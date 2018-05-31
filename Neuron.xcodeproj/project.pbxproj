@@ -1,0 +1,1182 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
+		8928C23020AE822B00C3103E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C22F20AE822B00C3103E /* Images.xcassets */; };
+		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
+		8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* NeuronMacro.swift */; };
+		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
+		8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24420AE90C000C3103E /* BaseNavigationController.swift */; };
+		8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24620AE90E900C3103E /* BaseViewController.swift */; };
+		8928C24920AE91E600C3103E /* SubController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* SubController1.swift */; };
+		8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C25820AEB18100C3103E /* NibLoadable.swift */; };
+		8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26920AED5C100C3103E /* SearchAppController.swift */; };
+		8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C26A20AED5C100C3103E /* SearchAppController.xib */; };
+		8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26F20B2644C00C3103E /* QRCodeController.swift */; };
+		8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */; };
+		8928C27A20B2A61900C3103E /* SubController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27820B2A61900C3103E /* SubController2.swift */; };
+		8928C27B20B2A61900C3103E /* SubController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C27920B2A61900C3103E /* SubController2.xib */; };
+		8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27C20B3AAFA00C3103E /* Sub2TableViewCell.swift */; };
+		8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */; };
+		8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C2A120B41BCA00C3103E /* SelectWalletController.swift */; };
+		8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C2A220B41BCA00C3103E /* SelectWalletController.xib */; };
+		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
+		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
+		8964A18020BE94F70086848F /* NEPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17F20BE94F70086848F /* NEPickerView.swift */; };
+		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
+		896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042E20AE69C1002CFF6A /* ViewController.swift */; };
+		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
+		896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896D043320AE69C5002CFF6A /* Assets.xcassets */; };
+		896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */; };
+		896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044120AE69C5002CFF6A /* NeuronTests.swift */; };
+		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
+		898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */; };
+		898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */; };
+		898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EE20B5176A00ECB465 /* WalletDetailController.swift */; };
+		898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19EF20B5176A00ECB465 /* WalletDetailController.xib */; };
+		898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19F320B53F3800ECB465 /* DetailIconCell.swift */; };
+		898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19F420B53F3800ECB465 /* DetailIconCell.xib */; };
+		898A19F920B54E0F00ECB465 /* ReceiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19F720B54E0F00ECB465 /* ReceiveController.swift */; };
+		898A19FA20B54E0F00ECB465 /* ReceiveController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19F820B54E0F00ECB465 /* ReceiveController.xib */; };
+		898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19FD20B55FE300ECB465 /* AddWalletController.swift */; };
+		898A1A0020B55FE300ECB465 /* AddWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19FE20B55FE300ECB465 /* AddWalletController.xib */; };
+		898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0120B5717A00ECB465 /* AssetViewController.swift */; };
+		898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0220B5717A00ECB465 /* AssetViewController.xib */; };
+		898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */; };
+		898A1A0820B5797700ECB465 /* AssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */; };
+		898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0920B64F6000ECB465 /* AddAssetController.swift */; };
+		898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0A20B64F6000ECB465 /* AddAssetController.xib */; };
+		898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */; };
+		898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */; };
+		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
+		898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */; };
+		898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */; };
+		898A1A1C20B7A6BB00ECB465 /* CreatWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */; };
+		898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2020B7B51E00ECB465 /* SubController3.swift */; };
+		898A1A2320B7B51E00ECB465 /* SubController3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2120B7B51E00ECB465 /* SubController3.xib */; };
+		898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */; };
+		898A1A2720B7DAA300ECB465 /* Sub3TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2520B7DAA300ECB465 /* Sub3TableViewCell.xib */; };
+		898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */; };
+		898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */; };
+		898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2D20B8044900ECB465 /* TradeTableViewCell.swift */; };
+		898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2E20B8044900ECB465 /* TradeTableViewCell.xib */; };
+		89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SubController4.swift */; };
+		89C25C5B20BBA38300007EC1 /* SubController4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5920BBA38300007EC1 /* SubController4.xib */; };
+		89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */; };
+		89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */; };
+		89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */; };
+		89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */; };
+		89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */; };
+		89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6620BD252000007EC1 /* TACustomViewController.swift */; };
+		89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6720BD252000007EC1 /* TACustomViewController.xib */; };
+		89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6B20BD421E00007EC1 /* ContractController.swift */; };
+		89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6C20BD421E00007EC1 /* ContractController.xib */; };
+		89C25C7120BE369100007EC1 /* ContractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */; };
+		89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */; };
+		89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */; };
+		89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C7420BE3DC100007EC1 /* ConTractLastTableViewCell.xib */; };
+		E2E67496168FEDCBC828A891 /* Pods_NeuronUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */; };
+		FEA60F4E8F81CB701C31AE44 /* Pods_NeuronTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB1ED6C1CFAD097B034BA2EF /* Pods_NeuronTests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		896D043E20AE69C5002CFF6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 896D042120AE69C1002CFF6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 896D042820AE69C1002CFF6A;
+			remoteInfo = Neuron;
+		};
+		896D044920AE69C5002CFF6A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 896D042120AE69C1002CFF6A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 896D042820AE69C1002CFF6A;
+			remoteInfo = Neuron;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
+		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
+		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.release.xcconfig"; sourceTree = "<group>"; };
+		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
+		8928C22F20AE822B00C3103E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
+		8928C23420AE8F7C00C3103E /* NeuronMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronMacro.swift; sourceTree = "<group>"; };
+		8928C24220AE908300C3103E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		8928C24420AE90C000C3103E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
+		8928C24620AE90E900C3103E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8928C24820AE91E600C3103E /* SubController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController1.swift; sourceTree = "<group>"; };
+		8928C25820AEB18100C3103E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
+		8928C26920AED5C100C3103E /* SearchAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppController.swift; sourceTree = "<group>"; };
+		8928C26A20AED5C100C3103E /* SearchAppController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAppController.xib; sourceTree = "<group>"; };
+		8928C26F20B2644C00C3103E /* QRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeController.swift; sourceTree = "<group>"; };
+		8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRQRCodeScanTool.swift; sourceTree = "<group>"; };
+		8928C27820B2A61900C3103E /* SubController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController2.swift; sourceTree = "<group>"; };
+		8928C27920B2A61900C3103E /* SubController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController2.xib; sourceTree = "<group>"; };
+		8928C27C20B3AAFA00C3103E /* Sub2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sub2TableViewCell.swift; sourceTree = "<group>"; };
+		8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Sub2TableViewCell.xib; sourceTree = "<group>"; };
+		8928C2A120B41BCA00C3103E /* SelectWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWalletController.swift; sourceTree = "<group>"; };
+		8928C2A220B41BCA00C3103E /* SelectWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWalletController.xib; sourceTree = "<group>"; };
+		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
+		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
+		8964A17F20BE94F70086848F /* NEPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEPickerView.swift; sourceTree = "<group>"; };
+		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		896D042E20AE69C1002CFF6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		896D043120AE69C1002CFF6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		896D043320AE69C5002CFF6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		896D043620AE69C5002CFF6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		896D043820AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		896D043D20AE69C5002CFF6A /* NeuronTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeuronTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		896D044120AE69C5002CFF6A /* NeuronTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronTests.swift; sourceTree = "<group>"; };
+		896D044320AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		896D044820AE69C5002CFF6A /* NeuronUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeuronUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		896D044C20AE69C5002CFF6A /* NeuronUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronUITests.swift; sourceTree = "<group>"; };
+		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDetailController.swift; sourceTree = "<group>"; };
+		898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetsDetailController.xib; sourceTree = "<group>"; };
+		898A19EE20B5176A00ECB465 /* WalletDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailController.swift; sourceTree = "<group>"; };
+		898A19EF20B5176A00ECB465 /* WalletDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDetailController.xib; sourceTree = "<group>"; };
+		898A19F320B53F3800ECB465 /* DetailIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIconCell.swift; sourceTree = "<group>"; };
+		898A19F420B53F3800ECB465 /* DetailIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailIconCell.xib; sourceTree = "<group>"; };
+		898A19F720B54E0F00ECB465 /* ReceiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveController.swift; sourceTree = "<group>"; };
+		898A19F820B54E0F00ECB465 /* ReceiveController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveController.xib; sourceTree = "<group>"; };
+		898A19FD20B55FE300ECB465 /* AddWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletController.swift; sourceTree = "<group>"; };
+		898A19FE20B55FE300ECB465 /* AddWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWalletController.xib; sourceTree = "<group>"; };
+		898A1A0120B5717A00ECB465 /* AssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewController.swift; sourceTree = "<group>"; };
+		898A1A0220B5717A00ECB465 /* AssetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetViewController.xib; sourceTree = "<group>"; };
+		898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
+		898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetTableViewCell.xib; sourceTree = "<group>"; };
+		898A1A0920B64F6000ECB465 /* AddAssetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetController.swift; sourceTree = "<group>"; };
+		898A1A0A20B64F6000ECB465 /* AddAssetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAssetController.xib; sourceTree = "<group>"; };
+		898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetTableViewCell.swift; sourceTree = "<group>"; };
+		898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAssetTableViewCell.xib; sourceTree = "<group>"; };
+		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
+		898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordController.xib; sourceTree = "<group>"; };
+		898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatWalletController.swift; sourceTree = "<group>"; };
+		898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatWalletController.xib; sourceTree = "<group>"; };
+		898A1A2020B7B51E00ECB465 /* SubController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController3.swift; sourceTree = "<group>"; };
+		898A1A2120B7B51E00ECB465 /* SubController3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController3.xib; sourceTree = "<group>"; };
+		898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sub3TableViewCell.swift; sourceTree = "<group>"; };
+		898A1A2520B7DAA300ECB465 /* Sub3TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Sub3TableViewCell.xib; sourceTree = "<group>"; };
+		898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeDetailsController.swift; sourceTree = "<group>"; };
+		898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeDetailsController.xib; sourceTree = "<group>"; };
+		898A1A2D20B8044900ECB465 /* TradeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeTableViewCell.swift; sourceTree = "<group>"; };
+		898A1A2E20B8044900ECB465 /* TradeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeTableViewCell.xib; sourceTree = "<group>"; };
+		89C25C5820BBA38300007EC1 /* SubController4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController4.swift; sourceTree = "<group>"; };
+		89C25C5920BBA38300007EC1 /* SubController4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController4.xib; sourceTree = "<group>"; };
+		89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewController.swift; sourceTree = "<group>"; };
+		89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TAViewController.xib; sourceTree = "<group>"; };
+		89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewControllerCell.swift; sourceTree = "<group>"; };
+		89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TAViewControllerCell.xib; sourceTree = "<group>"; };
+		89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronProgressView.swift; sourceTree = "<group>"; };
+		89C25C6620BD252000007EC1 /* TACustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACustomViewController.swift; sourceTree = "<group>"; };
+		89C25C6720BD252000007EC1 /* TACustomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TACustomViewController.xib; sourceTree = "<group>"; };
+		89C25C6B20BD421E00007EC1 /* ContractController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractController.swift; sourceTree = "<group>"; };
+		89C25C6C20BD421E00007EC1 /* ContractController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractController.xib; sourceTree = "<group>"; };
+		89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTableViewCell.swift; sourceTree = "<group>"; };
+		89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractTableViewCell.xib; sourceTree = "<group>"; };
+		89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConTractLastTableViewCell.swift; sourceTree = "<group>"; };
+		89C25C7420BE3DC100007EC1 /* ConTractLastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConTractLastTableViewCell.xib; sourceTree = "<group>"; };
+		8CC6FD685582D038A3767657 /* Pods_Neuron.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Neuron.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C43FB42A510FDF667FD64169 /* Pods-NeuronUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronUITests/Pods-NeuronUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		DB16ADF7FEC17385D266EA00 /* Pods-NeuronUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronUITests/Pods-NeuronUITests.release.xcconfig"; sourceTree = "<group>"; };
+		DB57BA5F3596655B01B46EF1 /* Pods-NeuronTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FB1ED6C1CFAD097B034BA2EF /* Pods_NeuronTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		896D042620AE69C1002CFF6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D043A20AE69C5002CFF6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FEA60F4E8F81CB701C31AE44 /* Pods_NeuronTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D044520AE69C5002CFF6A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E2E67496168FEDCBC828A891 /* Pods_NeuronUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		638FD5929E22E012CA4314D1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */,
+				1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */,
+				DB57BA5F3596655B01B46EF1 /* Pods-NeuronTests.debug.xcconfig */,
+				71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */,
+				C43FB42A510FDF667FD64169 /* Pods-NeuronUITests.debug.xcconfig */,
+				DB16ADF7FEC17385D266EA00 /* Pods-NeuronUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		8928C22120AE7C6200C3103E /* Dao */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dao;
+			sourceTree = "<group>";
+		};
+		8928C22220AE7C6200C3103E /* General */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		8928C22320AE7C6200C3103E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8928C23120AE84AB00C3103E /* Utils */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		8928C22420AE7C6200C3103E /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				8928C23420AE8F7C00C3103E /* NeuronMacro.swift */,
+				8928C25820AEB18100C3103E /* NibLoadable.swift */,
+			);
+			path = Macro;
+			sourceTree = "<group>";
+		};
+		8928C22520AE7C6200C3103E /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				8928C22F20AE822B00C3103E /* Images.xcassets */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		8928C22620AE7C6200C3103E /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				8928C22820AE7CB500C3103E /* Base */,
+				8928C22A20AE7CB500C3103E /* Common */,
+				898A1A1D20B7B4F300ECB465 /* Transaction */,
+				8928C27320B29ABB00C3103E /* Wallet */,
+				8928C22720AE7CB500C3103E /* Dapp */,
+				8928C22920AE7CB500C3103E /* Main */,
+			);
+			path = Sections;
+			sourceTree = "<group>";
+		};
+		8928C22720AE7CB500C3103E /* Dapp */ = {
+			isa = PBXGroup;
+			children = (
+				8928C25120AEA6A700C3103E /* ViewModel */,
+				8928C25020AEA6A600C3103E /* View */,
+			);
+			path = Dapp;
+			sourceTree = "<group>";
+		};
+		8928C22820AE7CB500C3103E /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8928C24420AE90C000C3103E /* BaseNavigationController.swift */,
+				8928C24620AE90E900C3103E /* BaseViewController.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		8928C22920AE7CB500C3103E /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8928C24220AE908300C3103E /* MainViewController.swift */,
+				8928C24820AE91E600C3103E /* SubController1.swift */,
+				8928C27820B2A61900C3103E /* SubController2.swift */,
+				8928C27920B2A61900C3103E /* SubController2.xib */,
+				898A1A2020B7B51E00ECB465 /* SubController3.swift */,
+				898A1A2120B7B51E00ECB465 /* SubController3.xib */,
+				89C25C5820BBA38300007EC1 /* SubController4.swift */,
+				89C25C5920BBA38300007EC1 /* SubController4.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		8928C22A20AE7CB500C3103E /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */,
+				8928C26F20B2644C00C3103E /* QRCodeController.swift */,
+				89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */,
+				8964A17F20BE94F70086848F /* NEPickerView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		8928C23120AE84AB00C3103E /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8928C23220AE84E600C3103E /* ColorUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		8928C25020AEA6A600C3103E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89C25C6A20BD41D800007EC1 /* TableviewCell */,
+				8928C26920AED5C100C3103E /* SearchAppController.swift */,
+				8928C26A20AED5C100C3103E /* SearchAppController.xib */,
+				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
+				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
+				8964A17B20BE7F750086848F /* MessageSignController.swift */,
+				8964A17C20BE7F750086848F /* MessageSignController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8928C25120AEA6A700C3103E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8928C27320B29ABB00C3103E /* Wallet */ = {
+			isa = PBXGroup;
+			children = (
+				8928C28020B3E60900C3103E /* Sub2CustomView */,
+				8928C27420B29AD800C3103E /* View */,
+				8928C27520B29AD800C3103E /* ViewModel */,
+				8928C27C20B3AAFA00C3103E /* Sub2TableViewCell.swift */,
+				8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */,
+			);
+			path = Wallet;
+			sourceTree = "<group>";
+		};
+		8928C27420B29AD800C3103E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				898A19F220B53EF500ECB465 /* TableViewCell */,
+				898A19EE20B5176A00ECB465 /* WalletDetailController.swift */,
+				898A19EF20B5176A00ECB465 /* WalletDetailController.xib */,
+				898A19F720B54E0F00ECB465 /* ReceiveController.swift */,
+				898A19F820B54E0F00ECB465 /* ReceiveController.xib */,
+				898A19FD20B55FE300ECB465 /* AddWalletController.swift */,
+				898A19FE20B55FE300ECB465 /* AddWalletController.xib */,
+				898A1A0120B5717A00ECB465 /* AssetViewController.swift */,
+				898A1A0220B5717A00ECB465 /* AssetViewController.xib */,
+				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
+				898A1A0A20B64F6000ECB465 /* AddAssetController.xib */,
+				898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */,
+				898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */,
+				898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */,
+				898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */,
+				89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */,
+				89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8928C27520B29AD800C3103E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		8928C28020B3E60900C3103E /* Sub2CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				8928C2A120B41BCA00C3103E /* SelectWalletController.swift */,
+				8928C2A220B41BCA00C3103E /* SelectWalletController.xib */,
+				898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */,
+				898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */,
+				89C25C6620BD252000007EC1 /* TACustomViewController.swift */,
+				89C25C6720BD252000007EC1 /* TACustomViewController.xib */,
+			);
+			path = Sub2CustomView;
+			sourceTree = "<group>";
+		};
+		896D042020AE69C1002CFF6A = {
+			isa = PBXGroup;
+			children = (
+				896D042B20AE69C1002CFF6A /* Neuron */,
+				896D044020AE69C5002CFF6A /* NeuronTests */,
+				896D044B20AE69C5002CFF6A /* NeuronUITests */,
+				896D042A20AE69C1002CFF6A /* Products */,
+				638FD5929E22E012CA4314D1 /* Pods */,
+				89BCA81AE0CA58529FA94CB3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		896D042A20AE69C1002CFF6A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				896D042920AE69C1002CFF6A /* Neuron.app */,
+				896D043D20AE69C5002CFF6A /* NeuronTests.xctest */,
+				896D044820AE69C5002CFF6A /* NeuronUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		896D042B20AE69C1002CFF6A /* Neuron */ = {
+			isa = PBXGroup;
+			children = (
+				8928C22120AE7C6200C3103E /* Dao */,
+				8928C22220AE7C6200C3103E /* General */,
+				8928C22320AE7C6200C3103E /* Helpers */,
+				8928C22420AE7C6200C3103E /* Macro */,
+				8928C22520AE7C6200C3103E /* Resource */,
+				8928C22620AE7C6200C3103E /* Sections */,
+				896D042C20AE69C1002CFF6A /* AppDelegate.swift */,
+				896D042E20AE69C1002CFF6A /* ViewController.swift */,
+				896D043020AE69C1002CFF6A /* Main.storyboard */,
+				896D043320AE69C5002CFF6A /* Assets.xcassets */,
+				896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */,
+				896D043820AE69C5002CFF6A /* Info.plist */,
+				8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */,
+			);
+			path = Neuron;
+			sourceTree = "<group>";
+		};
+		896D044020AE69C5002CFF6A /* NeuronTests */ = {
+			isa = PBXGroup;
+			children = (
+				896D044120AE69C5002CFF6A /* NeuronTests.swift */,
+				896D044320AE69C5002CFF6A /* Info.plist */,
+			);
+			path = NeuronTests;
+			sourceTree = "<group>";
+		};
+		896D044B20AE69C5002CFF6A /* NeuronUITests */ = {
+			isa = PBXGroup;
+			children = (
+				896D044C20AE69C5002CFF6A /* NeuronUITests.swift */,
+				896D044E20AE69C5002CFF6A /* Info.plist */,
+			);
+			path = NeuronUITests;
+			sourceTree = "<group>";
+		};
+		898A19F220B53EF500ECB465 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				898A19F320B53F3800ECB465 /* DetailIconCell.swift */,
+				898A19F420B53F3800ECB465 /* DetailIconCell.xib */,
+				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,
+				898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */,
+				898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */,
+				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
+				89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */,
+				89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		898A1A1D20B7B4F300ECB465 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				898A1A1E20B7B4F300ECB465 /* View */,
+				898A1A1F20B7B4F300ECB465 /* ViewModel */,
+				898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */,
+				898A1A2520B7DAA300ECB465 /* Sub3TableViewCell.xib */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
+		898A1A1E20B7B4F300ECB465 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				898A1A2C20B8033C00ECB465 /* TableViewCell */,
+				898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */,
+				898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		898A1A1F20B7B4F300ECB465 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		898A1A2C20B8033C00ECB465 /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				898A1A2D20B8044900ECB465 /* TradeTableViewCell.swift */,
+				898A1A2E20B8044900ECB465 /* TradeTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		89BCA81AE0CA58529FA94CB3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CC6FD685582D038A3767657 /* Pods_Neuron.framework */,
+				FB1ED6C1CFAD097B034BA2EF /* Pods_NeuronTests.framework */,
+				3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89C25C6A20BD41D800007EC1 /* TableviewCell */ = {
+			isa = PBXGroup;
+			children = (
+				89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */,
+				89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */,
+				89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */,
+				89C25C7420BE3DC100007EC1 /* ConTractLastTableViewCell.xib */,
+			);
+			path = TableviewCell;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		896D042820AE69C1002CFF6A /* Neuron */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 896D045120AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "Neuron" */;
+			buildPhases = (
+				F48D79ACA9DA22B734D8BF82 /* [CP] Check Pods Manifest.lock */,
+				896D042520AE69C1002CFF6A /* Sources */,
+				896D042620AE69C1002CFF6A /* Frameworks */,
+				896D042720AE69C1002CFF6A /* Resources */,
+				350E1210298C0D04F3B3B8B2 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Neuron;
+			productName = Neuron;
+			productReference = 896D042920AE69C1002CFF6A /* Neuron.app */;
+			productType = "com.apple.product-type.application";
+		};
+		896D043C20AE69C5002CFF6A /* NeuronTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 896D045420AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "NeuronTests" */;
+			buildPhases = (
+				8CCB63F0933A35BAC15289B9 /* [CP] Check Pods Manifest.lock */,
+				896D043920AE69C5002CFF6A /* Sources */,
+				896D043A20AE69C5002CFF6A /* Frameworks */,
+				896D043B20AE69C5002CFF6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				896D043F20AE69C5002CFF6A /* PBXTargetDependency */,
+			);
+			name = NeuronTests;
+			productName = NeuronTests;
+			productReference = 896D043D20AE69C5002CFF6A /* NeuronTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		896D044720AE69C5002CFF6A /* NeuronUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 896D045720AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "NeuronUITests" */;
+			buildPhases = (
+				6ED304CBD81C419EE9F1043A /* [CP] Check Pods Manifest.lock */,
+				896D044420AE69C5002CFF6A /* Sources */,
+				896D044520AE69C5002CFF6A /* Frameworks */,
+				896D044620AE69C5002CFF6A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				896D044A20AE69C5002CFF6A /* PBXTargetDependency */,
+			);
+			name = NeuronUITests;
+			productName = NeuronUITests;
+			productReference = 896D044820AE69C5002CFF6A /* NeuronUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		896D042120AE69C1002CFF6A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0930;
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = cryptape;
+				TargetAttributes = {
+					896D042820AE69C1002CFF6A = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+					896D043C20AE69C5002CFF6A = {
+						CreatedOnToolsVersion = 9.3.1;
+						TestTargetID = 896D042820AE69C1002CFF6A;
+					};
+					896D044720AE69C5002CFF6A = {
+						CreatedOnToolsVersion = 9.3.1;
+						TestTargetID = 896D042820AE69C1002CFF6A;
+					};
+				};
+			};
+			buildConfigurationList = 896D042420AE69C1002CFF6A /* Build configuration list for PBXProject "Neuron" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 896D042020AE69C1002CFF6A;
+			productRefGroup = 896D042A20AE69C1002CFF6A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				896D042820AE69C1002CFF6A /* Neuron */,
+				896D043C20AE69C5002CFF6A /* NeuronTests */,
+				896D044720AE69C5002CFF6A /* NeuronUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		896D042720AE69C1002CFF6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */,
+				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
+				89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */,
+				898A1A0020B55FE300ECB465 /* AddWalletController.xib in Resources */,
+				8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */,
+				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
+				89C25C5B20BBA38300007EC1 /* SubController4.xib in Resources */,
+				898A1A1C20B7A6BB00ECB465 /* CreatWalletController.xib in Resources */,
+				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
+				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
+				89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */,
+				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
+				898A1A0820B5797700ECB465 /* AssetTableViewCell.xib in Resources */,
+				8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */,
+				898A19FA20B54E0F00ECB465 /* ReceiveController.xib in Resources */,
+				89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */,
+				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
+				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
+				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
+				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
+				8928C23020AE822B00C3103E /* Images.xcassets in Resources */,
+				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
+				89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */,
+				89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */,
+				898A1A2720B7DAA300ECB465 /* Sub3TableViewCell.xib in Resources */,
+				898A1A2320B7B51E00ECB465 /* SubController3.xib in Resources */,
+				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
+				8928C27B20B2A61900C3103E /* SubController2.xib in Resources */,
+				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
+				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
+				898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D043B20AE69C5002CFF6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D044620AE69C5002CFF6A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		350E1210298C0D04F3B3B8B2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Neuron/Pods-Neuron-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Neuron/Pods-Neuron-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ED304CBD81C419EE9F1043A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NeuronUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CCB63F0933A35BAC15289B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NeuronTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F48D79ACA9DA22B734D8BF82 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Neuron-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		896D042520AE69C1002CFF6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
+				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
+				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
+				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
+				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
+				89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */,
+				898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */,
+				89C25C7120BE369100007EC1 /* ContractTableViewCell.swift in Sources */,
+				8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */,
+				8964A18020BE94F70086848F /* NEPickerView.swift in Sources */,
+				89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */,
+				8928C27A20B2A61900C3103E /* SubController2.swift in Sources */,
+				898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */,
+				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
+				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
+				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
+				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
+				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
+				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
+				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
+				896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */,
+				898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */,
+				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
+				89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */,
+				898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */,
+				898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */,
+				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
+				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
+				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
+				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
+				8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */,
+				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
+				8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */,
+				8928C24920AE91E600C3103E /* SubController1.swift in Sources */,
+				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
+				8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */,
+				898A19F920B54E0F00ECB465 /* ReceiveController.swift in Sources */,
+				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
+				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
+				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D043920AE69C5002CFF6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		896D044420AE69C5002CFF6A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		896D043F20AE69C5002CFF6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 896D042820AE69C1002CFF6A /* Neuron */;
+			targetProxy = 896D043E20AE69C5002CFF6A /* PBXContainerItemProxy */;
+		};
+		896D044A20AE69C5002CFF6A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 896D042820AE69C1002CFF6A /* Neuron */;
+			targetProxy = 896D044920AE69C5002CFF6A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		896D043020AE69C1002CFF6A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				896D043120AE69C1002CFF6A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				896D043620AE69C5002CFF6A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		896D044F20AE69C5002CFF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		896D045020AE69C5002CFF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		896D045220AE69C5002CFF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EY7PVD9CX5;
+				INFOPLIST_FILE = Neuron/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.Neuron;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+			};
+			name = Debug;
+		};
+		896D045320AE69C5002CFF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EY7PVD9CX5;
+				INFOPLIST_FILE = Neuron/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.Neuron;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "$(PODS_ROOT)/**";
+			};
+			name = Release;
+		};
+		896D045520AE69C5002CFF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB57BA5F3596655B01B46EF1 /* Pods-NeuronTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NeuronTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
+			};
+			name = Debug;
+		};
+		896D045620AE69C5002CFF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NeuronTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
+			};
+			name = Release;
+		};
+		896D045820AE69C5002CFF6A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C43FB42A510FDF667FD64169 /* Pods-NeuronUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NeuronUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Neuron;
+			};
+			name = Debug;
+		};
+		896D045920AE69C5002CFF6A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB16ADF7FEC17385D266EA00 /* Pods-NeuronUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = NeuronUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Neuron;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		896D042420AE69C1002CFF6A /* Build configuration list for PBXProject "Neuron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				896D044F20AE69C5002CFF6A /* Debug */,
+				896D045020AE69C5002CFF6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		896D045120AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "Neuron" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				896D045220AE69C5002CFF6A /* Debug */,
+				896D045320AE69C5002CFF6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		896D045420AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "NeuronTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				896D045520AE69C5002CFF6A /* Debug */,
+				896D045620AE69C5002CFF6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		896D045720AE69C5002CFF6A /* Build configuration list for PBXNativeTarget "NeuronUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				896D045820AE69C5002CFF6A /* Debug */,
+				896D045920AE69C5002CFF6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 896D042120AE69C1002CFF6A /* Project object */;
+}

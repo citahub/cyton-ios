@@ -1,0 +1,53 @@
+PODS:
+  - DynamicBlurView (2.0.2)
+  - EFQRCode (4.2.1)
+  - IQKeyboardManagerSwift (6.0.3)
+  - MJRefresh (3.1.15.3)
+  - PopupDialog (0.7.1):
+    - DynamicBlurView (~> 2.0)
+  - RTRootNavigationController (0.6.7):
+    - RTRootNavigationController/Core (= 0.6.7)
+  - RTRootNavigationController/Core (0.6.7)
+  - RxCocoa (4.1.2):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.1.2)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+
+DEPENDENCIES:
+  - EFQRCode
+  - IQKeyboardManagerSwift
+  - MJRefresh
+  - PopupDialog
+  - RTRootNavigationController
+  - RxCocoa (~> 4.0)
+  - RxSwift (~> 4.0)
+  - SDWebImage
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - DynamicBlurView
+    - EFQRCode
+    - IQKeyboardManagerSwift
+    - MJRefresh
+    - PopupDialog
+    - RTRootNavigationController
+    - RxCocoa
+    - RxSwift
+    - SDWebImage
+
+SPEC CHECKSUMS:
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  EFQRCode: f3fd67049faa07adb575495c05d72a34e407a940
+  IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
+  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  RTRootNavigationController: d6aa6cbb78a3eaecea4f6e4df63f15dd887836b8
+  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
+  RxSwift: e49536837d9901277638493ea537394d4b55f570
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+
+PODFILE CHECKSUM: f1fad5972f1af90f2bdaa65dbc30403080642c37
+
+COCOAPODS: 1.5.2
