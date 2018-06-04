@@ -18,9 +18,9 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     var dataArray:[[String:String]] = []
     
     var delegate:NEPickerViewDelegate?
-    var selectDict : [String : String] = [String : String]()
-    
     var finalDict:[String:String] = [String:String]()
+    
+    var selectDict : [String : String] = [String : String]()
     
     private let bottomView = UIView.init()
     private let pickerV = UIPickerView.init()
@@ -29,15 +29,9 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-//        setUpSubViews()
     }
-    
-    func setUpSubViews() {
 
-        
-    }
     
     override func layoutSubviews() {
         bottomView.frame = CGRect(x: 0, y: ScreenH - 200, width: ScreenH, height: 200)
@@ -55,6 +49,11 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         pickerV.delegate = self
         pickerV.dataSource = self
         bottomView.addSubview(pickerV)
+        if selectDict.count != 0 {
+            pickerV.selectRow(dataArray.index(of: selectDict)!, inComponent: 0, animated: true)
+            pickerV.reloadAllComponents()
+            finalDict = selectDict
+        }
     }
     
     //点击完成

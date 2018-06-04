@@ -12,6 +12,7 @@ target 'Neuron' do
   pod 'RxCocoa',    '~> 4.0'
   pod 'PopupDialog'
   pod "EFQRCode"	
+  pod 'RSKPlaceholderTextView'
 
   # Pods for Neuron
 

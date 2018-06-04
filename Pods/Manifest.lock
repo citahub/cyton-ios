@@ -5,6 +5,7 @@ PODS:
   - MJRefresh (3.1.15.3)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
+  - RSKPlaceholderTextView (3.0.0)
   - RTRootNavigationController (0.6.7):
     - RTRootNavigationController/Core (= 0.6.7)
   - RTRootNavigationController/Core (0.6.7)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - MJRefresh
   - PopupDialog
+  - RSKPlaceholderTextView
   - RTRootNavigationController
   - RxCocoa (~> 4.0)
   - RxSwift (~> 4.0)
@@ -32,6 +34,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - MJRefresh
     - PopupDialog
+    - RSKPlaceholderTextView
     - RTRootNavigationController
     - RxCocoa
     - RxSwift
@@ -43,11 +46,12 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  RSKPlaceholderTextView: 0ce73a19998e236323b3f1f16bf4a4e4a76c2c28
   RTRootNavigationController: d6aa6cbb78a3eaecea4f6e4df63f15dd887836b8
   RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
   RxSwift: e49536837d9901277638493ea537394d4b55f570
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
 
-PODFILE CHECKSUM: f1fad5972f1af90f2bdaa65dbc30403080642c37
+PODFILE CHECKSUM: 6729b8a34ca5117ab7484883f505844e0b58dc65
 
 COCOAPODS: 1.5.2

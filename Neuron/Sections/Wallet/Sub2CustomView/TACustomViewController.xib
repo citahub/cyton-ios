@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -30,7 +30,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="DKT-7z-VOn"/>
-                                <constraint firstAttribute="width" constant="375" id="iVh-MN-F2d"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.078431372549019607" green="0.090196078431372548" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -111,6 +110,7 @@
                         <constraint firstItem="gsj-JX-bDz" firstAttribute="leading" secondItem="WgT-do-CEM" secondAttribute="leading" id="aG5-xg-Ne7"/>
                         <constraint firstAttribute="width" constant="375" id="jZm-cV-Yb0"/>
                         <constraint firstItem="296-70-CWg" firstAttribute="top" secondItem="WgT-do-CEM" secondAttribute="top" id="qi5-Dh-TwR"/>
+                        <constraint firstItem="296-70-CWg" firstAttribute="centerX" secondItem="WgT-do-CEM" secondAttribute="centerX" id="s1y-Ux-eyT"/>
                         <constraint firstAttribute="height" constant="443" id="sbC-Gu-Vui"/>
                         <constraint firstItem="NcB-qP-9Qq" firstAttribute="top" secondItem="y4d-GK-176" secondAttribute="bottom" constant="42" id="ueQ-TF-obL"/>
                         <constraint firstItem="wRr-nP-4i3" firstAttribute="top" secondItem="296-70-CWg" secondAttribute="bottom" constant="1" id="xgd-Je-KUf"/>
@@ -121,6 +121,7 @@
             <constraints>
                 <constraint firstItem="WgT-do-CEM" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Bwm-dw-KZd"/>
                 <constraint firstItem="WgT-do-CEM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sxr-vw-Q8y"/>
+                <constraint firstItem="WgT-do-CEM" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="yUD-hh-oIj"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

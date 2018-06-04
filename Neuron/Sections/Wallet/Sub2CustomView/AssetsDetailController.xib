@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,11 +56,10 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rlG-xB-IOe">
-                            <rect key="frame" x="35" y="248" width="90" height="44"/>
+                            <rect key="frame" x="28" y="248" width="84" height="44"/>
                             <color key="backgroundColor" red="0.19215686274509802" green="0.31764705882352939" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="3gU-yi-9og"/>
-                                <constraint firstAttribute="width" constant="90" id="jxw-pq-ARE"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                             <state key="normal" title="付款"/>
@@ -73,10 +73,9 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1H0-KL-FfY">
-                            <rect key="frame" x="166" y="247" width="90" height="44"/>
+                            <rect key="frame" x="168" y="247" width="84" height="44"/>
                             <color key="backgroundColor" red="0.19215686274509802" green="0.31764705882352939" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="90" id="4Yd-P5-B2j"/>
                                 <constraint firstAttribute="height" constant="44" id="FVe-1K-Je0"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
@@ -111,19 +110,20 @@
                         <constraint firstItem="1H0-KL-FfY" firstAttribute="baseline" secondItem="rlG-xB-IOe" secondAttribute="baseline" constant="-1" id="215-Md-rg8"/>
                         <constraint firstAttribute="trailing" secondItem="m5p-2u-YIY" secondAttribute="trailing" id="42q-0e-ucK"/>
                         <constraint firstAttribute="height" constant="350" id="FGD-5O-bnx"/>
+                        <constraint firstItem="rlG-xB-IOe" firstAttribute="width" secondItem="7qd-k0-xzx" secondAttribute="width" multiplier="0.3" id="H8S-WL-sEt"/>
                         <constraint firstItem="RHA-Ey-U7p" firstAttribute="top" secondItem="7qd-k0-xzx" secondAttribute="top" constant="15" id="Ilb-fW-kz3"/>
                         <constraint firstItem="RHA-Ey-U7p" firstAttribute="leading" secondItem="7qd-k0-xzx" secondAttribute="leading" constant="10" id="N6R-Dv-ePy"/>
                         <constraint firstItem="j4w-gC-FnV" firstAttribute="top" secondItem="e1y-1S-4w2" secondAttribute="bottom" constant="10" id="QFH-Md-QfM"/>
                         <constraint firstAttribute="width" constant="280" id="Ri7-tH-a1A"/>
                         <constraint firstItem="rlG-xB-IOe" firstAttribute="top" secondItem="m5p-2u-YIY" secondAttribute="bottom" constant="38" id="Ryl-DA-xzn"/>
                         <constraint firstItem="m5p-2u-YIY" firstAttribute="leading" secondItem="7qd-k0-xzx" secondAttribute="leading" id="T4B-52-lEZ"/>
-                        <constraint firstItem="1H0-KL-FfY" firstAttribute="leading" secondItem="rlG-xB-IOe" secondAttribute="trailing" constant="41" id="VPn-1v-0Q0"/>
                         <constraint firstAttribute="trailing" secondItem="e1y-1S-4w2" secondAttribute="trailing" id="Y8U-Zl-oF3"/>
-                        <constraint firstItem="j4w-gC-FnV" firstAttribute="leading" secondItem="7qd-k0-xzx" secondAttribute="leading" constant="110" id="caC-qf-Ys2"/>
+                        <constraint firstItem="1H0-KL-FfY" firstAttribute="centerX" secondItem="7qd-k0-xzx" secondAttribute="centerX" multiplier="1.5" id="ZhD-Ii-PLI"/>
+                        <constraint firstItem="1H0-KL-FfY" firstAttribute="width" secondItem="7qd-k0-xzx" secondAttribute="width" multiplier="0.3" id="d8v-Ym-QtU"/>
                         <constraint firstItem="e1y-1S-4w2" firstAttribute="leading" secondItem="7qd-k0-xzx" secondAttribute="leading" id="gPH-o2-CoP"/>
                         <constraint firstItem="m5p-2u-YIY" firstAttribute="top" secondItem="j4w-gC-FnV" secondAttribute="bottom" constant="10" id="loC-Ah-mYa"/>
-                        <constraint firstItem="rlG-xB-IOe" firstAttribute="leading" secondItem="7qd-k0-xzx" secondAttribute="leading" constant="35" id="qGB-fz-o3I"/>
-                        <constraint firstAttribute="trailing" secondItem="j4w-gC-FnV" secondAttribute="trailing" constant="110" id="vBg-br-0uG"/>
+                        <constraint firstItem="rlG-xB-IOe" firstAttribute="centerX" secondItem="7qd-k0-xzx" secondAttribute="centerX" multiplier="0.5" id="mp5-fD-WLU"/>
+                        <constraint firstItem="j4w-gC-FnV" firstAttribute="centerX" secondItem="7qd-k0-xzx" secondAttribute="centerX" id="uKm-sM-g6D"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

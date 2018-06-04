@@ -16,6 +16,7 @@ class CreatWalletController: BaseViewController,UITableViewDataSource,UITableVie
     let placeholderArray = ["请输入钱包名称","请输入密码","请确认密码"]
     
     @IBOutlet weak var cTable: UITableView!
+    @IBOutlet weak var nextButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "创建钱包"
@@ -49,6 +50,11 @@ class CreatWalletController: BaseViewController,UITableViewDataSource,UITableVie
         
     }
     
+    @IBAction func didClickNextButton(_ sender: UIButton) {
+        let gCtrl = GenerateMnemonicController.init(nibName: "GenerateMnemonicController", bundle: nil)
+        navigationController?.pushViewController(gCtrl, animated: true)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

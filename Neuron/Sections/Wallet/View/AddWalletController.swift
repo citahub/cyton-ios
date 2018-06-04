@@ -24,7 +24,8 @@ class AddWalletController: BaseViewController {
     }
     //导入钱包
     @IBAction func didImportWallet(_ sender: UIButton) {
-        
+        let iCtrl = ImportWalletController.init(nibName: "ImportWalletController", bundle: nil)
+        navigationController?.pushViewController(iCtrl, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

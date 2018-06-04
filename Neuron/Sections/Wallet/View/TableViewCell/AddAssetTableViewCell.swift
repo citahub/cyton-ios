@@ -25,7 +25,7 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     
     let firstBtn = UIButton.init(type: UIButtonType.custom)
     let secBtn = UIButton.init(type: UIButtonType.custom)
-    
+//    let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
     
     @IBOutlet weak var headLable: UILabel!
     @IBOutlet weak var rightTextField: UITextField!
@@ -52,10 +52,8 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
                 firstBtn.addTarget(self, action: #selector(didSetUpPickView), for: .touchUpInside)
                 rightTextField.rightView = firstBtn
                 rightTextField.delegate = self
-                rightTextField.tag = 2000 // 根据tag来跟别的textfield区分
-                let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
-                rightTextField.addGestureRecognizer(tap)
-                
+                rightTextField.tag = 3000 // 根据tag来跟别的textfield区分
+//                rightTextField.addGestureRecognizer(tap)
             }else if selectRow == 1{
                 rightTextField.rightViewMode = .always
                 secBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)
@@ -64,7 +62,9 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
                 secBtn.addTarget(self, action: #selector(didPushQRCodeView), for: .touchUpInside)
                 rightTextField.rightView = secBtn
             }else{
-                
+                rightTextField.rightViewMode = .never
+//                rightTextField.removeGestureRecognizer(tap)
+                rightTextField.tag = 3001
             }
         }
     }
@@ -97,7 +97,7 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     
     //textfidel代理
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
-        if textField.tag == 2000
+        if textField.tag == 3000
         {
             return false
         }else{

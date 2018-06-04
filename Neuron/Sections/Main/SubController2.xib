@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -51,7 +51,7 @@
                                 <action selector="didClickSetupBtn:" destination="-1" eventType="touchUpInside" id="gaK-Ck-WJP"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rtw-bN-4hy">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="rtw-bN-4hy">
                             <rect key="frame" x="143" y="10" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="5n6-0L-5Zc"/>
@@ -61,7 +61,6 @@
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                     <integer key="value" value="30"/>
                                 </userDefinedRuntimeAttribute>
-                                <userDefinedRuntimeAttribute type="image" keyPath="image" value="头像"/>
                             </userDefinedRuntimeAttributes>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fanta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrZ-Ny-rzd">
@@ -133,7 +132,6 @@
                         <constraint firstItem="o0Q-qa-K9l" firstAttribute="top" secondItem="fRV-WT-KyR" secondAttribute="bottom" constant="1" id="3HV-k4-n3U"/>
                         <constraint firstItem="OdV-l8-J1M" firstAttribute="leading" secondItem="o0Q-qa-K9l" secondAttribute="trailing" constant="8" id="4SN-n0-OQH"/>
                         <constraint firstAttribute="trailing" secondItem="zAx-h6-tSb" secondAttribute="trailing" constant="10" id="5GX-z5-IxT"/>
-                        <constraint firstItem="liL-Cq-C0H" firstAttribute="leading" secondItem="rtw-bN-4hy" secondAttribute="trailing" constant="92" id="5vz-wt-d5y"/>
                         <constraint firstAttribute="bottom" secondItem="fRV-WT-KyR" secondAttribute="bottom" constant="42" id="6qC-zK-mw5"/>
                         <constraint firstItem="o0Q-qa-K9l" firstAttribute="bottom" secondItem="RRR-S8-wZF" secondAttribute="bottom" id="6qz-if-aW8"/>
                         <constraint firstItem="RRR-S8-wZF" firstAttribute="top" secondItem="fRV-WT-KyR" secondAttribute="bottom" constant="1" id="CoZ-qP-B1o"/>
@@ -148,6 +146,7 @@
                         <constraint firstItem="o0Q-qa-K9l" firstAttribute="top" secondItem="RRR-S8-wZF" secondAttribute="top" id="Sid-gI-pje"/>
                         <constraint firstAttribute="trailing" secondItem="liL-Cq-C0H" secondAttribute="trailing" id="X3u-Hs-jNg"/>
                         <constraint firstItem="o0Q-qa-K9l" firstAttribute="leading" secondItem="RRR-S8-wZF" secondAttribute="trailing" constant="8" symbolic="YES" id="fge-jG-tV6"/>
+                        <constraint firstItem="rtw-bN-4hy" firstAttribute="centerX" secondItem="8tz-JU-vdD" secondAttribute="centerX" id="fyY-Nn-k3s"/>
                         <constraint firstItem="fRV-WT-KyR" firstAttribute="leading" secondItem="8tz-JU-vdD" secondAttribute="leading" id="glu-gk-i1e"/>
                         <constraint firstItem="liL-Cq-C0H" firstAttribute="top" secondItem="8tz-JU-vdD" secondAttribute="top" id="hZV-fS-rLh"/>
                         <constraint firstAttribute="trailing" secondItem="vrZ-Ny-rzd" secondAttribute="trailing" constant="10" id="jYU-yD-aq7"/>
@@ -156,7 +155,6 @@
                         <constraint firstItem="zAx-h6-tSb" firstAttribute="top" secondItem="vrZ-Ny-rzd" secondAttribute="bottom" constant="8" id="mY7-8L-MlM"/>
                         <constraint firstItem="OdV-l8-J1M" firstAttribute="leading" secondItem="o0Q-qa-K9l" secondAttribute="trailing" constant="8" symbolic="YES" id="pS9-pk-no7"/>
                         <constraint firstItem="rtw-bN-4hy" firstAttribute="top" secondItem="8tz-JU-vdD" secondAttribute="top" constant="10" id="paP-Hv-VNs"/>
-                        <constraint firstItem="rtw-bN-4hy" firstAttribute="leading" secondItem="8tz-JU-vdD" secondAttribute="leading" constant="143" id="qpF-oj-l42"/>
                         <constraint firstAttribute="height" constant="190" id="uNu-GE-D7A"/>
                         <constraint firstItem="o0Q-qa-K9l" firstAttribute="leading" secondItem="RRR-S8-wZF" secondAttribute="trailing" constant="8" id="vNP-Dr-V6P"/>
                     </constraints>

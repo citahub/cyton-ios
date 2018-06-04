@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="179.66666666666666"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="包含数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="icm-4M-FuH">
@@ -30,13 +31,12 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RFQ-qa-Xk8">
-                        <rect key="frame" x="15" y="31" width="345" height="133.5"/>
+                        <rect key="frame" x="15" y="31" width="345" height="133.66666666666666"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Es-XS-CG3">
-                                <rect key="frame" x="0.0" y="0.0" width="172" height="40"/>
+                                <rect key="frame" x="0.0" y="0.0" width="172.66666666666666" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="6ns-WQ-Ph6"/>
-                                    <constraint firstAttribute="width" constant="172" id="NPV-l9-vap"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                 <state key="normal" title="HEX">
@@ -52,7 +52,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cDN-w5-qiM">
-                                <rect key="frame" x="172" y="0.0" width="173" height="40"/>
+                                <rect key="frame" x="172.66666666666663" y="0.0" width="172.33333333333337" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7Hf-Hq-Ygy"/>
                                 </constraints>
@@ -70,7 +70,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SYg-ml-hF0">
-                                <rect key="frame" x="1" y="44" width="343" height="88.5"/>
+                                <rect key="frame" x="1" y="44.000000000000007" width="343" height="88.666666666666686"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" none="YES"/>
@@ -86,6 +86,7 @@
                             <bool key="isElement" value="YES"/>
                         </accessibility>
                         <constraints>
+                            <constraint firstItem="2Es-XS-CG3" firstAttribute="width" secondItem="RFQ-qa-Xk8" secondAttribute="width" multiplier="0.5" id="2rG-u5-t6d"/>
                             <constraint firstItem="SYg-ml-hF0" firstAttribute="leading" secondItem="RFQ-qa-Xk8" secondAttribute="leading" constant="1" id="7Un-h4-vPa"/>
                             <constraint firstItem="cDN-w5-qiM" firstAttribute="top" secondItem="RFQ-qa-Xk8" secondAttribute="top" id="K24-Nz-WIR"/>
                             <constraint firstItem="SYg-ml-hF0" firstAttribute="top" secondItem="2Es-XS-CG3" secondAttribute="bottom" constant="4" id="ONd-MC-ylD"/>

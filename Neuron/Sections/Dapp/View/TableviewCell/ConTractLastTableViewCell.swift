@@ -29,7 +29,7 @@ class ConTractLastTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        lineV.frame = CGRect(x: 0, y: 39, width: 172, height: 5)
+        lineV.frame = CGRect(x: 0, y: 39, width: ScreenW * 0.459, height: 5)
         lineV.backgroundColor = ColorFromString(hex: "#fe8227")
         bView.addSubview(lineV)
         bView.layer.borderColor = ColorFromString(hex: "#cccccc").toCGColor()
@@ -40,12 +40,12 @@ class ConTractLastTableViewCell: UITableViewCell {
     
     
     @IBAction func didClickHEXButton(_ sender: UIButton) {
-        lineV.frame = CGRect(x: 0, y: 39, width: 172, height: 5)
+        lineV.frame = CGRect(x: 0, y: 39, width: ScreenW * 0.459, height: 5)
         textView.text = hexStr
     }
     
     @IBAction func didClickUTF8Button(_ sender: UIButton) {
-        lineV.frame = CGRect(x: 172, y: 39, width: 172, height: 5)
+        lineV.frame = CGRect(x: ScreenW * 0.459, y: 39, width: ScreenW * 0.459, height: 5)
         textView.text = UTF8Str
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

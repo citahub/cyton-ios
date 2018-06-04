@@ -29,6 +29,16 @@
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
 		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
 		8964A18020BE94F70086848F /* NEPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17F20BE94F70086848F /* NEPickerView.swift */; };
+		8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18520BFE6850086848F /* ImportWalletController.swift */; };
+		8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18620BFE6860086848F /* ImportWalletController.xib */; };
+		8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18920BFEF950086848F /* ImportTextViewCell.swift */; };
+		8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */; };
+		8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */; };
+		8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18F20C112C40086848F /* SQButtonTagView.swift */; };
+		8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19120C115A70086848F /* SureMnemonicViewController.swift */; };
+		8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A19220C115A70086848F /* SureMnemonicViewController.xib */; };
+		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
+		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
 		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
 		896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042E20AE69C1002CFF6A /* ViewController.swift */; };
 		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
@@ -129,6 +139,16 @@
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
 		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
 		8964A17F20BE94F70086848F /* NEPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEPickerView.swift; sourceTree = "<group>"; };
+		8964A18520BFE6850086848F /* ImportWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
+		8964A18620BFE6860086848F /* ImportWalletController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportWalletController.xib; sourceTree = "<group>"; };
+		8964A18920BFEF950086848F /* ImportTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTextViewCell.swift; sourceTree = "<group>"; };
+		8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMnemonicController.swift; sourceTree = "<group>"; };
+		8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenerateMnemonicController.xib; sourceTree = "<group>"; };
+		8964A18F20C112C40086848F /* SQButtonTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQButtonTagView.swift; sourceTree = "<group>"; };
+		8964A19120C115A70086848F /* SureMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewController.swift; sourceTree = "<group>"; };
+		8964A19220C115A70086848F /* SureMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SureMnemonicViewController.xib; sourceTree = "<group>"; };
+		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
+		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
 		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		896D042E20AE69C1002CFF6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -390,8 +410,14 @@
 				898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */,
 				898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */,
 				898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */,
+				8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */,
+				8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */,
+				8964A19120C115A70086848F /* SureMnemonicViewController.swift */,
+				8964A19220C115A70086848F /* SureMnemonicViewController.xib */,
 				89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */,
 				89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */,
+				8964A18520BFE6850086848F /* ImportWalletController.swift */,
+				8964A18620BFE6860086848F /* ImportWalletController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -406,12 +432,15 @@
 		8928C28020B3E60900C3103E /* Sub2CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				8964A18F20C112C40086848F /* SQButtonTagView.swift */,
 				8928C2A120B41BCA00C3103E /* SelectWalletController.swift */,
 				8928C2A220B41BCA00C3103E /* SelectWalletController.xib */,
 				898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */,
 				898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */,
 				89C25C6620BD252000007EC1 /* TACustomViewController.swift */,
 				89C25C6720BD252000007EC1 /* TACustomViewController.xib */,
+				8964A19520C12FB70086848F /* ButtonTagView.swift */,
+				8964A19720C15EA20086848F /* ButtonTagUpView.swift */,
 			);
 			path = Sub2CustomView;
 			sourceTree = "<group>";
@@ -487,6 +516,7 @@
 				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
 				89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */,
 				89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */,
+				8964A18920BFEF950086848F /* ImportTextViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -676,6 +706,7 @@
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
+				8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */,
 				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
 				8928C23020AE822B00C3103E /* Images.xcassets in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
@@ -687,6 +718,8 @@
 				8928C27B20B2A61900C3103E /* SubController2.xib in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
+				8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */,
+				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -720,6 +753,7 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -732,6 +766,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -803,8 +838,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */,
+				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
+				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
@@ -825,12 +863,15 @@
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */,
 				898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */,
+				8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */,
+				8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
+				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
 				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
 				8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */,
@@ -842,6 +883,7 @@
 				898A19F920B54E0F00ECB465 /* ReceiveController.swift in Sources */,
 				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
+				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
