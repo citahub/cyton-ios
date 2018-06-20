@@ -15,7 +15,8 @@ enum SelectButtonStates {
     case privateKeyState
 }
 
-class ImportWalletController: BaseViewController,UITableViewDelegate,UITableViewDataSource,ImportTextViewCellDelegate,AddAssetTableViewCellDelegate {
+class ImportWalletController: BaseViewController,UITableViewDelegate,UITableViewDataSource,ImportTextViewCellDelegate,AddAssetTableViewCellDelegate,QRCodeControllerDelegate {
+    
 
     
     var selectState = SelectButtonStates.keystoreState
@@ -51,7 +52,6 @@ class ImportWalletController: BaseViewController,UITableViewDelegate,UITableView
     @IBAction func didClickKeystoreButton(_ sender: UIButton) {
         selectState = .keystoreState
         setTopButtonStateWithButton(sender: sender)
-
     }
     @IBAction func didClickHelpwordButton(_ sender: UIButton) {
         selectState = .helpWordState
@@ -161,8 +161,6 @@ class ImportWalletController: BaseViewController,UITableViewDelegate,UITableView
         case .helpWordState:
             break
         case .privateKeyState: break
-            
-        default: break
         }
     }
     //选择类型
@@ -174,6 +172,9 @@ class ImportWalletController: BaseViewController,UITableViewDelegate,UITableView
     //textview上点击二维码
     func didClickQRBtn() {
         print("点击二维码")
+        let qrCtrl = QRCodeController()
+        qrCtrl.delegate = self
+        self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
     
     //时刻获取到textview的输入
@@ -181,6 +182,10 @@ class ImportWalletController: BaseViewController,UITableViewDelegate,UITableView
         print(text)
     }
     
+    //扫描二维码返回的内容
+    func didBackQRCodeMessage(codeResult: String) {
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

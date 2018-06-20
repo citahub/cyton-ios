@@ -51,19 +51,14 @@
                                 <action selector="didClickSetupBtn:" destination="-1" eventType="touchUpInside" id="gaK-Ck-WJP"/>
                             </connections>
                         </button>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="rtw-bN-4hy">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rtw-bN-4hy">
                             <rect key="frame" x="143" y="10" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="5n6-0L-5Zc"/>
                                 <constraint firstAttribute="width" constant="60" id="mkx-NM-n3Q"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="30"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fanta" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrZ-Ny-rzd">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vrZ-Ny-rzd">
                             <rect key="frame" x="10" y="78" width="325" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="25" id="MIq-IL-Rqf"/>
@@ -72,7 +67,7 @@
                             <color key="textColor" red="0.25098039215686274" green="0.25098039215686274" blue="0.25098039215686274" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="afsbhjkyjthrgsefdgfhgjghhjhfdgd" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAx-h6-tSb">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAx-h6-tSb">
                             <rect key="frame" x="10" y="111" width="325" height="19"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="Kt9-yR-raE"/>
@@ -185,9 +180,8 @@
         </view>
     </objects>
     <resources>
-        <image name="navigation_back" width="375" height="160"/>
+        <image name="navigation_back" width="375" height="64"/>
         <image name="should_M" width="20" height="19"/>
-        <image name="头像" width="198" height="148"/>
         <image name="设置" width="22" height="22"/>
         <image name="资产设备" width="17" height="17"/>
     </resources>

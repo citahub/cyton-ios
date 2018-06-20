@@ -12,19 +12,26 @@ class GenerateMnemonicController: BaseViewController {
 
     @IBOutlet weak var mnemonicTextView: UITextView!
     @IBOutlet weak var nextButton: UIButton!
+    var mnemonicArray = [String.SubSequence]()
+    var walletModel = WalletModel(){
+        didSet{
+            mnemonicArray = walletModel.mnemonic.split(separator: " ")
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "备份助记词"
         mnemonicTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
         mnemonicTextView.layer.borderWidth = 1
         mnemonicTextView.isEditable = false
+        mnemonicTextView.text = walletModel.mnemonic
     }
 
     @IBAction func didClickNextButton(_ sender: UIButton) {
-        
         let sCtrl = SureMnemonicViewController.init(nibName: "SureMnemonicViewController", bundle: nil)
+        sCtrl.walletModel = walletModel
         navigationController?.pushViewController(sCtrl, animated: true)
-        
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

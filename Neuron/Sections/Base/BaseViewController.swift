@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class BaseViewController: UIViewController {
 
     
@@ -33,7 +34,11 @@ class BaseViewController: UIViewController {
     }
     
     func setUpNavigationBarStyle(){
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "navigation_back"), for: UIBarMetrics.default)
+        if isiphoneX() {
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "navigation_back-x"), for: UIBarMetrics.default)
+        }else{
+            self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "navigation_back"), for: UIBarMetrics.default)
+        }
         self.navigationController?.navigationBar.titleTextAttributes =  [NSAttributedStringKey.foregroundColor:ColorFromString(hex: "#ffffff")]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationBar.shadowImage = UIImage.init()
@@ -50,21 +55,12 @@ class BaseViewController: UIViewController {
         return UIBarButtonItem.init(customView: btn)
     }
     
+
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,57 +1,118 @@
 PODS:
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - CryptoSwift (0.10.0)
   - DynamicBlurView (2.0.2)
   - EFQRCode (4.2.1)
+  - IGIdenticon (0.5)
   - IQKeyboardManagerSwift (6.0.3)
+  - KeychainSwift (11.0.0)
+  - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.3)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
+  - Realm (3.7.2):
+    - Realm/Headers (= 3.7.2)
+  - Realm/Headers (3.7.2)
+  - RealmSwift (3.7.2):
+    - Realm (= 3.7.2)
+  - Result (4.0.0)
   - RSKPlaceholderTextView (3.0.0)
   - RTRootNavigationController (0.6.7):
     - RTRootNavigationController/Core (= 0.6.7)
   - RTRootNavigationController/Core (0.6.7)
-  - RxCocoa (4.1.2):
-    - RxSwift (~> 4.0)
-  - RxSwift (4.1.2)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
+  - SipHash (1.2.2)
+  - SwiftyJSON (4.1.0)
+  - Toast-Swift (3.0.1)
+  - TrezorCrypto (0.0.5)
+  - TrustCore (0.0.7):
+    - BigInt
+    - TrezorCrypto
+  - TrustKeystore (0.4.1):
+    - BigInt
+    - CryptoSwift
+    - TrezorCrypto
+    - TrustCore
 
 DEPENDENCIES:
   - EFQRCode
+  - IGIdenticon
   - IQKeyboardManagerSwift
+  - KeychainSwift
+  - MBProgressHUD
   - MJRefresh
   - PopupDialog
+  - RealmSwift
+  - Result
   - RSKPlaceholderTextView
   - RTRootNavigationController
-  - RxCocoa (~> 4.0)
-  - RxSwift (~> 4.0)
   - SDWebImage
+  - SwiftyJSON
+  - Toast-Swift
+  - TrustCore
+  - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - BigInt
+    - CryptoSwift
     - DynamicBlurView
     - EFQRCode
+    - IGIdenticon
     - IQKeyboardManagerSwift
+    - KeychainSwift
+    - MBProgressHUD
     - MJRefresh
     - PopupDialog
+    - Realm
+    - RealmSwift
+    - Result
     - RSKPlaceholderTextView
     - RTRootNavigationController
-    - RxCocoa
-    - RxSwift
     - SDWebImage
+    - SipHash
+    - SwiftyJSON
+    - Toast-Swift
+    - TrezorCrypto
+    - TrustCore
+
+EXTERNAL SOURCES:
+  TrustKeystore:
+    :branch: master
+    :git: https://github.com/TrustWallet/trust-keystore
+
+CHECKOUT OPTIONS:
+  TrustKeystore:
+    :commit: 0e58e6f167bbf5e7b94b6bccf5b3c40e53060c61
+    :git: https://github.com/TrustWallet/trust-keystore
 
 SPEC CHECKSUMS:
+  BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   EFQRCode: f3fd67049faa07adb575495c05d72a34e407a940
+  IGIdenticon: 0f8fa2c776e35d4cb204bedbc5005ef748b263d8
   IQKeyboardManagerSwift: 04e8679f85e496bb2c474eeb9284052f1b3c391c
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
+  Realm: dd18c3014e8d90df300b83c6da740067436089c5
+  RealmSwift: 79917cae59a0c43ef8118b233a5978891dd50b4a
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RSKPlaceholderTextView: 0ce73a19998e236323b3f1f16bf4a4e4a76c2c28
   RTRootNavigationController: d6aa6cbb78a3eaecea4f6e4df63f15dd887836b8
-  RxCocoa: d88ba0f1f6abf040011a9eb4b539324fc426843a
-  RxSwift: e49536837d9901277638493ea537394d4b55f570
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+  TrezorCrypto: ecef681446bf02af6248d3b5e394026d7e766e56
+  TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
+  TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
 
-PODFILE CHECKSUM: 6729b8a34ca5117ab7484883f505844e0b58dc65
+PODFILE CHECKSUM: 2fe84f407b7d86180fefa54f8168eed553acce9f
 
-COCOAPODS: 1.5.2
+COCOAPODS: 1.5.3

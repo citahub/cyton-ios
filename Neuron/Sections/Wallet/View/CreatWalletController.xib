@@ -60,14 +60,14 @@
                     </view>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lgs-Mz-F2Y">
-                    <rect key="frame" x="15" y="200" width="345" height="44"/>
-                    <color key="backgroundColor" red="0.1803921568627451" green="0.29019607843137252" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="15" y="245" width="345" height="44"/>
+                    <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="l39-i4-ofG"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <state key="normal" title="下一步">
-                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </state>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -78,14 +78,24 @@
                         <action selector="didClickNextButton:" destination="-1" eventType="touchUpInside" id="bOe-Qh-wOO"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码不能少于8位字符，区分字母大小写，建议混用英文，数字和符号" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xay-Dw-dfH">
+                    <rect key="frame" x="15" y="195" width="345" height="40"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="1" green="0.21505552000209105" blue="0.05958674325399882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xay-Dw-dfH" secondAttribute="trailing" constant="15" id="3OP-h1-H5V"/>
+                <constraint firstItem="xay-Dw-dfH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="5PC-zZ-3my"/>
                 <constraint firstItem="1im-gf-fDX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ewc-is-dsp"/>
                 <constraint firstItem="Lgs-Mz-F2Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="FRs-r6-9KI"/>
                 <constraint firstItem="1im-gf-fDX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="I8C-fN-64L"/>
-                <constraint firstItem="Lgs-Mz-F2Y" firstAttribute="top" secondItem="1im-gf-fDX" secondAttribute="bottom" constant="15" id="Y5C-2m-Umg"/>
+                <constraint firstItem="Lgs-Mz-F2Y" firstAttribute="top" secondItem="1im-gf-fDX" secondAttribute="bottom" constant="60" id="Y5C-2m-Umg"/>
+                <constraint firstItem="xay-Dw-dfH" firstAttribute="top" secondItem="1im-gf-fDX" secondAttribute="bottom" constant="10" id="a6f-n2-Wuj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Lgs-Mz-F2Y" secondAttribute="trailing" constant="15" id="ewu-Pf-Uwy"/>
+                <constraint firstItem="Lgs-Mz-F2Y" firstAttribute="top" secondItem="xay-Dw-dfH" secondAttribute="bottom" constant="10" id="ooN-53-PUJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="1im-gf-fDX" secondAttribute="trailing" id="ped-bp-F0L"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

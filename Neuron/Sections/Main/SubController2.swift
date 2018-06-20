@@ -23,15 +23,54 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     let sCtrl = SelectWalletController.init(nibName: "SelectWalletController", bundle: nil)
     let aCtrl = AssetsDetailController.init(nibName: "AssetsDetailController", bundle: nil)
     
+    var viewModel = SubController2ViewModel()
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.hidesBottomBarWhenPushed = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super .viewDidAppear(animated)
+        if self.navigationController?.viewControllers[0] == self {self.hidesBottomBarWhenPushed = false}
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        didGetDataForCurrentWallet()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包"
-        //这个必须写在构建UI之前。。必须必须
-//        UIApplication.shared.keyWindow?.addSubview(sCtrl.view)
-//        sCtrl.view.isHidden = true
         aCtrl.delegate = self;
+        addNotify()
         setUpSubViewDetails()
+    }
+    
+    //接收通知
+    func addNotify() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .creatWalletSuccess, object: nil)
+    }
+    
+    /// 正常情况下进入钱包界面要获取的数据
+    func didGetDataForCurrentWallet() {
+        if WalletRealmTool.isHasWallet() {
+            let walletModel = viewModel.getCurrentModel().currentWallet!
+            namelable.text = walletModel.name
+            mAddress.text = walletModel.address
+            iconImageView.image = UIImage(data: walletModel.iconData)
+        }
+    }
+    
+    //在当前钱包发生变化之后 UI的更新以及所有数据的更新
+    @objc func changeWallet(nofy:Notification){
+        let wAddress = nofy.userInfo!["post"]
+        print(wAddress as! String)
+        let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
+        namelable.text = walletModel.name
+        mAddress.text = walletModel.address
+        iconImageView.image = UIImage(data: walletModel.iconData)
     }
     
     func setUpSubViewDetails() {
@@ -42,6 +81,11 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         headView.layer.cornerRadius = 5
         headView.layer.borderWidth = 1
         headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
+        
+        iconImageView.layer.borderColor = ColorFromString(hex: lineColor).cgColor
+        iconImageView.layer.borderWidth = 1
+        iconImageView.layer.cornerRadius = 30
+        iconImageView.clipsToBounds = true
         
         mainTable.delegate = self
         mainTable.dataSource = self
@@ -128,6 +172,10 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         tableView.deselectRow(at: indexPath, animated: true)
         UIApplication.shared.keyWindow?.addSubview(aCtrl.view)
 
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func didReceiveMemoryWarning() {

@@ -18,6 +18,9 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     
     weak var delegate:AddAssetTableViewCellDelegate?
     
+    //是否是密文
+    var isSecretText:Bool = false {didSet{rightTextField.isSecureTextEntry = isSecretText}}
+    
     var indexP = NSIndexPath.init()
     // 设置属性来确定不同的cell有不同的状态
     var _selectRow:NSInteger = 0
@@ -33,8 +36,8 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         //使用KVO监听textfield.text
-        rightTextField.addObserver(self, forKeyPath: "text", options:.new, context: nil)
-
+//        rightTextField.addObserver(self, forKeyPath: "text", options:.new, context: nil)
+        rightTextField.addTarget(self, action: #selector(textFieldTextChanged(textField:)), for: .editingChanged)
     }
     
     //重写set方法
@@ -70,14 +73,16 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     }
     
     //KVO监听结果
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "text" && object is UITextField {
-
-            delegate?.didGetTextFieldTextWithIndexAndText(text: rightTextField.text!, index: indexP)
-        }else{
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-        }
-        
+//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if keyPath == "text" && object is UITextField {
+//            delegate?.didGetTextFieldTextWithIndexAndText(text: rightTextField.text!, index: indexP)
+//        }else{
+//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
+//        }
+//    }
+    
+    @objc func textFieldTextChanged(textField:UITextField){
+        delegate?.didGetTextFieldTextWithIndexAndText(text: textField.text!, index: indexP)
     }
     
     //点击第一行按钮弹出pickerview选择币种

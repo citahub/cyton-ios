@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
-platform :ios, '9.0'
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '10.0'
 
 target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -7,14 +8,19 @@ target 'Neuron' do
   pod 'MJRefresh' 
   pod 'SDWebImage'                      #图片的加载及缓存
   pod 'IQKeyboardManagerSwift'		#键盘
-  pod "RTRootNavigationController"       #导航栏
-  pod 'RxSwift',    '~> 4.0'
-  pod 'RxCocoa',    '~> 4.0'
+  pod 'RTRootNavigationController'       #导航栏
   pod 'PopupDialog'
-  pod "EFQRCode"	
+  pod 'EFQRCode'
   pod 'RSKPlaceholderTextView'
-
-  # Pods for Neuron
+  pod 'Toast-Swift'
+  pod 'RealmSwift'
+  pod 'MBProgressHUD'
+  pod 'TrustCore'
+  pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master'
+  pod 'Result'
+  pod 'KeychainSwift'
+  pod 'SwiftyJSON', :inhibit_warnings => true
+  pod 'IGIdenticon'
 
   target 'NeuronTests' do
     inherit! :search_paths

@@ -16,14 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+        initTheRealm()
         self.window?.backgroundColor = UIColor.white
         let mvc = MainViewController()
         self.window!.rootViewController! = mvc
         self.window?.makeKeyAndVisible()
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         keyboardSetUp()
-
+        inializers()
         
         return true
     }
@@ -39,6 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enableAutoToolbar = true
         //最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键，自动跳转到下一个输入框，最后一个输入框点击完成，自动收起键盘
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
+    }
+    
+    func initTheRealm() {
+        RealmHelper.initEncryptionRealm()
+    }
+    
+    func inializers() {
+        let keystore = ETHKeyStore.shared
+        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
+        paths.append(keystore.keysDirectory)
+
+        let initializers: [Initializer] = [
+            SkipBackupFilesInitializer(paths: paths),
+            ]
+        initializers.forEach { $0.perform() }
     }
     
     func applicationWillResignActive(_ application: UIApplication) {

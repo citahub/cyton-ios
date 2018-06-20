@@ -1,0 +1,6 @@
+framework module IGIdenticon {
+  umbrella header "IGIdenticon-umbrella.h"
+
+  export *
+  module * { export * }
+}

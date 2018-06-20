@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 protocol ButtonTagUpViewDelegate {
     
     func didDeleteSelectedButton(backDict:NSMutableDictionary)
@@ -76,12 +77,12 @@ class ButtonTagUpView: UIView {
                 let itemWidth = returnTextWidth(text: (dict.value(forKey: "buttonTitle") as? String)! , font:UIFont.systemFont(ofSize: 15) , viewWidth: ScreenW - 30).width+20
                 totalWidth = totalWidth+CGFloat(itemWidth)+hmargin
                 if totalWidth - hmargin > ScreenW - 30 {//代表着要换行了 row+1 并且计算总宽度
-                    totalWidth = itemWidth+hmargin
+                    totalWidth = CGFloat(itemWidth)+hmargin
                     row = row+1
-                    button.frame = CGRect(x: 10, y: vmargin+CGFloat(row)*(buttonHeight+vmargin), width: itemWidth, height: buttonHeight)
+                    button.frame = CGRect(x: 10, y: vmargin+CGFloat(row)*(buttonHeight+vmargin), width: CGFloat(itemWidth), height: buttonHeight)
                 }else{//不换行
                     //如果不换行的话 X是总宽度减去当前按钮的宽度和横向空隙
-                    button.frame = CGRect(x: totalWidth-CGFloat(itemWidth), y: CGFloat(row)*(buttonHeight+vmargin)+vmargin, width: itemWidth, height: buttonHeight)
+                    button.frame = CGRect(x: totalWidth-CGFloat(itemWidth), y: CGFloat(row)*(buttonHeight+vmargin)+vmargin, width: CGFloat(itemWidth), height: buttonHeight)
                 }
                 self.addSubview(button)
             }
@@ -99,9 +100,7 @@ class ButtonTagUpView: UIView {
         let dict = NSMutableDictionary()
         dict.setValue(sender.currentTitle, forKey: "buttonTitle")
         dict.setValue(sender.tag, forKey: "buttonTag")
-        
-        
-        
+                
         delegate?.didDeleteSelectedButton(backDict: dict)
         sender.removeFromSuperview()
     }
