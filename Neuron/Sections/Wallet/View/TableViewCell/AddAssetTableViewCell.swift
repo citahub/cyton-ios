@@ -28,15 +28,13 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     
     let firstBtn = UIButton.init(type: UIButtonType.custom)
     let secBtn = UIButton.init(type: UIButtonType.custom)
-//    let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
     
     @IBOutlet weak var headLable: UILabel!
     @IBOutlet weak var rightTextField: UITextField!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //使用KVO监听textfield.text
-//        rightTextField.addObserver(self, forKeyPath: "text", options:.new, context: nil)
+        //监听textfield.text
         rightTextField.addTarget(self, action: #selector(textFieldTextChanged(textField:)), for: .editingChanged)
     }
     
@@ -56,7 +54,9 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
                 rightTextField.rightView = firstBtn
                 rightTextField.delegate = self
                 rightTextField.tag = 3000 // 根据tag来跟别的textfield区分
-//                rightTextField.addGestureRecognizer(tap)
+                let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
+                
+                rightTextField.addGestureRecognizer(tap)
             }else if selectRow == 1{
                 rightTextField.rightViewMode = .always
                 secBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)
@@ -71,15 +71,6 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
             }
         }
     }
-    
-    //KVO监听结果
-//    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if keyPath == "text" && object is UITextField {
-//            delegate?.didGetTextFieldTextWithIndexAndText(text: rightTextField.text!, index: indexP)
-//        }else{
-//            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-//        }
-//    }
     
     @objc func textFieldTextChanged(textField:UITextField){
         delegate?.didGetTextFieldTextWithIndexAndText(text: textField.text!, index: indexP)
@@ -114,6 +105,6 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
         super.setSelected(selected, animated: animated)
     }
     deinit {
-        rightTextField.removeObserver(self, forKeyPath: "text")
+        
     }
 }

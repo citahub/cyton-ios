@@ -9,15 +9,12 @@
 import UIKit
 
 class GenerateMnemonicController: BaseViewController {
-
+    
     @IBOutlet weak var mnemonicTextView: UITextView!
     @IBOutlet weak var nextButton: UIButton!
-    var mnemonicArray = [String.SubSequence]()
-    var walletModel = WalletModel(){
-        didSet{
-            mnemonicArray = walletModel.mnemonic.split(separator: " ")
-        }
-    }
+    var password = ""
+    var mnemonicStr = ""
+    var walletModel = WalletModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +22,14 @@ class GenerateMnemonicController: BaseViewController {
         mnemonicTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
         mnemonicTextView.layer.borderWidth = 1
         mnemonicTextView.isEditable = false
-        mnemonicTextView.text = walletModel.mnemonic
+        mnemonicTextView.text = mnemonicStr
     }
 
     @IBAction func didClickNextButton(_ sender: UIButton) {
         let sCtrl = SureMnemonicViewController.init(nibName: "SureMnemonicViewController", bundle: nil)
         sCtrl.walletModel = walletModel
+        sCtrl.password = password
+        sCtrl.mnemonic = mnemonicStr
         navigationController?.pushViewController(sCtrl, animated: true)
     }
     override func didReceiveMemoryWarning() {

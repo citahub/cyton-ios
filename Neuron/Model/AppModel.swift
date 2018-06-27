@@ -16,7 +16,7 @@ class AppModel: Object {
     @objc dynamic var currentWallet : WalletModel?
 
     /// 整个app中的钱包列表
-    let wallets = List<WalletModel>()
+    var wallets = List<WalletModel>()
     
     
     

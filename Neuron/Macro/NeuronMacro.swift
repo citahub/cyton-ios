@@ -9,7 +9,7 @@
 import Foundation
 
 //主题颜色
-let themeColor = "#2E46f0"
+let themeColor = "#2e4af2"
 let lineColor = "#f1f1f1"
 
 

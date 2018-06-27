@@ -8,10 +8,8 @@
 
 import UIKit
 
-class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSource,AssetsDetailControllerDelegate {
-    var isChangeWallet = false//是否显示切换钱包 默认不显示
+class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSource,AssetsDetailControllerDelegate,SelectWalletControllerDelegate {
     
-    @IBOutlet weak var setUpButton: UIButton!
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!
@@ -43,9 +41,14 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包"
-        aCtrl.delegate = self;
+        sCtrl.delegate = self
+        aCtrl.delegate = self
         addNotify()
         setUpSubViewDetails()
+        
+        iconImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
+        iconImageView.addGestureRecognizer(tap)
     }
     
     //接收通知
@@ -57,10 +60,13 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func didGetDataForCurrentWallet() {
         if WalletRealmTool.isHasWallet() {
             let walletModel = viewModel.getCurrentModel().currentWallet!
-            namelable.text = walletModel.name
-            mAddress.text = walletModel.address
-            iconImageView.image = UIImage(data: walletModel.iconData)
+            refreshUI(walletModel: walletModel)
         }
+    }
+    
+    //switch wallet delegate
+    func didCallBackSelectedWalletModel(walletModel: WalletModel) {
+        refreshUI(walletModel: walletModel)
     }
     
     //在当前钱包发生变化之后 UI的更新以及所有数据的更新
@@ -68,6 +74,10 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         let wAddress = nofy.userInfo!["post"]
         print(wAddress as! String)
         let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
+        refreshUI(walletModel: walletModel)
+    }
+    
+    func refreshUI(walletModel:WalletModel){
         namelable.text = walletModel.name
         mAddress.text = walletModel.address
         iconImageView.image = UIImage(data: walletModel.iconData)
@@ -109,7 +119,11 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     //点击头部两个按钮
     //收款
     @IBAction func didClickArchiveBtn(_ sender: UIButton) {
+        let appModel = WalletRealmTool.getCurrentAppmodel()
         let rCtrl = ReceiveController.init(nibName: "ReceiveController", bundle: nil)
+        rCtrl.walletAddress = appModel.currentWallet?.address
+        rCtrl.walletName = appModel.currentWallet?.name
+        rCtrl.walletIcon = appModel.currentWallet?.iconData
         navigationController?.pushViewController(rCtrl, animated: true)
     }
     //点击资产管理按钮
@@ -118,13 +132,14 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         navigationController?.pushViewController(aCtrl, animated: true)
         
     }
-    //点击设置按钮
-    @IBAction func didClickSetupBtn(_ sender: Any) {
+    //click icon image
+    @objc func didClickIconImage() {
         let wCtrl = WalletDetailController.init(nibName: "WalletDetailController", bundle: nil)
         navigationController?.pushViewController(wCtrl, animated: true)
     }
+
     
-    //切换钱包
+    //switch wallet
     @objc func didChangeWallet(){
         UIApplication.shared.keyWindow?.addSubview(sCtrl.view)
     }
@@ -146,13 +161,14 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     //点击收款
     func didClickGet() {
         print("收款")
+        let appModel = WalletRealmTool.getCurrentAppmodel()
         let rCtrl = ReceiveController.init(nibName: "ReceiveController", bundle: nil)
+        rCtrl.walletAddress = appModel.currentWallet?.address
+        rCtrl.walletName = appModel.currentWallet?.name
+        rCtrl.walletIcon = appModel.currentWallet?.iconData
         navigationController?.pushViewController(rCtrl, animated: true)
     }
-    
-    
 
-    
     //tableview代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3;

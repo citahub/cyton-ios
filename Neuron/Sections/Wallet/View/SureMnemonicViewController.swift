@@ -19,9 +19,16 @@ class SureMnemonicViewController: BaseViewController,ButtonTagViewDelegate,Butto
     
     private var titleArr:Array<String> = []
     var viewModel = SureMnemonicViewModel()
+    var password = ""
+    var mnemonic:String?{
+        didSet{
+            titleArr =  (mnemonic?.components(separatedBy: " "))!
+        }
+    }
+    
+    
     var walletModel = WalletModel(){
         didSet{
-            titleArr =  walletModel.mnemonic.components(separatedBy: " ")
             viewModel.walletModel = walletModel
         }
     }
@@ -85,7 +92,7 @@ class SureMnemonicViewController: BaseViewController,ButtonTagViewDelegate,Butto
         let originalMnemonic = titleArr.joined()
         let selectMnemonic = selectArray.joined()
         let success = viewModel.compareMnemonic(original: originalMnemonic, current: selectMnemonic)
-        if success { viewModel.didImportWalletToRealm() }
+        if success { viewModel.didImportWalletToRealm(mnemonic: mnemonic!, password: password) }
     }
 
     func doPush() {

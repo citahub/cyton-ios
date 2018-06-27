@@ -66,15 +66,15 @@ class CreatWalletController: BaseViewController,UITableViewDataSource,UITableVie
         nextButton.backgroundColor = viewModel.setNextButtonBackgroundColor()
     }
     
-    //仅仅做跳转
     func doPush(mnemonic: String) {
         
         let model = WalletModel()
         model.name = viewModel.nameText
-        model.password = viewModel.newPasswordText
-        model.mnemonic = mnemonic
+        
         let gCtrl = GenerateMnemonicController.init(nibName: "GenerateMnemonicController", bundle: nil)
         gCtrl.walletModel = model
+        gCtrl.password = viewModel.newPasswordText
+        gCtrl.mnemonicStr = mnemonic
         navigationController?.pushViewController(gCtrl, animated: true)
     }
 

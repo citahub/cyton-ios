@@ -44,6 +44,13 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         sureBtn.addTarget(self, action: #selector(didClickSureBtn(sender:)), for: .touchUpInside)
         bottomView.addSubview(sureBtn)
         
+        cancleBtn.frame = CGRect(x: 15, y: 0, width: 48, height: 40)
+        cancleBtn.setTitle("取消", for: .normal)
+        cancleBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        cancleBtn.setTitleColor(ColorFromString(hex: "#4eb9f8"), for: .normal)
+        cancleBtn.addTarget(self, action: #selector(didClickCancleButton(sender:)), for: .touchUpInside)
+        bottomView.addSubview(cancleBtn)
+        
         pickerV.frame = CGRect(x: 0, y: 40, width: ScreenW, height: 160)
         pickerV.backgroundColor = ColorFromString(hex: "#ededed")
         pickerV.delegate = self
@@ -52,6 +59,7 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         if selectDict.count != 0 {
             pickerV.selectRow(dataArray.index(of: selectDict)!, inComponent: 0, animated: true)
             pickerV.reloadAllComponents()
+            
             finalDict = selectDict
         }
     }
@@ -61,6 +69,10 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         delegate?.callBackDictionnary(dict: finalDict)
         self.removeFromSuperview()
         
+    }
+    //click cancle
+    @objc func didClickCancleButton(sender:UIButton){
+        self.removeFromSuperview()
     }
     
     //pickerview代理
@@ -73,7 +85,15 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        let dict = dataArray[row]
+        var dict = dataArray[row]
+        if dict["id"] == "0"{
+            dict["name"] = "m/44'/60'/0'/0/0 metamask/jaxx兼容(ETH)"
+        }else if dict["id"] == "1"{
+            dict["name"] = "m/44'/60'/0'/0 Ledger(ETH)"
+        }else if dict["id"] == "2"{
+            dict["name"] = "m/44'/60'/1'/0/0 自定义路径"
+        }
+        
         let name =  dict["name"]
         return name
     }

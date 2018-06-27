@@ -21,6 +21,8 @@ target 'Neuron' do
   pod 'KeychainSwift'
   pod 'SwiftyJSON', :inhibit_warnings => true
   pod 'IGIdenticon'
+  pod 'SCLAlertView'
+  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
 
   target 'NeuronTests' do
     inherit! :search_paths

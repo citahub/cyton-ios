@@ -21,6 +21,7 @@ PODS:
   - RTRootNavigationController (0.6.7):
     - RTRootNavigationController/Core (= 0.6.7)
   - RTRootNavigationController/Core (0.6.7)
+  - SCLAlertView (0.8)
   - SDWebImage (4.3.3):
     - SDWebImage/Core (= 4.3.3)
   - SDWebImage/Core (4.3.3)
@@ -38,6 +39,7 @@ PODS:
     - TrustCore
 
 DEPENDENCIES:
+  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
   - EFQRCode
   - IGIdenticon
   - IQKeyboardManagerSwift
@@ -49,6 +51,7 @@ DEPENDENCIES:
   - Result
   - RSKPlaceholderTextView
   - RTRootNavigationController
+  - SCLAlertView
   - SDWebImage
   - SwiftyJSON
   - Toast-Swift
@@ -58,7 +61,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - BigInt
-    - CryptoSwift
     - DynamicBlurView
     - EFQRCode
     - IGIdenticon
@@ -72,6 +74,7 @@ SPEC REPOS:
     - Result
     - RSKPlaceholderTextView
     - RTRootNavigationController
+    - SCLAlertView
     - SDWebImage
     - SipHash
     - SwiftyJSON
@@ -80,11 +83,17 @@ SPEC REPOS:
     - TrustCore
 
 EXTERNAL SOURCES:
+  CryptoSwift:
+    :branch: master
+    :git: https://github.com/krzyzanowskim/CryptoSwift
   TrustKeystore:
     :branch: master
     :git: https://github.com/TrustWallet/trust-keystore
 
 CHECKOUT OPTIONS:
+  CryptoSwift:
+    :commit: 9284485ecd681b04d17e71383d903b5de33516db
+    :git: https://github.com/krzyzanowskim/CryptoSwift
   TrustKeystore:
     :commit: 0e58e6f167bbf5e7b94b6bccf5b3c40e53060c61
     :git: https://github.com/TrustWallet/trust-keystore
@@ -105,6 +114,7 @@ SPEC CHECKSUMS:
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RSKPlaceholderTextView: 0ce73a19998e236323b3f1f16bf4a4e4a76c2c28
   RTRootNavigationController: d6aa6cbb78a3eaecea4f6e4df63f15dd887836b8
+  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
@@ -113,6 +123,6 @@ SPEC CHECKSUMS:
   TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
   TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
 
-PODFILE CHECKSUM: 2fe84f407b7d86180fefa54f8168eed553acce9f
+PODFILE CHECKSUM: 569cd319d112a1fdb21d5cc3b0e9357f38cd8b8b
 
 COCOAPODS: 1.5.3

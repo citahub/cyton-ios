@@ -25,8 +25,8 @@ class QRCodeController: BaseViewController,HRQRCodeScanToolDelegate {
         print(resultStrs.first ?? "")
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
-    
     let share = HRQRCodeScanTool()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()

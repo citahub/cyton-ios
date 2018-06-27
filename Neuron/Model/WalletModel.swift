@@ -11,31 +11,24 @@ import RealmSwift
 
 class WalletModel: Object {
     
-    /// 钱包名称
+    /// wallet name
     @objc dynamic var name = ""
     
-    /// 钱包密码
-    @objc dynamic var password = ""
-    
-    /// 钱包地址
+    /// wallet address
     @objc dynamic var address = ""
     
-    /// 钱包私钥
-    @objc dynamic var privateKey = ""
+    /// encrypt privatekey
+    @objc dynamic var encryptPrivateKey = ""
     
-    /// keystore
-    @objc dynamic var keyStore = ""
+    /// password MD5
+    @objc dynamic var MD5screatPassword = ""
     
-    /// 钱包助记词
-    @objc dynamic var mnemonic = ""
-    
-    /// 根据钱包名称生成的头像
+    /// icon data
     @objc dynamic var iconData:Data!
     
     override static func primaryKey() -> String? {
         return "address"
     }
-    
 }
 
 

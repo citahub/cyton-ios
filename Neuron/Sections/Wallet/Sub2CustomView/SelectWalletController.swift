@@ -8,12 +8,24 @@
 
 import UIKit
 
+protocol SelectWalletControllerDelegate:NSObjectProtocol {
+    func didCallBackSelectedWalletModel(walletModel:WalletModel)
+}
+
 class SelectWalletController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var selectTable: UITableView!
     @IBOutlet weak var wView: UIView!
     @IBOutlet weak var headLable: UILabel!
     @IBOutlet weak var closeBtn: UIButton!
+    weak var delegate:SelectWalletControllerDelegate?
+    var appModel = AppModel()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        didGetWalletData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -23,17 +35,20 @@ class SelectWalletController: BaseViewController,UITableViewDelegate,UITableView
         selectTable.dataSource = self
         selectTable.delegate = self
         selectTable.tableFooterView = UIView.init()
-        
-
+        didGetWalletData()
     }
 
     @IBAction func didClickCloseBtn(_ sender: UIButton) {
         self.view.removeFromSuperview()
     }
     
+    func didGetWalletData() {
+        appModel = WalletRealmTool.getCurrentAppmodel()
+        selectTable.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return appModel.wallets.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,22 +56,23 @@ class SelectWalletController: BaseViewController,UITableViewDelegate,UITableView
         var cell = tableView.dequeueReusableCell(withIdentifier: ID)
         if cell == nil {
             cell = UITableViewCell.init(style: .default, reuseIdentifier: ID)
-//            let lineV = UIView.init(frame: CGRect(x: 15, y: 49, width: wView.frame.size.width - 15, height: 1))
-//            lineV.backgroundColor = ColorFromString(hex: lineColor)
-//            cell?.contentView.addSubview(lineV)
         }
         
         cell?.textLabel?.font = UIFont.systemFont(ofSize: 16)
         cell?.textLabel?.textColor = ColorFromString(hex: "#333333")
-        cell?.textLabel?.text = "我是钱包"
-        
+        let walletModel = appModel.wallets[indexPath.row]
+        cell?.textLabel?.text = walletModel.name
         return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let walletModel = appModel.wallets[indexPath.row]
+        try! WalletRealmTool.realm.write {
+            appModel.currentWallet = walletModel
+        }
+        delegate?.didCallBackSelectedWalletModel(walletModel: walletModel)
         self.view.removeFromSuperview()
-
     }
     
     

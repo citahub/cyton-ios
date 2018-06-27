@@ -2,8 +2,6 @@
 //  WalletTools.swift
 //  KKWallet
 //
-//  Created by 曹茂鑫 on 2018/5/17.
-//  Copyright © 2018年 Caomaoxin. All rights reserved.
 //
 
 import UIKit
@@ -17,6 +15,7 @@ class WalletTools: NSObject {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias GenerateMnemonicCallback = (String) -> Void
+    typealias ExportPrivateCallback = (ImportResult<String?>) -> Void
     
     static let documentDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
     static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
@@ -107,7 +106,7 @@ class WalletTools: NSObject {
         } catch {
             switch error {
             case KeyStore.Error.accountAlreadyExists:
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "账户已经存在")
+                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已经存在")
             case DecryptError.invalidPassword:
                 return ImportResult.failed(error: ImportError.wrongPassword, errorMessage: "密码错误")
             case KeyStore.Error.invalidMnemonic:
@@ -142,10 +141,10 @@ class WalletTools: NSObject {
     static func importWalletInJSON(json: String?, password: String) -> ImportResult<Account> {
         
         guard let data = json?.data(using: .utf8) else {
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "无效的JSON秘钥")
+            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "无效的keystpore")
         }
         guard let keyStore = keyStore else {
-            return ImportResult.failed(error: ImportError.openKeyStoreFailed, errorMessage: "JSON密钥导入失败")
+            return ImportResult.failed(error: ImportError.openKeyStoreFailed, errorMessage: "keystpore导入失败")
         }
         
         do {
@@ -154,7 +153,7 @@ class WalletTools: NSObject {
         } catch {
             switch error {
             case KeyStore.Error.accountAlreadyExists:
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "账户已经存在")
+                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已经存在")
             default:
                 return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
             }
@@ -218,6 +217,23 @@ class WalletTools: NSObject {
         }
     }
     
+    
+    /// exportPrivate async
+    ///
+    /// - Parameters:
+    ///   - account: account
+    ///   - password: password
+    ///   - completion: ImportResult<String?>
+    static func exportPrivateKeyAsync(account: Account,password:String,completion:@escaping ExportPrivateCallback){
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let privateKey = exportPrivateKey(account: account, password: password)
+            DispatchQueue.main.async {
+                completion(privateKey)
+            }
+        }
+    }
+    
     static func exportPrivateKey(account: Account,password:String) -> ImportResult<String?> {
         do {
             let privateKey = try keyStore?.exportPrivateKey(account: account, password: password)
@@ -227,4 +243,17 @@ class WalletTools: NSObject {
         }
     }
     
+    static func checkWalletName(name:String) -> Bool{
+        
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        var nameArr = [""]
+        for wallModel in appModel.wallets {
+            nameArr.append(wallModel.name)
+        }
+        if  nameArr.contains(name) {
+            return false
+        }else{
+            return true
+        }
+    }
 }

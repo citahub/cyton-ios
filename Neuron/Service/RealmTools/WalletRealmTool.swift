@@ -13,7 +13,7 @@ class WalletRealmTool: NSObject {
     
     static let realm = RealmHelper.sharedInstance
     
-    /// 根据钱包name去取钱包
+    /// according to wallet address to get WalletModel
     ///
     /// - Parameter walletName: walletName
     /// - Returns: WalletModel
@@ -23,16 +23,20 @@ class WalletRealmTool: NSObject {
         return walletModel
     }
     
-    /// 获取当前AppModel的所有内容
+    /// get everything for AppModel
     ///
     /// - Returns: appmodel
     static func getCurrentAppmodel() -> AppModel{
-        let result = realm.objects(AppModel.self)
-        let appModel:AppModel = result[0]
-        return appModel
+        if isHasWallet() {
+            let result = realm.objects(AppModel.self)
+            let appModel:AppModel = result[0]
+            return appModel
+        }else{
+            return AppModel()
+        }
     }
     
-    /// 更新appmodel的当前钱包
+    /// update currentWallet
     ///
     /// - Parameter walletName: wallet name
     static func updateAppCurrentWallet(walletAddress:String){
@@ -58,6 +62,13 @@ class WalletRealmTool: NSObject {
                 return true
             }
         }
+    }
+    
+    /// addAppModel
+    ///
+    /// - Parameter appModel: appmodel instance
+    static func addObject(appModel:AppModel){
+            realm.add(appModel)
     }
     
 }

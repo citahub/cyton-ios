@@ -5,189 +5,346 @@
 //  Created by XiaoLu on 2018/5/31.
 //  Copyright © 2018年 cryptape. All rights reserved.
 //
+//  Should Reconstruction !!!
 
 import UIKit
-
+import RSKPlaceholderTextView
 
 enum SelectButtonStates {
     case keystoreState
-    case helpWordState
+    case mnemonicState
     case privateKeyState
 }
 
-class ImportWalletController: BaseViewController,UITableViewDelegate,UITableViewDataSource,ImportTextViewCellDelegate,AddAssetTableViewCellDelegate,QRCodeControllerDelegate {
+class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldDelegate,NEPickerViewDelegate,ImportWalletViewModelDelegate,QRCodeControllerDelegate {
     
 
+    let viewModel = ImportWalletViewModel()
     
     var selectState = SelectButtonStates.keystoreState
-    
-    var titleArray = [""]
-    var placeholderArray = [""]
-    var textViewPlactHolderStr = ""
-    
+    let nView =  NEPickerView.init()
+    var selectFormatId = "0"
     
     @IBOutlet weak var keystoreButton: UIButton!//tag 2000
     @IBOutlet weak var helpWordButton: UIButton!//2001
     @IBOutlet weak var privateKeyButton: UIButton!//2002
-    @IBOutlet weak var importTable: UITableView!
-    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    //keystore VIew
+    @IBOutlet weak var keystoreNameTF: UITextField!
+    @IBOutlet weak var keystorePasswordTF: UITextField!
+    @IBOutlet weak var keystoreImportButton: UIButton!
+    @IBOutlet weak var keystoreHeadView: UIView!
+    @IBOutlet weak var keystoreQRButton: UIButton!
+    //mnemonic View
+
+    @IBOutlet weak var mnemonicQRButton: UIButton!
+    @IBOutlet weak var mnemonicHeadView: UIView!
+    @IBOutlet weak var formatTF: UITextField!
+    @IBOutlet weak var mnemonicNameTF: UITextField!
+    @IBOutlet weak var mnemonicPasswordTF: UITextField!
+    @IBOutlet weak var mnemonicConfirmTF: UITextField!
+    @IBOutlet weak var mnemonicImportButton: UIButton!
+    //privatekey view
+    @IBOutlet weak var privatekeyQRButton: UIButton!
+    @IBOutlet weak var privatekeyHeadView: UIView!
+    @IBOutlet weak var privatekeyNameTF: UITextField!
+    @IBOutlet weak var privatekeyPasswordTF: UITextField!
+    @IBOutlet weak var privatekeyConfirmTF: UITextField!
+    
+    private let keystoreTextView = RSKPlaceholderTextView.init()
+    private let mnemonicTextView = RSKPlaceholderTextView.init()
+    private let privatekeyTextView = RSKPlaceholderTextView.init()
+
     var lineStateView = UIView.init()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        switch selectState {
+        case .keystoreState:
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+            break
+        case .mnemonicState:
+            scrollView.setContentOffset(CGPoint(x: ScreenW, y: 0), animated: false)
+            break
+        case .privateKeyState:
+            scrollView.setContentOffset(CGPoint(x: ScreenW*2, y: 0), animated: false)
+            break
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        scrollView.contentSize = CGSize(width: ScreenW*3, height: 0)
+        scrollView.isPagingEnabled = true
+        scrollView.isScrollEnabled = false
         title = "导入钱包"
-        didSetPlactHolder()
+        viewModel.delegate = self
+        didSetKeyStoreView()
+        didSetMnemonicView()
+        didSetPricatekeyView()
+    }
+    // set keystore view
+    func didSetKeyStoreView(){
         lineStateView.backgroundColor = ColorFromString(hex: "#2e4af2")
         lineStateView.frame = CGRect(x: 0, y: 43, width: ScreenW/3, height: 2)
         self.view.addSubview(lineStateView)
-        importTable.delegate = self
-        importTable.dataSource = self
-        importTable.register(ImportTextViewCell.self, forCellReuseIdentifier: "ID1")
-        importTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
+        keystoreNameTF.placeholder = "请输入名称"
+        keystorePasswordTF.placeholder = "请输入密码"
+        
+        keystoreQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
+        
+        keystoreTextView.delegate = self
+        keystoreTextView.font = UIFont.systemFont(ofSize: 14)
+        keystoreTextView.placeholder = "请导入keystor文本"
+        keystoreTextView.layer.cornerRadius = 5
+        keystoreTextView.layer.borderWidth = 1
+        keystoreTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
+        keystoreTextView.clipsToBounds = true
+        keystoreHeadView.addSubview(keystoreTextView)
+        keystoreTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
+        keystoreTextView.translatesAutoresizingMaskIntoConstraints = false
+        let letftContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .left, relatedBy: .equal, toItem:keystoreHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .right, relatedBy: .equal, toItem:keystoreHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .top, relatedBy: .equal, toItem:keystoreHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .bottom, relatedBy: .equal, toItem:keystoreHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
+        keystoreHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        
+        let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab.font = UIFont.systemFont(ofSize: 15)
+        nameLab.textColor = ColorFromString(hex: "#333333")
+        nameLab.text = "钱包名称"
+        keystoreNameTF.leftViewMode = .always
+        keystoreNameTF.leftView = nameLab
+        let passwordLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        passwordLab.font = UIFont.systemFont(ofSize: 15)
+        passwordLab.textColor = ColorFromString(hex: "#333333")
+        passwordLab.text = "解锁密码"
+        keystorePasswordTF.leftViewMode = .always
+        keystorePasswordTF.leftView = passwordLab
+        keystoreHeadView.bringSubview(toFront: keystoreQRButton)
+    }
+    // set mnemonic view
+    func didSetMnemonicView() {
+        mnemonicTextView.tag = 3001
+        mnemonicQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
+        mnemonicNameTF.placeholder = "请输入名称"
+        mnemonicPasswordTF.placeholder = "请输入密码"
+        mnemonicConfirmTF.placeholder = "请确认密码"
+        formatTF.delegate = self
+        formatTF.leftViewMode = .always
+        formatTF.rightViewMode = .always
+        mnemonicNameTF.leftViewMode = .always
+        mnemonicPasswordTF.leftViewMode = .always
+        mnemonicConfirmTF.leftViewMode = .always
+        
+        mnemonicTextView.delegate = self
+        mnemonicTextView.font = UIFont.systemFont(ofSize: 14)
+        mnemonicTextView.placeholder = "助记词输入+空格"
+        mnemonicTextView.layer.cornerRadius = 5
+        mnemonicTextView.layer.borderWidth = 1
+        mnemonicTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
+        mnemonicTextView.clipsToBounds = true
+        mnemonicHeadView.addSubview(mnemonicTextView)
+        mnemonicTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
+        mnemonicTextView.translatesAutoresizingMaskIntoConstraints = false
+        let letftContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .left, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .right, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .top, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .bottom, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
+        mnemonicHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        
+        let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab.font = UIFont.systemFont(ofSize: 15)
+        nameLab.textColor = ColorFromString(hex: "#333333")
+        nameLab.text = "格式"
+        let nameLab1 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab1.font = UIFont.systemFont(ofSize: 15)
+        nameLab1.textColor = ColorFromString(hex: "#333333")
+        nameLab1.text = "钱包名称"
+        let nameLab2 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab2.font = UIFont.systemFont(ofSize: 15)
+        nameLab2.textColor = ColorFromString(hex: "#333333")
+        nameLab2.text = "设定密码"
+        let nameLab3 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab3.font = UIFont.systemFont(ofSize: 15)
+        nameLab3.textColor = ColorFromString(hex: "#333333")
+        nameLab3.text = "重复密码"
+        formatTF.leftView = nameLab
+        mnemonicNameTF.leftView = nameLab1
+        mnemonicPasswordTF.leftView = nameLab2
+        mnemonicConfirmTF.leftView = nameLab3
+        mnemonicHeadView.bringSubview(toFront:mnemonicQRButton)
+
+        
+        let firstBtn = UIButton.init(type: .custom)
+        firstBtn.setImage(UIImage.init(named: "Triangle"), for: .normal)
+        firstBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 50)
+        firstBtn.addTarget(self, action: #selector(didSetUpPickView), for: .touchUpInside)
+        formatTF.rightView = firstBtn
+        formatTF.text = "m/44'/60'/0'/0/0"
+        
+        let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
+        formatTF.addGestureRecognizer(tap)
         
     }
-    
-    //顶部的三个按钮 尽量单纯剥离界面逻辑
-    @IBAction func didClickKeystoreButton(_ sender: UIButton) {
-        selectState = .keystoreState
-        setTopButtonStateWithButton(sender: sender)
+    // set privatekey view
+    func didSetPricatekeyView() {
+        privatekeyNameTF.placeholder = "请输入名称"
+        privatekeyPasswordTF.placeholder = "请输入密码"
+        privatekeyConfirmTF.placeholder = "请重新输入密码"
+        privatekeyNameTF.leftViewMode = .always
+        privatekeyPasswordTF.leftViewMode = .always
+        privatekeyConfirmTF.leftViewMode = .always
+        privatekeyQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
+
+        privatekeyHeadView.addSubview(privatekeyTextView)
+        privatekeyTextView.delegate = self
+        privatekeyTextView.font = UIFont.systemFont(ofSize: 14)
+        privatekeyTextView.placeholder = "输入私钥原文"
+        privatekeyTextView.layer.cornerRadius = 5
+        privatekeyTextView.layer.borderWidth = 1
+        privatekeyTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
+        privatekeyTextView.clipsToBounds = true
+        privatekeyTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
+        privatekeyTextView.translatesAutoresizingMaskIntoConstraints = false
+        let letftContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .left, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
+        privatekeyHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        
+        privatekeyHeadView.bringSubview(toFront: privatekeyQRButton)
+
+        let nameLab1 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab1.font = UIFont.systemFont(ofSize: 15)
+        nameLab1.textColor = ColorFromString(hex: "#333333")
+        nameLab1.text = "钱包名称"
+        let nameLab2 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab2.font = UIFont.systemFont(ofSize: 15)
+        nameLab2.textColor = ColorFromString(hex: "#333333")
+        nameLab2.text = "设定密码"
+        let nameLab3 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        nameLab3.font = UIFont.systemFont(ofSize: 15)
+        nameLab3.textColor = ColorFromString(hex: "#333333")
+        nameLab3.text = "重复密码"
+        privatekeyNameTF.leftView = nameLab1
+        privatekeyPasswordTF.leftView = nameLab2
+        privatekeyConfirmTF.leftView = nameLab3
     }
-    @IBAction func didClickHelpwordButton(_ sender: UIButton) {
-        selectState = .helpWordState
-        setTopButtonStateWithButton(sender: sender)
+    //pickview
+    @objc func didSetUpPickView(){
+        print("点击了pick")
+        nView.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
+        nView.delegate = self
+        nView.dataArray = [["name":"m/44'/60'/0'/0/0","id":"0"],["name":"m/44'/60'/0'/0","id":"1"],["name":"m/44'/60'/1'/0/0","id":"2"]]
+        nView.selectDict = ["name":formatTF.text!,"id":selectFormatId]
+        UIApplication.shared.keyWindow?.addSubview(nView)
     }
-    @IBAction func didClickPrivatekeyButton(_ sender: UIButton) {
-        selectState = .privateKeyState
-        setTopButtonStateWithButton(sender: sender)
+    //NEPickerViewDelegate
+    func callBackDictionnary(dict: [String : String]) {
+        formatTF.text = dict["name"]
+        selectFormatId = dict["id"]!
     }
-    
-    //设置按钮颜色
-    func setTopButtonStateWithButton(sender:UIButton) {
-        sender.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
-        print(sender.tag - 2000)
-        lineStateView.frame = CGRect(x: CGFloat(ScreenW/3 * CGFloat(sender.tag - 2000)), y: 43, width: ScreenW/3, height: 2)
-        if sender.tag == 2000 {
-            helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-            privateKeyButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-        }else if sender.tag == 2001{
-            keystoreButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-            privateKeyButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-        }else if sender.tag == 2002{
-            helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-            keystoreButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
-        }
-        didSetPlactHolder()
-        importTable.reloadData()
-    }
-    
-    //设置placeholder
-    func didSetPlactHolder() {
-        switch selectState {
-        case .keystoreState:
-            titleArray = ["钱包名称","解锁密码"]
-            placeholderArray = ["请输入名称","请输入密码"]
-            textViewPlactHolderStr = "请导入keystor文本"
-            titleLable.text = "将以太坊官方钱包KeyStore文件内容粘贴至输入框，或通过扫描二维码输入。"
-            break
-        case .helpWordState:
-            titleArray = ["格式","钱包名称","设定密码","重复密码"]
-            placeholderArray = ["","请输入名称","请输入名称","请重现输入密码"]
-            textViewPlactHolderStr = "助记词输入+空格"
-            titleLable.text = "请输入钱包助记词并选择助记词格式。"
-            break
-        case .privateKeyState:
-            titleArray = ["钱包名称","设定密码","重复密码"]
-            placeholderArray = ["请输入名称","请输入密码","请重新输入密码"]
-            textViewPlactHolderStr = "输入私钥原文"
-            titleLable.text = "请将私钥粘贴至输入框，或通过扫描二维码输入。"
-            break
-        }
-    }
-    
-    //tableview 代理
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0{
-            return 1
-        }else{
-            return titleArray.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0{
-            return 135
-        }else {
-            return 50
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID1") as! ImportTextViewCell
-            cell.delegate = self
-            cell.placeHolderStr = textViewPlactHolderStr
-            
-            return cell
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID") as! AddAssetTableViewCell
-            cell.delegate = self
-            cell.indexP = indexPath as NSIndexPath
-            cell.headLable.text = titleArray[indexPath.row]
-            cell.placeHolderStr = placeholderArray[indexPath.row]
-            if selectState == .helpWordState && indexPath.row == 0{
-                cell.selectRow = 0
-                cell.rightTextField.text = "metamask/jaxx兼容"
-            }else{
-                cell.selectRow = 2
-                cell.rightTextField.text = ""
-            }
-            return cell
-        }
-    }
-    
-    // AddAssetTableViewCell 代理
-    //textfield的内容对应的NSIndexPath
-    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
-        print(text)
-        print(index.row)
-        switch selectState {
-        case .keystoreState:
-            break
-        case .helpWordState:
-            break
-        case .privateKeyState: break
-        }
-    }
-    //选择类型
-    func didClickSelectCoinBtn() {
-        print("点击了jaxx")
-    }
-    
-    // ImportTextViewCell代理
-    //textview上点击二维码
-    func didClickQRBtn() {
-        print("点击二维码")
+    // QRButton action
+    @objc func didClickQRButton(sender:UIButton){
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
     
-    //时刻获取到textview的输入
-    func didGetTextViewText(text: String) {
-        print(text)
+    // QRCode deleagte
+    func didBackQRCodeMessage(codeResult: String) {
+        switch selectState {
+        case .keystoreState:
+            keystoreTextView.text = codeResult
+            break
+        case .mnemonicState:
+            mnemonicTextView.text = codeResult
+            break
+        case .privateKeyState:
+            privatekeyTextView.text = codeResult
+            break
+        }
     }
     
-    //扫描二维码返回的内容
-    func didBackQRCodeMessage(codeResult: String) {
-        
+    //textField delegate
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField === formatTF {
+            didSetUpPickView()
+            formatTF.resignFirstResponder()
+        }
+    }
+    
+    //three top button
+    @IBAction func didClickKeystoreButton(_ sender: UIButton) {
+        selectState = .keystoreState
+        viewModel.importType = .keystoreType
+        setTopButtonStateWithButton(sender: sender)
+    }
+    @IBAction func didClickHelpwordButton(_ sender: UIButton) {
+        selectState = .mnemonicState
+        viewModel.importType = .mnemonicType
+        setTopButtonStateWithButton(sender: sender)
+    }
+    @IBAction func didClickPrivatekeyButton(_ sender: UIButton) {
+        selectState = .privateKeyState
+        viewModel.importType = .privateKeyType
+        setTopButtonStateWithButton(sender: sender)
+    }
+    //set top button color
+    func setTopButtonStateWithButton(sender:UIButton) {
+        sender.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
+        print(sender.tag - 2000)
+        lineStateView.frame = CGRect(x: CGFloat(ScreenW/3 * CGFloat(sender.tag - 2000)), y: 43, width: ScreenW/3, height: 2)
+        if sender.tag == 2000 {
+            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+            helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+            privateKeyButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+        }else if sender.tag == 2001{
+            scrollView.setContentOffset(CGPoint(x: ScreenW, y: 0), animated: true)
+            keystoreButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+            privateKeyButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+        }else if sender.tag == 2002{
+            scrollView.setContentOffset(CGPoint(x: ScreenW*2, y: 0), animated: true)
+            helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+            keystoreButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
+        }
+    }
+    //nextButton action
+    @IBAction func keystoreNextButton(_ sender: UIButton) {
+        viewModel.importKeyStoreWallet(keyStore: keystoreTextView.text, password: keystorePasswordTF.text!, name: keystoreNameTF.text!)
+    }
+    
+    @IBAction func mnemonicNextButton(_ sender: UIButton) {
+        viewModel.importWalletWithMnemonic(mnemonic: mnemonicTextView.text, password: mnemonicPasswordTF.text!, confirmPassword: mnemonicConfirmTF.text!,devirationPath: formatTF.text!, name: mnemonicNameTF.text!)
+    }
+    
+    @IBAction func privatekeyNextButton(_ sender: UIButton) {
+        viewModel.importPrivateWallet(privateKey: privatekeyTextView.text, password: privatekeyPasswordTF.text!, confirmPassword: privatekeyConfirmTF.text!, name: privatekeyNameTF.text!)
+    }
+    
+    //importWalletViewModelDelegate
+    func didPopToRootView() {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+}
+
+extension UIViewController {
+    var correctLayoutGuide: UILayoutGuide {
+        if #available(iOS 11.0, *) {
+            return view.safeAreaLayoutGuide
+        }
+        else {
+            return view.layoutMarginsGuide
+        }
+    }
+    
 }
