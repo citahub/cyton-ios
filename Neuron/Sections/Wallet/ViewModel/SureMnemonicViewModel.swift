@@ -23,7 +23,6 @@ class SureMnemonicViewModel: NSObject {
     var walletPrivateKey = ""
     var walletPasswordMD5 = ""
     
-    
     var delegate:SureMnemonicViewModelDelegate?
     typealias SureMnemonicViewModelBlcol = (_ str:String) -> Void
     var walletModel = WalletModel()
