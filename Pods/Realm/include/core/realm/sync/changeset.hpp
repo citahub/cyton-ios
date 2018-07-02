@@ -559,8 +559,15 @@ inline Changeset::iterator Changeset::insert_stable(const_iterator cpos, InputIt
 inline Changeset::iterator Changeset::erase_stable(const_iterator cpos)
 {
     auto pos = const_iterator_to_iterator(cpos);
+    auto begin = m_instructions.begin();
+    auto end = m_instructions.end();
+    REALM_ASSERT(pos.m_inner >= begin);
+    REALM_ASSERT(pos.m_inner < end);
     pos.m_inner->erase(pos.m_pos);
-    ++pos;
+    if (pos.m_pos >= pos.m_inner->size()) {
+        ++pos.m_inner;
+        pos.m_pos = 0;
+    }
     return pos;
 }
 

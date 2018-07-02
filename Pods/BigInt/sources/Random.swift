@@ -7,8 +7,8 @@
 //
 
 import Foundation
-#if os(Linux) || os(FreeBSD)
-  import Glibc
+#if os(Linux)
+  import SwiftShims
 #endif
 
 
@@ -26,12 +26,10 @@ extension BigUInt {
         assert(byteCount > 0)
 
         let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: byteCount)
-      #if os(Linux) || os(FreeBSD)
-        let fd = open("/dev/urandom", O_RDONLY)
-        defer {
-            close(fd)
+      #if os(Linux)
+        for i in 0..<byteCount {
+          buffer[i] = UInt8(_swift_stdlib_cxx11_mt19937_uniform(UInt32(UInt8.max)))
         }
-        let _ = read(fd, buffer, MemoryLayout<UInt8>.size * byteCount)
       #else
         arc4random_buf(buffer, byteCount)
       #endif
@@ -40,7 +38,7 @@ extension BigUInt {
         }
         defer {
             buffer.deinitialize(count: byteCount)
-            buffer.deallocate()
+            buffer.deallocate(capacity: byteCount)
         }
         return BigUInt(Data(bytesNoCopy: buffer, count: byteCount, deallocator: .none))
     }
