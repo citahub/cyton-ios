@@ -16,6 +16,11 @@ class Sub2TableViewCell: UITableViewCell {
     
     @IBOutlet weak var countLable: UILabel!
     
+    var iconUrlStr:String?{
+        didSet{
+            iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,7 +29,6 @@ class Sub2TableViewCell: UITableViewCell {
         lineV.backgroundColor = ColorFromString(hex: "#eeeeee")
         contentView.addSubview(lineV)
         contentView.bringSubview(toFront: lineV)
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

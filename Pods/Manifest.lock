@@ -80,7 +80,7 @@ DEPENDENCIES:
   - Toast-Swift
   - TrustCore
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
-  - web3swift (from `https://github.com/xiaoluSF/web3swift`, branch `Nervos_version`)
+  - web3swift (from `https://github.com/BANKEX/web3swift`, branch `master`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -119,8 +119,8 @@ EXTERNAL SOURCES:
     :branch: master
     :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
-    :branch: Nervos_version
-    :git: https://github.com/xiaoluSF/web3swift
+    :branch: master
+    :git: https://github.com/BANKEX/web3swift
 
 CHECKOUT OPTIONS:
   CryptoSwift:
@@ -130,8 +130,8 @@ CHECKOUT OPTIONS:
     :commit: 9efdccfcace4d42874838243cb2b4710636fd563
     :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
-    :commit: 455af1a402699ea3adfde8211ec097f6df77e769
-    :git: https://github.com/xiaoluSF/web3swift
+    :commit: 273bef7108498f859b5d92b372ef0a757592321c
+    :git: https://github.com/BANKEX/web3swift
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -164,6 +164,6 @@ SPEC CHECKSUMS:
   TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
   web3swift: 3aec6f5285c79d2fd5d3a5be05a813329b909934
 
-PODFILE CHECKSUM: 5662e50c1fe95d18b76b3f1a2ca52edd198e2321
+PODFILE CHECKSUM: ef9e750b48a5a65bd02d62a45294b15e683f3dc5
 
 COCOAPODS: 1.5.3

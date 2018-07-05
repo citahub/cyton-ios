@@ -23,7 +23,7 @@ target 'Neuron' do
   pod 'IGIdenticon'
   pod 'SCLAlertView'
   pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
-  pod 'web3swift', :git => 'https://github.com/xiaoluSF/web3swift',:branch => 'Nervos_version'
+  pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
   
   target 'NeuronTests' do
     inherit! :search_paths

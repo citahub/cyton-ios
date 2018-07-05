@@ -112,11 +112,11 @@ class SureMnemonicViewModel: NSObject {
     }
     
     private func didPostCreatSuccessNotify()  {
-        //发出创建钱包成功的通知，同时吧钱包address传过去
+        //send notification when wallet is created success,by the way send walletAddress
         NotificationCenter.default.post(name:.creatWalletSuccess, object: self, userInfo: ["post":walletModel.address])
     }
     
-    //如果创建成功钱包 就去执行mainviewcontroller里的更换tabbar的操作
+    //if creat wallet successful send changetabbr notification
     func changeTabbar() {
         NotificationCenter.default.post(name: .changeTabbr, object: self)
     }

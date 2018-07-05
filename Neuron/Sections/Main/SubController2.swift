@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import RealmSwift
+import web3swift
+import BigInt
 
 class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSource,AssetsDetailControllerDelegate,SelectWalletControllerDelegate {
     
@@ -22,6 +25,8 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     let aCtrl = AssetsDetailController.init(nibName: "AssetsDetailController", bundle: nil)
     
     var viewModel = SubController2ViewModel()
+    var tokenArray:[TokenModel] = []
+    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -36,6 +41,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         didGetDataForCurrentWallet()
+        didGetTokenList()
     }
     
     override func viewDidLoad() {
@@ -67,6 +73,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     //switch wallet delegate
     func didCallBackSelectedWalletModel(walletModel: WalletModel) {
         refreshUI(walletModel: walletModel)
+        didGetTokenList()
     }
     
     //在当前钱包发生变化之后 UI的更新以及所有数据的更新
@@ -81,6 +88,16 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         namelable.text = walletModel.name
         mAddress.text = walletModel.address
         iconImageView.image = UIImage(data: walletModel.iconData)
+    }
+    
+    /// get token list from realm
+    func didGetTokenList() {
+        tokenArray.removeAll()
+        let walletModel = viewModel.getCurrentModel().currentWallet!
+        for item in walletModel.selectTokenList {
+            tokenArray.append(item)
+        }
+        mainTable.reloadData()
     }
     
     func setUpSubViewDetails() {
@@ -130,7 +147,6 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     @IBAction func didClickManageBtn(_ sender: UIButton) {
         let aCtrl = AssetViewController.init(nibName: "AssetViewController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
-        
     }
     //click icon image
     @objc func didClickIconImage() {
@@ -171,23 +187,45 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
 
     //tableview代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3;
+        return tokenArray.count + 1;
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! Sub2TableViewCell
-        cell.titlelable.text = "ETH"
-        cell.iconImage.image = UIImage.init(named: "ETH_test")
-        cell.countLable.text = "100.00"
+        if indexPath.row == 0 {
+            cell.titlelable.text = "ETH"
+            cell.iconUrlStr = ""
+            let walletModel = viewModel.getCurrentModel().currentWallet!
+            viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
+                if error == nil {cell.countLable.text = balance}else{
+                    cell.countLable.text = "..."
+                    NeuLoad.showToast(text: (error?.localizedDescription)!)
+                }
+            }
+        }else{
+            let tokenModel = tokenArray[indexPath.row - 1]
+            
+            cell.titlelable.text = tokenModel.symbol
+            cell.iconUrlStr = tokenModel.iconUrl
+            let walletModel = viewModel.getCurrentModel().currentWallet!
+            viewModel.didGetERC20BalanceForCurrentWallet(wAddress: walletModel.address, ERC20Token: tokenModel.address) { (erc20Balance, error) in
+                if error == nil {
+                    let balance = Web3.Utils.formatToPrecision(erc20Balance!, numberDecimals: tokenModel.decimals, formattingDecimals: 6, fallbackToScientific: false)
+                    cell.countLable.text = balance
+                }else{
+                    cell.countLable.text = "..."
+                    NeuLoad.showToast(text: (error?.localizedDescription)!)
+                }
+            }
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         tableView.deselectRow(at: indexPath, animated: true)
         UIApplication.shared.keyWindow?.addSubview(aCtrl.view)
-
+        
     }
     
     deinit {

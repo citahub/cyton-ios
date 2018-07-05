@@ -20,6 +20,8 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     
     //是否是密文
     var isSecretText:Bool = false {didSet{rightTextField.isSecureTextEntry = isSecretText}}
+    var isEdit:Bool = true{didSet{rightTextField.isEnabled = isEdit}}
+    
     
     var indexP = NSIndexPath.init()
     // 设置属性来确定不同的cell有不同的状态

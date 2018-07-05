@@ -144,6 +144,7 @@ class ImportWalletViewModel: NSObject {
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
         NeuLoad.showHUD(text: "导入钱包中")
         walletModel.name = name
+        walletModel.MD5screatPassword = CryptTools.changeMD5(password: password)
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
@@ -174,6 +175,7 @@ class ImportWalletViewModel: NSObject {
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
         NeuLoad.showHUD(text: "导入钱包中")
         walletModel.name = name
+        walletModel.MD5screatPassword = CryptTools.changeMD5(password: password)
         walletModel.encryptPrivateKey = CryptTools.Endcode_AES_ECB(strToEncode: privateKey, key: password)
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
         WalletTools.importWallet(with: importType) { (result) in
