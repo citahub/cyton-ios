@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import LYEmptyView
 
 class SubController3: BaseViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -19,12 +20,12 @@ class SubController3: BaseViewController,UITableViewDelegate,UITableViewDataSour
         sTable.dataSource = self
         sTable.register(UINib.init(nibName: "Sub3TableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         sTable.tableFooterView = UIView.init()
-
+        sTable.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有交易数据", detailStr: "")
     }
 
     //tableview代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

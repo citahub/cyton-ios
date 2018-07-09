@@ -12,12 +12,12 @@ import RealmSwift
 class AppModel: Object {
     
     
-    /// 当前app显示的钱包
+    /// current wallet
     @objc dynamic var currentWallet : WalletModel?
-
-    /// 整个app中的钱包列表
+    
+    /// whole wallet list
     var wallets = List<WalletModel>()
     
-    
-    
+    /// whole wallet extra asset token list does not include tokens-eth.json's token
+    var extraTokenList = List<TokenModel>()
 }

@@ -5,7 +5,8 @@ platform :ios, '10.0'
 target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'MJRefresh' 
+  pod 'MJRefresh'
+  pod 'LYEmptyView'
   pod 'SDWebImage'                      #图片的加载及缓存
   pod 'IQKeyboardManagerSwift'		#键盘
   pod 'RTRootNavigationController'       #导航栏
@@ -23,7 +24,7 @@ target 'Neuron' do
   pod 'IGIdenticon'
   pod 'SCLAlertView'
   pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
-  pod 'web3swift', :git => 'https://github.com/xiaoluSF/web3swift',:branch => 'Nervos_version'
+  pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
   
   target 'NeuronTests' do
     inherit! :search_paths

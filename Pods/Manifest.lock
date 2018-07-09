@@ -11,6 +11,7 @@ PODS:
   - IQKeyboardManagerSwift (6.0.4)
   - KeychainSwift (11.0.0)
   - libsodium (1.0.12)
+  - LYEmptyView (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.3)
   - PopupDialog (0.7.1):
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - IGIdenticon
   - IQKeyboardManagerSwift
   - KeychainSwift
+  - LYEmptyView
   - MBProgressHUD
   - MJRefresh
   - PopupDialog
@@ -80,7 +82,7 @@ DEPENDENCIES:
   - Toast-Swift
   - TrustCore
   - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
-  - web3swift (from `https://github.com/xiaoluSF/web3swift`, branch `Nervos_version`)
+  - web3swift (from `https://github.com/BANKEX/web3swift`, branch `master`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -93,6 +95,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - KeychainSwift
     - libsodium
+    - LYEmptyView
     - MBProgressHUD
     - MJRefresh
     - PopupDialog
@@ -119,8 +122,8 @@ EXTERNAL SOURCES:
     :branch: master
     :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
-    :branch: Nervos_version
-    :git: https://github.com/xiaoluSF/web3swift
+    :branch: master
+    :git: https://github.com/BANKEX/web3swift
 
 CHECKOUT OPTIONS:
   CryptoSwift:
@@ -130,8 +133,8 @@ CHECKOUT OPTIONS:
     :commit: 9efdccfcace4d42874838243cb2b4710636fd563
     :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
-    :commit: 455af1a402699ea3adfde8211ec097f6df77e769
-    :git: https://github.com/xiaoluSF/web3swift
+    :commit: 273bef7108498f859b5d92b372ef0a757592321c
+    :git: https://github.com/BANKEX/web3swift
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -144,6 +147,7 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: 36dbe324b4f9793f5f41ba5227f3e7c76dfefd50
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
+  LYEmptyView: 893007305370c9c69d7dc71b4b32f9b2ee80a622
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
@@ -164,6 +168,6 @@ SPEC CHECKSUMS:
   TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
   web3swift: 3aec6f5285c79d2fd5d3a5be05a813329b909934
 
-PODFILE CHECKSUM: 5662e50c1fe95d18b76b3f1a2ca52edd198e2321
+PODFILE CHECKSUM: 1d7f723340e835ae8dafb705b24bf7b968e1bb7e
 
 COCOAPODS: 1.5.3

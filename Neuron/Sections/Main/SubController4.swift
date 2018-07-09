@@ -67,6 +67,23 @@ class SubController4: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let wCtrl = CommonWebViewController()
+        
+        if indexPath.section == 1 {
+            switch indexPath.row {
+            case 0:
+                wCtrl.urlStr = "https://github.com/cryptape/Neuron-iOS"
+            case 1:
+                wCtrl.urlStr = "https://docs.nervos.org/Neuron-Android/#/privacy-policy"
+            case 2:
+                wCtrl.urlStr = "https://www.nervos.org/contact"
+                default:
+                break
+            }
+            navigationController?.pushViewController(wCtrl, animated: true)
+        }
+        
+
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

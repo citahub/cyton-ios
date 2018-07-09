@@ -59,7 +59,6 @@ class NEPickerView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         if selectDict.count != 0 {
             pickerV.selectRow(dataArray.index(of: selectDict)!, inComponent: 0, animated: true)
             pickerV.reloadAllComponents()
-            
             finalDict = selectDict
         }
     }
