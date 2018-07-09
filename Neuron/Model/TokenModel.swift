@@ -13,7 +13,7 @@ import BigInt
 class TokenModel: Object {
     
     // because import and creat wallet will check wallet name,  this can use wallet name
-    @objc dynamic var walletName:String? = ""
+    @objc dynamic var tokenBalance = ""
     @objc dynamic var name = ""
     @objc dynamic var iconUrl:String? = ""
     @objc dynamic var address = ""
@@ -21,5 +21,13 @@ class TokenModel: Object {
     @objc dynamic var symbol = ""
     @objc dynamic var chainName:String? = ""
     var chainId = RealmOptional<Int>()
+    
+    override class func primaryKey() -> String? {
+        return "address"
+    }
+    
+    override static func ignoredProperties() -> [String] {
+        return ["tokenBalance"]
+    }
 }
 

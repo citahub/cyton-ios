@@ -83,12 +83,12 @@ class AssetViewController: BaseViewController,UITableViewDelegate,UITableViewDat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let tokenModel = dataArray[indexPath.row]
+        print(tokenModel.address)
         if selectAddressArray.contains(tokenModel.address) {
             viewModel.deleteSelectedToken(tokenM: tokenModel)
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
                 return item == tokenModel.address
             })
-            print(selectAddressArray)
         }else{
             viewModel.addSelectToken(tokenM: tokenModel)
         }

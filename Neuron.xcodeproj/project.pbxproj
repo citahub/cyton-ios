@@ -91,6 +91,11 @@
 		898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */; };
 		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */; };
+		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
+		89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */; };
+		89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */; };
+		89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */; };
+		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SubController4.swift */; };
 		89C25C5B20BBA38300007EC1 /* SubController4.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5920BBA38300007EC1 /* SubController4.xib */; };
 		89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */; };
@@ -244,6 +249,11 @@
 		898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
 		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptService.swift; sourceTree = "<group>"; };
+		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
+		89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3NetWork.swift; sourceTree = "<group>"; };
+		89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTransactionService.swift; sourceTree = "<group>"; };
+		89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TransactionService.swift; sourceTree = "<group>"; };
+		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SubController4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController4.swift; sourceTree = "<group>"; };
 		89C25C5920BBA38300007EC1 /* SubController4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController4.xib; sourceTree = "<group>"; };
 		89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewController.swift; sourceTree = "<group>"; };
@@ -354,6 +364,7 @@
 		8922685820DE4EA50021A85F /* Setup */ = {
 			isa = PBXGroup;
 			children = (
+				89BEBE7020F12621007D2705 /* View */,
 				8922685920DE4EA50021A85F /* TableViewCell */,
 			);
 			path = Setup;
@@ -555,6 +566,7 @@
 				89D4AC3220D8A6E80097E02B /* SubController2ViewModel.swift */,
 				89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */,
 				898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */,
+				89BEBE6820EF3A99007D2705 /* TAViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -698,6 +710,9 @@
 				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				89FE21DD20EDB70000A09302 /* ServiceErrors.swift */,
+				89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */,
+				89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */,
+				89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */,
 			);
 			path = TokenServices;
 			sourceTree = "<group>";
@@ -726,6 +741,14 @@
 				3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		89BEBE7020F12621007D2705 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				89BEBE7120F12647007D2705 /* CommonWebViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		89C25C6A20BD41D800007EC1 /* TableviewCell */ = {
@@ -967,6 +990,7 @@
 				"${BUILT_PRODUCTS_DIR}/IGIdenticon/IGIdenticon.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
@@ -999,6 +1023,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGIdenticon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
@@ -1109,6 +1134,7 @@
 				8922685C20DE4EC60021A85F /* SubController4TableViewCell.swift in Sources */,
 				8928C27A20B2A61900C3103E /* SubController2.swift in Sources */,
 				898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */,
+				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
 				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
@@ -1131,6 +1157,7 @@
 				89F9E73E20DEBDE8009E68D4 /* ExportKeyStoreController.swift in Sources */,
 				89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */,
 				89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */,
+				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordJuge.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */,
@@ -1141,7 +1168,10 @@
 				89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */,
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
 				89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */,
+				89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */,
+				89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */,
 				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
+				89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */,
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
 				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
 				89FC542B20D4141500D5D27C /* Initializer.swift in Sources */,

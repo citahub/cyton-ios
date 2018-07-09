@@ -25,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-ay-Wpk">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" bouncesZoom="NO" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="6Fy-ay-Wpk">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="325"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -35,7 +35,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="QPG-cI-GaU">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QPG-cI-GaU">
                                 <rect key="frame" x="158" y="10" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="YNS-5g-7jd"/>
@@ -47,7 +47,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包名称" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-3t-SFd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MWa-3t-SFd">
                                 <rect key="frame" x="0.0" y="77" width="375" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="9iK-v3-CT3"/>
@@ -56,8 +56,8 @@
                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="siufhafadhasd2341" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwR-Pl-tIF">
-                                <rect key="frame" x="0.0" y="103" width="375" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwR-Pl-tIF">
+                                <rect key="frame" x="10" y="103" width="355" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="FYE-QL-3nx"/>
                                 </constraints>
@@ -72,10 +72,10 @@
                             <constraint firstItem="QPG-cI-GaU" firstAttribute="centerX" secondItem="pK5-YO-Tv6" secondAttribute="centerX" id="Lzp-A3-R2T"/>
                             <constraint firstItem="MWa-3t-SFd" firstAttribute="leading" secondItem="pK5-YO-Tv6" secondAttribute="leading" id="ZBf-N9-EEd"/>
                             <constraint firstItem="QPG-cI-GaU" firstAttribute="top" secondItem="Qrt-LH-i5L" secondAttribute="top" constant="10" id="cys-70-dAt"/>
-                            <constraint firstItem="pK5-YO-Tv6" firstAttribute="trailing" secondItem="dwR-Pl-tIF" secondAttribute="trailing" id="irL-PN-Xuf"/>
+                            <constraint firstItem="pK5-YO-Tv6" firstAttribute="trailing" secondItem="dwR-Pl-tIF" secondAttribute="trailing" constant="10" id="irL-PN-Xuf"/>
                             <constraint firstItem="dwR-Pl-tIF" firstAttribute="top" secondItem="MWa-3t-SFd" secondAttribute="bottom" constant="5" id="m7j-HT-Dpx"/>
                             <constraint firstItem="MWa-3t-SFd" firstAttribute="top" secondItem="QPG-cI-GaU" secondAttribute="bottom" constant="7" id="n9g-KD-xdN"/>
-                            <constraint firstItem="dwR-Pl-tIF" firstAttribute="leading" secondItem="pK5-YO-Tv6" secondAttribute="leading" id="zdB-kk-oF5"/>
+                            <constraint firstItem="dwR-Pl-tIF" firstAttribute="leading" secondItem="pK5-YO-Tv6" secondAttribute="leading" constant="10" id="zdB-kk-oF5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pK5-YO-Tv6"/>
                     </view>
@@ -110,7 +110,4 @@
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="头像" width="198" height="148"/>
-    </resources>
 </document>

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AssetsDetailControllerDelegate: NSObjectProtocol {
-    func didClickPay()
+    func didClickPay(tokenModel:TokenModel)
     func didClickGet()
 }
 
@@ -21,18 +21,25 @@ class AssetsDetailController: BaseViewController {
     @IBOutlet weak var payButton: UIButton!
     @IBOutlet weak var getButtton: UIButton!
     weak var delegate:AssetsDetailControllerDelegate?
+    
+    var tokenModel = TokenModel(){
+        didSet{
+            iconImageV.sd_setImage(with: URL(string: tokenModel.iconUrl!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
+            titleLable.text = tokenModel.symbol
+            countLable.text = tokenModel.tokenBalance
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
-        self.view.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
-        
     }
     
     @IBAction func closeMyselfBtn(_ sender: UIButton) {
         self.view.removeFromSuperview()
     }
     @IBAction func didClickPayBtn(_ sender: UIButton) {
-        delegate?.didClickPay()
+        delegate?.didClickPay(tokenModel: tokenModel)
         self.view.removeFromSuperview()
     }
     

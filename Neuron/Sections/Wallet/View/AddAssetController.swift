@@ -41,26 +41,14 @@ class AddAssetController: BaseViewController,UITableViewDelegate,UITableViewData
         }
         NeuLoad.showHUD(text: "")
         let appModel = WalletRealmTool.getCurrentAppmodel()
-//        let walletModel = appModel.currentWallet
-        print(">>>>>>>>>>>>" + (appModel.currentWallet?.name)!)
         if !tokenModel.address.hasPrefix("0x") {
             tokenModel.address = "0x" + tokenModel.address
         }
-        
         try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)
+            appModel.currentWallet?.selectTokenList.append(tokenModel)
         }
-        
-        try? WalletRealmTool.realm.write {
-            let newTModel = TokenModel()
-            newTModel.address = tokenModel.address
-            newTModel.name = tokenModel.name
-            newTModel.decimals = tokenModel.decimals
-            newTModel.symbol = tokenModel.symbol
-            newTModel.walletName = (appModel.currentWallet?.name)!
-            appModel.currentWallet?.selectTokenList.append(newTModel)
-        }
-        
         NeuLoad.hidHUD()
         navigationController?.popViewController(animated: true)
     }

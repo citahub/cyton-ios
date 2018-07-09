@@ -28,14 +28,13 @@ class AssetViewModel: NSObject {
         
         for tModel in appModel.extraTokenList {
             try? WalletRealmTool.realm.write {
-                tModel.name = (appModel.currentWallet?.name)!
+                WalletRealmTool.realm.add(tModel, update: true)
             }
             tokenArray.append(tModel)
         }
         
         for (_, subJSON) : (String, JSON) in jsonObj! {
             let tokenModel = TokenModel()
-            tokenModel.walletName = (appModel.currentWallet?.name)!
             tokenModel.name = subJSON["name"].stringValue
             tokenModel.address = subJSON["address"].stringValue
             tokenModel.decimals = subJSON["decimals"].intValue
@@ -56,18 +55,21 @@ class AssetViewModel: NSObject {
     func addSelectToken(tokenM:TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(tokenM, update: true)
             appModel.currentWallet?.selectTokenList.append(tokenM)
         }
     }
     
     func deleteSelectedToken(tokenM:TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppmodel()
-        for tokenModel in appModel.currentWallet!.selectTokenList {
-            if tokenM.address == tokenModel.address {
-                try? WalletRealmTool.realm.write {
-                        WalletRealmTool.realm.delete(tokenModel)
+        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
+        try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(tokenM, update: true)
+            filterResult?.forEach({ (tm) in
+                if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
+                    appModel.currentWallet?.selectTokenList.remove(at: index)
                 }
-            }
+            })
         }
         
     }

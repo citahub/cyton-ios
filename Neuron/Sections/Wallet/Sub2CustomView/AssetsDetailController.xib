@@ -30,7 +30,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7qd-k0-xzx">
                     <rect key="frame" x="48" y="140" width="280" height="350"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1y-1S-4w2">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e1y-1S-4w2">
                             <rect key="frame" x="0.0" y="50" width="280" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="A6S-O5-Dfk"/>
@@ -39,14 +39,14 @@
                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ETH_test" translatesAutoresizingMaskIntoConstraints="NO" id="j4w-gC-FnV">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j4w-gC-FnV">
                             <rect key="frame" x="110" y="110" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="LQr-Po-Ynj"/>
                                 <constraint firstAttribute="width" constant="60" id="QDF-Bw-G88"/>
                             </constraints>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.10eth" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5p-2u-YIY">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5p-2u-YIY">
                             <rect key="frame" x="0.0" y="180" width="280" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="aoT-ag-52E"/>
@@ -142,7 +142,6 @@
         </view>
     </objects>
     <resources>
-        <image name="ETH_test" width="22" height="31"/>
         <image name="close" width="17" height="16"/>
     </resources>
 </document>

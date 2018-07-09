@@ -19,3 +19,20 @@ enum CustomTokenError: Error {
     case badSymbolError
     case undefinedError
 }
+
+
+enum SendEthResult<T> {
+    case Success(T)
+    case Error(Error)
+}
+
+enum SendEthErrors: Error {
+    case invalidDestinationAddress
+    case invalidAmountFormat
+    case contractLoadingError
+    case retrievingGasPriceError
+    case retrievingEstimatedGasError
+    case emptyResult
+    case noAvailableKeys
+    case createTransactionIssue
+}

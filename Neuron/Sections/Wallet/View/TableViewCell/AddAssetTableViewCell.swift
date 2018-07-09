@@ -21,6 +21,7 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
     //是否是密文
     var isSecretText:Bool = false {didSet{rightTextField.isSecureTextEntry = isSecretText}}
     var isEdit:Bool = true{didSet{rightTextField.isEnabled = isEdit}}
+    var isOnlyNumberAndPoint:Bool = false
     
     
     var indexP = NSIndexPath.init()
@@ -38,6 +39,7 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
         super.awakeFromNib()
         //监听textfield.text
         rightTextField.addTarget(self, action: #selector(textFieldTextChanged(textField:)), for: .editingChanged)
+        rightTextField.delegate = self
     }
     
     //重写set方法
@@ -54,7 +56,6 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
                 firstBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 50)
                 firstBtn.addTarget(self, action: #selector(didSetUpPickView), for: .touchUpInside)
                 rightTextField.rightView = firstBtn
-                rightTextField.delegate = self
                 rightTextField.tag = 3000 // 根据tag来跟别的textfield区分
                 let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
                 
@@ -64,6 +65,7 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
                 secBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)
                 secBtn.imageEdgeInsets = UIEdgeInsetsMake(0, 15, 0, -15)
                 secBtn.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+                rightTextField.tag = 3002 // 根据tag来跟别的textfield区分
                 secBtn.addTarget(self, action: #selector(didPushQRCodeView), for: .touchUpInside)
                 rightTextField.rightView = secBtn
             }else{
@@ -101,6 +103,25 @@ class AddAssetTableViewCell: UITableViewCell,UITextFieldDelegate {
         }else{
             return true
         }
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if isOnlyNumberAndPoint {
+            guard CharacterSet(charactersIn: "0123456789.").isSuperset(of: CharacterSet(charactersIn: string)) else {
+                return false
+            }
+            if textField.text?.first == "." {
+                textField.text = "0."
+                return true
+            }
+            if (textField.text?.contains("."))! && string == "." {
+                return false
+            }
+            return true
+        }else{
+            return true
+        }
+
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

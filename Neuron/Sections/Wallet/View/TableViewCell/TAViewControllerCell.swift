@@ -13,32 +13,43 @@ import UIKit
     
 }
 
-class TAViewControllerCell: UITableViewCell,NeuronProgressViewDelegate {
+class TAViewControllerCell: UITableViewCell {
     
-    //进度条的具体进度条
+    //current progress
     var progress:Float = 0.0{
         didSet{
-            if progress >= 0 || progress <= 1 {
-                npView.progressV.progress = progress
-            }else if progress < 0{
-                npView.progressV.progress = 0
-            }else{
-                npView.progressV.progress = 1
-            }
+            sView.setValue(progress, animated: true)
         }
     }
-    weak var delegate:TAViewControllerCellDelegate!
     
-    var npView = NeuronProgressView()
-    @IBOutlet weak var speedLable: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        npView = NeuronProgressView.init(frame: CGRect(x: 15, y: 40, width: ScreenW - 30, height: 15))
-        self.contentView.addSubview(npView)
+    var showGasPrice:String = ""{
+        didSet{
+            speedLable.text = showGasPrice + " ether"
+        }
     }
     
-    func NProgressView(neuronProgressView: UIProgressView, changeProgress currenProgress: Float) {
-        delegate.didCallbackCurrentProgress!(progress: currenProgress)
+    
+    weak var delegate:TAViewControllerCellDelegate!
+    
+    @IBOutlet weak var quickLable: UILabel!
+    @IBOutlet weak var slowLable: UILabel!
+    @IBOutlet weak var gasLable: UILabel!
+    @IBOutlet weak var sView: UISlider!
+    @IBOutlet weak var speedLable: UILabel!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        sView.maximumValue = 100.00
+        sView.minimumValue = 1.00
+        sView.addTarget(self, action: #selector(sliderDidChange), for: .valueChanged)
+    }
+    
+    
+    @objc func sliderDidChange(slider:UISlider) {
+        
+        let finalValue = String(format: "%.2f", slider.value)
+        let finalFloat = Float(finalValue)
+        delegate.didCallbackCurrentProgress!(progress: finalFloat!)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

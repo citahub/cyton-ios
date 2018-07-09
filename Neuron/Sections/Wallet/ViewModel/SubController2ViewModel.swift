@@ -66,12 +66,7 @@ class SubController2ViewModel: NSObject {
                 NeuLoad.showToast(text: error.localizedDescription)
                 completion(nil,error)
             }
-            
-            
         }
-        
-        
-        
     }
     
     
