@@ -49,7 +49,7 @@ func isThePasswordMeetCondition(password:String) -> Bool {
     if totleConform >= 3 {
         return true
     }else{
-        NeuLoad.showToast(text: "密码不符合规则，请重新输入")
-        return true
+        NeuLoad.showToast(text: "密码太弱请重新输入")
+        return false
     }
 }

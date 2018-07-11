@@ -25,6 +25,8 @@ target 'Neuron' do
   pod 'SCLAlertView'
   pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
   pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
+  pod 'Alamofire'
+  pod 'Alamofire-Synchronous'
   
   target 'NeuronTests' do
     inherit! :search_paths

@@ -94,7 +94,7 @@ void barrett_reduce256_modm(bignum256modm r, const bignum256modm q1, const bignu
 	c += mul32x32_64(modm_mu[8], q1[8]);
 	f = (bignum256modm_element_t)c; q3[7] |= (f << 6) & 0x3fffffff; q3[8] = (bignum256modm_element_t)(c >> 24);
 
-	/* r1 = (x mod 256^(32+1)) = x mod (2^8)(31+1) = x & ((1 << 264) - 1)
+	/* r1 = (x mod 256^(32+1)) = x mod (2^8)(32+1) = x & ((1 << 264) - 1)
 	   r2 = (q3 * m) mod (256^(32+1)) = (q3 * m) & ((1 << 264) - 1) */
 	c = mul32x32_64(modm_m[0], q3[0]);
 	r2[0] = (bignum256modm_element_t)(c & 0x3fffffff); c >>= 30;
@@ -146,6 +146,46 @@ void add256_modm(bignum256modm r, const bignum256modm x, const bignum256modm y) 
 	c += x[7] + y[7]; r[7] = c & 0x3fffffff; c >>= 30;
 	c += x[8] + y[8]; r[8] = c;
 
+	reduce256_modm(r);
+}
+
+/* -x modulo m */
+void neg256_modm(bignum256modm r, const bignum256modm x) {
+	bignum256modm_element_t b = 0, pb;
+
+	/* r = m - x */
+	pb = 0;
+	pb += x[0]; b = lt_modm(modm_m[0], pb); r[0] = (modm_m[0] - pb + (b << 30)); pb = b;
+	pb += x[1]; b = lt_modm(modm_m[1], pb); r[1] = (modm_m[1] - pb + (b << 30)); pb = b;
+	pb += x[2]; b = lt_modm(modm_m[2], pb); r[2] = (modm_m[2] - pb + (b << 30)); pb = b;
+	pb += x[3]; b = lt_modm(modm_m[3], pb); r[3] = (modm_m[3] - pb + (b << 30)); pb = b;
+	pb += x[4]; b = lt_modm(modm_m[4], pb); r[4] = (modm_m[4] - pb + (b << 30)); pb = b;
+	pb += x[5]; b = lt_modm(modm_m[5], pb); r[5] = (modm_m[5] - pb + (b << 30)); pb = b;
+	pb += x[6]; b = lt_modm(modm_m[6], pb); r[6] = (modm_m[6] - pb + (b << 30)); pb = b;
+	pb += x[7]; b = lt_modm(modm_m[7], pb); r[7] = (modm_m[7] - pb + (b << 30)); pb = b;
+	pb += x[8]; b = lt_modm(modm_m[8], pb); r[8] = (modm_m[8] - pb + (b << 16));
+
+	// if x==0, reduction is required
+	reduce256_modm(r);
+}
+
+/* consts for subtraction, > p */
+/* Emilia Kasper trick, https://www.imperialviolet.org/2010/12/04/ecc.html */
+static const uint32_t twoP[] = {
+		0x5cf5d3ed, 0x60498c68, 0x6f79cd64, 0x77be77a7, 0x40000013, 0x3fffffff, 0x3fffffff, 0x3fffffff, 0xfff};
+
+/* subtraction x-y % m */
+void sub256_modm(bignum256modm r, const bignum256modm x, const bignum256modm y) {
+	bignum256modm_element_t c = 0;
+	c  = twoP[0] + x[0] - y[0]; r[0] = c & 0x3fffffff; c >>= 30;
+	c += twoP[1] + x[1] - y[1]; r[1] = c & 0x3fffffff; c >>= 30;
+	c += twoP[2] + x[2] - y[2]; r[2] = c & 0x3fffffff; c >>= 30;
+	c += twoP[3] + x[3] - y[3]; r[3] = c & 0x3fffffff; c >>= 30;
+	c += twoP[4] + x[4] - y[4]; r[4] = c & 0x3fffffff; c >>= 30;
+	c += twoP[5] + x[5] - y[5]; r[5] = c & 0x3fffffff; c >>= 30;
+	c += twoP[6] + x[6] - y[6]; r[6] = c & 0x3fffffff; c >>= 30;
+	c += twoP[7] + x[7] - y[7]; r[7] = c & 0x3fffffff; c >>= 30;
+	c += twoP[8] + x[8] - y[8]; r[8] = c;
 	reduce256_modm(r);
 }
 

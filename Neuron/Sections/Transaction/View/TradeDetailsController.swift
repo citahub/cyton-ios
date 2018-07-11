@@ -9,12 +9,38 @@
 import UIKit
 
 class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableViewDelegate {
+    var tModel = TransactionModel(){
+        didSet{
+            if tModel.transactionType == "ETH" {
+                titleArr = ["区块链网络","接受方","发送方","手续费","GasPrice","交易流水号","所在区块","入块时间"]
+                subBtnArr = [tModel.chainName,
+                             tModel.to,
+                             tModel.from,
+                             tModel.totleGas + "eth",
+                             tModel.gasPrice + "Gwei",
+                             tModel.hashString,
+                             tModel.blockNumber,
+                             tModel.formatTime]
+            }else if tModel.transactionType == "Nervos"{
+                titleArr = ["区块链网络","接受方","发送方","手续费","交易流水号","所在区块","入块时间"]
+                subBtnArr = [tModel.chainName,
+                             tModel.to,
+                             tModel.from,
+                             tModel.gasUsed,
+                             tModel.hashString,
+                             tModel.blockNumber,
+                             tModel.formatTime]
+            }
+        }
+    }
 
-    let titleArr = ["区块链网络","接受方","发送方","手续费","Gas价格","交易流水号","所在区块","入块时间"]
-    let subBtnArr = ["Ethereum Mainnet(或CITA ChainID)","0x12345678964573826483","0x12345678964573826483","0.0005eth","0.000215 eth/gas","0x1234556754356324567532245","12007","2018-3-23  12:30:12"]//测试数据
+    private var titleArr = [""]
+    private var subBtnArr = [""]
     
-    
-    
+    @IBOutlet weak var amountLable: UILabel!
+    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var nameLable: UILabel!
+    @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var tTable: UITableView!
     override func viewDidLoad() {
@@ -22,7 +48,13 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
         didSetUIDetail()
         tTable.delegate = self
         tTable.dataSource = self
+        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        iconImage.image = UIImage(data: (walletModel?.iconData)!)
         tTable.register(UINib.init(nibName: "TradeTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
+        amountLable.text = tModel.value
+        addressLable.text = walletModel?.address
+        nameLable.text = walletModel?.name
+        tTable.reloadData()
     }
     
     func didSetUIDetail() {
@@ -37,15 +69,15 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8
+        return titleArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! TradeTableViewCell
+        cell.ethOrNervos = tModel.transactionType
         cell.selectIndex = indexPath as NSIndexPath
         cell.titleStr = titleArr[indexPath.row]
         cell.subTitleStr = subBtnArr[indexPath.row]
-        
         return cell
     }
 

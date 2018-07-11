@@ -91,6 +91,9 @@
 		898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */; };
 		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */; };
+		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
+		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
+		89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* APIMacro.swift */; };
 		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
 		89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */; };
 		89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */; };
@@ -249,6 +252,9 @@
 		898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
 		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptService.swift; sourceTree = "<group>"; };
+		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		89B296EC20F4CBA7008558A7 /* APIMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMacro.swift; sourceTree = "<group>"; };
 		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3NetWork.swift; sourceTree = "<group>"; };
 		89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTransactionService.swift; sourceTree = "<group>"; };
@@ -343,6 +349,7 @@
 		8913436F20C78D9600A17AEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89B296EA20F4CB6B008558A7 /* TransactionModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
@@ -353,6 +360,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				89B296E720F4CA57008558A7 /* Transaction */,
 				898CA98420EA21E90059ECA3 /* TokenServices */,
 				899CADA120E0ED9500FF9D27 /* WalletServices */,
 				89D4AC3420D8AFB00097E02B /* RealmTools */,
@@ -407,6 +415,7 @@
 		8928C22420AE7C6200C3103E /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				89B296EC20F4CBA7008558A7 /* APIMacro.swift */,
 				8928C23420AE8F7C00C3103E /* NeuronMacro.swift */,
 				8928C25820AEB18100C3103E /* NibLoadable.swift */,
 				89D4AC3720D8DB610097E02B /* NotificationName.swift */,
@@ -733,6 +742,14 @@
 			path = WalletServices;
 			sourceTree = "<group>";
 		};
+		89B296E720F4CA57008558A7 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				89B296E820F4CA57008558A7 /* TransactionService.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
 		89BCA81AE0CA58529FA94CB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,6 +893,9 @@
 					896D042820AE69C1002CFF6A = {
 						CreatedOnToolsVersion = 9.3.1;
 						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -1180,6 +1200,7 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */,
+				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
 				8928C24920AE91E600C3103E /* SubController1.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
@@ -1192,7 +1213,9 @@
 				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
+				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
+				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
 				8913437520C7D3A400A17AEF /* NeuLoad.swift in Sources */,
 				89FC542D20D4142D00D5D27C /* SkipBackupFilesInitializer.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,
@@ -1369,18 +1392,25 @@
 			baseConfigurationReference = 21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = PBL67DWM43;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a0d61ce0-9d06-4f77-b34d-5114cb14b17e";
+				PROVISIONING_PROFILE_SPECIFIER = "neuron-development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -1395,17 +1425,24 @@
 			baseConfigurationReference = 1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = PBL67DWM43;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a0d61ce0-9d06-4f77-b34d-5114cb14b17e";
+				PROVISIONING_PROFILE_SPECIFIER = "neuron-development";
 				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1420,7 +1457,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1429,6 +1468,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
@@ -1441,7 +1481,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1450,6 +1492,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
@@ -1461,7 +1504,9 @@
 			baseConfigurationReference = C43FB42A510FDF667FD64169 /* Pods-NeuronUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1470,6 +1515,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Neuron;
@@ -1481,7 +1527,9 @@
 			baseConfigurationReference = DB16ADF7FEC17385D266EA00 /* Pods-NeuronUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1490,6 +1538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Neuron;
