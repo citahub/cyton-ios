@@ -5,6 +5,7 @@ platform :ios, '10.0'
 target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+  pod 'PlainPing'
   pod 'MJRefresh'
   pod 'LYEmptyView'
   pod 'SDWebImage'                      #图片的加载及缓存

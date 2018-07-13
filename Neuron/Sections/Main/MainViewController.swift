@@ -70,17 +70,17 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         nav4 = BaseNavigationController.init(rootViewController: subController4)
         
         if WalletRealmTool.isHasWallet() {
-            self.viewControllers = [/*nav1,*/nav2,nav3,nav4] as? [UIViewController]
+            self.viewControllers = [nav1,nav2,nav3,nav4] as? [UIViewController]
         }else{
-            self.viewControllers = [/*nav1,*/nav5,nav3,nav4] as? [UIViewController]
+            self.viewControllers = [nav1,nav5,nav3,nav4] as? [UIViewController]
         }
     }
     
     @objc func didChangeSubViews(){
         if WalletRealmTool.isHasWallet() {
-            self.viewControllers = [/*nav1,*/nav2,nav3,nav4] as? [UIViewController]
+            self.viewControllers = [nav1,nav2,nav3,nav4] as? [UIViewController]
         }else{
-            self.viewControllers = [/*nav1,*/nav5,nav3,nav4] as? [UIViewController]
+            self.viewControllers = [nav1,nav5,nav3,nav4] as? [UIViewController]
         }
     }
     

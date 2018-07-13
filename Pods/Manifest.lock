@@ -14,6 +14,7 @@ PODS:
   - LYEmptyView (1.1.0)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.3)
+  - PlainPing (0.5)
   - PopupDialog (0.7.1):
     - DynamicBlurView (~> 2.0)
   - PromiseKit (6.3.4):
@@ -71,6 +72,7 @@ DEPENDENCIES:
   - LYEmptyView
   - MBProgressHUD
   - MJRefresh
+  - PlainPing
   - PopupDialog
   - RealmSwift
   - Result
@@ -98,6 +100,7 @@ SPEC REPOS:
     - LYEmptyView
     - MBProgressHUD
     - MJRefresh
+    - PlainPing
     - PopupDialog
     - PromiseKit
     - Realm
@@ -150,6 +153,7 @@ SPEC CHECKSUMS:
   LYEmptyView: 893007305370c9c69d7dc71b4b32f9b2ee80a622
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
+  PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   PopupDialog: 39598b7d41719f5c025b4b70e62728bae7734fef
   PromiseKit: e1425568123ec844a944c93f2bcb29d511d39cf5
   Realm: a469bb59e33f9926102ccaea4349822c53b9117e
@@ -168,6 +172,6 @@ SPEC CHECKSUMS:
   TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
   web3swift: 93e24a7cf3b65a2d508cd3d1e8f26990df9c869a
 
-PODFILE CHECKSUM: c6d0e8b7ba3b5af45e0264b7aa7e3cfe1d03d999
+PODFILE CHECKSUM: 6fac8b85b005a80f8ad39c3d750ac571d133d30a
 
 COCOAPODS: 1.5.3

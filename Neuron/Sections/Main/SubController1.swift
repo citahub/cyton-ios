@@ -12,14 +12,10 @@ import JavaScriptCore
 import Toast_Swift
 class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate {
 
-    
-    
-    
     private var webView = WKWebView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.navigationController?.navigationBar.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         didAddSubLayout()
     }
@@ -29,19 +25,19 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
         webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 49))
         let url = URL(string:"http://47.97.171.140:8866")
         let request = URLRequest.init(url: url!)
-        webView.load(request)
         
-//        let jsStr = "function openLocal2(){window.webkit.messageHandlers.zhuru.postMessage({body: 'zhurusuccess'});}"
-//
-//        let userJS = WKUserScript.init(source: jsStr, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        
-        
-//        let fileURL =  Bundle.main.url(forResource: "WebViewDemo", withExtension: "html" )
-//        webView.loadFileURL(fileURL!,allowingReadAccessTo:Bundle.main.bundleURL);
-//        webView.configuration.userContentController.addUserScript(userJS)
+        var js = ""
+        if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
+            do {
+                js += try String(contentsOfFile: path)
+            } catch{ }
+        }
+        print(js)
+        let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
-//        webView.configuration.userContentController.add(self, name: "zhuru")
-        webView.configuration.userContentController.add(self,name:"appHybrid")
+        webView.configuration.userContentController.add(self, name: "zhuru")
+        webView.configuration.userContentController.add(self,name:"pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
         if #available(iOS 11.0, *) {
@@ -54,7 +50,8 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
         webView.navigationDelegate = self
         webView.uiDelegate = self
         view.addSubview(webView)
-        
+        webView.load(request)
+
         let placrV = UIView.init()
         placrV.backgroundColor = ColorFromString(hex: themeColor)
         if isiphoneX() {
@@ -90,12 +87,7 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
             print(navigationAction.request.url!)
-            let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
-            self.navigationController?.pushViewController(sCtrl, animated: true)
-//            let alertController = UIAlertController(title: "Action not allowed", message: "Tapping on links is not allowed. Sorry!", preferredStyle: .alert)
-//            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-//            present(alertController, animated: true, completion: nil)
-            
+
             return
         }
         
@@ -109,8 +101,9 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
         print(message)
         print(message.body)
         switch message.name {
-        case "appHybrid":
-            print("点击了appHybrid")
+        case "pushSearchView":
+            let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
+            self.navigationController?.pushViewController(sCtrl, animated: true)
             break
         case "zhuru":
             print("这是注入的代码")

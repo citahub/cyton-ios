@@ -22,7 +22,9 @@ class SubController3: BaseViewController,UITableViewDelegate,UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        didGetEthTranscationData()
+        if WalletRealmTool.getCurrentAppmodel().wallets.count != 0 {
+            didGetEthTranscationData()
+        }
     }
     
     override func viewDidLoad() {
@@ -43,15 +45,19 @@ class SubController3: BaseViewController,UITableViewDelegate,UITableViewDataSour
     }
     
     func didGetEthTranscationData() {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
-            switch result{
-            case .Success(let ethArray):
-                self.dataArray = ethArray
-                self.didGetNervosTranscationData()
-            case .Error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+        if WalletRealmTool.getCurrentAppmodel().wallets.count != 0 {
+            let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+            service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
+                switch result{
+                case .Success(let ethArray):
+                    self.dataArray = ethArray
+                    self.didGetNervosTranscationData()
+                case .Error(let error):
+                    NeuLoad.showToast(text: error.localizedDescription)
+                }
             }
+        }else{
+            sTable.mj_header.endRefreshing()
         }
     }
     
