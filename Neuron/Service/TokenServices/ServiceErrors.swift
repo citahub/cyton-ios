@@ -36,3 +36,9 @@ enum SendEthErrors: Error {
     case noAvailableKeys
     case createTransactionIssue
 }
+
+enum TransactionErrors:Error {
+    case Requestfailed
+}
+
+

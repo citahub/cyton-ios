@@ -71,6 +71,15 @@ class SureMnemonicViewController: BaseViewController,ButtonTagViewDelegate,Butto
 //            print(name.value(forKey: "buttonTitle") as! String)
             selectArray.append(name.value(forKey: "buttonTitle") as! String)
         }
+        if selectArray.count == 12 {
+            sureButton.isEnabled = true
+            sureButton.backgroundColor = ColorFromString(hex: themeColor)
+            sureButton.setTitleColor(.white, for: .normal)
+        }else{
+            sureButton.isEnabled = false
+            sureButton.backgroundColor = ColorFromString(hex: "#f2f2f2")
+            sureButton.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
+        }
         print(selectArray)
     }
 

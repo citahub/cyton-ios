@@ -33,7 +33,7 @@ class SureMnemonicViewModel: NSObject {
             return true
         }else{
             NeuLoad.showToast(text: "助记词验证失败")
-            return true
+            return false
         }
     }
     

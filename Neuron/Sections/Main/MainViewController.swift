@@ -97,7 +97,6 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         barItem.image = UIImage(named:image)?.withRenderingMode(.alwaysOriginal)
         barItem.selectedImage = UIImage(named:imageSel)?.withRenderingMode(.alwaysOriginal)
         
-        
         return barItem
     }
 

@@ -85,6 +85,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         print(wAddress as! String)
         let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
         refreshUI(walletModel: walletModel)
+        loadData()
     }
     
     func refreshUI(walletModel:WalletModel){

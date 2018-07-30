@@ -48,6 +48,7 @@
 		8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A19220C115A70086848F /* SureMnemonicViewController.xib */; };
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
+		896812CB20F726D000731C8C /* dappOpration.js in Resources */ = {isa = PBXBuildFile; fileRef = 896812CA20F726D000731C8C /* dappOpration.js */; };
 		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
 		896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042E20AE69C1002CFF6A /* ViewController.swift */; };
 		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
@@ -91,6 +92,11 @@
 		898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */; };
 		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */; };
+		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
+		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
+		89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* APIMacro.swift */; };
+		89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895AA20F8507200B9468B /* BrowserUrlParser.swift */; };
+		89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserviewController.swift */; };
 		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
 		89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */; };
 		89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */; };
@@ -200,6 +206,7 @@
 		8964A19220C115A70086848F /* SureMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SureMnemonicViewController.xib; sourceTree = "<group>"; };
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
+		896812CA20F726D000731C8C /* dappOpration.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dappOpration.js; sourceTree = "<group>"; };
 		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		896D042E20AE69C1002CFF6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +256,11 @@
 		898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewModel.swift; sourceTree = "<group>"; };
 		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptService.swift; sourceTree = "<group>"; };
+		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
+		89B296EC20F4CBA7008558A7 /* APIMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMacro.swift; sourceTree = "<group>"; };
+		89B895AA20F8507200B9468B /* BrowserUrlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUrlParser.swift; sourceTree = "<group>"; };
+		89B895B020F8B0CD00B9468B /* BrowserviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserviewController.swift; sourceTree = "<group>"; };
 		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3NetWork.swift; sourceTree = "<group>"; };
 		89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTransactionService.swift; sourceTree = "<group>"; };
@@ -343,6 +355,7 @@
 		8913436F20C78D9600A17AEF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				89B296EA20F4CB6B008558A7 /* TransactionModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
@@ -353,6 +366,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				89B296E720F4CA57008558A7 /* Transaction */,
 				898CA98420EA21E90059ECA3 /* TokenServices */,
 				899CADA120E0ED9500FF9D27 /* WalletServices */,
 				89D4AC3420D8AFB00097E02B /* RealmTools */,
@@ -407,6 +421,7 @@
 		8928C22420AE7C6200C3103E /* Macro */ = {
 			isa = PBXGroup;
 			children = (
+				89B296EC20F4CBA7008558A7 /* APIMacro.swift */,
 				8928C23420AE8F7C00C3103E /* NeuronMacro.swift */,
 				8928C25820AEB18100C3103E /* NibLoadable.swift */,
 				89D4AC3720D8DB610097E02B /* NotificationName.swift */,
@@ -417,6 +432,7 @@
 		8928C22520AE7C6200C3103E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				896812CA20F726D000731C8C /* dappOpration.js */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				8928C22F20AE822B00C3103E /* Images.xcassets */,
 			);
@@ -503,6 +519,7 @@
 				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
 				8964A17B20BE7F750086848F /* MessageSignController.swift */,
 				8964A17C20BE7F750086848F /* MessageSignController.xib */,
+				89B895B020F8B0CD00B9468B /* BrowserviewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -510,6 +527,7 @@
 		8928C25120AEA6A700C3103E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -733,6 +751,14 @@
 			path = WalletServices;
 			sourceTree = "<group>";
 		};
+		89B296E720F4CA57008558A7 /* Transaction */ = {
+			isa = PBXGroup;
+			children = (
+				89B296E820F4CA57008558A7 /* TransactionService.swift */,
+			);
+			path = Transaction;
+			sourceTree = "<group>";
+		};
 		89BCA81AE0CA58529FA94CB3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -876,6 +902,9 @@
 					896D042820AE69C1002CFF6A = {
 						CreatedOnToolsVersion = 9.3.1;
 						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 0;
+							};
 							com.apple.Push = {
 								enabled = 1;
 							};
@@ -950,6 +979,7 @@
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
 				8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */,
+				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,
 				8905660520CE4F220041D4B4 /* WebViewDemo.html in Resources */,
@@ -993,6 +1023,7 @@
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
@@ -1026,6 +1057,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
@@ -1120,6 +1152,7 @@
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
 				899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
+				89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */,
 				89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
@@ -1161,6 +1194,7 @@
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordJuge.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */,
+				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */,
@@ -1180,6 +1214,7 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */,
+				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
 				8928C24920AE91E600C3103E /* SubController1.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
@@ -1192,7 +1227,9 @@
 				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
+				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
+				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
 				8913437520C7D3A400A17AEF /* NeuLoad.swift in Sources */,
 				89FC542D20D4142D00D5D27C /* SkipBackupFilesInitializer.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,
@@ -1369,18 +1406,25 @@
 			baseConfigurationReference = 21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PBL67DWM43;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
@@ -1395,17 +1439,24 @@
 			baseConfigurationReference = 1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ADDRESS_SANITIZER_CONTAINER_OVERFLOW = NO;
+				CLANG_ENABLE_CODE_COVERAGE = YES;
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = PBL67DWM43;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Neuron/Neuron-Bridging-Header.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
@@ -1420,7 +1471,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1429,6 +1482,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
@@ -1441,7 +1495,9 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1450,6 +1506,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Neuron.app/Neuron";
@@ -1461,7 +1518,9 @@
 			baseConfigurationReference = C43FB42A510FDF667FD64169 /* Pods-NeuronUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1470,6 +1529,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Neuron;
@@ -1481,7 +1541,9 @@
 			baseConfigurationReference = DB16ADF7FEC17385D266EA00 /* Pods-NeuronUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1490,6 +1552,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Neuron;

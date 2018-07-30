@@ -11,7 +11,7 @@ import web3swift
 
 class Web3NetWork {
     static public func getWeb3() -> web3{
-        return Web3.InfuraRinkebyWeb3()
+        return Web3.InfuraMainnetWeb3()
     }
 }
 

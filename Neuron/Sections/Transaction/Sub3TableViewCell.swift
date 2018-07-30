@@ -19,13 +19,15 @@ class Sub3TableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var iconImageV: UIImageView!
-    @IBOutlet weak var stateImageV: UIImageView!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var limitLable: UILabel!
     @IBOutlet weak var dataLable: UILabel!
     @IBOutlet weak var exchangeLable: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        iconImageV.image = UIImage(data: (walletModel?.iconData)!)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
