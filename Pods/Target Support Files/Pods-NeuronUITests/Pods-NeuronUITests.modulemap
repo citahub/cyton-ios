@@ -1,6 +1,0 @@
-framework module Pods_NeuronUITests {
-  umbrella header "Pods-NeuronUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

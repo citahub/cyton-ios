@@ -48,7 +48,7 @@ PODS:
   - TrustCore (0.0.7):
     - BigInt
     - TrezorCrypto
-  - TrustKeystore (0.4.1):
+  - TrustKeystore (0.4.2):
     - BigInt
     - CryptoSwift
     - TrezorCrypto
@@ -82,8 +82,8 @@ DEPENDENCIES:
   - SDWebImage
   - SwiftyJSON
   - Toast-Swift
-  - TrustCore
-  - TrustKeystore (from `https://github.com/TrustWallet/trust-keystore`, branch `master`)
+  - TrustCore (~> 0.0.7)
+  - TrustKeystore (~> 0.4.1)
   - web3swift (from `https://github.com/BANKEX/web3swift`, branch `master`)
 
 SPEC REPOS:
@@ -116,14 +116,12 @@ SPEC REPOS:
     - Toast-Swift
     - TrezorCrypto
     - TrustCore
+    - TrustKeystore
 
 EXTERNAL SOURCES:
   CryptoSwift:
     :branch: master
     :git: https://github.com/krzyzanowskim/CryptoSwift
-  TrustKeystore:
-    :branch: master
-    :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
     :branch: master
     :git: https://github.com/BANKEX/web3swift
@@ -132,9 +130,6 @@ CHECKOUT OPTIONS:
   CryptoSwift:
     :commit: 9284485ecd681b04d17e71383d903b5de33516db
     :git: https://github.com/krzyzanowskim/CryptoSwift
-  TrustKeystore:
-    :commit: b338faf76d62efa570bd03088ebceac4e10314da
-    :git: https://github.com/TrustWallet/trust-keystore
   web3swift:
     :commit: 64a7b74768a4a771017a545fa8f094efa42d9352
     :git: https://github.com/BANKEX/web3swift
@@ -169,9 +164,9 @@ SPEC CHECKSUMS:
   Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
   TrezorCrypto: bea2dab002f9a5fe885df004694b9ece52dc088b
   TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
-  TrustKeystore: fdd5936098af80b9478122bbd3a89477a5389298
+  TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 93e24a7cf3b65a2d508cd3d1e8f26990df9c869a
 
-PODFILE CHECKSUM: 6fac8b85b005a80f8ad39c3d750ac571d133d30a
+PODFILE CHECKSUM: 81d5fe762d1b026ce19958c3825647af325bf479
 
 COCOAPODS: 1.5.3

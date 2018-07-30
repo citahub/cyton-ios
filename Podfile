@@ -17,8 +17,8 @@ target 'Neuron' do
   pod 'Toast-Swift'
   pod 'RealmSwift'
   pod 'MBProgressHUD'
-  pod 'TrustCore'
-  pod 'TrustKeystore', :git=>'https://github.com/TrustWallet/trust-keystore', :branch=>'master'
+  pod 'TrustCore','~> 0.0.7'
+  pod 'TrustKeystore','~> 0.4.1'
   pod 'Result'
   pod 'KeychainSwift'
   pod 'SwiftyJSON', :inhibit_warnings => true
