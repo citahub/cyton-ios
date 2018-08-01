@@ -58,7 +58,6 @@ class SubController2ViewModel: NSObject {
     
     func didGetERC20BalanceForCurrentWallet(wAddress:String,ERC20Token:String,completion: @escaping (BigUInt?,Error?) ->Void ) {
         ERC20TokenService.getERC20TokenBalance(walletAddress: wAddress, contractAddress: ERC20Token) { (result) in
-            
             switch result{
             case .Success(let erc20Balance):
                 completion(erc20Balance,nil)
@@ -70,4 +69,35 @@ class SubController2ViewModel: NSObject {
     }
     
     
+    /// get Nervos native chain message
+    ///
+    /// - Parameter completion:(TokenModel?,Error?)
+    func getMateDataForNervos(completion: @escaping (TokenModel?,Error?) ->Void) {
+        NervosNativeTokenServiceImp.getNervosNativeTokenMsg { (result) in
+            switch result {
+            case .Success(let tokenModel):
+                completion(tokenModel, nil)
+            case .Error(let error):
+                completion(nil,error)
+            }
+        }
+    }
+    
+    func getNervosNativeTokenBalance(walletAddress:String,completion: @escaping (String?, Error?) -> Void) {
+        NervosNativeTokenServiceImp.getNervosNativeTokenBalance(walletAddress: walletAddress) { (result) in
+            switch result{
+            case .Success(let balance):
+                print(balance.description)
+                let nervosBalance = Web3.Utils.formatToEthereumUnits(balance,
+                                                                  toUnits: .eth,
+                                                                  decimals: 6,
+                                                                  fallbackToScientific: false)
+                let balanceNumber = Float(nervosBalance!)
+                completion(String(balanceNumber!),nil)
+            case .Error(let error):
+                completion(nil,error)
+            }
+        }
+        
+    }
 }

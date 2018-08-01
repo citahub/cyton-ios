@@ -16,7 +16,7 @@ class RealmHelper {
     static var sharedInstance = try! Realm()
     
     /// 版本号
-    private static var schemaVersion:UInt64 = 0
+    private static var schemaVersion:UInt64 = 1
     
     
     //--MARK: 初始化 Realm
@@ -28,10 +28,15 @@ class RealmHelper {
         var config = Realm.Configuration()
         config.schemaVersion = schemaVersion
         config.encryptionKey = getKey() as Data
-        //使用默认目录，但是使用用户名来代替默认的文件名
-//        config.fileURL = config.fileURL?.deletingLastPathComponent().appendingPathComponent("\(username).realm")
-        //获取Realm文件的父级目录
+        //data migration
         let folderPath = config.fileURL?.deletingLastPathComponent().path
+        config.migrationBlock = { migration, oldSchemaVersion in
+            if oldSchemaVersion < schemaVersion {
+                
+            }
+        }
+        
+        
         /**
          *  设置可以在后台应用刷新中使用 Realm
          *  注意：以下的操作其实是关闭了 Realm 文件的 NSFileProtection 属性加密功能，将文件保护属性降级为一个不太严格的、允许即使在设备锁定时都可以访问文件的属性

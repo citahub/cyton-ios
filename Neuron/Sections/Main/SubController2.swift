@@ -42,7 +42,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         didGetDataForCurrentWallet()
-        if tokenArray.count != (viewModel.getCurrentModel().currentWallet?.selectTokenList.count)! + 1 {
+        if tokenArray.count != (viewModel.getCurrentModel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
             didGetTokenList()
         }
     }
@@ -97,12 +97,8 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     /// get token list from realm
     func didGetTokenList() {
         tokenArray.removeAll()
-        
-        let ethToken = TokenModel()
-        ethToken.symbol = "ETH"
-        ethToken.address = "1"
-        ethToken.iconUrl = ""
-        tokenArray.append(ethToken)
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        tokenArray += appModel.nativeTokenList
         let walletModel = viewModel.getCurrentModel().currentWallet!
         for item in walletModel.selectTokenList {
             tokenArray.append(item)
@@ -120,10 +116,20 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
         let walletModel = viewModel.getCurrentModel().currentWallet!
         for tm in tokenArray {
-            if tm.address == "1" {
+            if tm.chainId == "-1" {
                 group.enter()
                 viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil {
+                        tm.tokenBalance = balance!
+                    }else{
+                        NeuLoad.showToast(text: (error?.localizedDescription)!)
+                    }
+                    group.leave()
+                }
+            }else if tm.chainId != "" && tm.chainId != "-1" {
+                group.enter()
+                viewModel.getNervosNativeTokenBalance(walletAddress: walletModel.address) { (balance, error) in
+                    if error == nil{
                         tm.tokenBalance = balance!
                     }else{
                         NeuLoad.showToast(text: (error?.localizedDescription)!)

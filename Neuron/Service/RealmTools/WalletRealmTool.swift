@@ -27,13 +27,17 @@ class WalletRealmTool: NSObject {
     ///
     /// - Returns: appmodel
     static func getCurrentAppmodel() -> AppModel{
-        if isHasWallet() {
-            let result = realm.objects(AppModel.self)
+//        if isHasWallet() {
+        let result = realm.objects(AppModel.self)
+        if result.count == 0 {
+            return AppModel()
+        }else{
             let appModel:AppModel = result[0]
             return appModel
-        }else{
-            return AppModel()
         }
+//        }else{
+//            return AppModel()
+//        }
     }
     
     /// update currentWallet

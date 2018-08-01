@@ -44,6 +44,7 @@ class AddAssetController: BaseViewController,UITableViewDelegate,UITableViewData
         if !tokenModel.address.hasPrefix("0x") {
             tokenModel.address = "0x" + tokenModel.address
         }
+//        tokenModel.chainidName = 
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)

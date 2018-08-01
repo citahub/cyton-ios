@@ -13,6 +13,11 @@ enum EthServiceResult<T> {
     case Error(Error)
 }
 
+enum NervosServiceResult<T>{
+    case Success(T)
+    case Error(Error)
+}
+
 enum CustomTokenError: Error {
     case wrongBalanceError
     case badNameError
