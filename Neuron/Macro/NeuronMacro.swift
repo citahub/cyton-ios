@@ -8,18 +8,18 @@
 
 import Foundation
 
-//主题颜色
+//theme color
 let themeColor = "#2e4af2"
 let lineColor = "#f1f1f1"
 
 
 
-/// 屏幕高度
+/// Screen height
 let ScreenH = UIScreen.main.bounds.height
-/// 屏幕宽度
+/// screen width
 let ScreenW = UIScreen.main.bounds.width
 
-//判断是不是iPhoneX
+//isiPhoneX
 public func isiphoneX() -> Bool {
     
     if UIScreen.main.bounds.height == 812 {
@@ -29,7 +29,7 @@ public func isiphoneX() -> Bool {
     }
 }
 
-//返回realm的加密key
+//realm encryption key
 func getKey() -> NSData {
     // Identifier for our keychain entry - should be unique for your application
     let keychainIdentifier = "org.nervos.Neuron"
@@ -70,7 +70,7 @@ func getKey() -> NSData {
     return keyData
 }
 
-//随机打乱数组
+//random array
 extension Array{
     public func shuffle() -> Array {
         var list = self

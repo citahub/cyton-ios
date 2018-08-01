@@ -32,7 +32,7 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
-                    tokenModel.decimals = 6
+                    tokenModel.decimals = nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     completion(NervosServiceResult.Success(tokenModel))
                     break

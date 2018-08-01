@@ -32,11 +32,11 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
         self.delegate = self;
         addNotify()
         self.initTabbarItems()
-        getNervosToken()
+        addNativeTokenMsgToRealm()
     }
     
     // get native token for nervos  'just temporary'
-    func getNervosToken() {
+    func addNativeTokenMsgToRealm() {
         var tModel = TokenModel()
         let group = DispatchGroup()
         group.enter()
@@ -62,14 +62,14 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
 
         let ethModel = TokenModel()
         ethModel.address = ""
-        ethModel.chainId = "-1"
+        ethModel.chainId = ETH_MainNetChainId
         ethModel.chainName = ""
-        ethModel.decimals = 6
+        ethModel.decimals = nativeTokenDecimals
         ethModel.iconUrl = ""
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"
         ethModel.symbol = "ETH"
-        ethModel.chainidName = "-1" + ""
+        ethModel.chainidName = ETH_MainNetChainId + ""
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(ethModel, update: true)
             if !appModel.nativeTokenList.contains(ethModel){

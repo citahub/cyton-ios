@@ -14,6 +14,7 @@
 		8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */; };
 		8913437520C7D3A400A17AEF /* NeuLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437420C7D3A400A17AEF /* NeuLoad.swift */; };
 		8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437720CA56CA00A17AEF /* RealmHelper.swift */; };
+		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		8922685C20DE4EC60021A85F /* SubController4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */; };
 		8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */; };
 		8928C23020AE822B00C3103E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C22F20AE822B00C3103E /* Images.xcassets */; };
@@ -173,6 +174,7 @@
 		8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatWalletViewModel.swift; sourceTree = "<group>"; };
 		8913437420C7D3A400A17AEF /* NeuLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuLoad.swift; sourceTree = "<group>"; };
 		8913437720CA56CA00A17AEF /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
 		8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController4TableViewCell.swift; sourceTree = "<group>"; };
 		8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController4TableViewCell.xib; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -429,6 +431,7 @@
 				8928C23420AE8F7C00C3103E /* NeuronMacro.swift */,
 				8928C25820AEB18100C3103E /* NibLoadable.swift */,
 				89D4AC3720D8DB610097E02B /* NotificationName.swift */,
+				891C2482211165AC007C639D /* TokenMacro.swift */,
 			);
 			path = Macro;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
 				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
+				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,
 				8913437520C7D3A400A17AEF /* NeuLoad.swift in Sources */,
 				89FC542D20D4142D00D5D27C /* SkipBackupFilesInitializer.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,

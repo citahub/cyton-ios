@@ -116,7 +116,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         }
         let walletModel = viewModel.getCurrentModel().currentWallet!
         for tm in tokenArray {
-            if tm.chainId == "-1" {
+            if tm.chainId == ETH_MainNetChainId {
                 group.enter()
                 viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil {
@@ -126,7 +126,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
                     }
                     group.leave()
                 }
-            }else if tm.chainId != "" && tm.chainId != "-1" {
+            }else if tm.chainId != "" && tm.chainId != ETH_MainNetChainId {
                 group.enter()
                 viewModel.getNervosNativeTokenBalance(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil{
