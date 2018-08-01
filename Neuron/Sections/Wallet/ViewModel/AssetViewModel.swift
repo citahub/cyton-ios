@@ -40,6 +40,7 @@ class AssetViewModel: NSObject {
             tokenModel.decimals = subJSON["decimals"].intValue
             tokenModel.iconUrl = subJSON["logo"]["src"].stringValue
             tokenModel.symbol = subJSON["symbol"].stringValue
+            tokenModel.chainidName = subJSON["name"].stringValue
             tokenArray.append(tokenModel)
         }
         

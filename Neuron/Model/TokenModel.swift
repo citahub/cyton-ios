@@ -20,10 +20,14 @@ class TokenModel: Object {
     @objc dynamic var decimals = 0
     @objc dynamic var symbol = ""
     @objc dynamic var chainName:String? = ""
-    var chainId = RealmOptional<Int>()
+    @objc dynamic var chainidName = "" // chainId + name
+    @objc dynamic var chainId = ""
+    
+    // defaults false, eth and RPC "getMateData" is true.
+    @objc dynamic var isNativeToken = false
     
     override class func primaryKey() -> String? {
-        return "address"
+        return "chainidName"
     }
     
     override static func ignoredProperties() -> [String] {

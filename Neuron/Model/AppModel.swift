@@ -11,7 +11,6 @@ import RealmSwift
 
 class AppModel: Object {
     
-    
     /// current wallet
     @objc dynamic var currentWallet : WalletModel?
     
@@ -20,4 +19,8 @@ class AppModel: Object {
     
     /// whole wallet extra asset token list does not include tokens-eth.json's token
     var extraTokenList = List<TokenModel>()
+    
+    /// who storage native tokens
+    var nativeTokenList = List<TokenModel>()
+        
 }

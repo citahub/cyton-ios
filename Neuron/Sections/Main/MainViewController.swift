@@ -22,21 +22,69 @@ class MainViewController: UITabBarController,UITabBarControllerDelegate {
     var nav3:BaseNavigationController?
     var nav4:BaseNavigationController?
     var nav5:BaseNavigationController?
-
+    
+    //temp
+    let sub2ViewModel = SubController2ViewModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self;
         addNotify()
         self.initTabbarItems()
+        addNativeTokenMsgToRealm()
     }
     
-    //添加通知监听
+    // get native token for nervos  'just temporary'
+    func addNativeTokenMsgToRealm() {
+        var tModel = TokenModel()
+        let group = DispatchGroup()
+        group.enter()
+        sub2ViewModel.getMateDataForNervos { (tokenModel, error) in
+            if error == nil {
+                tModel = tokenModel!
+                print(tModel.description)
+            }else{
+                NeuLoad.showToast(text: (error?.localizedDescription)!)
+            }
+            group.leave()
+        }
+        
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        group.notify(queue: .main) {
+            try? WalletRealmTool.realm.write {
+                WalletRealmTool.realm.add(tModel, update: true)
+                if !appModel.nativeTokenList.contains(tModel){
+                    appModel.nativeTokenList.append(tModel)
+                }
+            }
+        }
+
+        let ethModel = TokenModel()
+        ethModel.address = ""
+        ethModel.chainId = ETH_MainNetChainId
+        ethModel.chainName = ""
+        ethModel.decimals = nativeTokenDecimals
+        ethModel.iconUrl = ""
+        ethModel.isNativeToken = true
+        ethModel.name = "ethereum"
+        ethModel.symbol = "ETH"
+        ethModel.chainidName = ETH_MainNetChainId + ""
+        try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(ethModel, update: true)
+            if !appModel.nativeTokenList.contains(ethModel){
+                appModel.nativeTokenList.append(ethModel)
+                WalletRealmTool.addObject(appModel: appModel)
+            }
+        }
+    }
+    
+    //add notify
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(didChangeSubViews), name: .changeTabbr, object: nil)
     }
     
-    //初始化tabbar
+    // init tabbar
     public func initTabbarItems(){
         
         let font = UIFont.systemFont(ofSize: 10)

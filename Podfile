@@ -28,7 +28,8 @@ target 'Neuron' do
   pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
-  
+  pod 'NervosSwift'
+
   target 'NeuronTests' do
     inherit! :search_paths
     # Pods for testing
