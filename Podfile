@@ -23,7 +23,6 @@ target 'Neuron' do
   pod 'MBProgressHUD'
   pod 'TrustCore','~> 0.0.7'
   pod 'TrustKeystore','~> 0.4.1'
-  pod 'Result'
   pod 'KeychainSwift'
   pod 'SwiftyJSON', :inhibit_warnings => true
   pod 'IGIdenticon'
