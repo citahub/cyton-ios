@@ -237,7 +237,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func didClickPay(tokenModel: TokenModel) {
         print("付款")
         let tCtrl =  TAViewController.init(nibName: "TAViewController", bundle: nil)
-        tCtrl.tokenAddress = tokenModel.address
+        tCtrl.tokenModel = tokenModel
         navigationController?.pushViewController(tCtrl, animated: true)
     }
     //点击收款

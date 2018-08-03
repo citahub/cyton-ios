@@ -34,7 +34,7 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
     
     var toAddress:String = ""
     var amount:String = ""
-    var tokenAddress = ""
+    var tokenModel = TokenModel()
     
     
     override func viewDidLoad() {
@@ -169,7 +169,7 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         tCtrl.amountStr = amount
         tCtrl.destinationAddress = toAddress
         tCtrl.estimatedGas = estimatedGas!
-        tCtrl.erc20TokenAddress = tokenAddress
+        tCtrl.tokenModel = tokenModel
     }
     
     func successPop() {
