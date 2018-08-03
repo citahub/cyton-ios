@@ -14,7 +14,7 @@ protocol ImportWalletViewModelDelegate {
     func didPopToRootView()
 }
 
-enum importWalletType {
+enum ImportWalletType {
     case keystoreType
     case mnemonicType
     case privateKeyType
@@ -24,7 +24,7 @@ class ImportWalletViewModel: NSObject {
     
     var delegate:ImportWalletViewModelDelegate?
     var walletModel = WalletModel()
-    var importType = importWalletType.keystoreType
+    var importType = ImportWalletType.keystoreType
     
     
     /// if change the way to import wallet the walletModel should be empy
