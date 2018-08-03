@@ -73,7 +73,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Alamofire-Synchronous
-  - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
   - EFQRCode
   - IGIdenticon
   - IQKeyboardManagerSwift
@@ -81,11 +80,10 @@ DEPENDENCIES:
   - LYEmptyView
   - MBProgressHUD
   - MJRefresh
-  - NervosSwift
+  - NervosSwift (from `https://github.com/cryptape/NervosSwift`, branch `master`)
   - PlainPing
   - PopupDialog
   - RealmSwift
-  - Result
   - RSKPlaceholderTextView
   - RTRootNavigationController
   - SCLAlertView
@@ -101,6 +99,7 @@ SPEC REPOS:
     - Alamofire
     - Alamofire-Synchronous
     - BigInt
+    - CryptoSwift
     - DynamicBlurView
     - EFQRCode
     - IGIdenticon
@@ -110,7 +109,6 @@ SPEC REPOS:
     - LYEmptyView
     - MBProgressHUD
     - MJRefresh
-    - NervosSwift
     - PlainPing
     - PopupDialog
     - PromiseKit
@@ -131,17 +129,17 @@ SPEC REPOS:
     - TrustKeystore
 
 EXTERNAL SOURCES:
-  CryptoSwift:
+  NervosSwift:
     :branch: master
-    :git: https://github.com/krzyzanowskim/CryptoSwift
+    :git: https://github.com/cryptape/NervosSwift
   web3swift:
     :branch: master
     :git: https://github.com/BANKEX/web3swift
 
 CHECKOUT OPTIONS:
-  CryptoSwift:
-    :commit: 4d446e7920354873ed92edc039a2e657281ba0fb
-    :git: https://github.com/krzyzanowskim/CryptoSwift
+  NervosSwift:
+    :commit: 2ed9a756d85b59b6001145a18cceefd75311e218
+    :git: https://github.com/cryptape/NervosSwift
   web3swift:
     :commit: 99d4dfb29d0755aa1043f791ef81bb37179bb97b
     :git: https://github.com/BANKEX/web3swift
@@ -181,6 +179,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 04154b99cef3bd5e44fbeb033d368ab794c6188d
+PODFILE CHECKSUM: 38f59297a4051e347a7c6ddf30c1c4a6496ac041
 
 COCOAPODS: 1.5.3

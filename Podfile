@@ -5,12 +5,16 @@ platform :ios, '10.0'
 target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
+
+  pod 'web3swift', git: 'https://github.com/BANKEX/web3swift', branch: 'master'
+  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwift", branch: "master"
+
   pod 'PlainPing'
   pod 'MJRefresh'
   pod 'LYEmptyView'
-  pod 'SDWebImage'                      #图片的加载及缓存
-  pod 'IQKeyboardManagerSwift'		#键盘
-  pod 'RTRootNavigationController'       #导航栏
+  pod 'SDWebImage'                       # 图片的加载及缓存
+  pod 'IQKeyboardManagerSwift'		       # 键盘
+  pod 'RTRootNavigationController'       # 导航栏
   pod 'PopupDialog'
   pod 'EFQRCode'
   pod 'RSKPlaceholderTextView'
@@ -19,16 +23,12 @@ target 'Neuron' do
   pod 'MBProgressHUD'
   pod 'TrustCore','~> 0.0.7'
   pod 'TrustKeystore','~> 0.4.1'
-  pod 'Result'
   pod 'KeychainSwift'
   pod 'SwiftyJSON', :inhibit_warnings => true
   pod 'IGIdenticon'
   pod 'SCLAlertView'
-  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
-  pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
-  pod 'NervosSwift'
 
   target 'NeuronTests' do
     inherit! :search_paths
