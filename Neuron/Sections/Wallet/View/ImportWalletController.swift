@@ -104,12 +104,12 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         keystoreHeadView.addSubview(keystoreTextView)
         keystoreTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         keystoreTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .left, relatedBy: .equal, toItem:keystoreHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .right, relatedBy: .equal, toItem:keystoreHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .top, relatedBy: .equal, toItem:keystoreHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .bottom, relatedBy: .equal, toItem:keystoreHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
-        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
-        keystoreHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        let letftContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .left, relatedBy: .equal, toItem: keystoreHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .right, relatedBy: .equal, toItem: keystoreHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .top, relatedBy: .equal, toItem: keystoreHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .bottom, relatedBy: .equal, toItem: keystoreHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
+        keystoreHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
         let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab.font = UIFont.systemFont(ofSize: 15)
@@ -153,12 +153,12 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         mnemonicHeadView.addSubview(mnemonicTextView)
         mnemonicTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         mnemonicTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .left, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .right, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .top, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .bottom, relatedBy: .equal, toItem:mnemonicHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
-        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
-        mnemonicHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        let letftContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .left, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .right, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .top, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .bottom, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
+        mnemonicHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
         let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab.font = UIFont.systemFont(ofSize: 15)
@@ -220,8 +220,8 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         let rightContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
         let topContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
         let bottomContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
-        NSLayoutConstraint.activate([letftContraint,rightContraint,topContraint,bottomContraint])
-        privatekeyHeadView.addConstraints([letftContraint,rightContraint,topContraint,bottomContraint])
+        NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
+        privatekeyHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
         privatekeyHeadView.bringSubview(toFront: privatekeyQRButton)
 
@@ -327,7 +327,7 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
     }
 
     @IBAction func mnemonicNextButton(_ sender: UIButton) {
-        viewModel.importWalletWithMnemonic(mnemonic: mnemonicTextView.text, password: mnemonicPasswordTF.text!, confirmPassword: mnemonicConfirmTF.text!,devirationPath: formatTF.text!, name: mnemonicNameTF.text!)
+        viewModel.importWalletWithMnemonic(mnemonic: mnemonicTextView.text, password: mnemonicPasswordTF.text!, confirmPassword: mnemonicConfirmTF.text!, devirationPath: formatTF.text!, name: mnemonicNameTF.text!)
     }
 
     @IBAction func privatekeyNextButton(_ sender: UIButton) {
