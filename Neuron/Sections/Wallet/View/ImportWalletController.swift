@@ -62,13 +62,10 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         switch selectState {
         case .keystoreState:
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-            break
         case .mnemonicState:
             scrollView.setContentOffset(CGPoint(x: ScreenW, y: 0), animated: false)
-            break
         case .privateKeyState:
             scrollView.setContentOffset(CGPoint(x: ScreenW*2, y: 0), animated: false)
-            break
         }
     }
 
@@ -271,13 +268,10 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         switch selectState {
         case .keystoreState:
             keystoreTextView.text = codeResult
-            break
         case .mnemonicState:
             mnemonicTextView.text = codeResult
-            break
         case .privateKeyState:
             privatekeyTextView.text = codeResult
-            break
         }
     }
 
