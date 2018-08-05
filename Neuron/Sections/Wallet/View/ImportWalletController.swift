@@ -93,7 +93,10 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
         keystorePasswordTF.placeholder = "请输入密码"
         
         keystoreQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
-        
+
+        keystoreTextView.autocorrectionType = .no
+        keystoreTextView.spellCheckingType = .no
+        keystoreTextView.autocapitalizationType = .none
         keystoreTextView.delegate = self
         keystoreTextView.font = UIFont.systemFont(ofSize: 14)
         keystoreTextView.placeholder = "请导入keystor文本"
@@ -125,8 +128,12 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
         keystorePasswordTF.leftView = passwordLab
         keystoreHeadView.bringSubview(toFront: keystoreQRButton)
     }
+
     // set mnemonic view
     func didSetMnemonicView() {
+        mnemonicTextView.autocorrectionType = .no
+        mnemonicTextView.spellCheckingType = .no
+        mnemonicTextView.autocapitalizationType = .none
         mnemonicTextView.tag = 3001
         mnemonicQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
         mnemonicNameTF.placeholder = "请输入名称"
@@ -201,6 +208,9 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
         privatekeyQRButton.addTarget(self, action: #selector(didClickQRButton(sender:)), for: .touchUpInside)
 
         privatekeyHeadView.addSubview(privatekeyTextView)
+        privatekeyTextView.autocorrectionType = .no
+        privatekeyTextView.spellCheckingType = .no
+        privatekeyTextView.autocapitalizationType = .none
         privatekeyTextView.delegate = self
         privatekeyTextView.font = UIFont.systemFont(ofSize: 14)
         privatekeyTextView.placeholder = "输入私钥原文"
