@@ -82,7 +82,7 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
         viewModel.delegate = self
         didSetKeyStoreView()
         didSetMnemonicView()
-        didSetPricatekeyView()
+        didSetPrivateKeyView()
     }
     // set keystore view
     func didSetKeyStoreView(){
@@ -96,10 +96,10 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
 
         keystoreTextView.autocorrectionType = .no
         keystoreTextView.spellCheckingType = .no
-        keystoreTextView.autocapitalizationType = .none
+        mnemonicTextView.autocapitalizationType = .none
         keystoreTextView.delegate = self
         keystoreTextView.font = UIFont.systemFont(ofSize: 14)
-        keystoreTextView.placeholder = "请导入keystor文本"
+        keystoreTextView.placeholder = "请导入keystore文本"
         keystoreTextView.layer.cornerRadius = 5
         keystoreTextView.layer.borderWidth = 1
         keystoreTextView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
@@ -198,7 +198,7 @@ class ImportWalletController: BaseViewController,UITextViewDelegate,UITextFieldD
         
     }
     // set privatekey view
-    func didSetPricatekeyView() {
+    func didSetPrivateKeyView() {
         privatekeyNameTF.placeholder = "请输入名称"
         privatekeyPasswordTF.placeholder = "请输入密码"
         privatekeyConfirmTF.placeholder = "请重新输入密码"
