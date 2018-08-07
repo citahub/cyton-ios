@@ -80,7 +80,7 @@ DEPENDENCIES:
   - LYEmptyView
   - MBProgressHUD
   - MJRefresh
-  - NervosSwift (from `https://github.com/cryptape/NervosSwift`, branch `master`)
+  - NervosSwift (from `https://github.com/cryptape/NervosSwift`, tag `v0.173`)
   - PlainPing
   - PopupDialog
   - RealmSwift
@@ -130,16 +130,16 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   NervosSwift:
-    :branch: master
     :git: https://github.com/cryptape/NervosSwift
+    :tag: v0.173
   web3swift:
     :branch: master
     :git: https://github.com/BANKEX/web3swift
 
 CHECKOUT OPTIONS:
   NervosSwift:
-    :commit: 2ed9a756d85b59b6001145a18cceefd75311e218
     :git: https://github.com/cryptape/NervosSwift
+    :tag: v0.173
   web3swift:
     :commit: 99d4dfb29d0755aa1043f791ef81bb37179bb97b
     :git: https://github.com/BANKEX/web3swift
@@ -179,6 +179,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 38f59297a4051e347a7c6ddf30c1c4a6496ac041
+PODFILE CHECKSUM: 97195d22b8434f07f7ab9927842ffb50e486c0a2
 
 COCOAPODS: 1.5.3
