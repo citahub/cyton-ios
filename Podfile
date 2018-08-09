@@ -6,8 +6,8 @@ target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'web3swift', git: 'https://github.com/BANKEX/web3swift', branch: 'master'
-  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwift", tag: "v0.173"
+  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwiftNext"
+  pod 'SwiftProtobuf', '~> 1.0.3'
 
   pod 'PlainPing'
   pod 'MJRefresh'
@@ -21,10 +21,10 @@ target 'Neuron' do
   pod 'Toast-Swift'
   pod 'RealmSwift'
   pod 'MBProgressHUD'
-  pod 'TrustCore','~> 0.0.7'
-  pod 'TrustKeystore','~> 0.4.1'
+  pod 'TrustCore', '~> 0.0.7'
+  pod 'TrustKeystore', '~> 0.4.1'
   pod 'KeychainSwift'
-  pod 'SwiftyJSON', :inhibit_warnings => true
+  pod 'SwiftyJSON', inhibit_warnings: true
   pod 'IGIdenticon'
   pod 'SCLAlertView'
   pod 'Alamofire'
