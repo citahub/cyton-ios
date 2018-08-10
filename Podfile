@@ -6,7 +6,7 @@ target 'Neuron' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
-  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwiftNext"
+  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwiftNext", branch: "develop"
   pod 'SwiftProtobuf', '~> 1.0.3'
 
   pod 'PlainPing'
