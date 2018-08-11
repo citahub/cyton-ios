@@ -7,7 +7,7 @@ target 'Neuron' do
   use_frameworks!
 
   pod 'web3swift', git: 'https://github.com/BANKEX/web3swift', branch: 'master'
-  pod 'NervosSwift', git: "https://github.com/cryptape/NervosSwift", tag: "v0.173"
+  pod 'NervosSwift', git: "https://github.com/cryptape/nervos-swift-stopped", tag: "v0.173"
 
   pod 'PlainPing'
   pod 'MJRefresh'
