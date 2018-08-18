@@ -19,7 +19,7 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         DispatchQueue.global().async {
-            let result = nervos.appChain.getMetaData(blockNumber)
+            let result = nervos.appChain.getMetaData(blockNumber: blockNumber)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let metaData):
