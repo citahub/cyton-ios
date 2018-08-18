@@ -12,33 +12,31 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSource,AssetsDetailControllerDelegate,SelectWalletControllerDelegate {
-    
+class SubController2: BaseViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!
     @IBOutlet weak var mAddress: UILabel!
     @IBOutlet weak var archiveBtn: UIButton!
     @IBOutlet weak var manageBtn: UIButton!
-    
+
     @IBOutlet weak var mainTable: UITableView!
     let sCtrl = SelectWalletController.init(nibName: "SelectWalletController", bundle: nil)
     let aCtrl = AssetsDetailController.init(nibName: "AssetsDetailController", bundle: nil)
-    
+
     var viewModel = SubController2ViewModel()
-    var tokenArray:[TokenModel] = []
-    
-    
+    var tokenArray: [TokenModel] = []
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.hidesBottomBarWhenPushed = true
     }
-    
+
     override func viewDidDisappear(_ animated: Bool) {
         super .viewDidAppear(animated)
-        if self.navigationController?.viewControllers[0] == self {self.hidesBottomBarWhenPushed = false}
+        if self.navigationController?.viewControllers[0] == self { self.hidesBottomBarWhenPushed = false }
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         didGetDataForCurrentWallet()
@@ -46,7 +44,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
             didGetTokenList()
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包"
@@ -54,17 +52,17 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         aCtrl.delegate = self
         addNotify()
         setUpSubViewDetails()
-        
+
         iconImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
         iconImageView.addGestureRecognizer(tap)
     }
-    
+
     //接收通知
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .creatWalletSuccess, object: nil)
     }
-    
+
     /// 正常情况下进入钱包界面要获取的数据
     func didGetDataForCurrentWallet() {
         if WalletRealmTool.isHasWallet() {
@@ -72,28 +70,28 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
             refreshUI(walletModel: walletModel)
         }
     }
-    
+
     //switch wallet delegate
     func didCallBackSelectedWalletModel(walletModel: WalletModel) {
         refreshUI(walletModel: walletModel)
         didGetTokenList()
     }
-    
+
     //在当前钱包发生变化之后 UI的更新以及所有数据的更新
-    @objc func changeWallet(nofy:Notification){
+    @objc func changeWallet(nofy: Notification) {
         let wAddress = nofy.userInfo!["post"]
         print(wAddress as! String)
         let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
         refreshUI(walletModel: walletModel)
         loadData()
     }
-    
-    func refreshUI(walletModel:WalletModel){
+
+    func refreshUI(walletModel: WalletModel) {
         namelable.text = walletModel.name
         mAddress.text = walletModel.address
         iconImageView.image = UIImage(data: walletModel.iconData)
     }
-    
+
     /// get token list from realm
     func didGetTokenList() {
         tokenArray.removeAll()
@@ -106,12 +104,11 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         mainTable.reloadData()
         getBalance(isRefresh: false)
     }
-    
-    func getBalance(isRefresh:Bool) {
+
+    func getBalance(isRefresh: Bool) {
         let group = DispatchGroup()
         if isRefresh {
-            
-        }else{
+        } else {
             NeuLoad.showHUD(text: "")
         }
         let walletModel = viewModel.getCurrentModel().currentWallet!
@@ -121,28 +118,28 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
                 viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil {
                         tm.tokenBalance = balance!
-                    }else{
+                    } else {
                         NeuLoad.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
                 }
-            }else if tm.chainId != "" && tm.chainId != ETH_MainNetChainId {
+            } else if tm.chainId != "" && tm.chainId != ETH_MainNetChainId {
                 group.enter()
                 viewModel.getNervosNativeTokenBalance(walletAddress: walletModel.address) { (balance, error) in
-                    if error == nil{
+                    if error == nil {
                         tm.tokenBalance = balance!
-                    }else{
+                    } else {
                         NeuLoad.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
                 }
-            }else{
+            } else {
                 group.enter()
                 viewModel.didGetERC20BalanceForCurrentWallet(wAddress: walletModel.address, ERC20Token: tm.address) { (erc20Balance, error) in
                     if error == nil {
                         let balance = Web3.Utils.formatToPrecision(erc20Balance!, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
                         tm.tokenBalance = balance!
-                    }else{
+                    } else {
                         NeuLoad.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
@@ -153,10 +150,12 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
             self.mainTable.reloadData()
             if isRefresh {
                 self.mainTable.mj_header.endRefreshing()
-            }else{NeuLoad.hidHUD()}
+            } else {
+                NeuLoad.hidHUD()
+            }
         }
     }
-    
+
     func setUpSubViewDetails() {
         headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
         headView.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -165,39 +164,37 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         headView.layer.cornerRadius = 5
         headView.layer.borderWidth = 1
         headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
-        
+
         iconImageView.layer.borderColor = ColorFromString(hex: lineColor).cgColor
         iconImageView.layer.borderWidth = 1
         iconImageView.layer.cornerRadius = 30
         iconImageView.clipsToBounds = true
-        
+
         mainTable.delegate = self
         mainTable.dataSource = self
         mainTable.register(UINib.init(nibName: "Sub2TableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
         mjheader?.lastUpdatedTimeLabel.isHidden = true
         mainTable.mj_header = mjheader
-        
-        
+
         //设置左右导航按钮
         let leftBtn = UIButton.init(type: .custom)
         leftBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         leftBtn.setImage(UIImage.init(named: "列表"), for: .normal)
         leftBtn.addTarget(self, action: #selector(didChangeWallet), for: .touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftBtn)
-        
+
         let rightBtn = UIButton.init(type: .custom)
         rightBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
         rightBtn.addTarget(self, action: #selector(didAddWallet), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
-        
     }
-    
-    @objc func loadData(){
+
+    @objc func loadData() {
         getBalance(isRefresh: true)
     }
-    
+
     //点击头部两个按钮
     //收款
     @IBAction func didClickArchiveBtn(_ sender: UIButton) {
@@ -219,19 +216,17 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         navigationController?.pushViewController(wCtrl, animated: true)
     }
 
-    
     //switch wallet
-    @objc func didChangeWallet(){
+    @objc func didChangeWallet() {
         UIApplication.shared.keyWindow?.addSubview(sCtrl.view)
     }
+
     //新增钱包
-    @objc func didAddWallet(){
+    @objc func didAddWallet() {
         let aCtrl = AddWalletController.init(nibName: "AddWalletController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
-        
     }
-    
-    
+
     //弹出界面点击按钮的代理事件
     //点击付款
     func didClickPay(tokenModel: TokenModel) {
@@ -240,6 +235,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         tCtrl.tokenAddress = tokenModel.address
         navigationController?.pushViewController(tCtrl, animated: true)
     }
+
     //点击收款
     func didClickGet() {
         print("收款")
@@ -255,8 +251,7 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tokenArray.count
     }
-    
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! Sub2TableViewCell
         let tokenModel = tokenArray[indexPath.row]
@@ -265,23 +260,11 @@ class SubController2: BaseViewController,UITableViewDelegate,UITableViewDataSour
         cell.countLable.text = tokenModel.tokenBalance
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         UIApplication.shared.keyWindow?.addSubview(aCtrl.view)
         let tokenModel = tokenArray[indexPath.row]
         aCtrl.tokenModel = tokenModel
     }
-    
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
-    }
-    
-
-
 }
