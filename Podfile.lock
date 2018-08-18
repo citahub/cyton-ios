@@ -83,7 +83,6 @@ DEPENDENCIES:
   - RTRootNavigationController
   - SCLAlertView
   - SDWebImage
-  - SwiftProtobuf (~> 1.0.3)
   - SwiftyJSON
   - Toast-Swift
   - TrustCore (~> 0.0.7)
@@ -169,6 +168,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 0e73b6b90f3c4eb6ed43aee0440eeafbaf0a6655
+PODFILE CHECKSUM: 23e51f3655a63d4bfd7d5040374ed65b7f41054a
 
 COCOAPODS: 1.5.3

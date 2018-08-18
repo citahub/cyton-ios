@@ -7,7 +7,6 @@ target 'Neuron' do
   use_frameworks!
 
   pod 'NervosSwift', git: "https://github.com/cryptape/nervos-swift", branch: "develop"
-  pod 'SwiftProtobuf', '~> 1.0.3'
 
   pod 'PlainPing'
   pod 'MJRefresh'
