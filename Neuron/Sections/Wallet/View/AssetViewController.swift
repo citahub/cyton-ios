@@ -9,20 +9,19 @@
 import UIKit
 import RealmSwift
 
-class AssetViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource {
-
+class AssetViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var aTable: UITableView!
     let viewModel = AssetViewModel()
-    var dataArray:[TokenModel] = []
-    var selectArr:List<TokenModel>?
-    var selectAddressArray:[String] = []
-    
+    var dataArray: [TokenModel] = []
+    var selectArr: List<TokenModel>?
+    var selectAddressArray: [String] = []
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         didGetDataForList()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "资产管理"
@@ -40,31 +39,31 @@ class AssetViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         }
         aTable.reloadData()
     }
-    
+
     //setup nav
-    func didSetRightBtn()  {
+    func didSetRightBtn() {
         let rightBtn = UIButton.init(type: .custom)
         rightBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
         rightBtn.addTarget(self, action: #selector(didAddAsset), for: .touchUpInside)
         navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
     }
-    
+
     //添加资产
-    @objc func didAddAsset(){
+    @objc func didAddAsset() {
         let aCtrl = AddAssetController.init(nibName: "AddAssetController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
     }
-    
+
     //tableview代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ID = "ID"
         let cell = tableView.dequeueReusableCell(withIdentifier: ID, for: indexPath) as! AssetTableViewCell
-        
+
         let tokenModel = dataArray[indexPath.row]
         cell.iconUrlStr = tokenModel.iconUrl
         cell.titleLable.text = tokenModel.name
@@ -72,14 +71,13 @@ class AssetViewController: BaseViewController,UITableViewDelegate,UITableViewDat
         cell.subTitleLable.text = tokenModel.symbol
         if selectAddressArray.contains(tokenModel.address) {
             cell.isSelect = true
-        }else{
+        } else {
             cell.isSelect = false
         }
-        
+
         return cell
     }
-    
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let tokenModel = dataArray[indexPath.row]
@@ -89,7 +87,7 @@ class AssetViewController: BaseViewController,UITableViewDelegate,UITableViewDat
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
                 return item == tokenModel.address
             })
-        }else{
+        } else {
             viewModel.addSelectToken(tokenM: tokenModel)
         }
         didGetDataForList()

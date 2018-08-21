@@ -9,22 +9,22 @@
 import UIKit
 
 class Sub2TableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var iconImage: UIImageView!
-    
+
     @IBOutlet weak var titlelable: UILabel!
-    
+
     @IBOutlet weak var countLable: UILabel!
-    
-    var iconUrlStr:String?{
-        didSet{
+
+    var iconUrlStr: String? {
+        didSet {
             iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         let lineV = UIView.init(frame: CGRect(x: 50, y: 59, width: ScreenW - 60, height: 1))
         lineV.backgroundColor = ColorFromString(hex: "#eeeeee")
         contentView.addSubview(lineV)
@@ -34,5 +34,5 @@ class Sub2TableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
 }

@@ -27,7 +27,7 @@ class AddWalletController: BaseViewController {
         let iCtrl = ImportWalletController.init(nibName: "ImportWalletController", bundle: nil)
         navigationController?.pushViewController(iCtrl, animated: true)
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

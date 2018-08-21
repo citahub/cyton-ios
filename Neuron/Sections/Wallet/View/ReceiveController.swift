@@ -11,18 +11,14 @@ import EFQRCode
 
 class ReceiveController: BaseViewController {
 
-
-    
-    
     @IBOutlet weak var qrImageView: UIImageView!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var nameLable: UILabel!
     @IBOutlet weak var copyBtn: UIButton!
-    var walletAddress:String?
-    var walletName:String?
-    var walletIcon:Data?
-    
-    
+    var walletAddress: String?
+    var walletName: String?
+    var walletIcon: Data?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "收款"
@@ -31,13 +27,12 @@ class ReceiveController: BaseViewController {
         nameLable.text = walletName! + "  " + walletAddress!
         iconImage.image = UIImage(data: walletIcon!)
     }
-    
-    func didSetUpQRCodeWithString(string:String) {
-        let imagea = EFQRCode.generate(content: string);
+
+    func didSetUpQRCodeWithString(string: String) {
+        let imagea = EFQRCode.generate(content: string)
         qrImageView.image = UIImage(cgImage: imagea!)
         }
-    
-    
+
     //复制地址按钮
     @IBAction func didCopyAddress(_ sender: UIButton) {
         UIPasteboard.general.string = walletAddress
@@ -47,7 +42,5 @@ class ReceiveController: BaseViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
 
 }

@@ -11,28 +11,27 @@ import SwiftyJSON
 import RealmSwift
 
 class AssetViewModel: NSObject {
-    
+
     /// get assetList
     ///
     /// - Returns: list
-    func getAssetListFromJSON() -> [TokenModel]{
-        
+    func getAssetListFromJSON() -> [TokenModel] {
+
         let appModel = WalletRealmTool.getCurrentAppmodel()
-        
-        
+
         let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
         let jsonObj = try? JSON(data: jsonData!)
-        
-        var tokenArray:[TokenModel] = []
-        
+
+        var tokenArray: [TokenModel] = []
+
         for tModel in appModel.extraTokenList {
             try? WalletRealmTool.realm.write {
                 WalletRealmTool.realm.add(tModel, update: true)
             }
             tokenArray.append(tModel)
         }
-        
+
         for (_, subJSON) : (String, JSON) in jsonObj! {
             let tokenModel = TokenModel()
             tokenModel.name = subJSON["name"].stringValue
@@ -43,25 +42,24 @@ class AssetViewModel: NSObject {
             tokenModel.chainidName = subJSON["name"].stringValue
             tokenArray.append(tokenModel)
         }
-        
 
         return tokenArray
     }
-    
-    func getSelectAsset() -> List<TokenModel>?{
+
+    func getSelectAsset() -> List<TokenModel>? {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         return appModel.currentWallet?.selectTokenList
     }
-    
-    func addSelectToken(tokenM:TokenModel) {
+
+    func addSelectToken(tokenM: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenM, update: true)
             appModel.currentWallet?.selectTokenList.append(tokenM)
         }
     }
-    
-    func deleteSelectedToken(tokenM:TokenModel) {
+
+    func deleteSelectedToken(tokenM: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
         try? WalletRealmTool.realm.write {
@@ -72,7 +70,7 @@ class AssetViewModel: NSObject {
                 }
             })
         }
-        
+
     }
-    
+
 }

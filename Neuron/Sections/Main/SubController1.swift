@@ -10,34 +10,34 @@ import UIKit
 import WebKit
 import JavaScriptCore
 import Toast_Swift
-class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScriptMessageHandler,UIScrollViewDelegate {
+class SubController1: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
 
     private var webView = WKWebView()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.isNavigationBarHidden = true
         didAddSubLayout()
     }
-    
+
     func didAddSubLayout() {
-        
+
         webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 49))
-        let url = URL(string:"http://47.97.171.140:8866")
+        let url = URL(string: "http://47.97.171.140:8866")
         let request = URLRequest.init(url: url!)
-        
+
         var js = ""
         if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
             do {
                 js += try String(contentsOfFile: path)
-            } catch{ }
+            } catch { }
         }
         print(js)
         let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "zhuru")
-        webView.configuration.userContentController.add(self,name:"pushSearchView")
+        webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
         if #available(iOS 11.0, *) {
@@ -56,27 +56,27 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
         placrV.backgroundColor = ColorFromString(hex: themeColor)
         if isiphoneX() {
             placrV.frame = CGRect(x: 0, y: 0, width: ScreenW, height: 44)
-        }else{
+        } else {
             placrV.frame = CGRect(x: 0, y: 0, width: ScreenW, height: 20)
         }
 //        view.addSubview(placrV)
     }
-    
+
     //scrollView代理
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return nil
     }
-    
+
     //wkwebview
     //视图开始载入的时候显示网络活动指示器
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
+
     }
-    
+
     //载入结束后，关闭网络活动指示器
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (html, error) in
+        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (_, _) in
 //            print(html!)
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -90,32 +90,27 @@ class SubController1: BaseViewController,WKUIDelegate,WKNavigationDelegate,WKScr
 
             return
         }
-        
+
         decisionHandler(.allow)
     }
-    
-    
+
     //WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        
+
         print(message)
         print(message.body)
         switch message.name {
         case "pushSearchView":
             let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
             self.navigationController?.pushViewController(sCtrl, animated: true)
-            break
         case "zhuru":
             print("这是注入的代码")
-            break
         default:
 
             break
         }
     }
-    
-    
-    
+
 //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
 //        self.navigationController?.pushViewController(sCtrl, animated: true)

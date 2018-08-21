@@ -11,15 +11,14 @@ import TrustKeystore
 import Result
 
 open class ETHKeyStore: Keystore {
-    
 
     static let shared = ETHKeyStore()
-    
+
     private let datadir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     let keyStore: KeyStore
     let keysDirectory: URL
     let userDefaults: UserDefaults
-    
+
     public init(
         keysSubfolder: String = "/keystore",
         userDefaults: UserDefaults = UserDefaults.standard
@@ -28,8 +27,7 @@ open class ETHKeyStore: Keystore {
         self.keyStore = try! KeyStore(keyDirectory: keysDirectory)
         self.userDefaults = userDefaults
     }
-    
-    
+
     func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let account = self.createAccout(password: password)
@@ -38,10 +36,10 @@ open class ETHKeyStore: Keystore {
             }
         }
     }
-    
+
     func createAccout(password: String) -> Account {
         let account = try! keyStore.createAccount(password: password, type: .encryptedKey)
         return account
     }
-    
+
 }

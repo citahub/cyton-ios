@@ -16,8 +16,7 @@ class ExportKeyStoreController: BaseViewController {
     var walletModel = WalletModel()
     var password = ""
     var keyStoreStr = ""
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "导出keystore"
@@ -26,30 +25,28 @@ class ExportKeyStoreController: BaseViewController {
         kestoreTextView.text = keyStoreStr
         setUpUI()
     }
-    
+
     func setUpUI() {
         shareButton.layer.cornerRadius = 5
         shareButton.layer.borderWidth = 1
         shareButton.layer.borderColor = ColorFromString(hex: themeColor).cgColor
     }
-    
+
     @IBAction func didClickCopyButton(_ sender: UIButton) {
         UIPasteboard.general.string = keyStoreStr
         NeuLoad.showToast(text: "keystore已经复制到粘贴板")
     }
-    
+
     @IBAction func didClickShareButton(_ sender: UIButton) {
         let shareText = keyStoreStr
-        let shareItem = ShareItem.init(shareString:shareText)
+        let shareItem = ShareItem.init(shareString: shareText)
         let activityVC = UIActivityViewController.init(activityItems: [shareItem], applicationActivities: nil)
-//        activityVC.excludedActivityTypes = [UIActivityType.airDrop,UIActivityType.mail,UIActivityType.postToFacebook,UIActivityType.postToTwitter,UIActivityType.print,UIActivityType.copyToPasteboard,UIActivityType.assignToContact,UIActivityType.saveToCameraRoll,UIActivityType.addToReadingList,UIActivityType.postToFlickr,UIActivityType.postToVimeo,UIActivityType.postToTencentWeibo,UIActivityType.airDrop,UIActivityType.openInIBooks];
         present(activityVC, animated: true, completion: nil)
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
     /*
     // MARK: - Navigation

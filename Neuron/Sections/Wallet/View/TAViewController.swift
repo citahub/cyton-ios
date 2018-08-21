@@ -10,33 +10,32 @@ import UIKit
 import BigInt
 import web3swift
 
-class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSource,AddAssetTableViewCellDelegate,TAViewControllerCellDelegate,QRCodeControllerDelegate,TACustomViewControllerDelegate {
+class TAViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, TAViewControllerCellDelegate, QRCodeControllerDelegate, TACustomViewControllerDelegate {
 
-    let nameArray = ["地址","转账金额"]
-    let plactholderArray = ["输入转账地址或扫码","转账金额"]
-    
+    let nameArray = ["地址", "转账金额"]
+    let plactholderArray = ["输入转账地址或扫码", "转账金额"]
+
     let tCtrl = TACustomViewController.init(nibName: "TACustomViewController", bundle: nil)
     let viewModel = TAViewModel()
     let appModel = WalletRealmTool.getCurrentAppmodel()
-    
+
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var walletName: UILabel!
     @IBOutlet weak var walletAddress: UILabel!
     @IBOutlet weak var tTable: UITableView!
-    
+
     var gasPrice = BigUInt()
     var letGasP = BigUInt()
-    
+
     var totleGas = BigUInt()
-    var estimatedGas:String?
-    var tableProgress:Float = 25.00
-    
-    var toAddress:String = ""
-    var amount:String = ""
+    var estimatedGas: String?
+    var tableProgress: Float = 25.00
+
+    var toAddress: String = ""
+    var amount: String = ""
     var tokenAddress = ""
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "转账"
@@ -46,17 +45,17 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         tTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         tTable.register(UINib.init(nibName: "TAViewControllerCell", bundle: nil), forCellReuseIdentifier: "ID1")
         tCtrl.delegate = self
-        
+
         iconImage.image = UIImage(data: (appModel.currentWallet?.iconData)!)
         walletName.text = appModel.currentWallet?.name
         walletAddress.text = appModel.currentWallet?.address
         didGetGasPrice()
     }
-    
+
     func didGetGasPrice() {
         NeuLoad.showHUD(text: "")
         viewModel.getGasPrice { (result) in
-            switch result{
+            switch result {
             case .Success(let gasP):
                 self.letGasP = gasP
                 self.totleGas = gasP * BigUInt(21000)
@@ -67,8 +66,8 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             NeuLoad.hidHUD()
         }
     }
-    
-    func getGasPriceAndPriceLimit(progress:Float) {
+
+    func getGasPriceAndPriceLimit(progress: Float) {
         gasPrice = letGasP * BigUInt(progress)
         let finalGas = totleGas
         let formatGasPrice = Web3.Utils.formatToEthereumUnits(finalGas, toUnits: .eth, decimals: 8)!
@@ -76,25 +75,23 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         estimatedGas = String(format: "%.8f", showGas)
         let index = IndexPath.init(row: 2, section: 0)
         self.tTable.reloadRows(at: [index], with: .none)
-        
+
     }
-    
-    
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 2 {
             return 80
-        }else{
+        } else {
             return 50
         }
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+
         if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! TAViewControllerCell
             cell.contentView.isUserInteractionEnabled = true
@@ -102,35 +99,33 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
             cell.showGasPrice = estimatedGas ?? ""
             cell.delegate = self
             return cell
-        }else{
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ID") as! AddAssetTableViewCell
             cell.delegate = self
             cell.headLable.text = nameArray[indexPath.row]
             cell.placeHolderStr = plactholderArray[indexPath.row]
             cell.indexP = indexPath as NSIndexPath
             print(indexPath.row)
-            if indexPath.row == 0  {
+            if indexPath.row == 0 {
                 cell.selectRow = 1
                 cell.rightTextField.text = toAddress
-            }else{
+            } else {
                 cell.isOnlyNumberAndPoint = true
                 cell.selectRow = 3
             }
-            
+
             return cell
         }
     }
-    
+
     //cell代理
     //textfield内容
     func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
         switch index.row {
         case 0:
             toAddress = text
-            break
         case 1:
             amount = text
-            break
         default:
             break
         }
@@ -140,7 +135,7 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         tableProgress = progress
         getGasPriceAndPriceLimit(progress: tableProgress)
     }
-    
+
     //界面本身的点击事件
     //点击qrcode
     func didClickQRCodeBtn() {
@@ -163,7 +158,7 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         if (estimatedGas?.isEmpty)! {
             return
         }
-        
+
         UIApplication.shared.keyWindow?.addSubview(tCtrl.view)
         tCtrl.gasPrice = gasPrice
         tCtrl.amountStr = amount
@@ -171,23 +166,21 @@ class TAViewController: BaseViewController,UITableViewDelegate,UITableViewDataSo
         tCtrl.estimatedGas = estimatedGas!
         tCtrl.erc20TokenAddress = tokenAddress
     }
-    
+
     func successPop() {
         navigationController?.popToRootViewController(animated: true)
     }
-    
+
     //QRCode delegate
     func didBackQRCodeMessage(codeResult: String) {
         toAddress = codeResult
         let index = IndexPath.init(row: 2, section: 0)
         self.tTable.reloadRows(at: [index], with: .none)
     }
-    
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
 
 }

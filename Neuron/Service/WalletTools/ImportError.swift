@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum ImportError : Error {
+enum ImportError: Error {
     case invalidatePrivateKey
     case invalidateJSONKey
     case openKeyStoreFailed
@@ -20,5 +20,5 @@ enum ImportError : Error {
     case invalidateAddress
     case invalidateTransactionInfo
     case networkError
-    case wrongParams;
+    case wrongParams
 }

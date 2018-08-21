@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableViewDelegate {
-    var tModel = TransactionModel(){
-        didSet{
+class TradeDetailsController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+    var tModel = TransactionModel() {
+        didSet {
             if tModel.transactionType == "ETH" {
-                titleArr = ["区块链网络","接受方","发送方","手续费","GasPrice","交易流水号","所在区块","入块时间"]
+                titleArr = ["区块链网络", "接受方", "发送方", "手续费", "GasPrice", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [tModel.chainName,
                              tModel.to,
                              tModel.from,
@@ -21,8 +21,8 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
                              tModel.hashString,
                              tModel.blockNumber,
                              tModel.formatTime]
-            }else if tModel.transactionType == "Nervos"{
-                titleArr = ["区块链网络","接受方","发送方","手续费","交易流水号","所在区块","入块时间"]
+            } else if tModel.transactionType == "Nervos" {
+                titleArr = ["区块链网络", "接受方", "发送方", "手续费", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [tModel.chainName,
                              tModel.to,
                              tModel.from,
@@ -36,7 +36,6 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
 
     private var titleArr = [""]
     private var subBtnArr = [""]
-    
     @IBOutlet weak var amountLable: UILabel!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var nameLable: UILabel!
@@ -56,7 +55,6 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
         nameLable.text = walletModel?.name
         tTable.reloadData()
     }
-    
     func didSetUIDetail() {
         headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
         headView.layer.shadowOffset = CGSize(width: 0, height: 1)
@@ -66,12 +64,9 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
         headView.layer.borderWidth = 1
         headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
     }
-    
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArr.count
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! TradeTableViewCell
         cell.ethOrNervos = tModel.transactionType
@@ -85,6 +80,4 @@ class TradeDetailsController: BaseViewController,UITableViewDataSource,UITableVi
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
 }

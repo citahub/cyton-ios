@@ -14,7 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         initTheRealm()
         self.window?.backgroundColor = UIColor.white
@@ -26,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         inializers()
         return true
     }
-    
+
     func keyboardSetUp() {
         IQKeyboardManager.shared.enable = true
         //控制点击背景是否收起键盘
@@ -39,22 +38,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键，自动跳转到下一个输入框，最后一个输入框点击完成，自动收起键盘
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
     }
-    
+
     func initTheRealm() {
         RealmHelper.initEncryptionRealm()
     }
-    
+
     func inializers() {
         let keystore = ETHKeyStore.shared
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
         paths.append(keystore.keysDirectory)
 
         let initializers: [Initializer] = [
-            SkipBackupFilesInitializer(paths: paths),
+            SkipBackupFilesInitializer(paths: paths)
             ]
         initializers.forEach { $0.perform() }
     }
-    
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -77,6 +76,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
 }
-

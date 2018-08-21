@@ -11,7 +11,7 @@ import UIKit
 class DetailIconCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -21,5 +21,5 @@ class DetailIconCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }
