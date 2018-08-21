@@ -10,16 +10,14 @@ import Foundation
 import web3swift
 import BigInt
 
-
-
 protocol CustomERC20TokenServiceProtocol {
-    static func decimals(walletAddress:String,token:String,completion:@escaping (EthServiceResult<BigUInt>) -> Void)
-    static func name(walletAddress:String,token:String,completion:@escaping (EthServiceResult<String>) -> Void)
-    static func symbol(walletAddress:String,token:String,completion:@escaping (EthServiceResult<String>) -> Void)
+    static func decimals(walletAddress: String, token: String, completion:@escaping (EthServiceResult<BigUInt>) -> Void)
+    static func name(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
+    static func symbol(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
 }
 
-class CustomERC20TokenService :CustomERC20TokenServiceProtocol {
-    
+class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
+
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(ERC20Token: token)
@@ -28,25 +26,24 @@ class CustomERC20TokenService :CustomERC20TokenServiceProtocol {
             DispatchQueue.main.async {
                 if let decimals = decimals?.value?["0"] as? BigUInt {
                     completion(EthServiceResult.Success(decimals))
-                }
-                else {
+                } else {
                     completion(EthServiceResult.Error(CustomTokenError.wrongBalanceError))
                 }
             }
         }
     }
-    
+
     static func name(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         let contract = self.contract(ERC20Token: token)
         if let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions(wAddress: walletAddress)) {
-            
+
             let reult = transaction.call(options: self.defaultOptions(wAddress: walletAddress), onBlock: "latest")
-            switch reult{
+            switch reult {
             case .success(let name):
-                
-                if let names = name["0"] as? String,!names.isEmpty {
+
+                if let names = name["0"] as? String, !names.isEmpty {
                     completion(EthServiceResult.Success(names))
-                }else{
+                } else {
                     completion(EthServiceResult.Error(CustomTokenError.badNameError))
                 }
             case .failure(let error):
@@ -56,36 +53,34 @@ class CustomERC20TokenService :CustomERC20TokenServiceProtocol {
             completion(EthServiceResult.Error(CustomTokenError.badNameError))
         }
     }
-    
+
     static func symbol(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(ERC20Token: token)
             let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions(wAddress: walletAddress))
             let symbol = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
             DispatchQueue.main.async {
-                if let symbol = symbol?.value?["0"] as? String, !symbol.isEmpty  {
+                if let symbol = symbol?.value?["0"] as? String, !symbol.isEmpty {
                     completion(EthServiceResult.Success(symbol))
-                }
-                else {
+                } else {
                     completion(EthServiceResult.Error(CustomTokenError.badSymbolError))
                 }
             }
         }
     }
-    
-    private static func contract(ERC20Token:String) -> web3.web3contract? {
+
+    private static func contract(ERC20Token: String) -> web3.web3contract? {
         let web3 = Web3NetWork.getWeb3()
         guard let contractETHAddress = EthereumAddress(ERC20Token) else {
             return nil
         }
-        return web3.contract(Web3.Utils.erc20ABI,at:contractETHAddress,abiVersion:2)
+        return web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)
     }
-    
-    private static func defaultOptions(wAddress:String) -> Web3Options {
+
+    private static func defaultOptions(wAddress: String) -> Web3Options {
         var options = Web3Options.defaultOptions()
         options.from = EthereumAddress(wAddress)
         return options
     }
-    
-}
 
+}

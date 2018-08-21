@@ -8,18 +8,18 @@
 
 import UIKit
 
-protocol QRCodeControllerDelegate {
-    func didBackQRCodeMessage(codeResult:String)
+protocol QRCodeControllerDelegate: class {
+    func didBackQRCodeMessage(codeResult: String)
 }
 
-class QRCodeController: BaseViewController,HRQRCodeScanToolDelegate {
-    
-    var delegate:QRCodeControllerDelegate?
-    
+class QRCodeController: BaseViewController, HRQRCodeScanToolDelegate {
+
+    weak var delegate: QRCodeControllerDelegate?
+
     func scanQRCodeFaild(error: HRQRCodeTooError) {
         print(error)
     }
-    
+
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
         print(resultStrs.first ?? "")
@@ -27,14 +27,12 @@ class QRCodeController: BaseViewController,HRQRCodeScanToolDelegate {
     }
     let share = HRQRCodeScanTool()
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "扫描二维码"
         share.delegate  = self
         share.beginScanInView(view: view)
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

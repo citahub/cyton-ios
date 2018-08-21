@@ -12,14 +12,14 @@ import TrustKeystore
 import TrustCore
 
 class WalletCryptService: NSObject {
-    
-    static public func updateEncryptPrivateKey(oldPassword:String,newPassword:String,walletAddress:String){        
+
+    static public func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
         let ac = Address.init(eip55: (walletAddress))
         let account = WalletTools.keyStore?.account(for: ac!)
         try! WalletTools.keyStore?.update(account: account!, password: oldPassword, newPassword: newPassword)
     }
-    
-    static public func didCheckoutKeyStoreWithCurrentWallet(password:String) -> String{
+
+    static public func didCheckoutKeyStoreWithCurrentWallet(password: String) -> String {
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         let walletPrivate = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
         let resultType = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: walletPrivate, password: password)
@@ -27,21 +27,16 @@ class WalletCryptService: NSObject {
         switch resultType {
         case .succeed(result: let keystoreStr):
             keyStore = keystoreStr
-            break
         case .failed(_, errorMessage:let errorMsg):
             NeuLoad.showToast(text: errorMsg)
-            break
         }
         return keyStore
     }
-    
-    static public func didDelegateWallet(password:String,walletAddress:String){
+
+    static public func didDelegateWallet(password: String, walletAddress: String) {
         let address = Address.init(eip55: (walletAddress))
         let account = WalletTools.keyStore?.account(for: address!)
         try! WalletTools.keyStore?.delete(account: account!, password: password)
     }
-    
+
 }
-
-
-

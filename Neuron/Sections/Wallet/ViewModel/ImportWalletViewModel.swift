@@ -10,7 +10,7 @@ import UIKit
 import TrustKeystore
 import IGIdenticon
 
-protocol ImportWalletViewModelDelegate {
+protocol ImportWalletViewModelDelegate: class {
     func didPopToRootView()
 }
 
@@ -21,25 +21,23 @@ enum ImportWalletType {
 }
 
 class ImportWalletViewModel: NSObject {
-    
-    var delegate:ImportWalletViewModelDelegate?
+
+    weak var delegate: ImportWalletViewModelDelegate?
     var walletModel = WalletModel()
     var importType = ImportWalletType.keystoreType
-    
-    
+
     /// if change the way to import wallet the walletModel should be empy
     func changeImportWay() {
         walletModel = WalletModel()
     }
-    
-    
+
     /// import keyStore wallet
     /// if import wallet way is keystore or privatekey,there is no mnemonic
     /// - Parameters:
     ///   - keyStore: keyStore
     ///   - password: password
     ///   - name: walletName
-    func importKeyStoreWallet(keyStore:String,password:String,name:String) {
+    func importKeyStoreWallet(keyStore: String, password: String, name: String) {
         if keyStore.isEmpty {NeuLoad.showToast(text: "请输入keystore文本");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
         if password.isEmpty {NeuLoad.showToast(text: "解锁密码不能为空");return}
@@ -60,24 +58,20 @@ class ImportWalletViewModel: NSObject {
             NeuLoad.hidHUD()
         }
     }
-    
-    
+
     /// get privateKey
-    func exportPirvateKey(account:Account,password:String) {
+    func exportPirvateKey(account: Account, password: String) {
         let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
         switch privateKeyResult {
         case .succeed(result: let privateKey):
             print(privateKey!)
             walletModel.encryptPrivateKey = CryptTools.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             didSaveWalletToRealm()
-            break
         case .failed(_, let errorMsg):
-            NeuLoad.showToast(text:errorMsg)
-            break
+            NeuLoad.showToast(text: errorMsg)
         }
     }
-    
-    
+
     /// getkeystore JSONString
     ///
     /// - Parameters:
@@ -105,7 +99,7 @@ class ImportWalletViewModel: NSObject {
 //        }
 //        
 //    }
-    
+
     /// save wallet
     func didSaveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppmodel()
@@ -127,8 +121,7 @@ class ImportWalletViewModel: NSObject {
         didPostCreatSuccessNotify()
         delegate?.didPopToRootView()
     }
-    
-    
+
     /// import wallet with mnemonic
     ///
     /// - Parameters:
@@ -136,7 +129,7 @@ class ImportWalletViewModel: NSObject {
     ///   - password: password
     ///   - devirationPath: devirationPath
     ///   - name: walletname
-    func importWalletWithMnemonic(mnemonic:String,password:String,confirmPassword:String,devirationPath:String,name:String) {
+    func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String, name: String) {
         if mnemonic.isEmpty {NeuLoad.showToast(text: "请输入助记词");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
@@ -158,8 +151,7 @@ class ImportWalletViewModel: NSObject {
             NeuLoad.hidHUD()
         }
     }
-    
-    
+
     /// import wallet with privatekey
     ///
     /// - Parameters:
@@ -167,7 +159,7 @@ class ImportWalletViewModel: NSObject {
     ///   - password: password
     ///   - confirmPassword: confirmPassword
     ///   - name: name
-    func importPrivateWallet(privateKey:String,password:String,confirmPassword:String,name:String) {
+    func importPrivateWallet(privateKey: String, password: String, confirmPassword: String, name: String) {
         if privateKey.isEmpty {NeuLoad.showToast(text: "请输入私钥");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
@@ -190,14 +182,13 @@ class ImportWalletViewModel: NSObject {
             NeuLoad.hidHUD()
         }
     }
-    
-    
-    private func didPostCreatSuccessNotify()  {
+
+    private func didPostCreatSuccessNotify() {
         //import wallet success send notify
-        NotificationCenter.default.post(name:.creatWalletSuccess, object: self, userInfo: ["post":walletModel.address])
+        NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
     }
     private func changeTabbar() {
         NotificationCenter.default.post(name: .changeTabbr, object: self)
     }
-    
+
 }

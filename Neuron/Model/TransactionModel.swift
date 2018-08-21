@@ -9,7 +9,7 @@
 import UIKit
 
 class TransactionModel: NSObject {
-    
+
     var value = ""
     var from = ""
     var to = ""
@@ -20,8 +20,7 @@ class TransactionModel: NSObject {
     var gas = ""
     var gasPrice = ""
     var blockNumber = ""
-    
-    
+
     var transactionType = "ETH" //default "ETH" include ERC20 transaction,  another one is "Nervos"
     var totleGas = ""
     var formatTime = ""

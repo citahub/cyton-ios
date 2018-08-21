@@ -18,4 +18,3 @@ protocol Keystore {
     func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void)
 
 }
-

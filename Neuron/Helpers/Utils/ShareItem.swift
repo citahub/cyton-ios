@@ -8,18 +8,18 @@
 
 import UIKit
 
-class ShareItem: NSObject,UIActivityItemSource {
-    
-    var shareString:String
-    
-    init(shareString:String) {
+class ShareItem: NSObject, UIActivityItemSource {
+
+    var shareString: String
+
+    init(shareString: String) {
         self.shareString = shareString
     }
-    
+
     func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
         return shareString
     }
-    
+
     func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
         return shareString
     }

@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// eth mainnet chainId, just work for Neuron
 let ETH_MainNetChainId = "-1"
 

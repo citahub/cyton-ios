@@ -9,7 +9,7 @@
 import UIKit
 
 class GenerateMnemonicController: BaseViewController {
-    
+
     @IBOutlet weak var mnemonicTextView: UITextView!
     @IBOutlet weak var nextButton: UIButton!
     var password = ""

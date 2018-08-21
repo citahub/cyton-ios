@@ -16,7 +16,7 @@ enum SelectButtonStates {
     case privateKeyState
 }
 
-class ImportWalletController: BaseViewController,UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     let viewModel = ImportWalletViewModel()
 
     var selectState = SelectButtonStates.keystoreState
@@ -216,10 +216,10 @@ class ImportWalletController: BaseViewController,UITextViewDelegate, UITextField
         privatekeyTextView.clipsToBounds = true
         privatekeyTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         privatekeyTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .left, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem:privatekeyHeadView , attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        let letftContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .left, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
         NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
         privatekeyHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 

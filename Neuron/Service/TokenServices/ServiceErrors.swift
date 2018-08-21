@@ -13,7 +13,7 @@ enum EthServiceResult<T> {
     case Error(Error)
 }
 
-enum NervosServiceResult<T>{
+enum NervosServiceResult<T> {
     case Success(T)
     case Error(Error)
 }
@@ -24,7 +24,6 @@ enum CustomTokenError: Error {
     case badSymbolError
     case undefinedError
 }
-
 
 enum SendEthResult<T> {
     case Success(T)
@@ -42,8 +41,6 @@ enum SendEthErrors: Error {
     case createTransactionIssue
 }
 
-enum TransactionErrors:Error {
+enum TransactionErrors: Error {
     case Requestfailed
 }
-
-

@@ -11,37 +11,36 @@ import TrustKeystore
 import RealmSwift
 import IGIdenticon
 
-protocol SureMnemonicViewModelDelegate {
+protocol SureMnemonicViewModelDelegate: class {
     func doPush()
 }
 
-
 class SureMnemonicViewModel: NSObject {
-    
+
     var walletName = ""
     var walletAddress = ""
     var walletPrivateKey = ""
     var walletPasswordMD5 = ""
-    
-    var delegate:SureMnemonicViewModelDelegate?
-    typealias SureMnemonicViewModelBlcol = (_ str:String) -> Void
+
+    weak var delegate: SureMnemonicViewModelDelegate?
+    typealias SureMnemonicViewModelBlcol = (_ str: String) -> Void
     var walletModel = WalletModel()
-    
+
     // 验证助记词
     public func compareMnemonic(original: String, current: String) -> Bool {
         if original == current {
             return true
-        }else{
+        } else {
             NeuLoad.showToast(text: "助记词验证失败")
             return false
         }
     }
-    
+
     //导入钱包
-    public func didImportWalletToRealm(mnemonic:String,password:String) {
+    public func didImportWalletToRealm(mnemonic: String, password: String) {
         // 通过助记词导入钱包
-        NeuLoad.showHUD(text:"钱包创建中...")
-        
+        NeuLoad.showHUD(text: "钱包创建中...")
+
         WalletTools.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTools.defaultDerivationPath, completion: { (result) in
             switch result {
             case .succeed(let account):
@@ -49,30 +48,28 @@ class SureMnemonicViewModel: NSObject {
                 self.walletName = self.walletModel.name
                 self.walletAddress = account.address.eip55String
                 self.walletPasswordMD5 = CryptTools.changeMD5(password: password)
-                self.exportKeystoreAndPirvateKey(account: account,password: password)
+                self.exportKeystoreAndPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
                 NeuLoad.showToast(text: errorMessage)
             }
             NeuLoad.hidHUD()
         })
     }
-    
+
     //export keystore
-    func exportKeystoreAndPirvateKey(account:Account,password:String) {
+    func exportKeystoreAndPirvateKey(account: Account, password: String) {
         let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
         switch privateKeyResult {
         case .succeed(result: let privateKey):
             print(privateKey!)
             self.walletPrivateKey = CryptTools.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             saveWallet()
-            break
         case .failed(let errorStr, let errorMsg):
-            NeuLoad.showToast(text:errorMsg)
+            NeuLoad.showToast(text: errorMsg)
             print(errorStr)
-            break
         }
     }
-    
+
 //    //生成keystore
 //    func exportKeystoreStr(privateKey:String) {
 //        let kS = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: privateKey, password: walletModel.password)
@@ -87,7 +84,7 @@ class SureMnemonicViewModel: NSObject {
 //            break
 //        }
 //    }
-    
+
     func saveWallet() {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let walletCount = appModel.wallets.count
@@ -110,15 +107,15 @@ class SureMnemonicViewModel: NSObject {
         delegate?.doPush()
         didPostCreatSuccessNotify()
     }
-    
-    private func didPostCreatSuccessNotify()  {
+
+    private func didPostCreatSuccessNotify() {
         //send notification when wallet is created success,by the way send walletAddress
-        NotificationCenter.default.post(name:.creatWalletSuccess, object: self, userInfo: ["post":walletModel.address])
+        NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
     }
-    
+
     //if creat wallet successful send changetabbr notification
     func changeTabbar() {
         NotificationCenter.default.post(name: .changeTabbr, object: self)
     }
-    
+
 }

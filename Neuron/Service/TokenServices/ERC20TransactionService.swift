@@ -10,10 +10,8 @@ import Foundation
 import web3swift
 import BigInt
 
-
-
 class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
-    
+
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
                                       gasLimit: UInt = 21000,
@@ -21,10 +19,10 @@ class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
                                       gasPrice: BigUInt,
                                       erc20TokenAddress: String,
                                       completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        
+
         let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
-        
+
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
@@ -38,7 +36,7 @@ class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
                 }
                 return
             }
-            
+
             let web3 = Web3NetWork.getWeb3()
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             let token = erc20TokenAddress
@@ -49,7 +47,7 @@ class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
             options.from = EthereumAddress(currentWalletAddress!)
             guard let tokenAddress = EthereumAddress(token),
                 let fromAddress = EthereumAddress(currentWalletAddress!),
-                let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress,from: fromAddress,to: destinationEthAddress,amount: amountString)
+                let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress, from: fromAddress, to: destinationEthAddress, amount: amountString)
                 else {
                     DispatchQueue.main.async {
                         completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
@@ -61,7 +59,7 @@ class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
             }
         }
     }
-    
+
     func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send(password: password, options: nil)
@@ -82,8 +80,7 @@ class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
             }
         }
     }
-    
-    
+
 //    private func contract(ERC20Token:String) -> web3.web3contract? {
 //        let web3 = Web3NetWork.getWeb3()
 //        guard let contractETHAddress = EthereumAddress(ERC20Token) else {

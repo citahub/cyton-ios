@@ -10,19 +10,19 @@ import UIKit
 import PlainPing
 
 class BrowserUrlParser {
-    
-    func isUrlvalid(urlStr:String,comletion:@escaping (Double?,Error?) -> Void){
-        PlainPing.ping(urlStr, withTimeout: 4.0, completionBlock: { (timeElapsed:Double?, error:Error?) in
+
+    func isUrlvalid( urlStr: String, comletion:@escaping (Double?, Error?) -> Void ) {
+        PlainPing.ping(urlStr, withTimeout: 4.0, completionBlock: { ( timeElapsed: Double?, error: Error?) in
             if let error = error {
-                comletion(0,error)
+                comletion(0, error)
                 print("error: \(error.localizedDescription)")
-            }else{
+            } else {
                 if let latency = timeElapsed {
                     print(latency)
-                    comletion(latency,nil)
+                    comletion(latency, nil)
                 }
             }
         })
     }
-    
+
 }

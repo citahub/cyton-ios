@@ -10,14 +10,12 @@ import UIKit
 
 class Sub3TableViewCell: UITableViewCell {
 
-    var statusType:String? {
-        didSet{
+    var statusType: String? {
+        didSet {
             //根据状态来判断stateImageV加载不同的图片
             print(statusType!)
         }
     }
-    
-    
     @IBOutlet weak var iconImageV: UIImageView!
     @IBOutlet weak var addressLable: UILabel!
     @IBOutlet weak var limitLable: UILabel!
@@ -27,15 +25,10 @@ class Sub3TableViewCell: UITableViewCell {
         super.awakeFromNib()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         iconImageV.image = UIImage(data: (walletModel?.iconData)!)
-        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
     }
-    
-    
-    
-    
 }

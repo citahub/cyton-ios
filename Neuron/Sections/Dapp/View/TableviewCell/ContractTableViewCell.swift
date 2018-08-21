@@ -8,35 +8,33 @@
 
 import UIKit
 
-class ContractTableViewCell: UITableViewCell,UITextFieldDelegate {
-    
-    var headLabStr:String?{
-        didSet{
+class ContractTableViewCell: UITableViewCell, UITextFieldDelegate {
+
+    var headLabStr: String? {
+        didSet {
             headLable.text = headLabStr
         }
     }
-    
-    var textFieldStr:String?{
-        didSet{
+
+    var textFieldStr: String? {
+        didSet {
             textField.text = textFieldStr
         }
     }
-    
-    var unitLabStr:String?{
-        didSet{
-            if unitLabStr?.count != 0{
+
+    var unitLabStr: String? {
+        didSet {
+            if unitLabStr?.count != 0 {
                 textField.rightViewMode = .always
                 rightView.text = unitLabStr
-            }else{
+            } else {
                 textField.rightViewMode = .never
             }
         }
     }
-    
-    
-    
+
     let rightView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
-    
+
     @IBOutlet weak var headLable: UILabel!
     @IBOutlet weak var textField: UITextField!
     override func awakeFromNib() {
@@ -45,15 +43,15 @@ class ContractTableViewCell: UITableViewCell,UITextFieldDelegate {
         rightView.textColor = ColorFromString(hex: "#b7b7b7")
         rightView.font = UIFont.systemFont(ofSize: 17)
         textField.rightView = rightView
-    } 
+    }
 
     //textField代理
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         return false
     }
-    
+
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
+
 }

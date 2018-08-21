@@ -13,18 +13,18 @@ import web3swift
 import BigInt
 
 protocol TransactionService {
-    func didGetETHTransaction(walletAddress:String,completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
-    func didGetNervosTransaction(walletAddress:String,completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
+    func didGetETHTransaction(walletAddress: String, completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
+    func didGetNervosTransaction(walletAddress: String, completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
 }
 
-class TransactionServiceImp : TransactionService{
+class TransactionServiceImp: TransactionService {
 
     func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
 
-        var resultArr:[TransactionModel] = []
-        let parameters:Dictionary = ["address":walletAddress]
-        Alamofire.request(ETH_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON(){ (response) in
+        var resultArr: [TransactionModel] = []
+        let parameters: Dictionary = ["address": walletAddress]
+        Alamofire.request(ETH_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             print(jsonObj!["status"])
 //            if jsonObj!["status"] != "1"{
@@ -46,25 +46,25 @@ class TransactionServiceImp : TransactionService{
                     transacationModel.transactionType = "ETH"
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
                         transacationModel.value = "+" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
-                    }else{
+                    } else {
                         transacationModel.value = "-" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
                     }
                     transacationModel.totleGas = self.getTotleGas(gasUsed: subJSON["gasUsed"].stringValue, gasPirce: subJSON["gasPrice"].stringValue)
                     resultArr.append(transacationModel)
                 }
                 completion(EthServiceResult.Success(resultArr))
-            }else{
+            } else {
                 completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
             }
 //            }
         }
     }
-    
+
     func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        var resultArr:[TransactionModel] = []
-        let parameters:Dictionary = ["account":walletAddress]
+        var resultArr: [TransactionModel] = []
+        let parameters: Dictionary = ["account": walletAddress]
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        Alamofire.request(NERVOS_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON(){ (response) in
+        Alamofire.request(NERVOS_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             if jsonObj!["result"]["count"] != "0" {
                 for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {
@@ -83,26 +83,26 @@ class TransactionServiceImp : TransactionService{
                     transacationModel.transactionType = "Nervos"
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
                         transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
-                    }else{
+                    } else {
                         transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
                     }
 
                     resultArr.append(transacationModel)
                 }
                 completion(EthServiceResult.Success(resultArr))
-            }else{
+            } else {
                 completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
             }
         }
     }
-    
-    func changeValue(eStr:String) -> String{
-        var fStr:String
+
+    func changeValue(eStr: String) -> String {
+        var fStr: String
         if eStr.hasPrefix("0x") {
-            let start = eStr.index(eStr.startIndex, offsetBy: 2);
+            let start = eStr.index(eStr.startIndex, offsetBy: 2)
             let str1 = String(eStr[start...])
             fStr = str1.uppercased()
-        }else{
+        } else {
             fStr = eStr.uppercased()
         }
         var sum = 0
@@ -114,9 +114,9 @@ class TransactionServiceImp : TransactionService{
         }
         return String(sum)
     }
-    
-    func formatValue(value:String) -> String {
-        
+
+    func formatValue(value: String) -> String {
+
         if value.count != 0 {
             let vInt = Int(value)!
             let biguInt = BigUInt(vInt)
@@ -124,19 +124,18 @@ class TransactionServiceImp : TransactionService{
             let strFload = Float(formatStr)
             let finalStr = String(strFload!)
             return finalStr
-        }else{
+        } else {
             return value
         }
     }
-    
-    func formatScientValue(value:String) -> String {
+
+    func formatScientValue(value: String) -> String {
         let biguInt = BigUInt(atof("0x" + value))
         let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
         return formatStr
     }
-    
-    
-    func getTotleGas(gasUsed:String,gasPirce:String) -> String {
+
+    func getTotleGas(gasUsed: String, gasPirce: String) -> String {
         if gasUsed.count != 0 && gasUsed.count != 0 {
             let gasUsedInt = Int(gasUsed)!
             let gasPriceInt = Int(gasPirce)!
@@ -145,43 +144,40 @@ class TransactionServiceImp : TransactionService{
             let strFload = Float(formatStr!)
             let finalGasStr = String(strFload!)
             return finalGasStr
-        }else{
+        } else {
             return ""
         }
     }
-    
-    func formatGasToGwei(gas:String) -> String {
+
+    func formatGasToGwei(gas: String) -> String {
         if gas.count != 0 {
             let vInt = Int(gas)!
             let bigInt = BigUInt(vInt)
             let formatStr = Web3.Utils.formatToEthereumUnits(bigInt, toUnits: .Gwei, decimals: 6, fallbackToScientific: false)!
             return formatStr
-        }else{
+        } else {
             return gas
         }
     }
-    
-    func formatTimeStamp(timeStamp:String) -> String {
+
+    func formatTimeStamp(timeStamp: String) -> String {
         let timeStampInt = Int(timeStamp)
-        let timeInterval:TimeInterval = TimeInterval(timeStampInt!)
+        let timeInterval: TimeInterval = TimeInterval(timeStampInt!)
         let date = Date(timeIntervalSince1970: timeInterval)
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let time = dateformatter.string(from: date)
         return time
     }
-    
-    func formatTimestamp(timeStap:Int) -> String {
+
+    func formatTimestamp(timeStap: Int) -> String {
         print(timeStap)
-        let timeInterval:TimeInterval = TimeInterval(timeStap)
+        let timeInterval: TimeInterval = TimeInterval(timeStap)
         let date = Date(timeIntervalSince1970: timeInterval/1000)
         let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let time = dateformatter.string(from: date)
         return time
     }
-    
+
 }
-
-
-

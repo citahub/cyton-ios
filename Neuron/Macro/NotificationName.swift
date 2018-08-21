@@ -8,11 +8,9 @@
 
 import Foundation
 
-extension Notification.Name{
+extension Notification.Name {
     static let creatWalletSuccess = Notification.Name("creatWalletSuccess")
     static let changeTabbr = Notification.Name("changeTabbr")
 }
 
 /// 创建钱包成功 一般是通知sub2来变更数据
-
-

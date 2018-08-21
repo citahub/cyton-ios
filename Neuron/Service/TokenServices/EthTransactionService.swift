@@ -11,30 +11,30 @@ import web3swift
 import BigInt
 
 protocol EthTransactionServiceProtocol {
-    
+
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
-                                      gasLimit:UInt,
-                                      walletPassword:String,
-                                      gasPrice:BigUInt,
-                                      erc20TokenAddress:String,
+                                      gasLimit: UInt,
+                                      walletPassword: String,
+                                      gasPrice: BigUInt,
+                                      erc20TokenAddress: String,
                                       completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
-    func send(password:String,transaction:TransactionIntermediate,completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
+    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
 }
 
-class EthTransactionServiceImp : EthTransactionServiceProtocol {
-    
+class EthTransactionServiceImp: EthTransactionServiceProtocol {
+
     func prepareTransactionForSending(destinationAddressString: String,
                                       amountString: String,
                                       gasLimit: UInt = 21000,
-                                      walletPassword:String,
-                                      gasPrice:BigUInt = BigUInt(1000000000),
-                                      erc20TokenAddress:String = "",
+                                      walletPassword: String,
+                                      gasPrice: BigUInt = BigUInt(1000000000),
+                                      erc20TokenAddress: String = "",
                                       completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        
+
         let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
-        
+
         DispatchQueue.global().async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
@@ -48,7 +48,7 @@ class EthTransactionServiceImp : EthTransactionServiceProtocol {
                 }
                 return
             }
-            
+
             let web3 = Web3NetWork.getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
@@ -57,7 +57,7 @@ class EthTransactionServiceImp : EthTransactionServiceProtocol {
                 return
             }
             let ethAddressFrom = EthereumAddress(selectedKey)
-            
+
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
@@ -69,7 +69,7 @@ class EthTransactionServiceImp : EthTransactionServiceProtocol {
                 }
                 return
             }
-            
+
             guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.retrievingEstimatedGasError))
@@ -91,14 +91,14 @@ class EthTransactionServiceImp : EthTransactionServiceProtocol {
                 }
                 return
             }
-            
+
             DispatchQueue.main.async {
                 completion(SendEthResult.Success(transaction))
             }
         }
     }
-    
-    func send(password:String,transaction:TransactionIntermediate,completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
+
+    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result = transaction.send(password: password, options: nil)
             if let error = result.error {
@@ -117,7 +117,7 @@ class EthTransactionServiceImp : EthTransactionServiceProtocol {
                 completion(SendEthResult.Success(value))
             }
         }
-        
+
     }
-    
+
 }

@@ -9,24 +9,22 @@
 import UIKit
 
 class ConTractLastTableViewCell: UITableViewCell {
-    
+
     //应该是传入两个字符串 点哪个按钮就显示什么内容
-    var hexStr:String?{
-        didSet{
+    var hexStr: String? {
+        didSet {
             textView.text = hexStr
         }
     }
     var UTF8Str = ""
-    
-    
-    
+
     let lineV = UIView.init()
     @IBOutlet weak var headLable: UILabel!
     @IBOutlet weak var rightBtn: UIButton!
     @IBOutlet weak var leftBtn: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var bView: UIView!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         lineV.frame = CGRect(x: 0, y: 39, width: ScreenW * 0.459, height: 5)
@@ -37,13 +35,12 @@ class ConTractLastTableViewCell: UITableViewCell {
         rightBtn.layer.borderColor = ColorFromString(hex: "#cccccc").toCGColor()
         textView.isEditable = false
     }
-    
-    
+
     @IBAction func didClickHEXButton(_ sender: UIButton) {
         lineV.frame = CGRect(x: 0, y: 39, width: ScreenW * 0.459, height: 5)
         textView.text = hexStr
     }
-    
+
     @IBAction func didClickUTF8Button(_ sender: UIButton) {
         lineV.frame = CGRect(x: ScreenW * 0.459, y: 39, width: ScreenW * 0.459, height: 5)
         textView.text = UTF8Str
@@ -53,5 +50,5 @@ class ConTractLastTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
+
 }
