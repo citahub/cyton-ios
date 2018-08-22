@@ -47,7 +47,7 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
     @IBOutlet weak var sureButton: UIButton!
 
     var ethTransactionService: EthTransactionServiceProtocol!
-    var nervosTransactionService:NervosTransactionServiceProtocol!
+    var nervosTransactionService: NervosTransactionServiceProtocol!
 
     let viewModel = TAViewModel()
     var walletModel = WalletModel()
@@ -106,12 +106,12 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
                        colorTextButton: 0xFFFFFF)
     }
 
-    func prepareTransaction(password:String){
+    func prepareTransaction(password: String) {
         NeuLoad.showHUD(text: "")
-        if tokenModel.chainId == ETH_MainNetChainId{
+        if tokenModel.chainId == ETH_MainNetChainId {
             ethTransactionService = EthTransactionServiceImp()
             ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
-                switch sendResult{
+                switch sendResult {
                 case .Success(let value):
                     print(value)
                     self.sendEthTransaction(password: password, transaction: value)
@@ -120,10 +120,10 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
                     NeuLoad.hidHUD()
                 }
             })
-        }else if tokenModel.chainId == ""{
+        } else if tokenModel.chainId == ""{
             ethTransactionService = ERC20TransactionServiceImp()
             ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
-                switch sendResult{
+                switch sendResult {
                 case .Success(let value):
                     print(value)
                     self.sendEthTransaction(password: password, transaction: value)
@@ -132,11 +132,11 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
                     NeuLoad.hidHUD()
                 }
             })
-        }else{
+        } else {
             nervosTransactionService = NervosTransactionServiceImp()
             print(amountStr)
-            nervosTransactionService.prepareTransactionForSending(address: destinationAddress, nonce: "", quota: BigUInt(100000), data:Data.init(hex: "") , value: amountStr, chainId: BigUInt(tokenModel.chainId)!) { (transaction) in
-                switch transaction{
+            nervosTransactionService.prepareTransactionForSending(address: destinationAddress, nonce: "", quota: BigUInt(100000), data: Data.init(hex: ""), value: amountStr, chainId: BigUInt(tokenModel.chainId)!) { (transaction) in
+                switch transaction {
                 case .Success(let value):
                     self.sendNervosTransaction(password: password, transaction: value)
                 case .Error(let error):
@@ -147,9 +147,9 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
         }
     }
 
-    func sendNervosTransaction(password:String,transaction:NervosTransaction) {
+    func sendNervosTransaction(password: String, transaction: NervosTransaction) {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
-            switch result{
+            switch result {
             case .Success(let nervosTransactionResult):
                 print(nervosTransactionResult.status)
                 NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
@@ -161,7 +161,6 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
             NeuLoad.hidHUD()
         }
     }
-
 
     func sendEthTransaction(password: String, transaction: TransactionIntermediate) {
         ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in

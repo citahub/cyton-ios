@@ -55,6 +55,7 @@ enum SendNervosErrors: Error {
     case emptyResult
     case noAvailableKeys
     case createTransactionIssue
+    case emptyNonce
 }
 
 enum SendNervosResult<T> {

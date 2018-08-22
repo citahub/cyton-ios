@@ -17,9 +17,9 @@ protocol NervosTransactionServiceProtocol {
                                       quota: BigUInt,
                                       data: Data,
                                       value: String,
-                                      chainId: BigUInt, completion: @escaping (SendEthResult<NervosTransaction>) -> Void)
+                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
 
-    func send(password: String, transaction: NervosTransaction, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
+    func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void)
 }
 
 class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
@@ -29,24 +29,24 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                                       quota: BigUInt = BigUInt(100000),
                                       data: Data,
                                       value: String,
-                                      chainId: BigUInt, completion: @escaping (SendEthResult<NervosTransaction>) -> Void) {
+                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
+                    completion(SendNervosResult.Error(SendNervosErrors.invalidDestinationAddress))
                 }
                 return
             }
             guard let amount = Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
+                    completion(SendNervosResult.Error(SendNervosErrors.invalidAmountFormat))
                 }
                 return
             }
 //            let finalValue = Data(hex: String(amount,radix: 16))
             guard let nonceBInt = randomNumberString() else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))
+                    completion(SendNervosResult.Error(SendNervosErrors.emptyNonce))
                 }
                 return
             }
@@ -55,18 +55,15 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             DispatchQueue.main.async {
                 switch bnResult {
                 case .success(let blockNum):
-                    print(amount.description)
-                    print(amount.description.data(using: String.Encoding.utf8)!)
-                    print(UInt64(quota).description)
                     let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonceBInt, data: data, value: amount, validUntilBlock: blockNum + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
-                    completion(SendEthResult.Success(transaction))
+                    completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
-                    completion(SendEthResult.Error(error))
+                    completion(SendNervosResult.Error(error))
                 }
             }
         }
     }
-    func send(password: String, transaction: NervosTransaction, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
+    func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let ner = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         var walletPrivate = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
@@ -75,7 +72,7 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             walletPrivate = String(walletPrivate.dropFirst(2))
         }
         guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: walletPrivate) else {
-            completion(SendEthResult.Error(NervosSignErrors.signTXFailed))
+            completion(SendNervosResult.Error(NervosSignErrors.signTXFailed))
             return
         }
         DispatchQueue.global().async {
@@ -83,9 +80,9 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
-                    completion(SendEthResult.Success(transaction))
+                    completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
-                    completion(SendEthResult.Error(error))
+                    completion(SendNervosResult.Error(error))
                 }
             }
         }
