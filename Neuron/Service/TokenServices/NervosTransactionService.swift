@@ -43,13 +43,13 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                 }
                 return
             }
-            let nonceString = UUID().uuidString
+            let nonce = UUID().uuidString
             let nervos = NervosNetwork.getNervos()
-            let blockNumberResult = nervos.appChain.blockNumber()
+            let result = nervos.appChain.blockNumber()
             DispatchQueue.main.async {
-                switch blockNumberResult {
+                switch result {
                 case .success(let blockNumber):
-                    let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonceString, data: data, value: amount, validUntilBlock: blockNumber + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
+                    let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonce, data: data, value: amount, validUntilBlock: blockNumber + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
                     completion(SendNervosResult.Error(error))
@@ -58,19 +58,18 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
         }
     }
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
-        let ner = NervosNetwork.getNervos()
+        let nervos = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
-        var walletPrivate = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
-        print(walletPrivate)
-        if walletPrivate.hasPrefix("0x") {
-            walletPrivate = String(walletPrivate.dropFirst(2))
+        var privateKey = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
+        if privateKey.hasPrefix("0x") {
+            privateKey = String(privateKey.dropFirst(2))
         }
-        guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: walletPrivate) else {
+        guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: privateKey) else {
             completion(SendNervosResult.Error(NervosSignErrors.signTXFailed))
             return
         }
         DispatchQueue.global().async {
-            let result = ner.appChain.sendRawTransaction(signedTx: signed)
+            let result = nervos.appChain.sendRawTransaction(signedTx: signed)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
