@@ -81,9 +81,3 @@ extension Array {
         return list
     }
 }
-
-// MARK: random string
-func randomNumberString() -> String? {
-    let y = arc4random() % 256
-    return String(y)
-}

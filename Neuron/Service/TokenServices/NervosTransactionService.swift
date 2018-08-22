@@ -43,19 +43,13 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                 }
                 return
             }
-//            let finalValue = Data(hex: String(amount,radix: 16))
-            guard let nonceBInt = randomNumberString() else {
-                DispatchQueue.main.async {
-                    completion(SendNervosResult.Error(SendNervosErrors.emptyNonce))
-                }
-                return
-            }
-            let ner = NervosNetwork.getNervos()
-            let bnResult = ner.appChain.blockNumber()
+            let nonceString = UUID().uuidString
+            let nervos = NervosNetwork.getNervos()
+            let blockNumberResult = nervos.appChain.blockNumber()
             DispatchQueue.main.async {
-                switch bnResult {
-                case .success(let blockNum):
-                    let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonceBInt, data: data, value: amount, validUntilBlock: blockNum + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
+                switch blockNumberResult {
+                case .success(let blockNumber):
+                    let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonceString, data: data, value: amount, validUntilBlock: blockNumber + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
                     completion(SendNervosResult.Error(error))
