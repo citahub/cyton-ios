@@ -19,7 +19,6 @@ class SubController2: BaseViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var mAddress: UILabel!
     @IBOutlet weak var archiveBtn: UIButton!
     @IBOutlet weak var manageBtn: UIButton!
-
     @IBOutlet weak var mainTable: UITableView!
     let sCtrl = SelectWalletController.init(nibName: "SelectWalletController", bundle: nil)
     let aCtrl = AssetsDetailController.init(nibName: "AssetsDetailController", bundle: nil)
@@ -232,7 +231,7 @@ class SubController2: BaseViewController, UITableViewDelegate, UITableViewDataSo
     func didClickPay(tokenModel: TokenModel) {
         print("付款")
         let tCtrl =  TAViewController.init(nibName: "TAViewController", bundle: nil)
-        tCtrl.tokenAddress = tokenModel.address
+        tCtrl.tokenModel = tokenModel
         navigationController?.pushViewController(tCtrl, animated: true)
     }
 

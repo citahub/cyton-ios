@@ -35,9 +35,6 @@ class WalletRealmTool: NSObject {
             let appModel: AppModel = result[0]
             return appModel
         }
-//        }else{
-//            return AppModel()
-//        }
     }
 
     /// update currentWallet

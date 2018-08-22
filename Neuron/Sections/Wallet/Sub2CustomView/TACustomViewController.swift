@@ -10,6 +10,7 @@ import UIKit
 import SCLAlertView
 import web3swift
 import BigInt
+import Nervos
 
 protocol TACustomViewControllerDelegate: class {
     func successPop()
@@ -39,13 +40,14 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
         }
     }
 
-    var erc20TokenAddress = ""
+    var tokenModel  = TokenModel()
 
     @IBOutlet weak var countLable: UILabel!
     @IBOutlet weak var taTable: UITableView!
     @IBOutlet weak var sureButton: UIButton!
 
     var ethTransactionService: EthTransactionServiceProtocol!
+    var nervosTransactionService:NervosTransactionServiceProtocol!
 
     let viewModel = TAViewModel()
     var walletModel = WalletModel()
@@ -75,7 +77,6 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
         walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         passwordMD5 = walletModel.MD5screatPassword
         valueArray = [destinationAddress, walletModel.address, estimatedGas]
-        ethTransactionService = erc20TokenAddress == "1" ? EthTransactionServiceImp():ERC20TransactionServiceImp()
     }
 
     @IBAction func didClickCloseButton(_ sender: UIButton) {
@@ -95,17 +96,7 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
                 NeuLoad.showToast(text: "旧密码错误")
                 return
             } else {
-                NeuLoad.showHUD(text: "")
-                self.ethTransactionService.prepareTransactionForSending(destinationAddressString: self.destinationAddress, amountString: self.amountStr, gasLimit: 21000, walletPassword: txt.text!, gasPrice: self.gasPrice, erc20TokenAddress: self.erc20TokenAddress, completion: { (sendResult) in
-                    switch sendResult {
-                    case .Success(let value):
-                        print(value)
-                        self.sendTransaction(password: txt.text!, transaction: value)
-                    case .Error(let error):
-                        print(error.localizedDescription)
-                        NeuLoad.hidHUD()
-                    }
-                })
+               self.prepareTransaction(password: txt.text!)
             }
         }
         alert.addButton("取消") {
@@ -115,7 +106,64 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
                        colorTextButton: 0xFFFFFF)
     }
 
-    func sendTransaction(password: String, transaction: TransactionIntermediate) {
+    func prepareTransaction(password:String){
+        NeuLoad.showHUD(text: "")
+        if tokenModel.chainId == ETH_MainNetChainId{
+            ethTransactionService = EthTransactionServiceImp()
+            ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
+                switch sendResult{
+                case .Success(let value):
+                    print(value)
+                    self.sendEthTransaction(password: password, transaction: value)
+                case .Error(let error):
+                    print(error.localizedDescription)
+                    NeuLoad.hidHUD()
+                }
+            })
+        }else if tokenModel.chainId == ""{
+            ethTransactionService = ERC20TransactionServiceImp()
+            ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
+                switch sendResult{
+                case .Success(let value):
+                    print(value)
+                    self.sendEthTransaction(password: password, transaction: value)
+                case .Error(let error):
+                    print(error.localizedDescription)
+                    NeuLoad.hidHUD()
+                }
+            })
+        }else{
+            nervosTransactionService = NervosTransactionServiceImp()
+            print(amountStr)
+            nervosTransactionService.prepareTransactionForSending(address: destinationAddress, nonce: "", quota: BigUInt(100000), data:Data.init(hex: "") , value: amountStr, chainId: BigUInt(tokenModel.chainId)!) { (transaction) in
+                switch transaction{
+                case .Success(let value):
+                    self.sendNervosTransaction(password: password, transaction: value)
+                case .Error(let error):
+                    print(error.localizedDescription)
+                    NeuLoad.hidHUD()
+                }
+            }
+        }
+    }
+
+    func sendNervosTransaction(password:String,transaction:NervosTransaction) {
+        nervosTransactionService.send(password: password, transaction: transaction) { (result) in
+            switch result{
+            case .Success(let nervosTransactionResult):
+                print(nervosTransactionResult.status)
+                NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
+                self.view.removeFromSuperview()
+                self.delegate?.successPop()
+            case .Error(let error):
+                NeuLoad.showToast(text: error.localizedDescription)
+            }
+            NeuLoad.hidHUD()
+        }
+    }
+
+
+    func sendEthTransaction(password: String, transaction: TransactionIntermediate) {
         ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
             case .Success(let ethTransactionResult):
