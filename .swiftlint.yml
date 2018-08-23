@@ -14,4 +14,7 @@ type_body_length:
 
 function_parameter_count: 8
 
-line_length: 180
+line_length:
+  warning: 180
+  error: 280
+  ignores_comments: true
