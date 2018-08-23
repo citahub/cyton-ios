@@ -101,11 +101,13 @@ class ButtonTagUpView: UIView {
     }
 
     //计算文本宽度
-    func  returnTextWidth(text: String, font: UIFont, viewWidth: CGFloat) -> CGSize {
-        var attr = [NSAttributedStringKey: AnyObject]()
-        attr[NSAttributedStringKey.font] = font
-        let textSize = text.boundingRect(with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attr, context: nil).size
-        return textSize
+    func returnTextWidth(text: String, font: UIFont, viewWidth: CGFloat) -> CGSize {
+        return text.boundingRect(
+            with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [NSAttributedStringKey.font: font],
+            context: nil
+        ).size
     }
 
     required init?(coder aDecoder: NSCoder) {

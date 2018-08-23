@@ -20,22 +20,22 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
     let viewModel = ImportWalletViewModel()
 
     var selectState = SelectButtonStates.keystoreState
-    let nView =  NEPickerView.init()
+    let nView =  NEPickerView()
     var selectFormatId = "0"
 
-    @IBOutlet weak var keystoreButton: UIButton!//tag 2000
-    @IBOutlet weak var helpWordButton: UIButton!//2001
-    @IBOutlet weak var privateKeyButton: UIButton!//2002
+    @IBOutlet weak var keystoreButton: UIButton! // tag 2000
+    @IBOutlet weak var helpWordButton: UIButton! // 2001
+    @IBOutlet weak var privateKeyButton: UIButton! // 2002
     @IBOutlet weak var scrollView: UIScrollView!
 
-    //keystore VIew
+    // keystore VIew
     @IBOutlet weak var keystoreNameTF: UITextField!
     @IBOutlet weak var keystorePasswordTF: UITextField!
     @IBOutlet weak var keystoreImportButton: UIButton!
     @IBOutlet weak var keystoreHeadView: UIView!
     @IBOutlet weak var keystoreQRButton: UIButton!
 
-    //mnemonic View
+    // mnemonic View
     @IBOutlet weak var mnemonicQRButton: UIButton!
     @IBOutlet weak var mnemonicHeadView: UIView!
     @IBOutlet weak var formatTF: UITextField!
@@ -44,18 +44,18 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
     @IBOutlet weak var mnemonicConfirmTF: UITextField!
     @IBOutlet weak var mnemonicImportButton: UIButton!
 
-    //privatekey view
+    // privatekey view
     @IBOutlet weak var privatekeyQRButton: UIButton!
     @IBOutlet weak var privatekeyHeadView: UIView!
     @IBOutlet weak var privatekeyNameTF: UITextField!
     @IBOutlet weak var privatekeyPasswordTF: UITextField!
     @IBOutlet weak var privatekeyConfirmTF: UITextField!
 
-    private let keystoreTextView = RSKPlaceholderTextView.init()
-    private let mnemonicTextView = RSKPlaceholderTextView.init()
-    private let privatekeyTextView = RSKPlaceholderTextView.init()
+    private let keystoreTextView = RSKPlaceholderTextView()
+    private let mnemonicTextView = RSKPlaceholderTextView()
+    private let privatekeyTextView = RSKPlaceholderTextView()
 
-    var lineStateView = UIView.init()
+    var lineStateView = UIView()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -71,7 +71,6 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        scrollView.contentSize = CGSize(width: ScreenW*3, height: 0)
         scrollView.isPagingEnabled = true
         scrollView.isScrollEnabled = false
         title = "导入钱包"
@@ -104,20 +103,20 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         keystoreHeadView.addSubview(keystoreTextView)
         keystoreTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         keystoreTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .left, relatedBy: .equal, toItem: keystoreHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .right, relatedBy: .equal, toItem: keystoreHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .top, relatedBy: .equal, toItem: keystoreHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: keystoreTextView, attribute: .bottom, relatedBy: .equal, toItem: keystoreHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        let letftContraint = NSLayoutConstraint(item: keystoreTextView, attribute: .left, relatedBy: .equal, toItem: keystoreHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint(item: keystoreTextView, attribute: .right, relatedBy: .equal, toItem: keystoreHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint(item: keystoreTextView, attribute: .top, relatedBy: .equal, toItem: keystoreHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint(item: keystoreTextView, attribute: .bottom, relatedBy: .equal, toItem: keystoreHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
         NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
         keystoreHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
-        let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab.font = UIFont.systemFont(ofSize: 15)
         nameLab.textColor = ColorFromString(hex: "#333333")
         nameLab.text = "钱包名称"
         keystoreNameTF.leftViewMode = .always
         keystoreNameTF.leftView = nameLab
-        let passwordLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let passwordLab = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         passwordLab.font = UIFont.systemFont(ofSize: 15)
         passwordLab.textColor = ColorFromString(hex: "#333333")
         passwordLab.text = "解锁密码"
@@ -153,26 +152,26 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         mnemonicHeadView.addSubview(mnemonicTextView)
         mnemonicTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         mnemonicTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .left, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .right, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .top, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: mnemonicTextView, attribute: .bottom, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        let letftContraint = NSLayoutConstraint(item: mnemonicTextView, attribute: .left, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint(item: mnemonicTextView, attribute: .right, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint(item: mnemonicTextView, attribute: .top, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint(item: mnemonicTextView, attribute: .bottom, relatedBy: .equal, toItem: mnemonicHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
         NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
         mnemonicHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
-        let nameLab = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab.font = UIFont.systemFont(ofSize: 15)
         nameLab.textColor = ColorFromString(hex: "#333333")
         nameLab.text = "格式"
-        let nameLab1 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab1 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab1.font = UIFont.systemFont(ofSize: 15)
         nameLab1.textColor = ColorFromString(hex: "#333333")
         nameLab1.text = "钱包名称"
-        let nameLab2 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab2 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab2.font = UIFont.systemFont(ofSize: 15)
         nameLab2.textColor = ColorFromString(hex: "#333333")
         nameLab2.text = "设定密码"
-        let nameLab3 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab3 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab3.font = UIFont.systemFont(ofSize: 15)
         nameLab3.textColor = ColorFromString(hex: "#333333")
         nameLab3.text = "重复密码"
@@ -182,14 +181,14 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         mnemonicConfirmTF.leftView = nameLab3
         mnemonicHeadView.bringSubview(toFront: mnemonicQRButton)
 
-        let firstBtn = UIButton.init(type: .custom)
-        firstBtn.setImage(UIImage.init(named: "Triangle"), for: .normal)
+        let firstBtn = UIButton(type: .custom)
+        firstBtn.setImage(UIImage(named: "Triangle"), for: .normal)
         firstBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 50)
         firstBtn.addTarget(self, action: #selector(didSetUpPickView), for: .touchUpInside)
         formatTF.rightView = firstBtn
         formatTF.text = "m/44'/60'/0'/0/0"
 
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didSetUpPickView))
         formatTF.addGestureRecognizer(tap)
     }
 
@@ -216,24 +215,24 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         privatekeyTextView.clipsToBounds = true
         privatekeyTextView.backgroundColor = ColorFromString(hex: "#f5f5f5")
         privatekeyTextView.translatesAutoresizingMaskIntoConstraints = false
-        let letftContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .left, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
-        let rightContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
-        let topContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
-        let bottomContraint = NSLayoutConstraint.init(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
+        let letftContraint = NSLayoutConstraint(item: privatekeyTextView, attribute: .left, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .leftMargin, multiplier: 1, constant: 7.5)
+        let rightContraint = NSLayoutConstraint(item: privatekeyTextView, attribute: .right, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .rightMargin, multiplier: 1, constant: -7.5)
+        let topContraint = NSLayoutConstraint(item: privatekeyTextView, attribute: .top, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .topMargin, multiplier: 1, constant: 7.5)
+        let bottomContraint = NSLayoutConstraint(item: privatekeyTextView, attribute: .bottom, relatedBy: .equal, toItem: privatekeyHeadView, attribute: .bottomMargin, multiplier: 1, constant: -7.5)
         NSLayoutConstraint.activate([letftContraint, rightContraint, topContraint, bottomContraint])
         privatekeyHeadView.addConstraints([letftContraint, rightContraint, topContraint, bottomContraint])
 
         privatekeyHeadView.bringSubview(toFront: privatekeyQRButton)
 
-        let nameLab1 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab1 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab1.font = UIFont.systemFont(ofSize: 15)
         nameLab1.textColor = ColorFromString(hex: "#333333")
         nameLab1.text = "钱包名称"
-        let nameLab2 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab2 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab2.font = UIFont.systemFont(ofSize: 15)
         nameLab2.textColor = ColorFromString(hex: "#333333")
         nameLab2.text = "设定密码"
-        let nameLab3 = UILabel.init(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
+        let nameLab3 = UILabel(frame: CGRect(x: 0, y: 0, width: 80, height: 49))
         nameLab3.font = UIFont.systemFont(ofSize: 15)
         nameLab3.textColor = ColorFromString(hex: "#333333")
         nameLab3.text = "重复密码"
@@ -242,7 +241,7 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         privatekeyConfirmTF.leftView = nameLab3
     }
 
-    //pickview
+    // pickview
     @objc func didSetUpPickView() {
         print("点击了pick")
         nView.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
@@ -251,11 +250,13 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         nView.selectDict = ["name": formatTF.text!, "id": selectFormatId]
         UIApplication.shared.keyWindow?.addSubview(nView)
     }
-    //NEPickerViewDelegate
+
+    // NEPickerViewDelegate
     func callBackDictionnary(dict: [String: String]) {
         formatTF.text = dict["name"]
         selectFormatId = dict["id"]!
     }
+
     // QRButton action
     @objc func didClickQRButton(sender: UIButton) {
         let qrCtrl = QRCodeController()
@@ -275,7 +276,7 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         }
     }
 
-    //textField delegate
+    // textField delegate
     func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField === formatTF {
             didSetUpPickView()
@@ -283,7 +284,7 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         }
     }
 
-    //three top button
+    // three top button
     @IBAction func didClickKeystoreButton(_ sender: UIButton) {
         selectState = .keystoreState
         viewModel.importType = .keystoreType
@@ -302,7 +303,7 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         setTopButtonStateWithButton(sender: sender)
     }
 
-    //set top button color
+    // set top button color
     func setTopButtonStateWithButton(sender: UIButton) {
         sender.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
         print(sender.tag - 2000)
@@ -321,35 +322,33 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
             keystoreButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
         }
     }
-    //nextButton action
+
+    // nextButton action
     @IBAction func keystoreNextButton(_ sender: UIButton) {
         viewModel.importKeyStoreWallet(keyStore: keystoreTextView.text, password: keystorePasswordTF.text!, name: keystoreNameTF.text!)
     }
 
     @IBAction func mnemonicNextButton(_ sender: UIButton) {
-        viewModel.importWalletWithMnemonic(mnemonic: mnemonicTextView.text, password: mnemonicPasswordTF.text!, confirmPassword: mnemonicConfirmTF.text!, devirationPath: formatTF.text!, name: mnemonicNameTF.text!)
+        viewModel.importWalletWithMnemonic(
+            mnemonic: mnemonicTextView.text,
+            password: mnemonicPasswordTF.text!,
+            confirmPassword: mnemonicConfirmTF.text!,
+            devirationPath: formatTF.text!,
+            name: mnemonicNameTF.text!
+        )
     }
 
     @IBAction func privatekeyNextButton(_ sender: UIButton) {
-        viewModel.importPrivateWallet(privateKey: privatekeyTextView.text, password: privatekeyPasswordTF.text!, confirmPassword: privatekeyConfirmTF.text!, name: privatekeyNameTF.text!)
+        viewModel.importPrivateWallet(
+            privateKey: privatekeyTextView.text,
+            password: privatekeyPasswordTF.text!,
+            confirmPassword: privatekeyConfirmTF.text!,
+            name: privatekeyNameTF.text!
+        )
     }
 
-    //importWalletViewModelDelegate
+    // importWalletViewModelDelegate
     func didPopToRootView() {
         navigationController?.popToRootViewController(animated: true)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-}
-
-extension UIViewController {
-    var correctLayoutGuide: UILayoutGuide {
-        if #available(iOS 11.0, *) {
-            return view.safeAreaLayoutGuide
-        } else {
-            return view.layoutMarginsGuide
-        }
     }
 }

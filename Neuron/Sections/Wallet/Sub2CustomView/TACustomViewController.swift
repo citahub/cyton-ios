@@ -134,7 +134,6 @@ class TACustomViewController: BaseViewController, UITableViewDataSource, UITable
             })
         } else {
             nervosTransactionService = NervosTransactionServiceImp()
-            print(amountStr)
             nervosTransactionService.prepareTransactionForSending(address: destinationAddress, nonce: "", quota: BigUInt(100000), data: Data.init(hex: ""), value: amountStr, chainId: BigUInt(tokenModel.chainId)!) { (transaction) in
                 switch transaction {
                 case .Success(let value):

@@ -114,7 +114,6 @@ class SQButtonTagView: UIView {
     }
 
     func refreshView() {
-
         for button in self.buttonTags {
             let btn = button as! UIButton
             if self.selectArray .contains(btn.tag-101) {
@@ -131,10 +130,12 @@ class SQButtonTagView: UIView {
     }
 
    class func  returnTextWidth(text: NSString, font: UIFont, viewWidth: CGFloat) -> CGSize {
-    var attr = [NSAttributedStringKey: AnyObject]()
-        attr[NSAttributedStringKey.font] = font
-        let textSize = text.boundingRect(with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attr, context: nil).size
-        return textSize
+        return text.boundingRect(
+            with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [NSAttributedStringKey.font: font],
+            context: nil
+        ).size
     }
 
     func setTagTexts(tagTexts: [Any]) {

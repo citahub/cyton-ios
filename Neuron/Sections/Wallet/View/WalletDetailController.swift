@@ -115,24 +115,21 @@ class WalletDetailController: BaseViewController, UITableViewDataSource, UITable
             }
         } else {
             let ID = "ID"
-            var cell = tableView.dequeueReusableCell(withIdentifier: ID)
-            if cell == nil {
-                cell = UITableViewCell.init(style: .value1, reuseIdentifier: ID)
-            }
-            cell?.textLabel?.textColor = ColorFromString(hex: "#333333")
-            cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
-            cell?.accessoryType = .disclosureIndicator
+            let cell = tableView.dequeueReusableCell(withIdentifier: ID) ?? UITableViewCell(style: .value1, reuseIdentifier: ID)
+            cell.textLabel?.textColor = ColorFromString(hex: "#333333")
+            cell.textLabel?.font = UIFont.systemFont(ofSize: 15)
+            cell.accessoryType = .disclosureIndicator
 
             switch indexPath.row {
             case 0 :
-                cell?.textLabel?.text = "修改密码"
+                cell.textLabel?.text = "修改密码"
             case 1:
-                cell?.textLabel?.text = "导出ketStore"
+                cell.textLabel?.text = "导出ketStore"
             default:
                 break
             }
 
-            return cell!
+            return cell
         }
     }
 

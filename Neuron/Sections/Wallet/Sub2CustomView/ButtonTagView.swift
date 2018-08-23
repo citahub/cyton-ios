@@ -45,11 +45,9 @@ class ButtonTagView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
     }
 
     func didSetMainViews() {
-
         var totalWidth: CGFloat = 0.0//到当前循环为止 所有横向按钮加起来的宽度
         var row: NSInteger = 0//第几行
 
@@ -99,14 +97,12 @@ class ButtonTagView: UIView {
             dict.setValue(button.tag, forKey: "buttonTag")
             backArray.append(dict)
         }
-//        selectTitleArr = nameArray
 
         delegate?.callBackSelectButtonArray(array: backArray)
         refreshView()
     }
 
     func refreshView() {
-
         for button in self.buttonArray {
             let btn = button as! UIButton
             if selectArr.contains(btn) {
@@ -123,8 +119,12 @@ class ButtonTagView: UIView {
     func  returnTextWidth(text: String, font: UIFont, viewWidth: CGFloat) -> CGSize {
         var attr = [NSAttributedStringKey: AnyObject]()
         attr[NSAttributedStringKey.font] = font
-        let textSize = text.boundingRect(with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)), options: [.usesLineFragmentOrigin, .usesFontLeading], attributes: attr, context: nil).size
-        return textSize
+        return text.boundingRect(
+            with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: attr,
+            context: nil
+         ).size
     }
 
     required init?(coder aDecoder: NSCoder) {
