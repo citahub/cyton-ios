@@ -52,14 +52,8 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
     ///   - walletAddress: walletAddress
     ///   - completion: result
     static func addERC20TokenToApp(contractAddress: String, walletAddress: String, completion:@escaping (EthServiceResult<TokenModel>) -> Void) {
-
         var ethAddress: EthereumAddress?
-        var cAddress: String = ""
-        if contractAddress.hasPrefix("0x") {
-            cAddress = contractAddress
-        } else {
-            cAddress = "0x" + contractAddress
-        }
+        let cAddress = contractAddress.addHexPrefix()
         ethAddress = EthereumAddress(cAddress)
 
         guard ethAddress != nil else {
@@ -69,7 +63,6 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
 
         let tokenModel = TokenModel()
         DispatchQueue.global(qos: .userInitiated).async {
-
             let disGroup = DispatchGroup()
 
             disGroup.enter()
@@ -114,5 +107,4 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             }
         }
     }
-
 }

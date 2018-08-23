@@ -40,10 +40,7 @@ class AddAssetController: BaseViewController, UITableViewDelegate, UITableViewDa
         }
         NeuLoad.showHUD(text: "")
         let appModel = WalletRealmTool.getCurrentAppmodel()
-        if !tokenModel.address.hasPrefix("0x") {
-            tokenModel.address = "0x" + tokenModel.address
-        }
-//        tokenModel.chainidName = 
+        tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)
