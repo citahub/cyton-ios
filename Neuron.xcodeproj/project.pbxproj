@@ -59,6 +59,10 @@
 		896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044120AE69C5002CFF6A /* NeuronTests.swift */; };
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
 		897AFC58212FDA9100383A12 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC57212FDA9100383A12 /* Array+Extension.swift */; };
+		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
+		897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897AFC5A2130129500383A12 /* CurrencyViewController.xib */; };
+		897AFC5F213012BB00383A12 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC5D213012BB00383A12 /* AboutUsViewController.swift */; };
+		897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897AFC5E213012BB00383A12 /* AboutUsViewController.xib */; };
 		898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */; };
 		898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */; };
 		898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EE20B5176A00ECB465 /* WalletDetailController.swift */; };
@@ -229,6 +233,10 @@
 		896D044C20AE69C5002CFF6A /* NeuronUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronUITests.swift; sourceTree = "<group>"; };
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897AFC57212FDA9100383A12 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
+		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
+		897AFC5A2130129500383A12 /* CurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyViewController.xib; sourceTree = "<group>"; };
+		897AFC5D213012BB00383A12 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
+		897AFC5E213012BB00383A12 /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
 		898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDetailController.swift; sourceTree = "<group>"; };
 		898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetsDetailController.xib; sourceTree = "<group>"; };
 		898A19EE20B5176A00ECB465 /* WalletDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailController.swift; sourceTree = "<group>"; };
@@ -799,6 +807,10 @@
 			isa = PBXGroup;
 			children = (
 				89BEBE7120F12647007D2705 /* CommonWebViewController.swift */,
+				897AFC592130129500383A12 /* CurrencyViewController.swift */,
+				897AFC5A2130129500383A12 /* CurrencyViewController.xib */,
+				897AFC5D213012BB00383A12 /* AboutUsViewController.swift */,
+				897AFC5E213012BB00383A12 /* AboutUsViewController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -990,9 +1002,11 @@
 				898A19FA20B54E0F00ECB465 /* ReceiveController.xib in Resources */,
 				89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
+				897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
+				897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */,
 				8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */,
 				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
 				8928C23020AE822B00C3103E /* Images.xcassets in Resources */,
@@ -1215,10 +1229,12 @@
 				8928C27A20B2A61900C3103E /* SubController2.swift in Sources */,
 				898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */,
 				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
+				897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */,
 				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
+				897AFC5F213012BB00383A12 /* AboutUsViewController.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,

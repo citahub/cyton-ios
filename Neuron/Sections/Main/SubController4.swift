@@ -10,8 +10,8 @@ import UIKit
 
 class SubController4: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
-    let titleArray = ["源代码", "服务及隐私条款", "联系我们"]
-//    let imageArray = ["aboutus","contactus"]
+    let titleArray = ["本地货币", "指纹设置", "关于我们", "联系我们"]
+    let imageArray = ["currency", "fingerprint_setup", "aboutus", "contactus"]
 
     @IBOutlet weak var sTable: UITableView!
     override func viewDidLoad() {
@@ -20,76 +20,55 @@ class SubController4: BaseViewController, UITableViewDelegate, UITableViewDataSo
         sTable.delegate = self
         sTable.dataSource = self
         sTable.tableFooterView = UIView.init()
-        sTable.register(UINib.init(nibName: "SubController4TableViewCell", bundle: nil), forCellReuseIdentifier: "ID1")
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
-
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 0.1
-    }
-
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        } else {
-            return titleArray.count
-        }
+        return titleArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! SubController4TableViewCell
-            cell.selectionStyle = .none
-            return cell
-        } else {
-            let ID = "ID"
-            var cell = tableView.dequeueReusableCell(withIdentifier: ID)
-            if cell == nil {
-                cell = UITableViewCell.init(style: .value1, reuseIdentifier: ID)
-                cell?.textLabel?.textColor = ColorFromString(hex: "#333333")
-                cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
-            }
-            cell?.textLabel?.text = titleArray[indexPath.row]
-            cell?.accessoryType = .disclosureIndicator
-
-            return cell!
+        let ID = "ID"
+        let cell = tableView.dequeueReusableCell(withIdentifier: ID) ?? UITableViewCell(style: .value1, reuseIdentifier: ID)
+        cell.textLabel?.textColor = ColorFromString(hex: "#2e313e")
+        cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
+        cell.textLabel?.text = titleArray[indexPath.row]
+        cell.imageView?.image = UIImage(named: imageArray[indexPath.row])
+        cell.accessoryType = .disclosureIndicator
+        switch indexPath.row {
+        case 0:
+            cell.detailTextLabel?.textColor = ColorFromString(hex: "#989caa")
+            cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 16)
+            cell.detailTextLabel?.text = "CNY"
+        case 1:
+            let switchButton = UISwitch(frame: CGRect(x: 0, y: 0, width: 30, height: 15))
+            switchButton.addTarget(self, action: #selector(changeFingerprintStatus(sender:)), for: .valueChanged)
+            switchButton.isOn = false
+            cell.accessoryView = switchButton
+        default:
+            break
         }
+        return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let wCtrl = CommonWebViewController()
-
-        if indexPath.section == 1 {
-            switch indexPath.row {
-            case 0:
-                wCtrl.urlStr = "https://github.com/cryptape/Neuron-iOS"
-            case 1:
-                wCtrl.urlStr = "https://docs.nervos.org/Neuron-Android/#/privacy-policy"
-            case 2:
-                wCtrl.urlStr = "https://www.nervos.org/contact"
-            default:
-                break
-            }
+        switch indexPath.row {
+        case 0:
+            let currency = CurrencyViewController()
+            navigationController?.pushViewController(currency, animated: true)
+        case 2:
+            let aboutUs = AboutUsViewController()
+            navigationController?.pushViewController(aboutUs, animated: true)
+        case 3:
+            let wCtrl = CommonWebViewController()
+            wCtrl.urlStr = "https://www.nervos.org/contact"
             navigationController?.pushViewController(wCtrl, animated: true)
+        default:
+            break
         }
-
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 180
-        } else {
-            return 50
-        }
+    @objc func changeFingerprintStatus(sender: UISwitch) {
     }
 
     override func didReceiveMemoryWarning() {

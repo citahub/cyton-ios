@@ -26,7 +26,6 @@ class SubController4TableViewCell: UITableViewCell {
         let infoDictionary = Bundle.main.infoDictionary!
         let appDisplayName = infoDictionary["CFBundleDisplayName"]
         let majorVersion = infoDictionary["CFBundleShortVersionString"]
-
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyMMdd"
         let convertedDate = dateFormatter.string(from: compileDate)
