@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         initTheRealm()
         self.window?.backgroundColor = UIColor.white
-        let mvc = MainViewController()
-        self.window!.rootViewController! = mvc
-        self.window?.makeKeyAndVisible()
         UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         keyboardSetUp()
         inializers()

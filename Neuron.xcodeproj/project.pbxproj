@@ -53,7 +53,6 @@
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
 		896812CB20F726D000731C8C /* dappOpration.js in Resources */ = {isa = PBXBuildFile; fileRef = 896812CA20F726D000731C8C /* dappOpration.js */; };
 		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
-		896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042E20AE69C1002CFF6A /* ViewController.swift */; };
 		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
 		896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896D043320AE69C5002CFF6A /* Assets.xcassets */; };
 		896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */; };
@@ -218,7 +217,6 @@
 		896812CA20F726D000731C8C /* dappOpration.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dappOpration.js; sourceTree = "<group>"; };
 		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		896D042E20AE69C1002CFF6A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		896D043120AE69C1002CFF6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		896D043320AE69C5002CFF6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		896D043620AE69C5002CFF6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -663,7 +661,6 @@
 				8913436F20C78D9600A17AEF /* Model */,
 				8928C22620AE7C6200C3103E /* Sections */,
 				896D042C20AE69C1002CFF6A /* AppDelegate.swift */,
-				896D042E20AE69C1002CFF6A /* ViewController.swift */,
 				896D043020AE69C1002CFF6A /* Main.storyboard */,
 				896D043320AE69C5002CFF6A /* Assets.xcassets */,
 				896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */,
@@ -1228,7 +1225,6 @@
 				899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */,
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
-				896D042F20AE69C1002CFF6A /* ViewController.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
 				898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */,
 				8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */,

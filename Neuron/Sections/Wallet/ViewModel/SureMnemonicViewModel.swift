@@ -113,9 +113,9 @@ class SureMnemonicViewModel: NSObject {
         NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
     }
 
-    //if creat wallet successful send changetabbr notification
+    //if creat wallet successful send changeTabbar notification
     func changeTabbar() {
-        NotificationCenter.default.post(name: .changeTabbr, object: self)
+        NotificationCenter.default.post(name: .changeTabbar, object: self)
     }
 
 }

@@ -59,7 +59,7 @@ class WalletDetailController: BaseViewController, UITableViewDataSource, UITable
         try! WalletRealmTool.realm.write {
             if appModel.wallets.count == 1 {
                 WalletRealmTool.realm.deleteAll()
-                NotificationCenter.default.post(name: .changeTabbr, object: self, userInfo: nil)
+                NotificationCenter.default.post(name: .changeTabbar, object: self, userInfo: nil)
             } else {
                 appModel.currentWallet = appModel.wallets[0]
                 WalletRealmTool.realm.delete(walletModel)
