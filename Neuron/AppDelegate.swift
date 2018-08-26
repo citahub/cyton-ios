@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mvc = MainViewController()
         self.window!.rootViewController! = mvc
         self.window?.makeKeyAndVisible()
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
+        UIApplication.shared.statusBarStyle = .lightContent
         keyboardSetUp()
         inializers()
         return true
