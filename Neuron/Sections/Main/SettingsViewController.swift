@@ -1,5 +1,5 @@
 //
-//  SubController4.swift
+//  SettingsViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/5/28.
@@ -8,8 +8,7 @@
 
 import UIKit
 
-class SubController4: BaseViewController, UITableViewDelegate, UITableViewDataSource {
-
+class SettingsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
     let titleArray = ["本地货币", "指纹设置", "关于我们", "联系我们"]
     let imageArray = ["currency", "fingerprint_setup", "aboutus", "contactus"]
 

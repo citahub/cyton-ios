@@ -1,5 +1,5 @@
 //
-//  SubController2.swift
+//  WalletViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/5/21.
@@ -12,7 +12,7 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class SubController2: BaseViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+class WalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!

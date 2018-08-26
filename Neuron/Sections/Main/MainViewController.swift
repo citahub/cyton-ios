@@ -9,15 +9,9 @@
 import UIKit
 
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
-    private var subController1 = SubController1()
-    private var subController2 = SubController2()
-    private var subController4 = SubController4()
-    private var addWallet = AddWalletController()
-
-    var nav1: BaseNavigationController!
-    var nav2: BaseNavigationController!
-    var nav4: BaseNavigationController!
-    var nav5: BaseNavigationController!
+    private var dAppNavigationController: BaseNavigationController!
+    private var walletNavigationController: BaseNavigationController!
+    private var settingsNavigationController: BaseNavigationController!
 
     //temp
     let sub2ViewModel = SubController2ViewModel()
@@ -28,8 +22,9 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
 
         initTabbarItems()
-        determineViewControllers()
-        NotificationCenter.default.addObserver(self, selector: #selector(determineViewControllers), name: .changeTabbar, object: nil)
+        determineWalletViewController()
+        viewControllers = [dAppNavigationController, walletNavigationController, settingsNavigationController]
+        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .changeTabbar, object: nil)
 
         addNativeTokenMsgToRealm()
     }
@@ -79,26 +74,27 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
     }
 
     public func initTabbarItems() {
-        subController1.tabBarItem = createTabbarItem(title: "应用", image: "dapp_off", imageSel: "dapp_on")
-        nav1 = BaseNavigationController(rootViewController: subController1)
+        let dAppViewController = DappViewController()
+        dAppViewController.tabBarItem = createTabbarItem(title: "应用", image: "dapp_off", imageSel: "dapp_on")
+        dAppNavigationController = BaseNavigationController(rootViewController: dAppViewController)
 
-        subController2.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
-        nav2 = BaseNavigationController(rootViewController: subController2)
+        walletNavigationController = BaseNavigationController()
 
-        subController4.tabBarItem = createTabbarItem(title: "设置", image: "setting_off", imageSel: "setting_on")
-        nav4 = BaseNavigationController(rootViewController: subController4)
-
-        addWallet.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
-        nav5 = BaseNavigationController(rootViewController: addWallet)
+        let settingsViewController = SettingsViewController()
+        settingsViewController.tabBarItem = createTabbarItem(title: "设置", image: "setting_off", imageSel: "setting_on")
+        settingsNavigationController = BaseNavigationController(rootViewController: settingsViewController)
     }
 
     @objc
-    private func determineViewControllers() {
+    private func determineWalletViewController() {
+        let walletViewController: UIViewController
         if WalletRealmTool.hasWallet() {
-            viewControllers = [nav1, nav2, nav4]
+            walletViewController = WalletViewController()
         } else {
-            viewControllers = [nav1, nav5, nav4]
+            walletViewController = AddWalletController()
         }
+        walletViewController.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
+        walletNavigationController.viewControllers = [walletViewController]
     }
 
     private func createTabbarItem(title: String, image: String, imageSel: String) -> UITabBarItem {
