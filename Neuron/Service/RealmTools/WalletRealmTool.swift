@@ -12,7 +12,6 @@ import RealmSwift
 class WalletRealmTool: NSObject {
 
     static let realm = RealmHelper.sharedInstance
-
     /// according to wallet address to get WalletModel
     ///
     /// - Parameter walletName: walletName
@@ -22,12 +21,10 @@ class WalletRealmTool: NSObject {
         walletModel = realm.object(ofType: WalletModel.self, forPrimaryKey: walletAddress)!
         return walletModel
     }
-
     /// get everything for AppModel
     ///
     /// - Returns: appmodel
     static func getCurrentAppmodel() -> AppModel {
-//        if isHasWallet() {
         let result = realm.objects(AppModel.self)
         if result.count == 0 {
             return AppModel()
@@ -36,7 +33,6 @@ class WalletRealmTool: NSObject {
             return appModel
         }
     }
-
     /// update currentWallet
     ///
     /// - Parameter walletName: wallet name
@@ -47,8 +43,7 @@ class WalletRealmTool: NSObject {
             appModel.currentWallet = getCreatWallet(walletAddress: walletAddress)
         }
     }
-
-    /// 判断当前app中是否有钱包
+    /// judge if there is a wallet in the current app
     ///
     /// - Returns: true or false
     static func isHasWallet() -> Bool {
@@ -64,7 +59,6 @@ class WalletRealmTool: NSObject {
             }
         }
     }
-
     /// addAppModel
     ///
     /// - Parameter appModel: appmodel instance

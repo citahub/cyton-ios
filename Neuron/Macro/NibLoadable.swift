@@ -16,7 +16,6 @@ extension NibLoadable where Self: UIView {
     static func loadFromNib(_ nibname: String? = nil) -> Self {//Self (大写) 当前类对象
         //self(小写) 当前对象
         let loadName = nibname == nil ? "\(self)" : nibname!
-
         return Bundle.main.loadNibNamed(loadName, owner: nil, options: nil)?.first as! Self
     }
 }

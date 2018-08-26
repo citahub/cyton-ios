@@ -11,13 +11,11 @@ import UIKit
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
     private var subController1 = SubController1()
     private var subController2 = SubController2()
-    private var subController3 = SubController3()
     private var subController4 = SubController4()
     private var addWallet = AddWalletController()
 
     var nav1: BaseNavigationController!
     var nav2: BaseNavigationController!
-    var nav3: BaseNavigationController!
     var nav4: BaseNavigationController!
     var nav5: BaseNavigationController!
 
@@ -87,22 +85,19 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         subController2.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
         nav2 = BaseNavigationController(rootViewController: subController2)
 
-        addWallet.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
-        nav5 = BaseNavigationController(rootViewController: addWallet)
-
-        subController3.tabBarItem = createTabbarItem(title: "交易", image: "trade_off", imageSel: "trade_on")
-        nav3 = BaseNavigationController(rootViewController: subController3)
-
         subController4.tabBarItem = createTabbarItem(title: "设置", image: "setting_off", imageSel: "setting_on")
         nav4 = BaseNavigationController(rootViewController: subController4)
+
+        addWallet.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
+        nav5 = BaseNavigationController(rootViewController: addWallet)
     }
 
     @objc
     private func determineViewControllers() {
         if WalletRealmTool.isHasWallet() {
-            viewControllers = [nav1, nav2, nav3, nav4]
+            viewControllers = [nav1, nav2, nav4]
         } else {
-            viewControllers = [nav1, nav5, nav3, nav4]
+            viewControllers = [nav1, nav5, nav4]
         }
     }
 

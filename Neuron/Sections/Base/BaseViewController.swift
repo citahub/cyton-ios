@@ -11,48 +11,63 @@ import UIKit
 class BaseViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
-        super .viewWillAppear(animated)
+        super.viewWillAppear(animated)
         self.automaticallyAdjustsScrollViewInsets = true
+        if navigationController?.viewControllers[0] == self {
+            UIApplication.shared.statusBarStyle = .lightContent
+        }
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if navigationController?.viewControllers[0] != self {
+            UIApplication.shared.statusBarStyle = .default
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super .viewDidAppear(animated)
-        self.hidesBottomBarWhenPushed = true
+        hidesBottomBarWhenPushed = true
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super .viewDidAppear(animated)
-        if self.navigationController?.viewControllers[0] == self {
-            self.hidesBottomBarWhenPushed = false
+        if navigationController?.viewControllers[0] == self {
+            hidesBottomBarWhenPushed = false
         }
     }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUpNavigationBarStyle()
     }
 
     func setUpNavigationBarStyle() {
-        if isiphoneX() {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "navigation_back-x"), for: UIBarMetrics.default)
+        if navigationController?.viewControllers[0] == self {
+            navigationController?.navigationBar.barTintColor = ColorFromString(hex: newThemeColor)
+            navigationController?.navigationBar.titleTextAttributes =  [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#ffffff")]
+            UIApplication.shared.statusBarStyle = .lightContent
         } else {
-            self.navigationController?.navigationBar.setBackgroundImage(UIImage.init(named: "navigation_back"), for: UIBarMetrics.default)
+            navigationController?.navigationBar.barTintColor = ColorFromString(hex: "#ffffff")
+            navigationController?.navigationBar.titleTextAttributes =  [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
+            UIApplication.shared.statusBarStyle = .default
         }
-        self.navigationController?.navigationBar.titleTextAttributes =  [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#ffffff")]
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationBar.shadowImage = UIImage.init()
 
+        navigationController?.navigationBar.isTranslucent = false
     }
 
     override func customBackItem(withTarget target: Any!, action: Selector!) -> UIBarButtonItem! {
-        let btn: UIButton = UIButton.init(type: .custom)
-        btn.setImage(UIImage.init(named: "nav_back"), for: .normal)
+        let btn: UIButton = UIButton(type: .custom)
         btn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
         btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
-//        btn.sizeToFit()
         btn.addTarget(target, action: action, for: .touchUpInside)
-        return UIBarButtonItem.init(customView: btn)
+        if navigationController?.viewControllers[0] == self {
+            btn.setImage(UIImage(named: "nav_back"), for: .normal)
+        } else {
+            btn.setImage(UIImage(named: "nav_darkback"), for: .normal)
+        }
+        return UIBarButtonItem(customView: btn)
     }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
