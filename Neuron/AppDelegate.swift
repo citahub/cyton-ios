@@ -14,12 +14,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        skipBackFiles()
+        skipBackupFiles()
         initializeRealm()
         setupKeyboard()
 
-        self.window?.backgroundColor = UIColor.white
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
         return true
     }
 
@@ -35,10 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         RealmHelper.initEncryptionRealm()
     }
 
-    private func skipBackFiles() {
-        let keystore = ETHKeyStore.shared
+    private func skipBackupFiles() {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
-        paths.append(keystore.keysDirectory)
+        paths.append(ETHKeyStore.shared.keysDirectory)
         SkipBackupFiles(paths: paths).skip()
     }
 
