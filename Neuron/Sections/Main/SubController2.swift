@@ -64,7 +64,7 @@ class SubController2: BaseViewController, UITableViewDelegate, UITableViewDataSo
 
     /// 正常情况下进入钱包界面要获取的数据
     func didGetDataForCurrentWallet() {
-        if WalletRealmTool.isHasWallet() {
+        if WalletRealmTool.hasWallet() {
             let walletModel = viewModel.getCurrentModel().currentWallet!
             refreshUI(walletModel: walletModel)
         }

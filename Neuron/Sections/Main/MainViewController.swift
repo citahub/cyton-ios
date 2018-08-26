@@ -94,7 +94,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     @objc
     private func determineViewControllers() {
-        if WalletRealmTool.isHasWallet() {
+        if WalletRealmTool.hasWallet() {
             viewControllers = [nav1, nav2, nav4]
         } else {
             viewControllers = [nav1, nav5, nav4]
