@@ -139,8 +139,7 @@
 		89F9E73E20DEBDE8009E68D4 /* ExportKeyStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9E73C20DEBDE8009E68D4 /* ExportKeyStoreController.swift */; };
 		89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeyStoreController.xib */; };
 		89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */; };
-		89FC542B20D4141500D5D27C /* Initializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542A20D4141500D5D27C /* Initializer.swift */; };
-		89FC542D20D4142D00D5D27C /* SkipBackupFilesInitializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFilesInitializer.swift */; };
+		89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */; };
 		89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */; };
 		89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */; };
 		89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21DD20EDB70000A09302 /* ServiceErrors.swift */; };
@@ -309,8 +308,7 @@
 		89F9E73C20DEBDE8009E68D4 /* ExportKeyStoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeyStoreController.swift; sourceTree = "<group>"; };
 		89F9E73D20DEBDE8009E68D4 /* ExportKeyStoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeyStoreController.xib; sourceTree = "<group>"; };
 		89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewModel.swift; sourceTree = "<group>"; };
-		89FC542A20D4141500D5D27C /* Initializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Initializer.swift; sourceTree = "<group>"; };
-		89FC542C20D4142D00D5D27C /* SkipBackupFilesInitializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFilesInitializer.swift; sourceTree = "<group>"; };
+		89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFiles.swift; sourceTree = "<group>"; };
 		89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21DD20EDB70000A09302 /* ServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceErrors.swift; sourceTree = "<group>"; };
@@ -432,7 +430,6 @@
 			children = (
 				1A3C652A212EAC0F00F1A0AA /* Extensions */,
 				899CAD9E20E0911900FF9D27 /* Encrypt */,
-				89FC542820D4126800D5D27C /* Core */,
 				8928C23120AE84AB00C3103E /* Utils */,
 			);
 			path = Helpers;
@@ -521,6 +518,7 @@
 		8928C23120AE84AB00C3103E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */,
 				8928C23220AE84E600C3103E /* ColorUtils.swift */,
 				8913437420C7D3A400A17AEF /* NeuLoad.swift */,
 				8913437720CA56CA00A17AEF /* RealmHelper.swift */,
@@ -833,23 +831,6 @@
 				89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */,
 			);
 			path = RealmTools;
-			sourceTree = "<group>";
-		};
-		89FC542820D4126800D5D27C /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				89FC542920D4126800D5D27C /* Initializers */,
-			);
-			path = Core;
-			sourceTree = "<group>";
-		};
-		89FC542920D4126800D5D27C /* Initializers */ = {
-			isa = PBXGroup;
-			children = (
-				89FC542C20D4142D00D5D27C /* SkipBackupFilesInitializer.swift */,
-				89FC542A20D4141500D5D27C /* Initializer.swift */,
-			);
-			path = Initializers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1253,7 +1234,6 @@
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
 				899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */,
 				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
-				89FC542B20D4141500D5D27C /* Initializer.swift in Sources */,
 				8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */,
 				89971F11212D049900E86C34 /* NervosTransactionService.swift in Sources */,
 				89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */,
@@ -1278,7 +1258,7 @@
 				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
 				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,
 				8913437520C7D3A400A17AEF /* NeuLoad.swift in Sources */,
-				89FC542D20D4142D00D5D27C /* SkipBackupFilesInitializer.swift in Sources */,
+				89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SubController4.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
