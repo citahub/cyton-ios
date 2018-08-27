@@ -53,10 +53,12 @@ class BaseNavigationController: UINavigationController {
         if style == .home {
             navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
             navigationBar.barTintColor = ColorFromString(hex: newThemeColor)
+            navigationBar.tintColor = .white
             navigationBar.barStyle = .black
         } else {
             navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
             navigationBar.barTintColor = .white
+            navigationBar.tintColor = ColorFromString(hex: "#333333")
             navigationBar.barStyle = .default
         }
     }
