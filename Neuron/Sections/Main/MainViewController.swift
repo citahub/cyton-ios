@@ -9,10 +9,6 @@
 import UIKit
 
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
-    private var dAppNavigationController: BaseNavigationController!
-    private var walletNavigationController: BaseNavigationController!
-    private var settingsNavigationController: BaseNavigationController!
-
     //temp
     let sub2ViewModel = SubController2ViewModel()
 
@@ -21,9 +17,8 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         delegate = self
 
-        initTabbarItems()
+        initTabBarItems()
         determineWalletViewController()
-        viewControllers = [dAppNavigationController, walletNavigationController, settingsNavigationController]
         NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .changeTabbar, object: nil)
 
         addNativeTokenMsgToRealm()
@@ -73,16 +68,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         }
     }
 
-    public func initTabbarItems() {
-        let dAppViewController = DappViewController()
-        dAppViewController.tabBarItem = createTabbarItem(title: "应用", image: "dapp_off", imageSel: "dapp_on")
-        dAppNavigationController = BaseNavigationController(rootViewController: dAppViewController)
-
-        walletNavigationController = BaseNavigationController()
-
-        let settingsViewController = SettingsViewController()
-        settingsViewController.tabBarItem = createTabbarItem(title: "设置", image: "setting_off", imageSel: "setting_on")
-        settingsNavigationController = BaseNavigationController(rootViewController: settingsViewController)
+    public func initTabBarItems() {
+        let appearance = UITabBarItem.appearance()
+        appearance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
+        appearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: ColorFromString(hex: themeColor)], for: .selected)
     }
 
     @objc
@@ -93,28 +82,6 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         } else {
             walletViewController = AddWalletController()
         }
-        walletViewController.tabBarItem = createTabbarItem(title: "钱包", image: "wallet_off", imageSel: "wallet_on")
-        walletNavigationController.viewControllers = [walletViewController]
-    }
-
-    private func createTabbarItem(title: String, image: String, imageSel: String) -> UITabBarItem {
-        let barItem = UITabBarItem()
-        barItem.title = title
-
-        barItem.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
-
-        barItem.setTitleTextAttributes([
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): ColorFromString(hex: "#666666"),
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): UIFont.systemFont(ofSize: 10)
-        ], for: .normal)
-        barItem.setTitleTextAttributes([
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.foregroundColor.rawValue): ColorFromString(hex: themeColor),
-            NSAttributedStringKey(rawValue: NSAttributedStringKey.font.rawValue): UIFont.systemFont(ofSize: 10)
-        ], for: .selected)
-
-        barItem.image = UIImage(named: image)?.withRenderingMode(.alwaysOriginal)
-        barItem.selectedImage = UIImage(named: imageSel)?.withRenderingMode(.alwaysOriginal)
-
-        return barItem
+        (viewControllers![1] as! BaseNavigationController).viewControllers = [walletViewController]
     }
 }
