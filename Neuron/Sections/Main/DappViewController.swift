@@ -1,5 +1,5 @@
 //
-//  SubController1.swift
+//  DappViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/5/18.
@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 import JavaScriptCore
 import Toast_Swift
-class SubController1: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
+class DappViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
 
     private var webView = WKWebView()
 

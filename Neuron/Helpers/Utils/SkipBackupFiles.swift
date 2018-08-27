@@ -1,16 +1,13 @@
-// Copyright SIX DAY LLC. All rights reserved.
-
 import Foundation
 
-struct SkipBackupFilesInitializer: Initializer {
-
+struct SkipBackupFiles {
     let urls: [URL]
 
     init(paths: [URL]) {
         self.urls = paths
     }
 
-    func perform() {
+    func skip() {
         urls.forEach { addSkipBackupAttributeToItemAtURL($0) }
     }
 

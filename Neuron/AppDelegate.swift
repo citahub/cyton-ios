@@ -11,47 +11,32 @@ import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        initTheRealm()
-        self.window?.backgroundColor = UIColor.white
-        let mvc = MainViewController()
-        self.window!.rootViewController! = mvc
-        self.window?.makeKeyAndVisible()
-        UIApplication.shared.statusBarStyle = .lightContent
-        keyboardSetUp()
-        inializers()
+        skipBackupFiles()
+        initializeRealm()
+        setupKeyboard()
+
         return true
     }
 
-    func keyboardSetUp() {
+    private func setupKeyboard() {
         IQKeyboardManager.shared.enable = true
-        //控制点击背景是否收起键盘
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        //控制键盘上的工具条文字颜色是否用户自定义
-        //将右边Done改成完成
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
-        // 控制是否显示键盘上的工具条
         IQKeyboardManager.shared.enableAutoToolbar = true
-        //最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键，自动跳转到下一个输入框，最后一个输入框点击完成，自动收起键盘
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
     }
 
-    func initTheRealm() {
+    private func initializeRealm() {
         RealmHelper.initEncryptionRealm()
     }
 
-    func inializers() {
-        let keystore = ETHKeyStore.shared
+    private func skipBackupFiles() {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
-        paths.append(keystore.keysDirectory)
-
-        let initializers: [Initializer] = [
-            SkipBackupFilesInitializer(paths: paths)
-            ]
-        initializers.forEach { $0.perform() }
+        paths.append(ETHKeyStore.shared.keysDirectory)
+        SkipBackupFiles(paths: paths).skip()
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -75,5 +60,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
 }

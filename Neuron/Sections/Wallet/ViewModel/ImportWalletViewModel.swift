@@ -188,7 +188,7 @@ class ImportWalletViewModel: NSObject {
         NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
     }
     private func changeTabbar() {
-        NotificationCenter.default.post(name: .changeTabbr, object: self)
+        NotificationCenter.default.post(name: .changeTabbar, object: self)
     }
 
 }
