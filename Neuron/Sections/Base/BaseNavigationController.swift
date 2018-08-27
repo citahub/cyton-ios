@@ -26,6 +26,12 @@ class BaseNavigationController: UINavigationController {
         applyStyle()
     }
 
+    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        super.setViewControllers(viewControllers, animated: animated)
+
+        style = viewControllers.count <= 1 ? .home : .inner
+    }
+
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if viewControllers.count == 0 {
             viewController.hidesBottomBarWhenPushed = false
