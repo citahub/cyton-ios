@@ -8,23 +8,16 @@
 
 import UIKit
 
-class SettingsViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingsViewController: UITableViewController {
     let titleArray = ["本地货币", "指纹设置", "关于我们", "联系我们"]
     let imageArray = ["currency", "fingerprint_setup", "aboutus", "contactus"]
 
-    @IBOutlet weak var sTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "设置"
-        sTable.delegate = self
-        sTable.dataSource = self
-        sTable.tableFooterView = UIView.init()
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleArray.count
-    }
-
+    /*
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ID = "ID"
         let cell = tableView.dequeueReusableCell(withIdentifier: ID) ?? UITableViewCell(style: .value1, reuseIdentifier: ID)
@@ -47,9 +40,9 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
             break
         }
         return cell
-    }
+    }*/
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         switch indexPath.row {
         case 0:
@@ -69,10 +62,4 @@ class SettingsViewController: BaseViewController, UITableViewDelegate, UITableVi
 
     @objc func changeFingerprintStatus(sender: UISwitch) {
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
