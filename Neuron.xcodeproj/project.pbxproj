@@ -398,13 +398,15 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		8922685820DE4EA50021A85F /* Setup */ = {
+		8922685820DE4EA50021A85F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				89C25C5820BBA38300007EC1 /* SettingsViewController.swift */,
+				1A2BFA1721338FEB0065496B /* Settings.storyboard */,
 				89BEBE7020F12621007D2705 /* View */,
 				8922685920DE4EA50021A85F /* TableViewCell */,
 			);
-			path = Setup;
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		8922685920DE4EA50021A85F /* TableViewCell */ = {
@@ -459,12 +461,12 @@
 		8928C22620AE7C6200C3103E /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				8922685820DE4EA50021A85F /* Setup */,
+				8928C22720AE7CB500C3103E /* Dapp */,
+				8928C27320B29ABB00C3103E /* Wallet */,
+				8922685820DE4EA50021A85F /* Settings */,
 				8928C22820AE7CB500C3103E /* Base */,
 				8928C22A20AE7CB500C3103E /* Common */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
-				8928C27320B29ABB00C3103E /* Wallet */,
-				8928C22720AE7CB500C3103E /* Dapp */,
 				8928C22920AE7CB500C3103E /* Main */,
 			);
 			path = Sections;
@@ -473,6 +475,7 @@
 		8928C22720AE7CB500C3103E /* Dapp */ = {
 			isa = PBXGroup;
 			children = (
+				8928C24820AE91E600C3103E /* DappViewController.swift */,
 				8928C25120AEA6A700C3103E /* ViewModel */,
 				8928C25020AEA6A600C3103E /* View */,
 			);
@@ -490,14 +493,8 @@
 		8928C22920AE7CB500C3103E /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8928C24220AE908300C3103E /* MainViewController.swift */,
-				8928C24820AE91E600C3103E /* DappViewController.swift */,
-				8928C27820B2A61900C3103E /* WalletViewController.swift */,
-				8928C27920B2A61900C3103E /* WalletViewController.xib */,
 				898A1A2020B7B51E00ECB465 /* SubController3.swift */,
 				898A1A2120B7B51E00ECB465 /* SubController3.xib */,
-				89C25C5820BBA38300007EC1 /* SettingsViewController.swift */,
-				1A2BFA1721338FEB0065496B /* Settings.storyboard */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -552,6 +549,8 @@
 		8928C27320B29ABB00C3103E /* Wallet */ = {
 			isa = PBXGroup;
 			children = (
+				8928C27820B2A61900C3103E /* WalletViewController.swift */,
+				8928C27920B2A61900C3103E /* WalletViewController.xib */,
 				8928C28020B3E60900C3103E /* Sub2CustomView */,
 				8928C27420B29AD800C3103E /* View */,
 				8928C27520B29AD800C3103E /* ViewModel */,
@@ -656,9 +655,10 @@
 				8913436F20C78D9600A17AEF /* Model */,
 				8928C22620AE7C6200C3103E /* Sections */,
 				896D042C20AE69C1002CFF6A /* AppDelegate.swift */,
+				8928C24220AE908300C3103E /* MainViewController.swift */,
 				896D043020AE69C1002CFF6A /* Main.storyboard */,
-				896D043320AE69C5002CFF6A /* Assets.xcassets */,
 				896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */,
+				896D043320AE69C5002CFF6A /* Assets.xcassets */,
 				896D043820AE69C5002CFF6A /* Info.plist */,
 				8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */,
 			);
