@@ -82,10 +82,21 @@ class ImportWalletController: UIViewController, UITextViewDelegate, UITextFieldD
         didSetPrivateKeyView()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        var lineStateViewPosition: CGFloat = 0
+        if selectState == .mnemonicState {
+            lineStateViewPosition = 1
+        } else if selectState == .privateKeyState {
+            lineStateViewPosition = 2
+        }
+        lineStateView.frame = CGRect(x: ScreenW / 3 *  lineStateViewPosition, y: keystoreButton.frame.origin.y + keystoreButton.frame.height, width: ScreenW / 3, height: 2)
+    }
+
     // set keystore view
     func didSetKeyStoreView() {
         lineStateView.backgroundColor = ColorFromString(hex: "#2e4af2")
-        lineStateView.frame = CGRect(x: 0, y: 43, width: ScreenW/3, height: 2)
         self.view.addSubview(lineStateView)
         keystoreNameTF.placeholder = "请输入名称"
         keystorePasswordTF.placeholder = "请输入密码"
@@ -308,8 +319,6 @@ class ImportWalletController: UIViewController, UITextViewDelegate, UITextFieldD
     // set top button color
     func setTopButtonStateWithButton(sender: UIButton) {
         sender.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
-        print(sender.tag - 2000)
-        lineStateView.frame = CGRect(x: CGFloat(ScreenW/3 * CGFloat(sender.tag - 2000)), y: 43, width: ScreenW/3, height: 2)
         if sender.tag == 2000 {
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
