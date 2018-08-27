@@ -10,7 +10,7 @@ import UIKit
 import BigInt
 import web3swift
 
-class TAViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, TAViewControllerCellDelegate, QRCodeControllerDelegate, TACustomViewControllerDelegate {
+class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, TAViewControllerCellDelegate, QRCodeControllerDelegate, TACustomViewControllerDelegate {
     let nameArray = ["地址", "转账金额"]
     let plactholderArray = ["输入转账地址或扫码", "转账金额"]
 

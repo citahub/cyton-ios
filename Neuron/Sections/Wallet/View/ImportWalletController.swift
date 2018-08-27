@@ -16,7 +16,7 @@ enum SelectButtonStates {
     case privateKeyState
 }
 
-class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class ImportWalletController: UIViewController, UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     let viewModel = ImportWalletViewModel()
 
     var selectState = SelectButtonStates.keystoreState
@@ -71,6 +71,8 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        automaticallyAdjustsScrollViewInsets = true
         scrollView.isPagingEnabled = true
         scrollView.isScrollEnabled = false
         title = "导入钱包"
@@ -80,10 +82,21 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
         didSetPrivateKeyView()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        var lineStateViewPosition: CGFloat = 0
+        if selectState == .mnemonicState {
+            lineStateViewPosition = 1
+        } else if selectState == .privateKeyState {
+            lineStateViewPosition = 2
+        }
+        lineStateView.frame = CGRect(x: ScreenW / 3 *  lineStateViewPosition, y: keystoreButton.frame.origin.y + keystoreButton.frame.height, width: ScreenW / 3, height: 2)
+    }
+
     // set keystore view
     func didSetKeyStoreView() {
         lineStateView.backgroundColor = ColorFromString(hex: "#2e4af2")
-        lineStateView.frame = CGRect(x: 0, y: 43, width: ScreenW/3, height: 2)
         self.view.addSubview(lineStateView)
         keystoreNameTF.placeholder = "请输入名称"
         keystorePasswordTF.placeholder = "请输入密码"
@@ -306,8 +319,6 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
     // set top button color
     func setTopButtonStateWithButton(sender: UIButton) {
         sender.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
-        print(sender.tag - 2000)
-        lineStateView.frame = CGRect(x: CGFloat(ScreenW/3 * CGFloat(sender.tag - 2000)), y: 43, width: ScreenW/3, height: 2)
         if sender.tag == 2000 {
             scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
             helpWordButton.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)

@@ -10,7 +10,7 @@ import UIKit
 import LYEmptyView
 import MJRefresh
 
-class SubController3: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class SubController3: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let service = TransactionServiceImp()
 

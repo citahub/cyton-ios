@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreatWalletController: BaseViewController, UITableViewDataSource, UITableViewDelegate, AddAssetTableViewCellDelegate, CreatWalletViewModelDelegate {
+class CreatWalletController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddAssetTableViewCellDelegate, CreatWalletViewModelDelegate {
 
     var viewModel =  CreatWalletViewModel()
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChangePasswordController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate {
+class ChangePasswordController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate {
 
     let titleArray = ["", "输入旧密码", "输入新密码", "再次输入新密码"]
     let placeholderArray = ["", "输入旧密码", "填写新密码", "再次填写新密码"]

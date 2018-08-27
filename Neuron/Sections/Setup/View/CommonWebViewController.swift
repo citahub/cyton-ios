@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class CommonWebViewController: BaseViewController, WKNavigationDelegate {
+class CommonWebViewController: UIViewController, WKNavigationDelegate {
 
     var urlStr = ""
 

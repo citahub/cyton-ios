@@ -8,26 +8,58 @@
 
 import UIKit
 
-class BaseNavigationController: RTRootNavigationController {
+class BaseNavigationController: UINavigationController {
+    enum Style {
+        case home
+        case inner
+    }
+
+    var style = Style.home {
+        didSet {
+            applyStyle()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        applyStyle()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        super.setViewControllers(viewControllers, animated: animated)
+
+        style = viewControllers.count <= 1 ? .home : .inner
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        if viewControllers.count == 0 {
+            viewController.hidesBottomBarWhenPushed = false
+            style = .home
+        } else {
+            viewController.hidesBottomBarWhenPushed = true
+            style = .inner
+        }
+        super.pushViewController(viewController, animated: animated)
     }
-    */
 
+    override func popViewController(animated: Bool) -> UIViewController? {
+        let viewController =  super.popViewController(animated: animated)
+        style = viewControllers.count <= 1 ? .home : .inner
+        return viewController
+    }
+
+    private func applyStyle() {
+        if style == .home {
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+            navigationBar.barTintColor = ColorFromString(hex: newThemeColor)
+            navigationBar.tintColor = .white
+            navigationBar.barStyle = .black
+        } else {
+            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
+            navigationBar.barTintColor = .white
+            navigationBar.tintColor = ColorFromString(hex: "#333333")
+            navigationBar.barStyle = .default
+        }
+    }
 }

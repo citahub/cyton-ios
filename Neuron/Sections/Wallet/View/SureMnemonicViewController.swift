@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SureMnemonicViewController: BaseViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, SureMnemonicViewModelDelegate {
+class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, SureMnemonicViewModelDelegate {
 
     private var showView: ButtonTagView! = nil
     private var selectView: ButtonTagUpView! = nil

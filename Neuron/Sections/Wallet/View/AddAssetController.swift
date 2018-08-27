@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddAssetController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeControllerDelegate {
+class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeControllerDelegate {
 
     let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
     let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]

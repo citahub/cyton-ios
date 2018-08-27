@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AssetViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class AssetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var aTable: UITableView!
     let viewModel = AssetViewModel()

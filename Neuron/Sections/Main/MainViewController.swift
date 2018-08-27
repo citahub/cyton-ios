@@ -17,7 +17,8 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         delegate = self
 
-        initTabBarItems()
+        applyBarStyle()
+
         determineWalletViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .changeTabbar, object: nil)
 
@@ -68,10 +69,15 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         }
     }
 
-    public func initTabBarItems() {
-        let appearance = UITabBarItem.appearance()
-        appearance.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
-        appearance.setTitleTextAttributes([NSAttributedStringKey.foregroundColor: ColorFromString(hex: themeColor)], for: .selected)
+    private func applyBarStyle() {
+        UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: ColorFromString(hex: themeColor)], for: .selected)
+
+        let navigationBarBackImage = UIImage(named: "nav_darkback")!.withRenderingMode(.alwaysOriginal)
+        UINavigationBar.appearance().backIndicatorImage = navigationBarBackImage
+        UINavigationBar.appearance().backIndicatorTransitionMaskImage = navigationBarBackImage
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.clear], for: .highlighted)
     }
 
     @objc

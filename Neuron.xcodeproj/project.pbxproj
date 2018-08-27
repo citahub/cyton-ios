@@ -24,7 +24,6 @@
 		8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* NeuronMacro.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
 		8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24420AE90C000C3103E /* BaseNavigationController.swift */; };
-		8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24620AE90E900C3103E /* BaseViewController.swift */; };
 		8928C24920AE91E600C3103E /* DappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* DappViewController.swift */; };
 		8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C25820AEB18100C3103E /* NibLoadable.swift */; };
 		8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26920AED5C100C3103E /* SearchAppController.swift */; };
@@ -190,7 +189,6 @@
 		8928C23420AE8F7C00C3103E /* NeuronMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronMacro.swift; sourceTree = "<group>"; };
 		8928C24220AE908300C3103E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8928C24420AE90C000C3103E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
-		8928C24620AE90E900C3103E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8928C24820AE91E600C3103E /* DappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappViewController.swift; sourceTree = "<group>"; };
 		8928C25820AEB18100C3103E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		8928C26920AED5C100C3103E /* SearchAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppController.swift; sourceTree = "<group>"; };
@@ -426,13 +424,6 @@
 			path = Dao;
 			sourceTree = "<group>";
 		};
-		8928C22220AE7C6200C3103E /* General */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = General;
-			sourceTree = "<group>";
-		};
 		8928C22320AE7C6200C3103E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -492,7 +483,6 @@
 			isa = PBXGroup;
 			children = (
 				8928C24420AE90C000C3103E /* BaseNavigationController.swift */,
-				8928C24620AE90E900C3103E /* BaseViewController.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -659,7 +649,6 @@
 			children = (
 				89D40EF520DCF1E00062C545 /* Neuron.entitlements */,
 				8928C22120AE7C6200C3103E /* Dao */,
-				8928C22220AE7C6200C3103E /* General */,
 				8928C22320AE7C6200C3103E /* Helpers */,
 				8928C22420AE7C6200C3103E /* Macro */,
 				8928C22520AE7C6200C3103E /* Resource */,
@@ -1061,7 +1050,6 @@
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/RTRootNavigationController/RTRootNavigationController.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
@@ -1097,7 +1085,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RTRootNavigationController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
@@ -1255,7 +1242,6 @@
 				89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */,
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
-				8928C24720AE90E900C3103E /* BaseViewController.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,

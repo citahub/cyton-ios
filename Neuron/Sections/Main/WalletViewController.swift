@@ -12,7 +12,7 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class WalletViewController: BaseViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!
@@ -26,18 +26,9 @@ class WalletViewController: BaseViewController, UITableViewDelegate, UITableView
     var viewModel = SubController2ViewModel()
     var tokenArray: [TokenModel] = []
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.hidesBottomBarWhenPushed = true
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super .viewDidAppear(animated)
-        if self.navigationController?.viewControllers[0] == self { self.hidesBottomBarWhenPushed = false }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         didGetDataForCurrentWallet()
         if tokenArray.count != (viewModel.getCurrentModel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
             didGetTokenList()
@@ -47,6 +38,8 @@ class WalletViewController: BaseViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包"
+        automaticallyAdjustsScrollViewInsets = true
+
         sCtrl.delegate = self
         aCtrl.delegate = self
         addNotify()

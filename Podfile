@@ -13,7 +13,6 @@ target 'Neuron' do
   pod 'LYEmptyView'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
-  pod 'RTRootNavigationController'
   pod 'PopupDialog'
   pod 'EFQRCode'
   pod 'RSKPlaceholderTextView'
