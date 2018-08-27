@@ -113,7 +113,6 @@
 		89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
-		89C25C5B20BBA38300007EC1 /* SettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5920BBA38300007EC1 /* SettingsViewController.xib */; };
 		89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */; };
 		89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */; };
 		89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */; };
@@ -286,7 +285,6 @@
 		89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TransactionService.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		89C25C5920BBA38300007EC1 /* SettingsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsViewController.xib; sourceTree = "<group>"; };
 		89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewController.swift; sourceTree = "<group>"; };
 		89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TAViewController.xib; sourceTree = "<group>"; };
 		89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewControllerCell.swift; sourceTree = "<group>"; };
@@ -510,7 +508,6 @@
 				898A1A2120B7B51E00ECB465 /* SubController3.xib */,
 				89C25C5820BBA38300007EC1 /* SettingsViewController.swift */,
 				1A2BFA1721338FEB0065496B /* Settings.storyboard */,
-				89C25C5920BBA38300007EC1 /* SettingsViewController.xib */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -972,7 +969,6 @@
 				898A1A0020B55FE300ECB465 /* AddWalletController.xib in Resources */,
 				8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
-				89C25C5B20BBA38300007EC1 /* SettingsViewController.xib in Resources */,
 				898A1A1C20B7A6BB00ECB465 /* CreatWalletController.xib in Resources */,
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
