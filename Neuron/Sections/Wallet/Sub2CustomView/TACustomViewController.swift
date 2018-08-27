@@ -16,7 +16,7 @@ protocol TACustomViewControllerDelegate: class {
     func successPop()
 }
 
-class TACustomViewController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class TACustomViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     let titleArray = ["转入地址", "付款钱包", "交易费用"]
 

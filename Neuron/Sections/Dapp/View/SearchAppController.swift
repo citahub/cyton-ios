@@ -9,7 +9,7 @@
 import UIKit
 import LYEmptyView
 
-class SearchAppController: BaseViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, QRCodeControllerDelegate {
+class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, QRCodeControllerDelegate {
 
     var searchText = UITextField.init()
     var searchArray: [String] = []

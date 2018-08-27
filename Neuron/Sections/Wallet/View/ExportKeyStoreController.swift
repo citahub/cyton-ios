@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExportKeyStoreController: BaseViewController {
+class ExportKeyStoreController: UIViewController {
 
     @IBOutlet weak var kestoreTextView: UITextView!
     @IBOutlet weak var copyButton: UIButton!

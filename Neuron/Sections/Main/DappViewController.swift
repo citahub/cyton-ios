@@ -10,9 +10,12 @@ import UIKit
 import WebKit
 import JavaScriptCore
 import Toast_Swift
-class DappViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
-
+class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
     private var webView = WKWebView()
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,6 @@ class DappViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate
     }
 
     func didAddSubLayout() {
-
         webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 49))
         let url = URL(string: "http://47.97.171.140:8866")
         let request = URLRequest.init(url: url!)
@@ -32,7 +34,6 @@ class DappViewController: BaseViewController, WKUIDelegate, WKNavigationDelegate
                 js += try String(contentsOfFile: path)
             } catch { }
         }
-        print(js)
         let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true

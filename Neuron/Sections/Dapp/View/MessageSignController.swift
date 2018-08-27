@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MessageSignController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MessageSignController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var nameLable: UILabel!

@@ -9,7 +9,7 @@
 import UIKit
 import EFQRCode
 
-class ReceiveController: BaseViewController {
+class ReceiveController: UIViewController {
 
     @IBOutlet weak var qrImageView: UIImageView!
     @IBOutlet weak var iconImage: UIImageView!

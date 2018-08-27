@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TradeDetailsController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class TradeDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tModel = TransactionModel() {
         didSet {
             if tModel.transactionType == "ETH" {

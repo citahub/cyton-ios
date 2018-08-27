@@ -36,9 +36,6 @@ PODS:
     - Realm (= 3.7.5)
   - Result (3.0.0)
   - RSKPlaceholderTextView (3.1.0)
-  - RTRootNavigationController (0.6.7):
-    - RTRootNavigationController/Core (= 0.6.7)
-  - RTRootNavigationController/Core (0.6.7)
   - SCLAlertView (0.8)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -80,7 +77,6 @@ DEPENDENCIES:
   - PopupDialog
   - RealmSwift
   - RSKPlaceholderTextView
-  - RTRootNavigationController
   - SCLAlertView
   - SDWebImage
   - SwiftyJSON
@@ -110,7 +106,6 @@ SPEC REPOS:
     - RealmSwift
     - Result
     - RSKPlaceholderTextView
-    - RTRootNavigationController
     - SCLAlertView
     - SDWebImage
     - secp256k1_ios
@@ -155,7 +150,6 @@ SPEC CHECKSUMS:
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   RSKPlaceholderTextView: 78dc8dfe343abec377503edf4689a743d23a4318
-  RTRootNavigationController: d6aa6cbb78a3eaecea4f6e4df63f15dd887836b8
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
@@ -168,6 +162,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 79b44a9e0a0a4506db2b37748efc1a950b08cc09
+PODFILE CHECKSUM: a9b7fd79572bc95f221adf7f71e44d1f9c567ba5
 
 COCOAPODS: 1.5.3

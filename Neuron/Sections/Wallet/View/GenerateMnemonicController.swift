@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GenerateMnemonicController: BaseViewController {
+class GenerateMnemonicController: UIViewController {
 
     @IBOutlet weak var mnemonicTextView: UITextView!
     @IBOutlet weak var nextButton: UIButton!

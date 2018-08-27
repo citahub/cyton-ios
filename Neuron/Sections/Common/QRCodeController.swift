@@ -12,7 +12,7 @@ protocol QRCodeControllerDelegate: class {
     func didBackQRCodeMessage(codeResult: String)
 }
 
-class QRCodeController: BaseViewController, HRQRCodeScanToolDelegate {
+class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     weak var delegate: QRCodeControllerDelegate?
 

@@ -16,7 +16,7 @@ enum SelectButtonStates {
     case privateKeyState
 }
 
-class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class ImportWalletController: UIViewController, UITextViewDelegate, UITextFieldDelegate, NEPickerViewDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     let viewModel = ImportWalletViewModel()
 
     var selectState = SelectButtonStates.keystoreState
@@ -71,6 +71,8 @@ class ImportWalletController: BaseViewController, UITextViewDelegate, UITextFiel
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        automaticallyAdjustsScrollViewInsets = true
         scrollView.isPagingEnabled = true
         scrollView.isScrollEnabled = false
         title = "导入钱包"

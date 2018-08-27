@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContractController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ContractController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     let headArray = ["请求人", "接收地址", "转账金额", "费用总计（含手续费）"]
     let textArray = ["https://www.cryptape.com/#/about", "0xCB5A05beF3257613E984C17DbcF03", "0.05", "0.05"]//假数据

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CurrencyViewController: BaseViewController {
+class CurrencyViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BrowserviewController: BaseViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
+class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
 
     var closeBtn: UIButton = UIButton()
 

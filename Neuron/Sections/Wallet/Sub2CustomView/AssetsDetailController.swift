@@ -13,7 +13,7 @@ protocol AssetsDetailControllerDelegate: NSObjectProtocol {
     func didClickGet()
 }
 
-class AssetsDetailController: BaseViewController {
+class AssetsDetailController: UIViewController {
     @IBOutlet weak var closeBtn: UIButton!
     @IBOutlet weak var titleLable: UILabel!
     @IBOutlet weak var iconImageV: UIImageView!

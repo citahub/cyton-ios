@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class WalletDetailController: BaseViewController, UITableViewDataSource, UITableViewDelegate {
+class WalletDetailController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var deleteWalletBtn: UIButton!
     @IBOutlet weak var wTable: UITableView!

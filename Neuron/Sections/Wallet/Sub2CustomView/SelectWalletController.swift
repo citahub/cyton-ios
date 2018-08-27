@@ -12,7 +12,7 @@ protocol SelectWalletControllerDelegate: NSObjectProtocol {
     func didCallBackSelectedWalletModel(walletModel: WalletModel)
 }
 
-class SelectWalletController: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class SelectWalletController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var selectTable: UITableView!
     @IBOutlet weak var wView: UIView!
