@@ -9,8 +9,6 @@
 import UIKit
 
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
-    private var walletNavigationController: BaseNavigationController!
-
     //temp
     let sub2ViewModel = SubController2ViewModel()
 
