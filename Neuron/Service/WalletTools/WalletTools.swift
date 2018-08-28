@@ -39,21 +39,17 @@ class WalletTools: NSObject {
     ///
     /// - Parameter completion: 回调
     static func generateMnemonic(completion: @escaping GenerateMnemonicCallback) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let mnemonic = Mnemonic.generate(strength: 128)
-            let words = mnemonic.components(separatedBy: " ")
-            var repeateWordsDetector = [String]()
-            for word in words {
-                if repeateWordsDetector.contains(word) {
-                    generateMnemonic(completion: completion)
-                    return
-                }
-                repeateWordsDetector.append(word)
+        let mnemonic = Mnemonic.generate(strength: 128)
+        let words = mnemonic.components(separatedBy: " ")
+        var repeateWordsDetector = [String]()
+        for word in words {
+            if repeateWordsDetector.contains(word) {
+                generateMnemonic(completion: completion)
+                return
             }
-            DispatchQueue.main.async {
-                completion(mnemonic)
-            }
+            repeateWordsDetector.append(word)
         }
+        completion(mnemonic)
     }
 
     /// 导入钱包

@@ -48,15 +48,28 @@ class CreatWalletController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: Any) {
         if canProceedNextStep() {
+            self.performSegue(withIdentifier: "nextButton", sender: sender)
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "nextButton" {
+            let walletModel = WalletModel()
+            walletModel.name = name!
+            let generateMnemonicController = segue.destination as! GenerateMnemonicController
+            generateMnemonicController.walletModel = walletModel
+            generateMnemonicController.password = password!
             WalletTools.generateMnemonic { (mnemonic) in
-                let generateMnemonicController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "generateMnemonic") as! GenerateMnemonicController
                 generateMnemonicController.mnemonicStr = mnemonic
-                self.performSegue(withIdentifier: "nextButton", sender: sender)
             }
         }
     }
 
     func canProceedNextStep() -> Bool {
+        if name?.count == 0 {
+            NeuLoad.showToast(text: "钱包名字不能为空")
+            return false
+        }
         if password != confirmPassword {
             NeuLoad.showToast(text: "两次密码不一致")
             return false
