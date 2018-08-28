@@ -40,7 +40,6 @@ class SureMnemonicViewModel: NSObject {
     public func didImportWalletToRealm(mnemonic: String, password: String) {
         // 通过助记词导入钱包
         NeuLoad.showHUD(text: "钱包创建中...")
-
         WalletTools.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTools.defaultDerivationPath, completion: { (result) in
             switch result {
             case .succeed(let account):
