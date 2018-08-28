@@ -15,6 +15,11 @@ import MJRefresh
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet var tabHeader: UIView!
     private var assetPageViewController: WalletAssetPageViewController!
+    private var isHeaderViewHidden = false {
+        didSet {
+            setNeedsStatusBarAppearanceUpdate()
+        }
+    }
 
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -28,6 +33,10 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
 
     var viewModel = SubController2ViewModel()
     var tokenArray: [TokenModel] = []
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isHeaderViewHidden ? .default : .lightContent
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -68,10 +77,12 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
             offset += scrollView.contentInset.top
         }
 
-        let headerViewHidden = offset >= tableView.tableHeaderView!.bounds.height
+        isHeaderViewHidden = offset >= tableView.tableHeaderView!.bounds.height
         assetPageViewController.pages.forEach { listViewController in
-            (listViewController as? UITableViewController)?.tableView.isScrollEnabled = headerViewHidden
+            (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
+
+        //navigationController?.setNavigationBarHidden(headerViewHidden, animated: false)
     }
 
     //接收通知
@@ -190,9 +201,8 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
 
         let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
         mjheader?.lastUpdatedTimeLabel.isHidden = true
-        mainTable.mj_header = mjheader*/
+        mainTable.mj_header = mjheader
 
-        //设置左右导航按钮
         let leftBtn = UIButton.init(type: .custom)
         leftBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         leftBtn.setImage(UIImage.init(named: "列表"), for: .normal)
@@ -204,6 +214,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
         rightBtn.addTarget(self, action: #selector(didAddWallet), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
+ */
     }
 
     @objc func loadData() {

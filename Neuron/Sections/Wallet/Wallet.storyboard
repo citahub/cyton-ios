@@ -21,7 +21,31 @@
                         <view key="tableHeaderView" contentMode="scaleToFill" id="GQ8-N2-jmG" userLabel="Header">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
+                            <subviews>
+                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgr-QW-ZGr" userLabel="Extended Background">
+                                    <rect key="frame" x="0.0" y="-800" width="375" height="800"/>
+                                    <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="800" id="kyd-44-tY6"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYl-xd-DII">
+                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="44" id="05p-xr-CG1"/>
+                                        <constraint firstAttribute="height" constant="44" id="zz0-tB-25H"/>
+                                    </constraints>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="kgr-QW-ZGr" secondAttribute="trailing" id="0Bb-eO-4hN"/>
+                                <constraint firstItem="FYl-xd-DII" firstAttribute="top" secondItem="kgr-QW-ZGr" secondAttribute="bottom" id="LB1-fN-fga"/>
+                                <constraint firstItem="kgr-QW-ZGr" firstAttribute="leading" secondItem="GQ8-N2-jmG" secondAttribute="leading" id="ch3-Tw-xcG"/>
+                                <constraint firstItem="FYl-xd-DII" firstAttribute="leading" secondItem="GQ8-N2-jmG" secondAttribute="leading" id="hKq-IE-Vgc"/>
+                                <constraint firstItem="kgr-QW-ZGr" firstAttribute="bottom" secondItem="GQ8-N2-jmG" secondAttribute="top" id="igJ-mH-8KG"/>
+                            </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="ohC-B3-ug3" userLabel="Footer">
                             <rect key="frame" x="0.0" y="480" width="375" height="1"/>
