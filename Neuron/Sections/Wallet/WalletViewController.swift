@@ -12,7 +12,9 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+    @IBOutlet var tabHeader: UIView!
+
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!
@@ -45,9 +47,10 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addNotify()
         setUpSubViewDetails()
 
+        /*
         iconImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
-        iconImageView.addGestureRecognizer(tap)
+        iconImageView.addGestureRecognizer(tap)*/
     }
 
     //接收通知
@@ -79,9 +82,10 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func refreshUI(walletModel: WalletModel) {
+        /*
         namelable.text = walletModel.name
         mAddress.text = walletModel.address
-        iconImageView.image = UIImage(data: walletModel.iconData)
+        iconImageView.image = UIImage(data: walletModel.iconData)*/
     }
 
     /// get token list from realm
@@ -93,7 +97,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         for item in walletModel.selectTokenList {
             tokenArray.append(item)
         }
-        mainTable.reloadData()
+        //mainTable.reloadData()
         getBalance(isRefresh: false)
     }
 
@@ -139,9 +143,9 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         group.notify(queue: .main) {
-            self.mainTable.reloadData()
+            //self.mainTable.reloadData()
             if isRefresh {
-                self.mainTable.mj_header.endRefreshing()
+             //   self.mainTable.mj_header.endRefreshing()
             } else {
                 NeuLoad.hidHUD()
             }
@@ -149,6 +153,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func setUpSubViewDetails() {
+        /*
         headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
         headView.layer.shadowOffset = CGSize(width: 0, height: 1)
         headView.layer.shadowOpacity = 0.3
@@ -162,12 +167,9 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         iconImageView.layer.cornerRadius = 30
         iconImageView.clipsToBounds = true
 
-        mainTable.delegate = self
-        mainTable.dataSource = self
-        mainTable.register(UINib.init(nibName: "Sub2TableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
         mjheader?.lastUpdatedTimeLabel.isHidden = true
-        mainTable.mj_header = mjheader
+        mainTable.mj_header = mjheader*/
 
         //设置左右导航按钮
         let leftBtn = UIButton.init(type: .custom)
@@ -239,7 +241,17 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.pushViewController(rCtrl, animated: true)
     }
 
-    //tableview代理
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height - tabHeader.frame.height
+    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tabHeader
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tabHeader.frame.height
+    }
+    /*
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tokenArray.count
     }
@@ -258,5 +270,5 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         UIApplication.shared.keyWindow?.addSubview(aCtrl.view)
         let tokenModel = tokenArray[indexPath.row]
         aCtrl.tokenModel = tokenModel
-    }
+    }*/
 }

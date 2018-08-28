@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NFk-Vr-nsf">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Wallet View Controller-->
+        <scene sceneID="hRl-w5-mEY">
+            <objects>
+                <tableViewController id="NFk-Vr-nsf" customClass="WalletViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lRl-d8-KLb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="GQ8-N2-jmG" userLabel="Header">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" name="keyboardFocusIndicatorColor" catalog="System" colorSpace="catalog"/>
+                        </view>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="ohC-B3-ug3" userLabel="Footer">
+                            <rect key="frame" x="0.0" y="480" width="375" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <sections>
+                            <tableViewSection id="wVX-Xo-akx">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="300" id="CPw-g0-zVZ">
+                                        <rect key="frame" x="0.0" y="180" width="375" height="300"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CPw-g0-zVZ" id="CfM-sr-ANk">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="NFk-Vr-nsf" id="v2m-e7-cTp"/>
+                            <outlet property="delegate" destination="NFk-Vr-nsf" id="ng0-Fv-u8f"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="tabHeader" destination="t1o-zF-Pti" id="IgJ-Hg-cHg"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tXy-kN-FrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="t1o-zF-Pti" userLabel="Tab Header">
+                    <rect key="frame" x="0.0" y="0.0" width="365" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v66-u7-PKJ">
+                            <rect key="frame" x="0.0" y="0.0" width="182.5" height="44"/>
+                            <state key="normal" title="代币"/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gyy-eG-GWj">
+                            <rect key="frame" x="182.5" y="0.0" width="182.5" height="44"/>
+                            <state key="normal" title="藏品"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="EXl-ne-gdu" firstAttribute="bottom" secondItem="v66-u7-PKJ" secondAttribute="bottom" id="3wB-K1-VLL"/>
+                        <constraint firstItem="Gyy-eG-GWj" firstAttribute="bottom" secondItem="EXl-ne-gdu" secondAttribute="bottom" id="ElR-i1-WXB"/>
+                        <constraint firstItem="v66-u7-PKJ" firstAttribute="leading" secondItem="EXl-ne-gdu" secondAttribute="leading" id="MfN-7D-3T1"/>
+                        <constraint firstItem="EXl-ne-gdu" firstAttribute="trailing" secondItem="Gyy-eG-GWj" secondAttribute="trailing" id="Reh-fg-hoJ"/>
+                        <constraint firstItem="Gyy-eG-GWj" firstAttribute="top" secondItem="EXl-ne-gdu" secondAttribute="top" id="UVt-of-hxU"/>
+                        <constraint firstItem="Gyy-eG-GWj" firstAttribute="width" secondItem="t1o-zF-Pti" secondAttribute="width" multiplier="0.5" id="VDr-l1-vNq"/>
+                        <constraint firstItem="v66-u7-PKJ" firstAttribute="top" secondItem="EXl-ne-gdu" secondAttribute="top" id="d3F-lI-DR9"/>
+                        <constraint firstItem="v66-u7-PKJ" firstAttribute="width" secondItem="t1o-zF-Pti" secondAttribute="width" multiplier="0.5" id="yaw-iz-dhV"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="EXl-ne-gdu"/>
+                </view>
+            </objects>
+            <point key="canvasLocation" x="183" y="-64"/>
+        </scene>
+    </scenes>
+</document>
