@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A09224221357F3D00CAED5D /* TokensViewController.swift */; };
+		1A092245213580C900CAED5D /* NFCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A092244213580C900CAED5D /* NFCViewController.swift */; };
 		1A1D2447213550FC00752843 /* WalletAssetPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */; };
 		1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA1721338FEB0065496B /* Settings.storyboard */; };
 		1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA19213513D60065496B /* Wallet.storyboard */; };
@@ -171,6 +172,7 @@
 
 /* Begin PBXFileReference section */
 		1A09224221357F3D00CAED5D /* TokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewController.swift; sourceTree = "<group>"; };
+		1A092244213580C900CAED5D /* NFCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCViewController.swift; sourceTree = "<group>"; };
 		1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAssetPageViewController.swift; sourceTree = "<group>"; };
 		1A2BFA1721338FEB0065496B /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1A2BFA19213513D60065496B /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
@@ -557,6 +559,7 @@
 				8928C27820B2A61900C3103E /* WalletViewController.swift */,
 				1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */,
 				1A09224221357F3D00CAED5D /* TokensViewController.swift */,
+				1A092244213580C900CAED5D /* NFCViewController.swift */,
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
 				8928C28020B3E60900C3103E /* Sub2CustomView */,
 				8928C27420B29AD800C3103E /* View */,
@@ -1264,6 +1267,7 @@
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
+				1A092245213580C900CAED5D /* NFCViewController.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
 				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
 				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,

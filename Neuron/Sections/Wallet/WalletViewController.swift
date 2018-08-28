@@ -13,7 +13,6 @@ import BigInt
 import MJRefresh
 
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
-    @IBOutlet weak var headerView: UIView!
     @IBOutlet var tabHeader: UIView!
     private var assetPageViewController: WalletAssetPageViewController!
 
@@ -69,7 +68,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
             offset += scrollView.contentInset.top
         }
 
-        let headerViewHidden = offset >= headerView.bounds.height
+        let headerViewHidden = offset >= tableView.tableHeaderView!.bounds.height
         assetPageViewController.pages.forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = headerViewHidden
         }
@@ -264,8 +263,13 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
     }
 
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.frame.height - tabHeader.frame.height
+        if #available(iOS 11.0, *) {
+            return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom
+        } else {
+            return tableView.frame.height - tabHeader.frame.height - tableView.contentInset.top - tableView.contentInset.bottom
+        }
     }
+
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tabHeader
     }

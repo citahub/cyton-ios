@@ -62,7 +62,6 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="headerView" destination="GQ8-N2-jmG" id="IyZ-I4-gKK"/>
                         <outlet property="tabHeader" destination="t1o-zF-Pti" id="IgJ-Hg-cHg"/>
                     </connections>
                 </tableViewController>
@@ -104,10 +103,10 @@
             </objects>
             <point key="canvasLocation" x="970" y="-65"/>
         </scene>
-        <!--Table View Controller-->
+        <!--View Controller-->
         <scene sceneID="mdT-Z0-ZGe">
             <objects>
-                <tableViewController storyboardIdentifier="nfcViewController" id="ZqU-lY-lyh" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="nfcViewController" id="ZqU-lY-lyh" customClass="NFCViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nuZ-t1-lVB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

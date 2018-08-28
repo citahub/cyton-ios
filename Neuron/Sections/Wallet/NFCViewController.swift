@@ -1,5 +1,5 @@
 //
-//  TokensViewController.swift
+//  NFCViewController.swift
 //  Neuron
 //
 //  Created by Yate Fulham on 2018/08/28.
@@ -8,10 +8,11 @@
 
 import UIKit
 
-/// ERC-20 Token List
-class TokensViewController: UITableViewController {
+/// ERC-721 List
+class NFCViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
