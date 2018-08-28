@@ -8,71 +8,73 @@
 
 import UIKit
 
-class CreatWalletController: UIViewController, UITableViewDataSource, UITableViewDelegate, AddAssetTableViewCellDelegate, CreatWalletViewModelDelegate {
+class CreatWalletController: UITableViewController {
 
-    var viewModel =  CreatWalletViewModel()
-
-    let titleArray = ["钱包名称", "设定密码", "重复密码"]
-    let placeholderArray = ["请输入钱包名称", "请输入密码", "请确认密码"]
-
-    @IBOutlet weak var cTable: UITableView!
     @IBOutlet weak var nextButton: UIButton!
+    var name: String? = ""
+    var password: String? = ""
+    var confirmPassword: String? = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         title = "创建钱包"
-        view.backgroundColor = ColorFromString(hex: "#f5f5f9")
-        cTable.delegate = self
-        cTable.dataSource = self
-        cTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID1")
-        viewModel.delegate = self
     }
 
-    //table代理
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+    @IBAction func walletNameChanged(_ sender: UITextField) {
+        name = sender.text
+        jugeNextButtonEnabled()
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! AddAssetTableViewCell
-        cell.delegate = self
-        cell.indexP = indexPath as NSIndexPath
-        cell.headLable.text = titleArray[indexPath.row]
-        cell.placeHolderStr = placeholderArray[indexPath.row]
-        if indexPath.row == 1 || indexPath.row == 2 {cell.isSecretText = true}
-        return cell
+    @IBAction func passwordChanged(_ sender: UITextField) {
+        password = sender.text
+        jugeNextButtonEnabled()
     }
 
-    //cell代理
-    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
-        viewModel.textfieldTextChanged(text: text, indexPath: index)
+    @IBAction func confirmPasswordChanged(_ sender: UITextField) {
+        confirmPassword = sender.text
+        jugeNextButtonEnabled()
     }
 
-    @IBAction func didClickNextButton(_ sender: UIButton) {
-        viewModel.goNextView()
-
-    }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    // modelView delegate
-    func reloadView() {
-//        nextButton.isEnabled = viewModel.isFulfil
-        nextButton.setTitleColor(viewModel.setNextButtonTitleColor(), for: .normal)
-        nextButton.backgroundColor = viewModel.setNextButtonBackgroundColor()
+    func jugeNextButtonEnabled() {
+        if name?.count != 0 && password?.count != 0 && confirmPassword?.count != 0 {
+            nextButton.backgroundColor = ColorFromString(hex: "#2e4af2")
+            nextButton.isEnabled = true
+        } else {
+            nextButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
+            nextButton.isEnabled = false
+        }
     }
 
-    func doPush(mnemonic: String) {
-
-        let model = WalletModel()
-        model.name = viewModel.nameText
-
-        let gCtrl = GenerateMnemonicController.init(nibName: "GenerateMnemonicController", bundle: nil)
-        gCtrl.walletModel = model
-        gCtrl.password = viewModel.newPasswordText
-        gCtrl.mnemonicStr = mnemonic
-        navigationController?.pushViewController(gCtrl, animated: true)
+    @IBAction func clickNextButton(_ sender: Any) {
+        if canProceedNextStep() {
+            WalletTools.generateMnemonic { (mnemonic) in
+                let generateMnemonicController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "generateMnemonic") as! GenerateMnemonicController
+                generateMnemonicController.mnemonicStr = mnemonic
+                self.performSegue(withIdentifier: "nextButton", sender: sender)
+            }
+        }
     }
 
+    func canProceedNextStep() -> Bool {
+        if password != confirmPassword {
+            NeuLoad.showToast(text: "两次密码不一致")
+            return false
+        }
+        if !isThePasswordMeetCondition(password: password!) {
+            return false
+        }
+        if !WalletTools.checkWalletName(name: name!) {
+            NeuLoad.showToast(text: "钱包名字重复")
+            return false
+        }
+        return true
+    }
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "nextButton" {
+            return false
+        }
+        return true
+    }
 }
