@@ -26,5 +26,7 @@ class SettingsViewController: UITableViewController {
     }
 
     @IBAction func fingerprintSwitchChanged(_ sender: Any) {
+        let add = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "AddWallet")
+        navigationController?.pushViewController(add, animated: true)
     }
 }
