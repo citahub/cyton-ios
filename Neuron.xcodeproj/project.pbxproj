@@ -72,7 +72,6 @@
 		898A19F920B54E0F00ECB465 /* ReceiveController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19F720B54E0F00ECB465 /* ReceiveController.swift */; };
 		898A19FA20B54E0F00ECB465 /* ReceiveController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19F820B54E0F00ECB465 /* ReceiveController.xib */; };
 		898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19FD20B55FE300ECB465 /* AddWalletController.swift */; };
-		898A1A0020B55FE300ECB465 /* AddWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19FE20B55FE300ECB465 /* AddWalletController.xib */; };
 		898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0120B5717A00ECB465 /* AssetViewController.swift */; };
 		898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0220B5717A00ECB465 /* AssetViewController.xib */; };
 		898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */; };
@@ -84,7 +83,6 @@
 		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
 		898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */; };
 		898A1A1B20B7A6BB00ECB465 /* CreatWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */; };
-		898A1A1C20B7A6BB00ECB465 /* CreatWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */; };
 		898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2020B7B51E00ECB465 /* SubController3.swift */; };
 		898A1A2320B7B51E00ECB465 /* SubController3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2120B7B51E00ECB465 /* SubController3.xib */; };
 		898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */; };
@@ -126,6 +124,8 @@
 		89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */; };
 		89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */; };
 		89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C7420BE3DC100007EC1 /* ConTractLastTableViewCell.xib */; };
+		89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89C3BF062134E3F200872BD0 /* AddWallet.storyboard */; };
+		89C3BF09213521DE00872BD0 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C3BF08213521DE00872BD0 /* UIView+Extension.swift */; };
 		89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6E09820E07F8E00C94026 /* ShareItem.swift */; };
 		89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeyStoreError.swift */; };
 		89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2120D59F270097E02B /* Keystore.swift */; };
@@ -244,7 +244,6 @@
 		898A19F720B54E0F00ECB465 /* ReceiveController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveController.swift; sourceTree = "<group>"; };
 		898A19F820B54E0F00ECB465 /* ReceiveController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiveController.xib; sourceTree = "<group>"; };
 		898A19FD20B55FE300ECB465 /* AddWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletController.swift; sourceTree = "<group>"; };
-		898A19FE20B55FE300ECB465 /* AddWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddWalletController.xib; sourceTree = "<group>"; };
 		898A1A0120B5717A00ECB465 /* AssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetViewController.swift; sourceTree = "<group>"; };
 		898A1A0220B5717A00ECB465 /* AssetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetViewController.xib; sourceTree = "<group>"; };
 		898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
@@ -256,7 +255,6 @@
 		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordController.xib; sourceTree = "<group>"; };
 		898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatWalletController.swift; sourceTree = "<group>"; };
-		898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CreatWalletController.xib; sourceTree = "<group>"; };
 		898A1A2020B7B51E00ECB465 /* SubController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController3.swift; sourceTree = "<group>"; };
 		898A1A2120B7B51E00ECB465 /* SubController3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController3.xib; sourceTree = "<group>"; };
 		898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sub3TableViewCell.swift; sourceTree = "<group>"; };
@@ -298,6 +296,8 @@
 		89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractTableViewCell.xib; sourceTree = "<group>"; };
 		89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConTractLastTableViewCell.swift; sourceTree = "<group>"; };
 		89C25C7420BE3DC100007EC1 /* ConTractLastTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConTractLastTableViewCell.xib; sourceTree = "<group>"; };
+		89C3BF062134E3F200872BD0 /* AddWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddWallet.storyboard; sourceTree = "<group>"; };
+		89C3BF08213521DE00872BD0 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		89C6E09820E07F8E00C94026 /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
 		89D4AC2020D59F270097E02B /* KeyStoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreError.swift; sourceTree = "<group>"; };
@@ -360,6 +360,7 @@
 			children = (
 				1A3C652B212EAC4800F1A0AA /* String+Extension.swift */,
 				897AFC57212FDA9100383A12 /* Array+Extension.swift */,
+				89C3BF08213521DE00872BD0 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -572,7 +573,7 @@
 				898A19F720B54E0F00ECB465 /* ReceiveController.swift */,
 				898A19F820B54E0F00ECB465 /* ReceiveController.xib */,
 				898A19FD20B55FE300ECB465 /* AddWalletController.swift */,
-				898A19FE20B55FE300ECB465 /* AddWalletController.xib */,
+				89C3BF062134E3F200872BD0 /* AddWallet.storyboard */,
 				898A1A0120B5717A00ECB465 /* AssetViewController.swift */,
 				898A1A0220B5717A00ECB465 /* AssetViewController.xib */,
 				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
@@ -580,7 +581,6 @@
 				898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */,
 				898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */,
 				898A1A1920B7A6BB00ECB465 /* CreatWalletController.swift */,
-				898A1A1A20B7A6BB00ECB465 /* CreatWalletController.xib */,
 				8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */,
 				8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */,
 				8964A19120C115A70086848F /* SureMnemonicViewController.swift */,
@@ -958,10 +958,8 @@
 				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */,
 				89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */,
-				898A1A0020B55FE300ECB465 /* AddWalletController.xib in Resources */,
 				8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
-				898A1A1C20B7A6BB00ECB465 /* CreatWalletController.xib in Resources */,
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
 				89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */,
@@ -979,6 +977,7 @@
 				8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */,
 				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
 				8928C23020AE822B00C3103E /* Images.xcassets in Resources */,
+				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
 				89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */,
@@ -1230,6 +1229,7 @@
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* AssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
+				89C3BF09213521DE00872BD0 /* UIView+Extension.swift in Sources */,
 				89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */,
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
 				89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */,

@@ -9,15 +9,12 @@
 import UIKit
 
 protocol ButtonTagUpViewDelegate: class {
-
     func didDeleteSelectedButton(backDict: NSMutableDictionary)
-
 }
 
 class ButtonTagUpView: UIView {
 
     weak var delegate: ButtonTagUpViewDelegate?
-
     var comArr = [NSMutableDictionary]() {//包含字典的数组 字典中放的是标题和按钮tag
         didSet {
             for subView in self.subviews {
@@ -26,7 +23,6 @@ class ButtonTagUpView: UIView {
             didSetMainViews()
         }
     }
-
     var titleArray: [String]! {//标题数组
         didSet {
 
@@ -38,15 +34,21 @@ class ButtonTagUpView: UIView {
     //有关按钮的属性
     private var buttonBackColor: UIColor = ColorFromString(hex: "#ffffff")
     private var buttonTitleColor: UIColor = ColorFromString(hex: "#333333")
-
     private var hmargin: CGFloat = 10//按钮横向之间的距离
     private var vmargin: CGFloat = 10//按钮垂直之间的距离
     private var buttonHeight: CGFloat = 30//按钮的高度
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ColorFromString(hex: "#f5f5f5")
 
+        setBackgroundView()
+    }
+
+    func setBackgroundView() {
+        backgroundColor = .white
+        layer.cornerRadius = 5
+        layer.borderWidth = 1
+        layer.borderColor = ColorFromString(hex: "#E9EBF0").cgColor
     }
 
     func didSetMainViews() {
@@ -57,9 +59,7 @@ class ButtonTagUpView: UIView {
 
         } else {
             for i in 0...comArr.count-1 {
-
                 let dict = comArr[i]
-
                 let button = UIButton.init(type: .custom)
                 button.layer.cornerRadius = 2.5
                 button.setTitleColor(buttonTitleColor, for: .normal)
@@ -91,11 +91,9 @@ class ButtonTagUpView: UIView {
         comArr = comArr.filter({ (cDict) -> Bool in
             return cDict.value(forKey: "buttonTag") as! Int != sender.tag
         })
-
         let dict = NSMutableDictionary()
         dict.setValue(sender.currentTitle, forKey: "buttonTitle")
         dict.setValue(sender.tag, forKey: "buttonTag")
-
         delegate?.didDeleteSelectedButton(backDict: dict)
         sender.removeFromSuperview()
     }

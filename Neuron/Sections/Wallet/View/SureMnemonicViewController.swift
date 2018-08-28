@@ -40,12 +40,11 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
 
     func didDrawSubViews() {
 
-        selectView = ButtonTagUpView.init(frame: CGRect(x: 15, y: 15+35, width: ScreenW - 30, height: 150))
-        selectView.backgroundColor = ColorFromString(hex: "#f5f5f5")
+        selectView = ButtonTagUpView(frame: CGRect(x: 15, y: 15 + 35 + 64, width: ScreenW - 30, height: 150))
         selectView.delegate = self
         view.addSubview(selectView)
 
-        showView = ButtonTagView.init(frame: CGRect(x: 15, y: 15+35 + 150, width: ScreenW - 30, height: 150))
+        showView = ButtonTagView(frame: CGRect(x: 15, y: 15 + 35 + 64 + 15 + 150, width: ScreenW - 30, height: 150))
         showView.delegate = self
         showView.titleArray = titleArr.shuffle()
         showView.backgroundColor = .white
