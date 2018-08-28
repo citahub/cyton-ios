@@ -13,7 +13,9 @@ import BigInt
 import MJRefresh
 
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet var tabHeader: UIView!
+    private var assetPageViewController: WalletAssetPageViewController!
 
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
@@ -51,6 +53,26 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         iconImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
         iconImageView.addGestureRecognizer(tap)*/
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "embedAssetPages" {
+            assetPageViewController = segue.destination as? WalletAssetPageViewController
+        }
+    }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offset = scrollView.contentOffset.y
+        if #available(iOS 11.0, *) {
+            offset += scrollView.adjustedContentInset.top
+        } else {
+            offset += scrollView.contentInset.top
+        }
+
+        let headerViewHidden = offset >= headerView.bounds.height
+        assetPageViewController.pages.forEach { listViewController in
+            (listViewController as? UITableViewController)?.tableView.isScrollEnabled = headerViewHidden
+        }
     }
 
     //接收通知
@@ -105,7 +127,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         let group = DispatchGroup()
         if isRefresh {
         } else {
-            NeuLoad.showHUD(text: "")
+            //NeuLoad.showHUD(text: "")
         }
         let walletModel = viewModel.getCurrentModel().currentWallet!
         for tm in tokenArray {
@@ -201,7 +223,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
     }
     //点击资产管理按钮
     @IBAction func didClickManageBtn(_ sender: UIButton) {
-        let aCtrl = AssetViewController.init(nibName: "AssetViewController", bundle: nil)
+        let aCtrl = ManageAssetViewController.init(nibName: "AssetViewController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
     }
     //click icon image

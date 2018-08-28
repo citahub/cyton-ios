@@ -9,7 +9,7 @@
 import UIKit
 
 class WalletAssetPageViewController: UIPageViewController {
-    private var pages = [UIViewController]()
+    var pages = [UIViewController]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,12 +17,12 @@ class WalletAssetPageViewController: UIPageViewController {
         dataSource = self
         delegate = self
 
-        let tokenViewController = storyboard!.instantiateViewController(withIdentifier: "tokenViewController")
+        let tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController")
         let nfcViewController = storyboard!.instantiateViewController(withIdentifier: "nfcViewController")
-        pages.append(tokenViewController)
+        pages.append(tokensViewController)
         pages.append(nfcViewController)
 
-        setViewControllers([tokenViewController], direction: .forward, animated: false)
+        setViewControllers([tokensViewController], direction: .forward, animated: false)
     }
 }
 
