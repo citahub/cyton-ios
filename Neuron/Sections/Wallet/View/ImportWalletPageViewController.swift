@@ -32,13 +32,21 @@ extension ImportWalletPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let currentIndex = pages.index(of: viewController)!
         let previousIndex = abs((currentIndex - 1) % pages.count)
-        return pages[previousIndex]
+        if currentIndex == 0 {
+            return nil
+        } else {
+            return pages[previousIndex]
+        }
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let currentIndex = pages.index(of: viewController)!
         let nextIndex = abs((currentIndex + 1) % pages.count)
-        return pages[nextIndex]
+        if currentIndex == 2 {
+            return nil
+        } else {
+            return pages[nextIndex]
+        }
     }
 }
 
