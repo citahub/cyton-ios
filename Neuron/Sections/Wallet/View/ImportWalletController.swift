@@ -59,39 +59,39 @@ class ImportWalletController: UIViewController, UITextViewDelegate, UITextFieldD
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        switch selectState {
-        case .keystoreState:
-            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
-        case .mnemonicState:
-            scrollView.setContentOffset(CGPoint(x: ScreenW, y: 0), animated: false)
-        case .privateKeyState:
-            scrollView.setContentOffset(CGPoint(x: ScreenW*2, y: 0), animated: false)
-        }
+//        switch selectState {
+//        case .keystoreState:
+//            scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+//        case .mnemonicState:
+//            scrollView.setContentOffset(CGPoint(x: ScreenW, y: 0), animated: false)
+//        case .privateKeyState:
+//            scrollView.setContentOffset(CGPoint(x: ScreenW*2, y: 0), animated: false)
+//        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        automaticallyAdjustsScrollViewInsets = true
-        scrollView.isPagingEnabled = true
-        scrollView.isScrollEnabled = false
-        title = "导入钱包"
-        viewModel.delegate = self
-        didSetKeyStoreView()
-        didSetMnemonicView()
-        didSetPrivateKeyView()
+//        automaticallyAdjustsScrollViewInsets = true
+//        scrollView.isPagingEnabled = true
+//        scrollView.isScrollEnabled = false
+//        title = "导入钱包"
+//        viewModel.delegate = self
+//        didSetKeyStoreView()
+//        didSetMnemonicView()
+//        didSetPrivateKeyView()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        var lineStateViewPosition: CGFloat = 0
-        if selectState == .mnemonicState {
-            lineStateViewPosition = 1
-        } else if selectState == .privateKeyState {
-            lineStateViewPosition = 2
-        }
-        lineStateView.frame = CGRect(x: ScreenW / 3 *  lineStateViewPosition, y: keystoreButton.frame.origin.y + keystoreButton.frame.height, width: ScreenW / 3, height: 2)
+//        var lineStateViewPosition: CGFloat = 0
+//        if selectState == .mnemonicState {
+//            lineStateViewPosition = 1
+//        } else if selectState == .privateKeyState {
+//            lineStateViewPosition = 2
+//        }
+//        lineStateView.frame = CGRect(x: ScreenW / 3 *  lineStateViewPosition, y: keystoreButton.frame.origin.y + keystoreButton.frame.height, width: ScreenW / 3, height: 2)
     }
 
     // set keystore view
