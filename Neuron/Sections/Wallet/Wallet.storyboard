@@ -23,10 +23,10 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kgr-QW-ZGr" userLabel="Extended Background">
-                                    <rect key="frame" x="0.0" y="-800" width="375" height="800"/>
+                                    <rect key="frame" x="0.0" y="-100" width="375" height="100"/>
                                     <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="800" id="kyd-44-tY6"/>
+                                        <constraint firstAttribute="height" constant="100" id="kyd-44-tY6"/>
                                     </constraints>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYl-xd-DII">

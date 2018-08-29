@@ -12,7 +12,7 @@ import Foundation
 let themeColor = "#2e4af2"
 let newThemeColor = "#365fff"
 let lineColor = "#f1f1f1"
-let darkBarTintColor = UIColor(red: 17.0 / 255, green: 95.0 / 255, blue: 1, alpha: 1)
+let darkBarTintColor = UIColor(red: 17.0 / 255, green: 65.0 / 255, blue: 1, alpha: 1)
 
 /// Screen height
 let ScreenH = UIScreen.main.bounds.height
