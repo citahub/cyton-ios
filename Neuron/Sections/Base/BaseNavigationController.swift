@@ -8,58 +8,32 @@
 
 import UIKit
 
+extension UINavigationBar {
+    var isDarkStyle: Bool {
+        set {
+            if newValue {
+                titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+                barTintColor = darkBarTintColor
+                tintColor = .white
+                barStyle = .black
+                shadowImage = UIImage()
+            } else {
+                titleTextAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
+                barTintColor = .white
+                tintColor = ColorFromString(hex: "#333333")
+                barStyle = .default
+                shadowImage = nil
+            }
+        }
+        get {
+            return barStyle == .black
+        }
+    }
+}
+
 class BaseNavigationController: UINavigationController {
-    enum Style {
-        case home
-        case inner
-    }
-
-    var style = Style.home {
-        didSet {
-            applyStyle()
-        }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        applyStyle()
-    }
-
-    override func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
-        super.setViewControllers(viewControllers, animated: animated)
-
-        style = viewControllers.count <= 1 ? .home : .inner
-    }
-
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if viewControllers.count == 0 {
-            viewController.hidesBottomBarWhenPushed = false
-            style = .home
-        } else {
-            viewController.hidesBottomBarWhenPushed = true
-            style = .inner
-        }
+        viewController.hidesBottomBarWhenPushed = viewControllers.count > 0
         super.pushViewController(viewController, animated: animated)
-    }
-
-    override func popViewController(animated: Bool) -> UIViewController? {
-        let viewController =  super.popViewController(animated: animated)
-        style = viewControllers.count <= 1 ? .home : .inner
-        return viewController
-    }
-
-    private func applyStyle() {
-        if style == .home {
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-            navigationBar.barTintColor = ColorFromString(hex: newThemeColor)
-            navigationBar.tintColor = .white
-            navigationBar.barStyle = .black
-        } else {
-            navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
-            navigationBar.barTintColor = .white
-            navigationBar.tintColor = ColorFromString(hex: "#333333")
-            navigationBar.barStyle = .default
-        }
     }
 }

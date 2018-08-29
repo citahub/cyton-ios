@@ -18,6 +18,16 @@ class SettingsViewController: UITableViewController {
         fingerprintSwitch.isOn = false
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isDarkStyle = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isDarkStyle = false
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "contactUs" {
             let webViewController = segue.destination as! CommonWebViewController

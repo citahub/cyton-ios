@@ -14,10 +14,11 @@ import MJRefresh
 
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet var tabHeader: UIView!
+
     private var assetPageViewController: WalletAssetPageViewController!
     private var isHeaderViewHidden = false {
         didSet {
-            setNeedsStatusBarAppearanceUpdate()
+            updateNavigationBar()
         }
     }
 
@@ -45,6 +46,13 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         if tokenArray.count != (viewModel.getCurrentModel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
             didGetTokenList()
         }
+
+        updateNavigationBar()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isDarkStyle = false
     }
 
     override func viewDidLoad() {
@@ -81,8 +89,11 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         assetPageViewController.pages.forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
+    }
 
-        //navigationController?.setNavigationBarHidden(headerViewHidden, animated: false)
+    private func updateNavigationBar() {
+        navigationController?.navigationBar.isDarkStyle = !isHeaderViewHidden
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     //接收通知
