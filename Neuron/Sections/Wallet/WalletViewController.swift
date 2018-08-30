@@ -13,7 +13,10 @@ import BigInt
 import MJRefresh
 
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+    @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
+    @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
+    @IBOutlet weak var scanQRButtonItem: UIBarButtonItem!
 
     private var assetPageViewController: WalletAssetPageViewController!
     private var isHeaderViewHidden = false {
@@ -22,13 +25,6 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         }
     }
 
-    @IBOutlet weak var headView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var namelable: UILabel!
-    @IBOutlet weak var mAddress: UILabel!
-    @IBOutlet weak var archiveBtn: UIButton!
-    @IBOutlet weak var manageBtn: UIButton!
-    @IBOutlet weak var mainTable: UITableView!
     let sCtrl = SelectWalletController.init(nibName: "SelectWalletController", bundle: nil)
     let aCtrl = AssetsDetailController.init(nibName: "AssetsDetailController", bundle: nil)
 
@@ -57,18 +53,11 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "钱包"
         automaticallyAdjustsScrollViewInsets = true
 
         sCtrl.delegate = self
         aCtrl.delegate = self
         addNotify()
-        setUpSubViewDetails()
-
-        /*
-        iconImageView.isUserInteractionEnabled = true
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
-        iconImageView.addGestureRecognizer(tap)*/
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -76,6 +65,8 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
             assetPageViewController = segue.destination as? WalletAssetPageViewController
         }
     }
+
+    @IBAction func unwind(seque: UIStoryboardSegue) { }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var offset = scrollView.contentOffset.y
@@ -93,6 +84,14 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
 
     private func updateNavigationBar() {
         navigationController?.navigationBar.isDarkStyle = !isHeaderViewHidden
+        if isHeaderViewHidden {
+            navigationItem.rightBarButtonItems = [switchWalletButtonItem]
+            title = viewModel.getCurrentModel().currentWallet?.name
+            navigationItem.titleView = nil
+        } else {
+            navigationItem.rightBarButtonItems = [scanQRButtonItem]
+            navigationItem.titleView = titleView
+        }
         setNeedsStatusBarAppearanceUpdate()
     }
 
@@ -195,45 +194,11 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         }
     }
 
-    func setUpSubViewDetails() {
-        /*
-        headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
-        headView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        headView.layer.shadowOpacity = 0.3
-        headView.layer.shadowRadius = 2.75
-        headView.layer.cornerRadius = 5
-        headView.layer.borderWidth = 1
-        headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
-
-        iconImageView.layer.borderColor = ColorFromString(hex: lineColor).cgColor
-        iconImageView.layer.borderWidth = 1
-        iconImageView.layer.cornerRadius = 30
-        iconImageView.clipsToBounds = true
-
-        let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
-        mjheader?.lastUpdatedTimeLabel.isHidden = true
-        mainTable.mj_header = mjheader
-
-        let leftBtn = UIButton.init(type: .custom)
-        leftBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-        leftBtn.setImage(UIImage.init(named: "列表"), for: .normal)
-        leftBtn.addTarget(self, action: #selector(didChangeWallet), for: .touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: leftBtn)
-
-        let rightBtn = UIButton.init(type: .custom)
-        rightBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-        rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
-        rightBtn.addTarget(self, action: #selector(didAddWallet), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
- */
-    }
-
     @objc func loadData() {
         getBalance(isRefresh: true)
     }
 
-    //点击头部两个按钮
-    //收款
+    // TODO: migrate these actions to storyboards segue
     @IBAction func didClickArchiveBtn(_ sender: UIButton) {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let rCtrl = ReceiveController.init(nibName: "ReceiveController", bundle: nil)
@@ -242,6 +207,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         rCtrl.walletIcon = appModel.currentWallet?.iconData
         navigationController?.pushViewController(rCtrl, animated: true)
     }
+
     //点击资产管理按钮
     @IBAction func didClickManageBtn(_ sender: UIButton) {
         let aCtrl = ManageAssetViewController.init(nibName: "AssetViewController", bundle: nil)
