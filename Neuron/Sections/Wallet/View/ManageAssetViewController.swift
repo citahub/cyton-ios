@@ -1,5 +1,5 @@
 //
-//  AssetViewController.swift
+//  ManageAssetViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/5/23.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AssetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ManageAssetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var aTable: UITableView!
     let viewModel = AssetViewModel()

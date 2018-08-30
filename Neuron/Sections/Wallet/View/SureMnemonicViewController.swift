@@ -70,7 +70,7 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
         }
         if selectArray.count == 12 {
             sureButton.isEnabled = true
-            sureButton.backgroundColor = ColorFromString(hex: themeColor)
+            sureButton.backgroundColor = themeColor
             sureButton.setTitleColor(.white, for: .normal)
         } else {
             sureButton.isEnabled = false

@@ -104,7 +104,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         if !oldPassword.isEmpty && !newPassword.isEmpty && !confirmPassword.isEmpty {
             changePwBtn.isEnabled = true
             changePwBtn.setTitleColor(.white, for: .normal)
-            changePwBtn.backgroundColor = ColorFromString(hex: themeColor)
+            changePwBtn.backgroundColor = themeColor
         } else {
             changePwBtn.isEnabled = false
             changePwBtn.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)

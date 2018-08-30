@@ -12,7 +12,16 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
+    @IBOutlet var tabHeader: UIView!
+
+    private var assetPageViewController: WalletAssetPageViewController!
+    private var isHeaderViewHidden = false {
+        didSet {
+            updateNavigationBar()
+        }
+    }
+
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var namelable: UILabel!
@@ -26,6 +35,10 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var viewModel = SubController2ViewModel()
     var tokenArray: [TokenModel] = []
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return isHeaderViewHidden ? .default : .lightContent
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -33,6 +46,13 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if tokenArray.count != (viewModel.getCurrentModel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
             didGetTokenList()
         }
+
+        updateNavigationBar()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isDarkStyle = false
     }
 
     override func viewDidLoad() {
@@ -45,9 +65,35 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addNotify()
         setUpSubViewDetails()
 
+        /*
         iconImageView.isUserInteractionEnabled = true
         let tap = UITapGestureRecognizer.init(target: self, action: #selector(didClickIconImage))
-        iconImageView.addGestureRecognizer(tap)
+        iconImageView.addGestureRecognizer(tap)*/
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "embedAssetPages" {
+            assetPageViewController = segue.destination as? WalletAssetPageViewController
+        }
+    }
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        var offset = scrollView.contentOffset.y
+        if #available(iOS 11.0, *) {
+            offset += scrollView.adjustedContentInset.top
+        } else {
+            offset += scrollView.contentInset.top
+        }
+
+        isHeaderViewHidden = offset >= tableView.tableHeaderView!.bounds.height
+        assetPageViewController.pages.forEach { listViewController in
+            (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
+        }
+    }
+
+    private func updateNavigationBar() {
+        navigationController?.navigationBar.isDarkStyle = !isHeaderViewHidden
+        setNeedsStatusBarAppearanceUpdate()
     }
 
     //接收通知
@@ -79,9 +125,10 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func refreshUI(walletModel: WalletModel) {
+        /*
         namelable.text = walletModel.name
         mAddress.text = walletModel.address
-        iconImageView.image = UIImage(data: walletModel.iconData)
+        iconImageView.image = UIImage(data: walletModel.iconData)*/
     }
 
     /// get token list from realm
@@ -93,7 +140,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         for item in walletModel.selectTokenList {
             tokenArray.append(item)
         }
-        mainTable.reloadData()
+        //mainTable.reloadData()
         getBalance(isRefresh: false)
     }
 
@@ -101,7 +148,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let group = DispatchGroup()
         if isRefresh {
         } else {
-            NeuLoad.showHUD(text: "")
+            //NeuLoad.showHUD(text: "")
         }
         let walletModel = viewModel.getCurrentModel().currentWallet!
         for tm in tokenArray {
@@ -139,9 +186,9 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
         }
         group.notify(queue: .main) {
-            self.mainTable.reloadData()
+            //self.mainTable.reloadData()
             if isRefresh {
-                self.mainTable.mj_header.endRefreshing()
+             //   self.mainTable.mj_header.endRefreshing()
             } else {
                 NeuLoad.hidHUD()
             }
@@ -149,6 +196,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func setUpSubViewDetails() {
+        /*
         headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
         headView.layer.shadowOffset = CGSize(width: 0, height: 1)
         headView.layer.shadowOpacity = 0.3
@@ -162,14 +210,10 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         iconImageView.layer.cornerRadius = 30
         iconImageView.clipsToBounds = true
 
-        mainTable.delegate = self
-        mainTable.dataSource = self
-        mainTable.register(UINib.init(nibName: "Sub2TableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
         mjheader?.lastUpdatedTimeLabel.isHidden = true
         mainTable.mj_header = mjheader
 
-        //设置左右导航按钮
         let leftBtn = UIButton.init(type: .custom)
         leftBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
         leftBtn.setImage(UIImage.init(named: "列表"), for: .normal)
@@ -181,6 +225,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
         rightBtn.addTarget(self, action: #selector(didAddWallet), for: .touchUpInside)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
+ */
     }
 
     @objc func loadData() {
@@ -199,7 +244,7 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     //点击资产管理按钮
     @IBAction func didClickManageBtn(_ sender: UIButton) {
-        let aCtrl = AssetViewController.init(nibName: "AssetViewController", bundle: nil)
+        let aCtrl = ManageAssetViewController.init(nibName: "AssetViewController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
     }
     //click icon image
@@ -239,7 +284,22 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         navigationController?.pushViewController(rCtrl, animated: true)
     }
 
-    //tableview代理
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if #available(iOS 11.0, *) {
+            return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom
+        } else {
+            return tableView.frame.height - tabHeader.frame.height - tableView.contentInset.top - tableView.contentInset.bottom
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tabHeader
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tabHeader.frame.height
+    }
+    /*
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tokenArray.count
     }
@@ -258,5 +318,5 @@ class WalletViewController: UIViewController, UITableViewDelegate, UITableViewDa
         UIApplication.shared.keyWindow?.addSubview(aCtrl.view)
         let tokenModel = tokenArray[indexPath.row]
         aCtrl.tokenModel = tokenModel
-    }
+    }*/
 }

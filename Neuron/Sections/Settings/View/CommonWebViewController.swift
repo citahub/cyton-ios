@@ -21,8 +21,8 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
 
     lazy private var progressView: UIProgressView = {
         self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: 2))
-        self.progressView.tintColor = ColorFromString(hex: themeColor)      // 进度条颜色
-        self.progressView.trackTintColor = UIColor.white // 进度条背景色
+        self.progressView.tintColor = themeColor
+        self.progressView.trackTintColor = .white
         return self.progressView
     }()
 

@@ -9,9 +9,10 @@
 import Foundation
 
 //theme color
-let themeColor = "#2e4af2"
-let newThemeColor = "#365fff"
-let lineColor = "#f1f1f1"
+let themeColor = ColorFromString(hex: "#2e4af2")
+let newThemeColor = ColorFromString(hex: "#365fff")
+let darkBarTintColor = UIColor(red: 17.0 / 255, green: 65.0 / 255, blue: 1, alpha: 1)
+let lineColor = ColorFromString(hex: "#f1f1f1")
 
 /// Screen height
 let ScreenH = UIScreen.main.bounds.height
