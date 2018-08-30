@@ -23,7 +23,6 @@
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		8922685C20DE4EC60021A85F /* SubController4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */; };
 		8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */; };
-		8928C23020AE822B00C3103E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8928C22F20AE822B00C3103E /* Images.xcassets */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
 		8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* NeuronMacro.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
@@ -191,7 +190,6 @@
 		8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController4TableViewCell.swift; sourceTree = "<group>"; };
 		8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController4TableViewCell.xib; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
-		8928C22F20AE822B00C3103E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		8928C23420AE8F7C00C3103E /* NeuronMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronMacro.swift; sourceTree = "<group>"; };
 		8928C24220AE908300C3103E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -460,7 +458,6 @@
 			children = (
 				896812CA20F726D000731C8C /* dappOpration.js */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
-				8928C22F20AE822B00C3103E /* Images.xcassets */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -982,7 +979,6 @@
 				897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */,
 				8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */,
 				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
-				8928C23020AE822B00C3103E /* Images.xcassets in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
