@@ -998,11 +998,8 @@
 				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
-<<<<<<< HEAD
-=======
 				8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */,
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
->>>>>>> develop
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,
