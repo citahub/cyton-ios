@@ -2,17 +2,16 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "963菜单_应收款.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "963菜单_应收款@2x.png",
+      "filename" : "switchWallet@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "963菜单_应收款@3x.png",
+      "filename" : "switchWallet@3x.png",
       "scale" : "3x"
     }
   ],

@@ -29,21 +29,11 @@
                                         <constraint firstAttribute="height" constant="800" id="kyd-44-tY6"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYl-xd-DII">
-                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="44" id="05p-xr-CG1"/>
-                                        <constraint firstAttribute="height" constant="44" id="zz0-tB-25H"/>
-                                    </constraints>
-                                    <state key="normal" title="Button"/>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="kgr-QW-ZGr" secondAttribute="trailing" id="0Bb-eO-4hN"/>
-                                <constraint firstItem="FYl-xd-DII" firstAttribute="top" secondItem="kgr-QW-ZGr" secondAttribute="bottom" id="LB1-fN-fga"/>
                                 <constraint firstItem="kgr-QW-ZGr" firstAttribute="leading" secondItem="GQ8-N2-jmG" secondAttribute="leading" id="ch3-Tw-xcG"/>
-                                <constraint firstItem="FYl-xd-DII" firstAttribute="leading" secondItem="GQ8-N2-jmG" secondAttribute="leading" id="hKq-IE-Vgc"/>
                                 <constraint firstItem="kgr-QW-ZGr" firstAttribute="bottom" secondItem="GQ8-N2-jmG" secondAttribute="top" id="igJ-mH-8KG"/>
                             </constraints>
                         </view>
@@ -85,11 +75,48 @@
                             <outlet property="delegate" destination="NFk-Vr-nsf" id="ng0-Fv-u8f"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="94F-ig-s1Z">
+                        <barButtonItem key="leftBarButtonItem" image="walletQRCode" id="eYq-eC-av4">
+                            <connections>
+                                <segue destination="7a9-kY-o3s" kind="show" identifier="requestPayment" id="nnK-XZ-dUv"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="scanQRButtonItem" destination="26M-ch-g5f" id="hBg-7v-hak"/>
+                        <outlet property="switchWalletButtonItem" destination="C0H-hr-lhb" id="pyo-1T-Odl"/>
                         <outlet property="tabHeader" destination="t1o-zF-Pti" id="IgJ-Hg-cHg"/>
+                        <outlet property="titleView" destination="s9e-Nm-DZw" id="JGN-5U-n4t"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXy-kN-FrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="switchWallet" id="C0H-hr-lhb">
+                    <connections>
+                        <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="uOJ-eb-Ope"/>
+                    </connections>
+                </barButtonItem>
+                <barButtonItem image="qrCode" id="26M-ch-g5f"/>
+                <view contentMode="scaleToFill" id="s9e-Nm-DZw" userLabel="NavBarTitle">
+                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                            <state key="normal" title="切换钱包"/>
+                            <connections>
+                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4V8-pX-BA8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="c5v-Li-QRF" firstAttribute="trailing" secondItem="3S1-FO-geS" secondAttribute="trailing" id="BIN-D1-7r7"/>
+                        <constraint firstItem="3S1-FO-geS" firstAttribute="leading" secondItem="c5v-Li-QRF" secondAttribute="leading" id="FQQ-ym-3VD"/>
+                        <constraint firstItem="3S1-FO-geS" firstAttribute="top" secondItem="c5v-Li-QRF" secondAttribute="top" id="K0U-4W-6sZ"/>
+                        <constraint firstItem="c5v-Li-QRF" firstAttribute="bottom" secondItem="3S1-FO-geS" secondAttribute="bottom" id="OAC-F1-O3f"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="c5v-Li-QRF"/>
+                </view>
                 <view contentMode="scaleToFill" id="t1o-zF-Pti" userLabel="Tab Header">
                     <rect key="frame" x="0.0" y="0.0" width="365" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,7 +144,23 @@
                     <viewLayoutGuide key="safeArea" id="EXl-ne-gdu"/>
                 </view>
             </objects>
-            <point key="canvasLocation" x="183" y="-64"/>
+            <point key="canvasLocation" x="1120.8" y="-64.31784107946028"/>
+        </scene>
+        <!--RequestPayment-->
+        <scene sceneID="quN-As-AJ6">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RequestPayment" id="7a9-kY-o3s" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iqR-2J-Jiv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1788" y="-500"/>
+        </scene>
+        <!--SwitchWallet-->
+        <scene sceneID="YQ8-C5-GWQ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SwitchWallet" id="ZGv-cZ-bkz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="spe-LV-xNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1882" y="-411"/>
         </scene>
         <!--Wallet Asset Page View Controller-->
         <scene sceneID="bSC-Bk-t53">
@@ -125,7 +168,7 @@
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="odI-Eb-82d" customClass="WalletAssetPageViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ug-aU-ubl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="970" y="-65"/>
+            <point key="canvasLocation" x="1919" y="-23"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="mdT-Z0-ZGe">
@@ -183,7 +226,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ntp-2h-aK3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2311" y="-278"/>
+            <point key="canvasLocation" x="3248.8000000000002" y="-278.41079460269867"/>
         </scene>
         <!--Tokens View Controller-->
         <scene sceneID="ALp-Vg-DGL">
@@ -1567,7 +1610,33 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDD-Nn-vgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1620" y="-277"/>
+            <point key="canvasLocation" x="2559.1999999999998" y="-277.51124437781112"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="82x-J8-bup">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jSW-Lb-IYD" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d9E-7R-0tT">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="NFk-Vr-nsf" kind="relationship" relationship="rootViewController" id="PfP-Dd-h96"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oON-gB-PtO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="181.59999999999999" y="-64.31784107946028"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="qrCode" width="22" height="22"/>
+        <image name="switchWallet" width="24" height="24"/>
+        <image name="walletQRCode" width="22" height="22"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="4V8-pX-BA8"/>
+    </inferredMetricsTieBreakers>
 </document>

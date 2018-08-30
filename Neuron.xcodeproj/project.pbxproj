@@ -10,6 +10,9 @@
 		1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A09224221357F3D00CAED5D /* TokensViewController.swift */; };
 		1A092245213580C900CAED5D /* NFCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A092244213580C900CAED5D /* NFCViewController.swift */; };
 		1A1D2447213550FC00752843 /* WalletAssetPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */; };
+		1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */; };
+		1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD02137B412008DC306 /* RequestPayment.storyboard */; };
+		1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */; };
 		1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA1721338FEB0065496B /* Settings.storyboard */; };
 		1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA19213513D60065496B /* Wallet.storyboard */; };
 		1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C652B212EAC4800F1A0AA /* String+Extension.swift */; };
@@ -173,6 +176,9 @@
 		1A09224221357F3D00CAED5D /* TokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewController.swift; sourceTree = "<group>"; };
 		1A092244213580C900CAED5D /* NFCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCViewController.swift; sourceTree = "<group>"; };
 		1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAssetPageViewController.swift; sourceTree = "<group>"; };
+		1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentViewController.swift; sourceTree = "<group>"; };
+		1A207DD02137B412008DC306 /* RequestPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RequestPayment.storyboard; sourceTree = "<group>"; };
+		1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwitchWallet.storyboard; sourceTree = "<group>"; };
 		1A2BFA1721338FEB0065496B /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		1A2BFA19213513D60065496B /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		1A3C652B212EAC4800F1A0AA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
@@ -558,6 +564,10 @@
 				1A09224221357F3D00CAED5D /* TokensViewController.swift */,
 				1A092244213580C900CAED5D /* NFCViewController.swift */,
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
+				8928C2A120B41BCA00C3103E /* SelectWalletController.swift */,
+				1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */,
+				1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */,
+				1A207DD02137B412008DC306 /* RequestPayment.storyboard */,
 				8928C28020B3E60900C3103E /* Sub2CustomView */,
 				8928C27420B29AD800C3103E /* View */,
 				8928C27520B29AD800C3103E /* ViewModel */,
@@ -615,7 +625,6 @@
 			isa = PBXGroup;
 			children = (
 				8964A18F20C112C40086848F /* SQButtonTagView.swift */,
-				8928C2A120B41BCA00C3103E /* SelectWalletController.swift */,
 				8928C2A220B41BCA00C3103E /* SelectWalletController.xib */,
 				898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */,
 				898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */,
@@ -958,12 +967,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */,
+				1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */,
 				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */,
 				89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */,
 				8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
+				1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */,
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
 				89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */,
 				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
@@ -1182,6 +1193,7 @@
 				899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */,
+				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
 				89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
