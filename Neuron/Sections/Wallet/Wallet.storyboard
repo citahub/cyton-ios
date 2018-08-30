@@ -166,10 +166,10 @@
             </objects>
             <point key="canvasLocation" x="1882" y="-411"/>
         </scene>
-        <!--Wallet Asset Page View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="bSC-Bk-t53">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="odI-Eb-82d" customClass="WalletAssetPageViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="odI-Eb-82d" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Ug-aU-ubl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1919" y="-23"/>

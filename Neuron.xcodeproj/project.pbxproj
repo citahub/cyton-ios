@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A09224221357F3D00CAED5D /* TokensViewController.swift */; };
 		1A092245213580C900CAED5D /* NFCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A092244213580C900CAED5D /* NFCViewController.swift */; };
-		1A1D2447213550FC00752843 /* WalletAssetPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */; };
 		1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */; };
 		1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD02137B412008DC306 /* RequestPayment.storyboard */; };
 		1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */; };
@@ -180,7 +179,6 @@
 /* Begin PBXFileReference section */
 		1A09224221357F3D00CAED5D /* TokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewController.swift; sourceTree = "<group>"; };
 		1A092244213580C900CAED5D /* NFCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFCViewController.swift; sourceTree = "<group>"; };
-		1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletAssetPageViewController.swift; sourceTree = "<group>"; };
 		1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentViewController.swift; sourceTree = "<group>"; };
 		1A207DD02137B412008DC306 /* RequestPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RequestPayment.storyboard; sourceTree = "<group>"; };
 		1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwitchWallet.storyboard; sourceTree = "<group>"; };
@@ -564,7 +562,6 @@
 			isa = PBXGroup;
 			children = (
 				8928C27820B2A61900C3103E /* WalletViewController.swift */,
-				1A1D2446213550FC00752843 /* WalletAssetPageViewController.swift */,
 				1A09224221357F3D00CAED5D /* TokensViewController.swift */,
 				1A092244213580C900CAED5D /* NFCViewController.swift */,
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
@@ -1221,7 +1218,6 @@
 				8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */,
 				898A1A2620B7DAA300ECB465 /* Sub3TableViewCell.swift in Sources */,
 				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
-				1A1D2447213550FC00752843 /* WalletAssetPageViewController.swift in Sources */,
 				897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */,
 				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
 				898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */,
