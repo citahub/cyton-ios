@@ -17,7 +17,6 @@ class PrivatekeyViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
     @IBAction func importWallet(_ sender: UIButton) {
     }
 }

@@ -150,6 +150,9 @@
                                 <state key="normal" title="助记词">
                                     <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="changeToMnemonic:" destination="izc-2M-eVN" eventType="touchUpInside" id="uSE-Kk-36f"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oK-uf-RKa">
                                 <rect key="frame" x="0.0" y="64" width="125" height="40"/>
@@ -160,6 +163,9 @@
                                 <state key="normal" title="Keystore">
                                     <color key="titleColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="changeToKestore:" destination="izc-2M-eVN" eventType="touchUpInside" id="flG-XA-EBo"/>
+                                </connections>
                             </button>
                             <button opaque="NO" tag="2002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiN-N7-Lhb">
                                 <rect key="frame" x="250" y="64" width="125" height="40"/>
@@ -171,11 +177,14 @@
                                 <state key="normal" title="私钥">
                                     <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="changeToPrivatekey:" destination="izc-2M-eVN" eventType="touchUpInside" id="lfm-SG-OUh"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-oI-azW">
                                 <rect key="frame" x="0.0" y="105" width="375" height="562"/>
                                 <connections>
-                                    <segue destination="rNL-pf-7HL" kind="embed" id="rHE-bA-Bjp"/>
+                                    <segue destination="rNL-pf-7HL" kind="embed" identifier="importWalletPageViewController" id="rHE-bA-Bjp"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -233,7 +242,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="3UH-3z-ZE5">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="3UH-3z-ZE5">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -245,7 +254,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="1y7-jb-3V6">
-                                    <rect key="frame" x="40" y="0.0" width="288" height="0.0"/>
+                                    <rect key="frame" x="40" y="0.0" width="288" height="48"/>
                                     <color key="backgroundColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <string key="text">将以太坊官方钱包KeyStore文件内容粘贴至输入框，或
 通过扫描二维码输入。</string>
@@ -264,7 +273,7 @@
                                 <constraint firstAttribute="bottom" secondItem="1y7-jb-3V6" secondAttribute="bottom" id="yaT-8H-lfU"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="G9b-Mb-Oc2">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="G9b-Mb-Oc2">
                             <rect key="frame" x="0.0" y="304" width="375" height="76"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -378,19 +387,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="gtX-uM-Uko">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="gtX-uM-Uko">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入钱包助记词并选择助记词格式。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xu-Ka-QDa">
-                                    <rect key="frame" x="45" y="0.0" width="283" height="0.0"/>
+                                    <rect key="frame" x="45" y="0.0" width="283" height="35"/>
                                     <color key="backgroundColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="XSS-Wa-9Fv">
-                                    <rect key="frame" x="21" y="-7.5" width="15" height="15"/>
+                                    <rect key="frame" x="21" y="10" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="15" id="FNq-Dg-Kbt"/>
                                         <constraint firstAttribute="width" constant="15" id="YoS-RV-KTO"/>
@@ -407,7 +416,7 @@
                                 <constraint firstItem="1Xu-Ka-QDa" firstAttribute="top" secondItem="gtX-uM-Uko" secondAttribute="top" id="vFr-OA-uR2"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="c4m-L7-lGA">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="c4m-L7-lGA">
                             <rect key="frame" x="0.0" y="391" width="375" height="95"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -570,23 +579,23 @@
         <scene sceneID="0Qm-p9-PQA">
             <objects>
                 <tableViewController storyboardIdentifier="privatekeyViewController" id="acs-RG-qLf" customClass="PrivatekeyViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="10" id="SED-bg-AAU">
+                    <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="10" id="SED-bg-AAU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="562"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="WSU-aR-FhR">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="WSU-aR-FhR">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请将私钥粘贴至输入框，或通过扫描二维码输入。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSW-VZ-iqd">
-                                    <rect key="frame" x="41" y="0.0" width="293" height="0.0"/>
+                                    <rect key="frame" x="41" y="0.0" width="293" height="35"/>
                                     <color key="backgroundColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="TaH-dc-dJM">
-                                    <rect key="frame" x="18" y="-7.5" width="15" height="15"/>
+                                    <rect key="frame" x="18" y="10" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="15" id="LTK-Dc-eB5"/>
                                         <constraint firstAttribute="height" constant="15" id="iz1-EE-evc"/>
@@ -603,7 +612,7 @@
                                 <constraint firstAttribute="bottom" secondItem="CSW-VZ-iqd" secondAttribute="bottom" id="pPQ-j0-xhC"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="dj2-Bm-Tge">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="dj2-Bm-Tge">
                             <rect key="frame" x="0.0" y="341" width="375" height="95"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
