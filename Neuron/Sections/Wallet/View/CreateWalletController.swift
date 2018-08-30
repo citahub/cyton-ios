@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreatWalletController: UITableViewController {
+class CreateWalletController: UITableViewController {
 
     @IBOutlet weak var nextButton: UIButton!
     var name: String? = ""

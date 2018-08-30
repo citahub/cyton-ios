@@ -9,7 +9,6 @@
 import UIKit
 
 class KeystoreViewController: UITableViewController {
-
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var importButton: UIButton!

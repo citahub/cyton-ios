@@ -42,7 +42,7 @@ extension ImportWalletPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let currentIndex = pages.index(of: viewController)!
         let nextIndex = abs((currentIndex + 1) % pages.count)
-        if currentIndex == 2 {
+        if currentIndex == pages.count - 1 {
             return nil
         } else {
             return pages[nextIndex]
