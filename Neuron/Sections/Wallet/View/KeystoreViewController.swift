@@ -43,12 +43,12 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
     }
 
     func jugeImportButtonEnabled() {
-        if name?.count != 0 && password?.count != 0 && keystore?.count != 0 {
-            importButton.backgroundColor = ColorFromString(hex: "#456CFF")
-            importButton.isEnabled = true
-        } else {
+        if name!.isEmpty || password!.isEmpty || keystore!.isEmpty {
             importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
             importButton.isEnabled = false
+        } else {
+            importButton.backgroundColor = ColorFromString(hex: "#456CFF")
+            importButton.isEnabled = true
         }
     }
 

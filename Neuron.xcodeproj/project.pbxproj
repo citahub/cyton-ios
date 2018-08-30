@@ -46,13 +46,11 @@
 		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
 		8964A18020BE94F70086848F /* NEPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17F20BE94F70086848F /* NEPickerView.swift */; };
 		8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18520BFE6850086848F /* ImportWalletController.swift */; };
-		8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18620BFE6860086848F /* ImportWalletController.xib */; };
 		8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18920BFEF950086848F /* ImportTextViewCell.swift */; };
 		8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */; };
 		8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */; };
 		8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18F20C112C40086848F /* SQButtonTagView.swift */; };
 		8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19120C115A70086848F /* SureMnemonicViewController.swift */; };
-		8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A19220C115A70086848F /* SureMnemonicViewController.xib */; };
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
 		896812CB20F726D000731C8C /* dappOpration.js in Resources */ = {isa = PBXBuildFile; fileRef = 896812CA20F726D000731C8C /* dappOpration.js */; };
@@ -220,13 +218,11 @@
 		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
 		8964A17F20BE94F70086848F /* NEPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEPickerView.swift; sourceTree = "<group>"; };
 		8964A18520BFE6850086848F /* ImportWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
-		8964A18620BFE6860086848F /* ImportWalletController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImportWalletController.xib; sourceTree = "<group>"; };
 		8964A18920BFEF950086848F /* ImportTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTextViewCell.swift; sourceTree = "<group>"; };
 		8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMnemonicController.swift; sourceTree = "<group>"; };
 		8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenerateMnemonicController.xib; sourceTree = "<group>"; };
 		8964A18F20C112C40086848F /* SQButtonTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19120C115A70086848F /* SureMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewController.swift; sourceTree = "<group>"; };
-		8964A19220C115A70086848F /* SureMnemonicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SureMnemonicViewController.xib; sourceTree = "<group>"; };
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
 		896812CA20F726D000731C8C /* dappOpration.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dappOpration.js; sourceTree = "<group>"; };
@@ -605,7 +601,6 @@
 				8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */,
 				8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */,
 				8964A19120C115A70086848F /* SureMnemonicViewController.swift */,
-				8964A19220C115A70086848F /* SureMnemonicViewController.xib */,
 				89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */,
 				89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */,
 				8964A18520BFE6850086848F /* ImportWalletController.swift */,
@@ -613,7 +608,6 @@
 				898889C52136521100D04AA8 /* KeystoreViewController.swift */,
 				898889C72136526800D04AA8 /* MnemonicViewController.swift */,
 				898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */,
-				8964A18620BFE6860086848F /* ImportWalletController.xib */,
 				89F9E73C20DEBDE8009E68D4 /* ExportKeyStoreController.swift */,
 				89F9E73D20DEBDE8009E68D4 /* ExportKeyStoreController.xib */,
 			);
@@ -1000,7 +994,6 @@
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
 				897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */,
-				8964A18820BFE6860086848F /* ImportWalletController.xib in Resources */,
 				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
@@ -1013,7 +1006,6 @@
 				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
-				8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,

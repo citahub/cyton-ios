@@ -446,7 +446,7 @@
                             </tableViewSection>
                             <tableViewSection id="A6z-zQ-hnG">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="0CO-oN-JX5" detailTextLabel="xlR-qp-x4U" rowHeight="50" style="IBUITableViewCellStyleValue1" id="EZU-au-igC">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="0CO-oN-JX5" detailTextLabel="xlR-qp-x4U" rowHeight="50" style="IBUITableViewCellStyleValue1" id="EZU-au-igC">
                                         <rect key="frame" x="0.0" y="181" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EZU-au-igC" id="ymy-Ys-u6E">
@@ -486,6 +486,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="nameChanged:" destination="b8Y-xE-WVz" eventType="editingChanged" id="Za2-et-08E"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -503,6 +506,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="passwordChanged:" destination="b8Y-xE-WVz" eventType="editingChanged" id="d0b-pg-m5n"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -520,6 +526,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="confirmPasswordChanged:" destination="b8Y-xE-WVz" eventType="editingChanged" id="ll0-oP-qtY"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -533,10 +542,9 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="confirmPassword" destination="AFM-ta-qVe" id="on4-tT-S24"/>
+                        <outlet property="devirationPath" destination="xlR-qp-x4U" id="ezg-Wd-YTD"/>
                         <outlet property="importButton" destination="S3y-P6-3bn" id="Jey-Da-dIn"/>
-                        <outlet property="name" destination="7hf-ck-qGd" id="OCC-K2-Tzd"/>
-                        <outlet property="password" destination="nFT-XC-LPW" id="IIg-pq-Ujf"/>
+                        <outlet property="textViewCell" destination="T36-1p-1CB" id="sSf-Dy-Ud9"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mb-V9-hUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -643,6 +651,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="nameChanged:" destination="acs-RG-qLf" eventType="editingChanged" id="DTt-b5-nyp"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -660,6 +671,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="passwordChanged:" destination="acs-RG-qLf" eventType="editingChanged" id="L4U-9h-ivU"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -677,6 +691,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <action selector="confirmPasswordChanged:" destination="acs-RG-qLf" eventType="editingChanged" id="QDP-9W-xqP"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -690,10 +707,8 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="confirmPassword" destination="JXj-HK-Mzk" id="LqU-hz-5jf"/>
                         <outlet property="importButton" destination="EWX-cD-ay6" id="ukp-1C-jQv"/>
-                        <outlet property="name" destination="x0p-cp-E12" id="kXZ-rw-JTi"/>
-                        <outlet property="password" destination="RR4-3f-AOS" id="0NZ-mb-gP8"/>
+                        <outlet property="textViewCell" destination="n1J-KV-lNL" id="DyM-FH-nDK"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEr-Gy-GOu" userLabel="First Responder" sceneMemberID="firstResponder"/>
