@@ -18,6 +18,10 @@ enum SelectButtonStates {
 
 class ImportWalletController: UIViewController {
 
+    @IBOutlet weak var keystore: UIButton!
+    @IBOutlet weak var mnemonic: UIButton!
+    @IBOutlet weak var privatekey: UIButton!
+    @IBOutlet weak var slider: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "导入钱包"
