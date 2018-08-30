@@ -24,32 +24,24 @@ class ImportTextViewCell: UITableViewCell, UITextViewDelegate {
     }
 
     weak var delegate: ImportTextViewCellDelegate?
-    private let textView = RSKPlaceholderTextView.init()
+    private let textView = RSKPlaceholderTextView()
     private let qrBtn  = UIButton.init(type: .custom)
-
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setUpSubViews()
-
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        setUpSubViews()
     }
 
     func setUpSubViews() {
 
         textView.frame = CGRect(x: 15, y: 15, width: ScreenW - 30, height: 105)
-        textView.backgroundColor = ColorFromString(hex: "#f5f5f5")
+        textView.backgroundColor = .white
         textView.delegate = self
+        textView.placeholderColor = ColorFromString(hex: "#989CAA")
         textView.font = UIFont.systemFont(ofSize: 14)
         textView.layer.cornerRadius = 5
         textView.layer.borderWidth = 1
-        textView.layer.borderColor = ColorFromString(hex: "#eeeeee").cgColor
+        textView.layer.borderColor = ColorFromString(hex: "#E9EBF0").cgColor
         textView.clipsToBounds = true
         contentView.addSubview(textView)
 
