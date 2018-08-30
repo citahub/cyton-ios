@@ -50,17 +50,17 @@ class ImportWalletController: UIViewController {
         privatekey.setTitleColor(ColorFromString(hex: "#666666"), for: .normal)
         switch states {
         case .keystoreState:
-            keystore.setTitleColor(ColorFromString(hex: themeColor), for: .normal)
+            keystore.setTitleColor(themeColor, for: .normal)
             slider.center.x = keystore.center.x
 //            pageViewController.pages.forEach { (importViewController) in
                 pageViewController.setViewControllers([pageViewController.pages[0]], direction: .reverse, animated: true, completion: nil)
 //            }
         case .mnemonicState:
-            mnemonic.setTitleColor(ColorFromString(hex: themeColor), for: .normal)
+            mnemonic.setTitleColor(themeColor, for: .normal)
             slider.center.x = mnemonic.center.x
             pageViewController.setViewControllers([pageViewController.pages[1]], direction: .reverse, animated: true, completion: nil)
         case .privateKeyState:
-            privatekey.setTitleColor(ColorFromString(hex: themeColor), for: .normal)
+            privatekey.setTitleColor(themeColor, for: .normal)
             slider.center.x = privatekey.center.x
             pageViewController.setViewControllers([pageViewController.pages[2]], direction: .forward, animated: true, completion: nil)
         }
