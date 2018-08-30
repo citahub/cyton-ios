@@ -13,7 +13,7 @@ extension UINavigationBar {
         set {
             if newValue {
                 titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-                barTintColor = darkBarTintColor
+                barTintColor = newThemeColor
                 tintColor = .white
                 barStyle = .black
                 shadowImage = UIImage()
@@ -32,6 +32,11 @@ extension UINavigationBar {
 }
 
 class BaseNavigationController: UINavigationController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBar.isTranslucent = false
+    }
+
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         viewController.hidesBottomBarWhenPushed = viewControllers.count > 0
         super.pushViewController(viewController, animated: animated)

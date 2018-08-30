@@ -54,7 +54,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.load(request)
 
         let placrV = UIView.init()
-        placrV.backgroundColor = ColorFromString(hex: themeColor)
+        placrV.backgroundColor = themeColor
         if isiphoneX() {
             placrV.frame = CGRect(x: 0, y: 0, width: ScreenW, height: 44)
         } else {

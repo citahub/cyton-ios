@@ -29,7 +29,7 @@ class ExportKeyStoreController: UIViewController {
     func setUpUI() {
         shareButton.layer.cornerRadius = 5
         shareButton.layer.borderWidth = 1
-        shareButton.layer.borderColor = ColorFromString(hex: themeColor).cgColor
+        shareButton.layer.borderColor = themeColor.cgColor
     }
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
