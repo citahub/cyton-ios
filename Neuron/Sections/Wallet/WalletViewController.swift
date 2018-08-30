@@ -15,6 +15,7 @@ import MJRefresh
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
+    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
     @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
     @IBOutlet weak var scanQRButtonItem: UIBarButtonItem!
 
@@ -54,6 +55,9 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = true
+
+        tabbedButtonView.buttonTitles = ["代币", "藏品"]
+        tabbedButtonView.delegate = self
 
         sCtrl.delegate = self
         aCtrl.delegate = self
@@ -285,4 +289,10 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         let tokenModel = tokenArray[indexPath.row]
         aCtrl.tokenModel = tokenModel
     }*/
+}
+
+extension WalletViewController: TabbedButtonsViewDelegate {
+    func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
+        // todo
+    }
 }

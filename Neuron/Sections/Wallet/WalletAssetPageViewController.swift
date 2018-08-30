@@ -29,14 +29,20 @@ class WalletAssetPageViewController: UIPageViewController {
 extension WalletAssetPageViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         let currentIndex = pages.firstIndex(of: viewController)!
-        let previousIndex = abs((currentIndex - 1) % pages.count)
-        return pages[previousIndex]
+        if currentIndex > 0 {
+            return pages[currentIndex - 1]
+        } else {
+            return nil
+        }
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         let currentIndex = pages.firstIndex(of: viewController)!
-        let nextIndex = abs((currentIndex + 1) % pages.count)
-        return pages[nextIndex]
+        if currentIndex < pages.count - 1 {
+            return pages[currentIndex + 1]
+        } else {
+            return nil
+        }
     }
 }
 
