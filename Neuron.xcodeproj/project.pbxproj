@@ -17,7 +17,6 @@
 		1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA19213513D60065496B /* Wallet.storyboard */; };
 		1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C652B212EAC4800F1A0AA /* String+Extension.swift */; };
 		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
-		8905660520CE4F220041D4B4 /* WebViewDemo.html in Resources */ = {isa = PBXBuildFile; fileRef = 8905660420CE4F220041D4B4 /* WebViewDemo.html */; };
 		8905660720D0AC120041D4B4 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905660620D0AC120041D4B4 /* AppModel.swift */; };
 		8913437120C78F1000A17AEF /* WalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437020C78F1000A17AEF /* WalletModel.swift */; };
 		8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */; };
@@ -186,7 +185,6 @@
 		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
 		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.release.xcconfig"; sourceTree = "<group>"; };
-		8905660420CE4F220041D4B4 /* WebViewDemo.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = WebViewDemo.html; sourceTree = "<group>"; };
 		8905660620D0AC120041D4B4 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		8913437020C78F1000A17AEF /* WalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletModel.swift; sourceTree = "<group>"; };
 		8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatWalletViewModel.swift; sourceTree = "<group>"; };
@@ -429,14 +427,6 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
-		8928C22120AE7C6200C3103E /* Dao */ = {
-			isa = PBXGroup;
-			children = (
-				8905660420CE4F220041D4B4 /* WebViewDemo.html */,
-			);
-			path = Dao;
-			sourceTree = "<group>";
-		};
 		8928C22320AE7C6200C3103E /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
@@ -661,8 +651,6 @@
 		896D042B20AE69C1002CFF6A /* Neuron */ = {
 			isa = PBXGroup;
 			children = (
-				89D40EF520DCF1E00062C545 /* Neuron.entitlements */,
-				8928C22120AE7C6200C3103E /* Dao */,
 				8928C22320AE7C6200C3103E /* Helpers */,
 				8928C22420AE7C6200C3103E /* Macro */,
 				8913437620C8E2A500A17AEF /* Service */,
@@ -674,6 +662,7 @@
 				896D043020AE69C1002CFF6A /* Main.storyboard */,
 				896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */,
 				896D043320AE69C5002CFF6A /* Assets.xcassets */,
+				89D40EF520DCF1E00062C545 /* Neuron.entitlements */,
 				896D043820AE69C5002CFF6A /* Info.plist */,
 				8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */,
 			);
@@ -1005,7 +994,6 @@
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,
-				8905660520CE4F220041D4B4 /* WebViewDemo.html in Resources */,
 				898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
