@@ -15,10 +15,14 @@ import MJRefresh
 class WalletViewController: UITableViewController, AssetsDetailControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
+    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
     @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
     @IBOutlet weak var scanQRButtonItem: UIBarButtonItem!
 
-    private var assetPageViewController: WalletAssetPageViewController!
+    private var tokensViewController: UIViewController!
+    private var nfcViewController: UIViewController!
+    private var assetPageViewController: UIPageViewController!
+    
     private var isHeaderViewHidden = false {
         didSet {
             updateNavigationBar()
@@ -58,11 +62,20 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         sCtrl.delegate = self
         aCtrl.delegate = self
         addNotify()
+
+        tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController")
+        nfcViewController = storyboard!.instantiateViewController(withIdentifier: "nfcViewController")
+        assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
+        assetPageViewController.dataSource = self
+        assetPageViewController.delegate = self
+
+        tabbedButtonView.buttonTitles = ["代币", "藏品"]
+        tabbedButtonView.delegate = self
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "embedAssetPages" {
-            assetPageViewController = segue.destination as? WalletAssetPageViewController
+            assetPageViewController = segue.destination as? UIPageViewController
         }
     }
 
@@ -77,7 +90,7 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         }
 
         isHeaderViewHidden = offset >= tableView.tableHeaderView!.bounds.height
-        assetPageViewController.pages.forEach { listViewController in
+        [tokensViewController, nfcViewController].forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
     }
@@ -285,4 +298,35 @@ class WalletViewController: UITableViewController, AssetsDetailControllerDelegat
         let tokenModel = tokenArray[indexPath.row]
         aCtrl.tokenModel = tokenModel
     }*/
+}
+
+extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
+        let viewControllerToShow = index == 0 ? tokensViewController : nfcViewController
+        assetPageViewController.setViewControllers([viewControllerToShow!], direction: .forward, animated: false)
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        if viewController == nfcViewController {
+            return tokensViewController
+        }
+        return nil
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        if viewController == tokensViewController {
+            return nfcViewController
+        }
+        return nil
+    }
+
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        if completed {
+            if previousViewControllers.first == tokensViewController {
+                tabbedButtonView.selectedIndex = 1
+            } else {
+                tabbedButtonView.selectedIndex = 0
+            }
+        }
+    }
 }
