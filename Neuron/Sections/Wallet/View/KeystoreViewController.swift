@@ -24,25 +24,25 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
 
     @IBAction func nameChanged(_ sender: UITextField) {
         name = sender.text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
     @IBAction func passwordChanged(_ sender: UITextField) {
         password = sender.text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
     func didGetTextViewText(text: String) {
         keystore = text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
     func didBackQRCodeMessage(codeResult: String) {
         keystore = codeResult
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
-    func jugeImportButtonEnabled() {
+    func judgeImportButtonEnabled() {
         if name!.isEmpty || password!.isEmpty || keystore!.isEmpty {
             importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
             importButton.isEnabled = false

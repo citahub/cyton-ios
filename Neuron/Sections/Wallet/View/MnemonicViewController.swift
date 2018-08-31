@@ -30,24 +30,27 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
 
     @IBAction func nameChanged(_ sender: UITextField) {
         name = sender.text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
+
     @IBAction func passwordChanged(_ sender: UITextField) {
         password = sender.text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
+
     @IBAction func confirmPasswordChanged(_ sender: UITextField) {
         confirmPassword = sender.text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
+
     func didGetTextViewText(text: String) {
         mnemonic = text
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
     func didBackQRCodeMessage(codeResult: String) {
         mnemonic = codeResult
-        jugeImportButtonEnabled()
+        judgeImportButtonEnabled()
     }
 
     func callBackDictionnary(dict: [String: String]) {
@@ -55,7 +58,7 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
         selectFormatId = dict["id"]!
     }
 
-    func jugeImportButtonEnabled() {
+    func judgeImportButtonEnabled() {
         if name!.isEmpty || password!.isEmpty || confirmPassword!.isEmpty || mnemonic!.isEmpty {
             importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
             importButton.isEnabled = false

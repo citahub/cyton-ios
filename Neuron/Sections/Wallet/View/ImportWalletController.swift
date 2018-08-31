@@ -38,7 +38,6 @@ class ImportWalletController: UIViewController {
         pageViewControllers.append(mnemonicViewController)
         pageViewControllers.append(privatekeyViewController)
         importWalletPageViewController.setViewControllers([keystoreViewController], direction: .forward, animated: false)
-
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -50,7 +49,6 @@ class ImportWalletController: UIViewController {
 
 extension ImportWalletController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        print(viewController.description + "before")
         currentIndex = pageViewControllers.index(of: viewController)!
         let previousIndex = abs((currentIndex - 1) % pageViewControllers.count)
         if currentIndex == 0 {
@@ -61,7 +59,6 @@ extension ImportWalletController: TabbedButtonsViewDelegate, UIPageViewControlle
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        print(viewController.description + "after")
         currentIndex = pageViewControllers.index(of: viewController)!
         let nextIndex = abs((currentIndex + 1) % pageViewControllers.count)
         if currentIndex == pageViewControllers.count - 1 {
