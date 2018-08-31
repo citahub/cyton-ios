@@ -137,93 +137,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JzJ-2R-i6L">
-                                <rect key="frame" x="0.0" y="102" width="125" height="2"/>
-                                <color key="backgroundColor" red="0.1803921568627451" green="0.29019607843137252" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="8Rh-bR-drd"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" tag="2001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uK3-0L-e9U">
-                                <rect key="frame" x="125" y="64" width="125" height="40"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="助记词">
-                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeToMnemonic:" destination="izc-2M-eVN" eventType="touchUpInside" id="uSE-Kk-36f"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0oK-uf-RKa">
-                                <rect key="frame" x="0.0" y="64" width="125" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="YiS-Jj-eSv"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Keystore">
-                                    <color key="titleColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeToKestore:" destination="izc-2M-eVN" eventType="touchUpInside" id="flG-XA-EBo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DiN-N7-Lhb">
-                                <rect key="frame" x="250" y="64" width="125" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="125" id="7tH-FL-i4Y"/>
-                                    <constraint firstAttribute="height" constant="40" id="nBz-dt-G0n"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="私钥">
-                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="changeToPrivatekey:" destination="izc-2M-eVN" eventType="touchUpInside" id="lfm-SG-OUh"/>
-                                </connections>
-                            </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-oI-azW">
                                 <rect key="frame" x="0.0" y="105" width="375" height="562"/>
                                 <connections>
                                     <segue destination="rNL-pf-7HL" kind="embed" identifier="importWalletPageViewController" id="rHE-bA-Bjp"/>
                                 </connections>
                             </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYP-US-sh9" customClass="TabbedButtonsView" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="64" width="375" height="41"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="9W9-FJ-ywF"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="margin">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="underlineWith">
+                                        <integer key="value" value="80"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="f0v-oI-azW" firstAttribute="centerX" secondItem="IYP-US-sh9" secondAttribute="centerX" id="4p3-bf-jhq"/>
                             <constraint firstItem="77w-7d-bKo" firstAttribute="bottom" secondItem="f0v-oI-azW" secondAttribute="bottom" id="6XG-qW-hxg"/>
                             <constraint firstItem="77w-7d-bKo" firstAttribute="trailing" secondItem="f0v-oI-azW" secondAttribute="trailing" id="7IL-rI-pGG"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="top" secondItem="0oK-uf-RKa" secondAttribute="top" id="AZI-Sa-vYM"/>
-                            <constraint firstItem="JzJ-2R-i6L" firstAttribute="bottom" secondItem="0oK-uf-RKa" secondAttribute="bottom" id="FJm-5L-kX3"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="baseline" secondItem="0oK-uf-RKa" secondAttribute="firstBaseline" id="I9V-Rk-e3d"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="top" secondItem="uK3-0L-e9U" secondAttribute="top" id="K4h-So-wPM"/>
+                            <constraint firstItem="IYP-US-sh9" firstAttribute="leading" secondItem="f0v-oI-azW" secondAttribute="leading" id="LbT-1H-ggJ"/>
                             <constraint firstItem="f0v-oI-azW" firstAttribute="leading" secondItem="77w-7d-bKo" secondAttribute="leading" id="NVu-mc-TFu"/>
-                            <constraint firstItem="JzJ-2R-i6L" firstAttribute="centerX" secondItem="0oK-uf-RKa" secondAttribute="centerX" id="NlW-Fe-TVZ"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="baseline" secondItem="uK3-0L-e9U" secondAttribute="firstBaseline" id="NxX-pP-SFk"/>
-                            <constraint firstItem="uK3-0L-e9U" firstAttribute="leading" secondItem="0oK-uf-RKa" secondAttribute="trailing" id="Ojl-ci-saP"/>
-                            <constraint firstItem="JzJ-2R-i6L" firstAttribute="width" secondItem="0oK-uf-RKa" secondAttribute="width" id="V8X-rI-PTD"/>
-                            <constraint firstAttribute="trailing" secondItem="DiN-N7-Lhb" secondAttribute="trailing" id="bNA-8q-2eH"/>
-                            <constraint firstItem="f0v-oI-azW" firstAttribute="top" secondItem="uK3-0L-e9U" secondAttribute="bottom" constant="1" id="bxk-Vg-HR6"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="top" secondItem="77w-7d-bKo" secondAttribute="top" id="fmb-SW-2mQ"/>
-                            <constraint firstItem="0oK-uf-RKa" firstAttribute="leading" secondItem="3wl-fg-gOI" secondAttribute="leading" id="shq-K1-yOd"/>
-                            <constraint firstItem="DiN-N7-Lhb" firstAttribute="leading" secondItem="uK3-0L-e9U" secondAttribute="trailing" id="tSr-ih-8UM"/>
+                            <constraint firstItem="IYP-US-sh9" firstAttribute="trailing" secondItem="f0v-oI-azW" secondAttribute="trailing" id="ONn-WL-hui"/>
+                            <constraint firstItem="IYP-US-sh9" firstAttribute="top" secondItem="77w-7d-bKo" secondAttribute="top" id="ZJP-VS-LUn"/>
+                            <constraint firstItem="f0v-oI-azW" firstAttribute="top" secondItem="77w-7d-bKo" secondAttribute="top" constant="41" id="s8e-ni-ayJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="77w-7d-bKo"/>
                     </view>
                     <connections>
-                        <outlet property="keystore" destination="0oK-uf-RKa" id="axz-Rx-yil"/>
-                        <outlet property="mnemonic" destination="uK3-0L-e9U" id="SDj-jZ-Qyx"/>
-                        <outlet property="privatekey" destination="DiN-N7-Lhb" id="pIz-Or-SuX"/>
-                        <outlet property="slider" destination="JzJ-2R-i6L" id="vSi-o0-I0W"/>
+                        <outlet property="tabbedButtonView" destination="IYP-US-sh9" id="0m0-lK-buL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PDt-R8-g1D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="512.79999999999995" y="965.6671664167917"/>
         </scene>
-        <!--Import Wallet Page View Controller-->
+        <!--Page View Controller-->
         <scene sceneID="27P-Kh-cRf">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rNL-pf-7HL" customClass="ImportWalletPageViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="rNL-pf-7HL" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KL7-MZ-TEn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="513" y="1696"/>

@@ -65,7 +65,6 @@
 		897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897AFC5A2130129500383A12 /* CurrencyViewController.xib */; };
 		897AFC5F213012BB00383A12 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC5D213012BB00383A12 /* AboutUsViewController.swift */; };
 		897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897AFC5E213012BB00383A12 /* AboutUsViewController.xib */; };
-		898889C421364EA700D04AA8 /* ImportWalletPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C321364EA700D04AA8 /* ImportWalletPageViewController.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
 		898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */; };
@@ -243,7 +242,6 @@
 		897AFC5A2130129500383A12 /* CurrencyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrencyViewController.xib; sourceTree = "<group>"; };
 		897AFC5D213012BB00383A12 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		897AFC5E213012BB00383A12 /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
-		898889C321364EA700D04AA8 /* ImportWalletPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletPageViewController.swift; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatekeyViewController.swift; sourceTree = "<group>"; };
@@ -597,7 +595,6 @@
 				89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */,
 				89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */,
 				8964A18520BFE6850086848F /* ImportWalletController.swift */,
-				898889C321364EA700D04AA8 /* ImportWalletPageViewController.swift */,
 				898889C52136521100D04AA8 /* KeystoreViewController.swift */,
 				898889C72136526800D04AA8 /* MnemonicViewController.swift */,
 				898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */,
@@ -998,7 +995,6 @@
 				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
-				8964A19420C115A70086848F /* SureMnemonicViewController.xib in Resources */,
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
@@ -1187,7 +1183,6 @@
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
-				898889C421364EA700D04AA8 /* ImportWalletPageViewController.swift in Sources */,
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
 				899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
