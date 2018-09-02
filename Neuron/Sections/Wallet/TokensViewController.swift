@@ -104,7 +104,6 @@ class TokensViewController: UITableViewController {
         cell.balance.text = model.tokenBalance
         cell.token.text = model.symbol
         cell.network.text = model.chainName ?? "ethereum Mainnet"
-
         return cell
     }
 

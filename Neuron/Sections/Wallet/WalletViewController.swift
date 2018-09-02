@@ -49,9 +49,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = true
-
         addNotify()
-
         tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController")
         nfcViewController = storyboard!.instantiateViewController(withIdentifier: "nfcViewController")
         assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
@@ -79,8 +77,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate {
         self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
 
-
-    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var offset = scrollView.contentOffset.y
         if #available(iOS 11.0, *) {
