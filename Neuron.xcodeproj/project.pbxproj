@@ -145,6 +145,8 @@
 		89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */; };
 		89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D935242139363A002FAEEC /* TokenTableViewCell.swift */; };
 		89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F7966C213A6B680064808A /* ERC721TableViewCell.swift */; };
+		89F7966F213BD5680064808A /* Assets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F7966E213BD5680064808A /* Assets.storyboard */; };
+		89F79671213BD8C40064808A /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F79670213BD8C40064808A /* Transaction.storyboard */; };
 		89F9E73E20DEBDE8009E68D4 /* ExportKeyStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9E73C20DEBDE8009E68D4 /* ExportKeyStoreController.swift */; };
 		89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeyStoreController.xib */; };
 		89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */; };
@@ -323,6 +325,8 @@
 		89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletViewModel.swift; sourceTree = "<group>"; };
 		89D935242139363A002FAEEC /* TokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTableViewCell.swift; sourceTree = "<group>"; };
 		89F7966C213A6B680064808A /* ERC721TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC721TableViewCell.swift; sourceTree = "<group>"; };
+		89F7966E213BD5680064808A /* Assets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assets.storyboard; sourceTree = "<group>"; };
+		89F79670213BD8C40064808A /* Transaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
 		89F9E73C20DEBDE8009E68D4 /* ExportKeyStoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeyStoreController.swift; sourceTree = "<group>"; };
 		89F9E73D20DEBDE8009E68D4 /* ExportKeyStoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeyStoreController.xib; sourceTree = "<group>"; };
 		89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewModel.swift; sourceTree = "<group>"; };
@@ -583,6 +587,7 @@
 				898A19FD20B55FE300ECB465 /* AddWalletController.swift */,
 				89C3BF062134E3F200872BD0 /* AddWallet.storyboard */,
 				898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */,
+				89F7966E213BD5680064808A /* Assets.storyboard */,
 				898A1A0220B5717A00ECB465 /* AssetViewController.xib */,
 				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
 				898A1A0A20B64F6000ECB465 /* AddAssetController.xib */,
@@ -716,6 +721,7 @@
 				898A1A1F20B7B4F300ECB465 /* ViewModel */,
 				898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */,
 				898A1A2520B7DAA300ECB465 /* Sub3TableViewCell.xib */,
+				89F79670213BD8C40064808A /* Transaction.storyboard */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -987,6 +993,7 @@
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
 				89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */,
+				89F7966F213BD5680064808A /* Assets.storyboard in Resources */,
 				89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */,
 				1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */,
 				898A1A2720B7DAA300ECB465 /* Sub3TableViewCell.xib in Resources */,
@@ -995,6 +1002,7 @@
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
+				89F79671213BD8C40064808A /* Transaction.storyboard in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,

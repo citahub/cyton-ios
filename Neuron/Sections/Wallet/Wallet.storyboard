@@ -207,6 +207,22 @@
             </objects>
             <point key="canvasLocation" x="1120.8" y="-64.31784107946028"/>
         </scene>
+        <!--Assets-->
+        <scene sceneID="WQm-gw-IXz">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Assets" id="aav-fQ-4qW" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="utW-K3-PMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3111" y="-785"/>
+        </scene>
+        <!--Transaction-->
+        <scene sceneID="NTD-gW-TRn">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Transaction" id="bsA-HT-tlA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lpe-c4-2e1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3150" y="-708"/>
+        </scene>
         <!--RequestPayment-->
         <scene sceneID="quN-As-AJ6">
             <objects>
@@ -303,7 +319,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ntp-2h-aK3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3248.8000000000002" y="-278.41079460269867"/>
+            <point key="canvasLocation" x="3450" y="-269"/>
         </scene>
         <!--Tokens View Controller-->
         <scene sceneID="ALp-Vg-DGL">
@@ -328,6 +344,7 @@
                                     <state key="normal" image="add_asset"/>
                                     <connections>
                                         <action selector="addAssets:" destination="5WI-5s-a3j" eventType="touchUpInside" id="SmV-p8-95r"/>
+                                        <segue destination="aav-fQ-4qW" kind="show" id="Ar4-Yt-8Wq"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -417,6 +434,7 @@
                                     <outlet property="network" destination="TvO-VX-noK" id="IWQ-lm-e6I"/>
                                     <outlet property="token" destination="G7U-N5-edK" id="7Ga-PP-cZx"/>
                                     <outlet property="tokenImage" destination="Nkr-sv-25F" id="U96-Rg-a4v"/>
+                                    <segue destination="bsA-HT-tlA" kind="show" id="UtD-5E-FRi"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
