@@ -13,7 +13,6 @@ protocol SelectWalletControllerDelegate: NSObjectProtocol {
 }
 
 class SelectWalletController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
     @IBOutlet weak var selectTable: UITableView!
     @IBOutlet weak var wView: UIView!
     @IBOutlet weak var headLable: UILabel!

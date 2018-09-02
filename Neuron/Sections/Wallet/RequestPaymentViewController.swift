@@ -7,9 +7,26 @@
 //
 
 import UIKit
+import EFQRCode
 
 class RequestPaymentViewController: UIViewController {
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var QRCode: UIImageView!
+    var appModel = AppModel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "收款二维码"
+        icon.image = UIImage(data: appModel.currentWallet!.iconData!)
+        name.text = appModel.currentWallet!.name
+        address.text = appModel.currentWallet!.address
+        let imagea = EFQRCode.generate(content: appModel.currentWallet!.address)
+        QRCode.image = UIImage(cgImage: imagea!)
+    }
+
+    @IBAction func copyAddress(_ sender: UIButton) {
+        UIPasteboard.general.string = appModel.currentWallet?.address
+        NeuLoad.showToast(text: "地址已经复制到粘贴板")
     }
 }
