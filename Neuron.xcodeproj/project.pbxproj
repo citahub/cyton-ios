@@ -103,6 +103,7 @@
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
 		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */; };
+		89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */; };
 		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
 		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
 		89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* APIMacro.swift */; };
@@ -282,6 +283,7 @@
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
 		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptService.swift; sourceTree = "<group>"; };
+		89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
 		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		89B296EC20F4CBA7008558A7 /* APIMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMacro.swift; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				1A092244213580C900CAED5D /* NFCViewController.swift */,
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
 				8928C2A120B41BCA00C3103E /* SelectWalletController.swift */,
+				89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */,
 				1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */,
 				1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */,
 				1A207DD02137B412008DC306 /* RequestPayment.storyboard */,
@@ -718,7 +721,6 @@
 			isa = PBXGroup;
 			children = (
 				898A1A1E20B7B4F300ECB465 /* View */,
-				898A1A1F20B7B4F300ECB465 /* ViewModel */,
 				898A1A2420B7DAA300ECB465 /* Sub3TableViewCell.swift */,
 				898A1A2520B7DAA300ECB465 /* Sub3TableViewCell.xib */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
@@ -734,13 +736,6 @@
 				898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		898A1A1F20B7B4F300ECB465 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		898A1A2C20B8033C00ECB465 /* TableViewCell */ = {
@@ -1266,6 +1261,7 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
+				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,

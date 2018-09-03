@@ -51,7 +51,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZc-xD-WK2">
+                                <label opaque="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZc-xD-WK2">
                                     <rect key="frame" x="80" y="81" width="215" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="0Fj-u1-d6o"/>
@@ -59,6 +59,9 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="6S9-7D-ZKp" appends="YES" id="IkX-Vt-4NW"/>
+                                    </connections>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cJI-kh-NQ4">
                                     <rect key="frame" x="300" y="81" width="20" height="20"/>
@@ -67,6 +70,9 @@
                                         <constraint firstAttribute="height" constant="20" id="voX-gR-npP"/>
                                     </constraints>
                                     <state key="normal" image="copy_address"/>
+                                    <connections>
+                                        <action selector="copyWalletAddressWithButton:" destination="NFk-Vr-nsf" eventType="touchUpInside" id="jue-65-kgU"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -158,9 +164,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
-                            <state key="normal" title="切换钱包"/>
+                            <state key="normal" image="switch_wallet"/>
                             <connections>
                                 <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4V8-pX-BA8"/>
                             </connections>
@@ -175,6 +181,11 @@
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="c5v-Li-QRF"/>
                 </view>
+                <tapGestureRecognizer id="6S9-7D-ZKp">
+                    <connections>
+                        <action selector="copyWalletAddress:" destination="NFk-Vr-nsf" id="onY-J3-yKm"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <view contentMode="scaleToFill" id="t1o-zF-Pti" userLabel="Tab Header">
                     <rect key="frame" x="0.0" y="0.0" width="365" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -476,6 +487,7 @@
         <image name="copy_address" width="14" height="14"/>
         <image name="qrCode" width="22" height="22"/>
         <image name="switchWallet" width="24" height="24"/>
+        <image name="switch_wallet" width="95" height="26"/>
         <image name="walletQRCode" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
