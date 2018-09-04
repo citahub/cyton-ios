@@ -9,27 +9,18 @@
 import UIKit
 import RealmSwift
 
-class ManageAssetViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
-    @IBOutlet weak var aTable: UITableView!
+class ManageAssetViewController: UITableViewController, AssetTableViewCellDelegate {
     let viewModel = AssetViewModel()
     var dataArray: [TokenModel] = []
     var selectArr: List<TokenModel>?
     var selectAddressArray: [String] = []
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        didGetDataForList()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "资产管理"
-        aTable.delegate = self
-        aTable.dataSource = self
-        aTable.register(UINib.init(nibName: "AssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        didSetRightBtn()
+        didGetDataForList()
     }
+    
     func didGetDataForList() {
         selectAddressArray.removeAll()
         dataArray = viewModel.getAssetListFromJSON()
@@ -37,38 +28,25 @@ class ManageAssetViewController: UIViewController, UITableViewDelegate, UITableV
         for tokenItem in selectArr! {
             selectAddressArray.append(tokenItem.address)
         }
-        aTable.reloadData()
     }
 
-    //setup nav
-    func didSetRightBtn() {
-        let rightBtn = UIButton.init(type: .custom)
-        rightBtn.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-        rightBtn.setImage(UIImage.init(named: "添加"), for: .normal)
-        rightBtn.addTarget(self, action: #selector(didAddAsset), for: .touchUpInside)
-        navigationItem.rightBarButtonItem = UIBarButtonItem.init(customView: rightBtn)
-    }
-
-    //添加资产
-    @objc func didAddAsset() {
+    @IBAction func addAssetAction(_ sender: UIBarButtonItem) {
         let aCtrl = AddAssetController.init(nibName: "AddAssetController", bundle: nil)
         navigationController?.pushViewController(aCtrl, animated: true)
     }
 
-    //tableview代理
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let ID = "ID"
-        let cell = tableView.dequeueReusableCell(withIdentifier: ID, for: indexPath) as! AssetTableViewCell
-
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assetTableviewCell") as! AssetTableViewCell
+        cell.delegate = self
         let tokenModel = dataArray[indexPath.row]
         cell.iconUrlStr = tokenModel.iconUrl
-        cell.titleLabel.text = tokenModel.name
+        cell.symbolLabel.text = tokenModel.name
         cell.addressLabel.text = tokenModel.address
-        cell.subTitleLabel.text = tokenModel.symbol
+        cell.nameLabel.text = tokenModel.symbol
         if selectAddressArray.contains(tokenModel.address) {
             cell.isSelect = true
         } else {
@@ -78,25 +56,28 @@ class ManageAssetViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let tokenModel = dataArray[indexPath.row]
-        print(tokenModel.address)
-        if selectAddressArray.contains(tokenModel.address) {
-            viewModel.deleteSelectedToken(tokenM: tokenModel)
+        let model = dataArray[indexPath.row]
+        selectedAsset(model: model)
+    }
+
+    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch) {
+        let index = tableView.indexPath(for: assetTableViewCell)!
+        let model = dataArray[index.row]
+        selectedAsset(model: model)
+    }
+
+    func selectedAsset(model: TokenModel) {
+        if selectAddressArray.contains(model.address) {
+            viewModel.deleteSelectedToken(tokenM: model)
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
-                return item == tokenModel.address
+                return item == model.address
             })
         } else {
-            viewModel.addSelectToken(tokenM: tokenModel)
+            viewModel.addSelectToken(tokenM: model)
         }
         didGetDataForList()
         tableView.reloadData()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }

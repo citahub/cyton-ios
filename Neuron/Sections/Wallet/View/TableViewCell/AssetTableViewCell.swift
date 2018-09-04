@@ -9,22 +9,25 @@
 import UIKit
 import SDWebImage
 
+protocol AssetTableViewCellDelegate: class {
+    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch)
+}
+
 class AssetTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-
-    @IBOutlet weak var subTitleLabel: UILabel!
-
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var stateBtn: UIButton!
+    @IBOutlet var iconImage: UIImageView!
+    @IBOutlet var symbolLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet weak var statusBtn: UISwitch!
+    weak var delegate: AssetTableViewCellDelegate?
 
     var isSelect: Bool = false {
         didSet {
             if isSelect {
-                stateBtn.setImage(UIImage.init(named: "state_on"), for: .normal)
+                statusBtn.isOn = true
             } else {
-                stateBtn.setImage(UIImage.init(named: "state_off"), for: .normal)
+                statusBtn.isOn = false
             }
         }
     }
@@ -35,15 +38,7 @@ class AssetTableViewCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let lineV = UIView.init(frame: CGRect(x: 74, y: 74, width: ScreenW - 74, height: 1))
-        lineV.backgroundColor = ColorFromString(hex: "#eeeeee")
-        contentView.addSubview(lineV)
-        contentView.bringSubview(toFront: lineV)
+    @IBAction func selectAssetSwitch(_ sender: UISwitch) {
+        delegate?.selectAsset(self, didSelectAsset: sender)
     }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

@@ -27,9 +27,6 @@ class TokensViewController: UITableViewController {
         didGetTokenList()
     }
 
-    @IBAction func addAssets(_ sender: UIButton) {
-    }
-    
     /// get token list from realm
     func didGetTokenList() {
         tokenArray.removeAll()
@@ -81,7 +78,7 @@ class TokensViewController: UITableViewController {
                     }
                     group.leave()
                 }
-            }
+            } 
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()

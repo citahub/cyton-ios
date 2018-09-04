@@ -219,12 +219,12 @@
             <point key="canvasLocation" x="1120.8" y="-64.31784107946028"/>
         </scene>
         <!--Assets-->
-        <scene sceneID="WQm-gw-IXz">
+        <scene sceneID="YoG-R7-kSG">
             <objects>
-                <viewControllerPlaceholder storyboardName="Assets" id="aav-fQ-4qW" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="utW-K3-PMi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Assets" id="Xr7-VV-O0W" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yrs-Ub-UJc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3111" y="-785"/>
+            <point key="canvasLocation" x="3156" y="-798"/>
         </scene>
         <!--Transaction-->
         <scene sceneID="NTD-gW-TRn">
@@ -354,8 +354,7 @@
                                     <rect key="frame" x="332" y="15" width="24" height="24"/>
                                     <state key="normal" image="add_asset"/>
                                     <connections>
-                                        <action selector="addAssets:" destination="5WI-5s-a3j" eventType="touchUpInside" id="SmV-p8-95r"/>
-                                        <segue destination="aav-fQ-4qW" kind="show" id="Ar4-Yt-8Wq"/>
+                                        <segue destination="Xr7-VV-O0W" kind="show" identifier="assets" id="SwU-fF-qmx"/>
                                     </connections>
                                 </button>
                             </subviews>
