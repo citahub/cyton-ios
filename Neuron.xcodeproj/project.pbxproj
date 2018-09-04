@@ -76,9 +76,7 @@
 		898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19F420B53F3800ECB465 /* DetailIconCell.xib */; };
 		898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19FD20B55FE300ECB465 /* AddWalletController.swift */; };
 		898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */; };
-		898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0220B5717A00ECB465 /* AssetViewController.xib */; };
 		898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */; };
-		898A1A0820B5797700ECB465 /* AssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */; };
 		898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0920B64F6000ECB465 /* AddAssetController.swift */; };
 		898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0A20B64F6000ECB465 /* AddAssetController.xib */; };
 		898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */; };
@@ -256,9 +254,7 @@
 		898A19F420B53F3800ECB465 /* DetailIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailIconCell.xib; sourceTree = "<group>"; };
 		898A19FD20B55FE300ECB465 /* AddWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletController.swift; sourceTree = "<group>"; };
 		898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAssetViewController.swift; sourceTree = "<group>"; };
-		898A1A0220B5717A00ECB465 /* AssetViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetViewController.xib; sourceTree = "<group>"; };
 		898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
-		898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetTableViewCell.xib; sourceTree = "<group>"; };
 		898A1A0920B64F6000ECB465 /* AddAssetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetController.swift; sourceTree = "<group>"; };
 		898A1A0A20B64F6000ECB465 /* AddAssetController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAssetController.xib; sourceTree = "<group>"; };
 		898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetTableViewCell.swift; sourceTree = "<group>"; };
@@ -591,7 +587,6 @@
 				89C3BF062134E3F200872BD0 /* AddWallet.storyboard */,
 				898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */,
 				89F7966E213BD5680064808A /* Assets.storyboard */,
-				898A1A0220B5717A00ECB465 /* AssetViewController.xib */,
 				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
 				898A1A0A20B64F6000ECB465 /* AddAssetController.xib */,
 				898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */,
@@ -707,7 +702,6 @@
 				898A19F320B53F3800ECB465 /* DetailIconCell.swift */,
 				898A19F420B53F3800ECB465 /* DetailIconCell.xib */,
 				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,
-				898A1A0620B5797700ECB465 /* AssetTableViewCell.xib */,
 				898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */,
 				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
 				89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */,
@@ -974,7 +968,6 @@
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
 				89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */,
 				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
-				898A1A0820B5797700ECB465 /* AssetTableViewCell.xib in Resources */,
 				8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */,
 				89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
@@ -983,7 +976,6 @@
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
 				897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */,
-				898A1A0420B5717A00ECB465 /* AssetViewController.xib in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,

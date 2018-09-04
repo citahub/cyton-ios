@@ -28,6 +28,7 @@ class TokensViewController: UITableViewController {
     }
 
     @IBAction func addAssets(_ sender: UIButton) {
+        print("dianji")
     }
     
     /// get token list from realm

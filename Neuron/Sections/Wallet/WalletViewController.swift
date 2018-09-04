@@ -158,11 +158,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     func didBackQRCodeMessage(codeResult: String) {
     }
 
-    //点击资产管理按钮
-    @IBAction func didClickManageBtn(_ sender: UIButton) {
-        let aCtrl = ManageAssetViewController.init(nibName: "AssetViewController", bundle: nil)
-        navigationController?.pushViewController(aCtrl, animated: true)
-    }
     //click icon image
     @objc func didClickIconImage() {
         let wCtrl = WalletDetailController.init(nibName: "WalletDetailController", bundle: nil)

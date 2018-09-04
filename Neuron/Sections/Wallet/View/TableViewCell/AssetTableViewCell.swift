@@ -12,19 +12,19 @@ import SDWebImage
 class AssetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var symbolLabel: UILabel!
 
-    @IBOutlet weak var subTitleLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
 
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var stateBtn: UIButton!
+    @IBOutlet weak var statusBtn: UISwitch!
 
     var isSelect: Bool = false {
         didSet {
             if isSelect {
-                stateBtn.setImage(UIImage.init(named: "state_on"), for: .normal)
+                statusBtn.isOn = true
             } else {
-                stateBtn.setImage(UIImage.init(named: "state_off"), for: .normal)
+                statusBtn.isOn = false
             }
         }
     }
@@ -34,16 +34,4 @@ class AssetTableViewCell: UITableViewCell {
             iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
         }
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        let lineV = UIView.init(frame: CGRect(x: 74, y: 74, width: ScreenW - 74, height: 1))
-        lineV.backgroundColor = ColorFromString(hex: "#eeeeee")
-        contentView.addSubview(lineV)
-        contentView.bringSubview(toFront: lineV)
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

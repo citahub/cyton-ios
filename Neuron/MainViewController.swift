@@ -87,7 +87,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         if WalletRealmTool.hasWallet() {
             walletViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateInitialViewController()!
         } else {
-            walletViewController = AddWalletController()
+            walletViewController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "AddWallet")
         }
         (viewControllers![1] as! BaseNavigationController).viewControllers = [walletViewController]
     }
