@@ -137,7 +137,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     //switch wallet delegate
-    func selectWalletController(_ controller: SelectWalletController, model: WalletModel) {
+    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
         refreshUI(walletModel: model)
     }
 

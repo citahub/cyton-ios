@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectWalletControllerDelegate: class {
-    func selectWalletController(_ controller: SelectWalletController, model: WalletModel)
+    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel)
 }
 
 class SelectWalletController: UITableViewController {
@@ -61,7 +61,7 @@ class SelectWalletController: UITableViewController {
         try! WalletRealmTool.realm.write {
             appModel.currentWallet = walletModel
         }
-        delegate?.selectWalletController(self, model: walletModel)
+        delegate?.selectWalletController(self, didSelectWallet: walletModel)
         dismiss(animated: true, completion: nil)
     }
 }
