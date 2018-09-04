@@ -22,7 +22,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
     private var tokensViewController: UIViewController!
-    private var nfcViewController: UIViewController!
+    private var nftViewController: UIViewController!
     private var assetPageViewController: UIPageViewController!
     private var isHeaderViewHidden = false {
         didSet {
@@ -51,7 +51,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         automaticallyAdjustsScrollViewInsets = true
         addNotify()
         tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController")
-        nfcViewController = storyboard!.instantiateViewController(withIdentifier: "nfcViewController")
+        nftViewController = storyboard!.instantiateViewController(withIdentifier: "nftViewController")
         assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
         assetPageViewController.dataSource = self
         assetPageViewController.delegate = self
@@ -101,7 +101,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         }
 
         isHeaderViewHidden = offset >= tableView.tableHeaderView!.bounds.height
-        [tokensViewController, nfcViewController].forEach { listViewController in
+        [tokensViewController, nftViewController].forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
     }
@@ -198,12 +198,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
 
 extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
-        let viewControllerToShow = index == 0 ? tokensViewController : nfcViewController
+        let viewControllerToShow = index == 0 ? tokensViewController : nftViewController
         assetPageViewController.setViewControllers([viewControllerToShow!], direction: .forward, animated: false)
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if viewController == nfcViewController {
+        if viewController == nftViewController {
             return tokensViewController
         }
         return nil
@@ -211,7 +211,7 @@ extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerD
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         if viewController == tokensViewController {
-            return nfcViewController
+            return nftViewController
         }
         return nil
     }
