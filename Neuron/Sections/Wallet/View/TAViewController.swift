@@ -100,7 +100,7 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ID") as! AddAssetTableViewCell
             cell.delegate = self
-            cell.headLable.text = nameArray[indexPath.row]
+            cell.headLabel.text = nameArray[indexPath.row]
             cell.placeHolderStr = plactholderArray[indexPath.row]
             cell.indexP = indexPath as NSIndexPath
             print(indexPath.row)

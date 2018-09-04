@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,7 +30,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="慢" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bFb-In-2ap">
-                        <rect key="frame" x="15" y="58" width="42" height="21"/>
+                        <rect key="frame" x="15" y="58.5" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="5la-eP-Tuk"/>
                             <constraint firstAttribute="width" constant="42" id="MOn-SE-CEs"/>
@@ -41,7 +40,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFW-bX-a1h">
-                        <rect key="frame" x="57" y="58" width="261" height="21"/>
+                        <rect key="frame" x="57" y="58.5" width="261" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="QvF-AE-MaL"/>
                         </constraints>
@@ -50,7 +49,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="快" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-Rl-tid">
-                        <rect key="frame" x="318" y="58" width="42" height="21"/>
+                        <rect key="frame" x="318" y="58.5" width="42" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="YI5-7m-eBr"/>
                             <constraint firstAttribute="width" constant="42" id="mE5-WY-1bz"/>
@@ -83,11 +82,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="gasLable" destination="Geb-Ju-Fhs" id="4Tl-pB-mvA"/>
-                <outlet property="quickLable" destination="xjR-Rl-tid" id="ev4-MZ-aUD"/>
+                <outlet property="gasLabel" destination="Geb-Ju-Fhs" id="Imz-SD-h68"/>
+                <outlet property="quickLabel" destination="xjR-Rl-tid" id="5Qg-1l-cre"/>
                 <outlet property="sView" destination="5wg-33-os2" id="iDC-wn-Cfl"/>
-                <outlet property="slowLable" destination="bFb-In-2ap" id="gbF-jg-4uI"/>
-                <outlet property="speedLable" destination="aFW-bX-a1h" id="Wjp-4T-KmS"/>
+                <outlet property="slowLabel" destination="bFb-In-2ap" id="XsR-oD-be4"/>
+                <outlet property="speedLabel" destination="aFW-bX-a1h" id="wFO-2q-AkS"/>
             </connections>
             <point key="canvasLocation" x="61.5" y="72"/>
         </tableViewCell>

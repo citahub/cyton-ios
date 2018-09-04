@@ -24,17 +24,17 @@ class TAViewControllerCell: UITableViewCell {
 
     var showGasPrice: String = ""{
         didSet {
-            speedLable.text = showGasPrice + " ether"
+            speedLabel.text = showGasPrice + " ether"
         }
     }
 
     weak var delegate: TAViewControllerCellDelegate!
 
-    @IBOutlet weak var quickLable: UILabel!
-    @IBOutlet weak var slowLable: UILabel!
-    @IBOutlet weak var gasLable: UILabel!
+    @IBOutlet weak var quickLabel: UILabel!
+    @IBOutlet weak var slowLabel: UILabel!
+    @IBOutlet weak var gasLabel: UILabel!
     @IBOutlet weak var sView: UISlider!
-    @IBOutlet weak var speedLable: UILabel!
+    @IBOutlet weak var speedLabel: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

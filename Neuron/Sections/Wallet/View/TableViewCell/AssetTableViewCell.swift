@@ -12,11 +12,11 @@ import SDWebImage
 class AssetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
 
-    @IBOutlet weak var subTitleLable: UILabel!
+    @IBOutlet weak var subTitleLabel: UILabel!
 
-    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var stateBtn: UIButton!
 
     var isSelect: Bool = false {

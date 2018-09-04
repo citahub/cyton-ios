@@ -132,9 +132,9 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.14117647058823529" green="0.17254901960784313" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="addressLable" destination="OIT-9h-XHs" id="si5-v5-Gki"/>
+                                    <outlet property="addressLabel" destination="OIT-9h-XHs" id="5wd-PG-Vp0"/>
                                     <outlet property="iconImageView" destination="0qn-IZ-Q32" id="rRs-3m-ZbS"/>
-                                    <outlet property="nameLable" destination="pDf-vq-tce" id="8gQ-WD-29o"/>
+                                    <outlet property="nameLabel" destination="pDf-vq-tce" id="35H-c4-enw"/>
                                     <outlet property="statusImageView" destination="5ca-RZ-12d" id="j37-XL-cBB"/>
                                 </connections>
                             </tableViewCell>

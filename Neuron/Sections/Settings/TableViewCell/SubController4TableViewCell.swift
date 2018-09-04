@@ -10,8 +10,8 @@ import UIKit
 
 class SubController4TableViewCell: UITableViewCell {
 
-    @IBOutlet weak var appNameLable: UILabel!
-    @IBOutlet weak var versionLable: UILabel!
+    @IBOutlet weak var appNameLabel: UILabel!
+    @IBOutlet weak var versionLabel: UILabel!
 
     var compileDate: Date {
         let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
@@ -30,8 +30,8 @@ class SubController4TableViewCell: UITableViewCell {
         dateFormatter.dateFormat = "yyMMdd"
         let convertedDate = dateFormatter.string(from: compileDate)
         print(convertedDate)
-        appNameLable.text = appDisplayName as? String
-        versionLable.text = "V \(String(describing: majorVersion!))" + ".\(convertedDate)"
+        appNameLabel.text = appDisplayName as? String
+        versionLabel.text = "V \(String(describing: majorVersion!))" + ".\(convertedDate)"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

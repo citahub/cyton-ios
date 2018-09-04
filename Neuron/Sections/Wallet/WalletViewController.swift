@@ -77,15 +77,11 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     @IBAction func copyWalletAddress(_ sender: UITapGestureRecognizer) {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
-        UIPasteboard.general.string = appModel.currentWallet?.address
-        NeuLoad.showToast(text: "地址已经复制到粘贴板")
+        copyAddress()
     }
 
     @IBAction func copyWalletAddressWithButton(_ sender: UIButton) {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
-        UIPasteboard.general.string = appModel.currentWallet?.address
-        NeuLoad.showToast(text: "地址已经复制到粘贴板")
+        copyAddress()
     }
     
     @IBAction func scanQRCode(_ sender: UIBarButtonItem) {
@@ -108,6 +104,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         [tokensViewController, nfcViewController].forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
+    }
+
+    private func copyAddress() {
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        UIPasteboard.general.string = appModel.currentWallet?.address
+        NeuLoad.showToast(text: "地址已经复制到粘贴板")
     }
 
     private func updateNavigationBar() {
@@ -135,8 +137,8 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     //switch wallet delegate
-    func didCallBackSelectedWalletModel(walletModel: WalletModel) {
-        refreshUI(walletModel: walletModel)
+    func selectWalletController(_ controller: SelectWalletController, model: WalletModel) {
+        refreshUI(walletModel: model)
     }
 
     @objc func changeWallet(nofy: Notification) {

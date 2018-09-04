@@ -17,10 +17,10 @@ class Sub3TableViewCell: UITableViewCell {
         }
     }
     @IBOutlet weak var iconImageV: UIImageView!
-    @IBOutlet weak var addressLable: UILabel!
-    @IBOutlet weak var limitLable: UILabel!
-    @IBOutlet weak var dataLable: UILabel!
-    @IBOutlet weak var exchangeLable: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var limitLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var exchangeLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet

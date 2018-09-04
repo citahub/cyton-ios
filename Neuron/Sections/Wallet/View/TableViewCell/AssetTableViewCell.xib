@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -81,11 +80,11 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="addressLable" destination="qZl-DG-JKh" id="dNF-S0-0oj"/>
+                <outlet property="addressLabel" destination="qZl-DG-JKh" id="AE2-Gn-rzz"/>
                 <outlet property="iconImage" destination="K7I-Iy-t5L" id="dae-Cr-yLS"/>
                 <outlet property="stateBtn" destination="Z9t-9J-hJT" id="Hyv-9B-Bd5"/>
-                <outlet property="subTitleLable" destination="nn8-fN-nLT" id="jhr-xG-Cbh"/>
-                <outlet property="titleLable" destination="8Jz-o9-AWp" id="jqH-O1-H7P"/>
+                <outlet property="subTitleLabel" destination="nn8-fN-nLT" id="4KM-SZ-1ci"/>
+                <outlet property="titleLabel" destination="8Jz-o9-AWp" id="4zi-vm-PFu"/>
             </connections>
             <point key="canvasLocation" x="61.5" y="69"/>
         </tableViewCell>

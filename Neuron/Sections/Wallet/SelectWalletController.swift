@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SelectWalletControllerDelegate: class {
-    func didCallBackSelectedWalletModel(walletModel: WalletModel)
+    func selectWalletController(_ controller: SelectWalletController, model: WalletModel)
 }
 
 class SelectWalletController: UITableViewController {
@@ -46,8 +46,8 @@ class SelectWalletController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchWalletCell") as! WalletTableViewCell
         let walletModel = appModel.wallets[indexPath.section]
         cell.iconImageView.image = UIImage(data: walletModel.iconData)
-        cell.nameLable.text = walletModel.name
-        cell.addressLable.text = walletModel.address
+        cell.nameLabel.text = walletModel.name
+        cell.addressLabel.text = walletModel.address
         if appModel.currentWallet?.address == walletModel.address {
             cell.selectStatus = true
         } else {
@@ -61,7 +61,7 @@ class SelectWalletController: UITableViewController {
         try! WalletRealmTool.realm.write {
             appModel.currentWallet = walletModel
         }
-        delegate?.didCallBackSelectedWalletModel(walletModel: walletModel)
+        delegate?.selectWalletController(self, model: walletModel)
         dismiss(animated: true, completion: nil)
     }
 }

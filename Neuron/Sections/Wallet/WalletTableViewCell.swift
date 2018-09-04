@@ -10,8 +10,8 @@ import UIKit
 
 class WalletTableViewCell: UITableViewCell {
     @IBOutlet var iconImageView: UIImageView!
-    @IBOutlet var nameLable: UILabel!
-    @IBOutlet var addressLable: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet var statusImageView: UIImageView!
     var selectStatus: Bool = false {
         didSet {
@@ -21,13 +21,5 @@ class WalletTableViewCell: UITableViewCell {
                 statusImageView.isHidden = true
             }
         }
-    }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
     }
 }

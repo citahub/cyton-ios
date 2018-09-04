@@ -85,7 +85,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
             cell.delegate = self
             cell.indexP = indexPath as NSIndexPath
             cell.isSecretText = true
-            cell.headLable.text = titleArray[indexPath.row]
+            cell.headLabel.text = titleArray[indexPath.row]
             cell.placeHolderStr = placeholderArray[indexPath.row]
             return cell
         }

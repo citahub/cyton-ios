@@ -12,7 +12,7 @@ class ContractTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     var headLabStr: String? {
         didSet {
-            headLable.text = headLabStr
+            headLabel.text = headLabStr
         }
     }
 
@@ -35,7 +35,7 @@ class ContractTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     let rightView = UILabel.init(frame: CGRect(x: 0, y: 0, width: 40, height: 44))
 
-    @IBOutlet weak var headLable: UILabel!
+    @IBOutlet weak var headLabel: UILabel!
     @IBOutlet weak var textField: UITextField!
     override func awakeFromNib() {
         super.awakeFromNib()

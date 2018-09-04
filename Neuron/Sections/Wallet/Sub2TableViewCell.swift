@@ -14,7 +14,7 @@ class Sub2TableViewCell: UITableViewCell {
 
     @IBOutlet weak var titlelable: UILabel!
 
-    @IBOutlet weak var countLable: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
 
     var iconUrlStr: String? {
         didSet {

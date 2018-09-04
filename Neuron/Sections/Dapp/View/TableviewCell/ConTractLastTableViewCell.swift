@@ -19,7 +19,7 @@ class ConTractLastTableViewCell: UITableViewCell {
     var UTF8Str = ""
 
     let lineV = UIView.init()
-    @IBOutlet weak var headLable: UILabel!
+    @IBOutlet weak var headLabel: UILabel!
     @IBOutlet weak var rightBtn: UIButton!
     @IBOutlet weak var leftBtn: UIButton!
     @IBOutlet weak var textView: UITextView!
