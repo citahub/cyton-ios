@@ -163,6 +163,7 @@
                     <navigationItem key="navigationItem" id="ZNf-2N-qe6"/>
                     <connections>
                         <outlet property="walletAddressLabel" destination="Leb-Jq-yHG" id="TIa-Wi-UrO"/>
+                        <outlet property="walletIconImageView" destination="eht-yj-nmo" id="0jg-0d-Nam"/>
                         <outlet property="walletNameLabel" destination="3ch-kv-w2c" id="OHu-4X-44v"/>
                     </connections>
                 </tableViewController>

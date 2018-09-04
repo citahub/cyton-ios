@@ -72,7 +72,6 @@
 		898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */; };
 		898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */; };
 		898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EE20B5176A00ECB465 /* WalletDetailController.swift */; };
-		898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19EF20B5176A00ECB465 /* WalletDetailController.xib */; };
 		898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19F320B53F3800ECB465 /* DetailIconCell.swift */; };
 		898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A19F420B53F3800ECB465 /* DetailIconCell.xib */; };
 		898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19FD20B55FE300ECB465 /* AddWalletController.swift */; };
@@ -251,7 +250,6 @@
 		898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDetailController.swift; sourceTree = "<group>"; };
 		898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AssetsDetailController.xib; sourceTree = "<group>"; };
 		898A19EE20B5176A00ECB465 /* WalletDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletDetailController.swift; sourceTree = "<group>"; };
-		898A19EF20B5176A00ECB465 /* WalletDetailController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WalletDetailController.xib; sourceTree = "<group>"; };
 		898A19F320B53F3800ECB465 /* DetailIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailIconCell.swift; sourceTree = "<group>"; };
 		898A19F420B53F3800ECB465 /* DetailIconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailIconCell.xib; sourceTree = "<group>"; };
 		898A19FD20B55FE300ECB465 /* AddWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddWalletController.swift; sourceTree = "<group>"; };
@@ -585,7 +583,6 @@
 				898A19F220B53EF500ECB465 /* TableViewCell */,
 				898A19EE20B5176A00ECB465 /* WalletDetailController.swift */,
 				891B663C213EAA1900B0FCB0 /* WalletManageMent.storyboard */,
-				898A19EF20B5176A00ECB465 /* WalletDetailController.xib */,
 				898A19FD20B55FE300ECB465 /* AddWalletController.swift */,
 				89C3BF062134E3F200872BD0 /* AddWallet.storyboard */,
 				898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */,
@@ -978,7 +975,6 @@
 				897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
-				898A19F120B5176A00ECB465 /* WalletDetailController.xib in Resources */,
 				897AFC5C2130129500383A12 /* CurrencyViewController.xib in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,

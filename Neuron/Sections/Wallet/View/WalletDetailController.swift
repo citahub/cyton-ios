@@ -12,6 +12,7 @@ import SCLAlertView
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var walletAddressLabel: UILabel!
+    @IBOutlet var walletIconImageView: UIImageView!
     var appModel = AppModel()
     var walletModel = WalletModel()
 
@@ -20,8 +21,9 @@ class WalletDetailController: UITableViewController {
         title = "钱包管理"
         appModel = WalletRealmTool.getCurrentAppmodel()
         walletModel = appModel.currentWallet!
-        walletAddressLabel.text = appModel.currentWallet?.address
-        walletNameLabel.text = appModel.currentWallet?.name
+        walletAddressLabel.text = walletModel.address
+        walletNameLabel.text = walletModel.name
+        walletIconImageView.image = UIImage(data: walletModel.iconData)
     }
 
     func didDeletWallet(_ sender: UIButton) {
@@ -126,10 +128,4 @@ class WalletDetailController: UITableViewController {
         alert.showEdit("修改钱包名称", subTitle: "", colorStyle: 0x2e4af2,
                        colorTextButton: 0xFFFFFF)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }
