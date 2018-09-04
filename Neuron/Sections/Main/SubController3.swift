@@ -83,10 +83,10 @@ class SubController3: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! Sub3TableViewCell
 
         let transModel = dataArray[indexPath.row]
-        cell.addressLable.text = transModel.hashString
-        cell.dataLable.text = transModel.formatTime
-        cell.limitLable.text = transModel.value
-        cell.exchangeLable.text = transModel.chainName
+        cell.addressLabel.text = transModel.hashString
+        cell.dateLabel.text = transModel.formatTime
+        cell.limitLabel.text = transModel.value
+        cell.exchangeLabel.text = transModel.chainName
         return cell
     }
 

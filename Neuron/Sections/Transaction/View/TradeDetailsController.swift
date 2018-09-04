@@ -36,9 +36,9 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
 
     private var titleArr = [""]
     private var subBtnArr = [""]
-    @IBOutlet weak var amountLable: UILabel!
-    @IBOutlet weak var addressLable: UILabel!
-    @IBOutlet weak var nameLable: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var headView: UIView!
     @IBOutlet weak var tTable: UITableView!
@@ -50,9 +50,9 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         iconImage.image = UIImage(data: (walletModel?.iconData)!)
         tTable.register(UINib.init(nibName: "TradeTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        amountLable.text = tModel.value
-        addressLable.text = walletModel?.address
-        nameLable.text = walletModel?.name
+        amountLabel.text = tModel.value
+        addressLabel.text = walletModel?.address
+        nameLabel.text = walletModel?.name
         tTable.reloadData()
     }
     func didSetUIDetail() {

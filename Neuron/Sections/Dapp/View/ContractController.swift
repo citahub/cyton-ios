@@ -15,8 +15,8 @@ class ContractController: UIViewController, UITableViewDelegate, UITableViewData
     let unitArray = ["", "", "eth", "eth"]
 
     @IBOutlet weak var headView: UIView!
-    @IBOutlet weak var nameLable: UILabel!
-    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var cTable: UITableView!
     @IBOutlet weak var backButton: UIButton!

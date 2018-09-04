@@ -11,8 +11,8 @@ import UIKit
 class MessageSignController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var nameLable: UILabel!
-    @IBOutlet weak var addressLable: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var mTable: UITableView!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var subMitButton: UIButton!
@@ -70,7 +70,7 @@ class MessageSignController: UIViewController, UITableViewDelegate, UITableViewD
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! ConTractLastTableViewCell
-            cell.headLable.text = "签名信息"
+            cell.headLabel.text = "签名信息"
             cell.hexStr = "The Message To Be Signed"
             cell.UTF8Str = "utf8-The Message To Be Signed"
 

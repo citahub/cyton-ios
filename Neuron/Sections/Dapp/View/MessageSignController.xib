@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MessageSignController" customModule="Neuron" customModuleProvider="target">
             <connections>
-                <outlet property="addressLable" destination="L1O-OE-43M" id="T0W-iq-Ux3"/>
+                <outlet property="addressLabel" destination="L1O-OE-43M" id="pPc-mh-LC9"/>
                 <outlet property="backButton" destination="Jf2-Vn-aXz" id="s1C-Ga-IPj"/>
                 <outlet property="iconImage" destination="Qxp-wc-LnS" id="Kws-dx-Dn1"/>
                 <outlet property="mTable" destination="KCy-MO-c7Y" id="416-5H-IC9"/>
-                <outlet property="nameLable" destination="c99-Ow-SFR" id="DRD-2b-XHZ"/>
+                <outlet property="nameLabel" destination="c99-Ow-SFR" id="HfP-hn-WtL"/>
                 <outlet property="subMitButton" destination="Bbl-yr-nH1" id="WQi-uC-4cR"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -48,8 +48,8 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="Qxp-wc-LnS">
-                                        <rect key="frame" x="25" y="8" width="60" height="60"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qxp-wc-LnS">
+                                        <rect key="frame" x="25" y="28" width="60" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="2CS-DZ-8MW"/>
                                             <constraint firstAttribute="height" constant="60" id="GrN-c7-5ti"/>
@@ -61,7 +61,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包名称A" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c99-Ow-SFR">
-                                        <rect key="frame" x="100" y="8" width="150" height="21"/>
+                                        <rect key="frame" x="100" y="28" width="150" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="04e-gS-TWl"/>
                                             <constraint firstAttribute="width" constant="150" id="qs4-Gg-30m"/>
@@ -71,7 +71,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x1CAF01098FBD81" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L1O-OE-43M">
-                                        <rect key="frame" x="100" y="44" width="200" height="21"/>
+                                        <rect key="frame" x="100" y="64" width="200" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="k2c-Ca-HxR"/>
                                             <constraint firstAttribute="height" constant="21" id="maw-qA-n3J"/>
@@ -159,7 +159,4 @@
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="头像" width="198" height="148"/>
-    </resources>
 </document>

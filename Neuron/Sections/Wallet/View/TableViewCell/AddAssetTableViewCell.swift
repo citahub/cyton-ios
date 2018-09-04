@@ -31,7 +31,7 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
     let firstBtn = UIButton.init(type: UIButtonType.custom)
     let secBtn = UIButton.init(type: UIButtonType.custom)
 
-    @IBOutlet weak var headLable: UILabel!
+    @IBOutlet weak var headLabel: UILabel!
     @IBOutlet weak var rightTextField: UITextField!
 
     override func awakeFromNib() {

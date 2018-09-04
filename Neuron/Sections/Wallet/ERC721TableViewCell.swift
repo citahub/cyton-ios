@@ -13,12 +13,4 @@ class ERC721TableViewCell: UITableViewCell {
     @IBOutlet var name: UILabel!
     @IBOutlet var network: UILabel!
     @IBOutlet var number: UILabel!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }

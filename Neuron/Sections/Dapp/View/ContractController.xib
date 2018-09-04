@@ -12,12 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContractController" customModule="Neuron" customModuleProvider="target">
             <connections>
-                <outlet property="addressLable" destination="Vwv-Ac-aJg" id="NDC-dO-k8r"/>
+                <outlet property="addressLabel" destination="Vwv-Ac-aJg" id="lz8-C3-hcS"/>
                 <outlet property="backButton" destination="cds-GF-LZ5" id="4Rp-bH-0H3"/>
                 <outlet property="cTable" destination="3oh-Ri-ImK" id="3bd-0K-deR"/>
                 <outlet property="headView" destination="HcM-RE-sD2" id="ekn-U8-yLv"/>
                 <outlet property="iconImage" destination="g59-9R-cMQ" id="nE8-st-zvu"/>
-                <outlet property="nameLable" destination="aoo-TD-cco" id="eUS-4R-Qjg"/>
+                <outlet property="nameLabel" destination="aoo-TD-cco" id="rBf-XT-JPa"/>
                 <outlet property="submitButton" destination="09I-yZ-Wql" id="L1U-vS-l8h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +36,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HcM-RE-sD2">
                     <rect key="frame" x="15" y="20" width="345" height="110"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="头像" translatesAutoresizingMaskIntoConstraints="NO" id="g59-9R-cMQ">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g59-9R-cMQ">
                             <rect key="frame" x="18" y="23" width="60" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="78D-jE-04F"/>
@@ -145,7 +145,4 @@
             <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="头像" width="198" height="148"/>
-    </resources>
 </document>

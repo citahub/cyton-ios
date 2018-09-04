@@ -15,9 +15,9 @@ protocol AssetsDetailControllerDelegate: NSObjectProtocol {
 
 class AssetsDetailController: UIViewController {
     @IBOutlet weak var closeBtn: UIButton!
-    @IBOutlet weak var titleLable: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var iconImageV: UIImageView!
-    @IBOutlet weak var countLable: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var payButton: UIButton!
     @IBOutlet weak var getButtton: UIButton!
     weak var delegate: AssetsDetailControllerDelegate?
@@ -25,8 +25,8 @@ class AssetsDetailController: UIViewController {
     var tokenModel = TokenModel() {
         didSet {
             iconImageV.sd_setImage(with: URL(string: tokenModel.iconUrl!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
-            titleLable.text = tokenModel.symbol
-            countLable.text = tokenModel.tokenBalance
+            titleLabel.text = tokenModel.symbol
+            countLabel.text = tokenModel.tokenBalance
         }
     }
 

@@ -66,9 +66,9 @@ class ManageAssetViewController: UIViewController, UITableViewDelegate, UITableV
 
         let tokenModel = dataArray[indexPath.row]
         cell.iconUrlStr = tokenModel.iconUrl
-        cell.titleLable.text = tokenModel.name
-        cell.addressLable.text = tokenModel.address
-        cell.subTitleLable.text = tokenModel.symbol
+        cell.titleLabel.text = tokenModel.name
+        cell.addressLabel.text = tokenModel.address
+        cell.subTitleLabel.text = tokenModel.symbol
         if selectAddressArray.contains(tokenModel.address) {
             cell.isSelect = true
         } else {

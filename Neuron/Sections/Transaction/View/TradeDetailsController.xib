@@ -12,11 +12,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TradeDetailsController" customModule="Neuron" customModuleProvider="target">
             <connections>
-                <outlet property="addressLable" destination="sw5-JA-SSK" id="ja4-UV-bhP"/>
-                <outlet property="amountLable" destination="j85-Ih-HWa" id="3gE-6K-GRT"/>
+                <outlet property="addressLabel" destination="sw5-JA-SSK" id="cti-TN-AxB"/>
+                <outlet property="amountLabel" destination="j85-Ih-HWa" id="lLL-v0-U1q"/>
                 <outlet property="headView" destination="hds-kn-c5O" id="CXX-g9-rN6"/>
                 <outlet property="iconImage" destination="igH-rg-oHH" id="erf-jZ-x6j"/>
-                <outlet property="nameLable" destination="Kgb-yb-kSA" id="DTe-rW-u7D"/>
+                <outlet property="nameLabel" destination="Kgb-yb-kSA" id="TTp-0P-AwD"/>
                 <outlet property="tTable" destination="8iM-k3-GBa" id="HU5-E2-qLY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>

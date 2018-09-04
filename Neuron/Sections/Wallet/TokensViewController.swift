@@ -103,7 +103,7 @@ class TokensViewController: UITableViewController {
         cell.imageView?.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
         cell.balance.text = model.tokenBalance
         cell.token.text = model.symbol
-        cell.network.text = model.chainName ?? "ethereum Mainnet"
+        cell.network.text = (model.chainName?.isEmpty)! ? "ethereum Mainnet": model.chainName
         return cell
     }
 

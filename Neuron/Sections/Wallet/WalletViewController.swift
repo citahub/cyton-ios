@@ -12,7 +12,7 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class WalletViewController: UITableViewController, QRCodeControllerDelegate {
+class WalletViewController: UITableViewController, QRCodeControllerDelegate, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
@@ -69,13 +69,28 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate {
             let appModel = WalletRealmTool.getCurrentAppmodel()
             requestPaymentViewController.appModel = appModel
         }
+        if segue.identifier == "switchWallet" {
+            let navigationController = segue.destination as! UINavigationController
+            let selectWalletController = navigationController.topViewController as! SelectWalletController
+            selectWalletController.delegate = self
+        }
     }
 
+    @IBAction func copyWalletAddress(_ sender: UITapGestureRecognizer) {
+        copyAddress()
+    }
+
+    @IBAction func copyWalletAddressWithButton(_ sender: UIButton) {
+        copyAddress()
+    }
+    
     @IBAction func scanQRCode(_ sender: UIBarButtonItem) {
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
+
+    @IBAction func unwind(seque: UIStoryboardSegue) { }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         var offset = scrollView.contentOffset.y
@@ -89,6 +104,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate {
         [tokensViewController, nfcViewController].forEach { listViewController in
             (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
         }
+    }
+
+    private func copyAddress() {
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        UIPasteboard.general.string = appModel.currentWallet?.address
+        NeuLoad.showToast(text: "地址已经复制到粘贴板")
     }
 
     private func updateNavigationBar() {
@@ -116,8 +137,8 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate {
     }
 
     //switch wallet delegate
-    func didCallBackSelectedWalletModel(walletModel: WalletModel) {
-        refreshUI(walletModel: walletModel)
+    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
+        refreshUI(walletModel: model)
     }
 
     @objc func changeWallet(nofy: Notification) {

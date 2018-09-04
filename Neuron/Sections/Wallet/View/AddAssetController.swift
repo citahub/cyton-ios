@@ -62,7 +62,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! AddAssetTableViewCell
         cell.delegate = self
         cell.indexP = indexPath as NSIndexPath
-        cell.headLable.text = titleArray[indexPath.row]
+        cell.headLabel.text = titleArray[indexPath.row]
         cell.placeHolderStr = placeholderArray[indexPath.row]
         cell.selectRow = indexPath.row
         if indexPath.row == 0 {

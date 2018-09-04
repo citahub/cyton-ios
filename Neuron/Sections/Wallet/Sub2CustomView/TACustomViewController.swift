@@ -26,7 +26,7 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
 
     var amountStr: String = ""{
         didSet {
-            countLable.text = amountStr
+            countLabel.text = amountStr
         }
     }
     var destinationAddress = ""{
@@ -42,7 +42,7 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
 
     var tokenModel  = TokenModel()
 
-    @IBOutlet weak var countLable: UILabel!
+    @IBOutlet weak var countLabel: UILabel!
     @IBOutlet weak var taTable: UITableView!
     @IBOutlet weak var sureButton: UIButton!
 
@@ -73,7 +73,7 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         taTable.delegate = self
         taTable.dataSource = self
-        countLable.text = amountStr
+        countLabel.text = amountStr
         walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         passwordMD5 = walletModel.MD5screatPassword
         valueArray = [destinationAddress, walletModel.address, estimatedGas]

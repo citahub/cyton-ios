@@ -698,7 +698,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="此密码将被用于保护私钥和交易授权。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gT5-41-7tF">
-                                    <rect key="frame" x="37" y="10" width="323" height="15"/>
+                                    <rect key="frame" x="37" y="0.0" width="323" height="35"/>
                                     <color key="backgroundColor" red="0.99215686274509807" green="0.98431372549019602" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -708,10 +708,10 @@
                             <color key="backgroundColor" red="0.99215686274509807" green="0.98431372549019602" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="tQW-e2-naK" firstAttribute="top" secondItem="VPV-BQ-7qS" secondAttribute="top" constant="11" id="8lv-EK-l2V"/>
-                                <constraint firstItem="f0B-Lc-SQY" firstAttribute="bottom" secondItem="gT5-41-7tF" secondAttribute="bottom" constant="10" id="YTR-8h-La7"/>
-                                <constraint firstItem="gT5-41-7tF" firstAttribute="top" secondItem="f0B-Lc-SQY" secondAttribute="top" constant="-10" id="Yu5-kA-sCW"/>
-                                <constraint firstItem="f0B-Lc-SQY" firstAttribute="trailing" secondItem="gT5-41-7tF" secondAttribute="trailing" constant="15" id="aLJ-kY-Lz4"/>
-                                <constraint firstItem="gT5-41-7tF" firstAttribute="leading" secondItem="tQW-e2-naK" secondAttribute="trailing" constant="8" symbolic="YES" id="shd-TY-0g8"/>
+                                <constraint firstItem="f0B-Lc-SQY" firstAttribute="trailing" secondItem="gT5-41-7tF" secondAttribute="trailing" constant="15" id="FaU-ux-2B5"/>
+                                <constraint firstItem="gT5-41-7tF" firstAttribute="leading" secondItem="tQW-e2-naK" secondAttribute="trailing" constant="8" id="f8R-fv-Ye6"/>
+                                <constraint firstItem="gT5-41-7tF" firstAttribute="top" secondItem="VPV-BQ-7qS" secondAttribute="top" id="jVK-mJ-Y5i"/>
+                                <constraint firstItem="f0B-Lc-SQY" firstAttribute="bottom" secondItem="gT5-41-7tF" secondAttribute="bottom" id="kbD-az-2hs"/>
                                 <constraint firstItem="tQW-e2-naK" firstAttribute="leading" secondItem="VPV-BQ-7qS" secondAttribute="leading" constant="15" id="vkh-PV-eer"/>
                             </constraints>
                             <viewLayoutGuide key="safeArea" id="f0B-Lc-SQY"/>
