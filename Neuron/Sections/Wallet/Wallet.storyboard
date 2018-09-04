@@ -29,7 +29,7 @@
                                         <constraint firstAttribute="height" constant="800" id="kyd-44-tY6"/>
                                     </constraints>
                                 </view>
-                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RX2-3x-Rcb">
+                                <imageView clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RX2-3x-Rcb">
                                     <rect key="frame" x="167.5" y="9" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="40" id="HO3-7N-t14"/>
@@ -40,6 +40,9 @@
                                             <integer key="value" value="20"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="Biu-lx-Ksa" appends="YES" id="k35-HQ-yff"/>
+                                    </connections>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="56L-QU-CcV">
                                     <rect key="frame" x="10" y="57" width="355" height="16"/>
@@ -186,6 +189,11 @@
                         <action selector="copyWalletAddress:" destination="NFk-Vr-nsf" id="onY-J3-yKm"/>
                     </connections>
                 </tapGestureRecognizer>
+                <tapGestureRecognizer id="Biu-lx-Ksa">
+                    <connections>
+                        <segue destination="fAy-po-D77" kind="show" id="vWR-O1-Dbc"/>
+                    </connections>
+                </tapGestureRecognizer>
                 <view contentMode="scaleToFill" id="t1o-zF-Pti" userLabel="Tab Header">
                     <rect key="frame" x="0.0" y="0.0" width="365" height="44"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -217,6 +225,14 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="1120.8" y="-64.31784107946028"/>
+        </scene>
+        <!--WalletManageMent-->
+        <scene sceneID="NG1-Ib-ugU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="WalletManageMent" id="fAy-po-D77" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2S9-OU-SEi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121" y="416"/>
         </scene>
         <!--Assets-->
         <scene sceneID="YoG-R7-kSG">
