@@ -9,15 +9,18 @@
 import UIKit
 import SDWebImage
 
+protocol AssetTableViewCellDelegate: class {
+    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch)
+}
+
 class AssetTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var symbolLabel: UILabel!
-
-    @IBOutlet weak var nameLabel: UILabel!
-
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet var iconImage: UIImageView!
+    @IBOutlet var symbolLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
     @IBOutlet weak var statusBtn: UISwitch!
+    weak var delegate: AssetTableViewCellDelegate?
 
     var isSelect: Bool = false {
         didSet {
@@ -33,5 +36,9 @@ class AssetTableViewCell: UITableViewCell {
         didSet {
             iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
         }
+    }
+
+    @IBAction func selectAssetSwitch(_ sender: UISwitch) {
+        delegate?.selectAsset(self, didSelectAsset: sender)
     }
 }
