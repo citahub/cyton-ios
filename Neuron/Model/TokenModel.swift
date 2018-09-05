@@ -14,6 +14,7 @@ class TokenModel: Object {
 
     // because import and creat wallet will check wallet name,  this can use wallet name
     @objc dynamic var tokenBalance = ""
+    @objc dynamic var currencyAmount = ""
     @objc dynamic var name = ""
     @objc dynamic var iconUrl: String? = ""
     @objc dynamic var address = ""
@@ -31,6 +32,6 @@ class TokenModel: Object {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["tokenBalance"]
+        return ["tokenBalance","currencyAmount"]
     }
 }
