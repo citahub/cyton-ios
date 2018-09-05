@@ -1,5 +1,5 @@
 //
-//  NFCViewController.swift
+//  NFTViewController.swift
 //  Neuron
 //
 //  Created by Yate Fulham on 2018/08/28.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// ERC-721 List
-class NFCViewController: UITableViewController {
+class NFTViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
