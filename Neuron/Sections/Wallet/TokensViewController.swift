@@ -8,6 +8,7 @@
 
 import UIKit
 import web3swift
+import BigInt
 
 /// ERC-20 Token List
 class TokensViewController: UITableViewController {
@@ -37,6 +38,34 @@ class TokensViewController: UITableViewController {
             tokenArray.append(item)
         }
         getBalance(isRefresh: false)
+    }
+
+    func getCurrencyPrice() {
+        var currencyTotle = 0.0
+        for model in tokenArray {
+            let currency = CurrencyService()
+            let currencyToken = currency.searchCurrencyId(for: model.symbol)
+            guard let tokenId = currencyToken?.id else {
+                continue
+            }
+            currency.getCurrencyPrice(tokenid: tokenId, currencyType: "CNY") { (result) in
+                switch result {
+                case .Success(let price):
+                    guard let balance = Double(model.tokenBalance) else {
+                        return
+                    }
+                    guard balance != 0 else {
+                        return
+                    }
+                    model.currencyAmount = String(format: "%.2f", price * balance)
+                    currencyTotle += Double(model.currencyAmount) ?? 0
+                    self.totle.text = String(format: "总资产:%.2f%@", currencyTotle, "元")
+                    self.tableView.reloadData()
+                case .Error(let error):
+                    NeuLoad.showToast(text: error.localizedDescription)
+                }
+            }
+        }
     }
 
     func getBalance(isRefresh: Bool) {
@@ -78,10 +107,11 @@ class TokensViewController: UITableViewController {
                     }
                     group.leave()
                 }
-            } 
+            }
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
+            self.getCurrencyPrice()
             if isRefresh {
                 //   self.mainTable.mj_header.endRefreshing()
             } else {
@@ -101,6 +131,11 @@ class TokensViewController: UITableViewController {
         cell.balance.text = model.tokenBalance
         cell.token.text = model.symbol
         cell.network.text = (model.chainName?.isEmpty)! ? "ethereum Mainnet": model.chainName
+        if model.currencyAmount.count != 0 {
+            cell.currency.text = "¥" + model.currencyAmount
+        } else {
+            cell.currency.text = ""
+        }
         return cell
     }
 

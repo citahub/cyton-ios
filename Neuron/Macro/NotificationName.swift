@@ -11,6 +11,5 @@ import Foundation
 extension Notification.Name {
     static let creatWalletSuccess = Notification.Name("creatWalletSuccess")
     static let changeTabbar = Notification.Name("changeTabbar")
+    static let allWalletsDeleted = Notification.Name("changeTabbar")
 }
-
-/// 创建钱包成功 一般是通知sub2来变更数据

@@ -42,7 +42,7 @@ class SubController2ViewModel: NSObject {
             case .Success(let balance):
                 let ethBalance = Web3.Utils.formatToEthereumUnits(balance,
                                                                   toUnits: .eth,
-                                                                  decimals: 6,
+                                                                  decimals: 8,
                                                                   fallbackToScientific: false)
                 let balanceNumber = Float(ethBalance!)
                 completion(String(balanceNumber!), nil)
@@ -86,7 +86,7 @@ class SubController2ViewModel: NSObject {
                 print(balance.description)
                 let nervosBalance = Web3.Utils.formatToEthereumUnits(balance,
                                                                   toUnits: .eth,
-                                                                  decimals: 6,
+                                                                  decimals: 8,
                                                                   fallbackToScientific: false)
                 let balanceNumber = Float(nervosBalance!)
                 completion(String(balanceNumber!), nil)
