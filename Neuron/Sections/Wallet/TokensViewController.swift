@@ -8,7 +8,6 @@
 
 import UIKit
 import web3swift
-import BigInt
 
 /// ERC-20 Token List
 class TokensViewController: UITableViewController {
