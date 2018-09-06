@@ -33,7 +33,7 @@ class CurrencyService: NSObject {
         if currencyType.count == 0 {
             convert = ""
         }
-        let path = CURRENCY_PRICE_URL + "\(id)" + convert
+        let path = ServerApi.currencyPriceURL + "\(id)" + convert
         print(path)
         Alamofire.request(path, method: .get).responseJSON { (response) in
             if response.error == nil {

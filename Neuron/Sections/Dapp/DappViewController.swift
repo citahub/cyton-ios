@@ -24,7 +24,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func didAddSubLayout() {
-        webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 49))
+        webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 49))
         let url = URL(string: "http://47.97.171.140:8866")
         let request = URLRequest.init(url: url!)
 
@@ -54,11 +54,11 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.load(request)
 
         let placrV = UIView.init()
-        placrV.backgroundColor = themeColor
+        placrV.backgroundColor = AppColor.themeColor
         if isiphoneX() {
-            placrV.frame = CGRect(x: 0, y: 0, width: ScreenW, height: 44)
+            placrV.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: 44)
         } else {
-            placrV.frame = CGRect(x: 0, y: 0, width: ScreenW, height: 20)
+            placrV.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: 20)
         }
 //        view.addSubview(placrV)
     }

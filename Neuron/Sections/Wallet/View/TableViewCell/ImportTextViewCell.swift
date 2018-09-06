@@ -34,7 +34,7 @@ class ImportTextViewCell: UITableViewCell, UITextViewDelegate {
 
     func setUpSubViews() {
 
-        textView.frame = CGRect(x: 15, y: 15, width: ScreenW - 30, height: 105)
+        textView.frame = CGRect(x: 15, y: 15, width: ScreenSize.width - 30, height: 105)
         textView.backgroundColor = .white
         textView.delegate = self
         textView.placeholderColor = ColorFromString(hex: "#989CAA")
@@ -45,7 +45,7 @@ class ImportTextViewCell: UITableViewCell, UITextViewDelegate {
         textView.clipsToBounds = true
         contentView.addSubview(textView)
 
-        qrBtn.frame = CGRect(x: ScreenW - 30 - 46, y: 105 - 46, width: 46, height: 46)
+        qrBtn.frame = CGRect(x: ScreenSize.width - 30 - 46, y: 105 - 46, width: 46, height: 46)
         qrBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)
         qrBtn.addTarget(self, action: #selector(didClickQRButton), for: .touchUpInside)
         textView.addSubview(qrBtn)

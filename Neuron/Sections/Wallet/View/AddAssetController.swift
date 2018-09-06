@@ -25,7 +25,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         aTable.delegate = self
         aTable.dataSource = self
         aTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        aTable.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: CGFloat.leastNormalMagnitude))
+        aTable.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: CGFloat.leastNormalMagnitude))
 
     }
 
@@ -91,7 +91,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
 
     //cell的代理 弹出pickerview
     func didClickSelectCoinBtn() {
-        nView.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
+        nView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
         nView.delegate = self
         nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "Nervos", "id": "101"]]
         nView.selectDict = ["name": "以太坊eth", "id": "100"]

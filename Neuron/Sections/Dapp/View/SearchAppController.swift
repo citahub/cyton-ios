@@ -28,7 +28,7 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     @IBOutlet weak var sTable: UITableView!
     func setUpNavigationTitleView() {
-        let tView = UIView.init(frame: CGRect(x: 0, y: 0, width: ScreenW - 72, height: 30))
+        let tView = UIView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width - 72, height: 30))
         tView.backgroundColor = UIColor.white
         tView.layer.cornerRadius = 3.0
         tView.clipsToBounds = true

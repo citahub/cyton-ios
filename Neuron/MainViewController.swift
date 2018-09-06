@@ -52,14 +52,14 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         let ethModel = TokenModel()
         ethModel.address = ""
-        ethModel.chainId = ETH_MainNetChainId
+        ethModel.chainId = NativeChainId.ethMainNetChainId
         ethModel.chainName = ""
-        ethModel.decimals = nativeTokenDecimals
+        ethModel.decimals = NaticeDecimals.nativeTokenDecimals
         ethModel.iconUrl = ""
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"
         ethModel.symbol = "ETH"
-        ethModel.chainidName = ETH_MainNetChainId + ""
+        ethModel.chainidName = NativeChainId.ethMainNetChainId + ""
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(ethModel, update: true)
             if !appModel.nativeTokenList.contains(ethModel) {
@@ -71,7 +71,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     private func applyBarStyle() {
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: themeColor], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: AppColor.themeColor], for: .selected)
 
         let navigationBarBackImage = UIImage(named: "nav_darkback")!.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = navigationBarBackImage

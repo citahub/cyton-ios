@@ -8,10 +8,10 @@
 
 import Foundation
 
-let NERVOS_SERVER_URL = "http://47.97.171.140:4000"
-let NERVOS_TRANSACTION_URL = NERVOS_SERVER_URL + "/api/transactions"
-
-let ETHER_SCAN_API_KEY = "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z"
-let ETH_TRANSACTION_URL = "http://api.etherscan.io/api?apikey=" + ETHER_SCAN_API_KEY + "&module=account&action=txlist&sort=asc"
-
-let CURRENCY_PRICE_URL = "https://api.coinmarketcap.com/v2/ticker/"
+struct ServerApi {
+    static let nervorURL = "http://47.97.171.140:4000"
+    static let nervosTransactionURL = nervorURL + "/api/transactions"
+    static let etherScanKey = "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z"
+    static let etherScanURL = "http://api.etherscan.io/api?apikey=" + etherScanKey + "&module=account&action=txlist&sort=asc"
+    static let currencyPriceURL = "https://api.coinmarketcap.com/v2/ticker/"
+}

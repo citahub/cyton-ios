@@ -8,8 +8,12 @@
 
 import Foundation
 
-/// eth mainnet chainId, just work for Neuron
-let ETH_MainNetChainId = "-1"
+struct NativeChainId {
+    /// eth mainnet chainId, just work for Neuron
+    static let ethMainNetChainId = "-1"
+}
 
-/// eth and nervos token decimals default 18
-let nativeTokenDecimals = 18
+struct NaticeDecimals {
+    /// eth and nervos token decimals default 18
+    static let nativeTokenDecimals = 18
+}

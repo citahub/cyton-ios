@@ -62,9 +62,9 @@ class ButtonTagView: UIView {
             button.tag = 2000+i
             buttonArray.append(button)
             //计算每个标题文本的宽度
-            let itemWidth = returnTextWidth(text: titleArray[i], font: UIFont.systemFont(ofSize: 15), viewWidth: ScreenW - 30).width+20
+            let itemWidth = returnTextWidth(text: titleArray[i], font: UIFont.systemFont(ofSize: 15), viewWidth: ScreenSize.width - 30).width+20
             totalWidth = totalWidth+CGFloat(itemWidth)+hmargin
-            if totalWidth - hmargin > ScreenW - 30 {//代表着要换行了 row+1 并且计算总宽度
+            if totalWidth - hmargin > ScreenSize.width - 30 {//代表着要换行了 row+1 并且计算总宽度
                 totalWidth = CGFloat(itemWidth)+hmargin
                 row = row+1
                 button.frame = CGRect(x: 10, y: vmargin+CGFloat(row)*(buttonHeight+vmargin), width: CGFloat(itemWidth), height: buttonHeight)
