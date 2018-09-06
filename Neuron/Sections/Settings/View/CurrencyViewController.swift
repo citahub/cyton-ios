@@ -9,7 +9,6 @@
 import UIKit
 
 class CurrencyViewController: UITableViewController {
-
     var dataArray = [LocalCurrency]()
 
     override func viewDidLoad() {

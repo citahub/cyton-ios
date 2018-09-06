@@ -108,7 +108,7 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func prepareTransaction(password: String) {
         NeuLoad.showHUD(text: "")
-        if tokenModel.chainId == NativeChainId.ethMainNetChainId {
+        if tokenModel.chainId == NativeChainId.ethMainnetChainId {
             ethTransactionService = EthTransactionServiceImp()
             ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
                 switch sendResult {

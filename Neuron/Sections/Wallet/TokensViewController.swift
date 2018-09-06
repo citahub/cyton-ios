@@ -89,7 +89,7 @@ class TokensViewController: UITableViewController {
         }
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         for tm in tokenArray {
-            if tm.chainId == NativeChainId.ethMainNetChainId {
+            if tm.chainId == NativeChainId.ethMainnetChainId {
                 group.enter()
                 viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil {
@@ -99,7 +99,7 @@ class TokensViewController: UITableViewController {
                     }
                     group.leave()
                 }
-            } else if tm.chainId != "" && tm.chainId != NativeChainId.ethMainNetChainId {
+            } else if tm.chainId != "" && tm.chainId != NativeChainId.ethMainnetChainId {
                 group.enter()
                 viewModel.getNervosNativeTokenBalance(walletAddress: walletModel.address) { (balance, error) in
                     if error == nil {

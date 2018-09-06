@@ -10,7 +10,7 @@ import Foundation
 
 struct NativeChainId {
     /// eth mainnet chainId, just work for Neuron
-    static let ethMainNetChainId = "-1"
+    static let ethMainnetChainId = "-1"
 }
 
 struct NaticeDecimals {
