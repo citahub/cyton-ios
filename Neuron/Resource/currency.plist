@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>元</string>
+		<key>short</key>
+		<string>CNY</string>
+		<key>symbol</key>
+		<string>¥</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>美元</string>
+		<key>short</key>
+		<string>USD</string>
+		<key>symbol</key>
+		<string>$</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>新台币</string>
+		<key>short</key>
+		<string>TWD</string>
+		<key>symbol</key>
+		<string>NT$</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>港元</string>
+		<key>short</key>
+		<string>HKD</string>
+		<key>symbol</key>
+		<string>HK$</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>欧元</string>
+		<key>short</key>
+		<string>EUR</string>
+		<key>symbol</key>
+		<string>€</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>俄罗斯卢布</string>
+		<key>short</key>
+		<string>RUB</string>
+		<key>symbol</key>
+		<string>₽</string>
+	</dict>
+</array>
+</plist>

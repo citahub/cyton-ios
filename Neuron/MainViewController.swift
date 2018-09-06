@@ -52,14 +52,14 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         let ethModel = TokenModel()
         ethModel.address = ""
-        ethModel.chainId = NativeChainId.ethMainNetChainId
+        ethModel.chainId = NativeChainId.ethMainnetChainId
         ethModel.chainName = ""
         ethModel.decimals = NaticeDecimals.nativeTokenDecimals
         ethModel.iconUrl = ""
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"
         ethModel.symbol = "ETH"
-        ethModel.chainidName = NativeChainId.ethMainNetChainId + ""
+        ethModel.chainidName = NativeChainId.ethMainnetChainId + ""
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(ethModel, update: true)
             if !appModel.nativeTokenList.contains(ethModel) {

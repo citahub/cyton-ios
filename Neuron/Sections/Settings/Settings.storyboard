@@ -54,7 +54,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="lLp-GC-J8g" kind="show" id="lod-Kl-X2a"/>
+                                            <segue destination="gAJ-Ph-Khh" kind="show" id="DGq-Yx-LLZ"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="10P-N9-Qgl" imageView="aOO-Bb-M2s" style="IBUITableViewCellStyleDefault" id="IQU-FC-wTb">
@@ -140,6 +140,7 @@
                     <navigationItem key="navigationItem" id="0CW-xZ-GRc"/>
                     <connections>
                         <outlet property="fingerprintSwitch" destination="eeC-p6-ifW" id="5yN-d5-hti"/>
+                        <outlet property="localCurrencyLabel" destination="a1h-wv-ki9" id="nlI-uc-z1s"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFz-TJ-bUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -169,19 +170,65 @@
             <point key="canvasLocation" x="44" y="897"/>
         </scene>
         <!--Currency View Controller-->
-        <scene sceneID="dYu-AH-W23">
+        <scene sceneID="bJ8-uh-m9J">
             <objects>
-                <viewController id="lLp-GC-J8g" customClass="CurrencyViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Tpu-km-M6Q">
+                <tableViewController id="gAJ-Ph-Khh" customClass="CurrencyViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2fA-Yk-0tb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="AnQ-su-vsD"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="a8d-JR-MU3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="qg2-Ut-YyT">
+                            <rect key="frame" x="0.0" y="68" width="375" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="currencyCell" rowHeight="40" id="thF-qm-ugJ" customClass="CurrencyTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="40"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="thF-qm-ugJ" id="ZtZ-mi-ytW">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currency_selected" translatesAutoresizingMaskIntoConstraints="NO" id="oN1-Nq-Qtt">
+                                            <rect key="frame" x="339" y="10" width="21" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="15" id="WZS-MY-QDM"/>
+                                                <constraint firstAttribute="width" constant="21" id="Yps-hB-QUF"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sdN-6C-Qay">
+                                            <rect key="frame" x="15" y="0.0" width="187.5" height="39.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="oN1-Nq-Qtt" firstAttribute="top" secondItem="ZtZ-mi-ytW" secondAttribute="top" constant="10" id="6ia-jz-yKO"/>
+                                        <constraint firstAttribute="bottom" secondItem="sdN-6C-Qay" secondAttribute="bottom" id="Ccd-rB-HFD"/>
+                                        <constraint firstAttribute="trailing" secondItem="oN1-Nq-Qtt" secondAttribute="trailing" constant="15" id="d19-87-wai"/>
+                                        <constraint firstItem="sdN-6C-Qay" firstAttribute="leading" secondItem="ZtZ-mi-ytW" secondAttribute="leading" constant="15" id="iZ5-4L-nZa"/>
+                                        <constraint firstItem="sdN-6C-Qay" firstAttribute="top" secondItem="ZtZ-mi-ytW" secondAttribute="top" id="od0-3h-FPD"/>
+                                        <constraint firstItem="sdN-6C-Qay" firstAttribute="width" secondItem="ZtZ-mi-ytW" secondAttribute="width" multiplier="0.5" id="pSI-WG-xpn"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="selectImageView" destination="oN1-Nq-Qtt" id="eAi-23-SAg"/>
+                                    <outlet property="symbolLabel" destination="sdN-6C-Qay" id="Scm-ud-Oqw"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="gAJ-Ph-Khh" id="eA5-eB-4AK"/>
+                            <outlet property="delegate" destination="gAJ-Ph-Khh" id="gJf-Yw-Fym"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mPA-fZ-7qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1290" y="-53"/>
+            <point key="canvasLocation" x="1303" y="-114"/>
         </scene>
         <!--About Us View Controller-->
         <scene sceneID="ly1-XN-g3g">
@@ -223,6 +270,7 @@
         <image name="aboutus" width="20" height="20"/>
         <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
+        <image name="currency_selected" width="21" height="15"/>
         <image name="fingerprint_setup" width="20" height="20"/>
         <image name="setting_off" width="22" height="22"/>
         <image name="setting_on" width="22" height="22"/>

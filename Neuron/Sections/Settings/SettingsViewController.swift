@@ -10,6 +10,7 @@ import UIKit
 
 class SettingsViewController: UITableViewController {
     @IBOutlet weak var fingerprintSwitch: UISwitch!
+    @IBOutlet weak var localCurrencyLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,7 @@ class SettingsViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isDarkStyle = true
+        localCurrencyLabel.text = LocalCurrencyService().getLocalCurrencySelect().short
     }
 
     override func viewWillDisappear(_ animated: Bool) {

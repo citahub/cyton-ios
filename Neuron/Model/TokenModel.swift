@@ -32,6 +32,6 @@ class TokenModel: Object {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["tokenBalance","currencyAmount"]
+        return ["tokenBalance", "currencyAmount"]
     }
 }
