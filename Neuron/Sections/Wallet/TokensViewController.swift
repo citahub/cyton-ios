@@ -14,6 +14,7 @@ class TokensViewController: UITableViewController {
     @IBOutlet weak var totle: UILabel!
     var tokenArray: [TokenModel] = []
     var viewModel = SubController2ViewModel()
+    var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -25,6 +26,16 @@ class TokensViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         didGetTokenList()
+        addNotify()
+    }
+
+    func addNotify() {
+        NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
+    }
+
+    @objc func changeLocalCurrency() {
+        currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
+        getCurrencyPrice(currencyModel: currentCurrencyModel)
     }
 
     /// get token list from realm
@@ -39,7 +50,7 @@ class TokensViewController: UITableViewController {
         getBalance(isRefresh: false)
     }
 
-    func getCurrencyPrice() {
+    func getCurrencyPrice(currencyModel: LocalCurrency) {
         var currencyTotle = 0.0
         for model in tokenArray {
             let currency = CurrencyService()
@@ -47,18 +58,21 @@ class TokensViewController: UITableViewController {
             guard let tokenId = currencyToken?.id else {
                 continue
             }
-            currency.getCurrencyPrice(tokenid: tokenId, currencyType: "CNY") { (result) in
+            currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyModel.short) { (result) in
                 switch result {
                 case .Success(let price):
                     guard let balance = Double(model.tokenBalance) else {
                         return
                     }
                     guard balance != 0 else {
+                        if currencyTotle == 0 {
+                            self.totle.text = String(format: "总资产(%@):%.2f%@", currencyModel.name, currencyTotle)
+                        }
                         return
                     }
                     model.currencyAmount = String(format: "%.2f", price * balance)
                     currencyTotle += Double(model.currencyAmount) ?? 0
-                    self.totle.text = String(format: "总资产:%.2f%@", currencyTotle, "元")
+                    self.totle.text = String(format: "总资产(%@):%.2f", currencyModel.name, currencyTotle)
                     self.tableView.reloadData()
                 case .Error(let error):
                     NeuLoad.showToast(text: error.localizedDescription)
@@ -110,7 +124,7 @@ class TokensViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
-            self.getCurrencyPrice()
+            self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 //   self.mainTable.mj_header.endRefreshing()
             } else {
@@ -131,7 +145,7 @@ class TokensViewController: UITableViewController {
         cell.token.text = model.symbol
         cell.network.text = (model.chainName?.isEmpty)! ? "ethereum Mainnet": model.chainName
         if model.currencyAmount.count != 0 {
-            cell.currency.text = "¥" + model.currencyAmount
+            cell.currency.text = currentCurrencyModel.symbol + model.currencyAmount
         } else {
             cell.currency.text = ""
         }
@@ -150,5 +164,9 @@ class TokensViewController: UITableViewController {
             offset += scrollView.contentInset.top
         }
         tableView.isScrollEnabled = offset > 0
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }

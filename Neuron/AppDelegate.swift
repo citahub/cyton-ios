@@ -17,8 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         skipBackupFiles()
         initializeRealm()
         setupKeyboard()
-
+        localCurrency()
         return true
+    }
+
+    private func localCurrency() {
+        LocalCurrencyService().saveLocalCurrencyFirstLaunch()
     }
 
     private func setupKeyboard() {
