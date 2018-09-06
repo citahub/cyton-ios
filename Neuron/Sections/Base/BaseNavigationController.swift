@@ -13,7 +13,7 @@ extension UINavigationBar {
         set {
             if newValue {
                 titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-                barTintColor = newThemeColor
+                barTintColor = AppColor.newThemeColor
                 tintColor = .white
                 barStyle = .black
                 shadowImage = UIImage()

@@ -31,7 +31,7 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
-                    tokenModel.decimals = nativeTokenDecimals
+                    tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     completion(NervosServiceResult.Success(tokenModel))
                 case .failure(let error):

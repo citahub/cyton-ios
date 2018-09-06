@@ -56,14 +56,14 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        view.frame = CGRect(x: 0, y: ScreenH, width: ScreenW, height: ScreenH)
+        view.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
         view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         UIView.animate(withDuration: 0.5, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
+            self.view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
         }, completion: { (_) in
             self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
         })
@@ -108,7 +108,7 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
 
     func prepareTransaction(password: String) {
         NeuLoad.showHUD(text: "")
-        if tokenModel.chainId == ETH_MainNetChainId {
+        if tokenModel.chainId == NativeChainId.ethMainNetChainId {
             ethTransactionService = EthTransactionServiceImp()
             ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
                 switch sendResult {

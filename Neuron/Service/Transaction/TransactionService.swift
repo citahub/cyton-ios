@@ -24,7 +24,7 @@ class TransactionServiceImp: TransactionService {
 
         var resultArr: [TransactionModel] = []
         let parameters: Dictionary = ["address": walletAddress]
-        Alamofire.request(ETH_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON { (response) in
+        Alamofire.request(ServerApi.nervosTransactionURL, method: .get, parameters: parameters).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             print(jsonObj!["status"])
 //            if jsonObj!["status"] != "1"{
@@ -64,7 +64,7 @@ class TransactionServiceImp: TransactionService {
         var resultArr: [TransactionModel] = []
         let parameters: Dictionary = ["account": walletAddress]
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        Alamofire.request(NERVOS_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON { (response) in
+        Alamofire.request(ServerApi.nervosTransactionURL, method: .get, parameters: parameters).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             if jsonObj!["result"]["count"] != "0" {
                 for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {

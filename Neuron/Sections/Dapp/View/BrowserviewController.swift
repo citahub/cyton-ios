@@ -20,14 +20,14 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
 
     lazy private var webview: WKWebView = {
-        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 64))
+        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
         self.webview.navigationDelegate = self
         return self.webview
     }()
 
     lazy private var progressView: UIProgressView = {
-        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: 2))
-        self.progressView.tintColor = themeColor      // 进度条颜色
+        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
+        self.progressView.tintColor = AppColor.themeColor      // 进度条颜色
         self.progressView.trackTintColor = UIColor.white // 进度条背景色
         return self.progressView
     }()

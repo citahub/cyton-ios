@@ -40,17 +40,17 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
 
     func didDrawSubViews() {
 
-        selectView = ButtonTagUpView(frame: CGRect(x: 15, y: 15 + 35 + 64, width: ScreenW - 30, height: 150))
+        selectView = ButtonTagUpView(frame: CGRect(x: 15, y: 15 + 35 + 64, width: ScreenSize.width - 30, height: 150))
         selectView.delegate = self
         view.addSubview(selectView)
 
-        showView = ButtonTagView(frame: CGRect(x: 15, y: 15 + 35 + 64 + 15 + 150, width: ScreenW - 30, height: 150))
+        showView = ButtonTagView(frame: CGRect(x: 15, y: 15 + 35 + 64 + 15 + 150, width: ScreenSize.width - 30, height: 150))
         showView.delegate = self
         showView.titleArray = titleArr.shuffle()
         showView.backgroundColor = .white
         view.addSubview(showView)
 
-        sureButton.frame = CGRect(x: 15, y: showView.frame.origin.y + showView.frame.size.height + 20, width: ScreenW - 30, height: 44)
+        sureButton.frame = CGRect(x: 15, y: showView.frame.origin.y + showView.frame.size.height + 20, width: ScreenSize.width - 30, height: 44)
         sureButton.backgroundColor = ColorFromString(hex: "#f2f2f2")
         sureButton.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
         sureButton.setTitle("完成备份", for: .normal)
@@ -70,7 +70,7 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
         }
         if selectArray.count == 12 {
             sureButton.isEnabled = true
-            sureButton.backgroundColor = themeColor
+            sureButton.backgroundColor = AppColor.themeColor
             sureButton.setTitleColor(.white, for: .normal)
         } else {
             sureButton.isEnabled = false

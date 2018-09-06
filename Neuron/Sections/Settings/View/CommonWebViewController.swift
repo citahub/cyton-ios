@@ -14,14 +14,14 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
     var urlStr = ""
 
     lazy private var webview: WKWebView = {
-        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH - 64))
+        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
         self.webview.navigationDelegate = self
         return self.webview
     }()
 
     lazy private var progressView: UIProgressView = {
-        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenW, height: 2))
-        self.progressView.tintColor = themeColor
+        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
+        self.progressView.tintColor = AppColor.themeColor
         self.progressView.trackTintColor = .white
         return self.progressView
     }()
