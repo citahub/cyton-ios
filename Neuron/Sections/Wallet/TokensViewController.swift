@@ -66,7 +66,7 @@ class TokensViewController: UITableViewController {
                     }
                     guard balance != 0 else {
                         if currencyTotle == 0 {
-                            self.totle.text = String(format: "总资产(%@):%.2f%@", currencyModel.name, currencyTotle)
+                            self.totle.text = String(format: "总资产(%@):%.2f", currencyModel.name, currencyTotle)
                         }
                         return
                     }

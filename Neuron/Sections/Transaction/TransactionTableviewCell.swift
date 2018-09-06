@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Sub3TableViewCell: UITableViewCell {
+class TransactionTableviewCell: UITableViewCell {
 
     var statusType: String? {
         didSet {
@@ -18,9 +18,10 @@ class Sub3TableViewCell: UITableViewCell {
     }
     @IBOutlet weak var iconImageV: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var limitLabel: UILabel!
+    @IBOutlet weak var networkLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var exchangeLabel: UILabel!
+    @IBOutlet weak var statusImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet

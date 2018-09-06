@@ -10,7 +10,7 @@ import UIKit
 import LYEmptyView
 import MJRefresh
 
-class SubController3: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SubController3: UIViewController {
 
     let service = TransactionServiceImp()
 
@@ -28,8 +28,8 @@ class SubController3: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "交易"
-        sTable.delegate = self
-        sTable.dataSource = self
+//        sTable.delegate = self
+//        sTable.dataSource = self
         sTable.register(UINib.init(nibName: "Sub3TableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         sTable.tableFooterView = UIView.init()
         sTable.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有交易数据", detailStr: "")
@@ -74,30 +74,30 @@ class SubController3: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     //tableview代理
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! Sub3TableViewCell
-
-        let transModel = dataArray[indexPath.row]
-        cell.addressLabel.text = transModel.hashString
-        cell.dateLabel.text = transModel.formatTime
-        cell.limitLabel.text = transModel.value
-        cell.exchangeLabel.text = transModel.chainName
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let transModel = dataArray[indexPath.row]
-        let tCtrl = TradeDetailsController.init(nibName: "TradeDetailsController", bundle: nil)
-        tCtrl.tModel = transModel
-        print(transModel.blockNumber)
-        navigationController?.pushViewController(tCtrl, animated: true)
-    }
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return dataArray.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! Sub3TableViewCell
+//
+//        let transModel = dataArray[indexPath.row]
+//        cell.addressLabel.text = transModel.hashString
+//        cell.dateLabel.text = transModel.formatTime
+//        cell.limitLabel.text = transModel.value
+//        cell.exchangeLabel.text = transModel.chainName
+//        return cell
+//    }
+//
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        tableView.deselectRow(at: indexPath, animated: true)
+//        let transModel = dataArray[indexPath.row]
+//        let tCtrl = TradeDetailsController.init(nibName: "TradeDetailsController", bundle: nil)
+//        tCtrl.tModel = transModel
+//        print(transModel.blockNumber)
+//        navigationController?.pushViewController(tCtrl, animated: true)
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
