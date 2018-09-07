@@ -106,6 +106,10 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let transModel = dataArray[indexPath.row]
+        let tCtrl = TradeDetailsController.init(nibName: "TradeDetailsController", bundle: nil)
+        tCtrl.tModel = transModel
+        navigationController?.pushViewController(tCtrl, animated: true)
     }
 
 }

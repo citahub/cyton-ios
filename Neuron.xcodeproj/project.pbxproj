@@ -81,8 +81,6 @@
 		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
 		898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */; };
 		898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */; };
-		898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2020B7B51E00ECB465 /* SubController3.swift */; };
-		898A1A2320B7B51E00ECB465 /* SubController3.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2120B7B51E00ECB465 /* SubController3.xib */; };
 		898A1A2620B7DAA300ECB465 /* TransactionTableviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2420B7DAA300ECB465 /* TransactionTableviewCell.swift */; };
 		898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */; };
 		898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */; };
@@ -262,8 +260,6 @@
 		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordController.xib; sourceTree = "<group>"; };
 		898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletController.swift; sourceTree = "<group>"; };
-		898A1A2020B7B51E00ECB465 /* SubController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController3.swift; sourceTree = "<group>"; };
-		898A1A2120B7B51E00ECB465 /* SubController3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController3.xib; sourceTree = "<group>"; };
 		898A1A2420B7DAA300ECB465 /* TransactionTableviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionTableviewCell.swift; sourceTree = "<group>"; };
 		898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeDetailsController.swift; sourceTree = "<group>"; };
 		898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TradeDetailsController.xib; sourceTree = "<group>"; };
@@ -483,7 +479,6 @@
 				8928C22820AE7CB500C3103E /* Base */,
 				8928C22A20AE7CB500C3103E /* Common */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
-				8928C22920AE7CB500C3103E /* Main */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -504,15 +499,6 @@
 				8928C24420AE90C000C3103E /* BaseNavigationController.swift */,
 			);
 			path = Base;
-			sourceTree = "<group>";
-		};
-		8928C22920AE7CB500C3103E /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				898A1A2020B7B51E00ECB465 /* SubController3.swift */,
-				898A1A2120B7B51E00ECB465 /* SubController3.xib */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		8928C22A20AE7CB500C3103E /* Common */ = {
@@ -999,7 +985,6 @@
 				89F7966F213BD5680064808A /* Assets.storyboard in Resources */,
 				89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */,
 				1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */,
-				898A1A2320B7B51E00ECB465 /* SubController3.xib in Resources */,
 				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
@@ -1232,7 +1217,6 @@
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
-				898A1A2220B7B51E00ECB465 /* SubController3.swift in Sources */,
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
 				8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */,
 				8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */,
