@@ -21,15 +21,11 @@ class TransactionServiceImp: TransactionService {
 
     func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-
         var resultArr: [TransactionModel] = []
         let parameters: Dictionary = ["address": walletAddress]
-        Alamofire.request(ServerApi.nervosTransactionURL, method: .get, parameters: parameters).responseJSON { (response) in
+        Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             print(jsonObj!["status"])
-//            if jsonObj!["status"] != "1"{
-//                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
-//            }else{
             if response.error == nil {
                 for (_, subJSON) : (String, JSON) in jsonObj!["result"] {
                     let transacationModel = TransactionModel()
@@ -56,7 +52,6 @@ class TransactionServiceImp: TransactionService {
             } else {
                 completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
             }
-//            }
         }
     }
 
@@ -69,7 +64,6 @@ class TransactionServiceImp: TransactionService {
             if jsonObj!["result"]["count"] != "0" {
                 for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {
                     let transacationModel = TransactionModel()
-//                    transacationModel.value = subJSON["value"].stringValue
                     transacationModel.from = subJSON["from"].stringValue
                     transacationModel.to = subJSON["to"].stringValue
                     transacationModel.hashString = subJSON["hash"].stringValue

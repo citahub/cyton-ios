@@ -66,7 +66,7 @@ class TokensViewController: UITableViewController {
                     }
                     guard balance != 0 else {
                         if currencyTotle == 0 {
-                            self.totle.text = String(format: "总资产(%@):%.2f%@", currencyModel.name, currencyTotle)
+                            self.totle.text = String(format: "总资产(%@):%.2f", currencyModel.name, currencyTotle)
                         }
                         return
                     }
@@ -140,7 +140,7 @@ class TokensViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tokenTableviewcell") as! TokenTableViewCell
         let model = tokenArray[indexPath.row]
-        cell.imageView?.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
+        cell.tokenImage.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
         cell.balance.text = model.tokenBalance
         cell.token.text = model.symbol
         cell.network.text = (model.chainName?.isEmpty)! ? "ethereum Mainnet": model.chainName
@@ -154,6 +154,19 @@ class TokensViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let transactionViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "transactionViewController") as! TransactionViewController
+        let model = tokenArray[indexPath.row]
+        transactionViewController.tokenModel = model
+        if model.isNativeToken {
+            if model.chainId == NativeChainId.ethMainnetChainId {
+                transactionViewController.tokenType = .ethereumToken
+            } else {
+                transactionViewController.tokenType = .nervosToken
+            }
+        } else {
+            transactionViewController.tokenType = .erc20Token
+        }
+        navigationController?.pushViewController(transactionViewController, animated: true)
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
