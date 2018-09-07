@@ -13,8 +13,7 @@
         <!--Transaction View Controller-->
         <scene sceneID="LYw-Ut-HWd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSY-pv-yXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="zzs-A1-Sn6" customClass="TransactionViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="transactionViewController" id="zzs-A1-Sn6" customClass="TransactionViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C50-du-EEs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -124,11 +123,17 @@
                                 <rect key="frame" x="0.0" y="612" width="187.5" height="55"/>
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="收款"/>
+                                <connections>
+                                    <segue destination="esu-jN-jR6" kind="show" identifier="requestPayment" id="e78-my-1U7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPZ-mD-qY7">
                                 <rect key="frame" x="187.5" y="612" width="187.5" height="55"/>
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="转账"/>
+                                <connections>
+                                    <action selector="didClickPay:" destination="zzs-A1-Sn6" eventType="touchUpInside" id="ILS-8k-SeU"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtj-4O-Ty2">
                                 <rect key="frame" x="184.5" y="626" width="1" height="25"/>
@@ -159,13 +164,20 @@
                         <viewLayoutGuide key="safeArea" id="y2t-DP-6U9"/>
                     </view>
                     <connections>
-                        <outlet property="paymentButton" destination="XPZ-mD-qY7" id="lCZ-fz-MVm"/>
-                        <outlet property="requestButton" destination="DQl-uS-hTA" id="MU0-kH-cs7"/>
                         <outlet property="transactionTableView" destination="tKh-tV-Yeh" id="gfw-ep-NOi"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZSY-pv-yXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2.3999999999999999" y="211.84407796101951"/>
+        </scene>
+        <!--RequestPayment-->
+        <scene sceneID="ACa-9w-a7L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="RequestPayment" id="esu-jN-jR6" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eaK-iK-kCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="116"/>
         </scene>
     </scenes>
 </document>

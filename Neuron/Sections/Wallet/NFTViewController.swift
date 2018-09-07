@@ -7,15 +7,17 @@
 //
 
 import UIKit
+import LYEmptyView
 
 /// ERC-721 List
 class NFTViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.ly_emptyView = LYEmptyView.empty(withImageStr: "", titleStr: "暂无藏品", detailStr: "")
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

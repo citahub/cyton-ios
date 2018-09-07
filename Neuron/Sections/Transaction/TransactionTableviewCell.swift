@@ -10,12 +10,6 @@ import UIKit
 
 class TransactionTableviewCell: UITableViewCell {
 
-    var statusType: String? {
-        didSet {
-            //根据状态来判断stateImageV加载不同的图片
-            print(statusType!)
-        }
-    }
     @IBOutlet weak var iconImageV: UIImageView!
     @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var networkLabel: UILabel!
