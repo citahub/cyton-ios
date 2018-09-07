@@ -63,8 +63,6 @@
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
 		897AFC58212FDA9100383A12 /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC57212FDA9100383A12 /* Array+Extension.swift */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
-		897AFC5F213012BB00383A12 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC5D213012BB00383A12 /* AboutUsViewController.swift */; };
-		897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897AFC5E213012BB00383A12 /* AboutUsViewController.xib */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
 		898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */; };
@@ -133,6 +131,7 @@
 		89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6E09820E07F8E00C94026 /* ShareItem.swift */; };
 		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
+		89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */; };
 		89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeyStoreError.swift */; };
 		89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2120D59F270097E02B /* Keystore.swift */; };
 		89D4AC2B20D59F270097E02B /* ETHKeyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2220D59F270097E02B /* ETHKeyStore.swift */; };
@@ -245,8 +244,6 @@
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		897AFC57212FDA9100383A12 /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
-		897AFC5D213012BB00383A12 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
-		897AFC5E213012BB00383A12 /* AboutUsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutUsViewController.xib; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatekeyViewController.swift; sourceTree = "<group>"; };
@@ -315,6 +312,7 @@
 		89C6E09820E07F8E00C94026 /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		89CA1FAB213F822B00669B2C /* tokens-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-list.json"; sourceTree = "<group>"; };
 		89CA1FAD213F832800669B2C /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
+		89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsTableViewController.swift; sourceTree = "<group>"; };
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
 		89D4AC2020D59F270097E02B /* KeyStoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreError.swift; sourceTree = "<group>"; };
 		89D4AC2120D59F270097E02B /* Keystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
@@ -810,8 +808,7 @@
 			children = (
 				89BEBE7120F12647007D2705 /* CommonWebViewController.swift */,
 				897AFC592130129500383A12 /* CurrencyViewController.swift */,
-				897AFC5D213012BB00383A12 /* AboutUsViewController.swift */,
-				897AFC5E213012BB00383A12 /* AboutUsViewController.xib */,
+				89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -992,7 +989,6 @@
 				8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */,
 				89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
-				897AFC60213012BB00383A12 /* AboutUsViewController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
@@ -1227,7 +1223,6 @@
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
-				897AFC5F213012BB00383A12 /* AboutUsViewController.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
@@ -1287,6 +1282,7 @@
 				898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */,
 				89D4AC2D20D59F270097E02B /* ImportType.swift in Sources */,
 				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
+				89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
