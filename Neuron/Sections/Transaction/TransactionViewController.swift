@@ -59,19 +59,21 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func didGetEthTranscationData() {
-            let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-            service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
-                switch result {
-                case .Success(let ethArray):
-                    self.dataArray = ethArray
-                case .Error(let error):
-                    NeuLoad.showToast(text: error.localizedDescription)
-                }
-                self.transactionTableView.mj_header.endRefreshing()
+        dataArray.removeAll()
+        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
+            switch result {
+            case .Success(let ethArray):
+                self.dataArray = ethArray
+            case .Error(let error):
+                NeuLoad.showToast(text: error.localizedDescription)
             }
+            self.transactionTableView.mj_header.endRefreshing()
+        }
     }
 
     func didGetNervosTranscationData() {
+        dataArray.removeAll()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         service.didGetNervosTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {

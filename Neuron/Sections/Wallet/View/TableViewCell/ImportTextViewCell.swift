@@ -24,7 +24,7 @@ class ImportTextViewCell: UITableViewCell, UITextViewDelegate {
     }
 
     weak var delegate: ImportTextViewCellDelegate?
-    private let textView = RSKPlaceholderTextView()
+    let textView = RSKPlaceholderTextView()
     private let qrBtn  = UIButton.init(type: .custom)
 
     override func awakeFromNib() {
