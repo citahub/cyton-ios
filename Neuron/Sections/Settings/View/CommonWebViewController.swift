@@ -10,35 +10,40 @@ import UIKit
 import WebKit
 
 class CommonWebViewController: UIViewController, WKNavigationDelegate {
+    var url: URL!
 
-    var urlStr = ""
-
-    lazy private var webview: WKWebView = {
-        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
-        self.webview.navigationDelegate = self
-        return self.webview
+    lazy private var webView: WKWebView = {
+        let webView = WKWebView.init(frame: .zero)
+        webView.navigationDelegate = self
+        return webView
     }()
 
     lazy private var progressView: UIProgressView = {
-        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
-        self.progressView.tintColor = AppColor.themeColor
-        self.progressView.trackTintColor = .white
-        return self.progressView
+        let progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
+        progressView.tintColor = AppColor.themeColor
+        progressView.trackTintColor = .white
+        return progressView
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webview)
+        view.addSubview(webView)
         view.addSubview(progressView)
-        webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        webview.load(URLRequest.init(url: URL.init(string: urlStr)!))
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.load(URLRequest.init(url: url))
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        webView.frame = CGRect(origin: .zero, size: view.bounds.size)
     }
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.alpha = 1.0
-            progressView.setProgress(Float(webview.estimatedProgress), animated: true)
-            if webview.estimatedProgress >= 1.0 {
+            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+            if webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
                     self.progressView.alpha = 0
                 }, completion: { (_) in

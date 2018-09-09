@@ -33,7 +33,7 @@ class SettingsViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "contactUs" {
             let webViewController = segue.destination as! CommonWebViewController
-            webViewController.urlStr = "https://www.nervos.org/contact"
+            webViewController.url = URL(string: "https://www.nervos.org/contact")!
         }
     }
 
