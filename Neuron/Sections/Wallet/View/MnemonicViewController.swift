@@ -50,6 +50,7 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
 
     func didBackQRCodeMessage(codeResult: String) {
         mnemonic = codeResult
+        textViewCell.textView.text = codeResult
         judgeImportButtonEnabled()
     }
 

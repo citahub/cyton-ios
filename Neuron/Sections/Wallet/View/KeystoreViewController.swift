@@ -39,6 +39,7 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
 
     func didBackQRCodeMessage(codeResult: String) {
         keystore = codeResult
+        textViewCell.textView.text = codeResult
         judgeImportButtonEnabled()
     }
 

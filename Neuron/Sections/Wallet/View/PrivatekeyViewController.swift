@@ -41,6 +41,7 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
     }
     func didBackQRCodeMessage(codeResult: String) {
         privateKey = codeResult
+        textViewCell.textView.text = codeResult
         judgeImportButtonEnabled()
     }
 
