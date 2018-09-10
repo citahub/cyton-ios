@@ -18,23 +18,18 @@ class AboutUsTableViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let urlString: String = URLs[segue.identifier ?? ""] ?? URLs.first!.value
         let webViewController = segue.destination as! CommonWebViewController
-        if segue.identifier == "serviceTerms" {
-            webViewController.urlStr = "https://github.com/cryptape/neuron-ios"
-        }
-        if segue.identifier == "nervosNetwork" {
-            webViewController.urlStr = "https://github.com/cryptape/neuron-ios"
-        }
-        if segue.identifier == "openSea" {
-            webViewController.urlStr = "https://opensea.io/"
-        }
-        if segue.identifier == "sourceCode" {
-            webViewController.urlStr = "https://github.com/cryptape/neuron-ios"
-        }
-        if segue.identifier == "infua" {
-            webViewController.urlStr = "https://infura.io/"
-        }
+        webViewController.url = URL(string: urlString)!
     }
+
+    private var URLs = [
+        "serviceTerms": "https://github.com/cryptape/neuron-ios",
+        "nervosNetwork": "https://github.com/cryptape/neuron-ios",
+        "openSea": "https://opensea.io/",
+        "sourceCode": "https://github.com/cryptape/neuron-ios",
+        "infua": "https://infura.io/"
+    ]
 
     func setVersionLabel() {
         let infoDictionary = Bundle.main.infoDictionary!
