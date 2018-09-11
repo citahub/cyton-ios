@@ -14,7 +14,7 @@
         <scene sceneID="FfC-ze-uzG">
             <objects>
                 <navigationController id="H7J-Ii-bw7" userLabel="AddWallet" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X9s-Z6-21v">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="X9s-Z6-21v">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -31,11 +31,11 @@
             <objects>
                 <viewController storyboardIdentifier="AddWallet" id="yZ5-nt-WqJ" userLabel="Add Wallet View Controller" customClass="AddWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4sQ-qG-YHE">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-0K-NPB">
-                                <rect key="frame" x="15" y="79" width="345" height="271"/>
+                                <rect key="frame" x="15" y="15" width="345" height="271"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="没有「找回密码」！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40V-bt-nvz">
                                         <rect key="frame" x="0.0" y="151" width="345" height="18"/>
@@ -76,7 +76,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTK-ab-Tg0">
-                                <rect key="frame" x="15" y="370" width="345" height="44"/>
+                                <rect key="frame" x="15" y="306" width="345" height="44"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EUS-Lr-Q9n"/>
@@ -96,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5W-FJ-GwR">
-                                <rect key="frame" x="14" y="421" width="345" height="30"/>
+                                <rect key="frame" x="14" y="357" width="345" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9dm-pf-jHc"/>
                                 </constraints>
@@ -134,17 +134,17 @@
             <objects>
                 <viewController id="izc-2M-eVN" customClass="ImportWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3wl-fg-gOI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f0v-oI-azW">
-                                <rect key="frame" x="0.0" y="105" width="375" height="562"/>
+                                <rect key="frame" x="0.0" y="41" width="375" height="562"/>
                                 <connections>
                                     <segue destination="rNL-pf-7HL" kind="embed" identifier="importWalletPageViewController" id="rHE-bA-Bjp"/>
                                 </connections>
                             </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IYP-US-sh9" customClass="TabbedButtonsView" customModule="Neuron" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="375" height="41"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="9W9-FJ-ywF"/>
@@ -683,7 +683,7 @@
             <objects>
                 <tableViewController id="QXI-f3-QQB" customClass="CreateWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="yhB-GY-FIp">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="VPV-BQ-7qS">
@@ -860,11 +860,11 @@
             <objects>
                 <viewController storyboardIdentifier="generateMnemonic" id="88q-WH-hWg" customClass="GenerateMnemonicController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C7b-uB-gcb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrm-Js-j3P">
-                                <rect key="frame" x="0.0" y="64" width="375" height="87"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="wFJ-CP-cIz">
                                         <rect key="frame" x="15" y="15" width="14" height="14"/>
@@ -934,7 +934,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="asd " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-oT-DhE">
-                                <rect key="frame" x="15" y="162" width="345" height="133"/>
+                                <rect key="frame" x="15" y="98" width="345" height="133"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="133" id="1Sc-ST-nUP"/>
@@ -955,7 +955,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uif-Ne-6rO">
-                                <rect key="frame" x="15" y="325" width="345" height="44"/>
+                                <rect key="frame" x="15" y="261" width="345" height="44"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ACG-re-51J"/>
@@ -974,7 +974,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="G9D-oT-DhE" firstAttribute="centerX" secondItem="Jrm-Js-j3P" secondAttribute="centerX" id="0OK-FK-k4c"/>
-                            <constraint firstItem="G9D-oT-DhE" firstAttribute="top" secondItem="C7b-uB-gcb" secondAttribute="top" constant="162" id="97F-uu-qoi"/>
+                            <constraint firstItem="G9D-oT-DhE" firstAttribute="top" secondItem="C7b-uB-gcb" secondAttribute="top" constant="98" id="97F-uu-qoi"/>
                             <constraint firstItem="G9D-oT-DhE" firstAttribute="leading" secondItem="uif-Ne-6rO" secondAttribute="leading" id="C1R-jd-lZP"/>
                             <constraint firstItem="uif-Ne-6rO" firstAttribute="top" secondItem="G9D-oT-DhE" secondAttribute="bottom" constant="30" id="GwK-NU-9Qd"/>
                             <constraint firstItem="G9D-oT-DhE" firstAttribute="leading" secondItem="Gfp-aP-P7t" secondAttribute="leading" constant="15" id="MHB-tx-jII"/>
@@ -999,11 +999,11 @@
             <objects>
                 <viewController id="hAj-D9-k6L" customClass="SureMnemonicViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ugS-Uk-QFk">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyO-Ub-LXP">
-                                <rect key="frame" x="0.0" y="64" width="375" height="35"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="NoD-gF-Fp3">
                                         <rect key="frame" x="15" y="10" width="14" height="14"/>

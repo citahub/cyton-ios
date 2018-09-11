@@ -38,5 +38,4 @@ class WalletCryptService: NSObject {
         let account = WalletTools.keyStore?.account(for: address!)
         try! WalletTools.keyStore?.delete(account: account!, password: password)
     }
-
 }
