@@ -11,18 +11,51 @@ import LYEmptyView
 
 /// ERC-721 List
 class NFTViewController: UITableViewController {
+    var dataArray: [AssetsModel] = []
+    private let testAddress = "0xac30bce77cf849d869aa37e39b983fa50767a2dd"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.ly_emptyView = LYEmptyView.empty(withImageStr: "", titleStr: "暂无藏品", detailStr: "")
+        getListData()
+    }
+
+    func getListData() {
+        dataArray.removeAll()
+        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let address = appModel.currentWallet!.address
+        let nftService = NFTService()
+        nftService.getErc721Data(with: testAddress) { (result) in
+            switch result {
+            case .Success(let nftModel):
+                self.dataArray = nftModel.assets
+            case .Error(let error):
+                NeuLoad.showToast(text: error.localizedDescription)
+            }
+            self.tableView.reloadData()
+        }
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dataArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ERC721TableviewCell") as! ERC721TableViewCell
+
+        let model = dataArray[indexPath.row]
+        cell.ERC721Image.sd_setImage(with: URL(string: model.image_thumbnail_url ?? ""), placeholderImage: UIImage(named: "eth_logo"))
+        cell.name.text = model.name
+        cell.number.text = "ID:" + model.token_id
+        cell.network.text = model.asset_contract.name
         return cell
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = dataArray[indexPath.row]
+        let nftDetailViewController = UIStoryboard(name: "NFTDetail", bundle: nil).instantiateViewController(withIdentifier: "nftDetailViewController") as! NFTDetailViewController
+        nftDetailViewController.assetsModel = model
+        navigationController?.pushViewController(nftDetailViewController, animated: true)
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {

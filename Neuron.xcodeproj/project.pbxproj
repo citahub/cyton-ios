@@ -143,6 +143,12 @@
 		89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */; };
 		89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3720D8DB610097E02B /* NotificationName.swift */; };
 		89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */; };
+		89D84CE121475755006B0287 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE021475755006B0287 /* NFTService.swift */; };
+		89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89D84CE2214790B5006B0287 /* NFTDetail.storyboard */; };
+		89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */; };
+		89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE82147D926006B0287 /* NFTDetailViewController.swift */; };
+		89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */; };
+		89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */; };
 		89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D935242139363A002FAEEC /* TokenTableViewCell.swift */; };
 		89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F7966C213A6B680064808A /* ERC721TableViewCell.swift */; };
 		89F7966F213BD5680064808A /* Assets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F7966E213BD5680064808A /* Assets.storyboard */; };
@@ -323,6 +329,12 @@
 		89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRealmTool.swift; sourceTree = "<group>"; };
 		89D4AC3720D8DB610097E02B /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportWalletViewModel.swift; sourceTree = "<group>"; };
+		89D84CE021475755006B0287 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
+		89D84CE2214790B5006B0287 /* NFTDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NFTDetail.storyboard; sourceTree = "<group>"; };
+		89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsCollectionViewCell.swift; sourceTree = "<group>"; };
+		89D84CE82147D926006B0287 /* NFTDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailViewController.swift; sourceTree = "<group>"; };
+		89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTHeaderReusableView.swift; sourceTree = "<group>"; };
+		89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTFooterReusableView.swift; sourceTree = "<group>"; };
 		89D935242139363A002FAEEC /* TokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTableViewCell.swift; sourceTree = "<group>"; };
 		89F7966C213A6B680064808A /* ERC721TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC721TableViewCell.swift; sourceTree = "<group>"; };
 		89F7966E213BD5680064808A /* Assets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assets.storyboard; sourceTree = "<group>"; };
@@ -564,6 +576,11 @@
 				1A207DD02137B412008DC306 /* RequestPayment.storyboard */,
 				89D935242139363A002FAEEC /* TokenTableViewCell.swift */,
 				89F7966C213A6B680064808A /* ERC721TableViewCell.swift */,
+				89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */,
+				89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */,
+				89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */,
+				89D84CE82147D926006B0287 /* NFTDetailViewController.swift */,
+				89D84CE2214790B5006B0287 /* NFTDetail.storyboard */,
 				8928C28020B3E60900C3103E /* Sub2CustomView */,
 				8928C27420B29AD800C3103E /* View */,
 				8928C27520B29AD800C3103E /* ViewModel */,
@@ -767,6 +784,7 @@
 			children = (
 				899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */,
 				89CA1FAD213F832800669B2C /* CurrencyService.swift */,
+				89D84CE021475755006B0287 /* NFTService.swift */,
 			);
 			path = WalletServices;
 			sourceTree = "<group>";
@@ -961,6 +979,7 @@
 			files = (
 				8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */,
 				1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */,
+				89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */,
 				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */,
 				89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */,
@@ -1183,6 +1202,7 @@
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */,
 				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
+				89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */,
 				89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
@@ -1205,9 +1225,11 @@
 				897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */,
 				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
 				898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */,
+				89D84CE121475755006B0287 /* NFTService.swift in Sources */,
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
+				89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
@@ -1234,6 +1256,7 @@
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
+				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
 				89C3BF09213521DE00872BD0 /* UIView+Extension.swift in Sources */,
@@ -1270,6 +1293,7 @@
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
+				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
 				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,

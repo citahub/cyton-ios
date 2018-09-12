@@ -288,10 +288,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f9f-ld-hb7">
-                                            <rect key="frame" x="15" y="6.5" width="62" height="62"/>
+                                            <rect key="frame" x="15" y="16.5" width="38" height="38"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="62" id="3vE-LS-6yF"/>
-                                                <constraint firstAttribute="height" constant="62" id="bBl-gk-IT6"/>
+                                                <constraint firstAttribute="width" constant="38" id="3vE-LS-6yF"/>
+                                                <constraint firstAttribute="height" constant="38" id="bBl-gk-IT6"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfX-wR-t5L">
@@ -322,7 +322,7 @@
                                         <constraint firstItem="YLV-f4-1I4" firstAttribute="top" secondItem="ZeO-8a-PAt" secondAttribute="top" id="6l3-EL-KT9"/>
                                         <constraint firstAttribute="trailing" secondItem="YLV-f4-1I4" secondAttribute="trailing" constant="15" id="Qi1-6G-9Ns"/>
                                         <constraint firstItem="f9f-ld-hb7" firstAttribute="leading" secondItem="ZeO-8a-PAt" secondAttribute="leading" constant="15" id="YfC-p5-kAw"/>
-                                        <constraint firstAttribute="bottom" secondItem="f9f-ld-hb7" secondAttribute="bottom" constant="1" id="iF0-Ij-ecd"/>
+                                        <constraint firstAttribute="bottom" secondItem="f9f-ld-hb7" secondAttribute="bottom" constant="15" id="iF0-Ij-ecd"/>
                                         <constraint firstAttribute="bottom" secondItem="YLV-f4-1I4" secondAttribute="bottom" id="iFz-YB-ERD"/>
                                     </constraints>
                                 </tableViewCellContentView>
