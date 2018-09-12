@@ -58,8 +58,8 @@ struct TraitsModel: Decodable {
 }
 
 struct AnyValue: Decodable {
-    private var int: Int?
-    private var string: String?
+    var int: Int?
+    var string: String?
 
     init(_ int: Int) {
         self.int = int

@@ -9,5 +9,6 @@
 import UIKit
 
 class TraitsCollectionViewCell: UICollectionViewCell {
-    
+    @IBOutlet weak var traitTypeLabel: UILabel!
+    @IBOutlet weak var valueLabel: UILabel!
 }

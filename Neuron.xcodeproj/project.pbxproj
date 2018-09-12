@@ -148,6 +148,8 @@
 		89D84CE52147926A006B0287 /* NFTDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE42147926A006B0287 /* NFTDetailTableViewController.swift */; };
 		89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */; };
 		89D84CE92147D926006B0287 /* NFTDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE82147D926006B0287 /* NFTDetailController.swift */; };
+		89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */; };
+		89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */; };
 		89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D935242139363A002FAEEC /* TokenTableViewCell.swift */; };
 		89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F7966C213A6B680064808A /* ERC721TableViewCell.swift */; };
 		89F7966F213BD5680064808A /* Assets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F7966E213BD5680064808A /* Assets.storyboard */; };
@@ -333,6 +335,8 @@
 		89D84CE42147926A006B0287 /* NFTDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailTableViewController.swift; sourceTree = "<group>"; };
 		89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TraitsCollectionViewCell.swift; sourceTree = "<group>"; };
 		89D84CE82147D926006B0287 /* NFTDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTDetailController.swift; sourceTree = "<group>"; };
+		89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTHeaderReusableView.swift; sourceTree = "<group>"; };
+		89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTFooterReusableView.swift; sourceTree = "<group>"; };
 		89D935242139363A002FAEEC /* TokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTableViewCell.swift; sourceTree = "<group>"; };
 		89F7966C213A6B680064808A /* ERC721TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC721TableViewCell.swift; sourceTree = "<group>"; };
 		89F7966E213BD5680064808A /* Assets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assets.storyboard; sourceTree = "<group>"; };
@@ -575,6 +579,8 @@
 				89D935242139363A002FAEEC /* TokenTableViewCell.swift */,
 				89F7966C213A6B680064808A /* ERC721TableViewCell.swift */,
 				89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */,
+				89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */,
+				89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */,
 				89D84CE42147926A006B0287 /* NFTDetailTableViewController.swift */,
 				89D84CE82147D926006B0287 /* NFTDetailController.swift */,
 				89D84CE2214790B5006B0287 /* NFTDetail.storyboard */,
@@ -1226,6 +1232,7 @@
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
+				89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
@@ -1290,6 +1297,7 @@
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
+				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
 				89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */,
