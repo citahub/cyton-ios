@@ -8,9 +8,7 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
-class NFTDetailController: UICollectionViewController {
+class NFTDetailViewController: UICollectionViewController {
     var assetsModel: AssetsModel!
 
     override func viewDidLoad() {

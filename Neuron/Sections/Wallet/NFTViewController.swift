@@ -12,6 +12,7 @@ import LYEmptyView
 /// ERC-721 List
 class NFTViewController: UITableViewController {
     var dataArray: [AssetsModel] = []
+    private let testAddress = "0xac30bce77cf849d869aa37e39b983fa50767a2dd"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,7 @@ class NFTViewController: UITableViewController {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let address = appModel.currentWallet!.address
         let nftService = NFTService()
-        nftService.getErc721Data(with: "0xac30bce77cf849d869aa37e39b983fa50767a2dd") { (result) in
+        nftService.getErc721Data(with: testAddress) { (result) in
             switch result {
             case .Success(let nftModel):
                 self.dataArray = nftModel.assets
@@ -52,9 +53,9 @@ class NFTViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let model = dataArray[indexPath.row]
-        let nftDetailTableViewController = UIStoryboard(name: "NFTDetail", bundle: nil).instantiateViewController(withIdentifier: "nftDetailController") as! NFTDetailController
-        nftDetailTableViewController.assetsModel = model
-        navigationController?.pushViewController(nftDetailTableViewController, animated: true)
+        let nftDetailViewController = UIStoryboard(name: "NFTDetail", bundle: nil).instantiateViewController(withIdentifier: "nftDetailViewController") as! NFTDetailViewController
+        nftDetailViewController.assetsModel = model
+        navigationController?.pushViewController(nftDetailViewController, animated: true)
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
