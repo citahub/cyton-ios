@@ -46,7 +46,7 @@ class NFTDetailController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "pushToDescription" {
             let commonWebViewController = segue.destination as? CommonWebViewController
-            commonWebViewController?.url = URL(string: assetsModel.external_link ?? "")
+            commonWebViewController?.url = URL(string: assetsModel.external_link ?? "https://www.nervos.org")
         }
     }
 

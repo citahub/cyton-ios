@@ -43,11 +43,7 @@ class NFTViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ERC721TableviewCell") as! ERC721TableViewCell
 
         let model = dataArray[indexPath.row]
-        if model.image_thumbnail_url == nil {
-            cell.ERC721Image.image = UIImage(named: "eth_logo")
-        } else {
-            cell.ERC721Image.sd_setImage(with: URL(string: model.image_thumbnail_url!))
-        }
+        cell.ERC721Image.sd_setImage(with: URL(string: model.image_thumbnail_url ?? ""), placeholderImage: UIImage(named: "eth_logo"))
         cell.name.text = model.name
         cell.number.text = "ID:" + model.token_id
         cell.network.text = model.asset_contract.name
