@@ -25,8 +25,10 @@
 		8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437720CA56CA00A17AEF /* RealmHelper.swift */; };
 		891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */; };
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
-		8922685C20DE4EC60021A85F /* SubController4TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */; };
-		8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */; };
+		89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD5214A6617007CB446 /* SimpleGasViewController.swift */; };
+		89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD7214A6971007CB446 /* EthGasViewController.swift */; };
+		89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */; };
+		89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DDB214A6CBE007CB446 /* PaymentViewController.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
 		8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* NeuronMacro.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
@@ -203,8 +205,10 @@
 		8913437720CA56CA00A17AEF /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WalletManagement.storyboard; sourceTree = "<group>"; };
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
-		8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController4TableViewCell.swift; sourceTree = "<group>"; };
-		8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubController4TableViewCell.xib; sourceTree = "<group>"; };
+		89230DD5214A6617007CB446 /* SimpleGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGasViewController.swift; sourceTree = "<group>"; };
+		89230DD7214A6971007CB446 /* EthGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGasViewController.swift; sourceTree = "<group>"; };
+		89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuoteViewController.swift; sourceTree = "<group>"; };
+		89230DDB214A6CBE007CB446 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		8928C23420AE8F7C00C3103E /* NeuronMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronMacro.swift; sourceTree = "<group>"; };
@@ -442,8 +446,6 @@
 		8922685920DE4EA50021A85F /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				8922685A20DE4EC60021A85F /* SubController4TableViewCell.swift */,
-				8922685B20DE4EC60021A85F /* SubController4TableViewCell.xib */,
 				89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */,
 			);
 			path = TableViewCell;
@@ -730,7 +732,10 @@
 				898A1A1E20B7B4F300ECB465 /* View */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
 				89C6145F2141421400DC3DF4 /* TransactionViewController.swift */,
-				898A1A2420B7DAA300ECB465 /* TransactionTableviewCell.swift */,
+				89230DDB214A6CBE007CB446 /* PaymentViewController.swift */,
+				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
+				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
+				89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -748,6 +753,7 @@
 		898A1A2C20B8033C00ECB465 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
+				898A1A2420B7DAA300ECB465 /* TransactionTableviewCell.swift */,
 				898A1A2D20B8044900ECB465 /* TradeTableViewCell.swift */,
 				898A1A2E20B8044900ECB465 /* TradeTableViewCell.xib */,
 			);
@@ -1011,7 +1017,6 @@
 				89F79671213BD8C40064808A /* Transaction.storyboard in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
-				8922685D20DE4EC60021A85F /* SubController4TableViewCell.xib in Resources */,
 				89C614572140D4C500DC3DF4 /* currency.plist in Resources */,
 				898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */,
 			);
@@ -1218,7 +1223,6 @@
 				89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */,
 				899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */,
 				1A207DD52137D8CF008DC306 /* TabbedButtonsView.swift in Sources */,
-				8922685C20DE4EC60021A85F /* SubController4TableViewCell.swift in Sources */,
 				8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */,
 				898A1A2620B7DAA300ECB465 /* TransactionTableviewCell.swift in Sources */,
 				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
@@ -1252,8 +1256,10 @@
 				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordJuge.swift in Sources */,
+				89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
+				89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
@@ -1276,12 +1282,14 @@
 				89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */,
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
+				89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
 				89D4AC3320D8A6E80097E02B /* SubController2ViewModel.swift in Sources */,
+				89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */,
 				89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
 				89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */,

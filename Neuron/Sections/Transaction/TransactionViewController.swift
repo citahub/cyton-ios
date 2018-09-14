@@ -41,9 +41,9 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     @IBAction func didClickPay(_ sender: UIButton) {
-        let tCtrl =  TAViewController.init(nibName: "TAViewController", bundle: nil)
-        tCtrl.tokenModel = tokenModel
-        navigationController?.pushViewController(tCtrl, animated: true)
+//        let tCtrl =  TAViewController.init(nibName: "TAViewController", bundle: nil)
+//        tCtrl.tokenModel = tokenModel
+//        navigationController?.pushViewController(tCtrl, animated: true)
     }
 
     @objc func loadData() {
