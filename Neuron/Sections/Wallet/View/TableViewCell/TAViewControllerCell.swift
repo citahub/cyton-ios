@@ -10,11 +10,9 @@ import UIKit
 
 @objc protocol TAViewControllerCellDelegate {
     @objc optional func didCallbackCurrentProgress(progress: Float)
-
 }
 
 class TAViewControllerCell: UITableViewCell {
-
     //current progress
     var progress: Float = 0.0 {
         didSet {
@@ -44,14 +42,8 @@ class TAViewControllerCell: UITableViewCell {
     }
 
     @objc func sliderDidChange(slider: UISlider) {
-
         let finalValue = String(format: "%.2f", slider.value)
         let finalFloat = Float(finalValue)
         delegate.didCallbackCurrentProgress!(progress: finalFloat!)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
-
 }

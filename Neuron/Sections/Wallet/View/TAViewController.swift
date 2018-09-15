@@ -10,11 +10,11 @@ import UIKit
 import BigInt
 import web3swift
 
-class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, TAViewControllerCellDelegate, QRCodeControllerDelegate, TACustomViewControllerDelegate {
+class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     let nameArray = ["地址", "转账金额"]
     let plactholderArray = ["输入转账地址或扫码", "转账金额"]
 
-    let tCtrl = TACustomViewController.init(nibName: "TACustomViewController", bundle: nil)
+    let tCtrl = TACustomViewController(nibName: "TACustomViewController", bundle: nil)
     let viewModel = TAViewModel()
     let appModel = WalletRealmTool.getCurrentAppmodel()
 
@@ -40,8 +40,8 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         tTable.delegate = self
         tTable.dataSource = self
         tTable.isScrollEnabled = false
-        tTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        tTable.register(UINib.init(nibName: "TAViewControllerCell", bundle: nil), forCellReuseIdentifier: "ID1")
+        tTable.register(UINib(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
+        tTable.register(UINib(nibName: "TAViewControllerCell", bundle: nil), forCellReuseIdentifier: "ID1")
         tCtrl.delegate = self
 
         iconImage.image = UIImage(data: (appModel.currentWallet?.iconData)!)
@@ -71,7 +71,7 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let formatGasPrice = Web3.Utils.formatToEthereumUnits(finalGas, toUnits: .eth, decimals: 8)!
         let showGas = Float(formatGasPrice)! * progress
         estimatedGas = String(format: "%.8f", showGas)
-        let index = IndexPath.init(row: 2, section: 0)
+        let index = IndexPath(row: 2, section: 0)
         self.tTable.reloadRows(at: [index], with: .none)
 
     }
@@ -89,7 +89,6 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
         if indexPath.row == 2 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! TAViewControllerCell
             cell.contentView.isUserInteractionEnabled = true
@@ -116,42 +115,18 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
 
-    //cell代理
-    //textfield内容
-    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
-        switch index.row {
-        case 0:
-            toAddress = text
-        case 1:
-            amount = text
-        default:
-            break
-        }
-    }
-    //拉动进度条返回的进度 0~1之间
-    func didCallbackCurrentProgress(progress: Float) {
-        tableProgress = progress
-        getGasPriceAndPriceLimit(progress: tableProgress)
-    }
-
-    //界面本身的点击事件
-    //点击qrcode
-    func didClickQRCodeBtn() {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
-    }
-
     //点击下一步
     @IBAction func didClickNextButton(_ sender: UIButton) {
-        if toAddress.isEmpty {NeuLoad.showToast(text: "请输入转账地址")
+        if toAddress.isEmpty {
+            NeuLoad.showToast(text: "请输入转账地址")
             return
         }
         if !toAddress.hasPrefix("0x") || toAddress.count != 42 {
             NeuLoad.showToast(text: "地址有误:地址一般为0x开头的42位字符")
             return
         }
-        if amount.isEmpty {NeuLoad.showToast(text: "请输入转账金额")
+        if amount.isEmpty {
+            NeuLoad.showToast(text: "请输入转账金额")
             return
         }
         if (estimatedGas?.isEmpty)! {
@@ -165,20 +140,43 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         tCtrl.estimatedGas = estimatedGas!
         tCtrl.tokenModel = tokenModel
     }
+}
 
+extension TAViewController: TACustomViewControllerDelegate {
     func successPop() {
         navigationController?.popToRootViewController(animated: true)
     }
+}
 
-    //QRCode delegate
+extension TAViewController: QRCodeControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         toAddress = codeResult
-        let index = IndexPath.init(row: 2, section: 0)
+        let index = IndexPath(row: 2, section: 0)
         self.tTable.reloadRows(at: [index], with: .none)
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension TAViewController: AddAssetTableViewCellDelegate, TAViewControllerCellDelegate {
+    func didClickQRCodeBtn() {
+        let qrCtrl = QRCodeController()
+        qrCtrl.delegate = self
+        self.navigationController?.pushViewController(qrCtrl, animated: true)
+    }
+
+    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
+        switch index.row {
+        case 0:
+            toAddress = text
+        case 1:
+            amount = text
+        default:
+            break
+        }
+    }
+
+    //拉动进度条返回的进度 0~1之间
+    func didCallbackCurrentProgress(progress: Float) {
+        tableProgress = progress
+        getGasPriceAndPriceLimit(progress: tableProgress)
     }
 }
