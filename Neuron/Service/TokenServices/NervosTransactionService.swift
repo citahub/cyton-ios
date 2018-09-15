@@ -49,7 +49,16 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let blockNumber):
-                    let transaction = NervosTransaction.init(to: destinationEthAddress, nonce: nonce, data: data, value: amount, validUntilBlock: blockNumber + BigUInt(88), quota: quota, version: BigUInt(0), chainId: chainId)
+                    let transaction = NervosTransaction(
+                        to: destinationEthAddress,
+                        nonce: nonce,
+                        data: data,
+                        value: amount,
+                        validUntilBlock: blockNumber + BigUInt(88),
+                        quota: quota,
+                        version: BigUInt(0),
+                        chainId: chainId
+                    )
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
                     completion(SendNervosResult.Error(error))
@@ -57,6 +66,7 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             }
         }
     }
+
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!

@@ -22,7 +22,7 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
         textViewCell.delegate = self
         viewModel.delegate = self
     }
-    
+
     @IBAction func nameChanged(_ sender: UITextField) {
         name = sender.text
         judgeImportButtonEnabled()

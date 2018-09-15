@@ -141,6 +141,7 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
+
     //点击下一步
     @IBAction func didClickNextButton(_ sender: UIButton) {
         if toAddress.isEmpty {NeuLoad.showToast(text: "请输入转账地址")
@@ -180,5 +181,4 @@ class TAViewController: UIViewController, UITableViewDelegate, UITableViewDataSo
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }

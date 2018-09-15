@@ -83,7 +83,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     @IBAction func copyWalletAddressWithButton(_ sender: UIButton) {
         copyAddress()
     }
-    
+
     @IBAction func scanQRCode(_ sender: UIBarButtonItem) {
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self

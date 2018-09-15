@@ -20,7 +20,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         title = "资产管理"
         didGetDataForList()
     }
-    
+
     func didGetDataForList() {
         selectAddressArray.removeAll()
         dataArray = viewModel.getAssetListFromJSON()
