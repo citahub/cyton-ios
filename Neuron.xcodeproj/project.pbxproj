@@ -50,7 +50,6 @@
 		8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18920BFEF950086848F /* ImportTextViewCell.swift */; };
 		8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */; };
 		8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */; };
-		8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18F20C112C40086848F /* SQButtonTagView.swift */; };
 		8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19120C115A70086848F /* SureMnemonicViewController.swift */; };
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
@@ -229,7 +228,6 @@
 		8964A18920BFEF950086848F /* ImportTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTextViewCell.swift; sourceTree = "<group>"; };
 		8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMnemonicController.swift; sourceTree = "<group>"; };
 		8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenerateMnemonicController.xib; sourceTree = "<group>"; };
-		8964A18F20C112C40086848F /* SQButtonTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19120C115A70086848F /* SureMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewController.swift; sourceTree = "<group>"; };
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
@@ -636,7 +634,6 @@
 		8928C28020B3E60900C3103E /* Sub2CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				8964A18F20C112C40086848F /* SQButtonTagView.swift */,
 				8928C2A220B41BCA00C3103E /* SelectWalletController.xib */,
 				898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */,
 				898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */,
@@ -1240,7 +1237,6 @@
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
-				8964A19020C112C40086848F /* SQButtonTagView.swift in Sources */,
 				8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */,
 				89D4AC2B20D59F270097E02B /* ETHKeyStore.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
