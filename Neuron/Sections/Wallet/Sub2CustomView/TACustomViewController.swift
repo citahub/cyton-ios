@@ -110,31 +110,54 @@ class TACustomViewController: UIViewController, UITableViewDataSource, UITableVi
         NeuLoad.showHUD(text: "")
         if tokenModel.chainId == NativeChainId.ethMainnetChainId {
             ethTransactionService = EthTransactionServiceImp()
-            ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
-                switch sendResult {
-                case .Success(let value):
-                    print(value)
-                    self.sendEthTransaction(password: password, transaction: value)
-                case .Error(let error):
-                    print(error.localizedDescription)
-                    NeuLoad.hidHUD()
+            ethTransactionService.prepareTransactionForSending(
+                destinationAddressString: destinationAddress,
+                amountString: amountStr,
+                gasLimit: 21000,
+                walletPassword: password,
+                gasPrice: gasPrice,
+                erc20TokenAddress: tokenModel.address,
+                completion: { (sendResult) in
+                    switch sendResult {
+                    case .Success(let value):
+                        print(value)
+                        self.sendEthTransaction(password: password, transaction: value)
+                    case .Error(let error):
+                        print(error.localizedDescription)
+                        NeuLoad.hidHUD()
+                    }
                 }
-            })
+            )
         } else if tokenModel.chainId == ""{
             ethTransactionService = ERC20TransactionServiceImp()
-            ethTransactionService.prepareTransactionForSending(destinationAddressString: destinationAddress, amountString: amountStr, gasLimit: 21000, walletPassword: password, gasPrice: gasPrice, erc20TokenAddress: tokenModel.address, completion: { (sendResult) in
-                switch sendResult {
-                case .Success(let value):
-                    print(value)
-                    self.sendEthTransaction(password: password, transaction: value)
-                case .Error(let error):
-                    print(error.localizedDescription)
-                    NeuLoad.hidHUD()
+            ethTransactionService.prepareTransactionForSending(
+                destinationAddressString: destinationAddress,
+                amountString: amountStr,
+                gasLimit: 21000,
+                walletPassword: password,
+                gasPrice: gasPrice,
+                erc20TokenAddress: tokenModel.address,
+                completion: { (sendResult) in
+                    switch sendResult {
+                    case .Success(let value):
+                        print(value)
+                        self.sendEthTransaction(password: password, transaction: value)
+                    case .Error(let error):
+                        print(error.localizedDescription)
+                        NeuLoad.hidHUD()
+                    }
                 }
-            })
+            )
         } else {
             nervosTransactionService = NervosTransactionServiceImp()
-            nervosTransactionService.prepareTransactionForSending(address: destinationAddress, nonce: "", quota: BigUInt(100000), data: Data.init(hex: ""), value: amountStr, chainId: BigUInt(tokenModel.chainId)!) { (transaction) in
+            nervosTransactionService.prepareTransactionForSending(
+                address: destinationAddress,
+                nonce: "",
+                quota: BigUInt(100000),
+                data: Data(hex: ""),
+                value: amountStr,
+                chainId: BigUInt(tokenModel.chainId)!
+            ) { (transaction) in
                 switch transaction {
                 case .Success(let value):
                     self.sendNervosTransaction(password: password, transaction: value)
