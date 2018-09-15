@@ -79,8 +79,8 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
         if indexPath.section == 1 && indexPath.row == 0 {
             pickerView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
             pickerView.delegate = self
-            pickerView.dataArray = [["name": "m/44'/60'/0'/0/0","id": "0"],["name": "m/44'/60'/0'/0","id": "1"],["name":"m/44'/60'/1'/0/0","id": "2"]]
-            pickerView.selectDict = ["name": devirationPath.text!,"id": selectFormatId]
+            pickerView.dataArray = [["name": "m/44'/60'/0'/0/0", "id": "0"], ["name": "m/44'/60'/0'/0", "id": "1"], ["name": "m/44'/60'/1'/0/0", "id": "2"]]
+            pickerView.selectDict = ["name": devirationPath.text!, "id": selectFormatId]
             UIApplication.shared.keyWindow?.addSubview(pickerView)
         }
     }
