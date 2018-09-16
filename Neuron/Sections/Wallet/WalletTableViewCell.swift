@@ -13,9 +13,9 @@ class WalletTableViewCell: UITableViewCell {
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
-    var selectStatus: Bool = false {
-        didSet {
-            if selectStatus {
+    override var isSelected: Bool {
+        didSet{
+            if isSelected {
                 shadowsView.backgroundColor = ColorFromString(hex: "#6080ff")
                 shadowsView.shadowColor = ColorFromString(hex: "#C8D4FF")
                 nameLabel.textColor = .white

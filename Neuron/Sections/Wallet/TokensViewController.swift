@@ -185,15 +185,10 @@ class TokensViewController: UITableViewController {
         }
         tableView.isScrollEnabled = offset > 0
     }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 }
 
 extension TokensViewController: SelectWalletControllerDelegate {
     func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
-        print("111")
         tokenArray.removeAll()
         for item in model.selectTokenList {
             tokenArray.append(item)
