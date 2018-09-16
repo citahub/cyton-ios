@@ -29,6 +29,13 @@ class TokensViewController: UITableViewController {
         addNotify()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "switchWallet" {
+            let selectWalletController = segue.destination as! SelectWalletController
+            selectWalletController.delegate = self
+        }
+    }
+
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
     }
@@ -181,5 +188,16 @@ class TokensViewController: UITableViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+}
+
+extension TokensViewController: SelectWalletControllerDelegate {
+    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
+        print("111")
+        tokenArray.removeAll()
+        for item in model.selectTokenList {
+            tokenArray.append(item)
+        }
+        getBalance(isRefresh: false)
     }
 }
