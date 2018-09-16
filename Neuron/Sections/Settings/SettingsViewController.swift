@@ -15,12 +15,12 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "设置"
+        navigationItem.title = "设置"
         fingerprintSwitch.isOn = false
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         navigationController?.navigationBar.isDarkStyle = true
         localCurrencyLabel.text = LocalCurrencyService().getLocalCurrencySelect().short
     }
