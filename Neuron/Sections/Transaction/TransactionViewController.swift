@@ -38,6 +38,11 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
             let appModel = WalletRealmTool.getCurrentAppmodel()
             requestPaymentViewController.appModel = appModel
         }
+        if segue.identifier == "payment" {
+            let paymentViewController = segue.destination as! PaymentViewController
+            paymentViewController.tokenType = tokenType
+            paymentViewController.tokenModel = tokenModel
+        }
     }
 
     @IBAction func didClickPay(_ sender: UIButton) {

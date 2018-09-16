@@ -83,7 +83,6 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
             //                }
             //                return
             //            }
-            print(">>>>>>>>>>>" + gasPrice.description)
             options.gasPrice = gasPrice
             guard let transaction = contract.method(options: options) else {
                 DispatchQueue.main.async {
