@@ -13,6 +13,7 @@ import web3swift
 
 protocol EthGasViewControllerDelegate: class {
     func getTransactionGasPriceAndData(ethGasViewController: EthGasViewController, gasPrice: BigUInt, data: Data)
+    func getTransactionCostGas(gas: String)
 }
 
 class EthGasViewController: UIViewController {
@@ -46,6 +47,7 @@ class EthGasViewController: UIViewController {
         let gasCosted = gas * Float(gasPrice)
         let totleGas = Web3.Utils.formatToEthereumUnits(BigUInt(gasCosted), toUnits: .eth, decimals: 4, fallbackToScientific: false)
         gasLabel.text = totleGas! + "  eth"
+        delegate?.getTransactionCostGas(gas: gasLabel.text!)
     }
 
     func getGasPrice() {

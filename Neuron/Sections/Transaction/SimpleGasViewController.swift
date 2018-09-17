@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 
 protocol SimpleGasViewControllerDelegate: class {
     func getTransactionGasPrice(simpleGasViewController: SimpleGasViewController, gasPrice: BigUInt)
+    func getTransactionCostGas(gas: String)
 }
 
 class SimpleGasViewController: UIViewController {
@@ -39,6 +40,7 @@ class SimpleGasViewController: UIViewController {
         let gasCosted = gas * finalGasPrice
         let totleGas = Web3.Utils.formatToEthereumUnits(BigUInt(gasCosted), toUnits: .eth, decimals: 4, fallbackToScientific: false)
         gasLabel.text = totleGas! + "  eth"
+        delegate?.getTransactionCostGas(gas: gasLabel.text!)
     }
 
     func getGasPrice() {

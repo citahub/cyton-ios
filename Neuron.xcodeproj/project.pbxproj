@@ -96,6 +96,9 @@
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
 		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */; };
+		89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A21214FA89A00900976 /* PayCoverViewController.swift */; };
+		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
+		89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */; };
 		89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */; };
 		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
 		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
@@ -282,6 +285,9 @@
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
 		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptService.swift; sourceTree = "<group>"; };
+		89A45A21214FA89A00900976 /* PayCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCoverViewController.swift; sourceTree = "<group>"; };
+		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
+		89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAmountViewController.swift; sourceTree = "<group>"; };
 		89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
 		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
@@ -733,6 +739,9 @@
 				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
 				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
 				89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */,
+				89A45A21214FA89A00900976 /* PayCoverViewController.swift */,
+				89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */,
+				89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -1201,11 +1210,13 @@
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
 				899CADA320E0EDAC00FF9D27 /* WalletCryptService.swift in Sources */,
+				89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */,
 				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
 				89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */,
 				89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */,
+				89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */,
@@ -1218,6 +1229,7 @@
 				8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */,
 				8964A18020BE94F70086848F /* NEPickerView.swift in Sources */,
 				89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */,
+				89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */,
 				899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */,
 				1A207DD52137D8CF008DC306 /* TabbedButtonsView.swift in Sources */,
 				8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */,

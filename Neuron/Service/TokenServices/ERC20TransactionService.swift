@@ -10,16 +10,26 @@ import Foundation
 import web3swift
 import BigInt
 
-class ERC20TransactionServiceImp: EthTransactionServiceProtocol {
+protocol Erc20TransactionServiceProtocol {
 
-    func prepareTransactionForSending(destinationAddressString: String,
-                                      amountString: String,
-                                      gasLimit: UInt = 21000,
-                                      walletPassword: String,
-                                      gasPrice: BigUInt,
-                                      erc20TokenAddress: String,
-                                      completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+    func prepareERC20TransactionForSending(destinationAddressString: String,
+                                           amountString: String,
+                                           gasLimit: UInt,
+                                           walletPassword: String,
+                                           gasPrice: BigUInt,
+                                           erc20TokenAddress: String,
+                                           completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
+    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
+}
 
+class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
+    func prepareERC20TransactionForSending(destinationAddressString: String,
+                                           amountString: String,
+                                           gasLimit: UInt = 21000,
+                                           walletPassword: String,
+                                           gasPrice: BigUInt,
+                                           erc20TokenAddress: String,
+                                           completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
 

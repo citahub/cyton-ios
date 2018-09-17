@@ -12,7 +12,7 @@ import BigInt
 //import web3swift
 
 protocol NervosTransactionServiceProtocol {
-    func prepareTransactionForSending(address: String,
+    func prepareNervosTransactionForSending(address: String,
                                       nonce: String,
                                       quota: BigUInt,
                                       data: Data,
@@ -24,7 +24,7 @@ protocol NervosTransactionServiceProtocol {
 
 class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
 
-    func prepareTransactionForSending(address: String,
+    func prepareNervosTransactionForSending(address: String,
                                       nonce: String = "",
                                       quota: BigUInt = BigUInt(100000),
                                       data: Data,
