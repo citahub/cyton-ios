@@ -9,16 +9,22 @@
 import UIKit
 
 class WalletTableViewCell: UITableViewCell {
+    @IBOutlet weak var shadowsView: UIView!
     @IBOutlet var iconImageView: UIImageView!
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
-    @IBOutlet var statusImageView: UIImageView!
-    var selectStatus: Bool = false {
-        didSet {
-            if selectStatus {
-                statusImageView.isHidden = false
+    override var isSelected: Bool {
+        didSet{
+            if isSelected {
+                shadowsView.backgroundColor = ColorFromString(hex: "#6080ff")
+                shadowsView.shadowColor = ColorFromString(hex: "#C8D4FF")
+                nameLabel.textColor = .white
+                addressLabel.textColor = .white
             } else {
-                statusImageView.isHidden = true
+                shadowsView.backgroundColor = .white
+                shadowsView.shadowColor = ColorFromString(hex: "#E5E5E5")
+                nameLabel.textColor = ColorFromString(hex: "#2E313E")
+                addressLabel.textColor = ColorFromString(hex: "#6C7184")
             }
         }
     }

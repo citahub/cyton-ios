@@ -43,6 +43,10 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         navigationController?.navigationBar.isDarkStyle = false
     }
 
@@ -116,7 +120,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         navigationController?.navigationBar.isDarkStyle = !isHeaderViewHidden
         if isHeaderViewHidden {
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
-            title = viewModel.getCurrentModel().currentWallet?.name
+            navigationItem.title = viewModel.getCurrentModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
             navigationItem.rightBarButtonItems = [scanQRButtonItem]

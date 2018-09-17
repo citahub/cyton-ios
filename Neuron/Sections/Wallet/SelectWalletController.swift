@@ -49,9 +49,9 @@ class SelectWalletController: UITableViewController {
         cell.nameLabel.text = walletModel.name
         cell.addressLabel.text = walletModel.address
         if appModel.currentWallet?.address == walletModel.address {
-            cell.selectStatus = true
+            cell.isSelected = true
         } else {
-            cell.selectStatus = false
+            cell.isSelected = false
         }
         return cell
     }
