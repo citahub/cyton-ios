@@ -24,7 +24,7 @@ protocol NervosTransactionServiceProtocol {
 class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
 
     func prepareNervosTransactionForSending(address: String,
-                                            quota: BigUInt = BigUInt(100000),
+                                            quota: BigUInt = BigUInt(1000000),
                                             data: Data,
                                             value: String,
                                             chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
@@ -35,12 +35,14 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                 }
                 return
             }
+            print(value)
             guard let amount = Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
                     completion(SendNervosResult.Error(SendNervosErrors.invalidAmountFormat))
                 }
                 return
             }
+            print(amount)
             let nonce = UUID().uuidString
             let nervos = NervosNetwork.getNervos()
             let result = nervos.appChain.blockNumber()
@@ -51,11 +53,11 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                         to: destinationEthAddress,
                         nonce: nonce,
                         quota: quota,
-                        validUntilBlock: blockNumber + 88,
+                        validUntilBlock: blockNumber + BigUInt(88),
                         data: data,
                         value: amount,
                         chainId: chainId,
-                        version: 0
+                        version: BigUInt(0)
                     )
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
@@ -81,6 +83,7 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
+                    print(transaction.hash.toHexString())
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
                     completion(SendNervosResult.Error(error))

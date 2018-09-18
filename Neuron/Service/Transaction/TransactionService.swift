@@ -124,7 +124,7 @@ class TransactionServiceImp: TransactionService {
     }
 
     func formatScientValue(value: String) -> String {
-        let biguInt = BigUInt(atof("0x" + value))
+        let biguInt = BigUInt(atof(value))
         let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
         return formatStr
     }

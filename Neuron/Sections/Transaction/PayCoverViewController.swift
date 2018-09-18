@@ -113,8 +113,8 @@ class PayCoverViewController: UIViewController {
                                                                     value: amount,
                                                                     chainId: BigUInt(tokenModel.chainId)!) { (reuslt) in
                                                                         switch reuslt {
-                                                                        case .Success(let value):
-                                                                            self.sendNervosTransaction(password: password, transaction: value)
+                                                                        case .Success(let transaction):
+                                                                            self.sendNervosTransaction(password: password, transaction: transaction)
                                                                         case .Error(let error):
                                                                             NeuLoad.showToast(text: error.localizedDescription)
                                                                             NeuLoad.hidHUD()

@@ -17,7 +17,7 @@ class ConfirmSendViewController: UIViewController {
     weak var delegate: ConfirmSendViewControllerDelegate?
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var passwordTextField: UITextField!
-    private var password: String!
+    private var password: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordTextField.delegate = self
