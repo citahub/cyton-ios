@@ -29,7 +29,7 @@ class PaymentViewController: UITableViewController {
     var ethGasPrice: BigUInt!
     var payValue: String = ""
     var destinationAddress: String = ""
-    var extraData: Data?
+    var extraData = Data()
     var nervosQuota: BigUInt!
     var gasCost: String = ""
 
@@ -49,9 +49,15 @@ class PaymentViewController: UITableViewController {
         amountTextField.delegate = self
         addressTextField.delegate = self
         simpleGasViewController = storyboard!.instantiateViewController(withIdentifier: "simpleGasViewController") as? SimpleGasViewController
+        simpleGasViewController.delegate = self
+        simpleGasViewController.tokenModel = tokenModel
+        simpleGasViewController.tokenType = tokenType
         ethGasViewController = storyboard!.instantiateViewController(withIdentifier: "ethGasViewController") as? EthGasViewController
+        ethGasViewController.delegate = self
         nervosQuoteViewController = storyboard!.instantiateViewController(withIdentifier: "nervosQuoteViewController") as? NervosQuoteViewController
+        nervosQuoteViewController.delegate = self
         payCoverViewController = storyboard!.instantiateViewController(withIdentifier: "confirmViewController") as? PayCoverViewController
+        payCoverViewController.delegate = self
         nervosQuoteViewController.tokenModel = tokenModel
         gasPageViewController.setViewControllers([simpleGasViewController], direction: .forward, animated: false)
         getBaseData()
@@ -92,25 +98,26 @@ class PaymentViewController: UITableViewController {
     }
 
     @IBAction func clickNextButton(_ sender: UIButton) {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         if canProceedNextStep() {
-            UIApplication.shared.keyWindow?.addSubview(payCoverViewController.view)
+            let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
             payCoverViewController.tokenModel = tokenModel
             payCoverViewController.walletAddress = walletModel.address
             payCoverViewController.amount = payValue
             payCoverViewController.toAddress = destinationAddress
             payCoverViewController.gasCost = gasCost
+            payCoverViewController.tokenType = tokenType
             switch tokenType {
             case .ethereumToken:
-                payCoverViewController.data = extraData
+                payCoverViewController.extraData = extraData
                 payCoverViewController.gasPrice = ethGasPrice
             case .nervosToken:
-                payCoverViewController.data = extraData
+                payCoverViewController.extraData = extraData
                 payCoverViewController.gasPrice = nervosQuota
             case .erc20Token:
                 payCoverViewController.gasPrice = ethGasPrice
                 payCoverViewController.contrackAddress = tokenModel.address
             }
+            UIApplication.shared.keyWindow?.addSubview(payCoverViewController.view)
         }
     }
 
@@ -137,8 +144,13 @@ class PaymentViewController: UITableViewController {
     }
 }
 
-extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate, UITextFieldDelegate {
+extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate, UITextFieldDelegate, PayCoverViewControllerDelegate {
+    func popToRootView() {
+        navigationController?.popViewController(animated: true)
+    }
+
     func getTransactionCostGas(gas: String) {
+        print(gas)
         gasCost = gas
     }
 
@@ -153,7 +165,11 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
     }
 
     func getTransactionGasPrice(simpleGasViewController: SimpleGasViewController, gasPrice: BigUInt) {
-        ethGasPrice = gasPrice
+        if tokenType == .nervosToken {
+            nervosQuota = gasPrice
+        } else {
+            ethGasPrice = gasPrice
+        }
     }
 
     func didBackQRCodeMessage(codeResult: String) {

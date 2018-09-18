@@ -13,11 +13,10 @@ import BigInt
 
 protocol NervosTransactionServiceProtocol {
     func prepareNervosTransactionForSending(address: String,
-                                      nonce: String,
-                                      quota: BigUInt,
-                                      data: Data,
-                                      value: String,
-                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
+                                            quota: BigUInt,
+                                            data: Data,
+                                            value: String,
+                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
 
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void)
 }
@@ -25,11 +24,10 @@ protocol NervosTransactionServiceProtocol {
 class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
 
     func prepareNervosTransactionForSending(address: String,
-                                      nonce: String = "",
-                                      quota: BigUInt = BigUInt(100000),
-                                      data: Data,
-                                      value: String,
-                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
+                                            quota: BigUInt = BigUInt(100000),
+                                            data: Data,
+                                            value: String,
+                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {

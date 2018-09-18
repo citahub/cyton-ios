@@ -496,7 +496,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2pL-dU-rp3">
-                                <rect key="frame" x="0.0" y="260" width="375" height="407"/>
+                                <rect key="frame" x="0.0" y="220" width="375" height="447"/>
                                 <connections>
                                     <segue destination="Hdv-3p-XuV" kind="embed" identifier="confirmPageViewController" id="1sP-wg-Hgo"/>
                                 </connections>
@@ -506,7 +506,7 @@
                         <constraints>
                             <constraint firstItem="2pL-dU-rp3" firstAttribute="trailing" secondItem="ziJ-2K-8o5" secondAttribute="trailing" id="FZ1-7Q-Lxi"/>
                             <constraint firstItem="2pL-dU-rp3" firstAttribute="leading" secondItem="ziJ-2K-8o5" secondAttribute="leading" id="QmC-kN-brB"/>
-                            <constraint firstItem="2pL-dU-rp3" firstAttribute="top" secondItem="ziJ-2K-8o5" secondAttribute="top" constant="240" id="h2W-OS-yP5"/>
+                            <constraint firstItem="2pL-dU-rp3" firstAttribute="top" secondItem="ziJ-2K-8o5" secondAttribute="top" constant="200" id="h2W-OS-yP5"/>
                             <constraint firstItem="2pL-dU-rp3" firstAttribute="bottom" secondItem="ziJ-2K-8o5" secondAttribute="bottom" id="ocB-GO-7E9"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ziJ-2K-8o5"/>
@@ -519,7 +519,7 @@
         <!--Page View Controller-->
         <scene sceneID="8lx-tR-Yf3">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="Hdv-3p-XuV" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Hdv-3p-XuV" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Ebg-2t-kIt" kind="showDetail" id="tZV-zz-wfo"/>
                         <segue destination="UpI-0F-Qax" kind="showDetail" id="jUp-1r-7bh"/>
@@ -534,10 +534,10 @@
             <objects>
                 <tableViewController storyboardIdentifier="confirmAmountViewController" id="Ebg-2t-kIt" customClass="ConfirmAmountViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="fZq-Tx-iax">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="407"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Rw5-ed-2ab">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="Rw5-ed-2ab">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -556,6 +556,9 @@
                                         <constraint firstAttribute="height" constant="30" id="Bm6-sK-QgX"/>
                                     </constraints>
                                     <state key="normal" image="close"/>
+                                    <connections>
+                                        <action selector="clickCloseButton:" destination="Ebg-2t-kIt" eventType="touchUpInside" id="5dF-lm-PsX"/>
+                                    </connections>
                                 </button>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a9G-qb-f0B">
                                     <rect key="frame" x="0.0" y="50" width="375" height="1"/>
@@ -606,12 +609,15 @@
                                             <integer key="value" value="5"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="clickTransferButton:" destination="Ebg-2t-kIt" eventType="touchUpInside" id="iyd-FH-Rwt"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="edh-QW-W6T" secondAttribute="bottom" constant="20" id="LmN-g4-XbD"/>
                                 <constraint firstItem="edh-QW-W6T" firstAttribute="leading" secondItem="k9d-aS-5qd" secondAttribute="leading" constant="15" id="M0i-6F-2b5"/>
+                                <constraint firstAttribute="bottom" secondItem="edh-QW-W6T" secondAttribute="bottom" constant="20" id="TKe-ia-A1l"/>
                                 <constraint firstAttribute="trailing" secondItem="edh-QW-W6T" secondAttribute="trailing" constant="15" id="W8s-Og-bkb"/>
                             </constraints>
                         </view>
@@ -715,7 +721,7 @@
             <objects>
                 <viewController storyboardIdentifier="confirmSendViewController" id="UpI-0F-Qax" customClass="ConfirmSendViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9zL-JN-AG0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="407"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0ur-6y-gYs">
@@ -733,6 +739,9 @@
                                     <constraint firstAttribute="height" constant="30" id="pGy-bh-kkt"/>
                                 </constraints>
                                 <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="clickCloseButton:" destination="UpI-0F-Qax" eventType="touchUpInside" id="ime-5v-4mc"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TgQ-vv-KuO">
                                 <rect key="frame" x="0.0" y="50" width="375" height="1"/>
@@ -758,7 +767,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BRH-lc-Yrk">
-                                <rect key="frame" x="15" y="343" width="345" height="44"/>
+                                <rect key="frame" x="15" y="383" width="345" height="44"/>
                                 <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="3wA-hw-zdr"/>
@@ -769,6 +778,9 @@
                                         <integer key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickSendTransactionButton:" destination="UpI-0F-Qax" eventType="touchUpInside" id="zG0-xm-d9m"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
