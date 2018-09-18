@@ -50,12 +50,12 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                     let transaction = NervosTransaction(
                         to: destinationEthAddress,
                         nonce: nonce,
+                        quota: quota,
+                        validUntilBlock: blockNumber + 88,
                         data: data,
                         value: amount,
-                        validUntilBlock: blockNumber + BigUInt(88),
-                        quota: quota,
-                        version: BigUInt(0),
-                        chainId: chainId
+                        chainId: chainId,
+                        version: 0
                     )
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
