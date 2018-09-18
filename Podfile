@@ -5,7 +5,7 @@ target 'Neuron' do
   use_frameworks!
   inhibit_all_warnings!
 
-  pod 'NervosSwift', git: "https://github.com/cryptape/nervos-swift", tag: "v0.17.0"
+  pod 'NervosSwift', git: "https://github.com/cryptape/nervos-swift", tag: "v0.17.1"
 
   pod 'PlainPing'
   pod 'MJRefresh'

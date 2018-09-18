@@ -2,12 +2,15 @@
 
 The Neuron iOS wallet.
 
-## Prerequisites
+### System Requirements
 
-* Swift 4.1
-* iOS 10 and above
-* Xcode 10 and above
+To build Neuron, you'll need:
+
+* Swift 4.1 or later
+* Xcode 10 or later
 * [CocoaPods](https://cocoapods.org)
+
+Neuron supports iOS 10 and newer versions.
 
 ## MIT License
 
