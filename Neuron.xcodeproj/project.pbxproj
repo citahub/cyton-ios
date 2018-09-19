@@ -111,13 +111,7 @@
 		89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
-		89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */; };
-		89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */; };
-		89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */; };
-		89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */; };
 		89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */; };
-		89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6620BD252000007EC1 /* TACustomViewController.swift */; };
-		89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6720BD252000007EC1 /* TACustomViewController.xib */; };
 		89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6B20BD421E00007EC1 /* ContractController.swift */; };
 		89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6C20BD421E00007EC1 /* ContractController.xib */; };
 		89C25C7120BE369100007EC1 /* ContractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */; };
@@ -300,13 +294,7 @@
 		89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TransactionService.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewController.swift; sourceTree = "<group>"; };
-		89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TAViewController.xib; sourceTree = "<group>"; };
-		89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewControllerCell.swift; sourceTree = "<group>"; };
-		89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TAViewControllerCell.xib; sourceTree = "<group>"; };
 		89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronProgressView.swift; sourceTree = "<group>"; };
-		89C25C6620BD252000007EC1 /* TACustomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TACustomViewController.swift; sourceTree = "<group>"; };
-		89C25C6720BD252000007EC1 /* TACustomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TACustomViewController.xib; sourceTree = "<group>"; };
 		89C25C6B20BD421E00007EC1 /* ContractController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractController.swift; sourceTree = "<group>"; };
 		89C25C6C20BD421E00007EC1 /* ContractController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractController.xib; sourceTree = "<group>"; };
 		89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTableViewCell.swift; sourceTree = "<group>"; };
@@ -614,8 +602,6 @@
 				8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */,
 				8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */,
 				8964A19120C115A70086848F /* SureMnemonicViewController.swift */,
-				89C25C5C20BBD4AB00007EC1 /* TAViewController.swift */,
-				89C25C5D20BBD4AB00007EC1 /* TAViewController.xib */,
 				8964A18520BFE6850086848F /* ImportWalletController.swift */,
 				898889C52136521100D04AA8 /* KeystoreViewController.swift */,
 				898889C72136526800D04AA8 /* MnemonicViewController.swift */,
@@ -645,8 +631,6 @@
 				8928C2A220B41BCA00C3103E /* SelectWalletController.xib */,
 				898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */,
 				898A19EB20B5018B00ECB465 /* AssetsDetailController.xib */,
-				89C25C6620BD252000007EC1 /* TACustomViewController.swift */,
-				89C25C6720BD252000007EC1 /* TACustomViewController.xib */,
 				8964A19520C12FB70086848F /* ButtonTagView.swift */,
 				8964A19720C15EA20086848F /* ButtonTagUpView.swift */,
 			);
@@ -722,8 +706,6 @@
 				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,
 				898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */,
 				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
-				89C25C6020BBEC3200007EC1 /* TAViewControllerCell.swift */,
-				89C25C6120BBEC3200007EC1 /* TAViewControllerCell.xib */,
 				8964A18920BFEF950086848F /* ImportTextViewCell.swift */,
 			);
 			path = TableViewCell;
@@ -994,17 +976,14 @@
 				89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */,
 				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeyStoreController.xib in Resources */,
-				89C25C6920BD252000007EC1 /* TACustomViewController.xib in Resources */,
 				8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */,
 				891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */,
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
-				89C25C6320BBEC3200007EC1 /* TAViewControllerCell.xib in Resources */,
 				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
 				8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */,
-				89C25C5F20BBD4AB00007EC1 /* TAViewController.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
@@ -1221,7 +1200,6 @@
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */,
 				89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */,
-				89C25C5E20BBD4AB00007EC1 /* TAViewController.swift in Sources */,
 				1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */,
 				898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */,
 				898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */,
@@ -1236,7 +1214,6 @@
 				898A1A2620B7DAA300ECB465 /* TransactionTableviewCell.swift in Sources */,
 				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
 				897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */,
-				89C25C6220BBEC3200007EC1 /* TAViewControllerCell.swift in Sources */,
 				898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */,
 				89D84CE121475755006B0287 /* NFTService.swift in Sources */,
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
@@ -1258,7 +1235,6 @@
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeyStoreController.swift in Sources */,
 				89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */,
-				89C25C6820BD252000007EC1 /* TACustomViewController.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
 				89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */,
 				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,
