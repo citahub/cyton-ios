@@ -57,9 +57,9 @@ class TransactionServiceImp: TransactionService {
 
     func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         var resultArr: [TransactionModel] = []
-        let parameters: Dictionary = ["account": walletAddress]
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        Alamofire.request(ServerApi.nervosTransactionURL, method: .get, parameters: parameters).responseJSON { (response) in
+        let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
+        Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
             if jsonObj!["result"]["count"] != "0" {
                 for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {
@@ -124,7 +124,7 @@ class TransactionServiceImp: TransactionService {
     }
 
     func formatScientValue(value: String) -> String {
-        let biguInt = BigUInt(atof("0x" + value))
+        let biguInt = BigUInt(atof(value))
         let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
         return formatStr
     }

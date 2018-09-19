@@ -12,24 +12,22 @@ import BigInt
 //import web3swift
 
 protocol NervosTransactionServiceProtocol {
-    func prepareTransactionForSending(address: String,
-                                      nonce: String,
-                                      quota: BigUInt,
-                                      data: Data,
-                                      value: String,
-                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
+    func prepareNervosTransactionForSending(address: String,
+                                            quota: BigUInt,
+                                            data: Data,
+                                            value: String,
+                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
 
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void)
 }
 
 class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
 
-    func prepareTransactionForSending(address: String,
-                                      nonce: String = "",
-                                      quota: BigUInt = BigUInt(100000),
-                                      data: Data,
-                                      value: String,
-                                      chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
+    func prepareNervosTransactionForSending(address: String,
+                                            quota: BigUInt = BigUInt(1000000),
+                                            data: Data,
+                                            value: String,
+                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {
@@ -53,11 +51,11 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                         to: destinationEthAddress,
                         nonce: nonce,
                         quota: quota,
-                        validUntilBlock: blockNumber + 88,
+                        validUntilBlock: blockNumber + BigUInt(88),
                         data: data,
                         value: amount,
                         chainId: chainId,
-                        version: 0
+                        version: BigUInt(0)
                     )
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):

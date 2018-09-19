@@ -11,26 +11,24 @@ import web3swift
 import BigInt
 
 protocol EthTransactionServiceProtocol {
-
-    func prepareTransactionForSending(destinationAddressString: String,
-                                      amountString: String,
-                                      gasLimit: UInt,
-                                      walletPassword: String,
-                                      gasPrice: BigUInt,
-                                      erc20TokenAddress: String,
-                                      completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
+    func prepareETHTransactionForSending(destinationAddressString: String,
+                                         amountString: String,
+                                         gasLimit: UInt,
+                                         walletPassword: String,
+                                         gasPrice: BigUInt,
+                                         data: Data,
+                                         completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
     func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
 }
 
 class EthTransactionServiceImp: EthTransactionServiceProtocol {
-
-    func prepareTransactionForSending(destinationAddressString: String,
-                                      amountString: String,
-                                      gasLimit: UInt = 21000,
-                                      walletPassword: String,
-                                      gasPrice: BigUInt = BigUInt(1000000000),
-                                      erc20TokenAddress: String = "",
-                                      completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+    func prepareETHTransactionForSending(destinationAddressString: String,
+                                         amountString: String,
+                                         gasLimit: UInt = 21000,
+                                         walletPassword: String,
+                                         gasPrice: BigUInt,
+                                         data: Data,
+                                         completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
 
         let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
@@ -77,15 +75,8 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
                 return
             }
             options.gasLimit = estimatedGas
-            //            guard let gasPrice = web3.eth.getGasPrice().value else {
-            //                DispatchQueue.main.async {
-            //                    completion(SendEthResult.Error(SendEthErrors.retrievingGasPriceError))
-            //                }
-            //                return
-            //            }
-            print(">>>>>>>>>>>" + gasPrice.description)
             options.gasPrice = gasPrice
-            guard let transaction = contract.method(options: options) else {
+            guard let transaction = contract.method(extraData: Data(), options: options) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
                 }
