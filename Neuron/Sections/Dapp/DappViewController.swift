@@ -25,7 +25,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     func didAddSubLayout() {
         webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 49))
-        let url = URL(string: "http://47.97.171.140:8866")
+        let url = URL(string: "http://dapp.cryptape.com")
         let request = URLRequest.init(url: url!)
 
         var js = ""

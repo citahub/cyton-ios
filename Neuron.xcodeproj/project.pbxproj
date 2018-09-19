@@ -1496,7 +1496,7 @@
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1529,7 +1529,7 @@
 				CODE_SIGN_ENTITLEMENTS = Neuron/Neuron.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

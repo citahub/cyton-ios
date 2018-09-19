@@ -54,7 +54,7 @@ class TokensViewController: UITableViewController {
         for item in walletModel.selectTokenList {
             tokenArray.append(item)
         }
-        getBalance(isRefresh: false)
+        getBalance(isRefresh: true)
     }
 
     func getCurrencyPrice(currencyModel: LocalCurrency) {
@@ -91,6 +91,7 @@ class TokensViewController: UITableViewController {
     func getBalance(isRefresh: Bool) {
         let group = DispatchGroup()
         if isRefresh {
+            NeuLoad.showHUD(text: "")
         } else {
             //NeuLoad.showHUD(text: "")
         }
@@ -133,7 +134,7 @@ class TokensViewController: UITableViewController {
             self.tableView.reloadData()
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
-                //   self.mainTable.mj_header.endRefreshing()
+                NeuLoad.hidHUD()
             } else {
                 NeuLoad.hidHUD()
             }
@@ -193,6 +194,6 @@ extension TokensViewController: SelectWalletControllerDelegate {
         for item in model.selectTokenList {
             tokenArray.append(item)
         }
-        getBalance(isRefresh: false)
+        getBalance(isRefresh: true)
     }
 }
