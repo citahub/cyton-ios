@@ -23,7 +23,7 @@ class SimpleGasViewController: UIViewController {
     let viewModel = TAViewModel()
     var tokenModel = TokenModel()
     var gas: Float = 60000
-    var gasPrice: BigUInt = ethDefaultGasPrice
+    lazy var gasPrice: BigUInt = ethDefaultGasPrice
     var tokenType: TokenType = .nervosToken
     weak var delegate: SimpleGasViewControllerDelegate?
 
@@ -40,11 +40,11 @@ class SimpleGasViewController: UIViewController {
             gasPrice = ethDefaultGasPrice
             getGasPrice()
         }
-        setGasLableValue(finalGasPrice: gasSlider.value * Float(gasPrice.description)!)
+        setGasLabelValue(finalGasPrice: gasSlider.value * Float(gasPrice.description)!)
         delegate?.getTransactionGasPrice(simpleGasViewController: self, gasPrice: gasPrice)
     }
 
-    func setGasLableValue(finalGasPrice: Float) {
+    func setGasLabelValue(finalGasPrice: Float) {
         if tokenType == .nervosToken {
             let totleGas = Web3.Utils.formatToEthereumUnits(BigUInt(finalGasPrice), toUnits: .Gwei, decimals: 4, fallbackToScientific: false)
             gasLabel.text = totleGas! + tokenModel.symbol
@@ -64,18 +64,18 @@ class SimpleGasViewController: UIViewController {
             case .Error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
-            self.setGasLableValue(finalGasPrice: self.gasSlider.value * Float(self.gasPrice.description)!)
+            self.setGasLabelValue(finalGasPrice: self.gasSlider.value * Float(self.gasPrice.description)!)
         }
     }
 
     @IBAction func sliderValueChangedAction(_ sender: UISlider) {
         if tokenType == .nervosToken {
             let currentGasPrice = sender.value * Float(gasPrice)
-            setGasLableValue(finalGasPrice: currentGasPrice)
+            setGasLabelValue(finalGasPrice: currentGasPrice)
             delegate?.getTransactionGasPrice(simpleGasViewController: self, gasPrice: BigUInt(currentGasPrice))
         } else {
             let currentGasPrice = sender.value * Float(gasPrice)
-            setGasLableValue(finalGasPrice: currentGasPrice)
+            setGasLabelValue(finalGasPrice: currentGasPrice)
             delegate?.getTransactionGasPrice(simpleGasViewController: self, gasPrice: BigUInt(currentGasPrice))
         }
     }

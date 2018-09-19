@@ -168,21 +168,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         navigationController?.pushViewController(wCtrl, animated: true)
     }
 
-    //新增钱包
-    @objc func didAddWallet() {
-        let aCtrl = AddWalletController.init(nibName: "AddWalletController", bundle: nil)
-        navigationController?.pushViewController(aCtrl, animated: true)
-    }
-
-    //弹出界面点击按钮的代理事件
-    //点击付款
-    func didClickPay(tokenModel: TokenModel) {
-        print("付款")
-        let tCtrl =  TAViewController.init(nibName: "TAViewController", bundle: nil)
-        tCtrl.tokenModel = tokenModel
-        navigationController?.pushViewController(tCtrl, animated: true)
-    }
-
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if #available(iOS 11.0, *) {
             return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom

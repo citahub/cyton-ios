@@ -28,12 +28,12 @@ class ConfirmSendViewController: UIViewController {
     }
 
     @IBAction func clickSendTransactionButton(_ sender: UIButton) {
-        if isPasswordCorrect() {
+        if passwordCorrect() {
             delegate?.sendTransaction(confirmSendViewController: self, password: password)
         }
     }
 
-    func isPasswordCorrect() -> Bool {
+    func passwordCorrect() -> Bool {
         if password.count == 0 {
             NeuLoad.showToast(text: "请输入钱包密码")
             return false

@@ -39,11 +39,11 @@ class EthGasViewController: UIViewController {
         hexTextView.delegate = self
         gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
         gasTextField.text = String(gas)
-        setGasLableValue()
+        setGasLabelValue()
         getGasPrice()
     }
 
-    func setGasLableValue() {
+    func setGasLabelValue() {
         let gasCosted = gas * Float(gasPrice)
         let totleGas = Web3.Utils.formatToEthereumUnits(BigUInt(gasCosted), toUnits: .eth, decimals: 4, fallbackToScientific: false)
         gasLabel.text = totleGas! + "  eth"
@@ -86,7 +86,7 @@ extension EthGasViewController: UITextFieldDelegate, UITextViewDelegate {
             }
             gasPrice = Web3.Utils.parseToBigUInt(textFieldText, units: .Gwei)!
         }
-        setGasLableValue()
+        setGasLabelValue()
         delegate?.getTransactionGasPriceAndData(ethGasViewController: self, gasPrice: gasPrice, data: data)
     }
 
