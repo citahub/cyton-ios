@@ -16,12 +16,14 @@ protocol SimpleGasViewControllerDelegate: class {
 }
 
 class SimpleGasViewController: UIViewController {
+    let ethDefaultGasPrice = BigUInt(4000000000)
+    let nervosDefaultQuota = BigUInt(1000000)
     @IBOutlet weak var gasLabel: UILabel!
     @IBOutlet weak var gasSlider: UISlider!
     let viewModel = TAViewModel()
     var tokenModel = TokenModel()
     var gas: Float = 60000
-    var gasPrice: BigUInt = 4000000000
+    var gasPrice: BigUInt = ethDefaultGasPrice
     var tokenType: TokenType = .nervosToken
     weak var delegate: SimpleGasViewControllerDelegate?
 
@@ -33,9 +35,9 @@ class SimpleGasViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if tokenType == .nervosToken {
-            gasPrice = 1000000
+            gasPrice = nervosDefaultQuota
         } else {
-            gasPrice = 4000000000
+            gasPrice = ethDefaultGasPrice
             getGasPrice()
         }
         setGasLableValue(finalGasPrice: gasSlider.value * Float(gasPrice.description)!)

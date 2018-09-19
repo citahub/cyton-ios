@@ -150,7 +150,6 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
     }
 
     func getTransactionCostGas(gas: String) {
-        print(gas)
         gasCost = gas
     }
 

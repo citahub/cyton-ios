@@ -35,14 +35,12 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
                 }
                 return
             }
-            print(value)
             guard let amount = Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
                     completion(SendNervosResult.Error(SendNervosErrors.invalidAmountFormat))
                 }
                 return
             }
-            print(amount)
             let nonce = UUID().uuidString
             let nervos = NervosNetwork.getNervos()
             let result = nervos.appChain.blockNumber()
@@ -83,7 +81,6 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
-                    print(transaction.hash.toHexString())
                     completion(SendNervosResult.Success(transaction))
                 case .failure(let error):
                     completion(SendNervosResult.Error(error))

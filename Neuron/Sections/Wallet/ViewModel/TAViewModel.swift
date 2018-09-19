@@ -12,7 +12,6 @@ import BigInt
 
 protocol TAViewModelProtocol {
     func getGasPrice(completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-
 }
 
 class TAViewModel: TAViewModelProtocol {

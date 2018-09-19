@@ -132,7 +132,6 @@
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="转账"/>
                                 <connections>
-                                    <action selector="didClickPay:" destination="zzs-A1-Sn6" eventType="touchUpInside" id="ILS-8k-SeU"/>
                                     <segue destination="kLj-Uo-04C" kind="show" identifier="payment" id="zWB-SQ-d6i"/>
                                 </connections>
                             </button>
@@ -593,12 +592,12 @@
                                 <constraint firstAttribute="trailing" secondItem="Qla-8z-74L" secondAttribute="trailing" id="zjO-dO-5c2"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="k9d-aS-5qd">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="k9d-aS-5qd">
                             <rect key="frame" x="0.0" y="270" width="375" height="130"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edh-QW-W6T">
-                                    <rect key="frame" x="15" y="66" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="-64" width="345" height="44"/>
                                     <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="0QX-N4-mv2"/>
