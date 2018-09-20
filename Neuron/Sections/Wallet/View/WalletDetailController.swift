@@ -26,7 +26,7 @@ class WalletDetailController: UITableViewController {
         walletIconImageView.image = UIImage(data: walletModel.iconData)
     }
 
-    func didDeletWallet(_ sender: UIButton) {
+    @IBAction func didDeletWallet(_ sender: UIButton) {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )

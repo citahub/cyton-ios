@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
 
-class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class KeystoreViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
-    @IBOutlet weak var textViewCell: ImportTextViewCell!
+    @IBOutlet weak var keyStoreTextView: RSKPlaceholderTextView!
     var name: String? = ""
     var password: String? = ""
     var keystore: String? = ""
@@ -18,7 +19,7 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textViewCell.delegate = self
+        keyStoreTextView.delegate = self
         viewModel.delegate = self
     }
 
@@ -32,14 +33,9 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
         judgeImportButtonEnabled()
     }
 
-    func didGetTextViewText(text: String) {
-        keystore = text
-        judgeImportButtonEnabled()
-    }
-
     func didBackQRCodeMessage(codeResult: String) {
         keystore = codeResult
-        textViewCell.textView.text = codeResult
+        keyStoreTextView.text = codeResult
         judgeImportButtonEnabled()
     }
 
@@ -53,7 +49,7 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
         }
     }
 
-    func didClickQRBtn() {
+    @IBAction func didClickQRBtn() {
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
@@ -65,5 +61,12 @@ class KeystoreViewController: UITableViewController, ImportTextViewCellDelegate,
 
     func didPopToRootView() {
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension KeystoreViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        keystore = textView.text
+        judgeImportButtonEnabled()
     }
 }

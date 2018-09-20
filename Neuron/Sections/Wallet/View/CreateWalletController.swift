@@ -22,16 +22,19 @@ class CreateWalletController: UITableViewController {
     }
 
     @IBAction func walletNameChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         name = sender.text
         jugeNextButtonEnabled()
     }
 
     @IBAction func passwordChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         password = sender.text
         jugeNextButtonEnabled()
     }
 
     @IBAction func confirmPasswordChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         confirmPassword = sender.text
         jugeNextButtonEnabled()
     }
@@ -68,6 +71,10 @@ class CreateWalletController: UITableViewController {
     func canProceedNextStep() -> Bool {
         if name?.count == 0 {
             NeuLoad.showToast(text: "钱包名字不能为空")
+            return false
+        }
+        if password?.count == 0 {
+            NeuLoad.showToast(text: "密码不能为空")
             return false
         }
         if password != confirmPassword {

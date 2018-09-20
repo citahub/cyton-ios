@@ -27,7 +27,7 @@ class ImportWalletController: UIViewController {
         super.viewDidLoad()
         title = "导入钱包"
         tabbedButtonView.delegate = self
-        tabbedButtonView.buttonTitles = ["keyStore", "助记词", "私钥"]
+        tabbedButtonView.buttonTitles = ["KeyStore", "助记词", "私钥"]
 
         importWalletPageViewController.delegate = self
         importWalletPageViewController.dataSource = self

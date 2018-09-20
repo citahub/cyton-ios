@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="akW-48-Rr6">
-                            <rect key="frame" x="0.0" y="200" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="150" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -57,32 +57,8 @@
                                             <segue destination="gAJ-Ph-Khh" kind="show" id="DGq-Yx-LLZ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="10P-N9-Qgl" imageView="aOO-Bb-M2s" style="IBUITableViewCellStyleDefault" id="IQU-FC-wTb">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="IQU-FC-wTb" id="bM6-O6-7CL">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="指纹设置" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="10P-N9-Qgl">
-                                                    <rect key="frame" x="51" y="0.0" width="308" height="49.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="fingerprint_setup" id="aOO-Bb-M2s">
-                                                    <rect key="frame" x="16" y="14" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="accessoryView" destination="eeC-p6-ifW" id="gPn-J8-ZP7"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="ctX-FE-pBX" imageView="559-8b-uVd" style="IBUITableViewCellStyleDefault" id="rSZ-Id-bNh">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rSZ-Id-bNh" id="YbG-qY-ILA">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
@@ -106,7 +82,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="zui-xg-08b" imageView="pTg-Du-Zfd" style="IBUITableViewCellStyleDefault" id="BfW-Ks-nPe">
-                                        <rect key="frame" x="0.0" y="150" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BfW-Ks-nPe" id="Hng-Rf-3QM">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
@@ -139,18 +115,10 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="0CW-xZ-GRc"/>
                     <connections>
-                        <outlet property="fingerprintSwitch" destination="eeC-p6-ifW" id="5yN-d5-hti"/>
                         <outlet property="localCurrencyLabel" destination="a1h-wv-ki9" id="nlI-uc-z1s"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFz-TJ-bUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="eeC-p6-ifW">
-                    <rect key="frame" x="0.0" y="0.0" width="51" height="31"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <connections>
-                        <action selector="fingerprintSwitchChanged:" destination="cE0-S4-LPn" eventType="valueChanged" id="est-UD-6eD"/>
-                    </connections>
-                </switch>
             </objects>
             <point key="canvasLocation" x="44" y="190.25487256371815"/>
         </scene>
@@ -460,17 +428,16 @@
         <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
         <image name="currency_selected" width="21" height="15"/>
-        <image name="fingerprint_setup" width="20" height="20"/>
         <image name="infua" width="20" height="20"/>
         <image name="nervos_network" width="20" height="20"/>
         <image name="neuron_logo" width="60" height="60"/>
         <image name="openSea" width="20" height="20"/>
         <image name="service_terms" width="20" height="20"/>
         <image name="setting_off" width="24" height="24"/>
-        <image name="setting_on" width="22" height="22"/>
+        <image name="setting_on" width="24" height="24"/>
         <image name="source_code" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YMg-tp-jzU"/>
+        <segue reference="3rD-FZ-v8q"/>
     </inferredMetricsTieBreakers>
 </document>

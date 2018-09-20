@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
 
-class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate, NEPickerViewDelegate {
+class MnemonicViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate, NEPickerViewDelegate {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var devirationPath: UILabel!
-    @IBOutlet weak var textViewCell: ImportTextViewCell!
+    @IBOutlet weak var mnemonicTextView: RSKPlaceholderTextView!
+
     let pickerView =  NEPickerView()
     var selectFormatId = "0"
     var name: String? = ""
@@ -22,7 +24,8 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textViewCell.delegate = self
+        mnemonicTextView.placeholder = "请输入助记词+空格"
+        mnemonicTextView.delegate = self
         viewModel.delegate = self
         pickerView.delegate = self
         devirationPath.text = "m/44'/60'/0'/0/0"
@@ -50,7 +53,7 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
 
     func didBackQRCodeMessage(codeResult: String) {
         mnemonic = codeResult
-        textViewCell.textView.text = codeResult
+        mnemonicTextView.text = codeResult
         judgeImportButtonEnabled()
     }
 
@@ -69,7 +72,7 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
         }
     }
 
-    func didClickQRBtn() {
+   @IBAction func didClickQRBtn() {
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
@@ -91,5 +94,12 @@ class MnemonicViewController: UITableViewController, ImportTextViewCellDelegate,
 
     func didPopToRootView() {
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension MnemonicViewController: UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        mnemonic = textView.text
+        judgeImportButtonEnabled()
     }
 }
