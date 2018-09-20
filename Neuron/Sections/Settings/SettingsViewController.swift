@@ -9,14 +9,14 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    @IBOutlet weak var fingerprintSwitch: UISwitch!
+//    @IBOutlet weak var fingerprintSwitch: UISwitch!
     @IBOutlet weak var localCurrencyLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = "设置"
-        fingerprintSwitch.isOn = false
+//        fingerprintSwitch.isOn = false
     }
 
     override func viewDidAppear(_ animated: Bool) {

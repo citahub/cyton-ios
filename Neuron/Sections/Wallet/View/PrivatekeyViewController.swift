@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import RSKPlaceholderTextView
 
-class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegate, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
-    @IBOutlet weak var textViewCell: ImportTextViewCell!
+    @IBOutlet weak var privatekeyTextView: RSKPlaceholderTextView!
     var name: String? = ""
     var password: String? = ""
     var confirmPassword: String? = ""
@@ -19,7 +20,7 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        textViewCell.delegate = self
+        privatekeyTextView.delegate = self
         viewModel.delegate = self
     }
 
@@ -41,7 +42,7 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
     }
     func didBackQRCodeMessage(codeResult: String) {
         privateKey = codeResult
-        textViewCell.textView.text = codeResult
+        privatekeyTextView.text = codeResult
         judgeImportButtonEnabled()
     }
 
@@ -55,7 +56,7 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
         }
     }
 
-    func didClickQRBtn() {
+   @IBAction func didClickQRBtn() {
         let qrCtrl = QRCodeController()
         qrCtrl.delegate = self
         self.navigationController?.pushViewController(qrCtrl, animated: true)
@@ -67,5 +68,12 @@ class PrivatekeyViewController: UITableViewController, ImportTextViewCellDelegat
 
     func didPopToRootView() {
         navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension PrivatekeyViewController : UITextViewDelegate {
+    func textViewDidEndEditing(_ textView: UITextView) {
+        privateKey = textView.text
+        judgeImportButtonEnabled()
     }
 }

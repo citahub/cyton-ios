@@ -33,6 +33,9 @@
                                     <state key="normal" title="删除当前钱包">
                                         <color key="titleColor" red="0.21568627450980393" green="0.37647058823529411" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="didDeletWallet:" destination="GJT-Gk-vAR" eventType="touchUpInside" id="kNq-sL-8a4"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

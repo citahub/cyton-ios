@@ -25,7 +25,7 @@ class NFTViewController: UITableViewController {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let address = appModel.currentWallet!.address
         let nftService = NFTService()
-        nftService.getErc721Data(with: testAddress) { (result) in
+        nftService.getErc721Data(with: address) { (result) in
             switch result {
             case .Success(let nftModel):
                 self.dataArray = nftModel.assets
