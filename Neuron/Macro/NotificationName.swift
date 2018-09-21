@@ -11,8 +11,7 @@ import Foundation
 extension Notification.Name {
     static let creatWalletSuccess = Notification.Name("creatWalletSuccess")
     static let changeTabbar = Notification.Name("changeTabbar")
-    static let allWalletsDeleted = Notification.Name("changeTabbar")
     static let changeLocalCurrency = Notification.Name("changeLocalCurrency")
-    static let beginRefresh = Notification.Name("begainRefresh")
+    static let beginRefresh = Notification.Name("beginRefresh")
     static let endRefresh = Notification.Name("endRefresh")
 }

@@ -142,8 +142,6 @@ class TokensViewController: UITableViewController {
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 NeuLoad.hidHUD()
-            } else {
-
             }
         }
     }

@@ -177,7 +177,7 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField.tag == 2000 {
+        if textField == amountTextField {
             var character = ""
             if (textField.text?.contains("."))! {
                 character = "0123456789"

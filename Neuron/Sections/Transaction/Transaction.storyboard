@@ -325,7 +325,7 @@
                                                     <color key="textColor" red="0.27058823529411763" green="0.42352941176470588" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textField opaque="NO" tag="2000" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入金额" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q6I-an-bTw">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入金额" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q6I-an-bTw">
                                                     <rect key="frame" x="15" y="40" width="300" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="300" id="uae-ab-vE5"/>
@@ -378,7 +378,7 @@
                                                         <action selector="clickQRButton:" destination="kLj-Uo-04C" eventType="touchUpInside" id="tlX-aC-i7m"/>
                                                     </connections>
                                                 </button>
-                                                <textField opaque="NO" tag="2001" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入收款地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5mJ-9j-mIR">
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入收款地址" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5mJ-9j-mIR">
                                                     <rect key="frame" x="15" y="48" width="345" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="5q3-66-2dT"/>
@@ -536,7 +536,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="Rw5-ed-2ab">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="Rw5-ed-2ab">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -592,12 +592,12 @@
                                 <constraint firstAttribute="trailing" secondItem="Qla-8z-74L" secondAttribute="trailing" id="zjO-dO-5c2"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="k9d-aS-5qd">
-                            <rect key="frame" x="0.0" y="270" width="375" height="130"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="k9d-aS-5qd">
+                            <rect key="frame" x="0.0" y="270" width="375" height="176"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edh-QW-W6T">
-                                    <rect key="frame" x="15" y="-64" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="112" width="345" height="44"/>
                                     <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="0QX-N4-mv2"/>

@@ -49,9 +49,9 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         cell.nameLabel.text = tokenModel.symbol
         cell.selectionStyle = .none
         if selectAddressArray.contains(tokenModel.address) {
-            cell.isSelect = true
+            cell.isSelected = true
         } else {
-            cell.isSelect = false
+            cell.isSelected = false
         }
 
         return cell
