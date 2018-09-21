@@ -38,11 +38,17 @@ class TokensViewController: UITableViewController {
 
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
     }
 
     @objc func changeLocalCurrency() {
         currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
         getCurrencyPrice(currencyModel: currentCurrencyModel)
+    }
+
+    @objc
+    func refreshData() {
+        getBalance(isRefresh: false)
     }
 
     /// get token list from realm
@@ -132,11 +138,12 @@ class TokensViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
+            NotificationCenter.default.post(name: .endRefresh, object: self, userInfo: nil)
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 NeuLoad.hidHUD()
             } else {
-                NeuLoad.hidHUD()
+
             }
         }
     }
