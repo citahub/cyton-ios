@@ -93,14 +93,14 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionTableviewCell
         let transModel = dataArray[indexPath.row]
-        cell.addressLabel.text = transModel.hashString
         cell.dateLabel.text = transModel.formatTime
         cell.exchangeLabel.text = transModel.value
         cell.networkLabel.text = transModel.chainName
+        cell.statusImageView.image = UIImage(named: "transaction_success")
         if transModel.value.first == "+" {
-            cell.statusImageView.image = UIImage(named: "transaction_success")
+            cell.addressLabel.text = transModel.from
         } else {
-            cell.statusImageView.image = UIImage(named: "transaction_failed")
+            cell.addressLabel.text = transModel.to
         }
         return cell
     }
@@ -108,7 +108,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let transModel = dataArray[indexPath.row]
-        let tCtrl = TradeDetailsController.init(nibName: "TradeDetailsController", bundle: nil)
+        let tCtrl = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
         tCtrl.tModel = transModel
         navigationController?.pushViewController(tCtrl, animated: true)
     }

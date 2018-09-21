@@ -14,7 +14,6 @@ protocol AssetTableViewCellDelegate: class {
 }
 
 class AssetTableViewCell: UITableViewCell {
-
     @IBOutlet var iconImage: UIImageView!
     @IBOutlet var symbolLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!

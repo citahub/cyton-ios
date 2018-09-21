@@ -47,6 +47,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         cell.symbolLabel.text = tokenModel.name
         cell.addressLabel.text = tokenModel.address
         cell.nameLabel.text = tokenModel.symbol
+        cell.selectionStyle = .none
         if selectAddressArray.contains(tokenModel.address) {
             cell.isSelect = true
         } else {
@@ -54,12 +55,6 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         }
 
         return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let model = dataArray[indexPath.row]
-        selectedAsset(model: model)
     }
 
     func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch) {
@@ -78,6 +73,5 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
             viewModel.addSelectToken(tokenM: model)
         }
         didGetDataForList()
-        tableView.reloadData()
     }
 }

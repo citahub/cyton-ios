@@ -91,7 +91,7 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             CustomERC20TokenService.decimals(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
                 case .Success(let decimals):
-                    tokenModel.decimals = Int(Web3.Utils.formatToPrecision(decimals)!) ?? 6
+                    tokenModel.decimals = Int(decimals)
                 case .Error(let error):
                     print(error.localizedDescription)
                 }
