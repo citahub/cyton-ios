@@ -114,6 +114,8 @@ class WalletDetailController: UITableViewController {
             if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {NeuLoad.showToast(text: "该钱包名称已存在");return} else {
                 if txt.text!.isEmpty {
                     NeuLoad.showToast(text: "钱包名字不能为空")
+                } else if txt.text!.count > 15 {
+                    NeuLoad.showToast(text: "钱包名称不能超过15个字符")
                 } else {
                     try! WalletRealmTool.realm.write {
                         self.walletModel.name = txt.text!

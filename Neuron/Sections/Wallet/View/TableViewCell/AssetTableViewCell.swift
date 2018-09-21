@@ -14,7 +14,6 @@ protocol AssetTableViewCellDelegate: class {
 }
 
 class AssetTableViewCell: UITableViewCell {
-
     @IBOutlet var iconImage: UIImageView!
     @IBOutlet var symbolLabel: UILabel!
     @IBOutlet var nameLabel: UILabel!
@@ -22,9 +21,9 @@ class AssetTableViewCell: UITableViewCell {
     @IBOutlet weak var statusBtn: UISwitch!
     weak var delegate: AssetTableViewCellDelegate?
 
-    var isSelect: Bool = false {
+    override var isSelected: Bool {
         didSet {
-            if isSelect {
+            if isSelected {
                 statusBtn.isOn = true
             } else {
                 statusBtn.isOn = false

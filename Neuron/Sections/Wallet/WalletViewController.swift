@@ -59,9 +59,22 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
         assetPageViewController.dataSource = self
         assetPageViewController.delegate = self
-
+        let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
+        mjheader?.lastUpdatedTimeLabel.isHidden = true
+        mjheader?.stateLabel.textColor = .white
+        tableView.mj_header = mjheader
         tabbedButtonView.buttonTitles = ["代币", "藏品"]
         tabbedButtonView.delegate = self
+    }
+
+    @objc
+    func endRefresh() {
+        tableView.mj_header.endRefreshing()
+    }
+
+    @objc
+    func loadData() {
+        NotificationCenter.default.post(name: .beginRefresh, object: self, userInfo: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -130,7 +143,8 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .creatWalletSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .createWalletSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(endRefresh), name: .endRefresh, object: nil)
     }
 
     func didGetDataForCurrentWallet() {
@@ -147,7 +161,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
 
     @objc func changeWallet(nofy: Notification) {
         let wAddress = nofy.userInfo!["post"]
-        print(wAddress as! String)
         let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
         refreshUI(walletModel: walletModel)
     }

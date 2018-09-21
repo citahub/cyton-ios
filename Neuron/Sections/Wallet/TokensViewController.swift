@@ -38,11 +38,17 @@ class TokensViewController: UITableViewController {
 
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
     }
 
     @objc func changeLocalCurrency() {
         currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
         getCurrencyPrice(currencyModel: currentCurrencyModel)
+    }
+
+    @objc
+    func refreshData() {
+        getBalance(isRefresh: false)
     }
 
     /// get token list from realm
@@ -132,10 +138,9 @@ class TokensViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
+            NotificationCenter.default.post(name: .endRefresh, object: self, userInfo: nil)
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
-                NeuLoad.hidHUD()
-            } else {
                 NeuLoad.hidHUD()
             }
         }
@@ -151,7 +156,7 @@ class TokensViewController: UITableViewController {
         cell.tokenImage.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
         cell.balance.text = model.tokenBalance
         cell.token.text = model.symbol
-        cell.network.text = (model.chainName?.isEmpty)! ? "ethereum Mainnet": model.chainName
+        cell.network.text = (model.chainName?.isEmpty)! ? "Ethereum Mainnet": model.chainName
         if model.currencyAmount.count != 0 {
             cell.currency.text = currentCurrencyModel.symbol + model.currencyAmount
         } else {

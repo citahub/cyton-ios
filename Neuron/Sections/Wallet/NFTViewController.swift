@@ -18,6 +18,16 @@ class NFTViewController: UITableViewController {
         super.viewDidLoad()
         tableView.ly_emptyView = LYEmptyView.empty(withImageStr: "", titleStr: "暂无藏品", detailStr: "")
         getListData()
+        addNotify()
+    }
+
+    func addNotify() {
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
+    }
+
+    @objc
+    func refreshData() {
+        getListData()
     }
 
     func getListData() {
