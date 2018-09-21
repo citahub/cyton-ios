@@ -116,9 +116,10 @@ class ImportWalletViewModel: NSObject {
         NeuLoad.hidHUD()
         NeuLoad.showToast(text: "导入成功")
         if walletCount == 0 {
-            changeTabbar()
+            NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
         }
-        didPostCreatSuccessNotify()
+
+        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["post": walletModel.address])
         delegate?.didPopToRootView()
     }
 
@@ -182,13 +183,4 @@ class ImportWalletViewModel: NSObject {
             NeuLoad.hidHUD()
         }
     }
-
-    private func didPostCreatSuccessNotify() {
-        //import wallet success send notify
-        NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
-    }
-    private func changeTabbar() {
-        NotificationCenter.default.post(name: .changeTabbar, object: self)
-    }
-
 }

@@ -143,7 +143,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .creatWalletSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .createWalletSuccess, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endRefresh), name: .endRefresh, object: nil)
     }
 

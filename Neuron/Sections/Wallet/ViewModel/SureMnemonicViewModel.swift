@@ -101,20 +101,9 @@ class SureMnemonicViewModel: NSObject {
         }
         NeuLoad.showToast(text: "创建成功")
         if walletCount == 0 {
-            changeTabbar()
+            NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
         }
         delegate?.doPush()
-        didPostCreatSuccessNotify()
+        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["post": walletModel.address])
     }
-
-    private func didPostCreatSuccessNotify() {
-        //send notification when wallet is created success,by the way send walletAddress
-        NotificationCenter.default.post(name: .creatWalletSuccess, object: self, userInfo: ["post": walletModel.address])
-    }
-
-    //if creat wallet successful send changeTabbar notification
-    func changeTabbar() {
-        NotificationCenter.default.post(name: .changeTabbar, object: self)
-    }
-
 }
