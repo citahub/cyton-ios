@@ -130,6 +130,10 @@ class PaymentViewController: UITableViewController {
             NeuLoad.showToast(text: "转账地址不能为空")
             return false
         }
+        if destinationAddress == tokenModel.address {
+            NeuLoad.showToast(text: "发送地址和收款地址不能相同")
+            return false
+        }
         let planPay = Double(payValue)!
         let tokenBalance = Double(tokenModel.tokenBalance)!
         if planPay > tokenBalance {
@@ -194,7 +198,7 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField.tag == 2000 {
+        if textField == amountTextField {
             payValue = textField.text ?? ""
         } else {
             destinationAddress = textField.text ?? ""

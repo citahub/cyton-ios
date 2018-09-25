@@ -69,7 +69,7 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.hashString = subJSON["hash"].stringValue
                     transacationModel.timeStamp = String(subJSON["timestamp"].intValue)
                     transacationModel.formatTime = self.formatTimestamp(timeStap: subJSON["timestamp"].intValue)
-                    transacationModel.chainName = "Nervos Mainnet"
+                    transacationModel.chainName = "test-chain"
                     transacationModel.gasPrice = ""
                     transacationModel.gas = ""
                     transacationModel.gasUsed = self.changeValue(eStr: subJSON["gasUsed"].stringValue)
@@ -125,8 +125,9 @@ class TransactionServiceImp: TransactionService {
 
     func formatScientValue(value: String) -> String {
         let biguInt = BigUInt(atof(value))
-        let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
-        return formatStr
+        let format = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
+        let finalValue = Double(format)!
+        return finalValue.clean
     }
 
     func getTotleGas(gasUsed: String, gasPirce: String) -> String {

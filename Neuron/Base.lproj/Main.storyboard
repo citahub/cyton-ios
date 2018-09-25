@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dQ0-5m-U0C">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dQ0-5m-U0C">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -14,10 +14,10 @@
         <scene sceneID="ACh-dl-MiB">
             <objects>
                 <tabBarController id="dQ0-5m-U0C" customClass="MainViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RWM-Fq-3aU">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="RWM-Fq-3aU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
                         <segue destination="Hlq-GV-TAq" kind="relationship" relationship="viewControllers" id="JKO-nV-u01"/>
@@ -34,7 +34,7 @@
             <objects>
                 <viewController id="GU4-hP-9ZW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mWX-jE-RRc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="YeZ-F2-6He"/>
@@ -79,7 +79,7 @@
             <objects>
                 <viewController id="p8c-h3-jt8" customClass="DappViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LVm-H3-4FI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="lbZ-aR-khA"/>
@@ -111,11 +111,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="dapp_off" width="22" height="22"/>
-        <image name="dapp_on" width="22" height="22"/>
-        <image name="setting_off" width="22" height="22"/>
+        <image name="dapp_off" width="22" height="23"/>
+        <image name="dapp_on" width="20" height="23"/>
+        <image name="setting_off" width="24" height="24"/>
         <image name="setting_on" width="22" height="22"/>
-        <image name="wallet_off" width="22" height="22"/>
-        <image name="wallet_on" width="22" height="22"/>
+        <image name="wallet_off" width="22" height="24"/>
+        <image name="wallet_on" width="20" height="22"/>
     </resources>
 </document>

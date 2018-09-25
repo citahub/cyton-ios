@@ -40,12 +40,8 @@ class SubController2ViewModel: NSObject {
         EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletAddress) { (result) in
             switch result {
             case .Success(let balance):
-                let ethBalance = Web3.Utils.formatToEthereumUnits(balance,
-                                                                  toUnits: .eth,
-                                                                  decimals: 8,
-                                                                  fallbackToScientific: false)
-                let balanceNumber = Float(ethBalance!)
-                completion(String(balanceNumber!), nil)
+                let balanceNumber = self.formatBalanceValue(value: balance)
+                completion(balanceNumber, nil)
             case .Error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
                 completion(nil, error)
@@ -83,17 +79,17 @@ class SubController2ViewModel: NSObject {
         NervosNativeTokenServiceImp.getNervosNativeTokenBalance(walletAddress: walletAddress) { (result) in
             switch result {
             case .Success(let balance):
-                print(balance.description)
-                let nervosBalance = Web3.Utils.formatToEthereumUnits(balance,
-                                                                  toUnits: .eth,
-                                                                  decimals: 8,
-                                                                  fallbackToScientific: false)
-                let balanceNumber = Float(nervosBalance!)
-                completion(String(balanceNumber!), nil)
+                let balanceNumber = self.formatBalanceValue(value: balance)
+                completion(balanceNumber, nil)
             case .Error(let error):
                 completion(nil, error)
             }
         }
+    }
 
+    func formatBalanceValue(value: BigUInt) -> String {
+        let format = Web3.Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
+        let finalValue = Double(format)!
+        return finalValue.clean
     }
 }

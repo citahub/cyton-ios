@@ -18,12 +18,12 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "交易列表"
+        loadData()
         transactionTableView.delegate = self
         transactionTableView.dataSource = self
         transactionTableView.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有交易数据", detailStr: "")
@@ -53,7 +53,6 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
             didGetNervosTranscationData()
         case .erc20Token:
             transactionTableView.reloadData()
-            self.transactionTableView.mj_header.endRefreshing()
         }
     }
 

@@ -38,7 +38,7 @@ class NFTViewController: UITableViewController {
         nftService.getErc721Data(with: address) { (result) in
             switch result {
             case .Success(let nftModel):
-                self.dataArray = nftModel.assets
+                self.dataArray = nftModel.assets ?? []
             case .Error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
