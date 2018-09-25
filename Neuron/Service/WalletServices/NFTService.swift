@@ -24,7 +24,7 @@ class NFTService: NSObject {
 }
 
 struct NFTModel: Decodable {
-    var assets: [AssetsModel]
+    var assets: [AssetsModel]?
 }
 
 struct AssetsModel: Decodable {

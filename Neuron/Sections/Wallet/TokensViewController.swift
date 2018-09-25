@@ -98,8 +98,6 @@ class TokensViewController: UITableViewController {
         let group = DispatchGroup()
         if isRefresh {
             NeuLoad.showHUD(text: "")
-        } else {
-            //NeuLoad.showHUD(text: "")
         }
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
         for tm in tokenArray {

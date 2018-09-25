@@ -44,6 +44,7 @@
 		8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */; };
 		8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C2A120B41BCA00C3103E /* SelectWalletController.swift */; };
 		8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C2A220B41BCA00C3103E /* SelectWalletController.xib */; };
+		892A1985215A55F400B2293D /* Float+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A1984215A55F400B2293D /* Float+Extension.swift */; };
 		8955580520DCA7F700FC92D8 /* PasswordJuge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955580420DCA7F700FC92D8 /* PasswordJuge.swift */; };
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
 		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
@@ -221,6 +222,7 @@
 		8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Sub2TableViewCell.xib; sourceTree = "<group>"; };
 		8928C2A120B41BCA00C3103E /* SelectWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWalletController.swift; sourceTree = "<group>"; };
 		8928C2A220B41BCA00C3103E /* SelectWalletController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectWalletController.xib; sourceTree = "<group>"; };
+		892A1984215A55F400B2293D /* Float+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extension.swift"; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordJuge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordJuge.swift; sourceTree = "<group>"; };
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
 		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 				1A3C652B212EAC4800F1A0AA /* String+Extension.swift */,
 				897AFC57212FDA9100383A12 /* Array+Extension.swift */,
 				89C3BF08213521DE00872BD0 /* UIView+Extension.swift */,
+				892A1984215A55F400B2293D /* Float+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1181,6 +1184,7 @@
 			files = (
 				89D4AC3020D59F270097E02B /* Wallet.swift in Sources */,
 				8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */,
+				892A1985215A55F400B2293D /* Float+Extension.swift in Sources */,
 				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,

@@ -61,7 +61,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         assetPageViewController.delegate = self
         let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
         mjheader?.lastUpdatedTimeLabel.isHidden = true
-        mjheader?.stateLabel.textColor = .white
         tableView.mj_header = mjheader
         tabbedButtonView.buttonTitles = ["代币", "藏品"]
         tabbedButtonView.delegate = self
