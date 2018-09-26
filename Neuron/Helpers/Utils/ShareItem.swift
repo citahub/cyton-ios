@@ -20,7 +20,7 @@ class ShareItem: NSObject, UIActivityItemSource {
         return shareString
     }
 
-    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivityType?) -> Any? {
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
         return shareString
     }
 

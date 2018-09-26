@@ -30,7 +30,7 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         }
     }
 
-    var viewModel = SubController2ViewModel()
+    let viewModel = SubController2ViewModel()
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return isHeaderViewHidden ? .default : .lightContent
     }

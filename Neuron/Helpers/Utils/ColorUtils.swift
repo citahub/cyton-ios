@@ -35,5 +35,5 @@ public func ColorFromString (hex: String) -> UIColor {
 ///   - maxSize: maxSize description
 /// - Returns: return value description
 public func textSize(text: String, font: UIFont, maxSize: CGSize) -> CGSize {
-    return text.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [NSAttributedStringKey.font: font], context: nil).size
+    return text.boundingRect(with: maxSize, options: [.usesLineFragmentOrigin], attributes: [NSAttributedString.Key.font: font], context: nil).size
 }

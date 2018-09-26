@@ -12,13 +12,13 @@ extension UINavigationBar {
     var isDarkStyle: Bool {
         set {
             if newValue {
-                titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+                titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
                 barTintColor = AppColor.newThemeColor
                 tintColor = .white
                 barStyle = .black
                 shadowImage = UIImage()
             } else {
-                titleTextAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#242b43")]
+                titleTextAttributes = [NSAttributedString.Key.foregroundColor: ColorFromString(hex: "#242b43")]
                 barTintColor = .white
                 tintColor = ColorFromString(hex: "#333333")
                 barStyle = .default

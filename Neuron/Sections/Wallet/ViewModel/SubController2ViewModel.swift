@@ -37,10 +37,10 @@ class SubController2ViewModel: NSObject {
     /// - Parameter walletAddress: wallet Address
     /// - Returns: balance
     func didGetTokenForCurrentwallet(walletAddress: String, completion: @escaping (String?, Error?) -> Void) {
-        EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletAddress) { (result) in
+        EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
             switch result {
             case .Success(let balance):
-                let balanceNumber = self.formatBalanceValue(value: balance)
+                let balanceNumber = self?.formatBalanceValue(value: balance)
                 completion(balanceNumber, nil)
             case .Error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
@@ -76,10 +76,10 @@ class SubController2ViewModel: NSObject {
     }
 
     func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (String?, Error?) -> Void) {
-        NervosNativeTokenServiceImp.getNervosNativeTokenBalance(walletAddress: walletAddress) { (result) in
+        NervosNativeTokenServiceImp.getNervosNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
             switch result {
             case .Success(let balance):
-                let balanceNumber = self.formatBalanceValue(value: balance)
+                let balanceNumber = self?.formatBalanceValue(value: balance)
                 completion(balanceNumber, nil)
             case .Error(let error):
                 completion(nil, error)

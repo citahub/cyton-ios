@@ -26,10 +26,10 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
     var indexP = NSIndexPath.init()
     // 设置属性来确定不同的cell有不同的状态
     var _selectRow: NSInteger = 0
-    let placeholserAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#999999"), NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)]
+    let placeholserAttributes = [NSAttributedString.Key.foregroundColor: ColorFromString(hex: "#999999"), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
 
-    let firstBtn = UIButton.init(type: UIButtonType.custom)
-    let secBtn = UIButton.init(type: UIButtonType.custom)
+    let firstBtn = UIButton.init(type: UIButton.ButtonType.custom)
+    let secBtn = UIButton.init(type: UIButton.ButtonType.custom)
 
     @IBOutlet weak var headLabel: UILabel!
     @IBOutlet weak var rightTextField: UITextField!

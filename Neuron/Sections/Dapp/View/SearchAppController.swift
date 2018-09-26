@@ -37,7 +37,7 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
         searchText.frame = tView.frame
         searchText.leftViewMode = .always
         searchText.rightViewMode = .always
-        let placeholserAttributes = [NSAttributedStringKey.foregroundColor: ColorFromString(hex: "#999999"), NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14)]
+        let placeholserAttributes = [NSAttributedString.Key.foregroundColor: ColorFromString(hex: "#999999"), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]
         searchText.attributedPlaceholder = NSAttributedString(string: "添加token名称或者合约地址", attributes: placeholserAttributes)
         searchText.returnKeyType = UIReturnKeyType.search
         searchText.clearButtonMode = .whileEditing
@@ -140,11 +140,11 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
     }
 
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
     }
 
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             self.searchArray.remove(at: indexPath.row)
             tableView.reloadData()
