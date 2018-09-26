@@ -117,8 +117,8 @@ class ButtonTagView: UIView {
 
     //计算文本宽度
     func  returnTextWidth(text: String, font: UIFont, viewWidth: CGFloat) -> CGSize {
-        var attr = [NSAttributedStringKey: AnyObject]()
-        attr[NSAttributedStringKey.font] = font
+        var attr = [NSAttributedString.Key: AnyObject]()
+        attr[NSAttributedString.Key.font] = font
         return text.boundingRect(
             with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
             options: [.usesLineFragmentOrigin, .usesFontLeading],

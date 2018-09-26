@@ -26,7 +26,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 subBtnArr = [tModel.chainName,
                              tModel.to,
                              tModel.from,
-                             tModel.gasUsed,
+                             tModel.gasUsed + "NOS",
                              tModel.hashString,
                              tModel.blockNumber,
                              tModel.formatTime]
@@ -44,6 +44,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "交易详情"
         didSetUIDetail()
         tTable.delegate = self
         tTable.dataSource = self

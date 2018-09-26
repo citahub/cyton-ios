@@ -1,5 +1,5 @@
 //
-//  Float+Extension.swift
+//  Double+Extension.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/9/25.

@@ -11,7 +11,7 @@ import Foundation
 enum ImportError: Error {
     case invalidatePrivateKey
     case invalidateJSONKey
-    case openKeyStoreFailed
+    case openKeystoreFailed
     case accountAlreadyExists
     case accountNotExisits
     case wrongPassword

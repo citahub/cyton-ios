@@ -103,7 +103,7 @@ class ButtonTagUpView: UIView {
         return text.boundingRect(
             with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
             options: [.usesLineFragmentOrigin, .usesFontLeading],
-            attributes: [NSAttributedStringKey.font: font],
+            attributes: [NSAttributedString.Key.font: font],
             context: nil
         ).size
     }

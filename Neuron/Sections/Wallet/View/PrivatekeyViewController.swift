@@ -29,10 +29,12 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
         judgeImportButtonEnabled()
     }
     @IBAction func passwordChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         password = sender.text
         judgeImportButtonEnabled()
     }
     @IBAction func confirmPasswordChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         confirmPassword = sender.text
         judgeImportButtonEnabled()
     }
@@ -47,7 +49,8 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
     }
 
     func judgeImportButtonEnabled() {
-        if name!.isEmpty || password!.isEmpty || confirmPassword!.isEmpty || privateKey!.isEmpty {
+        let nameClean = name?.trimmingCharacters(in: .whitespaces)
+        if nameClean!.isEmpty || password!.isEmpty || confirmPassword!.isEmpty || privateKey!.isEmpty {
             importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
             importButton.isEnabled = false
         } else {

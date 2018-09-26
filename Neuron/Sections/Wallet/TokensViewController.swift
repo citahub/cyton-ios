@@ -13,7 +13,7 @@ import web3swift
 class TokensViewController: UITableViewController {
     @IBOutlet weak var totle: UILabel!
     var tokenArray: [TokenModel] = []
-    var viewModel = SubController2ViewModel()
+    let viewModel = SubController2ViewModel()
     var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
 
     override func viewWillAppear(_ animated: Bool) {

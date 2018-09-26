@@ -185,7 +185,6 @@ extension PayCoverViewController: ConfirmSendViewControllerDelegate, ConfirmAmou
         case .erc20Token:
             self.prepareErc20Transaction(password: password)
         }
-
     }
 
     func closePayCoverView() {

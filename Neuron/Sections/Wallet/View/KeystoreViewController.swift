@@ -29,6 +29,7 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     @IBAction func passwordChanged(_ sender: UITextField) {
+        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         password = sender.text
         judgeImportButtonEnabled()
     }
@@ -40,7 +41,8 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     func judgeImportButtonEnabled() {
-        if name!.isEmpty || password!.isEmpty || keystore!.isEmpty {
+        let nameClean = name?.trimmingCharacters(in: .whitespaces)
+        if nameClean!.isEmpty || password!.isEmpty || keystore!.isEmpty {
             importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
             importButton.isEnabled = false
         } else {
@@ -56,7 +58,7 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     @IBAction func importWallet(_ sender: UIButton) {
-        viewModel.importKeyStoreWallet(keyStore: keystore!, password: password!, name: name!)
+        viewModel.importKeystoreWallet(keyStore: keystore!, password: password!, name: name!)
     }
 
     func didPopToRootView() {

@@ -18,7 +18,7 @@ class WalletTools: NSObject {
 
     static let documentDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
     static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
-    static let keyStore = try? KeyStore(keyDirectory: keysDirectory)
+    static let keystore = try? KeyStore(keyDirectory: keysDirectory)
     //创建钱包
     @available(iOS 10.0, *)
     static func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void) {
@@ -31,7 +31,7 @@ class WalletTools: NSObject {
     }
 
     static func createAccout(password: String) -> Account {
-        let account = try! keyStore?.createAccount(password: password, type: .hierarchicalDeterministicWallet)
+        let account = try! keystore?.createAccount(password: password, type: .hierarchicalDeterministicWallet)
         return account!
     }
 
@@ -92,11 +92,11 @@ class WalletTools: NSObject {
     ///   - devirationPath: devirationPath
     ///   - completion: 导入结果回调
     static func importMnemonic(mnemonic: String, password: String, devirationPath: String) -> ImportResult<Account> {
-        guard keyStore != nil else {
-            return ImportResult.failed(error: ImportError.openKeyStoreFailed, errorMessage: "JSON密钥导入失败")
+        guard keystore != nil else {
+            return ImportResult.failed(error: ImportError.openKeystoreFailed, errorMessage: "JSON密钥导入失败")
         }
         do {
-            let account = try keyStore!.import(mnemonic: mnemonic, passphrase: "", derivationPath: devirationPath, encryptPassword: password)
+            let account = try keystore!.import(mnemonic: mnemonic, passphrase: "", derivationPath: devirationPath, encryptPassword: password)
             return ImportResult.succeed(result: account)
         } catch {
             switch error {
@@ -138,8 +138,8 @@ class WalletTools: NSObject {
         guard let data = json?.data(using: .utf8) else {
             return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "无效的keystpore")
         }
-        guard let keyStore = keyStore else {
-            return ImportResult.failed(error: ImportError.openKeyStoreFailed, errorMessage: "keystpore导入失败")
+        guard let keyStore = keystore else {
+            return ImportResult.failed(error: ImportError.openKeystoreFailed, errorMessage: "keystpore导入失败")
         }
 
         do {
@@ -230,7 +230,7 @@ class WalletTools: NSObject {
 
     static func exportPrivateKey(account: Account, password: String) -> ImportResult<String?> {
         do {
-            let privateKey = try keyStore?.exportPrivateKey(account: account, password: password)
+            let privateKey = try keystore?.exportPrivateKey(account: account, password: password)
             return ImportResult.succeed(result: privateKey?.toHexString())
         } catch {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
