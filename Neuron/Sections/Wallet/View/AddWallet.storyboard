@@ -216,7 +216,7 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="UPu-4k-xoa"/>
                                     </constraints>
-                                    <string key="text">将以太坊官方钱包KeyStore文件内容粘贴至输入框，或
+                                    <string key="text">将以太坊官方钱包keystore文件内容粘贴至输入框，或
 通过扫描二维码输入。</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <color key="textColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
@@ -271,7 +271,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入KeyStore"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="请输入keystore"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" red="0.9137254901960784" green="0.92156862745098034" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>

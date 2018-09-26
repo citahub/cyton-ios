@@ -22,7 +22,6 @@ class CreateWalletController: UITableViewController {
     }
 
     @IBAction func walletNameChanged(_ sender: UITextField) {
-        sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         name = sender.text
         jugeNextButtonEnabled()
     }
@@ -40,7 +39,8 @@ class CreateWalletController: UITableViewController {
     }
 
     func jugeNextButtonEnabled() {
-        if name?.count != 0 && password?.count != 0 && confirmPassword?.count != 0 {
+        let nameClean = name?.trimmingCharacters(in: .whitespaces)
+        if nameClean?.count != 0 && password?.count != 0 && confirmPassword?.count != 0 {
             nextButton.backgroundColor = ColorFromString(hex: "#2e4af2")
             nextButton.isEnabled = true
         } else {
@@ -69,8 +69,13 @@ class CreateWalletController: UITableViewController {
     }
 
     func canProceedNextStep() -> Bool {
-        if name?.count == 0 {
+        let nameClean = name?.trimmingCharacters(in: .whitespaces)
+        if nameClean?.count == 0 {
             NeuLoad.showToast(text: "钱包名字不能为空")
+            return false
+        }
+        if (name?.count)! > 15 {
+            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
             return false
         }
         if password?.count == 0 {

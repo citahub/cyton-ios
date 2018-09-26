@@ -30,7 +30,7 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
 
-        let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
+        let keyStoreStr = WalletCryptService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
 
         DispatchQueue.global().async {

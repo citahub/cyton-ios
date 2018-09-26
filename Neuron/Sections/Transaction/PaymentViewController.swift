@@ -113,6 +113,7 @@ class PaymentViewController: UITableViewController {
             case .nervosToken:
                 payCoverViewController.extraData = extraData
                 payCoverViewController.gasPrice = nervosQuota
+                payCoverViewController.gasCost = "1e-16 NOS"
             case .erc20Token:
                 payCoverViewController.gasPrice = ethGasPrice
                 payCoverViewController.contrackAddress = tokenModel.address
@@ -130,7 +131,8 @@ class PaymentViewController: UITableViewController {
             NeuLoad.showToast(text: "转账地址不能为空")
             return false
         }
-        if destinationAddress == tokenModel.address {
+        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        if destinationAddress == walletModel.address {
             NeuLoad.showToast(text: "发送地址和收款地址不能相同")
             return false
         }

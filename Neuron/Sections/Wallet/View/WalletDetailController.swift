@@ -89,7 +89,7 @@ class WalletDetailController: UITableViewController {
                         NeuLoad.showToast(text: "密码错误")
                         return
                     } else {
-                        let eCtrl = ExportKeyStoreController.init(nibName: "ExportKeyStoreController", bundle: nil)
+                        let eCtrl = ExportKeystoreController.init(nibName: "ExportKeystoreController", bundle: nil)
                         eCtrl.password = txt.text!
                         self.navigationController?.pushViewController(eCtrl, animated: true)
                     }
@@ -112,7 +112,8 @@ class WalletDetailController: UITableViewController {
         let txt = alert.addTextField("请输入钱包名字")
         alert.addButton("确定") {
             if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {NeuLoad.showToast(text: "该钱包名称已存在");return} else {
-                if txt.text!.isEmpty {
+                let nameClean = txt.text?.trimmingCharacters(in: .whitespaces)
+                if nameClean?.count == 0 {
                     NeuLoad.showToast(text: "钱包名字不能为空")
                 } else if txt.text!.count > 15 {
                     NeuLoad.showToast(text: "钱包名称不能超过15个字符")

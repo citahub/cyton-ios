@@ -37,9 +37,13 @@ class ImportWalletViewModel: NSObject {
     ///   - keyStore: keyStore
     ///   - password: password
     ///   - name: walletName
-    func importKeyStoreWallet(keyStore: String, password: String, name: String) {
+    func importKeystoreWallet(keyStore: String, password: String, name: String) {
         if keyStore.isEmpty {NeuLoad.showToast(text: "请输入keystore文本");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if name.count > 15 {
+            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            return
+        }
         if password.isEmpty {NeuLoad.showToast(text: "解锁密码不能为空");return}
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
         NeuLoad.showHUD(text: "导入钱包中")
@@ -133,6 +137,10 @@ class ImportWalletViewModel: NSObject {
     func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String, name: String) {
         if mnemonic.isEmpty {NeuLoad.showToast(text: "请输入助记词");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if name.count > 15 {
+            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            return
+        }
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
         if !isThePasswordMeetCondition(password: password) {return}
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
@@ -163,6 +171,10 @@ class ImportWalletViewModel: NSObject {
     func importPrivateWallet(privateKey: String, password: String, confirmPassword: String, name: String) {
         if privateKey.isEmpty {NeuLoad.showToast(text: "请输入私钥");return}
         if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if name.count > 15 {
+            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            return
+        }
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
         if !isThePasswordMeetCondition(password: password) {return}
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}

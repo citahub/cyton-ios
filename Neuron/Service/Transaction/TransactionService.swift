@@ -41,9 +41,9 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.blockNumber = subJSON["blockNumber"].stringValue
                     transacationModel.transactionType = "ETH"
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
+                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + "ETH"
                     } else {
-                        transacationModel.value = "-" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
+                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "ETH"
                     }
                     transacationModel.totleGas = self.getTotleGas(gasUsed: subJSON["gasUsed"].stringValue, gasPirce: subJSON["gasPrice"].stringValue)
                     resultArr.append(transacationModel)
@@ -72,7 +72,7 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.chainName = "test-chain"
                     transacationModel.gasPrice = ""
                     transacationModel.gas = ""
-                    transacationModel.gasUsed = self.changeValue(eStr: subJSON["gasUsed"].stringValue)
+                    transacationModel.gasUsed = self.formatGasUsed(gasString: subJSON["gasUsed"].stringValue)
                     transacationModel.blockNumber = self.changeValue(eStr: subJSON["blockNumber"].stringValue)
                     transacationModel.transactionType = "Nervos"
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
@@ -80,7 +80,6 @@ class TransactionServiceImp: TransactionService {
                     } else {
                         transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
                     }
-
                     resultArr.append(transacationModel)
                 }
                 completion(EthServiceResult.Success(resultArr))
@@ -109,18 +108,10 @@ class TransactionServiceImp: TransactionService {
         return String(sum)
     }
 
-    func formatValue(value: String) -> String {
-
-        if value.count != 0 {
-            let vInt = Int(value)!
-            let biguInt = BigUInt(vInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
-            let strFload = Float(formatStr)
-            let finalStr = String(strFload!)
-            return finalStr
-        } else {
-            return value
-        }
+    func formatGasUsed(gasString: String) -> String {
+        let formatValue = changeValue(eStr: gasString)
+        let final = Double(formatValue)!/pow(10, 18)
+        return String(final)
     }
 
     func formatScientValue(value: String) -> String {
@@ -135,7 +126,7 @@ class TransactionServiceImp: TransactionService {
             let gasUsedInt = Int(gasUsed)!
             let gasPriceInt = Int(gasPirce)!
             let gasT = BigUInt(gasUsedInt * gasPriceInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(gasT, toUnits: .eth, decimals: 6, fallbackToScientific: false)
+            let formatStr = Web3.Utils.formatToEthereumUnits(gasT, toUnits: .eth, decimals: 8, fallbackToScientific: false)
             let strFload = Float(formatStr!)
             let finalGasStr = String(strFload!)
             return finalGasStr
@@ -148,7 +139,7 @@ class TransactionServiceImp: TransactionService {
         if gas.count != 0 {
             let vInt = Int(gas)!
             let bigInt = BigUInt(vInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(bigInt, toUnits: .Gwei, decimals: 6, fallbackToScientific: false)!
+            let formatStr = Web3.Utils.formatToEthereumUnits(bigInt, toUnits: .Gwei, decimals: 8, fallbackToScientific: false)!
             return formatStr
         } else {
             return gas
