@@ -12,6 +12,7 @@ extension Notification.Name {
     static let createWalletSuccess = Notification.Name("createWalletSuccess")
     static let allWalletsDeleted = Notification.Name("allWalletsDeleted")
     static let changeLocalCurrency = Notification.Name("changeLocalCurrency")
+    static let switchWallet = Notification.Name("switchWallet")
     static let beginRefresh = Notification.Name("beginRefresh")
     static let endRefresh = Notification.Name("endRefresh")
 }

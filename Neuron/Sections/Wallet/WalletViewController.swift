@@ -150,12 +150,14 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         if WalletRealmTool.hasWallet() {
             let walletModel = viewModel.getCurrentModel().currentWallet!
             refreshUI(walletModel: walletModel)
+            loadData()
         }
     }
 
     //switch wallet delegate
     func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
-        refreshUI(walletModel: model)
+        didGetDataForCurrentWallet()
+        NotificationCenter.default.post(name: .switchWallet, object: self, userInfo: nil)
     }
 
     @objc func changeWallet(nofy: Notification) {

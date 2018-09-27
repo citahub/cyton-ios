@@ -74,7 +74,7 @@ class CreateWalletController: UITableViewController {
             NeuLoad.showToast(text: "钱包名字不能为空")
             return false
         }
-        if (name?.count)! > 15 {
+        if name!.count > 15 {
             NeuLoad.showToast(text: "钱包名字不能超过15个字符")
             return false
         }

@@ -27,6 +27,7 @@ class SelectWalletController: UITableViewController {
 
     func didGetWalletData() {
         appModel = WalletRealmTool.getCurrentAppmodel()
+        tableView.reloadData()
     }
 
     @IBAction func addWalletAction(_ sender: UIButton) {

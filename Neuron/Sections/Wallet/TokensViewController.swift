@@ -16,13 +16,6 @@ class TokensViewController: UITableViewController {
     let viewModel = SubController2ViewModel()
     var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if tokenArray.count != (WalletRealmTool.getCurrentAppmodel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
-            didGetTokenList()
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         didGetTokenList()
@@ -39,6 +32,7 @@ class TokensViewController: UITableViewController {
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(switchWalletLoadToken), name: .switchWallet, object: nil)
     }
 
     @objc func changeLocalCurrency() {
@@ -49,6 +43,11 @@ class TokensViewController: UITableViewController {
     @objc
     func refreshData() {
         getBalance(isRefresh: false)
+    }
+
+    @objc
+    func switchWalletLoadToken() {
+        didGetTokenList()
     }
 
     /// get token list from realm
