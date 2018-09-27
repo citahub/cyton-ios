@@ -16,13 +16,6 @@ class TokensViewController: UITableViewController {
     let viewModel = SubController2ViewModel()
     var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        if tokenArray.count != (WalletRealmTool.getCurrentAppmodel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
-//            didGetTokenList()
-//        }
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         didGetTokenList()
