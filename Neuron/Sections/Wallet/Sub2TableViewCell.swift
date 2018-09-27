@@ -28,7 +28,7 @@ class Sub2TableViewCell: UITableViewCell {
         let lineV = UIView.init(frame: CGRect(x: 50, y: 59, width: ScreenSize.width - 60, height: 1))
         lineV.backgroundColor = ColorFromString(hex: "#eeeeee")
         contentView.addSubview(lineV)
-        contentView.bringSubviewToFront(lineV)
+        contentView.bringSubview(toFront: lineV)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
