@@ -17,7 +17,7 @@ class NFTDetailViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if kind == UICollectionView.elementKindSectionHeader {
+        if kind == UICollectionElementKindSectionHeader {
             let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                            withReuseIdentifier: "collectionHeader", for: indexPath) as! NFTHeaderReusableView
             if assetsModel.image_preview_url != nil {
@@ -30,7 +30,7 @@ class NFTDetailViewController: UICollectionViewController {
             reusableview.idLabel.text = "ID:" + assetsModel.token_id
             reusableview.assetNameLabel.text = assetsModel.asset_contract.name
             return reusableview
-        } else if kind == UICollectionView.elementKindSectionFooter {
+        } else if kind == UICollectionElementKindSectionFooter {
             let reusableview = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
                                                                            withReuseIdentifier: "collectionFooter", for: indexPath) as! NFTFooterReusableView
             reusableview.introductionLabel.text = assetsModel.description
