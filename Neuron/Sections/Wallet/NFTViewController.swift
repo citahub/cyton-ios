@@ -23,6 +23,7 @@ class NFTViewController: UITableViewController {
 
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .switchWallet, object: nil)
     }
 
     @objc
