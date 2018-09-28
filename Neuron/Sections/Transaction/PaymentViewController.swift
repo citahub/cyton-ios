@@ -113,7 +113,7 @@ class PaymentViewController: UITableViewController {
             case .nervosToken:
                 payCoverViewController.extraData = extraData
                 payCoverViewController.gasPrice = nervosQuota
-                payCoverViewController.gasCost = "1e-16 NOS"
+                payCoverViewController.gasCost = "1e-16 \(tokenModel.symbol)"
             case .erc20Token:
                 payCoverViewController.gasPrice = ethGasPrice
                 payCoverViewController.contrackAddress = tokenModel.address

@@ -20,6 +20,8 @@ class TransactionModel: NSObject {
     var gas = ""
     var gasPrice = ""
     var blockNumber = ""
+    var symbol = ""
+
 
     var transactionType = "ETH" //default "ETH" include ERC20 transaction,  another one is "Nervos"
     var totleGas = ""
