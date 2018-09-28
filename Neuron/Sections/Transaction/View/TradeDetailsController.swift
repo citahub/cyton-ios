@@ -26,7 +26,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 subBtnArr = [tModel.chainName,
                              tModel.to,
                              tModel.from,
-                             tModel.gasUsed + "NOS",
+                             tModel.gasUsed + tModel.symbol,
                              tModel.hashString,
                              tModel.blockNumber,
                              tModel.formatTime]

@@ -40,10 +40,11 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.gasUsed = subJSON["gasUsed"].stringValue
                     transacationModel.blockNumber = subJSON["blockNumber"].stringValue
                     transacationModel.transactionType = "ETH"
+                    transacationModel.symbol = "ETH"
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + "ETH"
+                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
                     } else {
-                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "ETH"
+                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
                     }
                     transacationModel.totleGas = self.getTotleGas(gasUsed: subJSON["gasUsed"].stringValue, gasPirce: subJSON["gasPrice"].stringValue)
                     resultArr.append(transacationModel)
@@ -58,6 +59,7 @@ class TransactionServiceImp: TransactionService {
     func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         var resultArr: [TransactionModel] = []
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        let nativeTokenArray = WalletRealmTool.getCurrentAppmodel().nativeTokenList
         let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
         Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { (response) in
             let jsonObj = try? JSON(data: response.data!)
@@ -69,16 +71,21 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.hashString = subJSON["hash"].stringValue
                     transacationModel.timeStamp = String(subJSON["timestamp"].intValue)
                     transacationModel.formatTime = self.formatTimestamp(timeStap: subJSON["timestamp"].intValue)
-                    transacationModel.chainName = "test-chain"
+                    transacationModel.chainName = subJSON["chainName"].stringValue
                     transacationModel.gasPrice = ""
                     transacationModel.gas = ""
                     transacationModel.gasUsed = self.formatGasUsed(gasString: subJSON["gasUsed"].stringValue)
                     transacationModel.blockNumber = self.changeValue(eStr: subJSON["blockNumber"].stringValue)
                     transacationModel.transactionType = "Nervos"
+                    nativeTokenArray.forEach({ (tokenModel) in
+                        if tokenModel.chainId == subJSON["chainId"].stringValue {
+                            transacationModel.symbol = tokenModel.symbol
+                        }
+                    })
                     if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
+                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
                     } else {
-                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
+                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
                     }
                     resultArr.append(transacationModel)
                 }
