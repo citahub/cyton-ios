@@ -28,8 +28,8 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
     var _selectRow: NSInteger = 0
     let placeholserAttributes = [NSAttributedString.Key.foregroundColor: ColorFromString(hex: "#999999"), NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
 
-    let firstBtn = UIButton.init(type: UIButton.ButtonType.custom)
-    let secBtn = UIButton.init(type: UIButton.ButtonType.custom)
+    let firstBtn = UIButton.init(type: .custom)
+    let secBtn = UIButton.init(type: .custom)
 
     @IBOutlet weak var headLabel: UILabel!
     @IBOutlet weak var rightTextField: UITextField!

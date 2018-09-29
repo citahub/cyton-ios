@@ -92,7 +92,7 @@ class SureMnemonicViewModel: NSObject {
         walletModel.MD5screatPassword = walletPasswordMD5
         let gitIcon = GitHubIdenticon.init()
         let iconImage = gitIcon.icon(from: walletModel.name, size: CGSize(width: 60, height: 60))
-        let imageData = UIImagePNGRepresentation(iconImage!)
+        let imageData = iconImage!.pngData()
         walletModel.iconData = imageData
         try! WalletRealmTool.realm.write {
             appModel.currentWallet = walletModel
