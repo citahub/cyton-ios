@@ -27,20 +27,10 @@ class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
     }
     let share = HRQRCodeScanTool()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        navigationController?.navigationBar.isDarkStyle = false
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "扫描二维码"
         share.delegate  = self
         share.beginScanInView(view: view)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

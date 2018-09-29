@@ -9,24 +9,28 @@
 import UIKit
 import web3swift
 
+protocol TokensViewControllerDelegate: class {
+    func getCurrentCurrencyModel(currencyModel: LocalCurrency, totleCurrency: Double)
+}
+
 /// ERC-20 Token List
 class TokensViewController: UITableViewController {
-    @IBOutlet weak var totle: UILabel!
     var tokenArray: [TokenModel] = []
     let viewModel = SubController2ViewModel()
     var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
+    weak var delegate: TokensViewControllerDelegate?
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if tokenArray.count != (WalletRealmTool.getCurrentAppmodel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
+            didGetTokenList()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         didGetTokenList()
         addNotify()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "switchWallet" {
-            let selectWalletController = segue.destination as! SelectWalletController
-            selectWalletController.delegate = self
-        }
     }
 
     func addNotify() {
@@ -78,13 +82,13 @@ class TokensViewController: UITableViewController {
                     }
                     guard balance != 0 else {
                         if currencyTotle == 0 {
-                            self.totle.text = String(format: "总资产(%@):%.2f", currencyModel.name, currencyTotle)
+                            self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                         }
                         return
                     }
                     model.currencyAmount = String(format: "%.2f", price * balance)
                     currencyTotle += Double(model.currencyAmount) ?? 0
-                    self.totle.text = String(format: "总资产(%@):%.2f", currencyModel.name, currencyTotle)
+                    self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                     self.tableView.reloadData()
                 case .Error(let error):
                     NeuLoad.showToast(text: error.localizedDescription)
@@ -187,15 +191,5 @@ class TokensViewController: UITableViewController {
             offset += scrollView.contentInset.top
         }
         tableView.isScrollEnabled = offset > 0
-    }
-}
-
-extension TokensViewController: SelectWalletControllerDelegate {
-    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
-        tokenArray.removeAll()
-        for item in model.selectTokenList {
-            tokenArray.append(item)
-        }
-        getBalance(isRefresh: true)
     }
 }

@@ -21,13 +21,7 @@ class SettingsViewController: UITableViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        navigationController?.navigationBar.isDarkStyle = true
         localCurrencyLabel.text = LocalCurrencyService().getLocalCurrencySelect().short
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isDarkStyle = false
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

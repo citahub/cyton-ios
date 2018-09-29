@@ -12,16 +12,18 @@ import web3swift
 import BigInt
 import MJRefresh
 
-class WalletViewController: UITableViewController, QRCodeControllerDelegate, SelectWalletControllerDelegate {
+class WalletViewController: UITableViewController, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
+    @IBOutlet weak var totleCurrencyLabel: UILabel!
+    @IBOutlet weak var currencyBalanceLabel: UILabel!
     @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
-    @IBOutlet weak var scanQRButtonItem: UIBarButtonItem!
+    @IBOutlet weak var requestPaymentButtonItem: UIBarButtonItem!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
-    private var tokensViewController: UIViewController!
+    private var tokensViewController: TokensViewController!
     private var nftViewController: UIViewController!
     private var assetPageViewController: UIPageViewController!
     private var isHeaderViewHidden = false {
@@ -41,20 +43,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         updateNavigationBar()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        navigationController?.navigationBar.isDarkStyle = false
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = true
         addNotify()
-        tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController")
+        tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController") as? TokensViewController
+        tokensViewController.delegate = self
         nftViewController = storyboard!.instantiateViewController(withIdentifier: "nftViewController")
         assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
         assetPageViewController.dataSource = self
@@ -100,12 +94,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         copyAddress()
     }
 
-    @IBAction func scanQRCode(_ sender: UIBarButtonItem) {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
-    }
-
     @IBAction func unwind(seque: UIStoryboardSegue) { }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -129,13 +117,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 
     private func updateNavigationBar() {
-        navigationController?.navigationBar.isDarkStyle = !isHeaderViewHidden
         if isHeaderViewHidden {
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
             navigationItem.title = viewModel.getCurrentModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
-            navigationItem.rightBarButtonItems = [scanQRButtonItem]
+            navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
             navigationItem.titleView = titleView
         }
         setNeedsStatusBarAppearanceUpdate()
@@ -172,16 +159,6 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
         icon.image = UIImage(data: walletModel.iconData)
     }
 
-    //TODO: how to deal with qrcode result?
-    func didBackQRCodeMessage(codeResult: String) {
-    }
-
-    //click icon image
-    @objc func didClickIconImage() {
-        let wCtrl = WalletDetailController.init(nibName: "WalletDetailController", bundle: nil)
-        navigationController?.pushViewController(wCtrl, animated: true)
-    }
-
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if #available(iOS 11.0, *) {
             return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom
@@ -199,7 +176,12 @@ class WalletViewController: UITableViewController, QRCodeControllerDelegate, Sel
     }
 }
 
-extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, TokensViewControllerDelegate {
+    func getCurrentCurrencyModel(currencyModel: LocalCurrency, totleCurrency: Double) {
+        totleCurrencyLabel.text = "总资产(\(currencyModel.name))"
+        currencyBalanceLabel.text = String(format: "%.2f", totleCurrency)
+    }
+
     func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
         let viewControllerToShow = index == 0 ? tokensViewController : nftViewController
         assetPageViewController.setViewControllers([viewControllerToShow!], direction: .forward, animated: false)
