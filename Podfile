@@ -13,8 +13,8 @@ target 'Neuron' do
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
   pod 'EFQRCode'
-  pod 'RSKPlaceholderTextView'
-  pod 'Toast-Swift'
+  pod 'RSKPlaceholderTextView', "~> 4.0.0"
+  pod 'Toast-Swift', "~> 4.0.0"
   pod 'RealmSwift'
   pod 'MBProgressHUD'
   pod 'TrustCore', '~> 0.0.7'

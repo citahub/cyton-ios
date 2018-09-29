@@ -32,7 +32,7 @@ PODS:
   - RealmSwift (3.7.5):
     - Realm (= 3.7.5)
   - Result (3.0.0)
-  - RSKPlaceholderTextView (3.1.0)
+  - RSKPlaceholderTextView (4.0.0)
   - SCLAlertView (0.8)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -41,7 +41,7 @@ PODS:
   - SipHash (1.2.2)
   - SwiftProtobuf (1.0.3)
   - SwiftyJSON (4.1.0)
-  - Toast-Swift (3.0.1)
+  - Toast-Swift (4.0.0)
   - TrezorCrypto (0.0.6)
   - TrustCore (0.0.7):
     - BigInt
@@ -72,11 +72,11 @@ DEPENDENCIES:
   - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.18.0`)
   - PlainPing
   - RealmSwift
-  - RSKPlaceholderTextView
+  - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
   - SDWebImage
   - SwiftyJSON
-  - Toast-Swift
+  - Toast-Swift (~> 4.0.0)
   - TrustCore (~> 0.0.7)
   - TrustKeystore (~> 0.4.1)
 
@@ -141,19 +141,19 @@ SPEC CHECKSUMS:
   Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
-  RSKPlaceholderTextView: 78dc8dfe343abec377503edf4689a743d23a4318
+  RSKPlaceholderTextView: 15f1dc1883e103ea605874b863f19ff6b08496d5
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 5ccc0e4054e37c75800e5744acb2aa80bb72b39c
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
-  Toast-Swift: ba0b01b095aada709d915f9beb1d38184a2721c3
+  Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   TrezorCrypto: bea2dab002f9a5fe885df004694b9ece52dc088b
   TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 15065d0b0f3c13234a80c5470eece91d5d0eee1b
+PODFILE CHECKSUM: 2ce316301a164dc7211797df02cb55ddabc1c3ac
 
 COCOAPODS: 1.5.3
