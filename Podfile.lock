@@ -63,7 +63,7 @@ DEPENDENCIES:
   - Alamofire
   - Alamofire-Synchronous
   - EFQRCode
-  - IGIdenticon
+  - IGIdenticon (from `https://github.com/cryptape/IGIdenticon.git`, branch `swift4.2`)
   - IQKeyboardManagerSwift
   - KeychainSwift
   - LYEmptyView
@@ -87,7 +87,6 @@ SPEC REPOS:
     - BigInt
     - CryptoSwift
     - EFQRCode
-    - IGIdenticon
     - IQKeyboardManagerSwift
     - KeychainSwift
     - libsodium
@@ -113,11 +112,17 @@ SPEC REPOS:
     - web3swift
 
 EXTERNAL SOURCES:
+  IGIdenticon:
+    :branch: swift4.2
+    :git: https://github.com/cryptape/IGIdenticon.git
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
     :tag: v0.18.0
 
 CHECKOUT OPTIONS:
+  IGIdenticon:
+    :commit: 7d4457b4daf7a931f52f9c6ee48b1f0b20bb274b
+    :git: https://github.com/cryptape/IGIdenticon.git
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
     :tag: v0.18.0
@@ -128,7 +133,7 @@ SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
-  IGIdenticon: 0f8fa2c776e35d4cb204bedbc5005ef748b263d8
+  IGIdenticon: b54a7f8014e3e61de3519e35731ff85d3eeb694b
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
   libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
@@ -154,6 +159,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 2ce316301a164dc7211797df02cb55ddabc1c3ac
+PODFILE CHECKSUM: 616ab2b21c7a228c3349dfdfdd2e341aa80fd3d7
 
 COCOAPODS: 1.5.3
