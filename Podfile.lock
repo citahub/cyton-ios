@@ -5,7 +5,6 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - CryptoSwift (0.10.0)
-  - DynamicBlurView (2.0.2)
   - EFQRCode (4.2.2)
   - IGIdenticon (0.5)
   - IQKeyboardManagerSwift (6.1.1)
@@ -18,8 +17,6 @@ PODS:
     - SwiftProtobuf (~> 1.0.3)
     - web3swift (~> 1.1.1)
   - PlainPing (0.5)
-  - PopupDialog (0.8.0):
-    - DynamicBlurView (~> 2.0)
   - PromiseKit (6.3.5):
     - PromiseKit/CorePromise (= 6.3.5)
     - PromiseKit/Foundation (= 6.3.5)
@@ -74,7 +71,6 @@ DEPENDENCIES:
   - MJRefresh
   - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.18.0`)
   - PlainPing
-  - PopupDialog
   - RealmSwift
   - RSKPlaceholderTextView
   - SCLAlertView
@@ -90,7 +86,6 @@ SPEC REPOS:
     - Alamofire-Synchronous
     - BigInt
     - CryptoSwift
-    - DynamicBlurView
     - EFQRCode
     - IGIdenticon
     - IQKeyboardManagerSwift
@@ -100,7 +95,6 @@ SPEC REPOS:
     - MBProgressHUD
     - MJRefresh
     - PlainPing
-    - PopupDialog
     - PromiseKit
     - Realm
     - RealmSwift
@@ -133,7 +127,6 @@ SPEC CHECKSUMS:
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
-  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
   EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
   IGIdenticon: 0f8fa2c776e35d4cb204bedbc5005ef748b263d8
   IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
@@ -144,7 +137,6 @@ SPEC CHECKSUMS:
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   NervosSwift: 298278bafa8dfda023ed60926269db01e82fbb92
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
-  PopupDialog: 11347197b6ac3e0548ac445d40ce68d1d407e9a0
   PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
   Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
   RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
@@ -162,6 +154,6 @@ SPEC CHECKSUMS:
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 1dc26c242e16c239cad4b83fc00e30d7fc16e98e
+PODFILE CHECKSUM: 15065d0b0f3c13234a80c5470eece91d5d0eee1b
 
 COCOAPODS: 1.5.3
