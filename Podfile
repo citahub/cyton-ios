@@ -12,17 +12,16 @@ target 'Neuron' do
   pod 'LYEmptyView'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
-  pod 'PopupDialog'
   pod 'EFQRCode'
-  pod 'RSKPlaceholderTextView'
-  pod 'Toast-Swift'
+  pod 'RSKPlaceholderTextView', "~> 4.0.0"
+  pod 'Toast-Swift', "~> 4.0.0"
   pod 'RealmSwift'
   pod 'MBProgressHUD'
   pod 'TrustCore', '~> 0.0.7'
   pod 'TrustKeystore', '~> 0.4.1'
   pod 'KeychainSwift'
   pod 'SwiftyJSON', inhibit_warnings: true
-  pod 'IGIdenticon'
+  pod 'IGIdenticon', git: "https://github.com/cryptape/IGIdenticon.git", branch: "swift4.2"
   pod 'SCLAlertView'
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
