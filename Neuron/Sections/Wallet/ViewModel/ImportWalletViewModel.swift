@@ -108,10 +108,8 @@ class ImportWalletViewModel: NSObject {
     func didSaveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppmodel()
         let walletCount = appModel.wallets.count
-        let gitIcon = GitHubIdenticon.init()
-        let iconImage = gitIcon.icon(from: walletModel.name, size: CGSize(width: 60, height: 60))
-        let imageData = iconImage!.pngData()!
-        walletModel.iconData = imageData
+        let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
+        walletModel.iconData = iconImage!.pngData()!
         try! WalletRealmTool.realm.write {
             appModel.currentWallet = walletModel
             appModel.wallets.append(walletModel)
