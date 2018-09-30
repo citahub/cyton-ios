@@ -19,7 +19,7 @@ class ExportKeystoreController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "导出keystore"
-        walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: password)
         kestoreTextView.text = keyStoreStr
         setUpUI()

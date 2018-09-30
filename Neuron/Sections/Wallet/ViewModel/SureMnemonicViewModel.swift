@@ -85,7 +85,7 @@ class SureMnemonicViewModel: NSObject {
 //    }
 
     func saveWallet() {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         let walletCount = appModel.wallets.count
         walletModel.address = walletAddress
         walletModel.encryptPrivateKey =  walletPrivateKey

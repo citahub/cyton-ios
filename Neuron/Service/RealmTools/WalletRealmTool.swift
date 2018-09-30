@@ -24,7 +24,7 @@ class WalletRealmTool: NSObject {
     /// get everything for AppModel
     ///
     /// - Returns: appmodel
-    static func getCurrentAppmodel() -> AppModel {
+    static func getCurrentAppModel() -> AppModel {
         let result = realm.objects(AppModel.self)
         if result.count == 0 {
             return AppModel()

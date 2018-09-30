@@ -64,7 +64,7 @@ class PaymentViewController: UITableViewController {
     }
 
     func getBaseData() {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         iconImageView.image = UIImage(data: walletModel.iconData)
         nameLabel.text = walletModel.name
         addressLabel.text = walletModel.address
@@ -99,7 +99,7 @@ class PaymentViewController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: UIButton) {
         if canProceedNextStep() {
-            let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+            let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
             payCoverViewController.tokenModel = tokenModel
             payCoverViewController.walletAddress = walletModel.address
             payCoverViewController.amount = payValue
@@ -131,7 +131,7 @@ class PaymentViewController: UITableViewController {
             NeuLoad.showToast(text: "转账地址不能为空")
             return false
         }
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         if destinationAddress == walletModel.address {
             NeuLoad.showToast(text: "发送地址和收款地址不能相同")
             return false

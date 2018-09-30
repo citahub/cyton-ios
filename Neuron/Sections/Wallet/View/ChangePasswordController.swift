@@ -32,7 +32,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     func didGetData() {
-        walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         cTable.reloadData()
     }
 

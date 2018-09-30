@@ -19,7 +19,7 @@ class WalletDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包管理"
-        appModel = WalletRealmTool.getCurrentAppmodel()
+        appModel = WalletRealmTool.getCurrentAppModel()
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name

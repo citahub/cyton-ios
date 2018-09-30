@@ -40,7 +40,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
             group.leave()
         }
 
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         group.notify(queue: .main) {
             try? WalletRealmTool.realm.write {
                 WalletRealmTool.realm.add(tModel, update: true)

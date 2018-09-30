@@ -106,7 +106,7 @@ class ImportWalletViewModel: NSObject {
 
     /// save wallet
     func didSaveWalletToRealm() {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         let walletCount = appModel.wallets.count
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()!

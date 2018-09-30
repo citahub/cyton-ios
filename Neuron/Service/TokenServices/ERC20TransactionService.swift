@@ -31,7 +31,7 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
-        let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
+        let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {

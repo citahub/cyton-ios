@@ -19,7 +19,7 @@ class WalletCryptoService: NSObject {
     }
 
     static public func didCheckoutKeystoreWithCurrentWallet(password: String) -> String {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         let walletPrivate = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
         let resultType = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: walletPrivate, password: password)
         var keyStore = ""
