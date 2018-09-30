@@ -40,7 +40,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
     @IBAction func changePasswordBtn(_ sender: UIButton) {
         if walletModel.MD5screatPassword != CryptTools.changeMD5(password: oldPassword) {NeuLoad.showToast(text: "旧密码错误");return}
         if newPassword != confirmPassword {NeuLoad.showToast(text: "两次新密码输入不一致");return}
-        if !isThePasswordMeetCondition(password: newPassword) {return}
+        if !PasswordValidator.isValid(password: newPassword) {return}
         if walletModel.MD5screatPassword == CryptTools.changeMD5(password: newPassword) {
             NeuLoad.showToast(text: "新密码与旧密码一致，请重新输入")
             return

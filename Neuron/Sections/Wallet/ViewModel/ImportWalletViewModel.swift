@@ -140,7 +140,7 @@ class ImportWalletViewModel: NSObject {
             return
         }
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
-        if !isThePasswordMeetCondition(password: password) {return}
+        if !PasswordValidator.isValid(password: password) {return}
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
         NeuLoad.showHUD(text: "导入钱包中")
         walletModel.name = name
@@ -174,7 +174,7 @@ class ImportWalletViewModel: NSObject {
             return
         }
         if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
-        if !isThePasswordMeetCondition(password: password) {return}
+        if !PasswordValidator.isValid(password: password) {return}
         if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
         NeuLoad.showHUD(text: "导入钱包中")
         walletModel.name = name

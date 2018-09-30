@@ -45,22 +45,17 @@ class WalletRealmTool: NSObject {
     /// - Returns: true or false
     static func hasWallet() -> Bool {
         let result = realm.objects(AppModel.self)
-        if result.count == 0 {
+        guard let appModel = result.first else {
             return false
-        } else {
-            let appModel: AppModel = result[0]
-            if appModel.wallets.count == 0 {
-                return false
-            } else {
-                return true
-            }
         }
+
+        return appModel.wallets.count > 0
     }
 
     /// addAppModel
     ///
     /// - Parameter appModel: appmodel instance
     static func addObject(appModel: AppModel) {
-            realm.add(appModel)
+        realm.add(appModel)
     }
 }
