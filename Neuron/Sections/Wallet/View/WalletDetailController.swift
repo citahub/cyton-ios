@@ -19,7 +19,7 @@ class WalletDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包管理"
-        appModel = WalletRealmTool.getCurrentAppmodel()
+        appModel = WalletRealmTool.getCurrentAppModel()
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
@@ -35,7 +35,7 @@ class WalletDetailController: UITableViewController {
         txt.isSecureTextEntry = true
         alert.addButton("确定") {
             txt.resignFirstResponder()
-            if self.walletModel.MD5screatPassword != CryptTools.changeMD5(password: txt.text!) {
+            if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
                 NeuLoad.showToast(text: "旧密码错误")
                 return
             } else {
@@ -60,7 +60,7 @@ class WalletDetailController: UITableViewController {
                 WalletRealmTool.realm.delete(walletModel)
             }
         }
-        WalletCryptService.didDelegateWallet(password: password, walletAddress: address)
+        WalletCryptoService.didDelegateWallet(password: password, walletAddress: address)
         NeuLoad.showToast(text: "删除成功")
         navigationController?.popToRootViewController(animated: true)
     }
@@ -85,7 +85,7 @@ class WalletDetailController: UITableViewController {
                 txt.isSecureTextEntry = true
                 alert.addButton("确定") {
                     txt.resignFirstResponder()
-                    if self.walletModel.MD5screatPassword != CryptTools.changeMD5(password: txt.text!) {
+                    if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
                         NeuLoad.showToast(text: "密码错误")
                         return
                     } else {

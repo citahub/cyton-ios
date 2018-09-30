@@ -76,7 +76,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         }
         if segue.identifier == "requestPayment" {
             let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppmodel()
+            let appModel = WalletRealmTool.getCurrentAppModel()
             requestPaymentViewController.appModel = appModel
         }
         if segue.identifier == "switchWallet" {
@@ -111,7 +111,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     private func copyAddress() {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         UIPasteboard.general.string = appModel.currentWallet?.address
         NeuLoad.showToast(text: "地址已经复制到粘贴板")
     }

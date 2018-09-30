@@ -17,7 +17,7 @@ class AssetViewModel: NSObject {
     /// - Returns: list
     func getAssetListFromJSON() -> [TokenModel] {
 
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
 
         let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
@@ -47,12 +47,12 @@ class AssetViewModel: NSObject {
     }
 
     func getSelectAsset() -> List<TokenModel>? {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         return appModel.currentWallet?.selectTokenList
     }
 
     func addSelectToken(tokenM: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenM, update: true)
             appModel.currentWallet?.selectTokenList.append(tokenM)
@@ -60,7 +60,7 @@ class AssetViewModel: NSObject {
     }
 
     func deleteSelectedToken(tokenM: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenM, update: true)

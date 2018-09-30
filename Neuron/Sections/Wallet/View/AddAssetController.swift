@@ -39,7 +39,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             return
         }
         NeuLoad.showHUD(text: "")
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
@@ -130,7 +130,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didGetERC20Token(token: String) {
-        let appmodel = WalletRealmTool.getCurrentAppmodel()
+        let appmodel = WalletRealmTool.getCurrentAppModel()
         NeuLoad.showHUD(text: "")
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
             switch result {

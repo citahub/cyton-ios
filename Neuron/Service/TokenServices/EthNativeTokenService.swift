@@ -23,7 +23,7 @@ class EthNativeTokenService: EthNativeTokenServiceProtocol {
     ///   - completion: EthServiceResult<BigUInt>
     static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         let address = EthereumAddress(walletAddress)!
-        let web3Main = Web3NetWork.getWeb3()
+        let web3Main = Web3Network.getWeb3()
         DispatchQueue.global().async {
             let balanceResult = web3Main.eth.getBalance(address: address)
             DispatchQueue.main.async {

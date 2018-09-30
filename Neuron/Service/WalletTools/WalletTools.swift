@@ -239,7 +239,7 @@ class WalletTools: NSObject {
 
     static func checkWalletName(name: String) -> Bool {
 
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         var nameArr = [""]
         for wallModel in appModel.wallets {
             nameArr.append(wallModel.name)

@@ -22,7 +22,7 @@ class TokensViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if tokenArray.count != (WalletRealmTool.getCurrentAppmodel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppmodel().nativeTokenList.count {
+        if tokenArray.count != (WalletRealmTool.getCurrentAppModel().currentWallet?.selectTokenList.count)! + WalletRealmTool.getCurrentAppModel().nativeTokenList.count {
             didGetTokenList()
         }
     }
@@ -57,9 +57,9 @@ class TokensViewController: UITableViewController {
     /// get token list from realm
     func didGetTokenList() {
         tokenArray.removeAll()
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         tokenArray += appModel.nativeTokenList
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         for item in walletModel.selectTokenList {
             tokenArray.append(item)
         }
@@ -102,7 +102,7 @@ class TokensViewController: UITableViewController {
         if isRefresh {
             NeuLoad.showHUD(text: "")
         }
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         for tm in tokenArray {
             if tm.chainId == NativeChainId.ethMainnetChainId {
                 group.enter()

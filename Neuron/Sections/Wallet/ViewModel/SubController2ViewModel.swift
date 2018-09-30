@@ -29,7 +29,7 @@ class SubController2ViewModel: NSObject {
     ///
     /// - Returns: appmodel
     func getCurrentModel() -> AppModel {
-        return WalletRealmTool.getCurrentAppmodel()
+        return WalletRealmTool.getCurrentAppModel()
     }
 
     /// get eth balance

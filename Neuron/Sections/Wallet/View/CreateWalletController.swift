@@ -86,7 +86,7 @@ class CreateWalletController: UITableViewController {
             NeuLoad.showToast(text: "两次密码不一致")
             return false
         }
-        if !isThePasswordMeetCondition(password: password!) {
+        if !PasswordValidator.isValid(password: password!) {
             return false
         }
         if !WalletTools.checkWalletName(name: name!) {
