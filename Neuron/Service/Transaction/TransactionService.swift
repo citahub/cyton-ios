@@ -19,7 +19,7 @@ protocol TransactionService {
 class TransactionServiceImp: TransactionService {
 
     func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         let parameters: Dictionary = ["address": walletAddress]
         Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { [weak self](response) in
             do {
@@ -52,8 +52,8 @@ class TransactionServiceImp: TransactionService {
     }
 
     func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        let nativeTokenArray = WalletRealmTool.getCurrentAppmodel().nativeTokenList
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
+        let nativeTokenArray = WalletRealmTool.getCurrentAppModel().nativeTokenList
         let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
         Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
             do {

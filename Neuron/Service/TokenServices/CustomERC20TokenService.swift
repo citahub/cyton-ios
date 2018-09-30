@@ -70,7 +70,7 @@ class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
     }
 
     private static func contract(ERC20Token: String) -> web3.web3contract? {
-        let web3 = Web3NetWork.getWeb3()
+        let web3 = Web3Network.getWeb3()
         guard let contractETHAddress = EthereumAddress(ERC20Token) else {
             return nil
         }

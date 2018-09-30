@@ -46,7 +46,7 @@ class SureMnemonicViewModel: NSObject {
                 print(account)
                 self.walletName = self.walletModel.name
                 self.walletAddress = account.address.eip55String
-                self.walletPasswordMD5 = CryptTools.changeMD5(password: password)
+                self.walletPasswordMD5 = CryptoTool.changeMD5(password: password)
                 self.exportKeystoreAndPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
                 NeuLoad.showToast(text: errorMessage)
@@ -61,7 +61,7 @@ class SureMnemonicViewModel: NSObject {
         switch privateKeyResult {
         case .succeed(result: let privateKey):
             print(privateKey!)
-            self.walletPrivateKey = CryptTools.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
+            self.walletPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             saveWallet()
         case .failed(let errorStr, let errorMsg):
             NeuLoad.showToast(text: errorMsg)
@@ -85,7 +85,7 @@ class SureMnemonicViewModel: NSObject {
 //    }
 
     func saveWallet() {
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         let walletCount = appModel.wallets.count
         walletModel.address = walletAddress
         walletModel.encryptPrivateKey =  walletPrivateKey

@@ -16,7 +16,7 @@ protocol TAViewModelProtocol {
 
 class TAViewModel: TAViewModelProtocol {
     func getGasPrice(completion:@escaping (EthServiceResult<BigUInt>) -> Void) {
-        let web3 = Web3NetWork.getWeb3()
+        let web3 = Web3Network.getWeb3()
         DispatchQueue.global().async {
             let gasPriceResult = web3.eth.getGasPrice()
             DispatchQueue.main.async {

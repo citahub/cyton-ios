@@ -35,7 +35,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "requestPayment" {
             let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppmodel()
+            let appModel = WalletRealmTool.getCurrentAppModel()
             requestPaymentViewController.appModel = appModel
         }
         if segue.identifier == "payment" {
@@ -57,7 +57,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func didGetEthTranscationData() {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
             case .Success(let ethArray):
@@ -70,7 +70,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func didGetNervosTranscationData() {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         service.didGetNervosTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
             case .Success(let nervosArray):

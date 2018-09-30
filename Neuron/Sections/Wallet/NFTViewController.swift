@@ -33,7 +33,7 @@ class NFTViewController: UITableViewController {
 
     func getListData() {
         dataArray.removeAll()
-        let appModel = WalletRealmTool.getCurrentAppmodel()
+        let appModel = WalletRealmTool.getCurrentAppModel()
         let address = appModel.currentWallet!.address
         let nftService = NFTService()
         nftService.getErc721Data(with: address) { (result) in

@@ -48,7 +48,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
         didSetUIDetail()
         tTable.delegate = self
         tTable.dataSource = self
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         iconImage.image = UIImage(data: (walletModel?.iconData)!)
         tTable.register(UINib.init(nibName: "TradeTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         amountLabel.text = tModel.value

@@ -30,8 +30,8 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        let keyStoreStr = WalletCryptService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
-        let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
+        let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
+        let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
@@ -47,7 +47,7 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
                 return
             }
 
-            let web3 = Web3NetWork.getWeb3()
+            let web3 = Web3Network.getWeb3()
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             let token = erc20TokenAddress
 //            let contract = self.contract(ERC20Token: token)

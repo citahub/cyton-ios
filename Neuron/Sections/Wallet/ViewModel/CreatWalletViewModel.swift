@@ -99,7 +99,7 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
             NeuLoad.showToast(text: "钱包名字重复")
             return
         }
-        if !isThePasswordMeetCondition(password: newPasswordText) {return}
+        if !PasswordValidator.isValid(password: newPasswordText) {return}
         // 创建助记词
         WalletTools.generateMnemonic { (mnemonic) in
             self.delegate?.doPush(mnemonic: mnemonic)

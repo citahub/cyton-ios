@@ -1,5 +1,5 @@
 //
-//  Web3NetWork.swift
+//  Web3Network.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/7/6.
@@ -9,8 +9,8 @@
 import Foundation
 import web3swift
 
-class Web3NetWork {
-    static public func getWeb3() -> web3 {
+class Web3Network {
+    public static func getWeb3() -> web3 {
         return Web3.InfuraMainnetWeb3()
     }
 }

@@ -30,8 +30,8 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
 
-        let keyStoreStr = WalletCryptService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
-        let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
+        let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
+        let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global().async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
@@ -47,7 +47,7 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
                 return
             }
 
-            let web3 = Web3NetWork.getWeb3()
+            let web3 = Web3Network.getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))
