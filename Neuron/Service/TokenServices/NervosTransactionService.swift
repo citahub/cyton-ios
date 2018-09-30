@@ -68,7 +68,7 @@ class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        var privateKey = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
+        var privateKey = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
         if privateKey.hasPrefix("0x") {
             privateKey = String(privateKey.dropFirst(2))
         }

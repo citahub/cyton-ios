@@ -35,7 +35,7 @@ class WalletDetailController: UITableViewController {
         txt.isSecureTextEntry = true
         alert.addButton("确定") {
             txt.resignFirstResponder()
-            if self.walletModel.MD5screatPassword != CryptTools.changeMD5(password: txt.text!) {
+            if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
                 NeuLoad.showToast(text: "旧密码错误")
                 return
             } else {
@@ -85,7 +85,7 @@ class WalletDetailController: UITableViewController {
                 txt.isSecureTextEntry = true
                 alert.addButton("确定") {
                     txt.resignFirstResponder()
-                    if self.walletModel.MD5screatPassword != CryptTools.changeMD5(password: txt.text!) {
+                    if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
                         NeuLoad.showToast(text: "密码错误")
                         return
                     } else {

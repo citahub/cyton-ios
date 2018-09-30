@@ -39,7 +39,7 @@ class ConfirmSendViewController: UIViewController {
             return false
         }
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        if walletModel.MD5screatPassword != CryptTools.changeMD5(password: password) {
+        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: password) {
             NeuLoad.showToast(text: "密码不正确请重新输入")
             return false
         }

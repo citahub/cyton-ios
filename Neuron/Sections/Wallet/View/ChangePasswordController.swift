@@ -38,19 +38,19 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
 
     //修改密码按钮action
     @IBAction func changePasswordBtn(_ sender: UIButton) {
-        if walletModel.MD5screatPassword != CryptTools.changeMD5(password: oldPassword) {NeuLoad.showToast(text: "旧密码错误");return}
+        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {NeuLoad.showToast(text: "旧密码错误");return}
         if newPassword != confirmPassword {NeuLoad.showToast(text: "两次新密码输入不一致");return}
         if !PasswordValidator.isValid(password: newPassword) {return}
-        if walletModel.MD5screatPassword == CryptTools.changeMD5(password: newPassword) {
+        if walletModel.MD5screatPassword == CryptoTool.changeMD5(password: newPassword) {
             NeuLoad.showToast(text: "新密码与旧密码一致，请重新输入")
             return
         }
-        let privateKey = CryptTools.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: oldPassword)
-        let newEncryptPrivateKey = CryptTools.Endcode_AES_ECB(strToEncode: privateKey, key: newPassword)
+        let privateKey = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: oldPassword)
+        let newEncryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey, key: newPassword)
         NeuLoad.showHUD(text: "修改密码中...")
         try! WalletRealmTool.realm.write {
             walletModel.encryptPrivateKey = newEncryptPrivateKey
-            walletModel.MD5screatPassword = CryptTools.changeMD5(password: newPassword)
+            walletModel.MD5screatPassword = CryptoTool.changeMD5(password: newPassword)
         }
         let address = walletModel.address
         let oldP = oldPassword

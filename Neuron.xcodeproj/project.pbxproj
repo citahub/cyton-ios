@@ -95,7 +95,7 @@
 		89971F11212D049900E86C34 /* NervosTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89971F10212D049900E86C34 /* NervosTransactionService.swift */; };
 		899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */; };
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
-		899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptTools.swift */; };
+		899CADA020E0916E00FF9D27 /* CryptoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */; };
 		89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A21214FA89A00900976 /* PayCoverViewController.swift */; };
 		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
@@ -279,7 +279,7 @@
 		89971F10212D049900E86C34 /* NervosTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosTransactionService.swift; sourceTree = "<group>"; };
 		899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNativeTokenService.swift; sourceTree = "<group>"; };
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
-		899CAD9F20E0916E00FF9D27 /* CryptTools.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptTools.swift; sourceTree = "<group>"; };
+		899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTool.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptoService.swift; sourceTree = "<group>"; };
 		89A45A21214FA89A00900976 /* PayCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCoverViewController.swift; sourceTree = "<group>"; };
 		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
@@ -771,7 +771,7 @@
 		899CAD9E20E0911900FF9D27 /* Encrypt */ = {
 			isa = PBXGroup;
 			children = (
-				899CAD9F20E0916E00FF9D27 /* CryptTools.swift */,
+				899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */,
 			);
 			path = Encrypt;
 			sourceTree = "<group>";
@@ -1228,7 +1228,7 @@
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
-				899CADA020E0916E00FF9D27 /* CryptTools.swift in Sources */,
+				899CADA020E0916E00FF9D27 /* CryptoTool.swift in Sources */,
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
