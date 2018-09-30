@@ -5,7 +5,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import TrustKeystore
 import Result
 
@@ -200,13 +199,10 @@ class WalletTools: NSObject {
         do {
             let key = try KeystoreKey(password: password, key: data)
             let data = try JSONEncoder().encode(key)
-            let dict = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-            let json = JSON(dict)
-            let rawJson = json.rawString()
-            if let rawJson = rawJson {
-                return ImportResult.succeed(result: rawJson)
+            guard let rawJson = String(bytes: data.bytes, encoding: .utf8) else {
+                throw ImportError.invalidatePrivateKey
             }
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "导入私钥失败")
+            return ImportResult.succeed(result: rawJson)
         } catch {
             return ImportResult.failed(error: error, errorMessage: "导入私钥失败")
         }

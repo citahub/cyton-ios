@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import BigInt
 
-class TokenModel: Object {
+class TokenModel: Object, Decodable {
 
     // because import and creat wallet will check wallet name,  this can use wallet name
     @objc dynamic var tokenBalance = ""
@@ -33,5 +33,18 @@ class TokenModel: Object {
 
     override static func ignoredProperties() -> [String] {
         return ["tokenBalance", "currencyAmount"]
+    }
+
+    struct Logo: Decodable {
+        var src: String?
+    }
+    var _logo: Logo?
+
+    enum CodingKeys: String, CodingKey {
+        case name
+        case address
+        case decimals
+        case symbol
+        case _logo = "logo"
     }
 }

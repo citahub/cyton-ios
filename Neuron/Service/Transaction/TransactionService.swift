@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import SwiftyJSON
 import web3swift
 import BigInt
 
@@ -21,80 +20,79 @@ class TransactionServiceImp: TransactionService {
 
     func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        var resultArr: [TransactionModel] = []
         let parameters: Dictionary = ["address": walletAddress]
-        Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { (response) in
-            let jsonObj = try? JSON(data: response.data!)
-            print(jsonObj!["status"])
-            if response.error == nil {
-                for (_, subJSON) : (String, JSON) in jsonObj!["result"] {
-                    let transacationModel = TransactionModel()
-                    transacationModel.from = subJSON["from"].stringValue
-                    transacationModel.to = subJSON["to"].stringValue
-                    transacationModel.hashString = subJSON["hash"].stringValue
-                    transacationModel.timeStamp = subJSON["timeStamp"].stringValue
-                    transacationModel.formatTime = self.formatTimeStamp(timeStamp: subJSON["timeStamp"].stringValue)
+        Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { [weak self](response) in
+            do {
+                guard let responseData = response.data else { throw TransactionErrors.Requestfailed }
+                let ethTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
+                guard let transactions = ethTransaction?.result.transactions else { throw TransactionErrors.Requestfailed }
+                var resultArr: [TransactionModel] = []
+                guard let self = self else { throw TransactionErrors.Requestfailed }
+                for transacationModel in transactions {
+                    transacationModel.formatTime = self.formatTimeStamp(timeStamp: transacationModel.timeStamp)
                     transacationModel.chainName = "Ethereum Mainnet"
-                    transacationModel.gasPrice = self.formatGasToGwei(gas: subJSON["gasPrice"].stringValue)
-                    transacationModel.gas = subJSON["gas"].stringValue
-                    transacationModel.gasUsed = subJSON["gasUsed"].stringValue
-                    transacationModel.blockNumber = subJSON["blockNumber"].stringValue
+                    transacationModel.gasPrice = self.formatGasToGwei(gas: transacationModel.gasPrice)
                     transacationModel.transactionType = "ETH"
                     transacationModel.symbol = "ETH"
-                    if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
+                    if walletModel?.address.lowercased() == transacationModel.to {
+                        transacationModel.value = "+" + self.formatScientValue(value: transacationModel.value) + transacationModel.symbol
                     } else {
-                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
+                        transacationModel.value = "-" + self.formatScientValue(value: transacationModel.value) + transacationModel.symbol
                     }
-                    transacationModel.totleGas = self.getTotleGas(gasUsed: subJSON["gasUsed"].stringValue, gasPirce: subJSON["gasPrice"].stringValue)
+                    transacationModel.totleGas = self.getTotleGas(gasUsed: transacationModel.gasUsed, gasPirce: transacationModel.gasPrice)
+
                     resultArr.append(transacationModel)
+                    completion(EthServiceResult.Success(resultArr))
                 }
                 completion(EthServiceResult.Success(resultArr))
-            } else {
-                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
+            } catch {
+                completion(EthServiceResult.Error(error))
             }
         }
     }
 
     func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        var resultArr: [TransactionModel] = []
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         let nativeTokenArray = WalletRealmTool.getCurrentAppmodel().nativeTokenList
         let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
-        Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { (response) in
-            let jsonObj = try? JSON(data: response.data!)
-            if jsonObj!["result"]["count"] != "0" {
-                for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {
-                    let transacationModel = TransactionModel()
-                    transacationModel.from = subJSON["from"].stringValue
-                    transacationModel.to = subJSON["to"].stringValue
-                    transacationModel.hashString = subJSON["hash"].stringValue
-                    transacationModel.timeStamp = String(subJSON["timestamp"].intValue)
-                    transacationModel.formatTime = self.formatTimestamp(timeStap: subJSON["timestamp"].intValue)
-                    transacationModel.chainName = subJSON["chainName"].stringValue
+        Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
+            do {
+                guard let responseData = response.data else { throw TransactionErrors.Requestfailed }
+                let nervosTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
+                guard let transactions = nervosTransaction?.result.transactions else { throw TransactionErrors.Requestfailed }
+                var resultArr: [TransactionModel] = []
+                guard let self = self else { throw TransactionErrors.Requestfailed }
+                for transacationModel in transactions {
+                    transacationModel.formatTime = self.formatTimestamp(timeStap: Int(transacationModel.timeStamp) ?? 0)
                     transacationModel.gasPrice = ""
                     transacationModel.gas = ""
-                    transacationModel.gasUsed = self.formatGasUsed(gasString: subJSON["gasUsed"].stringValue)
-                    transacationModel.blockNumber = self.changeValue(eStr: subJSON["blockNumber"].stringValue)
+                    transacationModel.gasUsed = self.formatGasUsed(gasString: transacationModel.gasUsed)
+                    transacationModel.blockNumber = self.changeValue(eStr: transacationModel.blockNumber)
+                    transacationModel.gasPrice = ""
+                    transacationModel.gas = ""
                     transacationModel.transactionType = "Nervos"
                     nativeTokenArray.forEach({ (tokenModel) in
-                        if tokenModel.chainId == subJSON["chainId"].stringValue {
+                        if tokenModel.chainId == transacationModel.chainId {
                             transacationModel.symbol = tokenModel.symbol
                         }
                     })
-                    if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
+                    if walletModel?.address.lowercased() == transacationModel.to {
+                        transacationModel.value = "+" + self.formatScientValue(value: transacationModel.value) + transacationModel.symbol
                     } else {
-                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + transacationModel.symbol
+                        transacationModel.value = "-" + self.formatScientValue(value: transacationModel.value) + transacationModel.symbol
                     }
+
                     resultArr.append(transacationModel)
+                    completion(EthServiceResult.Success(resultArr))
                 }
                 completion(EthServiceResult.Success(resultArr))
-            } else {
-                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
+            } catch {
+                completion(EthServiceResult.Error(error))
             }
         }
     }
+
+    // MARK: - Utils
 
     func changeValue(eStr: String) -> String {
         var fStr: String

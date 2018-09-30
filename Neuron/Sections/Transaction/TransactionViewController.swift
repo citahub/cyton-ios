@@ -57,7 +57,6 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func didGetEthTranscationData() {
-        dataArray.removeAll()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
@@ -71,12 +70,11 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func didGetNervosTranscationData() {
-        dataArray.removeAll()
         let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
         service.didGetNervosTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
             case .Success(let nervosArray):
-                self.dataArray.append(contentsOf: nervosArray)
+                self.dataArray = nervosArray
                 self.transactionTableView.reloadData()
             case .Error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)

@@ -40,7 +40,6 @@ PODS:
   - secp256k1_ios (0.1.3)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.0.3)
-  - SwiftyJSON (4.1.0)
   - Toast-Swift (4.0.0)
   - TrezorCrypto (0.0.6)
   - TrustCore (0.0.7):
@@ -75,7 +74,6 @@ DEPENDENCIES:
   - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
   - SDWebImage
-  - SwiftyJSON
   - Toast-Swift (~> 4.0.0)
   - TrustCore (~> 0.0.7)
   - TrustKeystore (~> 0.4.1)
@@ -104,7 +102,6 @@ SPEC REPOS:
     - secp256k1_ios
     - SipHash
     - SwiftProtobuf
-    - SwiftyJSON
     - Toast-Swift
     - TrezorCrypto
     - TrustCore
@@ -152,13 +149,12 @@ SPEC CHECKSUMS:
   secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 5ccc0e4054e37c75800e5744acb2aa80bb72b39c
-  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   TrezorCrypto: bea2dab002f9a5fe885df004694b9ece52dc088b
   TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
   web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
 
-PODFILE CHECKSUM: 616ab2b21c7a228c3349dfdfdd2e341aa80fd3d7
+PODFILE CHECKSUM: ade22df892b4fe66adef4891a8360a860591cb9f
 
 COCOAPODS: 1.5.3
