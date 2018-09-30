@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import RealmSwift
 
 class AssetViewModel: NSObject {
@@ -16,15 +15,9 @@ class AssetViewModel: NSObject {
     ///
     /// - Returns: list
     func getAssetListFromJSON() -> [TokenModel] {
-
-        let appModel = WalletRealmTool.getCurrentAppModel()
-
-        let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
-        let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
-        let jsonObj = try? JSON(data: jsonData!)
-
         var tokenArray: [TokenModel] = []
 
+        let appModel = WalletRealmTool.getCurrentAppModel()
         for tModel in appModel.extraTokenList {
             try? WalletRealmTool.realm.write {
                 WalletRealmTool.realm.add(tModel, update: true)
@@ -32,17 +25,15 @@ class AssetViewModel: NSObject {
             tokenArray.append(tModel)
         }
 
-        for (_, subJSON) : (String, JSON) in jsonObj! {
-            let tokenModel = TokenModel()
-            tokenModel.name = subJSON["name"].stringValue
-            tokenModel.address = subJSON["address"].stringValue
-            tokenModel.decimals = subJSON["decimals"].intValue
-            tokenModel.iconUrl = subJSON["logo"]["src"].stringValue
-            tokenModel.symbol = subJSON["symbol"].stringValue
-            tokenModel.chainidName = subJSON["name"].stringValue
-            tokenArray.append(tokenModel)
-        }
+        let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
+        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)) else { return [] }
+        guard let tokens = try? JSONDecoder().decode([TokenModel].self, from: jsonData) else { return [] }
 
+        for token in tokens {
+            token.chainidName = token.name
+            token.iconUrl = token._logo?.src ?? ""
+            tokenArray.append(token)
+        }
         return tokenArray
     }
 
