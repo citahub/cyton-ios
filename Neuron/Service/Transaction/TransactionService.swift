@@ -42,7 +42,6 @@ class TransactionServiceImp: TransactionService {
                     transacationModel.totleGas = self.getTotleGas(gasUsed: transacationModel.gasUsed, gasPirce: transacationModel.gasPrice)
 
                     resultArr.append(transacationModel)
-                    completion(EthServiceResult.Success(resultArr))
                 }
                 completion(EthServiceResult.Success(resultArr))
             } catch {
@@ -83,7 +82,6 @@ class TransactionServiceImp: TransactionService {
                     }
 
                     resultArr.append(transacationModel)
-                    completion(EthServiceResult.Success(resultArr))
                 }
                 completion(EthServiceResult.Success(resultArr))
             } catch {
