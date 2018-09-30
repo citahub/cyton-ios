@@ -107,7 +107,7 @@
 		89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895AA20F8507200B9468B /* BrowserUrlParser.swift */; };
 		89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserviewController.swift */; };
 		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
-		89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */; };
+		89BEBE6B20EF82B6007D2705 /* Web3Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3Network.swift */; };
 		89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */; };
 		89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
@@ -291,7 +291,7 @@
 		89B895AA20F8507200B9468B /* BrowserUrlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUrlParser.swift; sourceTree = "<group>"; };
 		89B895B020F8B0CD00B9468B /* BrowserviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserviewController.swift; sourceTree = "<group>"; };
 		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
-		89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3NetWork.swift; sourceTree = "<group>"; };
+		89BEBE6A20EF82B6007D2705 /* Web3Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Network.swift; sourceTree = "<group>"; };
 		89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTransactionService.swift; sourceTree = "<group>"; };
 		89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TransactionService.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
@@ -758,7 +758,7 @@
 				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				89FE21DD20EDB70000A09302 /* ServiceErrors.swift */,
-				89BEBE6A20EF82B6007D2705 /* Web3NetWork.swift */,
+				89BEBE6A20EF82B6007D2705 /* Web3Network.swift */,
 				89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */,
 				89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */,
 				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
@@ -1256,7 +1256,7 @@
 				89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */,
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
 				89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */,
-				89BEBE6B20EF82B6007D2705 /* Web3NetWork.swift in Sources */,
+				89BEBE6B20EF82B6007D2705 /* Web3Network.swift in Sources */,
 				89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */,
 				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
 				89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */,

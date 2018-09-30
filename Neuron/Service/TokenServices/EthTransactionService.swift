@@ -47,7 +47,7 @@ class EthTransactionServiceImp: EthTransactionServiceProtocol {
                 return
             }
 
-            let web3 = Web3NetWork.getWeb3()
+            let web3 = Web3Network.getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))
