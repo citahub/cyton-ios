@@ -60,7 +60,7 @@ class WalletDetailController: UITableViewController {
                 WalletRealmTool.realm.delete(walletModel)
             }
         }
-        WalletCryptService.didDelegateWallet(password: password, walletAddress: address)
+        WalletCryptoService.didDelegateWallet(password: password, walletAddress: address)
         NeuLoad.showToast(text: "删除成功")
         navigationController?.popToRootViewController(animated: true)
     }

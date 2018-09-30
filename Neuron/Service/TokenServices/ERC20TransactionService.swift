@@ -30,7 +30,7 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        let keyStoreStr = WalletCryptService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
+        let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
 
         DispatchQueue.global(qos: .userInitiated).async {

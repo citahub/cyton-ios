@@ -56,7 +56,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         let oldP = oldPassword
         let newP = newPassword
         DispatchQueue.global(qos: .userInteractive).async {
-            WalletCryptService.updateEncryptPrivateKey(oldPassword: oldP, newPassword: newP, walletAddress: address)
+            WalletCryptoService.updateEncryptPrivateKey(oldPassword: oldP, newPassword: newP, walletAddress: address)
             DispatchQueue.main.async {
                 NeuLoad.hidHUD()
                 NeuLoad.showToast(text: "密码修改成功，请牢记！")

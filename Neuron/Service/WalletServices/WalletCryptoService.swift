@@ -1,5 +1,5 @@
 //
-//  WalletCryptService.swift
+//  WalletCryptoService.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/6/25.
@@ -11,8 +11,7 @@ import TrezorCrypto
 import TrustKeystore
 import TrustCore
 
-class WalletCryptService: NSObject {
-
+class WalletCryptoService: NSObject {
     static public func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
         let ac = Address.init(eip55: (walletAddress))
         let account = WalletTools.keystore?.account(for: ac!)
