@@ -10,13 +10,7 @@ import Foundation
 import BigInt
 import web3swift
 
-protocol ERC20TokenServiceProtocol {
-    static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-    static func addERC20TokenToApp(contractAddress: String, walletAddress: String, completion:@escaping (EthServiceResult<TokenModel>) -> Void)
-}
-
-class ERC20TokenService: ERC20TokenServiceProtocol {
-
+struct ERC20TokenService {
     /// getBalance
     ///
     /// - Parameters:
@@ -37,9 +31,9 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let erc20Balance):
-                    completion(EthServiceResult.Success(erc20Balance["0"] as! BigUInt))
+                    completion(EthServiceResult.success(erc20Balance["0"] as! BigUInt))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
+                    completion(EthServiceResult.error(error))
                 }
             }
         }
@@ -57,7 +51,7 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
         ethAddress = EthereumAddress(cAddress)
 
         guard ethAddress != nil else {
-            completion(EthServiceResult.Error(CustomTokenError.undefinedError))
+            completion(EthServiceResult.error(CustomTokenError.undefinedError))
             return
         }
 
@@ -68,9 +62,9 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             disGroup.enter()
             CustomERC20TokenService.name(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let name):
+                case .success(let name):
                     tokenModel.name = name
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -79,9 +73,9 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             disGroup.enter()
             CustomERC20TokenService.symbol(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let symbol):
+                case .success(let symbol):
                     tokenModel.symbol = symbol
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -90,9 +84,9 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
             disGroup.enter()
             CustomERC20TokenService.decimals(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let decimals):
+                case .success(let decimals):
                     tokenModel.decimals = Int(decimals)
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -100,10 +94,10 @@ class ERC20TokenService: ERC20TokenServiceProtocol {
 
             disGroup.notify(queue: .main) {
                 guard !tokenModel.name.isEmpty, !tokenModel.symbol.isEmpty else {
-                    completion(EthServiceResult.Error(CustomTokenError.undefinedError))
+                    completion(EthServiceResult.error(CustomTokenError.undefinedError))
                     return
                 }
-                completion(EthServiceResult.Success(tokenModel))
+                completion(EthServiceResult.success(tokenModel))
             }
         }
     }

@@ -9,15 +9,15 @@
 import UIKit
 import Alamofire
 
-class NFTService: NSObject {
+struct NFTService {
     func getErc721Data(with address: String, completion: @escaping (EthServiceResult<NFTModel>) -> Void) {
         let url = ServerApi.openseaURL + address
         Alamofire.request(url, method: .get).responseJSON { (response) in
             if response.error == nil {
                 let nftModel = try! JSONDecoder().decode(NFTModel.self, from: response.data!)
-                completion(EthServiceResult.Success(nftModel))
+                completion(EthServiceResult.success(nftModel))
             } else {
-                completion(EthServiceResult.Error(response.error!))
+                completion(EthServiceResult.error(response.error!))
             }
         }
     }

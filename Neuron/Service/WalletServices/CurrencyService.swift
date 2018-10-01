@@ -9,8 +9,7 @@
 import UIKit
 import Alamofire
 
-class CurrencyService: NSObject {
-
+struct CurrencyService {
     func getTokenList() -> [CurrencyToken] {
         let path = Bundle.main.path(forResource: "tokens-list", ofType: "json")!
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
@@ -38,9 +37,9 @@ class CurrencyService: NSObject {
             if response.error == nil {
                 let currencyData = try! JSONDecoder().decode(CurrencyData.self, from: response.data!)
                 let currencyPrice = currencyData.data.quotes[currencyType]!
-                completion(EthServiceResult.Success(currencyPrice.price))
+                completion(EthServiceResult.success(currencyPrice.price))
             } else {
-                completion(EthServiceResult.Error(response.error!))
+                completion(EthServiceResult.error(response.error!))
             }
         }
     }

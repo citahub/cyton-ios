@@ -129,7 +129,7 @@
 		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
 		89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */; };
-		89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeyStoreError.swift */; };
+		89D4AC2920D59F270097E02B /* KeystoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeystoreError.swift */; };
 		89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2120D59F270097E02B /* Keystore.swift */; };
 		89D4AC2B20D59F270097E02B /* ETHKeystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2220D59F270097E02B /* ETHKeystore.swift */; };
 		89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2320D59F270097E02B /* WalletType.swift */; };
@@ -314,7 +314,7 @@
 		89CA1FAD213F832800669B2C /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsTableViewController.swift; sourceTree = "<group>"; };
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
-		89D4AC2020D59F270097E02B /* KeyStoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyStoreError.swift; sourceTree = "<group>"; };
+		89D4AC2020D59F270097E02B /* KeystoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreError.swift; sourceTree = "<group>"; };
 		89D4AC2120D59F270097E02B /* Keystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
 		89D4AC2220D59F270097E02B /* ETHKeystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETHKeystore.swift; sourceTree = "<group>"; };
 		89D4AC2320D59F270097E02B /* WalletType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletType.swift; sourceTree = "<group>"; };
@@ -758,11 +758,11 @@
 				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				89FE21DD20EDB70000A09302 /* ServiceErrors.swift */,
-				89BEBE6A20EF82B6007D2705 /* Web3Network.swift */,
 				89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */,
 				89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */,
 				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
 				89971F10212D049900E86C34 /* NervosTransactionService.swift */,
+				89BEBE6A20EF82B6007D2705 /* Web3Network.swift */,
 				899AD19A211011F300A8AC09 /* NervosNetwork.swift */,
 			);
 			path = TokenServices;
@@ -836,7 +836,7 @@
 		89D4AC1F20D59F270097E02B /* WalletTools */ = {
 			isa = PBXGroup;
 			children = (
-				89D4AC2020D59F270097E02B /* KeyStoreError.swift */,
+				89D4AC2020D59F270097E02B /* KeystoreError.swift */,
 				89D4AC2120D59F270097E02B /* Keystore.swift */,
 				89D4AC2220D59F270097E02B /* ETHKeystore.swift */,
 				89D4AC2320D59F270097E02B /* WalletType.swift */,
@@ -1251,7 +1251,7 @@
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
 				89C3BF09213521DE00872BD0 /* UIView+Extension.swift in Sources */,
-				89D4AC2920D59F270097E02B /* KeyStoreError.swift in Sources */,
+				89D4AC2920D59F270097E02B /* KeystoreError.swift in Sources */,
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
 				89D4AC3A20DA31F60097E02B /* ImportWalletViewModel.swift in Sources */,
 				89BEBE6B20EF82B6007D2705 /* Web3Network.swift in Sources */,
@@ -1478,7 +1478,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
@@ -1508,7 +1511,10 @@
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1531,7 +1537,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1552,7 +1562,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1572,7 +1586,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1591,7 +1609,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

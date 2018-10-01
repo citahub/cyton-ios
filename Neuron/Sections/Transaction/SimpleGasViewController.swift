@@ -59,9 +59,9 @@ class SimpleGasViewController: UIViewController {
     func getGasPrice() {
         viewModel.getGasPrice { (result) in
             switch result {
-            case .Success(let gasPriceResult):
+            case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             self.setGasLabelValue(finalGasPrice: self.gasSlider.value * Float(self.gasPrice.description)!)

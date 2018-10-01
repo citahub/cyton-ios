@@ -10,11 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol TAViewModelProtocol {
-    func getGasPrice(completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-}
-
-class TAViewModel: TAViewModelProtocol {
+class TAViewModel {
     func getGasPrice(completion:@escaping (EthServiceResult<BigUInt>) -> Void) {
         let web3 = Web3Network.getWeb3()
         DispatchQueue.global().async {
@@ -22,9 +18,9 @@ class TAViewModel: TAViewModelProtocol {
             DispatchQueue.main.async {
                 switch gasPriceResult {
                 case .success(let gasPrice):
-                    completion(EthServiceResult.Success(gasPrice))
+                    completion(EthServiceResult.success(gasPrice))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
+                    completion(EthServiceResult.error(error))
                 }
             }
         }

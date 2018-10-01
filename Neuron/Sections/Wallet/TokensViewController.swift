@@ -76,7 +76,7 @@ class TokensViewController: UITableViewController {
             }
             currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyModel.short) { (result) in
                 switch result {
-                case .Success(let price):
+                case .success(let price):
                     guard let balance = Double(model.tokenBalance) else {
                         return
                     }
@@ -90,7 +90,7 @@ class TokensViewController: UITableViewController {
                     currencyTotle += Double(model.currencyAmount) ?? 0
                     self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                     self.tableView.reloadData()
-                case .Error(let error):
+                case .error(let error):
                     NeuLoad.showToast(text: error.localizedDescription)
                 }
             }

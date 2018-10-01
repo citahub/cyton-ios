@@ -10,14 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol CustomERC20TokenServiceProtocol {
-    static func decimals(walletAddress: String, token: String, completion:@escaping (EthServiceResult<BigUInt>) -> Void)
-    static func name(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
-    static func symbol(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
-}
-
-class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
-
+struct CustomERC20TokenService {
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(ERC20Token: token)
@@ -25,9 +18,9 @@ class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
             let decimals = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
             DispatchQueue.main.async {
                 if let decimals = decimals?.value?["0"] as? BigUInt {
-                    completion(EthServiceResult.Success(decimals))
+                    completion(EthServiceResult.success(decimals))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.wrongBalanceError))
+                    completion(EthServiceResult.error(CustomTokenError.wrongBalanceError))
                 }
             }
         }
@@ -42,15 +35,15 @@ class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
             case .success(let name):
 
                 if let names = name["0"] as? String, !names.isEmpty {
-                    completion(EthServiceResult.Success(names))
+                    completion(EthServiceResult.success(names))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.badNameError))
+                    completion(EthServiceResult.error(CustomTokenError.badNameError))
                 }
             case .failure(let error):
-                completion(EthServiceResult.Error(error))
+                completion(EthServiceResult.error(error))
             }
         } else {
-            completion(EthServiceResult.Error(CustomTokenError.badNameError))
+            completion(EthServiceResult.error(CustomTokenError.badNameError))
         }
     }
 
@@ -61,9 +54,9 @@ class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
             let symbol = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
             DispatchQueue.main.async {
                 if let symbol = symbol?.value?["0"] as? String, !symbol.isEmpty {
-                    completion(EthServiceResult.Success(symbol))
+                    completion(EthServiceResult.success(symbol))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.badSymbolError))
+                    completion(EthServiceResult.error(CustomTokenError.badSymbolError))
                 }
             }
         }

@@ -53,10 +53,10 @@ class EthGasViewController: UIViewController {
     func getGasPrice() {
         viewModel.getGasPrice { (result) in
             switch result {
-            case .Success(let gasPriceResult):
+            case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
                 self.gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPriceResult, toUnits: .Gwei, fallbackToScientific: false)
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
         }

@@ -9,8 +9,8 @@
 import Foundation
 import web3swift
 
-class Web3Network {
-    public static func getWeb3() -> web3 {
+struct Web3Network {
+    static func getWeb3() -> web3 {
         return Web3.InfuraMainnetWeb3()
     }
 }

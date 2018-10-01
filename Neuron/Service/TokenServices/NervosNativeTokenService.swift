@@ -10,12 +10,7 @@ import Foundation
 import Nervos
 import BigInt
 
-protocol NervosNativeTokenServicePortocol {
-    static func getNervosNativeTokenMsg(blockNumber: String, completion: @escaping(NervosServiceResult<TokenModel>) -> Void)
-    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping(NervosServiceResult<BigUInt>) -> Void)
-}
-
-class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
+struct NervosNativeTokenService {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         DispatchQueue.global().async {
@@ -33,9 +28,9 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
-                    completion(NervosServiceResult.Success(tokenModel))
+                    completion(NervosServiceResult.success(tokenModel))
                 case .failure(let error):
-                    completion(NervosServiceResult.Error(error))
+                    completion(NervosServiceResult.error(error))
                 }
             }
         }
@@ -48,9 +43,9 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let balance):
-                    completion(NervosServiceResult.Success(balance))
+                    completion(NervosServiceResult.success(balance))
                 case .failure(let error):
-                    completion(NervosServiceResult.Error(error))
+                    completion(NervosServiceResult.error(error))
                 }
             }
         }

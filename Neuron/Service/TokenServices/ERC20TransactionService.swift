@@ -10,19 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol Erc20TransactionServiceProtocol {
-
-    func prepareERC20TransactionForSending(destinationAddressString: String,
-                                           amountString: String,
-                                           gasLimit: UInt,
-                                           walletPassword: String,
-                                           gasPrice: BigUInt,
-                                           erc20TokenAddress: String,
-                                           completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
-    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
-}
-
-class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
+class ERC20TransactionService {
     func prepareERC20TransactionForSending(destinationAddressString: String,
                                            amountString: String,
                                            gasLimit: UInt = 21000,
@@ -36,13 +24,13 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
+                    completion(SendEthResult.error(SendEthErrors.invalidDestinationAddress))
                 }
                 return
             }
             guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
+                    completion(SendEthResult.error(SendEthErrors.invalidAmountFormat))
                 }
                 return
             }
@@ -60,12 +48,12 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
                 let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress, from: fromAddress, to: destinationEthAddress, amount: amountString)
                 else {
                     DispatchQueue.main.async {
-                        completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
+                        completion(SendEthResult.error(SendEthErrors.createTransactionIssue))
                     }
                     return
             }
             DispatchQueue.main.async {
-                completion(SendEthResult.Success(intermediate))
+                completion(SendEthResult.success(intermediate))
             }
         }
     }
@@ -75,18 +63,18 @@ class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
             let result = transaction.send(password: password, options: nil)
             if let error = result.error {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(error))
+                    completion(SendEthResult.error(error))
                 }
                 return
             }
             guard let value = result.value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.emptyResult))
+                    completion(SendEthResult.error(SendEthErrors.emptyResult))
                 }
                 return
             }
             DispatchQueue.main.async {
-                completion(SendEthResult.Success(value))
+                completion(SendEthResult.success(value))
             }
         }
     }

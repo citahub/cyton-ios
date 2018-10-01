@@ -8,8 +8,7 @@ import UIKit
 import TrustKeystore
 import Result
 
-class WalletTools: NSObject {
-
+struct WalletTools {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias GenerateMnemonicCallback = (String) -> Void
@@ -18,8 +17,7 @@ class WalletTools: NSObject {
     static let documentDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
     static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
     static let keystore = try? KeyStore(keyDirectory: keysDirectory)
-    //创建钱包
-    @available(iOS 10.0, *)
+
     static func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let account = self.createAccout(password: password)
@@ -234,7 +232,6 @@ class WalletTools: NSObject {
     }
 
     static func checkWalletName(name: String) -> Bool {
-
         let appModel = WalletRealmTool.getCurrentAppModel()
         var nameArr = [""]
         for wallModel in appModel.wallets {
