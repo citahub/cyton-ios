@@ -160,7 +160,6 @@ class TransactionServiceImp: TransactionService {
     }
 
     func formatTimestamp(timeStap: Int) -> String {
-        print(timeStap)
         let timeInterval: TimeInterval = TimeInterval(timeStap)
         let date = Date(timeIntervalSince1970: timeInterval/1000)
         let dateformatter = DateFormatter()

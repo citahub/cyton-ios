@@ -82,8 +82,6 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
 
     //在这处理数据的存储
     func goNextView() {
-//        print(account)
-
         if nameText.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空")
             return }
         if newPasswordText.isEmpty {NeuLoad.showToast(text: "钱包密码不能为空")
@@ -94,7 +92,6 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
                 NeuLoad.showToast(text: "密码不能少于8位字符")
                 return}
         }
-        print(newPasswordText)
         if !WalletTools.checkWalletName(name: nameText) {
             NeuLoad.showToast(text: "钱包名字重复")
             return

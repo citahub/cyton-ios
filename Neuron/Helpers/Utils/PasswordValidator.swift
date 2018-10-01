@@ -31,8 +31,6 @@ struct PasswordValidator {
         let specialBool = NSPredicate(format: "SELF MATCHES %@", specialPredicate)
 
         var totleConform = 0
-        print(lowerBool.evaluate(with: password))
-        print(numberBool.evaluate(with: password))
         if lowerBool.evaluate(with: password) == true {
             totleConform = totleConform + 1
         }

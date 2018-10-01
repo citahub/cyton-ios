@@ -81,12 +81,10 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
 
     //点击第一行按钮弹出pickerview选择币种
     @objc func didSetUpPickView() {
-        print("点击第一个")
         delegate?.didClickSelectCoinBtn!()
     }
     //点击第二行按钮跳转扫描二维码界面
     @objc func didPushQRCodeView() {
-        print("点击第二个")
         delegate?.didClickQRCodeBtn!()
     }
 

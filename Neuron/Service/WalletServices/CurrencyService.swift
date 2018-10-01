@@ -34,7 +34,6 @@ class CurrencyService: NSObject {
             convert = ""
         }
         let path = ServerApi.currencyPriceURL + "\(id)" + convert
-        print(path)
         Alamofire.request(path, method: .get).responseJSON { (response) in
             if response.error == nil {
                 let currencyData = try! JSONDecoder().decode(CurrencyData.self, from: response.data!)

@@ -43,7 +43,6 @@ class SureMnemonicViewModel: NSObject {
         WalletTools.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTools.defaultDerivationPath, completion: { (result) in
             switch result {
             case .succeed(let account):
-                print(account)
                 self.walletName = self.walletModel.name
                 self.walletAddress = account.address.eip55String
                 self.walletPasswordMD5 = CryptoTool.changeMD5(password: password)
@@ -60,7 +59,6 @@ class SureMnemonicViewModel: NSObject {
         let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
         switch privateKeyResult {
         case .succeed(result: let privateKey):
-            print(privateKey!)
             self.walletPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             saveWallet()
         case .failed(let errorStr, let errorMsg):
@@ -75,7 +73,6 @@ class SureMnemonicViewModel: NSObject {
 //        switch kS {
 //        case .succeed(let result):
 //            self.walletKeyStore = result
-//            print("keystore:" + result)
 //            break
 //        case .failed(let error,let errorMessage):
 //            NeuLoad.showToast(text:errorMessage)
