@@ -11,14 +11,14 @@ import TrezorCrypto
 import TrustKeystore
 import TrustCore
 
-class WalletCryptoService: NSObject {
-    static public func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
+struct WalletCryptoService {
+    static func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
         let ac = Address.init(eip55: (walletAddress))
         let account = WalletTools.keystore?.account(for: ac!)
         try! WalletTools.keystore?.update(account: account!, password: oldPassword, newPassword: newPassword)
     }
 
-    static public func didCheckoutKeystoreWithCurrentWallet(password: String) -> String {
+    static func didCheckoutKeystoreWithCurrentWallet(password: String) -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         let walletPrivate = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
         let resultType = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: walletPrivate, password: password)
@@ -32,7 +32,7 @@ class WalletCryptoService: NSObject {
         return keyStore
     }
 
-    static public func didDelegateWallet(password: String, walletAddress: String) {
+    static func didDelegateWallet(password: String, walletAddress: String) {
         let address = Address.init(eip55: (walletAddress))
         let account = WalletTools.keystore?.account(for: address!)
         try! WalletTools.keystore?.delete(account: account!, password: password)

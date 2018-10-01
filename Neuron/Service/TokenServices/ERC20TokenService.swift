@@ -10,7 +10,7 @@ import Foundation
 import BigInt
 import web3swift
 
-class ERC20TokenService {
+struct ERC20TokenService {
     /// getBalance
     ///
     /// - Parameters:

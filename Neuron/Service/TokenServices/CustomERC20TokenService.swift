@@ -10,7 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-class CustomERC20TokenService {
+struct CustomERC20TokenService {
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(ERC20Token: token)

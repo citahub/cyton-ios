@@ -10,7 +10,7 @@ import Foundation
 import Nervos
 import BigInt
 
-class NervosNativeTokenService {
+struct NervosNativeTokenService {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         DispatchQueue.global().async {

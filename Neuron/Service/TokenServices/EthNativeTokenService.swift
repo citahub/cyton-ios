@@ -10,7 +10,7 @@ import Foundation
 import BigInt
 import web3swift
 
-class EthNativeTokenService {
+struct EthNativeTokenService {
     /// get balance
     ///
     /// - Parameters:

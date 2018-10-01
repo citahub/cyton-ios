@@ -8,8 +8,7 @@ import UIKit
 import TrustKeystore
 import Result
 
-class WalletTools: NSObject {
-
+struct WalletTools {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias GenerateMnemonicCallback = (String) -> Void

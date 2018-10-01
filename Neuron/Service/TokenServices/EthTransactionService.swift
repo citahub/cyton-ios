@@ -97,7 +97,5 @@ class EthTransactionService {
                 completion(SendEthResult.Success(value))
             }
         }
-
     }
-
 }

@@ -9,8 +9,7 @@
 import UIKit
 import Alamofire
 
-class CurrencyService: NSObject {
-
+struct CurrencyService {
     func getTokenList() -> [CurrencyToken] {
         let path = Bundle.main.path(forResource: "tokens-list", ofType: "json")!
         let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path))
