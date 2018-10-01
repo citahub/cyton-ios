@@ -11,13 +11,7 @@ import Alamofire
 import web3swift
 import BigInt
 
-protocol TransactionService {
-    func didGetETHTransaction(walletAddress: String, completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
-    func didGetNervosTransaction(walletAddress: String, completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
-}
-
-class TransactionServiceImp: TransactionService {
-
+class TransactionService {
     func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         let parameters: Dictionary = ["address": walletAddress]

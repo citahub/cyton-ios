@@ -65,7 +65,7 @@ class SubController2ViewModel: NSObject {
     ///
     /// - Parameter completion:(TokenModel?,Error?)
     func getMateDataForNervos(completion: @escaping (TokenModel?, Error?) -> Void) {
-        NervosNativeTokenServiceImp.getNervosNativeTokenMsg { (result) in
+        NervosNativeTokenService.getNervosNativeTokenMsg { (result) in
             switch result {
             case .Success(let tokenModel):
                 completion(tokenModel, nil)
@@ -76,7 +76,7 @@ class SubController2ViewModel: NSObject {
     }
 
     func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (String?, Error?) -> Void) {
-        NervosNativeTokenServiceImp.getNervosNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
+        NervosNativeTokenService.getNervosNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
             switch result {
             case .Success(let balance):
                 let balanceNumber = self?.formatBalanceValue(value: balance)

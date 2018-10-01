@@ -9,20 +9,8 @@
 import Foundation
 import Nervos
 import BigInt
-//import web3swift
 
-protocol NervosTransactionServiceProtocol {
-    func prepareNervosTransactionForSending(address: String,
-                                            quota: BigUInt,
-                                            data: Data,
-                                            value: String,
-                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void)
-
-    func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void)
-}
-
-class NervosTransactionServiceImp: NervosTransactionServiceProtocol {
-
+class NervosTransactionService {
     func prepareNervosTransactionForSending(address: String,
                                             quota: BigUInt = BigUInt(1000000),
                                             data: Data,

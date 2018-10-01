@@ -10,18 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol EthTransactionServiceProtocol {
-    func prepareETHTransactionForSending(destinationAddressString: String,
-                                         amountString: String,
-                                         gasLimit: UInt,
-                                         walletPassword: String,
-                                         gasPrice: BigUInt,
-                                         data: Data,
-                                         completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
-    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
-}
-
-class EthTransactionServiceImp: EthTransactionServiceProtocol {
+class EthTransactionService {
     func prepareETHTransactionForSending(destinationAddressString: String,
                                          amountString: String,
                                          gasLimit: UInt = 21000,

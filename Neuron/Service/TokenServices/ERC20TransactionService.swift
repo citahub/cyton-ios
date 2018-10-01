@@ -10,19 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol Erc20TransactionServiceProtocol {
-
-    func prepareERC20TransactionForSending(destinationAddressString: String,
-                                           amountString: String,
-                                           gasLimit: UInt,
-                                           walletPassword: String,
-                                           gasPrice: BigUInt,
-                                           erc20TokenAddress: String,
-                                           completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void)
-    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void)
-}
-
-class ERC20TransactionServiceImp: Erc20TransactionServiceProtocol {
+class ERC20TransactionService {
     func prepareERC20TransactionForSending(destinationAddressString: String,
                                            amountString: String,
                                            gasLimit: UInt = 21000,

@@ -11,7 +11,7 @@ import LYEmptyView
 
 class TransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var transactionTableView: UITableView!
-    let service = TransactionServiceImp()
+    let service = TransactionService()
     var dataArray: [TransactionModel] = []
     var tokenType: TokenType = .erc20Token
     var tokenModel = TokenModel()

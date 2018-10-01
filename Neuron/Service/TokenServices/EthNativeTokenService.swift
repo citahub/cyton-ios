@@ -10,12 +10,7 @@ import Foundation
 import BigInt
 import web3swift
 
-protocol EthNativeTokenServiceProtocol {
-    static func getEthNativeTokenBalance(walletAddress: String, completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-}
-
-class EthNativeTokenService: EthNativeTokenServiceProtocol {
-
+class EthNativeTokenService {
     /// get balance
     ///
     /// - Parameters:
@@ -36,5 +31,4 @@ class EthNativeTokenService: EthNativeTokenServiceProtocol {
             }
         }
     }
-
 }

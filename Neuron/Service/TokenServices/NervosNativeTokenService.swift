@@ -10,12 +10,7 @@ import Foundation
 import Nervos
 import BigInt
 
-protocol NervosNativeTokenServicePortocol {
-    static func getNervosNativeTokenMsg(blockNumber: String, completion: @escaping(NervosServiceResult<TokenModel>) -> Void)
-    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping(NervosServiceResult<BigUInt>) -> Void)
-}
-
-class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
+class NervosNativeTokenService {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         DispatchQueue.global().async {

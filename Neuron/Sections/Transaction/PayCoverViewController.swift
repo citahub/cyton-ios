@@ -27,9 +27,9 @@ class PayCoverViewController: UIViewController {
     var tokenType: TokenType = .nervosToken
     weak var delegate: PayCoverViewControllerDelegate?
 
-    private var ethTransactionService: EthTransactionServiceProtocol!
-    private var nervosTransactionService: NervosTransactionServiceProtocol!
-    private var erc20TransactionService: Erc20TransactionServiceProtocol!
+    private var ethTransactionService: EthTransactionService!
+    private var nervosTransactionService: NervosTransactionService!
+    private var erc20TransactionService: ERC20TransactionService!
 
     private var confirmPageViewController: UIPageViewController!
     private var confirmAmountViewController: ConfirmAmountViewController!
@@ -74,7 +74,7 @@ class PayCoverViewController: UIViewController {
     }
 
     func prepareEthTransaction(password: String) {
-        ethTransactionService = EthTransactionServiceImp()
+        ethTransactionService = EthTransactionService()
         ethTransactionService.prepareETHTransactionForSending(destinationAddressString: toAddress,
                                                               amountString: amount,
                                                               gasLimit: 21000,
@@ -106,7 +106,7 @@ class PayCoverViewController: UIViewController {
     }
 
     func prepareNrevosTransaction(password: String) {
-        nervosTransactionService = NervosTransactionServiceImp()
+        nervosTransactionService = NervosTransactionService()
         nervosTransactionService.prepareNervosTransactionForSending(address: toAddress,
                                                                     quota: gasPrice,
                                                                     data: extraData,
@@ -137,7 +137,7 @@ class PayCoverViewController: UIViewController {
     }
 
     func prepareErc20Transaction(password: String) {
-        erc20TransactionService = ERC20TransactionServiceImp()
+        erc20TransactionService = ERC20TransactionService()
         erc20TransactionService.prepareERC20TransactionForSending(destinationAddressString: toAddress,
                                                                   amountString: amount,
                                                                   gasLimit: 21000,

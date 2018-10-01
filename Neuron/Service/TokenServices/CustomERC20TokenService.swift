@@ -10,14 +10,7 @@ import Foundation
 import web3swift
 import BigInt
 
-protocol CustomERC20TokenServiceProtocol {
-    static func decimals(walletAddress: String, token: String, completion:@escaping (EthServiceResult<BigUInt>) -> Void)
-    static func name(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
-    static func symbol(walletAddress: String, token: String, completion:@escaping (EthServiceResult<String>) -> Void)
-}
-
-class CustomERC20TokenService: CustomERC20TokenServiceProtocol {
-
+class CustomERC20TokenService {
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             let contract = self.contract(ERC20Token: token)

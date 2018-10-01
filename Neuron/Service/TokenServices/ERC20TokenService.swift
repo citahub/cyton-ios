@@ -10,13 +10,7 @@ import Foundation
 import BigInt
 import web3swift
 
-protocol ERC20TokenServiceProtocol {
-    static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-    static func addERC20TokenToApp(contractAddress: String, walletAddress: String, completion:@escaping (EthServiceResult<TokenModel>) -> Void)
-}
-
-class ERC20TokenService: ERC20TokenServiceProtocol {
-
+class ERC20TokenService {
     /// getBalance
     ///
     /// - Parameters:
