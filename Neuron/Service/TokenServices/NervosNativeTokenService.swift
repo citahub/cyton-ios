@@ -48,7 +48,6 @@ class NervosNativeTokenServiceImp: NervosNativeTokenServicePortocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let balance):
-                    print(balance.description)
                     completion(NervosServiceResult.Success(balance))
                 case .failure(let error):
                     completion(NervosServiceResult.Error(error))

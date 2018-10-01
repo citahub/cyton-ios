@@ -65,7 +65,6 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
         selectView.comArr = array
         selectArray.removeAll()
         for name in array {
-//            print(name.value(forKey: "buttonTitle") as! String)
             selectArray.append(name.value(forKey: "buttonTitle") as! String)
         }
         if selectArray.count == 12 {
@@ -77,7 +76,6 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
             sureButton.backgroundColor = ColorFromString(hex: "#f2f2f2")
             sureButton.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
         }
-        print(selectArray)
     }
 
     //点击删除按钮的时候 下方按钮改变选中状态
@@ -86,7 +84,6 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
         selectArray = selectArray.filter({ (title) -> Bool in
             return  backDict.value(forKey: "buttonTitle") as! String != title
         })
-        print(selectArray)
     }
 
     @objc func didCompletBackupMnemonic() {

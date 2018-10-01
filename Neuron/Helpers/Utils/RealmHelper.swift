@@ -18,7 +18,6 @@ class RealmHelper {
     // MARK: 初始化 Realm
     /// 初始化进过加密的 Realm， 加密过的 Realm 只会带来很少的额外资源占用（通常最多只会比平常慢10%）
     static func initEncryptionRealm() {
-        print(String(data: getKey() as Data, encoding: String.Encoding.utf8)?.replacingOccurrences(of: " ", with: "") ?? "")
         // 打开加密文件
         // Open the encrypted Realm file
         var config = Realm.Configuration()
@@ -37,7 +36,6 @@ class RealmHelper {
          */
         // 禁用此目录的文件保护
         try! FileManager.default.setAttributes([FileAttributeKey.protectionKey: FileProtectionType.none], ofItemAtPath: folderPath!)
-        print(config)
         // 将这个配置应用到默认的 Realm 数据库当中
         Realm.Configuration.defaultConfiguration = config
     }

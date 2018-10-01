@@ -78,7 +78,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     //载入结束后，关闭网络活动指示器
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (_, _) in
-//            print(html!)
         }
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
@@ -87,7 +86,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
-            print(navigationAction.request.url!)
 
             return
         }
@@ -97,17 +95,12 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     //WKScriptMessageHandler
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-
-        print(message)
-        print(message.body)
         switch message.name {
         case "pushSearchView":
             let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
             self.navigationController?.pushViewController(sCtrl, animated: true)
         case "zhuru":
-            print("这是注入的代码")
         default:
-
             break
         }
     }
