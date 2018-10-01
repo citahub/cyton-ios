@@ -30,7 +30,7 @@
 		89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */; };
 		89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DDB214A6CBE007CB446 /* PaymentViewController.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
-		8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* NeuronMacro.swift */; };
+		8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* UIStyle.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
 		8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24420AE90C000C3103E /* BaseNavigationController.swift */; };
 		8928C24920AE91E600C3103E /* DappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* DappViewController.swift */; };
@@ -102,7 +102,7 @@
 		89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */; };
 		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
 		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
-		89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* APIMacro.swift */; };
+		89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* ServerAPI.swift */; };
 		89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895AA20F8507200B9468B /* BrowserUrlParser.swift */; };
 		89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserviewController.swift */; };
 		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
@@ -207,7 +207,7 @@
 		89230DDB214A6CBE007CB446 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
-		8928C23420AE8F7C00C3103E /* NeuronMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronMacro.swift; sourceTree = "<group>"; };
+		8928C23420AE8F7C00C3103E /* UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyle.swift; sourceTree = "<group>"; };
 		8928C24220AE908300C3103E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8928C24420AE90C000C3103E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		8928C24820AE91E600C3103E /* DappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappViewController.swift; sourceTree = "<group>"; };
@@ -285,7 +285,7 @@
 		89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
 		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
-		89B296EC20F4CBA7008558A7 /* APIMacro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIMacro.swift; sourceTree = "<group>"; };
+		89B296EC20F4CBA7008558A7 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		89B895AA20F8507200B9468B /* BrowserUrlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUrlParser.swift; sourceTree = "<group>"; };
 		89B895B020F8B0CD00B9468B /* BrowserviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserviewController.swift; sourceTree = "<group>"; };
 		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
@@ -381,8 +381,8 @@
 			isa = PBXGroup;
 			children = (
 				1A3C652B212EAC4800F1A0AA /* String+Extension.swift */,
-				89C3BF08213521DE00872BD0 /* UIView+Extension.swift */,
 				892A1984215A55F400B2293D /* Double+Extension.swift */,
+				89C3BF08213521DE00872BD0 /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -443,26 +443,16 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
-		8928C22320AE7C6200C3103E /* Helpers */ = {
+		8928C22420AE7C6200C3103E /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				1A3C652A212EAC0F00F1A0AA /* Extensions */,
-				899CAD9E20E0911900FF9D27 /* Encrypt */,
-				8928C23120AE84AB00C3103E /* Utils */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		8928C22420AE7C6200C3103E /* Macro */ = {
-			isa = PBXGroup;
-			children = (
-				89B296EC20F4CBA7008558A7 /* APIMacro.swift */,
-				8928C23420AE8F7C00C3103E /* NeuronMacro.swift */,
+				89B296EC20F4CBA7008558A7 /* ServerAPI.swift */,
+				8928C23420AE8F7C00C3103E /* UIStyle.swift */,
 				8928C25820AEB18100C3103E /* NibLoadable.swift */,
 				89D4AC3720D8DB610097E02B /* NotificationName.swift */,
 				891C2482211165AC007C639D /* TokenMacro.swift */,
 			);
-			path = Macro;
+			path = Constants;
 			sourceTree = "<group>";
 		};
 		8928C22520AE7C6200C3103E /* Resource */ = {
@@ -527,6 +517,7 @@
 				8928C23220AE84E600C3103E /* ColorUtils.swift */,
 				8913437420C7D3A400A17AEF /* NeuLoad.swift */,
 				8913437720CA56CA00A17AEF /* RealmHelper.swift */,
+				899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */,
 				8955580420DCA7F700FC92D8 /* PasswordValidator.swift */,
 				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
 			);
@@ -662,10 +653,11 @@
 		896D042B20AE69C1002CFF6A /* Neuron */ = {
 			isa = PBXGroup;
 			children = (
-				8928C22320AE7C6200C3103E /* Helpers */,
-				8928C22420AE7C6200C3103E /* Macro */,
-				8913437620C8E2A500A17AEF /* Service */,
+				1A3C652A212EAC0F00F1A0AA /* Extensions */,
+				8928C23120AE84AB00C3103E /* Utils */,
+				8928C22420AE7C6200C3103E /* Constants */,
 				8913436F20C78D9600A17AEF /* Model */,
+				8913437620C8E2A500A17AEF /* Service */,
 				8928C22620AE7C6200C3103E /* Sections */,
 				8928C22520AE7C6200C3103E /* Resource */,
 				896D042C20AE69C1002CFF6A /* AppDelegate.swift */,
@@ -763,14 +755,6 @@
 				899AD19A211011F300A8AC09 /* NervosNetwork.swift */,
 			);
 			path = TokenServices;
-			sourceTree = "<group>";
-		};
-		899CAD9E20E0911900FF9D27 /* Encrypt */ = {
-			isa = PBXGroup;
-			children = (
-				899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */,
-			);
-			path = Encrypt;
 			sourceTree = "<group>";
 		};
 		899CADA120E0ED9500FF9D27 /* WalletServices */ = {
@@ -1264,7 +1248,7 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */,
-				89B296ED20F4CBA7008558A7 /* APIMacro.swift in Sources */,
+				89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */,
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
@@ -1277,7 +1261,7 @@
 				8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */,
 				898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */,
 				89D4AC2D20D59F270097E02B /* ImportType.swift in Sources */,
-				8928C23520AE8F7C00C3103E /* NeuronMacro.swift in Sources */,
+				8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */,
 				89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
