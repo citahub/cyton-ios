@@ -82,9 +82,9 @@ class PayCoverViewController: UIViewController {
                                                               gasPrice: gasPrice,
                                                               data: extraData!) { (result) in
                                                                 switch result {
-                                                                case .Success(let value):
+                                                                case .success(let value):
                                                                     self.sendEthTransaction(password: password, transaction: value)
-                                                                case .Error(let error):
+                                                                case .error(let error):
                                                                     NeuLoad.showToast(text: error.localizedDescription)
                                                                     NeuLoad.hidHUD()
                                                                 }
@@ -94,11 +94,11 @@ class PayCoverViewController: UIViewController {
     func sendEthTransaction(password: String, transaction: TransactionIntermediate) {
         ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             NeuLoad.hidHUD()
@@ -113,9 +113,9 @@ class PayCoverViewController: UIViewController {
                                                                     value: amount,
                                                                     chainId: BigUInt(tokenModel.chainId)!) { (reuslt) in
                                                                         switch reuslt {
-                                                                        case .Success(let transaction):
+                                                                        case .success(let transaction):
                                                                             self.sendNervosTransaction(password: password, transaction: transaction)
-                                                                        case .Error(let error):
+                                                                        case .error(let error):
                                                                             NeuLoad.showToast(text: error.localizedDescription)
                                                                             NeuLoad.hidHUD()
                                                                         }
@@ -125,11 +125,11 @@ class PayCoverViewController: UIViewController {
     func sendNervosTransaction(password: String, transaction: NervosTransaction) {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 NeuLoad.showToast(text: "转账成功,请稍后查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             NeuLoad.hidHUD()
@@ -145,9 +145,9 @@ class PayCoverViewController: UIViewController {
                                                                   gasPrice: gasPrice,
                                                                   erc20TokenAddress: tokenModel.address) { (result) in
                                                                     switch result {
-                                                                    case .Success(let value):
+                                                                    case .success(let value):
                                                                         self.sendErc20Transaction(password: password, transaction: value)
-                                                                    case .Error(let error):
+                                                                    case .error(let error):
                                                                         NeuLoad.showToast(text: error.localizedDescription)
                                                                         NeuLoad.hidHUD()
                                                                     }
@@ -157,11 +157,11 @@ class PayCoverViewController: UIViewController {
     func sendErc20Transaction(password: String, transaction: TransactionIntermediate) {
         erc20TransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
-            case .Success(_):
+            case .success(_):
                 NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             NeuLoad.hidHUD()

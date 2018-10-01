@@ -15,9 +15,9 @@ struct NFTService {
         Alamofire.request(url, method: .get).responseJSON { (response) in
             if response.error == nil {
                 let nftModel = try! JSONDecoder().decode(NFTModel.self, from: response.data!)
-                completion(EthServiceResult.Success(nftModel))
+                completion(EthServiceResult.success(nftModel))
             } else {
-                completion(EthServiceResult.Error(response.error!))
+                completion(EthServiceResult.error(response.error!))
             }
         }
     }

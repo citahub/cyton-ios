@@ -19,13 +19,13 @@ class NervosTransactionService {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {
-                    completion(SendNervosResult.Error(SendNervosErrors.invalidDestinationAddress))
+                    completion(SendNervosResult.error(SendNervosErrors.invalidDestinationAddress))
                 }
                 return
             }
             guard let amount = Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
-                    completion(SendNervosResult.Error(SendNervosErrors.invalidAmountFormat))
+                    completion(SendNervosResult.error(SendNervosErrors.invalidAmountFormat))
                 }
                 return
             }
@@ -45,9 +45,9 @@ class NervosTransactionService {
                         chainId: UInt32(chainId),
                         version: UInt32(0)
                     )
-                    completion(SendNervosResult.Success(transaction))
+                    completion(SendNervosResult.success(transaction))
                 case .failure(let error):
-                    completion(SendNervosResult.Error(error))
+                    completion(SendNervosResult.error(error))
                 }
             }
         }
@@ -61,7 +61,7 @@ class NervosTransactionService {
             privateKey = String(privateKey.dropFirst(2))
         }
         guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: privateKey) else {
-            completion(SendNervosResult.Error(NervosSignErrors.signTXFailed))
+            completion(SendNervosResult.error(NervosSignErrors.signTXFailed))
             return
         }
         DispatchQueue.global().async {
@@ -69,9 +69,9 @@ class NervosTransactionService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
-                    completion(SendNervosResult.Success(transaction))
+                    completion(SendNervosResult.success(transaction))
                 case .failure(let error):
-                    completion(SendNervosResult.Error(error))
+                    completion(SendNervosResult.error(error))
                 }
             }
         }

@@ -134,10 +134,10 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         NeuLoad.showHUD(text: "")
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
             switch result {
-            case .Success(let tokenM):
+            case .success(let tokenM):
                 self.tokenModel = tokenM
                 self.tokenModel.address = token
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             NeuLoad.hidHUD()

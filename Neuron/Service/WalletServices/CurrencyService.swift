@@ -38,9 +38,9 @@ struct CurrencyService {
             if response.error == nil {
                 let currencyData = try! JSONDecoder().decode(CurrencyData.self, from: response.data!)
                 let currencyPrice = currencyData.data.quotes[currencyType]!
-                completion(EthServiceResult.Success(currencyPrice.price))
+                completion(EthServiceResult.success(currencyPrice.price))
             } else {
-                completion(EthServiceResult.Error(response.error!))
+                completion(EthServiceResult.error(response.error!))
             }
         }
     }

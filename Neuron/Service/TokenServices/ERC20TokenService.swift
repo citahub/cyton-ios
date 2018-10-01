@@ -31,9 +31,9 @@ struct ERC20TokenService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let erc20Balance):
-                    completion(EthServiceResult.Success(erc20Balance["0"] as! BigUInt))
+                    completion(EthServiceResult.success(erc20Balance["0"] as! BigUInt))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
+                    completion(EthServiceResult.error(error))
                 }
             }
         }
@@ -51,7 +51,7 @@ struct ERC20TokenService {
         ethAddress = EthereumAddress(cAddress)
 
         guard ethAddress != nil else {
-            completion(EthServiceResult.Error(CustomTokenError.undefinedError))
+            completion(EthServiceResult.error(CustomTokenError.undefinedError))
             return
         }
 
@@ -62,9 +62,9 @@ struct ERC20TokenService {
             disGroup.enter()
             CustomERC20TokenService.name(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let name):
+                case .success(let name):
                     tokenModel.name = name
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -73,9 +73,9 @@ struct ERC20TokenService {
             disGroup.enter()
             CustomERC20TokenService.symbol(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let symbol):
+                case .success(let symbol):
                     tokenModel.symbol = symbol
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -84,9 +84,9 @@ struct ERC20TokenService {
             disGroup.enter()
             CustomERC20TokenService.decimals(walletAddress: walletAddress, token: cAddress, completion: { (result) in
                 switch result {
-                case .Success(let decimals):
+                case .success(let decimals):
                     tokenModel.decimals = Int(decimals)
-                case .Error(let error):
+                case .error(let error):
                     print(error.localizedDescription)
                 }
                 disGroup.leave()
@@ -94,10 +94,10 @@ struct ERC20TokenService {
 
             disGroup.notify(queue: .main) {
                 guard !tokenModel.name.isEmpty, !tokenModel.symbol.isEmpty else {
-                    completion(EthServiceResult.Error(CustomTokenError.undefinedError))
+                    completion(EthServiceResult.error(CustomTokenError.undefinedError))
                     return
                 }
-                completion(EthServiceResult.Success(tokenModel))
+                completion(EthServiceResult.success(tokenModel))
             }
         }
     }

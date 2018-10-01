@@ -28,9 +28,9 @@ struct NervosNativeTokenService {
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
-                    completion(NervosServiceResult.Success(tokenModel))
+                    completion(NervosServiceResult.success(tokenModel))
                 case .failure(let error):
-                    completion(NervosServiceResult.Error(error))
+                    completion(NervosServiceResult.error(error))
                 }
             }
         }
@@ -44,9 +44,9 @@ struct NervosNativeTokenService {
                 switch result {
                 case .success(let balance):
                     print(balance.description)
-                    completion(NervosServiceResult.Success(balance))
+                    completion(NervosServiceResult.success(balance))
                 case .failure(let error):
-                    completion(NervosServiceResult.Error(error))
+                    completion(NervosServiceResult.error(error))
                 }
             }
         }

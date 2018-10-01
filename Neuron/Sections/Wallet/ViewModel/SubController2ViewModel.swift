@@ -39,10 +39,10 @@ class SubController2ViewModel: NSObject {
     func didGetTokenForCurrentwallet(walletAddress: String, completion: @escaping (String?, Error?) -> Void) {
         EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
             switch result {
-            case .Success(let balance):
+            case .success(let balance):
                 let balanceNumber = self?.formatBalanceValue(value: balance)
                 completion(balanceNumber, nil)
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
                 completion(nil, error)
             }
@@ -52,9 +52,9 @@ class SubController2ViewModel: NSObject {
     func didGetERC20BalanceForCurrentWallet(wAddress: String, ERC20Token: String, completion: @escaping (BigUInt?, Error?) -> Void ) {
         ERC20TokenService.getERC20TokenBalance(walletAddress: wAddress, contractAddress: ERC20Token) { (result) in
             switch result {
-            case .Success(let erc20Balance):
+            case .success(let erc20Balance):
                 completion(erc20Balance, nil)
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
                 completion(nil, error)
             }
@@ -67,9 +67,9 @@ class SubController2ViewModel: NSObject {
     func getMateDataForNervos(completion: @escaping (TokenModel?, Error?) -> Void) {
         NervosNativeTokenService.getNervosNativeTokenMsg { (result) in
             switch result {
-            case .Success(let tokenModel):
+            case .success(let tokenModel):
                 completion(tokenModel, nil)
-            case .Error(let error):
+            case .error(let error):
                 completion(nil, error)
             }
         }
@@ -78,10 +78,10 @@ class SubController2ViewModel: NSObject {
     func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (String?, Error?) -> Void) {
         NervosNativeTokenService.getNervosNativeTokenBalance(walletAddress: walletAddress) { [weak self] (result) in
             switch result {
-            case .Success(let balance):
+            case .success(let balance):
                 let balanceNumber = self?.formatBalanceValue(value: balance)
                 completion(balanceNumber, nil)
-            case .Error(let error):
+            case .error(let error):
                 completion(nil, error)
             }
         }

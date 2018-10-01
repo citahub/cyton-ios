@@ -60,9 +60,9 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
-            case .Success(let ethArray):
+            case .success(let ethArray):
                 self.dataArray = ethArray
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             self.transactionTableView.mj_header.endRefreshing()
@@ -73,10 +73,10 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
         service.didGetNervosTransaction(walletAddress: (walletModel?.address)!) { (result) in
             switch result {
-            case .Success(let nervosArray):
+            case .success(let nervosArray):
                 self.dataArray = nervosArray
                 self.transactionTableView.reloadData()
-            case .Error(let error):
+            case .error(let error):
                 NeuLoad.showToast(text: error.localizedDescription)
             }
             self.transactionTableView.mj_header.endRefreshing()
@@ -109,7 +109,6 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         tCtrl.tModel = transModel
         navigationController?.pushViewController(tCtrl, animated: true)
     }
-
 }
 
 enum TokenType {

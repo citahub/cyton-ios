@@ -9,8 +9,8 @@
 import Foundation
 
 enum EthServiceResult<T> {
-    case Success(T)
-    case Error(Error)
+    case success(T)
+    case error(Error)
 }
 
 enum CustomTokenError: Error {
@@ -21,8 +21,8 @@ enum CustomTokenError: Error {
 }
 
 enum SendEthResult<T> {
-    case Success(T)
-    case Error(Error)
+    case success(T)
+    case error(Error)
 }
 
 enum SendEthErrors: Error {
@@ -37,13 +37,13 @@ enum SendEthErrors: Error {
 }
 
 enum TransactionErrors: Error {
-    case Requestfailed
+    case requestfailed
 }
 
 // Nervos Error
 enum NervosServiceResult<T> {
-    case Success(T)
-    case Error(Error)
+    case success(T)
+    case error(Error)
 }
 
 enum SendNervosErrors: Error {
@@ -59,8 +59,8 @@ enum SendNervosErrors: Error {
 }
 
 enum SendNervosResult<T> {
-    case Success(T)
-    case Error(Error)
+    case success(T)
+    case error(Error)
 }
 
 enum NervosSignErrors: Error {

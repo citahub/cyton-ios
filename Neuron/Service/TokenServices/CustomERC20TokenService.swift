@@ -18,9 +18,9 @@ struct CustomERC20TokenService {
             let decimals = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
             DispatchQueue.main.async {
                 if let decimals = decimals?.value?["0"] as? BigUInt {
-                    completion(EthServiceResult.Success(decimals))
+                    completion(EthServiceResult.success(decimals))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.wrongBalanceError))
+                    completion(EthServiceResult.error(CustomTokenError.wrongBalanceError))
                 }
             }
         }
@@ -35,15 +35,15 @@ struct CustomERC20TokenService {
             case .success(let name):
 
                 if let names = name["0"] as? String, !names.isEmpty {
-                    completion(EthServiceResult.Success(names))
+                    completion(EthServiceResult.success(names))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.badNameError))
+                    completion(EthServiceResult.error(CustomTokenError.badNameError))
                 }
             case .failure(let error):
-                completion(EthServiceResult.Error(error))
+                completion(EthServiceResult.error(error))
             }
         } else {
-            completion(EthServiceResult.Error(CustomTokenError.badNameError))
+            completion(EthServiceResult.error(CustomTokenError.badNameError))
         }
     }
 
@@ -54,9 +54,9 @@ struct CustomERC20TokenService {
             let symbol = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
             DispatchQueue.main.async {
                 if let symbol = symbol?.value?["0"] as? String, !symbol.isEmpty {
-                    completion(EthServiceResult.Success(symbol))
+                    completion(EthServiceResult.success(symbol))
                 } else {
-                    completion(EthServiceResult.Error(CustomTokenError.badSymbolError))
+                    completion(EthServiceResult.error(CustomTokenError.badSymbolError))
                 }
             }
         }

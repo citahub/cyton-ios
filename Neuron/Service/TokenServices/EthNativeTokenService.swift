@@ -24,9 +24,9 @@ struct EthNativeTokenService {
             DispatchQueue.main.async {
                 switch balanceResult {
                 case .success(let balance):
-                    completion(EthServiceResult.Success(balance))
+                    completion(EthServiceResult.success(balance))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
+                    completion(EthServiceResult.error(error))
                 }
             }
         }

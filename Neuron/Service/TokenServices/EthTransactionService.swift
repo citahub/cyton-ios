@@ -25,13 +25,13 @@ class EthTransactionService {
         DispatchQueue.global().async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
+                    completion(SendEthResult.error(SendEthErrors.invalidDestinationAddress))
                 }
                 return
             }
             guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
+                    completion(SendEthResult.error(SendEthErrors.invalidAmountFormat))
                 }
                 return
             }
@@ -39,7 +39,7 @@ class EthTransactionService {
             let web3 = Web3Network.getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))
+                    completion(SendEthResult.error(SendEthErrors.noAvailableKeys))
                 }
                 return
             }
@@ -52,14 +52,14 @@ class EthTransactionService {
             options.value = BigUInt(amount)
             guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.contractLoadingError))
+                    completion(SendEthResult.error(SendEthErrors.contractLoadingError))
                 }
                 return
             }
 
             guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.retrievingEstimatedGasError))
+                    completion(SendEthResult.error(SendEthErrors.retrievingEstimatedGasError))
                 }
                 return
             }
@@ -67,13 +67,13 @@ class EthTransactionService {
             options.gasPrice = gasPrice
             guard let transaction = contract.method(extraData: Data(), options: options) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
+                    completion(SendEthResult.error(SendEthErrors.createTransactionIssue))
                 }
                 return
             }
 
             DispatchQueue.main.async {
-                completion(SendEthResult.Success(transaction))
+                completion(SendEthResult.success(transaction))
             }
         }
     }
@@ -83,18 +83,18 @@ class EthTransactionService {
             let result = transaction.send(password: password, options: nil)
             if let error = result.error {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(error))
+                    completion(SendEthResult.error(error))
                 }
                 return
             }
             guard let value = result.value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.Error(SendEthErrors.emptyResult))
+                    completion(SendEthResult.error(SendEthErrors.emptyResult))
                 }
                 return
             }
             DispatchQueue.main.async {
-                completion(SendEthResult.Success(value))
+                completion(SendEthResult.success(value))
             }
         }
     }
