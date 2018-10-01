@@ -100,6 +100,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
             self.navigationController?.pushViewController(sCtrl, animated: true)
         case "zhuru":
+            break
         default:
             break
         }
