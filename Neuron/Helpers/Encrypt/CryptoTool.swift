@@ -9,9 +9,9 @@
 import UIKit
 import CryptoSwift
 
-class CryptoTool: NSObject {
+struct CryptoTool {
     //encode
-    public static func Endcode_AES_ECB(strToEncode: String, key: String) -> String {
+    static func Endcode_AES_ECB(strToEncode: String, key: String) -> String {
         var encodeString = ""
         do {
             let aes = try AES(key: Padding.zeroPadding.add(to: key.bytes, blockSize: AES.blockSize), blockMode: ECB())
@@ -24,7 +24,7 @@ class CryptoTool: NSObject {
     }
 
     //decode
-    public static func Decode_AES_ECB(strToDecode: String, key: String) -> String {
+    static func Decode_AES_ECB(strToDecode: String, key: String) -> String {
         var decodeStr = ""
         let data = NSData(base64Encoded: strToDecode, options: NSData.Base64DecodingOptions.init(rawValue: 0))
         var encrypted: [UInt8] = []
@@ -45,7 +45,7 @@ class CryptoTool: NSObject {
         return decodeStr
     }
 
-    static public func changeMD5(password: String) -> String {
+    static func changeMD5(password: String) -> String {
         return password.md5()
     }
 }
