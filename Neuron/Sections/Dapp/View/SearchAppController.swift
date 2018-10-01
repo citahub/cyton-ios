@@ -59,7 +59,6 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
 
     func setUpTableView() {
         searchArray = UserDefaults.standard.object(forKey: "searchHistory") as? [String] ?? []
-        print(searchArray)
         sTable.delegate = self
         sTable.dataSource = self
         sTable.tableFooterView = UIView.init()

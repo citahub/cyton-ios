@@ -53,7 +53,6 @@ class ImportWalletViewModel: NSObject {
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                print(account)
                 self.walletModel.address = account.address.eip55String
                 self.exportPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
@@ -68,7 +67,6 @@ class ImportWalletViewModel: NSObject {
         let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
         switch privateKeyResult {
         case .succeed(result: let privateKey):
-            print(privateKey!)
             walletModel.encryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             didSaveWalletToRealm()
         case .failed(_, let errorMsg):
@@ -149,7 +147,6 @@ class ImportWalletViewModel: NSObject {
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                print(account)
                 self.walletModel.address = account.address.eip55String
                 self.exportPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
@@ -184,7 +181,6 @@ class ImportWalletViewModel: NSObject {
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                print(account)
                 self.walletModel.address = account.address.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):

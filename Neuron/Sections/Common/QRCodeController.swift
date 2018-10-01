@@ -22,7 +22,6 @@ class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
-        print(resultStrs.first ?? "")
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
     let share = HRQRCodeScanTool()

@@ -99,7 +99,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func callBackDictionnary(dict: [String: String]) {
-        print(dict["name"]!)
     }
 
     func didClickQRCodeBtn() {

@@ -33,7 +33,6 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         sub2ViewModel.getMateDataForNervos { (tokenModel, error) in
             if error == nil {
                 tModel = tokenModel!
-                print(tModel.description)
             } else {
                 NeuLoad.showToast(text: (error?.localizedDescription)!)
             }

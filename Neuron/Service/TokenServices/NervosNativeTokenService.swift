@@ -43,8 +43,7 @@ struct NervosNativeTokenService {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let balance):
-                    print(balance.description)
-                    completion(NervosServiceResult.success(balance))
+                    completion(NervosServiceResult.Success(balance))
                 case .failure(let error):
                     completion(NervosServiceResult.error(error))
                 }

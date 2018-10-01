@@ -18,7 +18,6 @@ class BrowserUrlParser {
                 print("error: \(error.localizedDescription)")
             } else {
                 if let latency = timeElapsed {
-                    print(latency)
                     comletion(latency, nil)
                 }
             }

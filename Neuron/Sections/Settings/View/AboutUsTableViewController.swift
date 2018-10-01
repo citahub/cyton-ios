@@ -38,7 +38,6 @@ class AboutUsTableViewController: UITableViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyMMdd"
         let convertedDate = dateFormatter.string(from: compileDate)
-        print(convertedDate)
         versionLabel.text = appDisplayName as? String
         versionLabel.text = "V \(String(describing: majorVersion!))" + ".\(convertedDate)"
     }
