@@ -94,7 +94,7 @@ class PayCoverViewController: UIViewController {
     func sendEthTransaction(password: String, transaction: TransactionIntermediate) {
         ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
-            case .success(_):
+            case .success:
                 NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()
@@ -125,7 +125,7 @@ class PayCoverViewController: UIViewController {
     func sendNervosTransaction(password: String, transaction: NervosTransaction) {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
-            case .success(_):
+            case .success:
                 NeuLoad.showToast(text: "转账成功,请稍后查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()
@@ -157,7 +157,7 @@ class PayCoverViewController: UIViewController {
     func sendErc20Transaction(password: String, transaction: TransactionIntermediate) {
         erc20TransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
-            case .success(_):
+            case .success:
                 NeuLoad.showToast(text: "转账成功,请稍后刷新查看")
                 self.view.removeFromSuperview()
                 self.popToRootView()

@@ -74,7 +74,7 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
     }
 }
 
-extension PrivatekeyViewController : UITextViewDelegate {
+extension PrivatekeyViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         privateKey = textView.text
         judgeImportButtonEnabled()
