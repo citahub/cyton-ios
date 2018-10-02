@@ -19,7 +19,7 @@ target 'Neuron' do
   pod 'TrustCore', '~> 0.0.7'
   pod 'TrustKeystore', '~> 0.4.1'
   pod 'KeychainSwift'
-  pod 'IGIdenticon', git: "https://github.com/cryptape/IGIdenticon.git", branch: "swift4.2"
+  pod 'IGIdenticon', "~> 0.6"
   pod 'SCLAlertView'
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
