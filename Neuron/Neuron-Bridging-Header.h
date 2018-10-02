@@ -10,6 +10,5 @@
 #define Neuron_Bridging_Header_h
 
 #import "MJRefresh.h"
-#import "MBProgressHUD.h"
 
 #endif /* Neuron_Bridging_Header_h */

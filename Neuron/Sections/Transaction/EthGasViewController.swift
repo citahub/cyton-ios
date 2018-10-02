@@ -57,7 +57,7 @@ class EthGasViewController: UIViewController {
                 self.gasPrice = gasPriceResult
                 self.gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPriceResult, toUnits: .Gwei, fallbackToScientific: false)
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
         }
     }
@@ -80,7 +80,7 @@ extension EthGasViewController: UITextFieldDelegate, UITextViewDelegate {
             if tempGasPrice < gasPrice || tempGasPrice > (gasPrice * 10) {
                 let minGasPrice = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false) ?? ""
                 let maxGasPrice = Web3.Utils.formatToEthereumUnits(gasPrice * 10, toUnits: .Gwei, fallbackToScientific: false) ?? ""
-                NeuLoad.showToast(text: "Gas Price必须大于\(minGasPrice)并且小于\(maxGasPrice) Gwei")
+                Toast.showToast(text: "Gas Price必须大于\(minGasPrice)并且小于\(maxGasPrice) Gwei")
                 textField.text = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
                 return
             }

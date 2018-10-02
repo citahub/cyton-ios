@@ -31,14 +31,14 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func didClickAddButton(_ sender: UIButton) {
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
-            NeuLoad.showToast(text: "请输入正确的合约地址")
+            Toast.showToast(text: "请输入正确的合约地址")
             return
         }
         if tokenModel.name.isEmpty || tokenModel.symbol.isEmpty || String(tokenModel.decimals).isEmpty {
-            NeuLoad.showToast(text: "Token信息不全，请核对合约地址是否正确")
+            Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        NeuLoad.showHUD(text: "")
+        Toast.showHUD()
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
@@ -46,7 +46,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             appModel.extraTokenList.append(tokenModel)
             appModel.currentWallet?.selectTokenList.append(tokenModel)
         }
-        NeuLoad.hidHUD()
+        Toast.hideHUD()
         navigationController?.popViewController(animated: true)
     }
     //tableview代理
@@ -130,16 +130,16 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
 
     func didGetERC20Token(token: String) {
         let appmodel = WalletRealmTool.getCurrentAppModel()
-        NeuLoad.showHUD(text: "")
+        Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
             switch result {
             case .success(let tokenM):
                 self.tokenModel = tokenM
                 self.tokenModel.address = token
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
-            NeuLoad.hidHUD()
+            Toast.hideHUD()
             self.aTable.reloadData()
         }
     }

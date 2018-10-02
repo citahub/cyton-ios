@@ -86,7 +86,7 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
 
     @objc func didCompletBackupMnemonic() {
         if selectArray.count != titleArr.count {
-            NeuLoad.showToast(text: "助记词验证失败")
+            Toast.showToast(text: "助记词验证失败")
             return
         }
         let originalMnemonic = titleArr.joined()

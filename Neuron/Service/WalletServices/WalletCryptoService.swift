@@ -27,7 +27,7 @@ struct WalletCryptoService {
         case .succeed(result: let keyStoreString):
             keyStore = keyStoreString
         case .failed(_, errorMessage:let errorMsg):
-            NeuLoad.showToast(text: errorMsg)
+            Toast.showToast(text: errorMsg)
         }
         return keyStore
     }

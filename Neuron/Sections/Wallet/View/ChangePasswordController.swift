@@ -38,16 +38,16 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
 
     //修改密码按钮action
     @IBAction func changePasswordBtn(_ sender: UIButton) {
-        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {NeuLoad.showToast(text: "旧密码错误");return}
-        if newPassword != confirmPassword {NeuLoad.showToast(text: "两次新密码输入不一致");return}
+        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {Toast.showToast(text: "旧密码错误");return}
+        if newPassword != confirmPassword {Toast.showToast(text: "两次新密码输入不一致");return}
         if !PasswordValidator.isValid(password: newPassword) {return}
         if walletModel.MD5screatPassword == CryptoTool.changeMD5(password: newPassword) {
-            NeuLoad.showToast(text: "新密码与旧密码一致，请重新输入")
+            Toast.showToast(text: "新密码与旧密码一致，请重新输入")
             return
         }
         let privateKey = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: oldPassword)
         let newEncryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey, key: newPassword)
-        NeuLoad.showHUD(text: "修改密码中...")
+        Toast.showHUD(text: "修改密码中...")
         try! WalletRealmTool.realm.write {
             walletModel.encryptPrivateKey = newEncryptPrivateKey
             walletModel.MD5screatPassword = CryptoTool.changeMD5(password: newPassword)
@@ -58,8 +58,8 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         DispatchQueue.global(qos: .userInteractive).async {
             WalletCryptoService.updateEncryptPrivateKey(oldPassword: oldP, newPassword: newP, walletAddress: address)
             DispatchQueue.main.async {
-                NeuLoad.hidHUD()
-                NeuLoad.showToast(text: "密码修改成功，请牢记！")
+                Toast.hideHUD()
+                Toast.showToast(text: "密码修改成功，请牢记！")
                 self.navigationController?.popViewController(animated: true)
             }
         }

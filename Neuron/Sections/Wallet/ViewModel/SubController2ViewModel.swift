@@ -43,7 +43,7 @@ class SubController2ViewModel: NSObject {
                 let balanceNumber = self?.formatBalanceValue(value: balance)
                 completion(balanceNumber, nil)
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
                 completion(nil, error)
             }
         }
@@ -55,7 +55,7 @@ class SubController2ViewModel: NSObject {
             case .success(let erc20Balance):
                 completion(erc20Balance, nil)
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
                 completion(nil, error)
             }
         }

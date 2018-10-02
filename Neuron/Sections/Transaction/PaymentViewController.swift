@@ -124,26 +124,26 @@ class PaymentViewController: UITableViewController {
 
     private func canProceedNextStep() -> Bool {
         if payValue.count == 0 {
-            NeuLoad.showToast(text: "转账金额不能为空")
+            Toast.showToast(text: "转账金额不能为空")
             return false
         }
         if destinationAddress.count == 0 {
-            NeuLoad.showToast(text: "转账地址不能为空")
+            Toast.showToast(text: "转账地址不能为空")
             return false
         }
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         if destinationAddress == walletModel.address {
-            NeuLoad.showToast(text: "发送地址和收款地址不能相同")
+            Toast.showToast(text: "发送地址和收款地址不能相同")
             return false
         }
         let planPay = Double(payValue)!
         let tokenBalance = Double(tokenModel.tokenBalance)!
         if planPay > tokenBalance {
-            NeuLoad.showToast(text: "余额不足")
+            Toast.showToast(text: "余额不足")
             return false
         }
         if !destinationAddress.hasPrefix("0x") || destinationAddress.count != 42 {
-            NeuLoad.showToast(text: "地址有误:地址一般为0x开头的42位字符")
+            Toast.showToast(text: "地址有误:地址一般为0x开头的42位字符")
             return false
         }
         return true

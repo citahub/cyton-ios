@@ -80,7 +80,7 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
         }
         browser.isUrlvalid(urlStr: urlStr) { (_, error) in
             if error != nil {
-                NeuLoad.showToast(text: "链接无效,请重新输入")
+                Toast.showToast(text: "链接无效,请重新输入")
             } else {
                 let bCtrl = BrowserviewController()
                 bCtrl.requestUrlStr = urlStr
@@ -109,7 +109,7 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
         if codeResult.count != 0 {
             dealWithUrl(urlStr: codeResult)
         } else {
-            NeuLoad.showToast(text: "扫描结果为空")
+            Toast.showToast(text: "扫描结果为空")
         }
     }
 
@@ -130,7 +130,7 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
         tableView.deselectRow(at: indexPath, animated: true)
         browser.isUrlvalid(urlStr: searchArray[indexPath.row]) { (_, error) in
             if error != nil {
-                NeuLoad.showToast(text: "链接无效,请重新输入")
+                Toast.showToast(text: "链接无效,请重新输入")
             } else {
                 let bCtrl = BrowserviewController()
                 bCtrl.requestUrlStr = self.searchArray[indexPath.row]

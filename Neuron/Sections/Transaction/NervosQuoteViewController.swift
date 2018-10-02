@@ -52,13 +52,13 @@ extension NervosQuoteViewController: UITextFieldDelegate, UITextViewDelegate {
             return
         }
         if quotaInput.count == 0 {
-            NeuLoad.showToast(text: "quota不能为空")
+            Toast.showToast(text: "quota不能为空")
             textField.text = quota.description
             return
         }
         let textFieldValue = BigUInt(quotaInput)!
         if textFieldValue < BigUInt(1000000) {
-            NeuLoad.showToast(text: "quota值不能少于1000000")
+            Toast.showToast(text: "quota值不能少于1000000")
             textField.text = quota.description
             return
         }

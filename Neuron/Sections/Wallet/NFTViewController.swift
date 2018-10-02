@@ -41,7 +41,7 @@ class NFTViewController: UITableViewController {
             case .success(let nftModel):
                 self.dataArray = nftModel.assets ?? []
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
             self.tableView.reloadData()
         }

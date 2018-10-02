@@ -38,15 +38,15 @@ class ImportWalletViewModel: NSObject {
     ///   - password: password
     ///   - name: walletName
     func importKeystoreWallet(keyStore: String, password: String, name: String) {
-        if keyStore.isEmpty {NeuLoad.showToast(text: "请输入keystore文本");return}
-        if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if keyStore.isEmpty {Toast.showToast(text: "请输入keystore文本");return}
+        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
         if name.count > 15 {
-            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            Toast.showToast(text: "钱包名字不能超过15个字符")
             return
         }
-        if password.isEmpty {NeuLoad.showToast(text: "解锁密码不能为空");return}
-        if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
-        NeuLoad.showHUD(text: "导入钱包中")
+        if password.isEmpty {Toast.showToast(text: "解锁密码不能为空");return}
+        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
         let importType = ImportType.keyStore(json: keyStore, password: password)
@@ -56,9 +56,9 @@ class ImportWalletViewModel: NSObject {
                 self.walletModel.address = account.address.eip55String
                 self.exportPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
-                NeuLoad.showToast(text: errorMessage)
+                Toast.showToast(text: errorMessage)
             }
-            NeuLoad.hidHUD()
+            Toast.hideHUD()
         }
     }
 
@@ -70,7 +70,7 @@ class ImportWalletViewModel: NSObject {
             walletModel.encryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             didSaveWalletToRealm()
         case .failed(_, let errorMsg):
-            NeuLoad.showToast(text: errorMsg)
+            Toast.showToast(text: errorMsg)
         }
     }
 
@@ -113,8 +113,8 @@ class ImportWalletViewModel: NSObject {
             appModel.wallets.append(walletModel)
             WalletRealmTool.addObject(appModel: appModel)
         }
-        NeuLoad.hidHUD()
-        NeuLoad.showToast(text: "导入成功")
+        Toast.hideHUD()
+        Toast.showToast(text: "导入成功")
         if walletCount == 0 {
             NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
         }
@@ -131,16 +131,16 @@ class ImportWalletViewModel: NSObject {
     ///   - devirationPath: devirationPath
     ///   - name: walletname
     func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String, name: String) {
-        if mnemonic.isEmpty {NeuLoad.showToast(text: "请输入助记词");return}
-        if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if mnemonic.isEmpty {Toast.showToast(text: "请输入助记词");return}
+        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
         if name.count > 15 {
-            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            Toast.showToast(text: "钱包名字不能超过15个字符")
             return
         }
-        if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
+        if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
-        NeuLoad.showHUD(text: "导入钱包中")
+        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
@@ -150,9 +150,9 @@ class ImportWalletViewModel: NSObject {
                 self.walletModel.address = account.address.eip55String
                 self.exportPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
-                NeuLoad.showToast(text: errorMessage)
+                Toast.showToast(text: errorMessage)
             }
-            NeuLoad.hidHUD()
+            Toast.hideHUD()
         }
     }
 
@@ -164,16 +164,16 @@ class ImportWalletViewModel: NSObject {
     ///   - confirmPassword: confirmPassword
     ///   - name: name
     func importPrivateWallet(privateKey: String, password: String, confirmPassword: String, name: String) {
-        if privateKey.isEmpty {NeuLoad.showToast(text: "请输入私钥");return}
-        if name.isEmpty {NeuLoad.showToast(text: "钱包名字不能为空");return}
+        if privateKey.isEmpty {Toast.showToast(text: "请输入私钥");return}
+        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
         if name.count > 15 {
-            NeuLoad.showToast(text: "钱包名字不能超过15个字符")
+            Toast.showToast(text: "钱包名字不能超过15个字符")
             return
         }
-        if password != confirmPassword {NeuLoad.showToast(text: "两次密码输入不一致");return}
+        if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {NeuLoad.showToast(text: "钱包名字重复");return}
-        NeuLoad.showHUD(text: "导入钱包中")
+        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
         walletModel.encryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey, key: password)
@@ -184,9 +184,9 @@ class ImportWalletViewModel: NSObject {
                 self.walletModel.address = account.address.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
-                NeuLoad.showToast(text: errorMessage)
+                Toast.showToast(text: errorMessage)
             }
-            NeuLoad.hidHUD()
+            Toast.hideHUD()
         }
     }
 }
