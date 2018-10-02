@@ -33,7 +33,7 @@ class ExportKeystoreController: UIViewController {
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
         UIPasteboard.general.string = keyStoreStr
-        NeuLoad.showToast(text: "keystore已经复制到粘贴板")
+        Toast.showToast(text: "keystore已经复制到粘贴板")
     }
 
     @IBAction func didClickShareButton(_ sender: UIButton) {

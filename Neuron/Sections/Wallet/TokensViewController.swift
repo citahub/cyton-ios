@@ -91,7 +91,7 @@ class TokensViewController: UITableViewController {
                     self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                     self.tableView.reloadData()
                 case .error(let error):
-                    NeuLoad.showToast(text: error.localizedDescription)
+                    Toast.showToast(text: error.localizedDescription)
                 }
             }
         }
@@ -100,7 +100,7 @@ class TokensViewController: UITableViewController {
     func getBalance(isRefresh: Bool) {
         let group = DispatchGroup()
         if isRefresh {
-            NeuLoad.showHUD(text: "")
+            Toast.showHUD()
         }
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         for tm in tokenArray {
@@ -110,7 +110,7 @@ class TokensViewController: UITableViewController {
                     if error == nil {
                         tm.tokenBalance = balance!
                     } else {
-                        NeuLoad.showToast(text: (error?.localizedDescription)!)
+                        Toast.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
                 }
@@ -120,7 +120,7 @@ class TokensViewController: UITableViewController {
                     if error == nil {
                         tm.tokenBalance = balance!
                     } else {
-                        NeuLoad.showToast(text: (error?.localizedDescription)!)
+                        Toast.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
                 }
@@ -131,7 +131,7 @@ class TokensViewController: UITableViewController {
                         let balance = Web3.Utils.formatToPrecision(erc20Balance!, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
                         tm.tokenBalance = balance!
                     } else {
-                        NeuLoad.showToast(text: (error?.localizedDescription)!)
+                        Toast.showToast(text: (error?.localizedDescription)!)
                     }
                     group.leave()
                 }
@@ -142,7 +142,7 @@ class TokensViewController: UITableViewController {
             NotificationCenter.default.post(name: .endRefresh, object: self, userInfo: nil)
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
-                NeuLoad.hidHUD()
+                Toast.hideHUD()
             }
         }
     }

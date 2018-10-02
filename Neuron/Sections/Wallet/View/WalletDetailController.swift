@@ -36,7 +36,7 @@ class WalletDetailController: UITableViewController {
         alert.addButton("确定") {
             txt.resignFirstResponder()
             if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
-                NeuLoad.showToast(text: "旧密码错误")
+                Toast.showToast(text: "旧密码错误")
                 return
             } else {
                 self.deleteWallet(password: txt.text!)
@@ -61,7 +61,7 @@ class WalletDetailController: UITableViewController {
             }
         }
         WalletCryptoService.didDelegateWallet(password: password, walletAddress: address)
-        NeuLoad.showToast(text: "删除成功")
+        Toast.showToast(text: "删除成功")
         navigationController?.popToRootViewController(animated: true)
     }
 
@@ -86,7 +86,7 @@ class WalletDetailController: UITableViewController {
                 alert.addButton("确定") {
                     txt.resignFirstResponder()
                     if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
-                        NeuLoad.showToast(text: "密码错误")
+                        Toast.showToast(text: "密码错误")
                         return
                     } else {
                         let eCtrl = ExportKeystoreController.init(nibName: "ExportKeystoreController", bundle: nil)
@@ -111,12 +111,12 @@ class WalletDetailController: UITableViewController {
         let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("请输入钱包名字")
         alert.addButton("确定") {
-            if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {NeuLoad.showToast(text: "该钱包名称已存在");return} else {
+            if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
                 let nameClean = txt.text?.trimmingCharacters(in: .whitespaces)
                 if nameClean?.count == 0 {
-                    NeuLoad.showToast(text: "钱包名字不能为空")
+                    Toast.showToast(text: "钱包名字不能为空")
                 } else if txt.text!.count > 15 {
-                    NeuLoad.showToast(text: "钱包名称不能超过15个字符")
+                    Toast.showToast(text: "钱包名称不能超过15个字符")
                 } else {
                     try! WalletRealmTool.realm.write {
                         self.walletModel.name = txt.text!

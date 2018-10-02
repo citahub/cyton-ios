@@ -47,7 +47,7 @@ class TradeTableViewCell: UITableViewCell {
 
     @IBAction func didClickSubButton(_ sender: UIButton) {
         UIPasteboard.general.string = subTitleStr
-        NeuLoad.showToast(text: "复制成功")
+        Toast.showToast(text: "复制成功")
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

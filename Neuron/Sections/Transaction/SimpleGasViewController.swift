@@ -62,7 +62,7 @@ class SimpleGasViewController: UIViewController {
             case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
             self.setGasLabelValue(finalGasPrice: self.gasSlider.value * Float(self.gasPrice.description)!)
         }

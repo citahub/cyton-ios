@@ -63,7 +63,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
             case .success(let ethArray):
                 self.dataArray = ethArray
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
             self.transactionTableView.mj_header.endRefreshing()
         }
@@ -77,7 +77,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
                 self.dataArray = nervosArray
                 self.transactionTableView.reloadData()
             case .error(let error):
-                NeuLoad.showToast(text: error.localizedDescription)
+                Toast.showToast(text: error.localizedDescription)
             }
             self.transactionTableView.mj_header.endRefreshing()
         }

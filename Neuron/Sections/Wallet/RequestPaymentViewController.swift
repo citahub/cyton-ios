@@ -27,6 +27,6 @@ class RequestPaymentViewController: UIViewController {
 
     @IBAction func copyAddress(_ sender: UIButton) {
         UIPasteboard.general.string = appModel.currentWallet?.address
-        NeuLoad.showToast(text: "地址已经复制到粘贴板")
+        Toast.showToast(text: "地址已经复制到粘贴板")
     }
 }

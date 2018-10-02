@@ -31,7 +31,7 @@ class SureMnemonicViewModel: NSObject {
         if original == current {
             return true
         } else {
-            NeuLoad.showToast(text: "助记词验证失败")
+            Toast.showToast(text: "助记词验证失败")
             return false
         }
     }
@@ -39,7 +39,7 @@ class SureMnemonicViewModel: NSObject {
     //导入钱包
     public func didImportWalletToRealm(mnemonic: String, password: String) {
         // 通过助记词导入钱包
-        NeuLoad.showHUD(text: "钱包创建中...")
+        Toast.showHUD(text: "钱包创建中...")
         WalletTools.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTools.defaultDerivationPath, completion: { (result) in
             switch result {
             case .succeed(let account):
@@ -48,9 +48,9 @@ class SureMnemonicViewModel: NSObject {
                 self.walletPasswordMD5 = CryptoTool.changeMD5(password: password)
                 self.exportKeystoreAndPirvateKey(account: account, password: password)
             case .failed(_, let errorMessage):
-                NeuLoad.showToast(text: errorMessage)
+                Toast.showToast(text: errorMessage)
             }
-            NeuLoad.hidHUD()
+            Toast.hideHUD()
         })
     }
 
@@ -62,7 +62,7 @@ class SureMnemonicViewModel: NSObject {
             self.walletPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
             saveWallet()
         case .failed(let errorStr, let errorMsg):
-            NeuLoad.showToast(text: errorMsg)
+            Toast.showToast(text: errorMsg)
             print(errorStr)
         }
     }
@@ -94,7 +94,7 @@ class SureMnemonicViewModel: NSObject {
             appModel.wallets.append(walletModel)
             WalletRealmTool.addObject(appModel: appModel)
         }
-        NeuLoad.showToast(text: "创建成功")
+        Toast.showToast(text: "创建成功")
         if walletCount == 0 {
             NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
         }

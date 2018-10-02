@@ -12,11 +12,11 @@ struct PasswordValidator {
     static func isValid(password: String) -> Bool {
         if password.isEmpty {
             // FIXME: UI action should NOT happen inside validator!
-            NeuLoad.showToast(text: "密码不能为空")
+            Toast.showToast(text: "密码不能为空")
             return false
         }
         if password.count < 8 || password.count > 50 {
-            NeuLoad.showToast(text: "密码的长度为8到50")
+            Toast.showToast(text: "密码的长度为8到50")
             return false
         }
 
@@ -47,7 +47,7 @@ struct PasswordValidator {
         if totleConform >= 3 {
             return true
         } else {
-            NeuLoad.showToast(text: "密码太弱请重新输入")
+            Toast.showToast(text: "密码太弱请重新输入")
             return false
         }
     }

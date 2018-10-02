@@ -34,7 +34,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
             if error == nil {
                 tModel = tokenModel!
             } else {
-                NeuLoad.showToast(text: (error?.localizedDescription)!)
+                Toast.showToast(text: (error?.localizedDescription)!)
             }
             group.leave()
         }
