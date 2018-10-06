@@ -116,9 +116,9 @@ class ImportWalletViewModel: NSObject {
         Toast.hideHUD()
         Toast.showToast(text: "导入成功")
         if isFirstWallet {
-            NotificationCenter.default.post(name: .firstWalletCreated, object: self)
+            NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
         }
-        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["address": walletModel.address])
+        NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
         delegate?.didPopToRootView()
     }
 

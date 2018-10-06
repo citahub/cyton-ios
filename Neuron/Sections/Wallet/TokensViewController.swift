@@ -39,18 +39,16 @@ class TokensViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(switchWalletLoadToken), name: .switchWallet, object: nil)
     }
 
-    @objc func changeLocalCurrency() {
+    @objc private func changeLocalCurrency() {
         currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
         getCurrencyPrice(currencyModel: currentCurrencyModel)
     }
 
-    @objc
-    func refreshData() {
+    @objc private func refreshData() {
         getBalance(isRefresh: false)
     }
 
-    @objc
-    func switchWalletLoadToken() {
+    @objc private func switchWalletLoadToken() {
         didGetTokenList()
     }
 
@@ -139,7 +137,7 @@ class TokensViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
-            NotificationCenter.default.post(name: .endRefresh, object: self)
+            NotificationCenter.default.post(name: .endRefresh, object: nil)
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 Toast.hideHUD()
