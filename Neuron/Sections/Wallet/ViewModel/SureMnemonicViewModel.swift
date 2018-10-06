@@ -94,11 +94,11 @@ class SureMnemonicViewModel: NSObject {
             appModel.wallets.append(walletModel)
             WalletRealmTool.addObject(appModel: appModel)
         }
-        Toast.showToast(text: "创建成功")
-        if walletCount == 0 {
-            NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
-        }
         delegate?.doPush()
+        if walletCount == 0 {
+            NotificationCenter.default.post(name: .firstWalletCreated, object: self)
+        }
         NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["post": walletModel.address])
+        Toast.showToast(text: "创建成功")
     }
 }
