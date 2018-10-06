@@ -119,7 +119,7 @@ class ImportWalletViewModel: NSObject {
             NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
         }
 
-        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["post": walletModel.address])
+        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["address": walletModel.address])
         delegate?.didPopToRootView()
     }
 

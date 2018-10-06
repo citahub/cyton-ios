@@ -98,7 +98,7 @@ class SureMnemonicViewModel: NSObject {
         if walletCount == 0 {
             NotificationCenter.default.post(name: .firstWalletCreated, object: self)
         }
-        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["post": walletModel.address])
+        NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["address": walletModel.address])
         Toast.showToast(text: "创建成功")
     }
 }

@@ -60,13 +60,11 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         tabbedButtonView.delegate = self
     }
 
-    @objc
-    func endRefresh() {
+    @objc private func endRefresh() {
         tableView.mj_header.endRefreshing()
     }
 
-    @objc
-    func loadData() {
+    @objc private func loadData() {
         NotificationCenter.default.post(name: .beginRefresh, object: self, userInfo: nil)
     }
 
@@ -129,7 +127,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .createWalletSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(notification:)), name: .createWalletSuccess, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endRefresh), name: .endRefresh, object: nil)
     }
 
@@ -147,9 +145,9 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         NotificationCenter.default.post(name: .switchWallet, object: self, userInfo: nil)
     }
 
-    @objc func changeWallet(nofy: Notification) {
-        let wAddress = nofy.userInfo!["post"]
-        let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
+    @objc private func changeWallet(notification: Notification) {
+        let address = notification.userInfo!["address"] as! String
+        let walletModel = viewModel.didGetWalletMessage(walletAddress: address)
         refreshUI(walletModel: walletModel)
     }
 
