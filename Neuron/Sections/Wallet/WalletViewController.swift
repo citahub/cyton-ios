@@ -60,14 +60,12 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         tabbedButtonView.delegate = self
     }
 
-    @objc
-    func endRefresh() {
+    @objc private func endRefresh() {
         tableView.mj_header.endRefreshing()
     }
 
-    @objc
-    func loadData() {
-        NotificationCenter.default.post(name: .beginRefresh, object: self, userInfo: nil)
+    @objc private func loadData() {
+        NotificationCenter.default.post(name: .beginRefresh, object: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -129,7 +127,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(nofy:)), name: .createWalletSuccess, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(notification:)), name: .createWalletSuccess, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(endRefresh), name: .endRefresh, object: nil)
     }
 
@@ -144,12 +142,12 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     //switch wallet delegate
     func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
         didGetDataForCurrentWallet()
-        NotificationCenter.default.post(name: .switchWallet, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: .switchWallet, object: nil)
     }
 
-    @objc func changeWallet(nofy: Notification) {
-        let wAddress = nofy.userInfo!["post"]
-        let walletModel = viewModel.didGetWalletMessage(walletAddress: wAddress as! String)
+    @objc private func changeWallet(notification: Notification) {
+        let address = notification.userInfo!["address"] as! String
+        let walletModel = viewModel.didGetWalletMessage(walletAddress: address)
         refreshUI(walletModel: walletModel)
     }
 

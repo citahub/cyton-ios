@@ -9,10 +9,9 @@
 import UIKit
 
 class AddWalletController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "新增钱包"
+        navigationItem.title = "新增钱包"
     }
 }

@@ -10,6 +10,7 @@ import Foundation
 
 extension Notification.Name {
     static let createWalletSuccess = Notification.Name("createWalletSuccess")
+    static let firstWalletCreated = Notification.Name("firstWalletCreated")
     static let allWalletsDeleted = Notification.Name("allWalletsDeleted")
     static let changeLocalCurrency = Notification.Name("changeLocalCurrency")
     static let switchWallet = Notification.Name("switchWallet")

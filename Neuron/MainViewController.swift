@@ -21,6 +21,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         determineWalletViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .allWalletsDeleted, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .firstWalletCreated, object: nil)
 
         addNativeTokenMsgToRealm()
     }
