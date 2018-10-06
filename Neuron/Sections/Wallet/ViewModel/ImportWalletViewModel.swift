@@ -105,7 +105,7 @@ class ImportWalletViewModel: NSObject {
     /// save wallet
     func didSaveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppModel()
-        let walletCount = appModel.wallets.count
+        let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()!
         try! WalletRealmTool.realm.write {
@@ -115,10 +115,9 @@ class ImportWalletViewModel: NSObject {
         }
         Toast.hideHUD()
         Toast.showToast(text: "导入成功")
-        if walletCount == 0 {
-            NotificationCenter.default.post(name: .allWalletsDeleted, object: self)
+        if isFirstWallet {
+            NotificationCenter.default.post(name: .firstWalletCreated, object: self)
         }
-
         NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["address": walletModel.address])
         delegate?.didPopToRootView()
     }

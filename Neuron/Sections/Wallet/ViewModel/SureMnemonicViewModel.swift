@@ -83,7 +83,7 @@ class SureMnemonicViewModel: NSObject {
 
     func saveWallet() {
         let appModel = WalletRealmTool.getCurrentAppModel()
-        let walletCount = appModel.wallets.count
+        let isFirstWallet = appModel.wallets.count == 0
         walletModel.address = walletAddress
         walletModel.encryptPrivateKey =  walletPrivateKey
         walletModel.MD5screatPassword = walletPasswordMD5
@@ -95,7 +95,7 @@ class SureMnemonicViewModel: NSObject {
             WalletRealmTool.addObject(appModel: appModel)
         }
         delegate?.doPush()
-        if walletCount == 0 {
+        if isFirstWallet {
             NotificationCenter.default.post(name: .firstWalletCreated, object: self)
         }
         NotificationCenter.default.post(name: .createWalletSuccess, object: self, userInfo: ["address": walletModel.address])
