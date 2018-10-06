@@ -139,7 +139,7 @@ class TokensViewController: UITableViewController {
         }
         group.notify(queue: .main) {
             self.tableView.reloadData()
-            NotificationCenter.default.post(name: .endRefresh, object: self, userInfo: nil)
+            NotificationCenter.default.post(name: .endRefresh, object: self)
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 Toast.hideHUD()

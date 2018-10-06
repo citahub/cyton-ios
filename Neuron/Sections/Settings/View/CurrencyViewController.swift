@@ -43,7 +43,7 @@ class CurrencyViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         let model = dataArray[indexPath.row]
         LocalCurrencyService().saveLocalCurrency(model.short)
-        NotificationCenter.default.post(name: .changeLocalCurrency, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: .changeLocalCurrency, object: self)
         tableView.reloadData()
     }
 }

@@ -65,7 +65,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     @objc private func loadData() {
-        NotificationCenter.default.post(name: .beginRefresh, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: .beginRefresh, object: self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -142,7 +142,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     //switch wallet delegate
     func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
         didGetDataForCurrentWallet()
-        NotificationCenter.default.post(name: .switchWallet, object: self, userInfo: nil)
+        NotificationCenter.default.post(name: .switchWallet, object: self)
     }
 
     @objc private func changeWallet(notification: Notification) {
