@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, SureMnemonicViewModelDelegate, NoScreenshot {
+class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, SureMnemonicViewModelDelegate, NoScreenshot, EnterBackOverlayPresentable {
 
     private var showView: ButtonTagView! = nil
     private var selectView: ButtonTagUpView! = nil
@@ -37,6 +37,7 @@ class SureMnemonicViewController: UIViewController, ButtonTagViewDelegate, Butto
         didDrawSubViews()
         viewModel.delegate = self
         showNoScreenshotAlert(titile: "禁止截屏！", message: "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！")
+        setupEnterBackOverlay()
     }
 
     func didDrawSubViews() {

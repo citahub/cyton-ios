@@ -30,38 +30,50 @@ protocol EnterBackOverlayPresentable: OverlayPresentable {
 }
 
 extension EnterBackOverlayPresentable {
+    func setupEnterBackOverlay() {
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willResignActiveNotification, object: nil, queue: OperationQueue.main) { [weak self](_) in
+            guard let self = self else { return }
+            self.showOverlay()
+        }
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: OperationQueue.main, using: { [weak self](_) in
+            guard let self = self else { return }
+            self.removeOverlay()
+        })
+        _ = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: OperationQueue.main, using: { [weak self](_) in
+            guard let self = self else { return }
+            self.removeOverlay()
+        })
+    }
 }
 
 extension EnterBackOverlayPresentable where Self: UIViewController {
     var overlay: UIView {
+        let overlayTag = 2189219
+        if let overlay = view.viewWithTag(overlayTag) {
+            return overlay
+        }
         let overlay = UIView(frame: view.bounds)
         overlay.backgroundColor = UIColor.black
+        overlay.tag = overlayTag
         return overlay
     }
-    func setupEnterBackOverlay() {
-        _ = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: OperationQueue.main) { (_) in
-        }
-    }
-    func didEnterBackgroundNotification() {
-        debugPrint(#function)
-    }
 }
 
-extension NSObject {
-    func addDeinitTask(block: @escaping DeinitTask.Block) {
-        let task = DeinitTask(block: block)
-        var key = Date().timeIntervalSince1970
-        objc_setAssociatedObject(self, &key, task, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-    }
-}
+//extension NSObject {
+//    func addDeinitTask(block: @escaping DeinitTask.Block) {
+//        let task = DeinitTask(block: block)
+//        var key = Date().timeIntervalSince1970
+//        objc_setAssociatedObject(self, &key, task, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+//    }
+//}
 
-class DeinitTask: NSObject {
-    typealias Block = () -> Void
-    let block: Block
-    init(block: @escaping Block) {
-        self.block = block
-    }
-    deinit {
-        block()
-    }
-}
+//class DeinitTask: NSObject {
+//    typealias Block = () -> Void
+//    let block: Block
+//    init(block: @escaping Block) {
+//        self.block = block
+//    }
+//    deinit {
+//        block()
+//    }
+//}
