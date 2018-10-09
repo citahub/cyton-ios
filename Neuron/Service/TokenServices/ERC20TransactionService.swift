@@ -8,7 +8,7 @@
 
 import Foundation
 import web3swift
-import BigInt
+import struct BigInt.BigUInt
 
 class ERC20TransactionService {
     func prepareERC20TransactionForSending(destinationAddressString: String,

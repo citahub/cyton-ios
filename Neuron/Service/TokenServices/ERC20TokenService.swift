@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import BigInt
 import web3swift
+import struct BigInt.BigUInt
 
 struct ERC20TokenService {
     /// getBalance

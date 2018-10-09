@@ -8,7 +8,7 @@
 
 import Foundation
 import web3swift
-import BigInt
+import struct BigInt.BigUInt
 
 struct CustomERC20TokenService {
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {

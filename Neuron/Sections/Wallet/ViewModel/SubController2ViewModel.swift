@@ -8,7 +8,7 @@
 
 import UIKit
 import web3swift
-import BigInt
+import struct BigInt.BigUInt
 
 class SubController2ViewModel: NSObject {
 
