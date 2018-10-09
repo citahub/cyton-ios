@@ -23,7 +23,7 @@ class NervosTransactionService {
                 }
                 return
             }
-            guard let amount = Utils.parseToBigUInt(value, units: .eth) else {
+            guard let amount = Web3Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
                     completion(SendNervosResult.error(SendNervosErrors.invalidAmountFormat))
                 }

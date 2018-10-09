@@ -34,7 +34,7 @@ class NervosQuoteViewController: UIViewController {
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) {
-        gasLabel.text = Utils.formatToEthereumUnits(quotaInput, toUnits: .Gwei, decimals: 4, fallbackToScientific: false)! + " \(tokenModel.symbol)"
+        gasLabel.text = Web3Utils.formatToEthereumUnits(quotaInput, toUnits: .Gwei, decimals: 4, fallbackToScientific: false)! + " \(tokenModel.symbol)"
         delegate?.getTransactionCostGas(gas: gasLabel.text!)
     }
 }

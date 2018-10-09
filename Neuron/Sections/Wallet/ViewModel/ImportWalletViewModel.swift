@@ -113,7 +113,6 @@ class ImportWalletViewModel: NSObject {
             appModel.wallets.append(walletModel)
             WalletRealmTool.addObject(appModel: appModel)
         }
-        Toast.hideHUD()
         Toast.showToast(text: "导入成功")
         if isFirstWallet {
             NotificationCenter.default.post(name: .firstWalletCreated, object: nil)

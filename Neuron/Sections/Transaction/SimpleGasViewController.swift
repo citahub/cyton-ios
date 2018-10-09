@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import BigInt
 import web3swift
+import struct BigInt.BigUInt
 
 protocol SimpleGasViewControllerDelegate: class {
     func getTransactionGasPrice(simpleGasViewController: SimpleGasViewController, gasPrice: BigUInt)

@@ -63,7 +63,6 @@ class SureMnemonicViewModel: NSObject {
             saveWallet()
         case .failed(let errorStr, let errorMsg):
             Toast.showToast(text: errorMsg)
-            print(errorStr)
         }
     }
 
