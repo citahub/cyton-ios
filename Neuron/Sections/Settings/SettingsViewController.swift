@@ -9,28 +9,62 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-//    @IBOutlet weak var fingerprintSwitch: UISwitch!
-    @IBOutlet weak var localCurrencyLabel: UILabel!
+    weak var localCurrencyLabel: UILabel?
+    var rowIdentifiers = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        navigationItem.title = "设置"
-//        fingerprintSwitch.isOn = false
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        localCurrencyLabel.text = LocalCurrencyService().getLocalCurrencySelect().short
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "contactUs" {
-            let webViewController = segue.destination as! CommonWebViewController
-            webViewController.url = URL(string: "https://www.nervos.org/contact")!
+        rowIdentifiers = [
+            String(describing: SettingCurrencyTableViewCell.self),
+            String(describing: SettingAuthenticationTableViewCell.self),
+            String(describing: SettingAboutUsTableViewCell.self),
+            String(describing: SettingContactUsTableViewCell.self)
+        ]
+        if !AuthenticationService.shared.isValid {
+            rowIdentifiers.remove(at: 1)
         }
     }
 
-    @IBAction func fingerprintSwitchChanged(_ sender: Any) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        localCurrencyLabel?.text = LocalCurrencyService().getLocalCurrencySelect().short
+    }
+
+    @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
+        AuthenticationService.shared.setAuthenticationEnable(enable: !AuthenticationService.shared.isEnable) { (result) in
+            sender.isOn = result
+        }
+    }
+
+    // MARK: UITableViewDataSource
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rowIdentifiers.count
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: rowIdentifiers[indexPath.row])!
+        if let cell = cell as? SettingCurrencyTableViewCell {
+            localCurrencyLabel = cell.localCurrencyLabel
+            localCurrencyLabel?.text = LocalCurrencyService().getLocalCurrencySelect().short
+        } else if let cell = cell as? SettingAuthenticationTableViewCell {
+            cell.authenticationSwitch.isOn = AuthenticationService.shared.isEnable
+            cell.authenticationSwitch.addTarget(self, action: #selector(authenticationSwitchChanged), for: .touchUpInside)
+        }
+        return cell
+    }
+    // MARK: UITableViewDelegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        if cell.classForCoder == SettingCurrencyTableViewCell.self {
+            let controller: CurrencyViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        } else if cell.classForCoder == SettingAboutUsTableViewCell.self {
+            let controller: AboutUsTableViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        } else if cell.classForCoder == SettingContactUsTableViewCell.self {
+            let controller: CommonWebViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+            controller.url = URL(string: "https://www.nervos.org/contact")!
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 }
