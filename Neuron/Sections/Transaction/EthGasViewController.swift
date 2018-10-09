@@ -10,6 +10,7 @@ import UIKit
 import RSKPlaceholderTextView
 import BigInt
 import web3swift
+import struct BigInt.BigUInt
 
 protocol EthGasViewControllerDelegate: class {
     func getTransactionGasPriceAndData(ethGasViewController: EthGasViewController, gasPrice: BigUInt, data: Data)

@@ -9,6 +9,7 @@
 import Foundation
 import BigInt
 import web3swift
+import struct BigInt.BigUInt
 
 struct EthNativeTokenService {
     /// get balance

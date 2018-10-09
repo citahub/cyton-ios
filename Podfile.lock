@@ -4,43 +4,46 @@ PODS:
     - Alamofire (~> 4.0)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - CryptoSwift (0.10.0)
-  - EFQRCode (4.2.2)
+  - CryptoSwift (0.12.0)
+  - EFQRCode (4.3.0)
   - IGIdenticon (0.6)
-  - IQKeyboardManagerSwift (6.1.1)
-  - KeychainSwift (11.0.0)
-  - libsodium (1.0.12)
-  - LYEmptyView (1.1.0)
-  - MJRefresh (3.1.15.3)
-  - NervosSwift (0.18.0):
+  - IQKeyboardManagerSwift (6.2.0)
+  - KeychainSwift (12.0.0)
+  - LYEmptyView (1.2.2)
+  - MJRefresh (3.1.15.7)
+  - NervosSwift (0.18.1):
     - SwiftProtobuf (~> 1.0.3)
-    - web3swift (~> 1.1.1)
+    - web3swift (~> 1.1.10)
   - PlainPing (0.5)
-  - PromiseKit (6.3.5):
-    - PromiseKit/CorePromise (= 6.3.5)
-    - PromiseKit/Foundation (= 6.3.5)
-    - PromiseKit/UIKit (= 6.3.5)
-  - PromiseKit/CorePromise (6.3.5)
-  - PromiseKit/Foundation (6.3.5):
+  - PromiseKit (6.5.1):
+    - PromiseKit/CorePromise (= 6.5.1)
+    - PromiseKit/Foundation (= 6.5.1)
+    - PromiseKit/UIKit (= 6.5.1)
+  - PromiseKit/CorePromise (6.5.1)
+  - PromiseKit/Foundation (6.5.1):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.3.5):
+  - PromiseKit/UIKit (6.5.1):
     - PromiseKit/CorePromise
-  - Realm (3.7.5):
-    - Realm/Headers (= 3.7.5)
-  - Realm/Headers (3.7.5)
-  - RealmSwift (3.7.5):
-    - Realm (= 3.7.5)
-  - Result (3.0.0)
+  - Realm (3.11.0):
+    - Realm/Headers (= 3.11.0)
+  - Realm/Headers (3.11.0)
+  - RealmSwift (3.11.0):
+    - Realm (= 3.11.0)
+  - Result (4.0.0)
   - RSKPlaceholderTextView (4.0.0)
   - SCLAlertView (0.8)
+  - scrypt (2.0):
+    - CryptoSwift (~> 0.11)
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
-  - secp256k1_ios (0.1.3)
+  - secp256k1_swift (1.0.3)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.0.3)
+  - SwiftRLP (1.0.1):
+    - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
-  - TrezorCrypto (0.0.6)
+  - TrezorCrypto (0.0.8)
   - TrustCore (0.0.7):
     - BigInt
     - TrezorCrypto
@@ -49,13 +52,14 @@ PODS:
     - CryptoSwift
     - TrezorCrypto
     - TrustCore
-  - web3swift (1.1.1):
-    - BigInt (~> 3.1.0)
-    - CryptoSwift (~> 0.10.0)
-    - libsodium (~> 1.0.12)
-    - PromiseKit (~> 6.3.0)
-    - Result (~> 3.0.0)
-    - secp256k1_ios (~> 0.1.3)
+  - web3swift (1.1.10):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.11)
+    - PromiseKit (~> 6.3)
+    - Result (~> 4.0)
+    - scrypt (~> 2.0)
+    - secp256k1_swift (~> 1.0.3)
+    - SwiftRLP (~> 1.0.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -66,7 +70,7 @@ DEPENDENCIES:
   - KeychainSwift
   - LYEmptyView
   - MJRefresh
-  - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.18.0`)
+  - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.18.1`)
   - PlainPing
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
@@ -86,7 +90,6 @@ SPEC REPOS:
     - IGIdenticon
     - IQKeyboardManagerSwift
     - KeychainSwift
-    - libsodium
     - LYEmptyView
     - MJRefresh
     - PlainPing
@@ -96,10 +99,12 @@ SPEC REPOS:
     - Result
     - RSKPlaceholderTextView
     - SCLAlertView
+    - scrypt
     - SDWebImage
-    - secp256k1_ios
+    - secp256k1_swift
     - SipHash
     - SwiftProtobuf
+    - SwiftRLP
     - Toast-Swift
     - TrezorCrypto
     - TrustCore
@@ -109,43 +114,44 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
-    :tag: v0.18.0
+    :tag: v0.18.1
 
 CHECKOUT OPTIONS:
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
-    :tag: v0.18.0
+    :tag: v0.18.1
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
-  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
-  EFQRCode: 203846c7b135b5f7c1d18bb7923bc32a74c8b363
+  CryptoSwift: 1c07ca50843dd48bc54e6ea53d7a4dba3b645716
+  EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
-  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
-  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
-  libsodium: 9a8faa5ef2fa0d2d57bd7f7d79bf8fb7c1a9f0ea
-  LYEmptyView: 893007305370c9c69d7dc71b4b32f9b2ee80a622
-  MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
-  NervosSwift: 298278bafa8dfda023ed60926269db01e82fbb92
+  IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
+  KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
+  LYEmptyView: 12c9db1f3946fa3c812674467ad95b7ae7c93614
+  MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
+  NervosSwift: f3d55beb04d29b0e3e952e40392f74cf5f15eb40
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
-  PromiseKit: 32c36425387e9cfc7f1206f27bfd906d0b53c0d6
-  Realm: c286caf4dbf346ce24aad49ca76c7ce622d4a082
-  RealmSwift: 2a9281e37d6de55f66f76254d49d28aeb1b729e4
-  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  PromiseKit: 162f56c89aae9989ffc14476a5f821af17c3f4ba
+  Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
+  RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
+  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RSKPlaceholderTextView: 15f1dc1883e103ea605874b863f19ff6b08496d5
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
+  scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
-  secp256k1_ios: ac9ef04e761f43c58012b28548afa91493761f17
+  secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 5ccc0e4054e37c75800e5744acb2aa80bb72b39c
+  SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
-  TrezorCrypto: bea2dab002f9a5fe885df004694b9ece52dc088b
+  TrezorCrypto: 938c4b715fff7824a9c891a105e65ee0e4e81662
   TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
   TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
-  web3swift: 4b4e4a0dd16e7081b7190bf8596c5638f313a498
+  web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 156bc766e0b3a175fd4588b1216e093f083df0cf
+PODFILE CHECKSUM: 0b63d334ea3f43be1c7c87c5c4f8c865ca5f5a5e
 
 COCOAPODS: 1.5.3
