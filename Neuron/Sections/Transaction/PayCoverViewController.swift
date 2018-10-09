@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import BigInt
 import Nervos
 import web3swift
+import struct BigInt.BigUInt
 
 protocol PayCoverViewControllerDelegate: class {
     func popToRootView()
