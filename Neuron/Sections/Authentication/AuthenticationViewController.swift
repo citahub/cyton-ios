@@ -26,7 +26,6 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         automaticallyAdjustsScrollViewInsets = true
         switchImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(switchAuthenticationMode)))
         switchAuthenticationMode()
