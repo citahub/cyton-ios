@@ -8,17 +8,5 @@
 
 import UIKit
 
-class SettingCurrencyTableViewCell: UITableViewCell {
-    @IBOutlet weak var localCurrencyLabel: UILabel!
-}
 
-class SettingAuthenticationTableViewCell: UITableViewCell {
-    @IBOutlet weak var authenticationSwitch: UISwitch!
-}
-
-class SettingAboutUsTableViewCell: UITableViewCell {
-}
-
-class SettingContactUsTableViewCell: UITableViewCell {
-}
 

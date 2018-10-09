@@ -15,12 +15,12 @@ class AuthTouchIDViewController: UIViewController, AuthenticationMode {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fingerprintRecognition()
+        deviceOwnerAuthentication()
     }
 
-    @IBAction func fingerprintRecognition() {
+    @IBAction func deviceOwnerAuthentication() {
         messageLabel.isHidden = true
-        AuthenticationService.shared.fingerprintRecognition { (result, error) in
+        AuthenticationService.shared.deviceOwnerAuthentication { (result, error) in
             if result {
                 self.delegate?.authenticationSuccessful()
             } else {

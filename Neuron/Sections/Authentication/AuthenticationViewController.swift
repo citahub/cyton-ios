@@ -52,6 +52,7 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
             change(mode: mode)
         }
     }
+
     func change(mode: AuthenticationMode) {
         currentMode = mode
         mode.delegate = self

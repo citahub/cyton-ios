@@ -17,8 +17,8 @@ class SettingsViewController: UITableViewController {
         rowIdentifiers = [
             String(describing: SettingCurrencyTableViewCell.self),
             String(describing: SettingAuthenticationTableViewCell.self),
-            String(describing: SettingAboutUsTableViewCell.self),
-            String(describing: SettingContactUsTableViewCell.self)
+            "SettingAboutUsTableViewCell",
+            "SettingContactUsTableViewCell"
         ]
         if !AuthenticationService.shared.isValid {
             rowIdentifiers.remove(at: 1)
@@ -56,13 +56,13 @@ class SettingsViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         if cell.classForCoder == SettingCurrencyTableViewCell.self {
-            let controller: CurrencyViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+            let controller: CurrencyViewController = UIStoryboard(storyboard: .settings).instantiateViewController()
             navigationController?.pushViewController(controller, animated: true)
-        } else if cell.classForCoder == SettingAboutUsTableViewCell.self {
-            let controller: AboutUsTableViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+        } else if cell.reuseIdentifier == "SettingAboutUsTableViewCell" {
+            let controller: AboutUsTableViewController = UIStoryboard(storyboard: .settings).instantiateViewController()
             navigationController?.pushViewController(controller, animated: true)
-        } else if cell.classForCoder == SettingContactUsTableViewCell.self {
-            let controller: CommonWebViewController = UIStoryboard(storyboard: .Settings).instantiateViewController()
+        } else if cell.reuseIdentifier == "SettingContactUsTableViewCell" {
+            let controller: CommonWebViewController = UIStoryboard(storyboard: .settings).instantiateViewController()
             controller.url = URL(string: "https://www.nervos.org/contact")!
             navigationController?.pushViewController(controller, animated: true)
         }

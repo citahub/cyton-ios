@@ -22,6 +22,8 @@
 		6E867E03216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */; };
 		6E867E05216C3F1500BD6FE5 /* AuthPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */; };
 		6E867E07216C54B500BD6FE5 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */; };
+		6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */; };
+		6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */; };
 		6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */; };
 		6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */; };
 		6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC0216B3AE40044176D /* Authentication.storyboard */; };
@@ -207,6 +209,8 @@
 		6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectWalletViewController.swift; sourceTree = "<group>"; };
 		6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthPasswordViewController.swift; sourceTree = "<group>"; };
 		6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
+		6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAuthenticationTableViewCell.swift; sourceTree = "<group>"; };
+		6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC0216B3AE40044176D /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -475,6 +479,8 @@
 			children = (
 				89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */,
 				6E9D7CC9216B72020044176D /* SettingTableViewCells.swift */,
+				6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */,
+				6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1242,6 +1248,7 @@
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
 				89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
+				6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
@@ -1266,6 +1273,7 @@
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
 				89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */,
+				6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */,

@@ -23,9 +23,9 @@ extension UIViewController: StoryboardIdentifiable { }
 
 extension UIStoryboard {
     enum Stroyboard: String {
-        case Authentication
-        case Settings
-        case SwitchWallet
+        case authentication = "Authentication"
+        case settings = "Settings"
+        case switchWallet = "SwitchWallet"
     }
 
     convenience init(storyboard: Stroyboard, bundle storyboardBundleOrNil: Bundle? = nil) {

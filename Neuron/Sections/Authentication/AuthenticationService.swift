@@ -41,10 +41,6 @@ class AuthenticationService {
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
     }
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func register() { }
 
     // MARK: - Enable
@@ -54,7 +50,7 @@ class AuthenticationService {
             return
         }
         if enable {
-            fingerprintRecognition { (result, error) in
+            deviceOwnerAuthentication { (result, error) in
                 if result {
                     UserDefaults.standard.set(true, forKey: AuthenticationService.UserDefaultsKey.enable.rawValue)
                     complection(true)
@@ -83,7 +79,7 @@ class AuthenticationService {
         guard willResignActiveDate == nil || willResignActiveDate! + timeout < Date() else {
             return
         }
-        let controller: AuthenticationViewController = UIStoryboard(storyboard: .Authentication).instantiateViewController()
+        let controller: AuthenticationViewController = UIStoryboard(storyboard: .authentication).instantiateViewController()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UINavigationController(rootViewController: controller)
         window.backgroundColor = UIColor.orange
@@ -100,7 +96,7 @@ class AuthenticationService {
         })
     }
 
-    func fingerprintRecognition(complection: @escaping (Bool, LAError?) -> Void) {
+    func deviceOwnerAuthentication(complection: @escaping (Bool, LAError?) -> Void) {
         recognitionFlag = true
         LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "请验证指纹") { (result, error: Error?) in
             DispatchQueue.main.async {
@@ -121,7 +117,7 @@ class AuthenticationService {
     // MARK: - Notification
     @objc private func didBecomeActiveNotification() {
         guard isEnable else { return }
-        guard recognitionFlag == false else {
+        guard !recognitionFlag else {
             recognitionFlag = false
             return
         }

@@ -28,7 +28,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
 
     @IBAction func selectWallet(_ sender: Any) {
         guard let navigationController = view.window?.rootViewController as? UINavigationController else { return }
-        let controller: AuthSelectWalletViewController = UIStoryboard(storyboard: .Authentication).instantiateViewController()
+        let controller: AuthSelectWalletViewController = UIStoryboard(storyboard: .authentication).instantiateViewController()
         controller.delegate = self
         navigationController.pushViewController(controller, animated: true)
     }
