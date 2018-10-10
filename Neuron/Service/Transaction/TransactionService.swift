@@ -17,11 +17,11 @@ class TransactionService {
         let parameters: Dictionary = ["address": walletAddress]
         Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { [weak self](response) in
             do {
-                guard let responseData = response.data else { throw TransactionErrors.requestfailed }
+                guard let responseData = response.data else { throw TransactionError.requestfailed }
                 let ethTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
-                guard let transactions = ethTransaction?.result.transactions else { throw TransactionErrors.requestfailed }
+                guard let transactions = ethTransaction?.result.transactions else { throw TransactionError.requestfailed }
                 var resultArr: [TransactionModel] = []
-                guard let self = self else { throw TransactionErrors.requestfailed }
+                guard let self = self else { throw TransactionError.requestfailed }
                 for transacationModel in transactions {
                     transacationModel.formatTime = self.formatTimeStamp(timeStamp: transacationModel.timeStamp)
                     transacationModel.chainName = "Ethereum Mainnet"
@@ -50,11 +50,11 @@ class TransactionService {
         let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
         Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
             do {
-                guard let responseData = response.data else { throw TransactionErrors.requestfailed }
+                guard let responseData = response.data else { throw TransactionError.requestfailed }
                 let nervosTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
-                guard let transactions = nervosTransaction?.result.transactions else { throw TransactionErrors.requestfailed }
+                guard let transactions = nervosTransaction?.result.transactions else { throw TransactionError.requestfailed }
                 var resultArr: [TransactionModel] = []
-                guard let self = self else { throw TransactionErrors.requestfailed }
+                guard let self = self else { throw TransactionError.requestfailed }
                 for transacationModel in transactions {
                     transacationModel.formatTime = self.formatTimestamp(timeStap: Int(transacationModel.timeStamp) ?? 0)
                     transacationModel.gasPrice = ""

@@ -37,7 +37,7 @@ enum SendEthError: Error {
     case invalidPassword
 }
 
-enum TransactionErrors: Error {
+enum TransactionError: Error {
     case requestfailed
 }
 
@@ -47,7 +47,7 @@ enum NervosServiceResult<T> {
     case error(Error)
 }
 
-enum SendNervosErrors: Error {
+enum SendNervosError: Error {
     case invalidDestinationAddress
     case invalidAmountFormat
     case contractLoadingError
