@@ -9,8 +9,8 @@
 import UIKit
 import PlainPing
 
-class BrowserUrlParser {
-    func isUrlvalid( urlString: String, comletion:@escaping (Double?, Error?) -> Void ) {
+struct BrowserUrlParser {
+    static func isUrlvalid( urlString: String, comletion:@escaping (Double?, Error?) -> Void ) {
         PlainPing.ping(urlString, withTimeout: 4.0, completionBlock: { ( timeElapsed: Double?, error: Error?) in
             if let error = error {
                 comletion(0, error)
@@ -22,5 +22,4 @@ class BrowserUrlParser {
             }
         })
     }
-
 }

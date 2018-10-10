@@ -12,7 +12,6 @@ import LYEmptyView
 class SearchAppController: UITableViewController {
     @IBOutlet var textField: UITextField!
     var searchArray: [String] = []
-    let browser = BrowserUrlParser()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -53,7 +52,7 @@ class SearchAppController: UITableViewController {
             UserDefaults.standard.set(searchArray, forKey: "searchHistory")
             tableView.reloadData()
         }
-        browser.isUrlvalid(urlString: urlStr) { (_, error) in
+        BrowserUrlParser.isUrlvalid(urlString: urlStr) { (_, error) in
             if error != nil {
                 Toast.showToast(text: "链接无效,请重新输入")
             } else {
@@ -86,7 +85,7 @@ class SearchAppController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        browser.isUrlvalid(urlString: searchArray[indexPath.row]) { (_, error) in
+        BrowserUrlParser.isUrlvalid(urlString: searchArray[indexPath.row]) { (_, error) in
             if error != nil {
                 Toast.showToast(text: "链接无效,请重新输入")
             } else {
