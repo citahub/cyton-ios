@@ -12,19 +12,19 @@ import TrustCore
 
 struct WalletCryptoService {
     static func updatePassword(address: String, password: String, newPassword: String) throws {
-        let wallet = WalletTools.wallet(for: address)!
-        try WalletTools.keyStore.update(wallet: wallet, password: password, newPassword: newPassword)
+        let wallet = WalletTool.wallet(for: address)!
+        try WalletTool.keyStore.update(wallet: wallet, password: password, newPassword: newPassword)
     }
 
     static func deleteWallet(address: String, password: String) throws {
-        let wallet = WalletTools.wallet(for: address)!
-        try WalletTools.keyStore.delete(wallet: wallet, password: password)
+        let wallet = WalletTool.wallet(for: address)!
+        try WalletTool.keyStore.delete(wallet: wallet, password: password)
     }
 
     static func getKeystoreForCurrentWallet(password: String) throws -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        let wallet = WalletTools.wallet(for: walletModel.address)!
-        let data = try WalletTools.keyStore.export(wallet: wallet, password: password, newPassword: password)
+        let wallet = WalletTool.wallet(for: walletModel.address)!
+        let data = try WalletTool.keyStore.export(wallet: wallet, password: password, newPassword: password)
         return String(data: data, encoding: .utf8)!
     }
 }

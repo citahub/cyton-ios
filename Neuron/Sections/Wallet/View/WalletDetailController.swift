@@ -112,7 +112,7 @@ class WalletDetailController: UITableViewController {
         let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("请输入钱包名字")
         alert.addButton("确定") {
-            if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
+            if !WalletTool.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
                 let nameClean = txt.text?.trimmingCharacters(in: .whitespaces)
                 if nameClean?.count == 0 {
                     Toast.showToast(text: "钱包名字不能为空")

@@ -1,6 +1,6 @@
 //
-//  WalletTools.swift
-//  KKWallet
+//  WalletTool.swift
+//  Neuron
 //
 //
 
@@ -10,7 +10,7 @@ import TrustCore
 import struct TrustCore.EthereumAddress
 import Result
 
-struct WalletTools {
+struct WalletTool {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias GenerateMnemonicCallback = (String) -> Void

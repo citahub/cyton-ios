@@ -51,7 +51,7 @@ class ImportWalletViewModel: NSObject {
             Toast.showToast(text: "钱包名字不能超过15个字符")
             return
         }
-        if !WalletTools.checkWalletName(name: name) {
+        if !WalletTool.checkWalletName(name: name) {
             Toast.showToast(text: "钱包名字重复")
             return
         }
@@ -62,7 +62,7 @@ class ImportWalletViewModel: NSObject {
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.keystore(keystore: keystore, password: password)
-        WalletTools.importWallet(with: importType) { (result) in
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
@@ -109,11 +109,11 @@ class ImportWalletViewModel: NSObject {
         }
         if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
-        WalletTools.importWallet(with: importType) { (result) in
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
@@ -141,11 +141,11 @@ class ImportWalletViewModel: NSObject {
         }
         if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
-        WalletTools.importWallet(with: importType) { (result) in
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String

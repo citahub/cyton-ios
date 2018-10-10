@@ -56,11 +56,11 @@ class NervosTransactionService {
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = WalletTools.wallet(for: walletModel.address) else {
+        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
-        guard case .succeed(result: let privateKey) = WalletTools.exportPrivateKey(wallet: wallet, password: password) else {
+        guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }

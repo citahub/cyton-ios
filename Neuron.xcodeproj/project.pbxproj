@@ -133,7 +133,7 @@
 		89D4AC2920D59F270097E02B /* KeystoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeystoreError.swift */; };
 		89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2120D59F270097E02B /* Keystore.swift */; };
 		89D4AC2D20D59F270097E02B /* ImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2420D59F270097E02B /* ImportType.swift */; };
-		89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2520D59F270097E02B /* WalletTools.swift */; };
+		89D4AC2E20D59F270097E02B /* WalletTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2520D59F270097E02B /* WalletTool.swift */; };
 		89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2620D59F270097E02B /* ImportError.swift */; };
 		89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2820D59F270097E02B /* ImportResult.swift */; };
 		89D4AC3320D8A6E80097E02B /* SubController2ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3220D8A6E80097E02B /* SubController2ViewModel.swift */; };
@@ -316,7 +316,7 @@
 		89D4AC2020D59F270097E02B /* KeystoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreError.swift; sourceTree = "<group>"; };
 		89D4AC2120D59F270097E02B /* Keystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
 		89D4AC2420D59F270097E02B /* ImportType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportType.swift; sourceTree = "<group>"; };
-		89D4AC2520D59F270097E02B /* WalletTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTools.swift; sourceTree = "<group>"; };
+		89D4AC2520D59F270097E02B /* WalletTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTool.swift; sourceTree = "<group>"; };
 		89D4AC2620D59F270097E02B /* ImportError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportError.swift; sourceTree = "<group>"; };
 		89D4AC2820D59F270097E02B /* ImportResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportResult.swift; sourceTree = "<group>"; };
 		89D4AC3220D8A6E80097E02B /* SubController2ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubController2ViewModel.swift; sourceTree = "<group>"; };
@@ -818,7 +818,7 @@
 				89D4AC2020D59F270097E02B /* KeystoreError.swift */,
 				89D4AC2120D59F270097E02B /* Keystore.swift */,
 				89D4AC2420D59F270097E02B /* ImportType.swift */,
-				89D4AC2520D59F270097E02B /* WalletTools.swift */,
+				89D4AC2520D59F270097E02B /* WalletTool.swift */,
 				89D4AC2620D59F270097E02B /* ImportError.swift */,
 				1A1E8410216DF55D00B15E88 /* ExportError.swift */,
 				89D4AC2820D59F270097E02B /* ImportResult.swift */,
@@ -1200,7 +1200,7 @@
 				89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
-				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
+				89D4AC2E20D59F270097E02B /* WalletTool.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
