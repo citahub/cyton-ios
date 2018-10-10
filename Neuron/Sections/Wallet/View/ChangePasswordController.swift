@@ -37,7 +37,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
 
     @IBAction func changePasswordBtn(_ sender: UIButton) {
         if newPassword != confirmPassword {
-            Toast.showToast(text: "两次新密码输入不一致");
+            Toast.showToast(text: "两次新密码输入不一致")
             return
         }
         if !PasswordValidator.isValid(password: newPassword) {
@@ -55,7 +55,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
                 DispatchQueue.main.async {
                     // TODO: check if hideHUD prevents next showToast from showing up
                     Toast.hideHUD()
-                    Toast.showToast(text: "密码错误");
+                    Toast.showToast(text: "密码错误")
                 }
                 return
             }

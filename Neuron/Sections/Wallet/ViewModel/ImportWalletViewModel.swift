@@ -40,11 +40,11 @@ class ImportWalletViewModel: NSObject {
     ///   - name: walletName
     func importKeystoreWallet(keystore: String, password: String, name: String) {
         if keystore.isEmpty {
-            Toast.showToast(text: "请输入keystore文本");
+            Toast.showToast(text: "请输入keystore文本")
             return
         }
         if name.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空");
+            Toast.showToast(text: "钱包名字不能为空")
             return
         }
         if name.count > 15 {
@@ -52,11 +52,11 @@ class ImportWalletViewModel: NSObject {
             return
         }
         if !WalletTools.checkWalletName(name: name) {
-            Toast.showToast(text: "钱包名字重复");
+            Toast.showToast(text: "钱包名字重复")
             return
         }
         if password.isEmpty {
-            Toast.showToast(text: "解锁密码不能为空");
+            Toast.showToast(text: "解锁密码不能为空")
             return
         }
         Toast.showHUD(text: "导入钱包中")
