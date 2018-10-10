@@ -485,7 +485,10 @@
 			isa = PBXGroup;
 			children = (
 				8928C24820AE91E600C3103E /* DappViewController.swift */,
-				8928C25120AEA6A700C3103E /* ViewModel */,
+				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
+				8928C26920AED5C100C3103E /* SearchAppController.swift */,
+				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
+				89B895B020F8B0CD00B9468B /* BrowserviewController.swift */,
 				8928C25020AEA6A600C3103E /* View */,
 			);
 			path = Dapp;
@@ -531,23 +534,12 @@
 			isa = PBXGroup;
 			children = (
 				89C25C6A20BD41D800007EC1 /* TableviewCell */,
-				8928C26920AED5C100C3103E /* SearchAppController.swift */,
-				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
 				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
 				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
 				8964A17B20BE7F750086848F /* MessageSignController.swift */,
 				8964A17C20BE7F750086848F /* MessageSignController.xib */,
-				89B895B020F8B0CD00B9468B /* BrowserviewController.swift */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		8928C25120AEA6A700C3103E /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8928C27320B29ABB00C3103E /* Wallet */ = {

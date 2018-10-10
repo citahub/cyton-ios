@@ -14,7 +14,7 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
-        self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
+        self.webview = WKWebView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
         self.webview.navigationDelegate = self
         self.webview.uiDelegate = self
         return self.webview
