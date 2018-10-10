@@ -38,13 +38,13 @@ class TokenModel: Object, Decodable {
     struct Logo: Decodable {
         var src: String?
     }
-    var _logo: Logo?
+    var logo: Logo?
 
     enum CodingKeys: String, CodingKey {
         case name
         case address
         case decimals
         case symbol
-        case _logo = "logo"
+        case logo
     }
 }
