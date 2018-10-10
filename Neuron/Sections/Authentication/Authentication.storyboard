@@ -47,10 +47,10 @@
             </objects>
             <point key="canvasLocation" x="-647.20000000000005" y="124.58770614692655"/>
         </scene>
-        <!--Auth TouchID View Controller-->
+        <!--Auth Device View Controller-->
         <scene sceneID="8Pn-00-fQC">
             <objects>
-                <viewController storyboardIdentifier="AuthTouchIDViewController" id="hDB-I9-jCD" customClass="AuthTouchIDViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AuthDeviceViewController" id="hDB-I9-jCD" customClass="AuthDeviceViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7hp-bo-x4Q">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -74,7 +74,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="fingerprint_icon"/>
                                 <connections>
-                                    <action selector="fingerprintRecognition" destination="hDB-I9-jCD" eventType="touchUpInside" id="1EG-Mz-a9m"/>
+                                    <action selector="deviceOwnerAuthentication" destination="hDB-I9-jCD" eventType="touchUpInside" id="UFc-9W-jXc"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -82,6 +82,8 @@
                         <viewLayoutGuide key="safeArea" id="rbp-yJ-Ksc"/>
                     </view>
                     <connections>
+                        <outlet property="authenticationButton" destination="rhh-Gs-LNs" id="Kef-94-DZL"/>
+                        <outlet property="authenticationTitleLabel" destination="jQN-EF-XgW" id="4ol-4n-PMN"/>
                         <outlet property="messageLabel" destination="V3r-d6-u6f" id="C3Z-6e-5vz"/>
                     </connections>
                 </viewController>

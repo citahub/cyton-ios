@@ -27,7 +27,7 @@
 		6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */; };
 		6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */; };
 		6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC0216B3AE40044176D /* Authentication.storyboard */; };
-		6E9D7CC5216B490D0044176D /* AuthTouchIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC4216B490D0044176D /* AuthTouchIDViewController.swift */; };
+		6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */; };
 		6E9D7CC8216B49AF0044176D /* UIStoryBoard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC7216B49AF0044176D /* UIStoryBoard+Extension.swift */; };
 		6E9D7CCA216B72020044176D /* SettingTableViewCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC9216B72020044176D /* SettingTableViewCells.swift */; };
 		8905660720D0AC120041D4B4 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905660620D0AC120041D4B4 /* AppModel.swift */; };
@@ -214,7 +214,7 @@
 		6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC0216B3AE40044176D /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
-		6E9D7CC4216B490D0044176D /* AuthTouchIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTouchIDViewController.swift; sourceTree = "<group>"; };
+		6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeviceViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC7216B49AF0044176D /* UIStoryBoard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryBoard+Extension.swift"; sourceTree = "<group>"; };
 		6E9D7CC9216B72020044176D /* SettingTableViewCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCells.swift; sourceTree = "<group>"; };
 		71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -432,7 +432,7 @@
 				6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */,
 				6E9D7CC0216B3AE40044176D /* Authentication.storyboard */,
 				6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */,
-				6E9D7CC4216B490D0044176D /* AuthTouchIDViewController.swift */,
+				6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */,
 				6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */,
 				6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */,
 			);
@@ -1260,7 +1260,7 @@
 				6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
-				6E9D7CC5216B490D0044176D /* AuthTouchIDViewController.swift in Sources */,
+				6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */,
 				6E9D7CC8216B49AF0044176D /* UIStoryBoard+Extension.swift in Sources */,
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
 				8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */,

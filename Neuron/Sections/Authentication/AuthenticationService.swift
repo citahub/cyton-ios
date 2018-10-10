@@ -16,15 +16,15 @@ class AuthenticationService {
             return "\(AuthenticationService.self)_\(self)"
         }
     }
+    enum BiometryType {
+        case none
+        case touchID
+        case faceID
+    }
 
+    let biometryType: BiometryType
     var isValid: Bool {
-        var error: NSError?
-        if LAContext().canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
-            return true
-        } else {
-            debugPrint(error ?? "")
-            return false
-        }
+        return biometryType != BiometryType.none
     }
     var isEnable: Bool {
         return UserDefaults.standard.bool(forKey: AuthenticationService.UserDefaultsKey.enable.rawValue)
@@ -37,6 +37,22 @@ class AuthenticationService {
     private var recognitionFlag = false
 
     private init() {
+        var error: NSError?
+        let laContext = LAContext()
+         if laContext.canEvaluatePolicy(.deviceOwnerAuthentication, error: &error) {
+            if #available(iOS 11.0, *) {
+                if laContext.biometryType == LABiometryType.faceID {
+                    biometryType = BiometryType.faceID
+                } else {
+                    biometryType = BiometryType.touchID
+                }
+            } else {
+                biometryType = BiometryType.touchID
+            }
+        } else {
+            biometryType = BiometryType.none
+        }
+
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
     }
@@ -57,10 +73,16 @@ class AuthenticationService {
                 } else {
                     complection(false)
                     guard let error = error else { return }
+                    if #available(iOS 11.0, *) {
+                        if error.code == LAError.biometryNotEnrolled ||
+                            error.code == LAError.biometryNotAvailable ||
+                            error.code == LAError.biometryLockout {
+                            Toast.showToast(text: error.stringValue)
+                            return
+                        }
+                    }
                     switch error {
-                    case LAError.passcodeNotSet:
-                        Toast.showToast(text: error.stringValue)
-                    case LAError.touchIDLockout:
+                    case LAError.passcodeNotSet, LAError.touchIDLockout:
                         Toast.showToast(text: error.stringValue)
                     default:
                         break
@@ -132,11 +154,20 @@ class AuthenticationService {
 
 extension LAError {
     var stringValue: String {
+        if #available(iOS 11.0, *) {
+            if code == LAError.biometryNotEnrolled {
+                return "未设置 Face ID"
+            } else if code == LAError.biometryNotAvailable {
+                return "需要 Face ID 权限"
+            } else if code == LAError.biometryLockout {
+                return "多次验证失败被锁定"
+            }
+        }
         switch self {
         case LAError.passcodeNotSet:
-            return "未设置指纹密码"
+            return "未设置 Touch ID"
         case LAError.touchIDLockout:
-            return "TouchID多次验证失败被锁定"
+            return "多次验证失败被锁定"
         default:
             return "识别失败，请重试"
         }

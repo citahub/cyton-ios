@@ -41,12 +41,17 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
     }
 
     @IBAction func switchAuthenticationMode() {
-        if (currentMode as? AuthTouchIDViewController) == nil {
+        if (currentMode as? AuthDeviceViewController) == nil {
             switchImageView.image = UIImage(named: "password_login_icon")
-            let mode: AuthTouchIDViewController = storyboard!.instantiateViewController()
+            let mode: AuthDeviceViewController = storyboard!.instantiateViewController()
             change(mode: mode)
         } else {
-            switchImageView.image = UIImage(named: "fingerprint_login_icon")
+            if AuthenticationService.shared.biometryType == .faceID {
+                // TODO: 还没给 Face ID 相关图标
+                switchImageView.image = UIImage(named: "fingerprint_login_icon")
+            } else {
+                switchImageView.image = UIImage(named: "fingerprint_login_icon")
+            }
             let mode: AuthPasswordViewController = storyboard!.instantiateViewController()
             change(mode: mode)
         }
