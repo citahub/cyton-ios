@@ -6,30 +6,37 @@
 
 import UIKit
 import TrustKeystore
+import struct TrustCore.Address
 import Result
 
 struct WalletTools {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias GenerateMnemonicCallback = (String) -> Void
-    typealias ExportPrivateCallback = (ImportResult<String?>) -> Void
+    typealias ExportPrivateCallback = (ImportResult<String>) -> Void
 
     static let documentDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
     static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
-    static let keystore = try? KeyStore(keyDirectory: keysDirectory)
+    static let keyStore = try! KeyStore(keyDirectory: keysDirectory)
+
+    static func account(for address: String) -> Account? {
+        if let ethAddress = Address(string: address) {
+            return keyStore.account(for: ethAddress)
+        }
+        return nil
+    }
 
     static func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let account = self.createAccout(password: password)
+            let account = self.createAccount(password: password)
             DispatchQueue.main.async {
                 completion(.success(account))
             }
         }
     }
 
-    static func createAccout(password: String) -> Account {
-        let account = try! keystore?.createAccount(password: password, type: .hierarchicalDeterministicWallet)
-        return account!
+    static func createAccount(password: String) -> Account {
+        return try! keyStore.createAccount(password: password, type: .hierarchicalDeterministicWallet)
     }
 
     /// 生成12位助记词
@@ -89,11 +96,8 @@ struct WalletTools {
     ///   - devirationPath: devirationPath
     ///   - completion: 导入结果回调
     static func importMnemonic(mnemonic: String, password: String, devirationPath: String) -> ImportResult<Account> {
-        guard keystore != nil else {
-            return ImportResult.failed(error: ImportError.openKeystoreFailed, errorMessage: "JSON密钥导入失败")
-        }
         do {
-            let account = try keystore!.import(mnemonic: mnemonic, passphrase: "", derivationPath: devirationPath, encryptPassword: password)
+            let account = try keyStore.import(mnemonic: mnemonic, passphrase: "", derivationPath: devirationPath, encryptPassword: password)
             return ImportResult.succeed(result: account)
         } catch {
             switch error {
@@ -131,12 +135,8 @@ struct WalletTools {
     ///   - password: 密码
     /// - Returns: 导入结果
     static func importWalletInJSON(json: String?, password: String) -> ImportResult<Account> {
-
         guard let data = json?.data(using: .utf8) else {
             return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "无效的keystpore")
-        }
-        guard let keyStore = keystore else {
-            return ImportResult.failed(error: ImportError.openKeystoreFailed, errorMessage: "keystpore导入失败")
         }
 
         do {
@@ -211,9 +211,8 @@ struct WalletTools {
     /// - Parameters:
     ///   - account: account
     ///   - password: password
-    ///   - completion: ImportResult<String?>
+    ///   - completion: ImportResult<String>
     static func exportPrivateKeyAsync(account: Account, password: String, completion:@escaping ExportPrivateCallback) {
-
         DispatchQueue.global(qos: .userInitiated).async {
             let privateKey = exportPrivateKey(account: account, password: password)
             DispatchQueue.main.async {
@@ -222,10 +221,10 @@ struct WalletTools {
         }
     }
 
-    static func exportPrivateKey(account: Account, password: String) -> ImportResult<String?> {
+    static func exportPrivateKey(account: Account, password: String) -> ImportResult<String> {
         do {
-            let privateKey = try keystore?.exportPrivateKey(account: account, password: password)
-            return ImportResult.succeed(result: privateKey?.toHexString())
+            let privateKey = try keyStore.exportPrivateKey(account: account, password: password)
+            return ImportResult.succeed(result: privateKey.toHexString())
         } catch {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
         }

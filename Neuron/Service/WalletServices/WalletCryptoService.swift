@@ -8,14 +8,12 @@
 
 import UIKit
 import TrezorCrypto
-import TrustKeystore
 import TrustCore
 
 struct WalletCryptoService {
     static func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
-        let ac = Address.init(eip55: (walletAddress))
-        let account = WalletTools.keystore?.account(for: ac!)
-        try! WalletTools.keystore?.update(account: account!, password: oldPassword, newPassword: newPassword)
+        let account = WalletTools.account(for: walletAddress)
+        try! WalletTools.keyStore.update(account: account!, password: oldPassword, newPassword: newPassword)
     }
 
     static func didCheckoutKeystoreWithCurrentWallet(password: String) -> String {
@@ -33,8 +31,7 @@ struct WalletCryptoService {
     }
 
     static func didDelegateWallet(password: String, walletAddress: String) {
-        let address = Address.init(eip55: (walletAddress))
-        let account = WalletTools.keystore?.account(for: address!)
-        try! WalletTools.keystore?.delete(account: account!, password: password)
+        let account = WalletTools.account(for: walletAddress)
+        try! WalletTools.keyStore.delete(account: account!, password: password)
     }
 }

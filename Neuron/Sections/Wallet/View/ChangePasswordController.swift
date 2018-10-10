@@ -9,7 +9,6 @@
 import UIKit
 
 class ChangePasswordController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate {
-
     let titleArray = ["", "输入旧密码", "输入新密码", "再次输入新密码"]
     let placeholderArray = ["", "输入旧密码", "填写新密码", "再次填写新密码"]
 
@@ -36,27 +35,29 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         cTable.reloadData()
     }
 
-    //修改密码按钮action
     @IBAction func changePasswordBtn(_ sender: UIButton) {
-        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {Toast.showToast(text: "旧密码错误");return}
-        if newPassword != confirmPassword {Toast.showToast(text: "两次新密码输入不一致");return}
-        if !PasswordValidator.isValid(password: newPassword) {return}
+        if newPassword != confirmPassword {
+            Toast.showToast(text: "两次新密码输入不一致");
+            return
+        }
+        if !PasswordValidator.isValid(password: newPassword) {
+            return
+        }
+        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {
+            Toast.showToast(text: "旧密码错误");
+            return
+        }
         if walletModel.MD5screatPassword == CryptoTool.changeMD5(password: newPassword) {
             Toast.showToast(text: "新密码与旧密码一致，请重新输入")
             return
         }
-        let privateKey = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: oldPassword)
-        let newEncryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey, key: newPassword)
         Toast.showHUD(text: "修改密码中...")
-        try! WalletRealmTool.realm.write {
-            walletModel.encryptPrivateKey = newEncryptPrivateKey
-            walletModel.MD5screatPassword = CryptoTool.changeMD5(password: newPassword)
-        }
         let address = walletModel.address
-        let oldP = oldPassword
-        let newP = newPassword
-        DispatchQueue.global(qos: .userInteractive).async {
-            WalletCryptoService.updateEncryptPrivateKey(oldPassword: oldP, newPassword: newP, walletAddress: address)
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            WalletCryptoService.updateEncryptPrivateKey(oldPassword: self.oldPassword, newPassword: self.newPassword, walletAddress: address)
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 Toast.showToast(text: "密码修改成功，请牢记！")
@@ -65,7 +66,6 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         }
     }
 
-    //table代理
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 4
     }
@@ -114,9 +114,5 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
             changePwBtn.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
             changePwBtn.backgroundColor = ColorFromString(hex: "#F2F2F2")
         }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }

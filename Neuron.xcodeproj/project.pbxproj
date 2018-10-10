@@ -95,7 +95,6 @@
 		89971F11212D049900E86C34 /* NervosTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89971F10212D049900E86C34 /* NervosTransactionService.swift */; };
 		899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */; };
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
-		899CADA020E0916E00FF9D27 /* CryptoTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */; };
 		89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A21214FA89A00900976 /* PayCoverViewController.swift */; };
 		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
@@ -131,7 +130,6 @@
 		89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */; };
 		89D4AC2920D59F270097E02B /* KeystoreError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2020D59F270097E02B /* KeystoreError.swift */; };
 		89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2120D59F270097E02B /* Keystore.swift */; };
-		89D4AC2B20D59F270097E02B /* ETHKeystore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2220D59F270097E02B /* ETHKeystore.swift */; };
 		89D4AC2C20D59F270097E02B /* WalletType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2320D59F270097E02B /* WalletType.swift */; };
 		89D4AC2D20D59F270097E02B /* ImportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2420D59F270097E02B /* ImportType.swift */; };
 		89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2520D59F270097E02B /* WalletTools.swift */; };
@@ -279,7 +277,6 @@
 		89971F10212D049900E86C34 /* NervosTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosTransactionService.swift; sourceTree = "<group>"; };
 		899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNativeTokenService.swift; sourceTree = "<group>"; };
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
-		899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTool.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptoService.swift; sourceTree = "<group>"; };
 		89A45A21214FA89A00900976 /* PayCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCoverViewController.swift; sourceTree = "<group>"; };
 		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
@@ -316,7 +313,6 @@
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
 		89D4AC2020D59F270097E02B /* KeystoreError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeystoreError.swift; sourceTree = "<group>"; };
 		89D4AC2120D59F270097E02B /* Keystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Keystore.swift; sourceTree = "<group>"; };
-		89D4AC2220D59F270097E02B /* ETHKeystore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ETHKeystore.swift; sourceTree = "<group>"; };
 		89D4AC2320D59F270097E02B /* WalletType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletType.swift; sourceTree = "<group>"; };
 		89D4AC2420D59F270097E02B /* ImportType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportType.swift; sourceTree = "<group>"; };
 		89D4AC2520D59F270097E02B /* WalletTools.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletTools.swift; sourceTree = "<group>"; };
@@ -520,7 +516,6 @@
 				1A9204E321634212004B54DC /* ToastActivityView.xib */,
 				8913437420C7D3A400A17AEF /* Toast.swift */,
 				8913437720CA56CA00A17AEF /* RealmHelper.swift */,
-				899CAD9F20E0916E00FF9D27 /* CryptoTool.swift */,
 				8955580420DCA7F700FC92D8 /* PasswordValidator.swift */,
 				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
 			);
@@ -822,7 +817,6 @@
 			children = (
 				89D4AC2020D59F270097E02B /* KeystoreError.swift */,
 				89D4AC2120D59F270097E02B /* Keystore.swift */,
-				89D4AC2220D59F270097E02B /* ETHKeystore.swift */,
 				89D4AC2320D59F270097E02B /* WalletType.swift */,
 				89D4AC2420D59F270097E02B /* ImportType.swift */,
 				89D4AC2520D59F270097E02B /* WalletTools.swift */,
@@ -1211,13 +1205,11 @@
 				89D4AC2E20D59F270097E02B /* WalletTools.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
-				899CADA020E0916E00FF9D27 /* CryptoTool.swift in Sources */,
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
 				8964A19320C115A70086848F /* SureMnemonicViewController.swift in Sources */,
-				89D4AC2B20D59F270097E02B /* ETHKeystore.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */,

@@ -39,7 +39,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func skipBackupFiles() {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
-        paths.append(ETHKeystore.shared.keysDirectory)
+        paths.append(WalletTools.keysDirectory)
         SkipBackupFiles(paths: paths).skip()
     }
 

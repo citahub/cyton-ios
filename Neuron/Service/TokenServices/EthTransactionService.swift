@@ -18,7 +18,6 @@ class EthTransactionService {
                                          gasPrice: BigUInt,
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-
         let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
         let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
