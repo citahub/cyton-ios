@@ -44,14 +44,14 @@ PODS:
     - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
   - TrezorCrypto (0.0.8)
-  - TrustCore (0.0.7):
+  - TrustCore (0.2.2):
     - BigInt
-    - TrezorCrypto
-  - TrustKeystore (0.4.2):
+    - TrezorCrypto (~> 0.0.8)
+  - TrustKeystore (0.5.2):
     - BigInt
     - CryptoSwift
     - TrezorCrypto
-    - TrustCore
+    - TrustCore (~> 0.2.2)
   - web3swift (1.1.10):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.11)
@@ -77,8 +77,7 @@ DEPENDENCIES:
   - SCLAlertView
   - SDWebImage
   - Toast-Swift (~> 4.0.0)
-  - TrustCore (~> 0.0.7)
-  - TrustKeystore (~> 0.4.1)
+  - TrustKeystore (~> 0.5.2)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -148,10 +147,10 @@ SPEC CHECKSUMS:
   SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   TrezorCrypto: 938c4b715fff7824a9c891a105e65ee0e4e81662
-  TrustCore: 688df9a241008cf9cfa3842ec8ef28777a8b7534
-  TrustKeystore: ba8a33ccd7b6a46dfe25f209253d6ba13da6655c
+  TrustCore: fe2a3b842c50fd73af69f1ec4c040b7eefced188
+  TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 0b63d334ea3f43be1c7c87c5c4f8c865ca5f5a5e
+PODFILE CHECKSUM: 01dda49a7d5356363753243bd6bd1b4f236795b7
 
 COCOAPODS: 1.5.3

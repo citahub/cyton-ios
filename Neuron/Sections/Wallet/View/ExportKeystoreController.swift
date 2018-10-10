@@ -13,15 +13,13 @@ class ExportKeystoreController: UIViewController {
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     var walletModel = WalletModel()
-    var password = ""
-    var keyStoreStr = ""
+    var keystoreString = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "导出keystore"
         walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: password)
-        kestoreTextView.text = keyStoreStr
+        kestoreTextView.text = keystoreString
         setUpUI()
     }
 
@@ -32,12 +30,12 @@ class ExportKeystoreController: UIViewController {
     }
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
-        UIPasteboard.general.string = keyStoreStr
+        UIPasteboard.general.string = keystoreString
         Toast.showToast(text: "keystore已经复制到粘贴板")
     }
 
     @IBAction func didClickShareButton(_ sender: UIButton) {
-        let shareText = keyStoreStr
+        let shareText = keystoreString
         let shareItem = ShareItem.init(shareString: shareText)
         let activityVC = UIActivityViewController.init(activityItems: [shareItem], applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)

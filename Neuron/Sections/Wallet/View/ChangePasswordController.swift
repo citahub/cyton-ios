@@ -43,21 +43,22 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         if !PasswordValidator.isValid(password: newPassword) {
             return
         }
-        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: oldPassword) {
-            Toast.showToast(text: "旧密码错误");
-            return
-        }
-        if walletModel.MD5screatPassword == CryptoTool.changeMD5(password: newPassword) {
-            Toast.showToast(text: "新密码与旧密码一致，请重新输入")
-            return
-        }
         Toast.showHUD(text: "修改密码中...")
         let address = walletModel.address
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else {
                 return
             }
-            WalletCryptoService.updateEncryptPrivateKey(oldPassword: self.oldPassword, newPassword: self.newPassword, walletAddress: address)
+            do {
+                try WalletCryptoService.updatePassword(address: address, password: self.oldPassword, newPassword: self.newPassword)
+            } catch {
+                DispatchQueue.main.async {
+                    // TODO: check if hideHUD prevents next showToast from showing up
+                    Toast.hideHUD()
+                    Toast.showToast(text: "密码错误");
+                }
+                return
+            }
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 Toast.showToast(text: "密码修改成功，请牢记！")

@@ -1,9 +1,8 @@
 //
 //  ImportError.swift
-//  VIPWallet
+//  Neuron
 //
-//  Created by Ryan on 2018/4/9.
-//  Copyright © 2018年 Qingkong. All rights reserved.
+//  Copyright © 2018年 Cryptape. All rights reserved.
 //
 
 import Foundation

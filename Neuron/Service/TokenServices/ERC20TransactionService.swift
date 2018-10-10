@@ -18,19 +18,24 @@ class ERC20TransactionService {
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
+        guard let keyStoreStr = try? WalletCryptoService.getKeystoreForCurrentWallet(password: walletPassword) else {
+            DispatchQueue.main.async {
+                completion(SendEthResult.error(SendEthError.invalidPassword))
+            }
+            return
+        }
         let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.invalidDestinationAddress))
+                    completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
                 }
                 return
             }
             guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.invalidAmountFormat))
+                    completion(SendEthResult.error(SendEthError.invalidAmountFormat))
                 }
                 return
             }
@@ -38,7 +43,6 @@ class ERC20TransactionService {
             let web3 = Web3Network.getWeb3()
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             let token = erc20TokenAddress
-//            let contract = self.contract(ERC20Token: token)
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = gasPrice
@@ -48,7 +52,7 @@ class ERC20TransactionService {
                 let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress, from: fromAddress, to: destinationEthAddress, amount: amountString)
                 else {
                     DispatchQueue.main.async {
-                        completion(SendEthResult.error(SendEthErrors.createTransactionIssue))
+                        completion(SendEthResult.error(SendEthError.createTransactionIssue))
                     }
                     return
             }
@@ -69,7 +73,7 @@ class ERC20TransactionService {
             }
             guard let value = result.value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.emptyResult))
+                    completion(SendEthResult.error(SendEthError.emptyResult))
                 }
                 return
             }
@@ -78,12 +82,4 @@ class ERC20TransactionService {
             }
         }
     }
-
-//    private func contract(ERC20Token:String) -> web3.web3contract? {
-//        let web3 = Web3NetWork.getWeb3()
-//        guard let contractETHAddress = EthereumAddress(ERC20Token) else {
-//            return nil
-//        }
-//        return web3.contract(Web3.Utils.erc20ABI,at:contractETHAddress,abiVersion:2)
-//    }
 }

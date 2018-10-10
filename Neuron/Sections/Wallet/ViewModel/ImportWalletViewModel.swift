@@ -8,6 +8,7 @@
 
 import UIKit
 import TrustKeystore
+import struct TrustCore.EthereumAddress
 import IGIdenticon
 
 protocol ImportWalletViewModelDelegate: class {
@@ -60,11 +61,11 @@ class ImportWalletViewModel: NSObject {
         }
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        let importType = ImportType.keyStore(json: keystore, password: password)
+        let importType = ImportType.keystore(keystore: keystore, password: password)
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
@@ -115,7 +116,7 @@ class ImportWalletViewModel: NSObject {
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
@@ -147,7 +148,7 @@ class ImportWalletViewModel: NSObject {
         WalletTools.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
