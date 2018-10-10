@@ -9,7 +9,7 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate, EnterBackOverlayPresentable {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var privatekeyTextView: RSKPlaceholderTextView!
     var name: String? = ""
@@ -22,6 +22,7 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
         super.viewDidLoad()
         privatekeyTextView.delegate = self
         viewModel.delegate = self
+        setupEnterBackOverlay()
     }
 
     @IBAction func nameChanged(_ sender: UITextField) {
