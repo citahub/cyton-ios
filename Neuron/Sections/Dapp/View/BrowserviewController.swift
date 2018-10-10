@@ -10,25 +10,20 @@ import UIKit
 import WebKit
 
 class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
-
-    var closeBtn: UIButton = UIButton()
-
-    var requestUrlStr = ""{
-        didSet {
-
-        }
-    }
+    private var closeBtn: UIButton = UIButton()
+    var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
         self.webview = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
         self.webview.navigationDelegate = self
+        self.webview.uiDelegate = self
         return self.webview
     }()
 
     lazy private var progressView: UIProgressView = {
         self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
-        self.progressView.tintColor = AppColor.themeColor      // 进度条颜色
-        self.progressView.trackTintColor = UIColor.white // 进度条背景色
+        self.progressView.tintColor = AppColor.themeColor
+        self.progressView.trackTintColor = UIColor.white
         return self.progressView
     }()
 
@@ -44,24 +39,23 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
     }
 
     func setUpBackButton() {
-
-        let backButton = UIButton.init(type: .custom)
-        backButton.setImage(UIImage.init(named: "nav_back"), for: .normal)
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(UIImage(named: "nav_darkback"), for: .normal)
         backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        backButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -10, bottom: 0, right: 10)
+        backButton.contentHorizontalAlignment = .left
         backButton.addTarget(self, action: #selector(didClickBackButton), for: .touchUpInside)
-        let bBarbutton = UIBarButtonItem.init(customView: backButton)
+        let bBarbutton = UIBarButtonItem(customView: backButton)
 
-        closeBtn = UIButton.init(type: .custom)
-        closeBtn.setImage(UIImage.init(named: "closeWebView"), for: .normal)
+        closeBtn = UIButton(type: .custom)
+        closeBtn.setImage(UIImage(named: "close"), for: .normal)
         closeBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        closeBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 20)
+        closeBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
+        closeBtn.contentHorizontalAlignment = .left
         closeBtn.isHidden = true
         closeBtn.addTarget(self, action: #selector(didClickCloseButton), for: .touchUpInside)
-        let cBarbutton = UIBarButtonItem.init(customView: closeBtn)
+        let cBarbutton = UIBarButtonItem(customView: closeBtn)
 
         navigationItem.leftBarButtonItems = [bBarbutton, cBarbutton]
-
     }
 
     func getRequestStr(requestStr: String) -> String {
@@ -109,10 +103,5 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
 
     @objc func didClickCloseButton(sender: UIButton) {
         navigationController?.popViewController(animated: true)
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }

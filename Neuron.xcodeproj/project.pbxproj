@@ -37,7 +37,6 @@
 		8928C24920AE91E600C3103E /* DappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* DappViewController.swift */; };
 		8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C25820AEB18100C3103E /* NibLoadable.swift */; };
 		8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26920AED5C100C3103E /* SearchAppController.swift */; };
-		8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C26A20AED5C100C3103E /* SearchAppController.xib */; };
 		8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26F20B2644C00C3103E /* QRCodeController.swift */; };
 		8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */; };
 		8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27820B2A61900C3103E /* WalletViewController.swift */; };
@@ -101,6 +100,7 @@
 		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
 		89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */; };
 		89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */; };
+		89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */; };
 		89B296E920F4CA58008558A7 /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296E820F4CA57008558A7 /* TransactionService.swift */; };
 		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
 		89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* ServerAPI.swift */; };
@@ -215,7 +215,6 @@
 		8928C24820AE91E600C3103E /* DappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappViewController.swift; sourceTree = "<group>"; };
 		8928C25820AEB18100C3103E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		8928C26920AED5C100C3103E /* SearchAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppController.swift; sourceTree = "<group>"; };
-		8928C26A20AED5C100C3103E /* SearchAppController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchAppController.xib; sourceTree = "<group>"; };
 		8928C26F20B2644C00C3103E /* QRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeController.swift; sourceTree = "<group>"; };
 		8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRQRCodeScanTool.swift; sourceTree = "<group>"; };
 		8928C27820B2A61900C3103E /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
@@ -285,6 +284,7 @@
 		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
 		89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAmountViewController.swift; sourceTree = "<group>"; };
 		89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
+		89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DAppBrowser.storyboard; sourceTree = "<group>"; };
 		89B296E820F4CA57008558A7 /* TransactionService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		89B296EC20F4CBA7008558A7 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
@@ -532,7 +532,7 @@
 			children = (
 				89C25C6A20BD41D800007EC1 /* TableviewCell */,
 				8928C26920AED5C100C3103E /* SearchAppController.swift */,
-				8928C26A20AED5C100C3103E /* SearchAppController.xib */,
+				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
 				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
 				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
 				8964A17B20BE7F750086848F /* MessageSignController.swift */,
@@ -973,7 +973,6 @@
 				1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */,
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
 				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
-				8928C26C20AED5C100C3103E /* SearchAppController.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
@@ -990,6 +989,7 @@
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
 				89F79671213BD8C40064808A /* Transaction.storyboard in Resources */,
+				89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */,
 				1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
