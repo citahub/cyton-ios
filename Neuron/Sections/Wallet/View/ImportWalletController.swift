@@ -39,8 +39,12 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
         pageViewControllers.append(privatekeyViewController)
         importWalletPageViewController.setViewControllers([keystoreViewController], direction: .forward, animated: false)
 
-        showNoScreenshotAlert(titile: "禁止截屏！", message: "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！")
         setupEnterBackOverlay()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showNoScreenshotAlert(titile: "禁止截屏！", message: "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -58,22 +58,3 @@ extension EnterBackOverlayPresentable where Self: UIViewController {
         return overlay
     }
 }
-
-//extension NSObject {
-//    func addDeinitTask(block: @escaping DeinitTask.Block) {
-//        let task = DeinitTask(block: block)
-//        var key = Date().timeIntervalSince1970
-//        objc_setAssociatedObject(self, &key, task, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-//    }
-//}
-
-//class DeinitTask: NSObject {
-//    typealias Block = () -> Void
-//    let block: Block
-//    init(block: @escaping Block) {
-//        self.block = block
-//    }
-//    deinit {
-//        block()
-//    }
-//}

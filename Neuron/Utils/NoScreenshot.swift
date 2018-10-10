@@ -10,8 +10,12 @@ import Foundation
 
 protocol NoScreenshot { }
 
+private var NoScreenshotOnceTokenAssiciationKey = 0
+
 extension NoScreenshot where Self: UIViewController {
     func showNoScreenshotAlert(titile: String, message: String) {
+        guard objc_getAssociatedObject(self, &NoScreenshotOnceTokenAssiciationKey) == nil else { return }
+        objc_setAssociatedObject(self, &NoScreenshotOnceTokenAssiciationKey, 2233, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         let alert = UIAlertController(title: titile, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
         present(alert, animated: true, completion: nil)

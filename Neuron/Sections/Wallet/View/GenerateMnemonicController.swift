@@ -22,8 +22,12 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
         super.viewDidLoad()
         mnemonic.text = mnemonicStr
         title = "备份助记词"
-        showNoScreenshotAlert(titile: "禁止截屏！", message: "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！")
         setupEnterBackOverlay()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showNoScreenshotAlert(titile: "禁止截屏！", message: "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
