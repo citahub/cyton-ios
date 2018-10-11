@@ -32,7 +32,7 @@ enum DAppServer {
         }
     }
 
-    var rpcRul: String {
+    var rpcUrl: String {
         switch self {
         case .main:
             return "https://mainnet.infura.io/h3iIzGIN6msu3KeUrdlt"

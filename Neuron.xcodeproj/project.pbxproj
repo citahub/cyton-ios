@@ -64,6 +64,7 @@
 		8935BA57216EEDEC00C37263 /* WKWebViewConfigConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */; };
 		8935BA59216EFCE700C37263 /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA58216EFCE700C37263 /* neuron.js */; };
 		8935BA5B216EFCF000C37263 /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA5A216EFCF000C37263 /* init.js */; };
+		8935BA5D216F48A800C37263 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA5C216F48A800C37263 /* Method.swift */; };
 		8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955580420DCA7F700FC92D8 /* PasswordValidator.swift */; };
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
 		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
@@ -257,6 +258,7 @@
 		8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfigConstants.swift; sourceTree = "<group>"; };
 		8935BA58216EFCE700C37263 /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
 		8935BA5A216EFCF000C37263 /* init.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
+		8935BA5C216F48A800C37263 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
 		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 		8928C22720AE7CB500C3103E /* Dapp */ = {
 			isa = PBXGroup;
 			children = (
+				8935BA5C216F48A800C37263 /* Method.swift */,
 				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
 				8928C24820AE91E600C3103E /* DappViewController.swift */,
 				8928C26920AED5C100C3103E /* SearchAppController.swift */,
@@ -1284,6 +1287,7 @@
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */,
+				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
