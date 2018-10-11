@@ -13,7 +13,7 @@ class RealmHelper {
     static var sharedInstance = try! Realm()
     private static var schemaVersion: UInt64 = 2
 
-    static func configRealm() {
+    static func configureRealm() {
         var config = Realm.Configuration()
         config.schemaVersion = schemaVersion
         config.migrationBlock = migrationBlock
@@ -28,16 +28,19 @@ class RealmHelper {
 }
 
 private extension RealmHelper {
-    static func getEncryptionKey() -> Data? {
+    static var keychainQuery: CFDictionary {
         let keychainIdentifier = "org.nervos.Neuron"
-        let query: [NSString: AnyObject] = [
+        return [
             kSecClass: kSecClassKey,
             kSecAttrApplicationTag: keychainIdentifier.data(using: .utf8, allowLossyConversion: false) as AnyObject,
             kSecAttrKeySizeInBits: 512 as AnyObject,
             kSecReturnData: true as AnyObject
-        ]
+        ]  as CFDictionary
+    }
+
+    static func getEncryptionKey() -> Data? {
         var dataTypeRef: AnyObject?
-        let status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
+        let status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(keychainQuery, UnsafeMutablePointer($0)) }
         if status == errSecSuccess {
             return dataTypeRef as? Data
         }
@@ -46,7 +49,7 @@ private extension RealmHelper {
     }
 
     static func deleteEncryptionKeyFromKeychain() {
-        // TODO
+        SecItemDelete(keychainQuery)
     }
 
     static func removeEncrptionFromRealm(key: Data) {
