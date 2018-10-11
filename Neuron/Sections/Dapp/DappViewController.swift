@@ -44,7 +44,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
-        webView.configuration.userContentController.add(self, name: "zhuru")
         webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false

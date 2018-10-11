@@ -11,20 +11,26 @@ import WebKit
 
 extension WKWebViewConfiguration {
 
-    static func make(for server: DAppServer, address: String, in messageHandler: WKScriptMessageHandler) -> WKWebViewConfiguration {
+    static func make(for server: DAppServer, in messageHandler: WKScriptMessageHandler) -> WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        var js = """
-                const addressHex = "\(walletModel.address)";
-                const rpcURL = "\(server.rpcUrl)";
-                const chainID = "\(server.chainID)";
-                """
-        if let path = Bundle.main.path(forResource: "init", ofType: "js") {
+        var js = ""
+        if let neuronPath = Bundle.main.path(forResource: "neuron", ofType: "js") {
             do {
-                js += try String(contentsOfFile: path)
+                js += try String(contentsOfFile: neuronPath)
             } catch { }
         }
 
+        js = """
+             const addressHex = "\(walletModel.address)";
+             const rpcURL = "\(server.rpcUrl)";
+             const chainID = "\(server.chainID)";
+             """
+        if let initPath = Bundle.main.path(forResource: "init", ofType: "js") {
+            do {
+                js += try String(contentsOfFile: initPath)
+            } catch { }
+        }
         let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: false)
         config.userContentController.add(messageHandler, name: Method.signTransaction.rawValue)
         config.userContentController.add(messageHandler, name: Method.signPersonalMessage.rawValue)

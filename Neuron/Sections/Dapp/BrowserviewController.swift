@@ -9,22 +9,31 @@
 import UIKit
 import WebKit
 
-class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
-    private var closeBtn: UIButton = UIButton()
+class BrowserviewController: UIViewController, WKUIDelegate {
+    private var closeBtn = UIButton()
     var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
-        self.webview = WKWebView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64))
-        self.webview.navigationDelegate = self
-        self.webview.uiDelegate = self
-        return self.webview
+        let webview = WKWebView(
+            frame: .zero,
+            configuration: self.config
+        )
+        webview.navigationDelegate = self
+        webview.uiDelegate = self
+        return webview
     }()
 
     lazy private var progressView: UIProgressView = {
-        self.progressView = UIProgressView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
+        self.progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
         self.progressView.tintColor = AppColor.themeColor
         self.progressView.trackTintColor = UIColor.white
         return self.progressView
+    }()
+
+    lazy var config: WKWebViewConfiguration = {
+        let confit = WKWebViewConfiguration.make(for: .main, in: ScriptMessageProxy(delegate: self))
+        confit.websiteDataStore = WKWebsiteDataStore.default()
+        return confit
     }()
 
     override func viewDidLoad() {
@@ -80,19 +89,6 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
         }
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        title = webView.title
-        if webView.canGoBack {
-            closeBtn.isHidden = false
-        } else {
-            closeBtn.isHidden = true
-        }
-    }
-
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-
-    }
-
     @objc func didClickBackButton(sender: UIButton) {
         if webview.canGoBack {
             webview.goBack()
@@ -103,5 +99,22 @@ class BrowserviewController: UIViewController, WKUIDelegate, WKNavigationDelegat
 
     @objc func didClickCloseButton(sender: UIButton) {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension BrowserviewController: WKScriptMessageHandler {
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+
+    }
+}
+
+extension BrowserviewController: WKNavigationDelegate {
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        title = webView.title
+        if webView.canGoBack {
+            closeBtn.isHidden = false
+        } else {
+            closeBtn.isHidden = true
+        }
     }
 }
