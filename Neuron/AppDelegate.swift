@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func initializeRealm() {
-        RealmHelper.initEncryptionRealm()
+        RealmHelper.configRealm()
     }
 
     private func skipBackupFiles() {
