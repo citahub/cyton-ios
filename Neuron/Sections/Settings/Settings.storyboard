@@ -73,7 +73,7 @@
                                             <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="currency" id="Ip1-JA-WH7">
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="icon_authentication" id="Ip1-JA-WH7">
                                             <rect key="frame" x="16" y="14" width="20" height="20"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </imageView>
@@ -465,6 +465,7 @@
         <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
         <image name="currency_selected" width="21" height="15"/>
+        <image name="icon_authentication" width="20" height="20"/>
         <image name="infua" width="20" height="20"/>
         <image name="nervos_network" width="20" height="20"/>
         <image name="neuron_logo" width="60" height="60"/>
