@@ -18,7 +18,6 @@ class ProductAgreementViewController: UIViewController {
     @IBOutlet weak var checkButton: UIButton!
     var isAgree: Bool = false {
         didSet {
-            // TODO: 缺少同意条款按钮的icon
             if isAgree {
                 confirmButton.isEnabled = true
                 confirmButton.setTitleColor(UIColor(red: 54/255.0, green: 59/255.0, blue: 255/255.0, alpha: 1.0), for: .normal)
