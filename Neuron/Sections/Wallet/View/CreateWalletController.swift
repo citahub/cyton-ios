@@ -21,6 +21,11 @@ class CreateWalletController: UITableViewController {
         title = "创建钱包"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     @IBAction func walletNameChanged(_ sender: UITextField) {
         name = sender.text
         jugeNextButtonEnabled()

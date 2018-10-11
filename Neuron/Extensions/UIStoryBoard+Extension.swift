@@ -26,6 +26,8 @@ extension UIStoryboard {
         case authentication = "Authentication"
         case settings = "Settings"
         case switchWallet = "SwitchWallet"
+        case guide = "Guide"
+        case addWallet = "AddWallet"
     }
 
     convenience init(storyboard: Stroyboard, bundle storyboardBundleOrNil: Bundle? = nil) {

@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initializeRealm()
         setupKeyboard()
         localCurrency()
+        GuideService.shared.register()
         AuthenticationService.shared.register()
         return true
     }
