@@ -27,7 +27,7 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
         super.viewDidLoad()
         title = "导入钱包"
         tabbedButtonView.delegate = self
-        tabbedButtonView.buttonTitles = ["keystore", "助记词", "私钥"]
+        tabbedButtonView.buttonTitles = ["Keystore", "助记词", "私钥"]
 
         importWalletPageViewController.delegate = self
         importWalletPageViewController.dataSource = self

@@ -51,6 +51,7 @@ class CreateWalletController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: Any) {
         if canProceedNextStep() {
+            UIApplication.shared.keyWindow?.endEditing(true)
             self.performSegue(withIdentifier: "nextButton", sender: sender)
         }
     }
