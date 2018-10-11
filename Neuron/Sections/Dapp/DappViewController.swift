@@ -96,11 +96,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         case "pushSearchView":
             let sCtrl = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
             self.navigationController?.pushViewController(sCtrl, animated: true)
-        case "zhuru":
-            break
         default:
             break
         }
     }
-
 }
