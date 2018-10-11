@@ -8,6 +8,7 @@
 
 import UIKit
 import SCLAlertView
+import TrustKeystore
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -26,7 +27,7 @@ class WalletDetailController: UITableViewController {
         walletIconImageView.image = UIImage(data: walletModel.iconData)
     }
 
-    @IBAction func didDeletWallet(_ sender: UIButton) {
+    @IBAction func didDeleteWallet(_ sender: UIButton) {
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
         )
@@ -35,21 +36,15 @@ class WalletDetailController: UITableViewController {
         txt.isSecureTextEntry = true
         alert.addButton("确定") {
             txt.resignFirstResponder()
-            if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
-                Toast.showToast(text: "旧密码错误")
-                return
-            } else {
-                self.deleteWallet(password: txt.text!)
-            }
+            self.deleteWallet(password: txt.text!)
         }
         alert.addButton("取消") {
-
         }
-        alert.showEdit("删除钱包", subTitle: "请确保您已经做好钱包备份", colorStyle: 0x2e4af2,
-                       colorTextButton: 0xFFFFFF)
+        alert.showEdit("删除钱包", subTitle: "请确保您已经做好钱包备份", colorStyle: 0x2e4af2, colorTextButton: 0xFFFFFF)
     }
 
-    func deleteWallet(password: String) {
+    private func deleteWallet(password: String) {
+        // TODO: wrap realm and keystore operation as an atom transaction
         let address = walletModel.address
         try! WalletRealmTool.realm.write {
             if appModel.wallets.count == 1 {
@@ -60,9 +55,24 @@ class WalletDetailController: UITableViewController {
                 WalletRealmTool.realm.delete(walletModel)
             }
         }
-        WalletCryptoService.didDelegateWallet(password: password, walletAddress: address)
+        do {
+            try WalletCryptoService.deleteWallet(address: address, password: password)
+        } catch {
+            return Toast.showToast(text: "密码错误")
+        }
         Toast.showToast(text: "删除成功")
         navigationController?.popToRootViewController(animated: true)
+    }
+
+    private func exportKeystore(password: String) {
+        do {
+            let keystore = try WalletCryptoService.getKeystoreForCurrentWallet(password: password)
+            let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
+            exportController.keystoreString = keystore
+            self.navigationController?.pushViewController(exportController, animated: true)
+        } catch {
+            Toast.showToast(text: "密码错误")
+        }
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -85,20 +95,11 @@ class WalletDetailController: UITableViewController {
                 txt.isSecureTextEntry = true
                 alert.addButton("确定") {
                     txt.resignFirstResponder()
-                    if self.walletModel.MD5screatPassword != CryptoTool.changeMD5(password: txt.text!) {
-                        Toast.showToast(text: "密码错误")
-                        return
-                    } else {
-                        let eCtrl = ExportKeystoreController.init(nibName: "ExportKeystoreController", bundle: nil)
-                        eCtrl.password = txt.text!
-                        self.navigationController?.pushViewController(eCtrl, animated: true)
-                    }
+                    self.exportKeystore(password: txt.text!)
                 }
                 alert.addButton("取消") {
-
                 }
-                alert.showEdit("导出keystore", subTitle: "", colorStyle: 0x2e4af2,
-                               colorTextButton: 0xFFFFFF)
+                alert.showEdit("导出keystore", subTitle: "", colorStyle: 0x2e4af2, colorTextButton: 0xFFFFFF)
             }
         }
     }
@@ -111,7 +112,7 @@ class WalletDetailController: UITableViewController {
         let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("请输入钱包名字")
         alert.addButton("确定") {
-            if !WalletTools.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
+            if !WalletTool.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
                 let nameClean = txt.text?.trimmingCharacters(in: .whitespaces)
                 if nameClean?.count == 0 {
                     Toast.showToast(text: "钱包名字不能为空")
@@ -126,9 +127,7 @@ class WalletDetailController: UITableViewController {
             }
         }
         alert.addButton("取消") {
-
         }
-        alert.showEdit("修改钱包名称", subTitle: "", colorStyle: 0x2e4af2,
-                       colorTextButton: 0xFFFFFF)
+        alert.showEdit("修改钱包名称", subTitle: "", colorStyle: 0x2e4af2, colorTextButton: 0xFFFFFF)
     }
 }

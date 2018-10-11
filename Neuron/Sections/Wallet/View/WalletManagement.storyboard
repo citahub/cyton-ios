@@ -34,7 +34,7 @@
                                         <color key="titleColor" red="0.21568627450980393" green="0.37647058823529411" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="didDeletWallet:" destination="GJT-Gk-vAR" eventType="touchUpInside" id="kNq-sL-8a4"/>
+                                        <action selector="didDeleteWallet:" destination="GJT-Gk-vAR" eventType="touchUpInside" id="Uw5-zG-eVv"/>
                                     </connections>
                                 </button>
                             </subviews>

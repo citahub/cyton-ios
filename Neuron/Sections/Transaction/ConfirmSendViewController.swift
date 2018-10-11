@@ -38,11 +38,6 @@ class ConfirmSendViewController: UIViewController {
             Toast.showToast(text: "请输入钱包密码")
             return false
         }
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        if walletModel.MD5screatPassword != CryptoTool.changeMD5(password: password) {
-            Toast.showToast(text: "密码不正确请重新输入")
-            return false
-        }
         return true
     }
 }

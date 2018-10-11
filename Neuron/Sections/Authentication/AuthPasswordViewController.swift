@@ -37,10 +37,11 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
         guard let currentWallet = currentWallet else { return }
         guard let password = passwordTextField.text else { return }
         passwordTextField.resignFirstResponder()
-        if currentWallet.MD5screatPassword != CryptoTool.changeMD5(password: password) {
-            Toast.showToast(text: "密码不正确请重新输入")
-            return
-        }
+        // TODO: check current wallet password
+        //if currentWallet.MD5screatPassword != CryptoTool.changeMD5(password: password) {
+            //Toast.showToast(text: "密码不正确请重新输入")
+            //return
+        //}
         delegate?.authenticationSuccessful()
     }
 

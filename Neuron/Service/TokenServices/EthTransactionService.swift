@@ -18,20 +18,24 @@ class EthTransactionService {
                                          gasPrice: BigUInt,
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-
-        let keyStoreStr = WalletCryptoService.didCheckoutKeystoreWithCurrentWallet(password: walletPassword)
+        guard let keyStoreStr = try? WalletCryptoService.getKeystoreForCurrentWallet(password: walletPassword) else {
+            DispatchQueue.main.async {
+                completion(SendEthResult.error(SendEthError.invalidPassword))
+            }
+            return
+        }
         let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global().async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.invalidDestinationAddress))
+                    completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
                 }
                 return
             }
             guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.invalidAmountFormat))
+                    completion(SendEthResult.error(SendEthError.invalidAmountFormat))
                 }
                 return
             }
@@ -39,7 +43,7 @@ class EthTransactionService {
             let web3 = Web3Network.getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.noAvailableKeys))
+                    completion(SendEthResult.error(SendEthError.noAvailableKeys))
                 }
                 return
             }
@@ -52,14 +56,14 @@ class EthTransactionService {
             options.value = BigUInt(amount)
             guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.contractLoadingError))
+                    completion(SendEthResult.error(SendEthError.contractLoadingError))
                 }
                 return
             }
 
             guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.retrievingEstimatedGasError))
+                    completion(SendEthResult.error(SendEthError.retrievingEstimatedGasError))
                 }
                 return
             }
@@ -67,7 +71,7 @@ class EthTransactionService {
             options.gasPrice = gasPrice
             guard let transaction = contract.method(extraData: Data(), options: options) else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.createTransactionIssue))
+                    completion(SendEthResult.error(SendEthError.createTransactionIssue))
                 }
                 return
             }
@@ -89,7 +93,7 @@ class EthTransactionService {
             }
             guard let value = result.value else {
                 DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthErrors.emptyResult))
+                    completion(SendEthResult.error(SendEthError.emptyResult))
                 }
                 return
             }

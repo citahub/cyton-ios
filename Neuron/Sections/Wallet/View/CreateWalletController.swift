@@ -62,7 +62,7 @@ class CreateWalletController: UITableViewController {
             let generateMnemonicController = segue.destination as! GenerateMnemonicController
             generateMnemonicController.walletModel = walletModel
             generateMnemonicController.password = password!
-            WalletTools.generateMnemonic { (mnemonic) in
+            WalletTool.generateMnemonic { (mnemonic) in
                 generateMnemonicController.mnemonicStr = mnemonic
             }
         }
@@ -89,7 +89,7 @@ class CreateWalletController: UITableViewController {
         if !PasswordValidator.isValid(password: password!) {
             return false
         }
-        if !WalletTools.checkWalletName(name: name!) {
+        if !WalletTool.checkWalletName(name: name!) {
             Toast.showToast(text: "钱包名字重复")
             return false
         }

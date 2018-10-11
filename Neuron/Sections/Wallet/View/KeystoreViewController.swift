@@ -58,7 +58,7 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     @IBAction func importWallet(_ sender: UIButton) {
-        viewModel.importKeystoreWallet(keyStore: keystore!, password: password!, name: name!)
+        viewModel.importKeystoreWallet(keystore: keystore!, password: password!, name: name!)
     }
 
     func didPopToRootView() {
