@@ -16,8 +16,7 @@ target 'Neuron' do
   pod 'RSKPlaceholderTextView', "~> 4.0.0"
   pod 'Toast-Swift', "~> 4.0.0"
   pod 'RealmSwift'
-  pod 'TrustCore', '~> 0.0.7'
-  pod 'TrustKeystore', '~> 0.4.1'
+  pod 'TrustKeystore', '~> 0.5.2'
   pod 'KeychainSwift'
   pod 'IGIdenticon', "~> 0.6"
   pod 'SCLAlertView'

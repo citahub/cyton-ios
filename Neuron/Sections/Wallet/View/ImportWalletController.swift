@@ -10,7 +10,7 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class ImportWalletController: UIViewController {
+class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPresentable {
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
     private var keystoreViewController: UIViewController!
     private var mnemonicViewController: UIViewController!
@@ -38,6 +38,13 @@ class ImportWalletController: UIViewController {
         pageViewControllers.append(mnemonicViewController)
         pageViewControllers.append(privatekeyViewController)
         importWalletPageViewController.setViewControllers([keystoreViewController], direction: .forward, animated: false)
+
+        setupEnterBackOverlay()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showNoScreenshotAlert(titile: "禁止截屏！", message: "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

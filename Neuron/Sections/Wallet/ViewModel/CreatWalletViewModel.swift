@@ -92,13 +92,13 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
                 Toast.showToast(text: "密码不能少于8位字符")
                 return}
         }
-        if !WalletTools.checkWalletName(name: nameText) {
+        if !WalletTool.checkWalletName(name: nameText) {
             Toast.showToast(text: "钱包名字重复")
             return
         }
         if !PasswordValidator.isValid(password: newPasswordText) {return}
         // 创建助记词
-        WalletTools.generateMnemonic { (mnemonic) in
+        WalletTool.generateMnemonic { (mnemonic) in
             self.delegate?.doPush(mnemonic: mnemonic)
         }
 

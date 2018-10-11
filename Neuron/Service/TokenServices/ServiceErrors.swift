@@ -25,7 +25,7 @@ enum SendEthResult<T> {
     case error(Error)
 }
 
-enum SendEthErrors: Error {
+enum SendEthError: Error {
     case invalidDestinationAddress
     case invalidAmountFormat
     case contractLoadingError
@@ -34,9 +34,10 @@ enum SendEthErrors: Error {
     case emptyResult
     case noAvailableKeys
     case createTransactionIssue
+    case invalidPassword
 }
 
-enum TransactionErrors: Error {
+enum TransactionError: Error {
     case requestfailed
 }
 
@@ -46,7 +47,7 @@ enum NervosServiceResult<T> {
     case error(Error)
 }
 
-enum SendNervosErrors: Error {
+enum SendNervosError: Error {
     case invalidDestinationAddress
     case invalidAmountFormat
     case contractLoadingError
@@ -63,6 +64,6 @@ enum SendNervosResult<T> {
     case error(Error)
 }
 
-enum NervosSignErrors: Error {
+enum NervosSignError: Error {
     case signTXFailed
 }

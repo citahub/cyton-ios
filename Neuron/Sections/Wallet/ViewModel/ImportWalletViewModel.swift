@@ -8,6 +8,7 @@
 
 import UIKit
 import TrustKeystore
+import struct TrustCore.EthereumAddress
 import IGIdenticon
 
 protocol ImportWalletViewModelDelegate: class {
@@ -34,73 +35,44 @@ class ImportWalletViewModel: NSObject {
     /// import keyStore wallet
     /// if import wallet way is keystore or privatekey,there is no mnemonic
     /// - Parameters:
-    ///   - keyStore: keyStore
+    ///   - keystore: keystore
     ///   - password: password
     ///   - name: walletName
-    func importKeystoreWallet(keyStore: String, password: String, name: String) {
-        if keyStore.isEmpty {Toast.showToast(text: "请输入keystore文本");return}
-        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
+    func importKeystoreWallet(keystore: String, password: String, name: String) {
+        if keystore.isEmpty {
+            Toast.showToast(text: "请输入keystore文本")
+            return
+        }
+        if name.isEmpty {
+            Toast.showToast(text: "钱包名字不能为空")
+            return
+        }
         if name.count > 15 {
             Toast.showToast(text: "钱包名字不能超过15个字符")
             return
         }
-        if password.isEmpty {Toast.showToast(text: "解锁密码不能为空");return}
-        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if !WalletTool.checkWalletName(name: name) {
+            Toast.showToast(text: "钱包名字重复")
+            return
+        }
+        if password.isEmpty {
+            Toast.showToast(text: "解锁密码不能为空")
+            return
+        }
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
-        let importType = ImportType.keyStore(json: keyStore, password: password)
-        WalletTools.importWallet(with: importType) { (result) in
+        let importType = ImportType.keystore(keystore: keystore, password: password)
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
-                self.exportPirvateKey(account: account, password: password)
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
+                self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
             Toast.hideHUD()
         }
     }
-
-    /// get privateKey
-    func exportPirvateKey(account: Account, password: String) {
-        let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
-        switch privateKeyResult {
-        case .succeed(result: let privateKey):
-            walletModel.encryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
-            didSaveWalletToRealm()
-        case .failed(_, let errorMsg):
-            Toast.showToast(text: errorMsg)
-        }
-    }
-
-    /// getkeystore JSONString
-    ///
-    /// - Parameters:
-    ///   - privateKey: hexPrivateKey
-    ///   - password: password
-//    func getKeystore(privateKey:String,password:String) {
-//        let keystoreReuslt = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: privateKey, password: password)
-//        switch keystoreReuslt {
-//        case .succeed(result:let keystoreStr):
-//            walletModel.keyStore = keystoreStr
-//            switch importType {
-//            case .keystoreType:
-//                break
-//            case .mnemonicType:
-//                didSaveWalletToRealm()
-//                break
-//            case .privateKeyType:
-//                didSaveWalletToRealm()
-//                break
-//            }
-//            break
-//        case .failed(_, let errorMessage):
-//            NeuLoad.showToast(text: errorMessage)
-//            break
-//        }
-//        
-//    }
 
     /// save wallet
     func didSaveWalletToRealm() {
@@ -137,16 +109,15 @@ class ImportWalletViewModel: NSObject {
         }
         if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
-        WalletTools.importWallet(with: importType) { (result) in
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
-                self.exportPirvateKey(account: account, password: password)
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
+                self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
@@ -170,16 +141,14 @@ class ImportWalletViewModel: NSObject {
         }
         if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
         if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTools.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        walletModel.MD5screatPassword = CryptoTool.changeMD5(password: password)
-        walletModel.encryptPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey, key: password)
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
-        WalletTools.importWallet(with: importType) { (result) in
+        WalletTool.importWallet(with: importType) { (result) in
             switch result {
             case .succeed(let account):
-                self.walletModel.address = account.address.eip55String
+                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)

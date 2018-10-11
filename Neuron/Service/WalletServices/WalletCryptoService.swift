@@ -8,33 +8,23 @@
 
 import UIKit
 import TrezorCrypto
-import TrustKeystore
 import TrustCore
 
 struct WalletCryptoService {
-    static func updateEncryptPrivateKey(oldPassword: String, newPassword: String, walletAddress: String) {
-        let ac = Address.init(eip55: (walletAddress))
-        let account = WalletTools.keystore?.account(for: ac!)
-        try! WalletTools.keystore?.update(account: account!, password: oldPassword, newPassword: newPassword)
+    static func updatePassword(address: String, password: String, newPassword: String) throws {
+        let wallet = WalletTool.wallet(for: address)!
+        try WalletTool.keyStore.update(wallet: wallet, password: password, newPassword: newPassword)
     }
 
-    static func didCheckoutKeystoreWithCurrentWallet(password: String) -> String {
+    static func deleteWallet(address: String, password: String) throws {
+        let wallet = WalletTool.wallet(for: address)!
+        try WalletTool.keyStore.delete(wallet: wallet, password: password)
+    }
+
+    static func getKeystoreForCurrentWallet(password: String) throws -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        let walletPrivate = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
-        let resultType = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: walletPrivate, password: password)
-        var keyStore = ""
-        switch resultType {
-        case .succeed(result: let keyStoreString):
-            keyStore = keyStoreString
-        case .failed(_, errorMessage:let errorMsg):
-            Toast.showToast(text: errorMsg)
-        }
-        return keyStore
-    }
-
-    static func didDelegateWallet(password: String, walletAddress: String) {
-        let address = Address.init(eip55: (walletAddress))
-        let account = WalletTools.keystore?.account(for: address!)
-        try! WalletTools.keystore?.delete(account: account!, password: password)
+        let wallet = WalletTool.wallet(for: walletModel.address)!
+        let data = try WalletTool.keyStore.export(wallet: wallet, password: password, newPassword: password)
+        return String(data: data, encoding: .utf8)!
     }
 }

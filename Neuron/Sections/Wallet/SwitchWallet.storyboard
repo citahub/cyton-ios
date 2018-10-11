@@ -12,7 +12,7 @@
         <!--Select Wallet Controller-->
         <scene sceneID="WFs-Gs-eYU">
             <objects>
-                <tableViewController id="CMR-zg-SbC" customClass="SelectWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SelectWalletController" id="CMR-zg-SbC" customClass="SelectWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" id="5HF-qE-XlW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -19,13 +19,13 @@ class NervosTransactionService {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {
-                    completion(SendNervosResult.error(SendNervosErrors.invalidDestinationAddress))
+                    completion(SendNervosResult.error(SendNervosError.invalidDestinationAddress))
                 }
                 return
             }
             guard let amount = Web3Utils.parseToBigUInt(value, units: .eth) else {
                 DispatchQueue.main.async {
-                    completion(SendNervosResult.error(SendNervosErrors.invalidAmountFormat))
+                    completion(SendNervosResult.error(SendNervosError.invalidAmountFormat))
                 }
                 return
             }
@@ -56,12 +56,16 @@ class NervosTransactionService {
     func send(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        var privateKey = CryptoTool.Decode_AES_ECB(strToDecode: walletModel.encryptPrivateKey, key: password)
-        if privateKey.hasPrefix("0x") {
-            privateKey = String(privateKey.dropFirst(2))
+        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
+            return
+        }
+        guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
+            return
         }
         guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: privateKey) else {
-            completion(SendNervosResult.error(NervosSignErrors.signTXFailed))
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
         DispatchQueue.global().async {

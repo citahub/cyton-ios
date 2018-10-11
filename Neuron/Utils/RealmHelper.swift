@@ -10,37 +10,28 @@ import Foundation
 import RealmSwift
 
 class RealmHelper {
-
-    //使用默认的文件名和路径
     static var sharedInstance = try! Realm()
-    /// 版本号
-    private static var schemaVersion: UInt64 = 1
-    // MARK: 初始化 Realm
-    /// 初始化进过加密的 Realm， 加密过的 Realm 只会带来很少的额外资源占用（通常最多只会比平常慢10%）
-    static func initEncryptionRealm() {
-        // 打开加密文件
-        // Open the encrypted Realm file
+    private static var schemaVersion: UInt64 = 2
+
+    static func configRealm() {
         var config = Realm.Configuration()
         config.schemaVersion = schemaVersion
-        config.encryptionKey = getKey() as Data
-        //data migration
-        let folderPath = config.fileURL?.deletingLastPathComponent().path
-        config.migrationBlock = { migration, oldSchemaVersion in
-            if oldSchemaVersion < schemaVersion {
-
-            }
-        }
+        config.migrationBlock = migrationBlock
+        config.encryptionKey = getEncryptionKey()
         /**
          *  设置可以在后台应用刷新中使用 Realm
          *  注意：以下的操作其实是关闭了 Realm 文件的 NSFileProtection 属性加密功能，将文件保护属性降级为一个不太严格的、允许即使在设备锁定时都可以访问文件的属性
          */
         // 禁用此目录的文件保护
+        let folderPath = config.fileURL?.deletingLastPathComponent().path
         try! FileManager.default.setAttributes([FileAttributeKey.protectionKey: FileProtectionType.none], ofItemAtPath: folderPath!)
-        // 将这个配置应用到默认的 Realm 数据库当中
         Realm.Configuration.defaultConfiguration = config
     }
+}
+
+private extension RealmHelper {
     //realm encryption key
-    private static func getKey() -> NSData {
+    static func getEncryptionKey() -> Data {
         // Identifier for our keychain entry - should be unique for your application
         let keychainIdentifier = "org.nervos.Neuron"
         let keychainIdentifierData = keychainIdentifier.data(using: String.Encoding.utf8, allowLossyConversion: false)!
@@ -56,7 +47,7 @@ class RealmHelper {
         var dataTypeRef: AnyObject?
         var status = withUnsafeMutablePointer(to: &dataTypeRef) { SecItemCopyMatching(query as CFDictionary, UnsafeMutablePointer($0)) }
         if status == errSecSuccess {
-            return dataTypeRef as! NSData
+            return dataTypeRef as! Data
         }
         // No pre-existing key from this application, so generate a new one
         let keyData = NSMutableData(length: 64)!
@@ -71,6 +62,13 @@ class RealmHelper {
         ]
         status = SecItemAdd(query as CFDictionary, nil)
         assert(status == errSecSuccess, "Failed to insert the new key in the keychain")
-        return keyData
+        return keyData as Data
+    }
+
+    static var migrationBlock: MigrationBlock {
+        return { migration, oldSchemaVersion in
+            if oldSchemaVersion < schemaVersion {
+            }
+        }
     }
 }

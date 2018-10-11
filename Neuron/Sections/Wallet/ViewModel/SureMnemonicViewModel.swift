@@ -8,6 +8,7 @@
 
 import UIKit
 import TrustKeystore
+import struct TrustCore.EthereumAddress
 import RealmSwift
 import IGIdenticon
 
@@ -16,11 +17,8 @@ protocol SureMnemonicViewModelDelegate: class {
 }
 
 class SureMnemonicViewModel: NSObject {
-
     var walletName = ""
     var walletAddress = ""
-    var walletPrivateKey = ""
-    var walletPasswordMD5 = ""
 
     weak var delegate: SureMnemonicViewModelDelegate?
     typealias SureMnemonicViewModelBlcol = (_ str: String) -> Void
@@ -40,13 +38,11 @@ class SureMnemonicViewModel: NSObject {
     public func didImportWalletToRealm(mnemonic: String, password: String) {
         // 通过助记词导入钱包
         Toast.showHUD(text: "钱包创建中...")
-        WalletTools.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTools.defaultDerivationPath, completion: { (result) in
+        WalletTool.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTool.defaultDerivationPath, completion: { (result) in
             switch result {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
-                self.walletAddress = account.address.eip55String
-                self.walletPasswordMD5 = CryptoTool.changeMD5(password: password)
-                self.exportKeystoreAndPirvateKey(account: account, password: password)
+                self.walletAddress = EthereumAddress(data: account.address.data)!.eip55String
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
@@ -54,38 +50,10 @@ class SureMnemonicViewModel: NSObject {
         })
     }
 
-    //export keystore
-    func exportKeystoreAndPirvateKey(account: Account, password: String) {
-        let privateKeyResult = WalletTools.exportPrivateKey(account: account, password: password)
-        switch privateKeyResult {
-        case .succeed(result: let privateKey):
-            self.walletPrivateKey = CryptoTool.Endcode_AES_ECB(strToEncode: privateKey!, key: password)
-            saveWallet()
-        case .failed(let errorStr, let errorMsg):
-            Toast.showToast(text: errorMsg)
-        }
-    }
-
-//    //生成keystore
-//    func exportKeystoreStr(privateKey:String) {
-//        let kS = WalletTools.convertPrivateKeyToJSON(hexPrivateKey: privateKey, password: walletModel.password)
-//        switch kS {
-//        case .succeed(let result):
-//            self.walletKeyStore = result
-//            break
-//        case .failed(let error,let errorMessage):
-//            NeuLoad.showToast(text:errorMessage)
-//            print(error)
-//            break
-//        }
-//    }
-
     func saveWallet() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let isFirstWallet = appModel.wallets.count == 0
         walletModel.address = walletAddress
-        walletModel.encryptPrivateKey =  walletPrivateKey
-        walletModel.MD5screatPassword = walletPasswordMD5
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()
         try! WalletRealmTool.realm.write {
