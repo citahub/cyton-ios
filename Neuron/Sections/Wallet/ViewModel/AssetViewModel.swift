@@ -31,7 +31,7 @@ class AssetViewModel: NSObject {
 
         for token in tokens {
             token.chainidName = token.name
-            token.iconUrl = token._logo?.src ?? ""
+            token.iconUrl = token.logo?.src ?? ""
             tokenArray.append(token)
         }
         return tokenArray

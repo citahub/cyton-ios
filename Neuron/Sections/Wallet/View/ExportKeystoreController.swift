@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExportKeystoreController: UIViewController {
+class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
     @IBOutlet weak var kestoreTextView: UITextView!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
@@ -21,6 +21,7 @@ class ExportKeystoreController: UIViewController {
         walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         kestoreTextView.text = keystoreString
         setUpUI()
+        setupEnterBackOverlay()
     }
 
     func setUpUI() {
