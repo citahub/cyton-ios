@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         skipBackupFiles()
-        initializeRealm()
+        RealmHelper.configureRealm()
         setupKeyboard()
         localCurrency()
         AuthenticationService.shared.register()
@@ -32,10 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
-    }
-
-    private func initializeRealm() {
-        RealmHelper.configRealm()
     }
 
     private func skipBackupFiles() {
