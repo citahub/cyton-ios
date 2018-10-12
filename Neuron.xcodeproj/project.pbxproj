@@ -21,6 +21,12 @@
 		1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C652B212EAC4800F1A0AA /* String+Extension.swift */; };
 		1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A9204E321634212004B54DC /* ToastActivityView.xib */; };
 		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
+		6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB88216F573100029324 /* ProductAgreementViewController.swift */; };
+		6E83CB8E216F573100029324 /* GuideService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB89216F573100029324 /* GuideService.swift */; };
+		6E83CB8F216F573100029324 /* Guide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB8A216F573100029324 /* Guide.storyboard */; };
+		6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */; };
+		6E83CB91216F573100029324 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8C216F573100029324 /* GuideViewController.swift */; };
+		6E83CB93216F581800029324 /* ProductAgreement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB92216F581800029324 /* ProductAgreement.txt */; };
 		6E867E03216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */; };
 		6E867E05216C3F1500BD6FE5 /* AuthPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */; };
 		6E867E07216C54B500BD6FE5 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */; };
@@ -208,6 +214,12 @@
 		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
 		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
 		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E83CB88216F573100029324 /* ProductAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductAgreementViewController.swift; sourceTree = "<group>"; };
+		6E83CB89216F573100029324 /* GuideService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideService.swift; sourceTree = "<group>"; };
+		6E83CB8A216F573100029324 /* Guide.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Guide.storyboard; sourceTree = "<group>"; };
+		6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E83CB8C216F573100029324 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		6E83CB92216F581800029324 /* ProductAgreement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProductAgreement.txt; sourceTree = "<group>"; };
 		6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectWalletViewController.swift; sourceTree = "<group>"; };
 		6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthPasswordViewController.swift; sourceTree = "<group>"; };
 		6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
@@ -426,6 +438,18 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6E83CB87216F573100029324 /* Guide */ = {
+			isa = PBXGroup;
+			children = (
+				6E83CB89216F573100029324 /* GuideService.swift */,
+				6E83CB8C216F573100029324 /* GuideViewController.swift */,
+				6E83CB88216F573100029324 /* ProductAgreementViewController.swift */,
+				6E83CB8A216F573100029324 /* Guide.storyboard */,
+				6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */,
+			);
+			path = Guide;
+			sourceTree = "<group>";
+		};
 		6E9D7CBB216B37E90044176D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -500,6 +524,7 @@
 		8928C22520AE7C6200C3103E /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6E83CB92216F581800029324 /* ProductAgreement.txt */,
 				896812CA20F726D000731C8C /* dappOpration.js */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				89CA1FAB213F822B00669B2C /* tokens-list.json */,
@@ -511,13 +536,14 @@
 		8928C22620AE7C6200C3103E /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				6E9D7CBB216B37E90044176D /* Authentication */,
 				8928C22720AE7CB500C3103E /* Dapp */,
 				8928C27320B29ABB00C3103E /* Wallet */,
 				8922685820DE4EA50021A85F /* Settings */,
 				8928C22820AE7CB500C3103E /* Base */,
 				8928C22A20AE7CB500C3103E /* Common */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
+				6E83CB87216F573100029324 /* Guide */,
+				6E9D7CBB216B37E90044176D /* Authentication */,
 			);
 			path = Sections;
 			sourceTree = "<group>";
@@ -1004,6 +1030,7 @@
 			files = (
 				8928C2A420B41BCA00C3103E /* SelectWalletController.xib in Resources */,
 				1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */,
+				6E83CB93216F581800029324 /* ProductAgreement.txt in Resources */,
 				89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */,
 				898A1A2B20B7F0FC00ECB465 /* TradeDetailsController.xib in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */,
@@ -1019,6 +1046,7 @@
 				898A19ED20B5018B00ECB465 /* AssetsDetailController.xib in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
+				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
 				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
@@ -1219,10 +1247,12 @@
 				899CADA320E0EDAC00FF9D27 /* WalletCryptoService.swift in Sources */,
 				89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
+				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserviewController.swift in Sources */,
 				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
 				89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */,
 				89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */,
+				6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */,
@@ -1230,8 +1260,10 @@
 				1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */,
 				898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */,
 				898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */,
+				6E83CB91216F573100029324 /* GuideViewController.swift in Sources */,
 				89C25C7120BE369100007EC1 /* ContractTableViewCell.swift in Sources */,
 				8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */,
+				6E83CB8E216F573100029324 /* GuideService.swift in Sources */,
 				8964A18020BE94F70086848F /* NEPickerView.swift in Sources */,
 				89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */,
 				89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */,

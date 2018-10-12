@@ -17,10 +17,15 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     var keystore: String? = ""
     let viewModel = ImportWalletViewModel()
 
+    @IBOutlet weak var titleContentView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         keyStoreTextView.delegate = self
         viewModel.delegate = self
+
+        let titleHeight = titleLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: titleLabel.bounds.size.width, height: 100), limitedToNumberOfLines: 0).size.height
+        titleContentView.frame = CGRect(origin: titleContentView.frame.origin, size: CGSize(width: titleContentView.bounds.size.width, height: max(titleHeight + 12, 35.0)))
     }
 
     @IBAction func nameChanged(_ sender: UITextField) {

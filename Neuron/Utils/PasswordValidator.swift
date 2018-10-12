@@ -15,8 +15,8 @@ struct PasswordValidator {
             Toast.showToast(text: "密码不能为空")
             return false
         }
-        if password.count < 8 || password.count > 50 {
-            Toast.showToast(text: "密码的长度为8到50")
+        if password.count < 8 {
+            Toast.showToast(text: "密码的长度需要在8位以上")
             return false
         }
 
@@ -29,7 +29,7 @@ struct PasswordValidator {
         let uppercaseBool = NSPredicate(format: "SELF MATCHES %@", uppercasePredicate)
         let numberBool = NSPredicate(format: "SELF MATCHES %@", numberPredicate)
         let specialBool = NSPredicate(format: "SELF MATCHES %@", specialPredicate)
-
+        
         var totleConform = 0
         if lowerBool.evaluate(with: password) == true {
             totleConform = totleConform + 1
@@ -47,7 +47,7 @@ struct PasswordValidator {
         if totleConform >= 3 {
             return true
         } else {
-            Toast.showToast(text: "密码太弱请重新输入")
+            Toast.showToast(text: "您的密码安全性太弱，请重新输入")
             return false
         }
     }
