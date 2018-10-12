@@ -22,14 +22,17 @@ extension StoryboardIdentifiable where Self: UIViewController {
 extension UIViewController: StoryboardIdentifiable { }
 
 extension UIStoryboard {
-    enum Stroyboard: String {
-        case authentication = "Authentication"
-        case settings = "Settings"
-        case switchWallet = "SwitchWallet"
+    enum Name: String {
+        case authentication
+        case settings
+        case switchWallet
+        case guide
+        case addWallet
+        case main
     }
 
-    convenience init(storyboard: Stroyboard, bundle storyboardBundleOrNil: Bundle? = nil) {
-        self.init(name: storyboard.rawValue, bundle: nil)
+    convenience init(storyboard: Name, bundle storyboardBundleOrNil: Bundle? = nil) {
+        self.init(name: storyboard.rawValue.capitalized, bundle: nil)
     }
 
     func instantiateViewController<VC: UIViewController>() -> VC {

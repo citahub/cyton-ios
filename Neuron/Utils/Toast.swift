@@ -24,17 +24,21 @@ struct Toast {
 
     static func showHUD(text: String? = nil) {
         loadingView.text = text
-        rootView?.isUserInteractionEnabled = false
-        rootView?.showToast(loadingView, duration: 60, position: .center) // Do not hide until 60 secs
+        keyWindow?.isUserInteractionEnabled = false
+        keyWindow?.showToast(loadingView, duration: 60, position: .center) // Do not hide until 60 secs
     }
 
     static func hideHUD() {
-        rootView?.isUserInteractionEnabled = true
-        rootView?.hideToast(loadingView)
+        keyWindow?.isUserInteractionEnabled = true
+        keyWindow?.hideToast(loadingView)
     }
 
     private static var rootView: UIView? {
         return (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController?.view
+    }
+
+    private static var keyWindow: UIWindow? {
+        return UIApplication.shared.keyWindow
     }
 }
 

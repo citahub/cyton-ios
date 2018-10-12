@@ -37,7 +37,7 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     @IBAction func switchAuthenticationMode() {
@@ -47,10 +47,9 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
             change(mode: mode)
         } else {
             if AuthenticationService.shared.biometryType == .faceID {
-                // TODO: 还没给 Face ID 相关图标
-                switchImageView.image = UIImage(named: "fingerprint_login_icon")
+                switchImageView.image = UIImage(named: "faceId_login_icon")
             } else {
-                switchImageView.image = UIImage(named: "fingerprint_login_icon")
+                switchImageView.image = UIImage(named: "touchId_login_icon")
             }
             let mode: AuthPasswordViewController = storyboard!.instantiateViewController()
             change(mode: mode)
