@@ -19,5 +19,12 @@ class SensorsAnalyticsService {
         #endif
         sensors.trackAppCrash() // 自动收集 App Crash 日志
         sensors.registerSuperProperties(["platformType": "iOS"])
+        let eventType: SensorsAnalyticsAutoTrackEventType = [
+            .eventTypeAppStart,
+            .eventTypeAppEnd,
+            .eventTypeAppViewScreen,
+            .eventTypeAppClick
+        ]
+        sensors.enableAutoTrack(eventType)
     }
 }
