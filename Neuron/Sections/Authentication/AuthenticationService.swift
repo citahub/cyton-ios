@@ -120,7 +120,15 @@ class AuthenticationService {
 
     func deviceOwnerAuthentication(complection: @escaping (Bool, LAError?) -> Void) {
         recognitionFlag = true
-        LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: "请验证指纹") { (result, error: Error?) in
+        let localizedReason: String
+        if biometryType == .faceID {
+            localizedReason = "请验证 Face ID"
+        } else if biometryType == .touchID {
+            localizedReason = "请验证 Touch ID"
+        } else {
+            return
+        }
+        LAContext().evaluatePolicy(.deviceOwnerAuthentication, localizedReason: localizedReason) { (result, error: Error?) in
             DispatchQueue.main.async {
                 if result {
                     complection(true, nil)
