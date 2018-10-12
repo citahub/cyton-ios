@@ -15,7 +15,7 @@ class BrowserviewController: UIViewController, WKUIDelegate {
 
     lazy private var webview: WKWebView = {
         let webview = WKWebView(
-            frame: .zero,
+            frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
             configuration: self.config
         )
         webview.navigationDelegate = self
@@ -115,6 +115,13 @@ extension BrowserviewController: WKNavigationDelegate {
             closeBtn.isHidden = false
         } else {
             closeBtn.isHidden = true
+        }
+        webView.evaluateJavaScript("document.querySelector('head').querySelector('link[rel=manifest]').href;") { (manifest, _) in
+            guard let link = manifest else {
+                return
+            }
+            DAppAction.dealWithManifestJson(with: link as! String)
+            debugPrint(link as! String)
         }
     }
 }

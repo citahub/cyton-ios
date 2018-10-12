@@ -52,15 +52,9 @@ class SearchAppController: UITableViewController {
             UserDefaults.standard.set(searchArray, forKey: "searchHistory")
             tableView.reloadData()
         }
-        BrowserUrlParser.isUrlvalid(urlString: urlStr) { (_, error) in
-            if error != nil {
-                Toast.showToast(text: "链接无效,请重新输入")
-            } else {
-                let bCtrl = self.storyboard!.instantiateViewController(withIdentifier: "browserviewController") as! BrowserviewController
-                bCtrl.requestUrlStr = urlStr
-                self.navigationController?.pushViewController(bCtrl, animated: true)
-            }
-        }
+        let bCtrl = self.storyboard!.instantiateViewController(withIdentifier: "browserviewController") as! BrowserviewController
+        bCtrl.requestUrlStr = urlStr
+        self.navigationController?.pushViewController(bCtrl, animated: true)
     }
 
     // click qrButton
@@ -85,13 +79,7 @@ class SearchAppController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        BrowserUrlParser.isUrlvalid(urlString: searchArray[indexPath.row]) { (_, error) in
-            if error != nil {
-                Toast.showToast(text: "链接无效,请重新输入")
-            } else {
-                self.performSegue(withIdentifier: "browserview", sender: indexPath.row)
-            }
-        }
+        self.performSegue(withIdentifier: "browserview", sender: indexPath.row)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

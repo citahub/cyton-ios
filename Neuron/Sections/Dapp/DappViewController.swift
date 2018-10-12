@@ -66,23 +66,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     //wkwebview
-    //NetworkActivityIndicatorVisible
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-    }
-
-    //
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (_, _) in
-        }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-
-    //阻止链接被点击
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
-
             return
         }
 

@@ -72,6 +72,7 @@
 		8935BA5B216EFCF000C37263 /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA5A216EFCF000C37263 /* init.js */; };
 		8935BA5D216F48A800C37263 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA5C216F48A800C37263 /* Method.swift */; };
 		8935BA5F216F631A00C37263 /* ScriptMessageProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */; };
+		8951A84C2170A5CC00043228 /* DAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951A84B2170A5CC00043228 /* DAppAction.swift */; };
 		8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955580420DCA7F700FC92D8 /* PasswordValidator.swift */; };
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
 		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
@@ -273,6 +274,7 @@
 		8935BA5A216EFCF000C37263 /* init.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
 		8935BA5C216F48A800C37263 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageProxy.swift; sourceTree = "<group>"; };
+		8951A84B2170A5CC00043228 /* DAppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppAction.swift; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
 		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
@@ -569,6 +571,7 @@
 				8935BA5C216F48A800C37263 /* Method.swift */,
 				8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */,
 				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
+				8951A84B2170A5CC00043228 /* DAppAction.swift */,
 				8928C24820AE91E600C3103E /* DappViewController.swift */,
 				8928C26920AED5C100C3103E /* SearchAppController.swift */,
 				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
@@ -1344,6 +1347,7 @@
 				8935BA5F216F631A00C37263 /* ScriptMessageProxy.swift in Sources */,
 				8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */,
 				89971F11212D049900E86C34 /* NervosTransactionService.swift in Sources */,
+				8951A84C2170A5CC00043228 /* DAppAction.swift in Sources */,
 				89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */,
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
