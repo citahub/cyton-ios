@@ -18,7 +18,8 @@ class SettingsViewController: UITableViewController {
             String(describing: SettingCurrencyTableViewCell.self),
             String(describing: SettingAuthenticationTableViewCell.self),
             "SettingAboutUsTableViewCell",
-            "SettingContactUsTableViewCell"
+            "SettingContactUsTableViewCell",
+            "SettingContactCustomerServiceTableViewCell"
         ]
         if !AuthenticationService.shared.isValid {
             rowIdentifiers.remove(at: 1)
@@ -67,6 +68,9 @@ class SettingsViewController: UITableViewController {
             let controller: CommonWebViewController = UIStoryboard(storyboard: .settings).instantiateViewController()
             controller.url = URL(string: "https://www.nervos.org/contact")!
             navigationController?.pushViewController(controller, animated: true)
+        } else if cell.reuseIdentifier == "SettingContactCustomerServiceTableViewCell" {
+            UIPasteboard.general.string = "Nervos-Neuron"
+            Toast.showToast(text: "客服微信已复制")
         }
     }
 }
