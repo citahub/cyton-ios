@@ -21,6 +21,11 @@ class CreateWalletController: UITableViewController {
         title = "创建钱包"
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     @IBAction func walletNameChanged(_ sender: UITextField) {
         name = sender.text
         jugeNextButtonEnabled()
@@ -51,6 +56,7 @@ class CreateWalletController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: Any) {
         if canProceedNextStep() {
+            UIApplication.shared.keyWindow?.endEditing(true)
             self.performSegue(withIdentifier: "nextButton", sender: sender)
         }
     }

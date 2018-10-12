@@ -78,4 +78,14 @@ import UIKit
             return layer.shadowRadius
         }
     }
+
+    @IBInspectable var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+            layer.masksToBounds = newValue > 0
+        }
+        get {
+            return layer.cornerRadius
+        }
+    }
 }

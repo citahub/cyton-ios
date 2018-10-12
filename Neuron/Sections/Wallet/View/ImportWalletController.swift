@@ -27,7 +27,7 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
         super.viewDidLoad()
         title = "导入钱包"
         tabbedButtonView.delegate = self
-        tabbedButtonView.buttonTitles = ["keystore", "助记词", "私钥"]
+        tabbedButtonView.buttonTitles = ["Keystore", "助记词", "私钥"]
 
         importWalletPageViewController.delegate = self
         importWalletPageViewController.dataSource = self
@@ -40,6 +40,11 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
         importWalletPageViewController.setViewControllers([keystoreViewController], direction: .forward, animated: false)
 
         setupEnterBackOverlay()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewDidAppear(_ animated: Bool) {
