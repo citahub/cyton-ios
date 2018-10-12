@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         skipBackupFiles()
-        initializeRealm()
+        RealmHelper.configureRealm()
         setupKeyboard()
         localCurrency()
         GuideService.shared.register()
@@ -37,10 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
-    }
-
-    private func initializeRealm() {
-        RealmHelper.configRealm()
     }
 
     private func skipBackupFiles() {
