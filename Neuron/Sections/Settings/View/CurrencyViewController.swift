@@ -13,7 +13,7 @@ class CurrencyViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "本地货币"
+        title = "默认货币单位"
         getCurrencyList()
     }
 
@@ -44,6 +44,6 @@ class CurrencyViewController: UITableViewController {
         let model = dataArray[indexPath.row]
         LocalCurrencyService().saveLocalCurrency(model.short)
         NotificationCenter.default.post(name: .changeLocalCurrency, object: nil)
-        tableView.reloadData()
+        navigationController?.popViewController(animated: true)
     }
 }
