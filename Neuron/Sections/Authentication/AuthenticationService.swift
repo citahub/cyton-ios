@@ -101,7 +101,7 @@ class AuthenticationService {
         guard willResignActiveDate == nil || willResignActiveDate! + timeout < Date() else {
             return
         }
-        let controller: AuthenticationViewController = UIStoryboard(storyboard: .authentication).instantiateViewController()
+        let controller: AuthenticationViewController = UIStoryboard(name: .authentication).instantiateViewController()
         let window = UIWindow(frame: UIScreen.main.bounds)
         window.rootViewController = UINavigationController(rootViewController: controller)
         window.backgroundColor = UIColor.orange

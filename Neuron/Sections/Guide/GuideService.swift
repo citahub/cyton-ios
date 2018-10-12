@@ -41,7 +41,7 @@ class GuideService {
 
     private func showGuide() {
         guard window == nil else { return }
-        let controller: GuideViewController = UIStoryboard(storyboard: .guide).instantiateViewController()
+        let controller: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = BaseNavigationController(rootViewController: controller)
         window?.windowLevel = .alert

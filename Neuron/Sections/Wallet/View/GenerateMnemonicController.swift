@@ -29,7 +29,7 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         setupOverlayBackBarButton()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
