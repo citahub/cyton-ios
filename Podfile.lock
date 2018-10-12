@@ -38,6 +38,9 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - secp256k1_swift (1.0.3)
+  - SensorsAnalyticsSDK (1.10.15):
+    - SensorsAnalyticsSDK/core (= 1.10.15)
+  - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.0.3)
   - SwiftRLP (1.0.1):
@@ -76,6 +79,7 @@ DEPENDENCIES:
   - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
   - SDWebImage
+  - SensorsAnalyticsSDK (~> 1.10.15)
   - Toast-Swift (~> 4.0.0)
   - TrustKeystore (~> 0.5.2)
 
@@ -101,6 +105,7 @@ SPEC REPOS:
     - scrypt
     - SDWebImage
     - secp256k1_swift
+    - SensorsAnalyticsSDK
     - SipHash
     - SwiftProtobuf
     - SwiftRLP
@@ -142,6 +147,7 @@ SPEC CHECKSUMS:
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
+  SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 5ccc0e4054e37c75800e5744acb2aa80bb72b39c
   SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
@@ -151,6 +157,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 01dda49a7d5356363753243bd6bd1b4f236795b7
+PODFILE CHECKSUM: ba650f8dd99b769019e6bb77d542d3c19e92ff8a
 
 COCOAPODS: 1.5.3

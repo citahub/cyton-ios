@@ -22,6 +22,7 @@ target 'Neuron' do
   pod 'SCLAlertView'
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
+  pod 'SensorsAnalyticsSDK', '~> 1.10.15'
 
   target 'NeuronTests' do
     inherit! :search_paths
