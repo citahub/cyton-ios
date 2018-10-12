@@ -29,10 +29,16 @@ extension UIStoryboard {
         case guide
         case addWallet
         case main
+        var rawValue: String {
+            let string = "\(self)"
+            let prefixRange = Range(uncheckedBounds: (string.startIndex, string.index(after: string.startIndex)))
+            let prefix = string[prefixRange]
+            return prefix.replacingCharacters(in: prefixRange, with: prefix.uppercased())
+        }
     }
 
     convenience init(storyboard: Name, bundle storyboardBundleOrNil: Bundle? = nil) {
-        self.init(name: storyboard.rawValue.capitalized, bundle: nil)
+        self.init(name: storyboard.rawValue, bundle: nil)
     }
 
     func instantiateViewController<VC: UIViewController>() -> VC {
