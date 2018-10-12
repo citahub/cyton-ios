@@ -64,7 +64,7 @@ class ProductAgreementViewController: UIViewController {
     }
 
     @IBAction func agreement(_ sender: Any) {
-        isAgree = !isAgree
+        isAgree.toggle()
     }
 
     @IBAction func confirm(_ sender: Any) {

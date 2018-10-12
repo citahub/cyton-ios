@@ -37,7 +37,7 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     @IBAction func switchAuthenticationMode() {

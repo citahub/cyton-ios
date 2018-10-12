@@ -32,7 +32,7 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         GuideService.shared.window?.windowLevel = .alert
     }
 

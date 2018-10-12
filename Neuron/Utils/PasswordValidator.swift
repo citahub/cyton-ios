@@ -19,12 +19,12 @@ struct PasswordValidator {
             Toast.showToast(text: "密码的长度需要在8位以上")
             return false
         }
-        
+
         let lowerPredicate = "^.*?[a-z].*?$"
         let uppercasePredicate = "^.*?[A-Z].*?$"
         let numberPredicate = "^.*?[0-9].*?$"
         let specialPredicate = "^.*?[~!@#$%^&*()-+?:.].*?$"
-        
+
         let lowerBool = NSPredicate(format: "SELF MATCHES %@", lowerPredicate)
         let uppercaseBool = NSPredicate(format: "SELF MATCHES %@", uppercasePredicate)
         let numberBool = NSPredicate(format: "SELF MATCHES %@", numberPredicate)
@@ -43,7 +43,7 @@ struct PasswordValidator {
         if specialBool.evaluate(with: password) {
             totleConform = totleConform + 1
         }
-        
+
         if totleConform >= 3 {
             return true
         } else {
