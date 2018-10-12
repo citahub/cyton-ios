@@ -34,6 +34,7 @@
 		6E867E0D216C92A900BD6FE5 /* OverlayPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */; };
 		6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */; };
 		6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */; };
+		6E90D06921704C1D00B98363 /* SensorsAnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D06821704C1D00B98363 /* SensorsAnalyticsService.swift */; };
 		6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */; };
 		6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */; };
 		6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC0216B3AE40044176D /* Authentication.storyboard */; };
@@ -227,6 +228,7 @@
 		6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPresentable.swift; sourceTree = "<group>"; };
 		6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAuthenticationTableViewCell.swift; sourceTree = "<group>"; };
 		6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		6E90D06821704C1D00B98363 /* SensorsAnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorsAnalyticsService.swift; sourceTree = "<group>"; };
 		6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC0216B3AE40044176D /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -450,6 +452,14 @@
 			path = Guide;
 			sourceTree = "<group>";
 		};
+		6E90D06721704C1100B98363 /* SensorsAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				6E90D06821704C1D00B98363 /* SensorsAnalyticsService.swift */,
+			);
+			path = SensorsAnalytics;
+			sourceTree = "<group>";
+		};
 		6E9D7CBB216B37E90044176D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +487,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6E90D06721704C1100B98363 /* SensorsAnalytics */,
 				89C6145A2141036B00DC3DF4 /* SettingsService */,
 				89B296E720F4CA57008558A7 /* Transaction */,
 				898CA98420EA21E90059ECA3 /* TokenServices */,
@@ -1312,6 +1323,7 @@
 				89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
+				6E90D06921704C1D00B98363 /* SensorsAnalyticsService.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
@@ -1544,11 +1556,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
@@ -1574,11 +1589,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.nervos.neuron;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1601,7 +1619,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1622,7 +1644,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1642,7 +1668,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1661,7 +1691,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = NeuronUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.nervos.NeuronUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
