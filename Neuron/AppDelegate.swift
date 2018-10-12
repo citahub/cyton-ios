@@ -14,10 +14,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIStoryboard(storyboard: .main).instantiateInitialViewController()
+        window?.makeKeyAndVisible()
+
         skipBackupFiles()
-        initializeRealm()
+        RealmHelper.configureRealm()
         setupKeyboard()
         localCurrency()
+        GuideService.shared.register()
         AuthenticationService.shared.register()
         return true
     }
@@ -32,10 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
-    }
-
-    private func initializeRealm() {
-        RealmHelper.configRealm()
     }
 
     private func skipBackupFiles() {

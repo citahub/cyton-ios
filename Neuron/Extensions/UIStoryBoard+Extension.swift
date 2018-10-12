@@ -22,13 +22,22 @@ extension StoryboardIdentifiable where Self: UIViewController {
 extension UIViewController: StoryboardIdentifiable { }
 
 extension UIStoryboard {
-    enum Stroyboard: String {
-        case authentication = "Authentication"
-        case settings = "Settings"
-        case switchWallet = "SwitchWallet"
+    enum Name: String {
+        case authentication
+        case settings
+        case switchWallet
+        case guide
+        case addWallet
+        case main
+        var rawValue: String {
+            let string = "\(self)"
+            let prefixRange = Range(uncheckedBounds: (string.startIndex, string.index(after: string.startIndex)))
+            let prefix = string[prefixRange]
+            return string.replacingCharacters(in: prefixRange, with: prefix.uppercased())
+        }
     }
 
-    convenience init(storyboard: Stroyboard, bundle storyboardBundleOrNil: Bundle? = nil) {
+    convenience init(storyboard: Name, bundle storyboardBundleOrNil: Bundle? = nil) {
         self.init(name: storyboard.rawValue, bundle: nil)
     }
 

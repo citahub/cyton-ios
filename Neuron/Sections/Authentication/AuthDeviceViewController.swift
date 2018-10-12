@@ -17,12 +17,11 @@ class AuthDeviceViewController: UIViewController, AuthenticationMode {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // TODO: 还没给 Face ID 相关图标
         if AuthenticationService.shared.biometryType == .faceID {
-            authenticationButton.setImage(UIImage(named: "fingerprint_icon"), for: .normal)
+            authenticationButton.setImage(UIImage(named: "faceId_icon"), for: .normal)
             authenticationTitleLabel.text = "点击进行验证 Face ID"
         } else {
-            authenticationButton.setImage(UIImage(named: "fingerprint_icon"), for: .normal)
+            authenticationButton.setImage(UIImage(named: "touchId_icon"), for: .normal)
             authenticationTitleLabel.text = "点击进行验证 Touch ID"
         }
         deviceOwnerAuthentication()
