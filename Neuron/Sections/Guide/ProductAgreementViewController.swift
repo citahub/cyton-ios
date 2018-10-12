@@ -58,7 +58,7 @@ class ProductAgreementViewController: UIViewController {
 
     static func show(in inController: UIViewController) {
         guard UserDefaults.standard.bool(forKey: UserDefaultsKey.agreement.rawValue) == false else { return }
-        let controller: ProductAgreementViewController = UIStoryboard(storyboard: .guide).instantiateViewController()
+        let controller: ProductAgreementViewController = UIStoryboard(name: .guide).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
         inController.present(controller, animated: true, completion: nil)
     }

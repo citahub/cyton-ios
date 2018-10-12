@@ -1,5 +1,5 @@
 //
-//  UIStoryBoard+Extension.swift
+//  UIStoryboard+Extension.swift
 //  Neuron
 //
 //  Created by 晨风 on 2018/10/8.
@@ -29,16 +29,15 @@ extension UIStoryboard {
         case guide
         case addWallet
         case main
-        var rawValue: String {
-            let string = "\(self)"
-            let prefixRange = Range(uncheckedBounds: (string.startIndex, string.index(after: string.startIndex)))
-            let prefix = string[prefixRange]
-            return string.replacingCharacters(in: prefixRange, with: prefix.uppercased())
+
+        var capitalized: String {
+            let capital = String(rawValue.prefix(1)).uppercased()
+            return capital + rawValue.dropFirst()
         }
     }
 
-    convenience init(storyboard: Name, bundle storyboardBundleOrNil: Bundle? = nil) {
-        self.init(name: storyboard.rawValue, bundle: nil)
+    convenience init(name: Name, bundle storyboardBundleOrNil: Bundle? = nil) {
+        self.init(name: name.capitalized, bundle: nil)
     }
 
     func instantiateViewController<VC: UIViewController>() -> VC {
