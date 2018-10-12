@@ -33,7 +33,7 @@ extension UIStoryboard {
             let string = "\(self)"
             let prefixRange = Range(uncheckedBounds: (string.startIndex, string.index(after: string.startIndex)))
             let prefix = string[prefixRange]
-            return prefix.replacingCharacters(in: prefixRange, with: prefix.uppercased())
+            return string.replacingCharacters(in: prefixRange, with: prefix.uppercased())
         }
     }
 
