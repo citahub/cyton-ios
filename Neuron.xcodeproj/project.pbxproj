@@ -11,6 +11,7 @@
 		1A092245213580C900CAED5D /* NFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A092244213580C900CAED5D /* NFTViewController.swift */; };
 		1A1E8411216DF55D00B15E88 /* ExportError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E8410216DF55D00B15E88 /* ExportError.swift */; };
 		1A1E8413216DF6DC00B15E88 /* ExportResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E8412216DF6DC00B15E88 /* ExportResult.swift */; };
+		1A1E841821717EBD00B15E88 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E841721717EBD00B15E88 /* PasswordValidatorTests.swift */; };
 		1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */; };
 		1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD02137B412008DC306 /* RequestPayment.storyboard */; };
 		1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */; };
@@ -202,6 +203,7 @@
 		1A092244213580C900CAED5D /* NFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTViewController.swift; sourceTree = "<group>"; };
 		1A1E8410216DF55D00B15E88 /* ExportError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportError.swift; sourceTree = "<group>"; };
 		1A1E8412216DF6DC00B15E88 /* ExportResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportResult.swift; sourceTree = "<group>"; };
+		1A1E841721717EBD00B15E88 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
 		1A207DCE2137B3F7008DC306 /* RequestPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestPaymentViewController.swift; sourceTree = "<group>"; };
 		1A207DD02137B412008DC306 /* RequestPayment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RequestPayment.storyboard; sourceTree = "<group>"; };
 		1A207DD22137B4B7008DC306 /* SwitchWallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SwitchWallet.storyboard; sourceTree = "<group>"; };
@@ -413,6 +415,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A1E8414217178A800B15E88 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				8955580420DCA7F700FC92D8 /* PasswordValidator.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
+		1A1E841521717E8800B15E88 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				1A1E841621717E9400B15E88 /* Validators */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		1A1E841621717E9400B15E88 /* Validators */ = {
+			isa = PBXGroup;
+			children = (
+				1A1E841721717EBD00B15E88 /* PasswordValidatorTests.swift */,
+			);
+			path = Validators;
+			sourceTree = "<group>";
+		};
 		1A3C652A212EAC0F00F1A0AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,8 +456,7 @@
 			children = (
 				1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */,
 			);
-			name = Extensions;
-			path = "New Group";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		638FD5929E22E012CA4314D1 /* Pods */ = {
@@ -590,12 +615,12 @@
 		8928C23120AE84AB00C3103E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1A1E8414217178A800B15E88 /* Validators */,
 				89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */,
 				8928C23220AE84E600C3103E /* ColorUtils.swift */,
 				1A9204E321634212004B54DC /* ToastActivityView.xib */,
 				8913437420C7D3A400A17AEF /* Toast.swift */,
 				8913437720CA56CA00A17AEF /* RealmHelper.swift */,
-				8955580420DCA7F700FC92D8 /* PasswordValidator.swift */,
 				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
 				6E867E08216C862900BD6FE5 /* NoScreenshot.swift */,
 				6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */,
@@ -755,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				1AB3D1D021709F7600557E9D /* Extensions */,
+				1A1E841521717E8800B15E88 /* Utils */,
 				896D044120AE69C5002CFF6A /* NeuronTests.swift */,
 				896D044320AE69C5002CFF6A /* Info.plist */,
 			);
@@ -1380,6 +1406,7 @@
 			files = (
 				1AB3D1D221709F9600557E9D /* UIStoryboardExtensionTests.swift in Sources */,
 				896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */,
+				1A1E841821717EBD00B15E88 /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
