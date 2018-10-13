@@ -11,16 +11,16 @@ import Foundation
 struct PasswordValidator {
     enum Result {
         case valid
-        case invalid(reason: String)
+        case invalid(String)
     }
 
     static func validate(password: String) -> Result {
         if password.isEmpty {
-            return .invalid(reason: "密码不能为空")
+            return .invalid("密码不能为空")
         }
 
         if password.count < 8 {
-            return .invalid(reason: "密码的长度需要在8位以上")
+            return .invalid("密码的长度需要在8位以上")
         }
 
         let lowercasePredicate = NSPredicate(format: "SELF MATCHES %@", "^.*?[a-z].*?$")
@@ -34,7 +34,7 @@ struct PasswordValidator {
         if matches.count >= 3 {
             return .valid
         } else {
-            return .invalid(reason: "您的密码安全性太弱，请重新输入")
+            return .invalid("您的密码安全性太弱，请重新输入")
         }
     }
 }
