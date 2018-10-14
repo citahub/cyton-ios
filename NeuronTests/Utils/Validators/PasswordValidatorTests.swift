@@ -43,7 +43,7 @@ class PasswordValidatorTests: XCTestCase {
             "aBcdefg*"
         ].forEach { password in
             guard case .valid = PasswordValidator.validate(password: password) else {
-                return XCTFail("Password complexity not checked")
+                return XCTFail("Password valid not checked")
             }
         }
     }
