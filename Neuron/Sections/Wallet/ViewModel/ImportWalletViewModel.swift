@@ -43,16 +43,9 @@ class ImportWalletViewModel: NSObject {
             Toast.showToast(text: "请输入keystore文本")
             return
         }
-        if name.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空")
-            return
-        }
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
-            return
-        }
-        if !WalletTool.checkWalletName(name: name) {
-            Toast.showToast(text: "钱包名字重复")
+
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
             return
         }
         if password.isEmpty {
@@ -102,21 +95,12 @@ class ImportWalletViewModel: NSObject {
     ///   - name: walletname
     func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String, name: String) {
         if mnemonic.isEmpty {
-            Toast.showToast(text: "请输入助记词");
+            Toast.showToast(text: "请输入助记词")
             return
         }
 
-        // TODO: Add wallet name validator
-        if name.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空");
-            return
-        }
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
-            return
-        }
-        if !WalletTool.checkWalletName(name: name) {
-            Toast.showToast(text: "钱包名字重复");
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
             return
         }
 
@@ -125,7 +109,7 @@ class ImportWalletViewModel: NSObject {
             return
         }
         if password != confirmPassword {
-            Toast.showToast(text: "两次密码输入不一致");
+            Toast.showToast(text: "两次密码输入不一致")
             return
         }
 
@@ -156,20 +140,10 @@ class ImportWalletViewModel: NSObject {
             Toast.showToast(text: "请输入私钥")
             return
         }
-        // TODO: name validator
-        if name.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空")
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
             return
         }
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
-            return
-        }
-        if !WalletTool.checkWalletName(name: name) {
-            Toast.showToast(text: "钱包名字重复")
-            return
-        }
-
         if case .invalid(let reason) = PasswordValidator.validate(password: password) {
             Toast.showToast(text: reason)
             return

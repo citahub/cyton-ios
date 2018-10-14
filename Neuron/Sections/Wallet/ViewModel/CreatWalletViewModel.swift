@@ -82,8 +82,8 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
 
     //在这处理数据的存储
     func goNextView() {
-        if nameText.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空")
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: nameText) {
+            Toast.showToast(text: reason)
             return
         }
 
@@ -94,11 +94,6 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
 
         if newPasswordText != againPasswordText {
             Toast.showToast(text: "两次密码不一致")
-            return
-        }
-
-        if !WalletTool.checkWalletName(name: nameText) {
-            Toast.showToast(text: "钱包名字重复")
             return
         }
 
