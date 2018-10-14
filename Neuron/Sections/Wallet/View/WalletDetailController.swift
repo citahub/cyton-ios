@@ -79,7 +79,7 @@ class WalletDetailController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                didChangeWalletNmae()
+                didChangeWalletName()
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 0 {
@@ -104,7 +104,7 @@ class WalletDetailController: UITableViewController {
         }
     }
 
-    func didChangeWalletNmae() {
+    func didChangeWalletName() {
         // Add a text field
         let appearance = SCLAlertView.SCLAppearance(
             showCloseButton: false
@@ -112,18 +112,13 @@ class WalletDetailController: UITableViewController {
         let alert = SCLAlertView(appearance: appearance)
         let txt = alert.addTextField("请输入钱包名字")
         alert.addButton("确定") {
-            if !WalletTool.checkWalletName(name: txt.text!) && !txt.text!.isEmpty {Toast.showToast(text: "该钱包名称已存在");return} else {
-                let nameClean = txt.text?.trimmingCharacters(in: .whitespaces)
-                if nameClean?.count == 0 {
-                    Toast.showToast(text: "钱包名字不能为空")
-                } else if txt.text!.count > 15 {
-                    Toast.showToast(text: "钱包名称不能超过15个字符")
-                } else {
-                    try! WalletRealmTool.realm.write {
-                        self.walletModel.name = txt.text!
-                        self.walletNameLabel.text = txt.text
-                    }
-                }
+            if case .invalid(let reason) = WalletNameValidator.validate(walletName: txt.text ?? "") {
+                Toast.showToast(text: reason)
+                return
+            }
+            try! WalletRealmTool.realm.write {
+                self.walletModel.name = txt.text!
+                self.walletNameLabel.text = txt.text
             }
         }
         alert.addButton("取消") {

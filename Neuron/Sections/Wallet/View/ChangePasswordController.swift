@@ -36,13 +36,15 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
     }
 
     @IBAction func changePasswordBtn(_ sender: UIButton) {
+        if case .invalid(let reason) = PasswordValidator.validate(password: newPassword) {
+            Toast.showToast(text: reason)
+            return
+        }
         if newPassword != confirmPassword {
             Toast.showToast(text: "两次新密码输入不一致")
             return
         }
-        if !PasswordValidator.isValid(password: newPassword) {
-            return
-        }
+
         Toast.showHUD(text: "修改密码中...")
         let address = walletModel.address
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in

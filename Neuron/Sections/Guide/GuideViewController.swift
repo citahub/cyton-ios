@@ -47,12 +47,12 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
 
     @IBAction func createWallet(_ sender: Any) {
-        let controller: CreateWalletController = UIStoryboard(storyboard: .addWallet).instantiateViewController()
+        let controller: CreateWalletController = UIStoryboard(name: .addWallet).instantiateViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
     @IBAction func importWallet(_ sender: Any) {
-        let controller: ImportWalletController = UIStoryboard(storyboard: .addWallet).instantiateViewController()
+        let controller: ImportWalletController = UIStoryboard(name: .addWallet).instantiateViewController()
         navigationController?.pushViewController(controller, animated: true)
     }
 
