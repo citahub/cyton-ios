@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import web3swift
 import BigInt
-import MJRefresh
+import PullToRefresh
 
 class WalletViewController: UITableViewController, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
@@ -31,6 +31,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
             updateNavigationBar()
         }
     }
+    let refresher = PullToRefresh()
 
     let viewModel = SubController2ViewModel()
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -53,18 +54,18 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
         assetPageViewController.dataSource = self
         assetPageViewController.delegate = self
-        let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
-        mjheader?.lastUpdatedTimeLabel.isHidden = true
-        tableView.mj_header = mjheader
+        tableView.addPullToRefresh(refresher) {
+            self.loadData()
+        }
         tabbedButtonView.buttonTitles = ["代币", "藏品"]
         tabbedButtonView.delegate = self
     }
 
     @objc private func endRefresh() {
-        tableView.mj_header.endRefreshing()
+        tableView.endRefreshing(at: .top)
     }
 
-    @objc private func loadData() {
+    private func loadData() {
         NotificationCenter.default.post(name: .beginRefresh, object: nil)
     }
 
@@ -171,6 +172,10 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tabHeader.frame.height
+    }
+
+    deinit {
+        tableView.removePullToRefresh(at: .top)
     }
 }
 
