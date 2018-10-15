@@ -10,6 +10,10 @@ import Foundation
 import Alamofire
 
 struct DAppAction {
+    enum DAppActionError: Error {
+        case manifestRequestFailed
+    }
+
     func dealWithManifestJson(with link: String) {
         Alamofire.request(link, method: .get).responseJSON { (response) in
             do {
@@ -61,8 +65,4 @@ struct ManifestModel: Decodable {
         chainSet = try values.decode([String: String].self, forKey: .chainSet)
         entry = try values.decode(String.self, forKey: .entry)
     }
-}
-
-enum DAppActionError: Error {
-    case manifestRequestFailed
 }
