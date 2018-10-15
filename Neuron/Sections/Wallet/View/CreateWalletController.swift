@@ -75,30 +75,19 @@ class CreateWalletController: UITableViewController {
     }
 
     func canProceedNextStep() -> Bool {
-        let nameClean = name?.trimmingCharacters(in: .whitespaces)
-        if nameClean?.count == 0 {
-            Toast.showToast(text: "钱包名字不能为空")
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name ?? "") {
+            Toast.showToast(text: reason)
             return false
         }
-        if name!.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
-            return false
-        }
-        if password?.count == 0 {
-            Toast.showToast(text: "密码不能为空")
+        if case .invalid(let reason) = PasswordValidator.validate(password: password ?? "") {
+            Toast.showToast(text: reason)
             return false
         }
         if password != confirmPassword {
             Toast.showToast(text: "两次密码不一致")
             return false
         }
-        if !PasswordValidator.isValid(password: password!) {
-            return false
-        }
-        if !WalletTool.checkWalletName(name: name!) {
-            Toast.showToast(text: "钱包名字重复")
-            return false
-        }
+
         return true
     }
 

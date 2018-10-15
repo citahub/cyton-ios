@@ -6,9 +6,9 @@ target 'Neuron' do
   inhibit_all_warnings!
 
   pod 'NervosSwift', git: "https://github.com/cryptape/nervos-swift", tag: "v0.18.1"
+  pod 'PullToRefresher', git: "https://github.com/xiaoluSF/PullToRefresh", branch: "swift4.2"
 
   pod 'PlainPing'
-  pod 'MJRefresh'
   pod 'LYEmptyView'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'

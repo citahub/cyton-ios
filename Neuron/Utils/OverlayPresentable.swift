@@ -6,7 +6,7 @@
 //  Copyright © 2018 Cryptape. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol OverlayPresentable: NSObjectProtocol {
     associatedtype Overlay: UIView

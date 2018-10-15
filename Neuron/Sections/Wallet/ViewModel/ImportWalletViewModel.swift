@@ -44,16 +44,9 @@ class ImportWalletViewModel: NSObject {
             Toast.showToast(text: "请输入keystore文本")
             return
         }
-        if name.isEmpty {
-            Toast.showToast(text: "钱包名字不能为空")
-            return
-        }
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
-            return
-        }
-        if !WalletTool.checkWalletName(name: name) {
-            Toast.showToast(text: "钱包名字重复")
+
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
             return
         }
         if password.isEmpty {
@@ -67,7 +60,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
                 SensorsAnalytics.Track.importWallet(type: .keystone, address: self.walletModel.address)
                 if self.isUseQRCode {
                     SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
@@ -83,8 +76,7 @@ class ImportWalletViewModel: NSObject {
         }
     }
 
-    /// save wallet
-    func didSaveWalletToRealm() {
+    private func saveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
@@ -110,15 +102,25 @@ class ImportWalletViewModel: NSObject {
     ///   - devirationPath: devirationPath
     ///   - name: walletname
     func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String, name: String) {
-        if mnemonic.isEmpty {Toast.showToast(text: "请输入助记词");return}
-        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
+        if mnemonic.isEmpty {
+            Toast.showToast(text: "请输入助记词")
             return
         }
-        if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
-        if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
+            return
+        }
+
+        if case .invalid(let reason) = PasswordValidator.validate(password: password) {
+            Toast.showToast(text: reason)
+            return
+        }
+        if password != confirmPassword {
+            Toast.showToast(text: "两次密码输入不一致")
+            return
+        }
+
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
@@ -126,7 +128,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
                 SensorsAnalytics.Track.importWallet(type: .mnemonic, address: self.walletModel.address)
                 if self.isUseQRCode {
                     SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
@@ -150,15 +152,23 @@ class ImportWalletViewModel: NSObject {
     ///   - confirmPassword: confirmPassword
     ///   - name: name
     func importPrivateWallet(privateKey: String, password: String, confirmPassword: String, name: String) {
-        if privateKey.isEmpty {Toast.showToast(text: "请输入私钥");return}
-        if name.isEmpty {Toast.showToast(text: "钱包名字不能为空");return}
-        if name.count > 15 {
-            Toast.showToast(text: "钱包名字不能超过15个字符")
+        if privateKey.isEmpty {
+            Toast.showToast(text: "请输入私钥")
             return
         }
-        if password != confirmPassword {Toast.showToast(text: "两次密码输入不一致");return}
-        if !PasswordValidator.isValid(password: password) {return}
-        if !WalletTool.checkWalletName(name: name) {Toast.showToast(text: "钱包名字重复");return}
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
+            Toast.showToast(text: reason)
+            return
+        }
+        if case .invalid(let reason) = PasswordValidator.validate(password: password) {
+            Toast.showToast(text: reason)
+            return
+        }
+        if password != confirmPassword {
+            Toast.showToast(text: "两次密码输入不一致")
+            return
+        }
+
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
@@ -166,7 +176,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
                 SensorsAnalytics.Track.importWallet(type: .privatekey, address: self.walletModel.address)
                 if self.isUseQRCode {
                     SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: true)
