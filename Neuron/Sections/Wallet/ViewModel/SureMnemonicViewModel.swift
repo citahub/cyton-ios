@@ -43,6 +43,7 @@ class SureMnemonicViewModel: NSObject {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
                 self.walletAddress = EthereumAddress(data: account.address.data)!.eip55String
+                SensorsAnalytics.Track.createWallet(address: self.walletAddress)
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }

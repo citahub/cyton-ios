@@ -29,6 +29,7 @@ class PaymentViewController: UITableViewController {
     var ethGasPrice: BigUInt!
     var payValue: String = ""
     var destinationAddress: String = ""
+    var isUseQRCode = false
     var extraData = Data()
     var nervosQuota: BigUInt!
     var gasCost: String = ""
@@ -106,6 +107,7 @@ class PaymentViewController: UITableViewController {
             payCoverViewController.toAddress = destinationAddress
             payCoverViewController.gasCost = gasCost
             payCoverViewController.tokenType = tokenType
+            payCoverViewController.isUseQRCode = isUseQRCode
             switch tokenType {
             case .ethereumToken:
                 payCoverViewController.extraData = extraData
@@ -180,6 +182,7 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
         destinationAddress = codeResult
+        isUseQRCode = true
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -204,6 +207,7 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
             payValue = textField.text ?? ""
         } else {
             destinationAddress = textField.text ?? ""
+            isUseQRCode = false
         }
     }
 }

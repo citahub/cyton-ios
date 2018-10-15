@@ -41,6 +41,7 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
 
     func didBackQRCodeMessage(codeResult: String) {
         keystore = codeResult
+        viewModel.isUseQRCode = true
         keyStoreTextView.text = codeResult
         judgeImportButtonEnabled()
     }
@@ -74,6 +75,7 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
 extension KeystoreViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         keystore = textView.text
+        viewModel.isUseQRCode = false
         judgeImportButtonEnabled()
     }
 }

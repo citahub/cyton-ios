@@ -26,6 +26,7 @@ class ImportWalletViewModel: NSObject {
     weak var delegate: ImportWalletViewModelDelegate?
     var walletModel = WalletModel()
     var importType = ImportWalletType.keystoreType
+    var isUseQRCode = false
 
     /// if change the way to import wallet the walletModel should be empy
     func changeImportWay() {
@@ -67,8 +68,16 @@ class ImportWalletViewModel: NSObject {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
+                SensorsAnalytics.Track.importWallet(type: .keystone, address: self.walletModel.address)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
+                }
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
+                SensorsAnalytics.Track.importWallet(type: .keystone, address: nil)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
+                }
             }
             Toast.hideHUD()
         }
@@ -118,8 +127,16 @@ class ImportWalletViewModel: NSObject {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
+                SensorsAnalytics.Track.importWallet(type: .mnemonic, address: self.walletModel.address)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
+                }
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
+                SensorsAnalytics.Track.importWallet(type: .mnemonic, address: nil)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
+                }
             }
             Toast.hideHUD()
         }
@@ -150,8 +167,16 @@ class ImportWalletViewModel: NSObject {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.didSaveWalletToRealm()
+                SensorsAnalytics.Track.importWallet(type: .privatekey, address: self.walletModel.address)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: true)
+                }
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
+                SensorsAnalytics.Track.importWallet(type: .privatekey, address: nil)
+                if self.isUseQRCode {
+                    SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: false)
+                }
             }
             Toast.hideHUD()
         }

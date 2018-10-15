@@ -88,6 +88,11 @@ class TokensViewController: UITableViewController {
                     currencyTotle += Double(model.currencyAmount) ?? 0
                     self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                     self.tableView.reloadData()
+                    SensorsAnalytics.Track.possessMoney(
+                        chainType: model.chainId,
+                        currencyType: model.symbol,
+                        currencyNumber: Double(model.currencyAmount) ?? 0
+                    )
                 case .error(let error):
                     Toast.showToast(text: error.localizedDescription)
                 }

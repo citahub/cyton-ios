@@ -50,11 +50,13 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
 
     func didGetTextViewText(text: String) {
         mnemonic = text
+        viewModel.isUseQRCode = false
         judgeImportButtonEnabled()
     }
 
     func didBackQRCodeMessage(codeResult: String) {
         mnemonic = codeResult
+        viewModel.isUseQRCode = true
         mnemonicTextView.text = codeResult
         judgeImportButtonEnabled()
     }

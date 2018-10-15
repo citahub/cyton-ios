@@ -108,8 +108,10 @@ class SearchAppController: UIViewController, UITextFieldDelegate, UITableViewDel
     func didBackQRCodeMessage(codeResult: String) {
         if codeResult.count != 0 {
             dealWithUrl(urlStr: codeResult)
+            SensorsAnalytics.Track.scanQRCode(scanType: .none, scanResult: true)
         } else {
             Toast.showToast(text: "扫描结果为空")
+            SensorsAnalytics.Track.scanQRCode(scanType: .none, scanResult: false)
         }
     }
 
