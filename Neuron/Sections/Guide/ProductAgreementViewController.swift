@@ -16,6 +16,7 @@ class ProductAgreementViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
+
     var isAgree: Bool = false {
         didSet {
             if isAgree {
@@ -28,6 +29,10 @@ class ProductAgreementViewController: UIViewController {
                 checkButton.setImage(UIImage(named: "icon_check_no"), for: .normal)
             }
         }
+    }
+
+    static var shouldDisplay: Bool {
+        return !UserDefaults.standard.bool(forKey: UserDefaultsKey.agreement.rawValue)
     }
 
     override func viewDidLoad() {
@@ -54,13 +59,6 @@ class ProductAgreementViewController: UIViewController {
             attributedText.addAttribute(.foregroundColor, value: UIColor(red: 46/255.0, green: 49/255.0, blue: 62/255.0, alpha: 1.0), range: nsRange)
         }
         textView.attributedText = attributedText
-    }
-
-    static func show(in inController: UIViewController) {
-        guard UserDefaults.standard.bool(forKey: UserDefaultsKey.agreement.rawValue) == false else { return }
-        let controller: ProductAgreementViewController = UIStoryboard(name: .guide).instantiateViewController()
-        controller.modalPresentationStyle = .overCurrentContext
-        inController.present(controller, animated: true, completion: nil)
     }
 
     @IBAction func agreement(_ sender: Any) {

@@ -1,5 +1,5 @@
 //
-//  SureMnemonicViewController.swift
+//  VerifyMnemonicViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/6/1.
