@@ -10,6 +10,9 @@ import Foundation
 import SensorsAnalyticsSDK
 
 class SensorsAnalytics {
+    enum UserDefaultsKey: String {
+        case userId = "SensorsAnalyticsUserIdUserDefaultsKey"
+    }
     fileprivate let sensors: SensorsAnalyticsSDK
     static let service = SensorsAnalytics()
 
@@ -40,11 +43,15 @@ class SensorsAnalytics {
     }
 
     private func getUserId() -> String {
+        if let userId = UserDefaults.standard.string(forKey: UserDefaultsKey.userId.rawValue) {
+            return userId
+        }
         var userId = ""
         for _ in 0...50 {
             userId += "\(arc4random_uniform(10))"
         }
         userId += "\(Int(Date().timeIntervalSince1970 * 1000))"
+        UserDefaults.standard.set(userId, forKey: UserDefaultsKey.userId.rawValue)
         return userId
     }
 }
