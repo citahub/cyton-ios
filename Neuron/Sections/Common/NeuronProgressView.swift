@@ -70,7 +70,7 @@ class NeuronProgressView: UIView {
     //计算移动
     func addAnimation(point: CGPoint) {
         if 0 >= progressV.frame.origin.x && point.x <= progressV.frame.size.width {
-            sliderView.mj_origin.x = point.x
+            sliderView.ly_origin.x = point.x
         }
     }
 

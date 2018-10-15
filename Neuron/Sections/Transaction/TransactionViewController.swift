@@ -8,6 +8,7 @@
 
 import UIKit
 import LYEmptyView
+import PullToRefresh
 
 class TransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var transactionTableView: UITableView!
@@ -15,6 +16,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     var dataArray: [TransactionModel] = []
     var tokenType: TokenType = .erc20Token
     var tokenModel = TokenModel()
+    let refresher = PullToRefresh()
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -27,9 +29,9 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         transactionTableView.delegate = self
         transactionTableView.dataSource = self
         transactionTableView.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有交易数据", detailStr: "")
-        let mjheader = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(loadData))
-        mjheader?.lastUpdatedTimeLabel.isHidden = true
-        transactionTableView.mj_header = mjheader
+        transactionTableView.addPullToRefresh(refresher) {
+            self.loadData()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,7 +47,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
 
-    @objc func loadData() {
+    private func loadData() {
         switch tokenType {
         case .ethereumToken:
             didGetEthTranscationData()
@@ -65,7 +67,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
             }
-            self.transactionTableView.mj_header.endRefreshing()
+            self.transactionTableView.endRefreshing(at: .top)
         }
     }
 
@@ -79,7 +81,7 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
             }
-            self.transactionTableView.mj_header.endRefreshing()
+            self.transactionTableView.endRefreshing(at: .top)
         }
     }
 
@@ -108,6 +110,10 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         let tCtrl = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
         tCtrl.tModel = transModel
         navigationController?.pushViewController(tCtrl, animated: true)
+    }
+
+    deinit {
+        transactionTableView.removeAllPullToRefresh()
     }
 }
 

@@ -6,7 +6,7 @@
 //  Copyright © 2018年 cryptape. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 protocol NibLoadable {
 

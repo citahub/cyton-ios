@@ -77,7 +77,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="createWallet:" destination="O3T-88-B97" eventType="touchUpInside" id="wxu-OF-zei"/>
+                                    <segue destination="xU9-L5-la2" kind="show" id="yXq-A8-yqJ"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0se-6B-q7Z">
@@ -88,7 +88,7 @@
                                     <color key="titleColor" red="0.086274509799999996" green="0.21176470589999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="importWallet:" destination="O3T-88-B97" eventType="touchUpInside" id="zPK-gR-348"/>
+                                    <segue destination="gui-kn-TAq" kind="show" id="SXZ-8H-Nw0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -97,11 +97,12 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="1pw-Ug-Okf" id="QjW-NR-Ehf"/>
+                        <segue destination="3Kq-lC-yon" kind="presentation" identifier="displayAgreement" modalPresentationStyle="overCurrentContext" id="LHJ-Nj-MeX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eki-mB-kOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-639.20000000000005" y="-84.107946026986511"/>
+            <point key="canvasLocation" x="-702" y="-84"/>
         </scene>
         <!--Product Agreement View Controller-->
         <scene sceneID="sJW-Gw-4Km">
@@ -119,10 +120,11 @@
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="587"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAY-0L-22M">
-                                                <rect key="frame" x="15" y="523" width="174" height="18"/>
+                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAY-0L-22M">
+                                                <rect key="frame" x="15" y="523" width="200" height="18"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="我以仔细阅读并同意以上条款" image="icon_check_no">
                                                     <color key="titleColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
@@ -206,6 +208,22 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fW2-Rx-CdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="58.399999999999999" y="-84.107946026986511"/>
+        </scene>
+        <!--CreateWalletController-->
+        <scene sceneID="MqI-lL-5TP">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddWallet" referencedIdentifier="CreateWalletController" id="xU9-L5-la2" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="izC-a0-EBx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-802" y="261"/>
+        </scene>
+        <!--ImportWalletController-->
+        <scene sceneID="ReC-6G-dtk">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddWallet" referencedIdentifier="ImportWalletController" id="gui-kn-TAq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OOd-VB-7KB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-471" y="261"/>
         </scene>
     </scenes>
     <resources>

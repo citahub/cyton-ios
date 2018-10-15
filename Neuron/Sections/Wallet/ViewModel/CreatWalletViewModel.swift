@@ -82,26 +82,23 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
 
     //在这处理数据的存储
     func goNextView() {
-        if nameText.isEmpty {Toast.showToast(text: "钱包名字不能为空")
-            return }
-        if newPasswordText.isEmpty {Toast.showToast(text: "钱包密码不能为空")
-            return}
-        if !(newPasswordText == againPasswordText) {Toast.showToast(text: "两次密码不一致")
-            return} else {
-            if newPasswordText.count < 8 {
-                Toast.showToast(text: "密码不能少于8位字符")
-                return}
-        }
-        if !WalletTool.checkWalletName(name: nameText) {
-            Toast.showToast(text: "钱包名字重复")
+        if case .invalid(let reason) = WalletNameValidator.validate(walletName: nameText) {
+            Toast.showToast(text: reason)
             return
         }
-        if !PasswordValidator.isValid(password: newPasswordText) {return}
-        // 创建助记词
+
+        if case .invalid(let reason) = PasswordValidator.validate(password: newPasswordText) {
+            Toast.showToast(text: reason)
+            return
+        }
+
+        if newPasswordText != againPasswordText {
+            Toast.showToast(text: "两次密码不一致")
+            return
+        }
+
         WalletTool.generateMnemonic { (mnemonic) in
             self.delegate?.doPush(mnemonic: mnemonic)
         }
-
     }
-
 }

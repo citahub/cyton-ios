@@ -9,6 +9,5 @@
 #ifndef Neuron_Bridging_Header_h
 #define Neuron_Bridging_Header_h
 
-#import "MJRefresh.h"
 
 #endif /* Neuron_Bridging_Header_h */
