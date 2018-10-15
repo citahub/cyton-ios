@@ -103,4 +103,30 @@ extension BrowserViewController: WKNavigationDelegate {
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        guard let requestURL = navigationAction.request.url else {
+            decisionHandler(.allow)
+            return
+        }
+        if requestURL.absoluteString.hasPrefix("alipays://") || requestURL.absoluteString.hasPrefix("alipay://") {
+            UIApplication.shared.open(requestURL, options: [:]) { (result) in
+                guard !result else { return }
+                let alert = UIAlertController(title: "提示", message: "未检测到支付宝客户端，请安装后重试。", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            decisionHandler(.cancel)
+        } else if requestURL.absoluteString.hasPrefix("weixin://") {
+            UIApplication.shared.open(requestURL, options: [:]) { (result) in
+                guard !result else { return }
+                let alert = UIAlertController(title: "提示", message: "未检测到微信客户端，请安装后重试。", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+            decisionHandler(.cancel)
+        } else {
+            decisionHandler(.allow)
+        }
+    }
 }
