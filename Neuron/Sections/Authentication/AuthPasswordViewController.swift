@@ -34,15 +34,21 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
     }
 
     @IBAction func confirm(_ sender: Any) {
-        guard let currentWallet = currentWallet else { return }
+        guard let currentWallet = currentWallet, let wallet = WalletTool.wallet(for: currentWallet.address) else {
+            return
+        }
         guard let password = passwordTextField.text else { return }
         passwordTextField.resignFirstResponder()
-        // TODO: check current wallet password
-        //if currentWallet.MD5screatPassword != CryptoTool.changeMD5(password: password) {
-            //Toast.showToast(text: "密码不正确请重新输入")
-            //return
-        //}
-        delegate?.authenticationSuccessful()
+        DispatchQueue.global().async {
+            let isPasswordCorrect = WalletTool.checkPassword(wallet: wallet, password: password)
+            DispatchQueue.main.sync { [weak self] in
+                if isPasswordCorrect {
+                    self?.delegate?.authenticationSuccessful()
+                } else {
+                    Toast.showToast(text: "密码不正确请重新输入")
+                }
+            }
+        }
     }
 
     // MARK: - UITextFieldDelegate
