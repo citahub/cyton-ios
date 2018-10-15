@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 struct DAppAction {
-    static func dealWithManifestJson(with link: String) {
+    func dealWithManifestJson(with link: String) {
         Alamofire.request(link, method: .get).responseJSON { (response) in
             do {
                 guard let responseData = response.data else { throw DAppActionError.manifestRequestFailed }

@@ -1,5 +1,5 @@
 //
-//  BrowserviewController.swift
+//  BrowserViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/7/13.
@@ -9,8 +9,9 @@
 import UIKit
 import WebKit
 
-class BrowserviewController: UIViewController, WKUIDelegate {
-    private var closeBtn = UIButton()
+class BrowserViewController: UIViewController, WKUIDelegate {
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
@@ -24,47 +25,26 @@ class BrowserviewController: UIViewController, WKUIDelegate {
     }()
 
     lazy private var progressView: UIProgressView = {
-        self.progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
-        self.progressView.tintColor = AppColor.themeColor
-        self.progressView.trackTintColor = UIColor.white
-        return self.progressView
+        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
+        progressView.tintColor = AppColor.themeColor
+        progressView.trackTintColor = UIColor.white
+        return progressView
     }()
 
     lazy var config: WKWebViewConfiguration = {
-        let confit = WKWebViewConfiguration.make(for: .main, in: ScriptMessageProxy(delegate: self))
-        confit.websiteDataStore = WKWebsiteDataStore.default()
-        return confit
+        let config = WKWebViewConfiguration.make(for: .main, in: ScriptMessageProxy(delegate: self))
+        config.websiteDataStore = WKWebsiteDataStore.default()
+        return config
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpBackButton()
         view.addSubview(webview)
         view.addSubview(progressView)
         webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         let url = URL(string: getRequestStr(requestStr: requestUrlStr))
         let request = URLRequest.init(url: url!)
         webview.load(request)
-    }
-
-    func setUpBackButton() {
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage(named: "nav_darkback"), for: .normal)
-        backButton.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        backButton.contentHorizontalAlignment = .left
-        backButton.addTarget(self, action: #selector(didClickBackButton), for: .touchUpInside)
-        let bBarbutton = UIBarButtonItem(customView: backButton)
-
-        closeBtn = UIButton(type: .custom)
-        closeBtn.setImage(UIImage(named: "close"), for: .normal)
-        closeBtn.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        closeBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: -20, bottom: 0, right: 0)
-        closeBtn.contentHorizontalAlignment = .left
-        closeBtn.isHidden = true
-        closeBtn.addTarget(self, action: #selector(didClickCloseButton), for: .touchUpInside)
-        let cBarbutton = UIBarButtonItem(customView: closeBtn)
-
-        navigationItem.leftBarButtonItems = [bBarbutton, cBarbutton]
     }
 
     func getRequestStr(requestStr: String) -> String {
@@ -89,7 +69,7 @@ class BrowserviewController: UIViewController, WKUIDelegate {
         }
     }
 
-    @objc func didClickBackButton(sender: UIButton) {
+    @IBAction func didClickBackButton(_ sender: UIButton) {
         if webview.canGoBack {
             webview.goBack()
         } else {
@@ -97,31 +77,30 @@ class BrowserviewController: UIViewController, WKUIDelegate {
         }
     }
 
-    @objc func didClickCloseButton(sender: UIButton) {
+    @IBAction func dudCkucjCloseButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
 }
 
-extension BrowserviewController: WKScriptMessageHandler {
+extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 
     }
 }
 
-extension BrowserviewController: WKNavigationDelegate {
+extension BrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
         if webView.canGoBack {
-            closeBtn.isHidden = false
+            closeButton.isHidden = false
         } else {
-            closeBtn.isHidden = true
+            closeButton.isHidden = true
         }
         webView.evaluateJavaScript("document.querySelector('head').querySelector('link[rel=manifest]').href;") { (manifest, _) in
             guard let link = manifest else {
                 return
             }
-            DAppAction.dealWithManifestJson(with: link as! String)
-            debugPrint(link as! String)
+            DAppAction().dealWithManifestJson(with: link as! String)
         }
     }
 }
