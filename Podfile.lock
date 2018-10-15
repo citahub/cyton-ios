@@ -79,7 +79,7 @@ DEPENDENCIES:
   - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
   - SDWebImage
-  - SensorsAnalyticsSDK (~> 1.10.15)
+  - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
   - TrustKeystore (~> 0.5.2)
 
@@ -104,7 +104,6 @@ SPEC REPOS:
     - scrypt
     - SDWebImage
     - secp256k1_swift
-    - SensorsAnalyticsSDK
     - SipHash
     - SwiftProtobuf
     - SwiftRLP
@@ -121,6 +120,9 @@ EXTERNAL SOURCES:
   PullToRefresher:
     :branch: swift4.2
     :git: https://github.com/xiaoluSF/PullToRefresh
+  SensorsAnalyticsSDK:
+    :branch: v1.10.15
+    :git: https://github.com/sensorsdata/sa-sdk-ios
 
 CHECKOUT OPTIONS:
   NervosSwift:
@@ -129,6 +131,9 @@ CHECKOUT OPTIONS:
   PullToRefresher:
     :commit: 949e5b0ba018c7a98c2a625ad0fd4335eafd7436
     :git: https://github.com/xiaoluSF/PullToRefresh
+  SensorsAnalyticsSDK:
+    :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
+    :git: https://github.com/sensorsdata/sa-sdk-ios
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -162,6 +167,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 1202b7416cd1537b9327a785611a206da3102e69
+PODFILE CHECKSUM: 738db151dcd70c6bc3eae20d9fc35876533db0c7
 
 COCOAPODS: 1.5.3
