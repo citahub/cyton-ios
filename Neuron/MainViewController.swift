@@ -41,9 +41,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         let appModel = WalletRealmTool.getCurrentAppModel()
         group.notify(queue: .main) {
+            let alreadyContain = appModel.nativeTokenList.contains(where: {$0.chainidName == tModel.chainidName})
             try? WalletRealmTool.realm.write {
                 WalletRealmTool.realm.add(tModel, update: true)
-                if !appModel.nativeTokenList.contains(tModel) {
+                if !alreadyContain {
                     appModel.nativeTokenList.append(tModel)
                 }
             }
