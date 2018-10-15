@@ -242,4 +242,16 @@ struct WalletTool {
             return true
         }
     }
+
+    static func checkPassword(wallet: Wallet, password: String) -> Bool {
+        do {
+            var privateKeyData = try wallet.key.decrypt(password: password)
+            defer {
+                privateKeyData.resetBytes(in: 0 ..< privateKeyData.count)
+            }
+            return true
+        } catch {
+            return false
+        }
+    }
 }
