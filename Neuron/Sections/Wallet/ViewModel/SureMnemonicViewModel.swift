@@ -34,8 +34,7 @@ class SureMnemonicViewModel: NSObject {
         }
     }
 
-    //导入钱包
-    public func didImportWalletToRealm(mnemonic: String, password: String) {
+    public func importWallet(mnemonic: String, password: String) {
         // 通过助记词导入钱包
         Toast.showHUD(text: "钱包创建中...")
         WalletTool.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTool.defaultDerivationPath, completion: { (result) in
@@ -43,6 +42,7 @@ class SureMnemonicViewModel: NSObject {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
                 self.walletAddress = EthereumAddress(data: account.address.data)!.eip55String
+                self.saveWallet()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
@@ -50,10 +50,11 @@ class SureMnemonicViewModel: NSObject {
         })
     }
 
-    func saveWallet() {
+    private func saveWallet() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let isFirstWallet = appModel.wallets.count == 0
         walletModel.address = walletAddress
+        walletModel.name = walletName
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()
         try! WalletRealmTool.realm.write {
