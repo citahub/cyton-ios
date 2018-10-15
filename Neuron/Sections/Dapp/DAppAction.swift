@@ -8,10 +8,12 @@
 
 import Foundation
 import Alamofire
+import Nervos
 
 struct DAppAction {
     enum DAppActionError: Error {
         case manifestRequestFailed
+        case emptyChainHosts
     }
 
     func dealWithManifestJson(with link: String) {
@@ -19,12 +21,51 @@ struct DAppAction {
             do {
                 guard let responseData = response.data else { throw DAppActionError.manifestRequestFailed }
                 let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
+                try? self.getMateDataForDAppChain(with: manifest!)
             } catch {
 
             }
         }
     }
 
+    func getMateDataForDAppChain(with manifestModel: ManifestModel) throws {
+        guard let chainHosts = manifestModel.chainSet.values.first else {
+            throw DAppActionError.emptyChainHosts
+        }
+        let nervos = NervosNetwork.getNervos(with: chainHosts)
+        DispatchQueue.global().async {
+            let result = nervos.appChain.getMetaData()
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let metaData):
+                    let tokenModel = TokenModel()
+                    tokenModel.address = ""
+                    tokenModel.chainId = metaData.chainId.description
+                    tokenModel.chainName = metaData.chainName
+                    tokenModel.iconUrl = metaData.tokenAvatar
+                    tokenModel.isNativeToken = true
+                    tokenModel.name = metaData.tokenName
+                    tokenModel.symbol = metaData.tokenSymbol
+                    tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
+                    tokenModel.chainidName = metaData.chainName + metaData.chainId.description
+                    tokenModel.chainHosts = chainHosts
+                    self.saveToken(model: tokenModel)
+                case .failure(_): break
+                }
+            }
+        }
+    }
+
+    private func saveToken(model: TokenModel) {
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        let alreadyContain = appModel.nativeTokenList.contains(where: {$0.chainidName == model.chainidName})
+        try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(model, update: true)
+            if !alreadyContain {
+                appModel.nativeTokenList.append(model)
+            }
+        }
+    }
 }
 
 struct ManifestModel: Decodable {

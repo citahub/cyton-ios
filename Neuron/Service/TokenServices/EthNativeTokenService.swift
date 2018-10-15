@@ -17,7 +17,7 @@ struct EthNativeTokenService {
     /// - Parameters:
     ///   - walletAddress: wallet address
     ///   - completion: EthServiceResult<BigUInt>
-    static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
+    static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         let address = EthereumAddress(walletAddress)!
         let web3Main = Web3Network.getWeb3()
         DispatchQueue.global().async {
@@ -25,11 +25,18 @@ struct EthNativeTokenService {
             DispatchQueue.main.async {
                 switch balanceResult {
                 case .success(let balance):
-                    completion(EthServiceResult.success(balance))
+                    let balanceNumber = self.formatBalanceValue(value: balance)
+                    completion(EthServiceResult.success(balanceNumber))
                 case .failure(let error):
                     completion(EthServiceResult.error(error))
                 }
             }
         }
+    }
+
+    private static func formatBalanceValue(value: BigUInt) -> String {
+        let format = Web3.Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
+        let finalValue = Double(format)!
+        return finalValue.clean
     }
 }

@@ -10,8 +10,8 @@ import Foundation
 import Nervos
 
 struct NervosNetwork {
-    static func getNervos() -> Nervos {
-        let provider = NervosProvider(URL(string: "http://121.196.200.225:1337")!)!
+    static func getNervos(with urlString: String = "http://121.196.200.225:1337") -> Nervos {
+        let provider = NervosProvider(URL(string: urlString)!)!
         return Nervos(provider: provider)
     }
 }

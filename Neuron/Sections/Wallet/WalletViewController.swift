@@ -33,7 +33,6 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
     let refresher = PullToRefresh()
 
-    let viewModel = SubController2ViewModel()
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return isHeaderViewHidden ? .default : .lightContent
     }
@@ -118,7 +117,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     private func updateNavigationBar() {
         if isHeaderViewHidden {
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
-            navigationItem.title = viewModel.getCurrentModel().currentWallet?.name
+            navigationItem.title = WalletRealmTool.getCurrentAppModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
             navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
@@ -134,7 +133,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     func didGetDataForCurrentWallet() {
         if WalletRealmTool.hasWallet() {
-            let walletModel = viewModel.getCurrentModel().currentWallet!
+            let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
             refreshUI(walletModel: walletModel)
             loadData()
         }
@@ -148,7 +147,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     @objc private func changeWallet(notification: Notification) {
         let address = notification.userInfo!["address"] as! String
-        let walletModel = viewModel.didGetWalletMessage(walletAddress: address)
+        let walletModel = WalletRealmTool.getCreatWallet(walletAddress: address)
         refreshUI(walletModel: walletModel)
     }
 

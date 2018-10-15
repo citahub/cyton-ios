@@ -16,7 +16,6 @@ protocol TokensViewControllerDelegate: class {
 /// ERC-20 Token List
 class TokensViewController: UITableViewController {
     var tokenArray: [TokenModel] = []
-    let viewModel = SubController2ViewModel()
     var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
     weak var delegate: TokensViewControllerDelegate?
 
@@ -104,32 +103,35 @@ class TokensViewController: UITableViewController {
         for tm in tokenArray {
             if tm.chainId == NativeChainId.ethMainnetChainId {
                 group.enter()
-                viewModel.didGetTokenForCurrentwallet(walletAddress: walletModel.address) { (balance, error) in
-                    if error == nil {
-                        tm.tokenBalance = balance!
-                    } else {
-                        Toast.showToast(text: (error?.localizedDescription)!)
+                EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletModel.address) {(result) in
+                    switch result {
+                    case .success(let balance):
+                        tm.tokenBalance = balance
+                    case .error(let error):
+                        Toast.showToast(text: error.localizedDescription)
                     }
                     group.leave()
                 }
             } else if tm.chainId != "" && tm.chainId != NativeChainId.ethMainnetChainId {
                 group.enter()
-                viewModel.getNervosNativeTokenBalance(walletAddress: walletModel.address) { (balance, error) in
-                    if error == nil {
-                        tm.tokenBalance = balance!
-                    } else {
-                        Toast.showToast(text: (error?.localizedDescription)!)
+                NervosNativeTokenService.getNervosNativeTokenBalance(walletAddress: walletModel.address) {(result) in
+                    switch result {
+                    case .success(let balance):
+                        tm.tokenBalance = balance
+                    case .error(let error):
+                        Toast.showToast(text: (error.localizedDescription))
                     }
                     group.leave()
                 }
             } else if tm.address.count != 0 {
                 group.enter()
-                viewModel.didGetERC20BalanceForCurrentWallet(wAddress: walletModel.address, ERC20Token: tm.address) { (erc20Balance, error) in
-                    if error == nil {
-                        let balance = Web3.Utils.formatToPrecision(erc20Balance!, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
+                ERC20TokenService.getERC20TokenBalance(walletAddress: walletModel.address, contractAddress: tm.address) { (result) in
+                    switch result {
+                    case .success(let erc20Balance):
+                        let balance = Web3.Utils.formatToPrecision(erc20Balance, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
                         tm.tokenBalance = balance!
-                    } else {
-                        Toast.showToast(text: (error?.localizedDescription)!)
+                    case .error(let error):
+                        Toast.showToast(text: error.localizedDescription)
                     }
                     group.leave()
                 }
