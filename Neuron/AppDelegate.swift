@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         localCurrency()
         GuideService.shared.register()
         AuthenticationService.shared.register()
+        SensorsAnalytics.configureSensors()
         return true
     }
 

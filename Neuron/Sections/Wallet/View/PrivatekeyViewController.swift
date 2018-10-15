@@ -41,10 +41,12 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
     }
     func didGetTextViewText(text: String) {
         privateKey = text
+        viewModel.isUseQRCode = false
         judgeImportButtonEnabled()
     }
     func didBackQRCodeMessage(codeResult: String) {
         privateKey = codeResult
+        viewModel.isUseQRCode = true
         privatekeyTextView.text = codeResult
         judgeImportButtonEnabled()
     }

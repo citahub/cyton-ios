@@ -37,6 +37,7 @@
 		6E867E0D216C92A900BD6FE5 /* OverlayPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */; };
 		6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */; };
 		6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */; };
+		6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */; };
 		6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */; };
 		6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */; };
 		6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC0216B3AE40044176D /* Authentication.storyboard */; };
@@ -237,6 +238,7 @@
 		6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPresentable.swift; sourceTree = "<group>"; };
 		6E867E0E216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingAuthenticationTableViewCell.swift; sourceTree = "<group>"; };
 		6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCurrencyTableViewCell.swift; sourceTree = "<group>"; };
+		6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorsAnalytics.swift; sourceTree = "<group>"; };
 		6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
 		6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC0216B3AE40044176D /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
@@ -498,6 +500,14 @@
 			path = Guide;
 			sourceTree = "<group>";
 		};
+		6E90D06721704C1100B98363 /* SensorsAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */,
+			);
+			path = SensorsAnalytics;
+			sourceTree = "<group>";
+		};
 		6E9D7CBB216B37E90044176D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -525,6 +535,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				6E90D06721704C1100B98363 /* SensorsAnalytics */,
 				89C6145A2141036B00DC3DF4 /* SettingsService */,
 				89B296E720F4CA57008558A7 /* Transaction */,
 				898CA98420EA21E90059ECA3 /* TokenServices */,
@@ -1170,6 +1181,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SensorsAnalyticsSDK/SensorsAnalyticsSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftProtobuf/SwiftProtobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftRLP/SwiftRLP.framework",
@@ -1202,6 +1214,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SensorsAnalyticsSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftProtobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftRLP.framework",
@@ -1358,6 +1371,7 @@
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				89D4AC2A20D59F270097E02B /* Keystore.swift in Sources */,
+				6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
