@@ -16,7 +16,7 @@ protocol SimpleGasViewControllerDelegate: class {
 }
 
 class SimpleGasViewController: UIViewController {
-    let ethDefaultGasPrice = BigUInt(4000000000)
+    let ethDefaultGasPrice = BigUInt("4000000000")!
     let nervosDefaultQuota = BigUInt(1000000)
     @IBOutlet weak var gasLabel: UILabel!
     @IBOutlet weak var gasSlider: UISlider!
