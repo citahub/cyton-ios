@@ -43,10 +43,10 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "confirmMnemonic" {
-            let sureMnemonicViewController = segue.destination as! SureMnemonicViewController
-            sureMnemonicViewController.mnemonic = mnemonicStr
-            sureMnemonicViewController.password = password
-            sureMnemonicViewController.walletModel = walletModel
+            let verifyMnemonicViewController = segue.destination as! VerifyMnemonicViewController
+            verifyMnemonicViewController.mnemonic = mnemonicStr
+            verifyMnemonicViewController.password = password
+            verifyMnemonicViewController.walletModel = walletModel
         }
     }
 

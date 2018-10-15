@@ -59,7 +59,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
@@ -67,8 +67,7 @@ class ImportWalletViewModel: NSObject {
         }
     }
 
-    /// save wallet
-    func didSaveWalletToRealm() {
+    private func saveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
@@ -120,7 +119,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
@@ -160,7 +159,7 @@ class ImportWalletViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
-                self.didSaveWalletToRealm()
+                self.saveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
