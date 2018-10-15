@@ -17,9 +17,13 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         return .lightContent
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController?.isNavigationBarHidden = true
         didAddSubLayout()
     }
 
@@ -35,9 +39,11 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             } catch { }
         }
         let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
+        let infoDictionary = Bundle.main.infoDictionary!
+        let majorVersion = infoDictionary["CFBundleShortVersionString"]
+        webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
-        webView.configuration.userContentController.add(self, name: "zhuru")
         webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
@@ -52,15 +58,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.uiDelegate = self
         view.addSubview(webView)
         webView.load(request)
-
-        let placrV = UIView.init()
-        placrV.backgroundColor = AppColor.themeColor
-        if isiphoneX() {
-            placrV.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: 44)
-        } else {
-            placrV.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: 20)
-        }
-//        view.addSubview(placrV)
     }
 
     //scrollView代理
@@ -69,24 +66,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     //wkwebview
-    //视图开始载入的时候显示网络活动指示器
-    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-
-    }
-
-    //载入结束后，关闭网络活动指示器
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        webView.evaluateJavaScript("document.documentElement.outerHTML.toString()") { (_, _) in
-        }
-        UIApplication.shared.isNetworkActivityIndicatorVisible = false
-    }
-
-    //阻止链接被点击
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
-
             return
         }
 
@@ -97,22 +79,10 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case "pushSearchView":
-            let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
+            let sCtrl = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
             self.navigationController?.pushViewController(sCtrl, animated: true)
-        case "zhuru":
-            break
         default:
             break
         }
-    }
-
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let sCtrl = SearchAppController.init(nibName: "SearchAppController", bundle: nil)
-//        self.navigationController?.pushViewController(sCtrl, animated: true)
-//    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 }
