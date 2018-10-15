@@ -575,13 +575,13 @@
 		8928C22620AE7C6200C3103E /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				6E83CB87216F573100029324 /* Guide */,
 				8928C22720AE7CB500C3103E /* Dapp */,
 				8928C27320B29ABB00C3103E /* Wallet */,
 				8922685820DE4EA50021A85F /* Settings */,
 				8928C22820AE7CB500C3103E /* Base */,
 				8928C22A20AE7CB500C3103E /* Common */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
-				6E83CB87216F573100029324 /* Guide */,
 				6E9D7CBB216B37E90044176D /* Authentication */,
 			);
 			path = Sections;

@@ -17,17 +17,20 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
         let imageName: String
     }
 
-    var items = [GuideItem]()
+    private let items = [
+        GuideItem(title: "甄选全球最新DAPP", subTitle: "一应俱全", imageName: "guide_1"),
+        GuideItem(title: "多重安全算法保护", subTitle: "钱包秘钥惟您掌握", imageName: "guide_2"),
+        GuideItem(title: "开启区块链之旅", subTitle: "探索无限可能", imageName: "guide_3")
+    ]
+
     @IBOutlet weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        items = [
-            GuideItem(title: "甄选全球最新DAPP", subTitle: "一应俱全", imageName: "guide_1"),
-            GuideItem(title: "多重安全算法保护", subTitle: "钱包秘钥惟您掌握", imageName: "guide_2"),
-            GuideItem(title: "开启区块链之旅", subTitle: "探索无限可能", imageName: "guide_3")
-        ]
-        perform(#selector(showProductAgreementView), with: nil, afterDelay: 0.5)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.showProductAgreementView()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,18 +45,9 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     }
 
     @objc func showProductAgreementView() {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(showProductAgreementView), object: nil)
-        ProductAgreementViewController.show(in: self)
-    }
-
-    @IBAction func createWallet(_ sender: Any) {
-        let controller: CreateWalletController = UIStoryboard(name: .addWallet).instantiateViewController()
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
-    @IBAction func importWallet(_ sender: Any) {
-        let controller: ImportWalletController = UIStoryboard(name: .addWallet).instantiateViewController()
-        navigationController?.pushViewController(controller, animated: true)
+        if ProductAgreementViewController.shouldDisplay {
+            performSegue(withIdentifier: "displayAgreement", sender: self)
+        }
     }
 
     // MARK: - GuideViewControllerProtocol
@@ -73,5 +67,4 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return collectionView.bounds.size
     }
-
 }
