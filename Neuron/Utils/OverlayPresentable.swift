@@ -18,7 +18,7 @@ protocol OverlayPresentable: NSObjectProtocol {
 
 extension OverlayPresentable where Self: UIViewController {
     func showOverlay() {
-        view.addSubview(overlay)
+        view.window?.addSubview(overlay)
     }
     func removeOverlay() {
         overlay.removeFromSuperview()
@@ -46,15 +46,16 @@ extension EnterBackOverlayPresentable {
     }
 }
 
+private var EnterBackOverlayAssiciationKey = 0
 extension EnterBackOverlayPresentable where Self: UIViewController {
+
     var overlay: UIView {
-        let overlayTag = 2189219
-        if let overlay = view.viewWithTag(overlayTag) {
+        if let overlay = objc_getAssociatedObject(self, &EnterBackOverlayAssiciationKey) as? UIView {
             return overlay
         }
-        let overlay = UIView(frame: view.bounds)
-        overlay.backgroundColor = UIColor.black
-        overlay.tag = overlayTag
+        let overlay = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        overlay.frame = view.bounds
+        objc_setAssociatedObject(self, &EnterBackOverlayAssiciationKey, overlay, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return overlay
     }
 }
