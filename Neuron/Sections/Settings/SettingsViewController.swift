@@ -9,18 +9,16 @@
 import UIKit
 
 class SettingsViewController: UITableViewController {
-    weak var localCurrencyLabel: UILabel?
-    var rowIdentifiers = [String]()
+    var rowIdentifiers = [
+        String(describing: SettingCurrencyTableViewCell.self),
+        String(describing: SettingAuthenticationTableViewCell.self),
+        "SettingAboutUsTableViewCell",
+        "SettingForumsTableViewCell",
+        "SettingContactCustomerServiceTableViewCell"
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        rowIdentifiers = [
-            String(describing: SettingCurrencyTableViewCell.self),
-            String(describing: SettingAuthenticationTableViewCell.self),
-            "SettingAboutUsTableViewCell",
-            "SettingForumsTableViewCell",
-            "SettingContactCustomerServiceTableViewCell"
-        ]
         if !AuthenticationService.shared.isValid {
             rowIdentifiers.remove(at: 1)
         }
@@ -28,7 +26,7 @@ class SettingsViewController: UITableViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        localCurrencyLabel?.text = LocalCurrencyService().getLocalCurrencySelect().short
+        tableView.reloadData()
     }
 
     @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
@@ -45,8 +43,7 @@ class SettingsViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: rowIdentifiers[indexPath.row])!
         if let cell = cell as? SettingCurrencyTableViewCell {
-            localCurrencyLabel = cell.localCurrencyLabel
-            localCurrencyLabel?.text = LocalCurrencyService().getLocalCurrencySelect().short
+            cell.localCurrencyLabel.text = LocalCurrencyService().getLocalCurrencySelect().short
         } else if let cell = cell as? SettingAuthenticationTableViewCell {
             cell.authenticationSwitch.isOn = AuthenticationService.shared.isEnable
             cell.authenticationSwitch.addTarget(self, action: #selector(authenticationSwitchChanged), for: .touchUpInside)

@@ -27,12 +27,9 @@ class OpenAuthViewController: UIViewController {
     }
 
     @IBAction func confrim(_ sender: Any) {
-        AuthenticationService.shared.deviceOwnerAuthentication { (result, error) in
+        AuthenticationService.shared.setAuthenticationEnable(enable: true) { (result) in
             if result {
                 self.dismiss(animated: true, completion: nil)
-            } else {
-                guard let error = error else { return }
-                Toast.showToast(text: error.stringValue)
             }
         }
     }
