@@ -8,6 +8,7 @@
 
 import UIKit
 import LocalAuthentication
+import RealmSwift
 
 class AuthenticationService {
     enum UserDefaultsKey: String {
@@ -35,6 +36,7 @@ class AuthenticationService {
     private var willResignActiveDate: Date?
     private var window: UIWindow?
     private var recognitionFlag = false
+    private var notificationToken: NotificationToken?
 
     private init() {
         var error: NSError?
@@ -55,6 +57,26 @@ class AuthenticationService {
 
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
+
+        notificationToken = WalletRealmTool.realm.objects(WalletModel.self).observe { (change) in
+            switch change {
+            case .update(let values, deletions: _, let insertions, modifications: _):
+                guard !AuthenticationService.shared.isEnable else { return }
+                guard values.count == 1 else { return }
+                guard let index = insertions.first else { return }
+                guard index == 0 else { return }
+                DispatchQueue.main.async {
+                    let controller: OpenAuthViewController = UIStoryboard(name: .authentication).instantiateViewController()
+                    UIApplication.shared.windows.first?.rootViewController?.present(controller, animated: true, completion: nil)
+                }
+            default:
+                break
+            }
+        }
+    }
+
+    deinit {
+        notificationToken?.invalidate()
     }
 
     func register() { }
