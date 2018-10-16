@@ -18,6 +18,7 @@ class SettingsViewController: UITableViewController {
             String(describing: SettingCurrencyTableViewCell.self),
             String(describing: SettingAuthenticationTableViewCell.self),
             "SettingAboutUsTableViewCell",
+            "SettingForumsTableViewCell",
             "SettingContactCustomerServiceTableViewCell"
         ]
         if !AuthenticationService.shared.isValid {
@@ -62,6 +63,10 @@ class SettingsViewController: UITableViewController {
             navigationController?.pushViewController(controller, animated: true)
         } else if cell.reuseIdentifier == "SettingAboutUsTableViewCell" {
             let controller: AboutUsTableViewController = UIStoryboard(name: .settings).instantiateViewController()
+            navigationController?.pushViewController(controller, animated: true)
+        } else if cell.reuseIdentifier == "SettingForumsTableViewCell" {
+            let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
+            controller.url = URL(string: "https://forums.nervos.org/")
             navigationController?.pushViewController(controller, animated: true)
         } else if cell.reuseIdentifier == "SettingContactCustomerServiceTableViewCell" {
             UIPasteboard.general.string = "Nervos-Neuron"

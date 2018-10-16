@@ -28,7 +28,9 @@ class AboutUsTableViewController: UITableViewController {
         "nervosNetwork": "https://github.com/cryptape/neuron-ios",
         "openSea": "https://opensea.io/",
         "sourceCode": "https://github.com/cryptape/neuron-ios",
-        "infua": "https://infura.io/"
+        "infua": "https://infura.io/",
+        "PeckShield": "https://peckshield.com/",
+        "Cita": "https://github.com/cryptape/cita"
     ]
 
     func setVersionLabel() {
