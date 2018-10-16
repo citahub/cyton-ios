@@ -9,8 +9,6 @@
 import UIKit
 
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
-    //temp
-    let sub2ViewModel = SubController2ViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,20 +29,22 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         var tModel = TokenModel()
         let group = DispatchGroup()
         group.enter()
-        sub2ViewModel.getMateDataForNervos { (tokenModel, error) in
-            if error == nil {
-                tModel = tokenModel!
-            } else {
-                Toast.showToast(text: (error?.localizedDescription)!)
+        NervosNativeTokenService.getNervosNativeTokenMsg { (result) in
+            switch result {
+            case .success(let tokenModel):
+                tModel = tokenModel
+            case .error(let error):
+                Toast.showToast(text: (error.localizedDescription))
             }
             group.leave()
         }
 
         let appModel = WalletRealmTool.getCurrentAppModel()
         group.notify(queue: .main) {
+            let alreadyContain = appModel.nativeTokenList.contains(where: {$0.chainidName == tModel.chainidName})
             try? WalletRealmTool.realm.write {
                 WalletRealmTool.realm.add(tModel, update: true)
-                if !appModel.nativeTokenList.contains(tModel) {
+                if !alreadyContain {
                     appModel.nativeTokenList.append(tModel)
                 }
             }

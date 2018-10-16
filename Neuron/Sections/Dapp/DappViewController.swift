@@ -14,7 +14,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     private var webView = WKWebView()
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return .default
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +28,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func didAddSubLayout() {
-        webView = WKWebView.init(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 49))
+        webView = WKWebView.init(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
         let url = URL(string: "http://dapp.cryptape.com")
         let request = URLRequest.init(url: url!)
 
