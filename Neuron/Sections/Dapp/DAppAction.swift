@@ -11,7 +11,7 @@ import Alamofire
 import Nervos
 
 struct DAppAction {
-    enum DAppActionError: Error {
+    enum Error: Swift.Error {
         case manifestRequestFailed
         case emptyChainHosts
     }
@@ -19,7 +19,7 @@ struct DAppAction {
     func dealWithManifestJson(with link: String) {
         Alamofire.request(link, method: .get).responseJSON { (response) in
             do {
-                guard let responseData = response.data else { throw DAppActionError.manifestRequestFailed }
+                guard let responseData = response.data else { throw Error.manifestRequestFailed }
                 let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
                 try? self.getMateDataForDAppChain(with: manifest!)
             } catch {
@@ -30,7 +30,7 @@ struct DAppAction {
 
     func getMateDataForDAppChain(with manifestModel: ManifestModel) throws {
         guard let chainHosts = manifestModel.chainSet.values.first else {
-            throw DAppActionError.emptyChainHosts
+            throw Error.emptyChainHosts
         }
         let nervos = NervosNetwork.getNervos(with: chainHosts)
         DispatchQueue.global().async {

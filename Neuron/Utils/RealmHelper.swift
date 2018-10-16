@@ -18,7 +18,7 @@ class RealmHelper {
         config.schemaVersion = schemaVersion
         config.migrationBlock = migrationBlock
 
-        if schemaVersion >= 3, let encryptionKey = getEncryptionKey() {
+        if schemaVersion >= 2, let encryptionKey = getEncryptionKey() {
             removeEncrptionFromRealm(key: encryptionKey)
             deleteEncryptionKeyFromKeychain()
         }
