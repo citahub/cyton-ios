@@ -11,7 +11,7 @@ import RealmSwift
 
 class RealmHelper {
     static var sharedInstance = try! Realm()
-    private static var schemaVersion: UInt64 = 2
+    private static var schemaVersion: UInt64 = 3
 
     static func configureRealm() {
         var config = Realm.Configuration()

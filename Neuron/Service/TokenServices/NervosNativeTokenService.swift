@@ -36,18 +36,26 @@ struct NervosNativeTokenService {
         }
     }
 
-    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (NervosServiceResult<BigUInt>) -> Void) {
+    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (NervosServiceResult<String>) -> Void) {
         let nervos = NervosNetwork.getNervos()
         DispatchQueue.global().async {
             let result = nervos.appChain.getBalance(address: Address(walletAddress)!)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let balance):
-                    completion(NervosServiceResult.success(balance))
+                    let balanceNumber = self.formatBalanceValue(value: balance)
+                    completion(NervosServiceResult.success(balanceNumber))
                 case .failure(let error):
                     completion(NervosServiceResult.error(error))
                 }
             }
         }
     }
+
+    private static func formatBalanceValue(value: BigUInt) -> String {
+        let format = Web3Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
+        let finalValue = Double(format)!
+        return finalValue.clean
+    }
+
 }

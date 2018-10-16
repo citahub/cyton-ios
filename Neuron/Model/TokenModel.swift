@@ -11,8 +11,6 @@ import RealmSwift
 import BigInt
 
 class TokenModel: Object, Decodable {
-
-    // because import and creat wallet will check wallet name,  this can use wallet name
     @objc dynamic var tokenBalance = ""
     @objc dynamic var currencyAmount = ""
     @objc dynamic var name = ""
@@ -23,6 +21,7 @@ class TokenModel: Object, Decodable {
     @objc dynamic var chainName: String? = ""
     @objc dynamic var chainidName = "" // chainId + name
     @objc dynamic var chainId = ""
+    @objc dynamic var chainHosts = "" // manifest.json chainSet.values.first
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false
