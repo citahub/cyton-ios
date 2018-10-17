@@ -9,15 +9,6 @@
 import Foundation
 import WebKit
 
-//enum DAppDataHandle {
-//    case sendTransaction(Data)
-//    case signTransaction(Data)
-//    case signPersonalMessage(Data)
-//    case signMessage(Data)
-//    case signTypedMessage(Data)
-//    case unknown
-//}
-
 struct DAppDataHandle {
     static func fromMessage(message: WKScriptMessage) throws -> DAppCommonModel {
         let decoder = JSONDecoder()
@@ -29,9 +20,3 @@ struct DAppDataHandle {
         return objectModel
     }
 }
-
-//enum DAppDataResult<T> {
-//    case appChain(AppChainDAppModel)
-//    case ethChain(ETHDAppModel)
-//    case error(Error)
-//}
