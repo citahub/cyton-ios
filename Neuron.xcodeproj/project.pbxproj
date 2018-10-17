@@ -30,6 +30,7 @@
 		6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */; };
 		6E83CB91216F573100029324 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8C216F573100029324 /* GuideViewController.swift */; };
 		6E83CB93216F581800029324 /* ProductAgreement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB92216F581800029324 /* ProductAgreement.txt */; };
+		6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E859CB72176DC3100637E1C /* Overlay.storyboard */; };
 		6E867E03216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */; };
 		6E867E05216C3F1500BD6FE5 /* AuthPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */; };
 		6E867E07216C54B500BD6FE5 /* UIResponder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */; };
@@ -231,6 +232,7 @@
 		6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E83CB8C216F573100029324 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		6E83CB92216F581800029324 /* ProductAgreement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProductAgreement.txt; sourceTree = "<group>"; };
+		6E859CB72176DC3100637E1C /* Overlay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Overlay.storyboard; sourceTree = "<group>"; };
 		6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectWalletViewController.swift; sourceTree = "<group>"; };
 		6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthPasswordViewController.swift; sourceTree = "<group>"; };
 		6E867E06216C54B500BD6FE5 /* UIResponder+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIResponder+Extension.swift"; sourceTree = "<group>"; };
@@ -659,6 +661,7 @@
 				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
 				6E867E08216C862900BD6FE5 /* NoScreenshot.swift */,
 				6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */,
+				6E859CB72176DC3100637E1C /* Overlay.storyboard */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1097,6 +1100,7 @@
 				898A1A0C20B64F6000ECB465 /* AddAssetController.xib in Resources */,
 				898A19F620B53F3800ECB465 /* DetailIconCell.xib in Resources */,
 				898A1A1820B6BE6E00ECB465 /* ChangePasswordController.xib in Resources */,
+				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,

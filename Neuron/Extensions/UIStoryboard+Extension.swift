@@ -29,6 +29,7 @@ extension UIStoryboard {
         case guide
         case addWallet
         case main
+        case overlay
 
         var capitalized: String {
             let capital = String(rawValue.prefix(1)).uppercased()
