@@ -87,20 +87,21 @@ extension BrowserViewController: WKScriptMessageHandler {
         let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
         switch dappCommonModel.name {
         case .sendTransaction, .signTransaction:
-            presentTransaction(dappCommonModel: dappCommonModel)
+            pushTransaction(dappCommonModel: dappCommonModel)
         case .signPersonalMessage, .signMessage, .signTypedMessage:
-            presentSignMessage(dappCommonModel: dappCommonModel)
+            pushSignMessage(dappCommonModel: dappCommonModel)
         case .unknown: break
         }
     }
 }
 
 extension BrowserViewController {
-    private func presentTransaction(dappCommonModel: DAppCommonModel) {
-
+    private func pushTransaction(dappCommonModel: DAppCommonModel) {
+        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
+        navigationController?.pushViewController(contractController, animated: true)
     }
 
-    private func presentSignMessage(dappCommonModel: DAppCommonModel) {
+    private func pushSignMessage(dappCommonModel: DAppCommonModel) {
 
     }
 }

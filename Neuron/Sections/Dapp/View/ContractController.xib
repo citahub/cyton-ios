@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ContractController" customModule="Neuron" customModuleProvider="target">
             <connections>
-                <outlet property="addressLabel" destination="Vwv-Ac-aJg" id="lz8-C3-hcS"/>
-                <outlet property="backButton" destination="cds-GF-LZ5" id="4Rp-bH-0H3"/>
-                <outlet property="cTable" destination="3oh-Ri-ImK" id="3bd-0K-deR"/>
-                <outlet property="headView" destination="HcM-RE-sD2" id="ekn-U8-yLv"/>
-                <outlet property="iconImage" destination="g59-9R-cMQ" id="nE8-st-zvu"/>
-                <outlet property="nameLabel" destination="aoo-TD-cco" id="rBf-XT-JPa"/>
-                <outlet property="submitButton" destination="09I-yZ-Wql" id="L1U-vS-l8h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -102,9 +95,6 @@
                             <integer key="value" value="1"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="didClickBackButton:" destination="-1" eventType="touchUpInside" id="yJK-2l-fYw"/>
-                    </connections>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="09I-yZ-Wql">
                     <rect key="frame" x="200" y="603" width="160" height="44"/>
@@ -119,9 +109,6 @@
                             <integer key="value" value="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="didClickSubmitButton:" destination="-1" eventType="touchUpInside" id="L3j-ix-wkb"/>
-                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

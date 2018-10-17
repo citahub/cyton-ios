@@ -8,78 +8,68 @@
 
 import UIKit
 
-class ContractController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ContractController: UIViewController {
 
-    let headArray = ["请求人", "接收地址", "转账金额", "费用总计（含手续费）"]
-    let textArray = ["https://www.cryptape.com/#/about", "0xCB5A05beF3257613E984C17DbcF03", "0.05", "0.05"]//假数据
-    let unitArray = ["", "", "eth", "eth"]
+    var DAppCommonModel: DAppCommonModel!
+    var requestAddress: String = ""
 
-    @IBOutlet weak var headView: UIView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
+    lazy private var valueRightView: UILabel = {
+        let valueRightView = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 36))
+        valueRightView.font = UIFont.systemFont(ofSize: 17)
+        valueRightView.textColor = ColorFromString(hex: "#989CAA")
+        valueRightView.textAlignment = .right
+        return valueRightView
+    }()
+
+    lazy private var gasRightView: UILabel = {
+        let gasRightView = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 36))
+        gasRightView.font = UIFont.systemFont(ofSize: 17)
+        gasRightView.textColor = ColorFromString(hex: "#989CAA")
+        gasRightView.textAlignment = .right
+        return gasRightView
+    }()
+
     @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var cTable: UITableView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var submitButton: UIButton!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var requestTextField: UITextField!
+    @IBOutlet weak var toTextField: UITextField!
+    @IBOutlet weak var valueTextField: UITextField!
+    @IBOutlet weak var gasTextField: UITextField!
+    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
+    @IBOutlet weak var dataTextView: UITextView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "合约调用"
-        didSetUIDetail()
-        cTable.delegate = self
-        cTable.dataSource = self
-        cTable.register(UINib.init(nibName: "ContractTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        cTable.register(UINib.init(nibName: "ConTractLastTableViewCell", bundle: nil), forCellReuseIdentifier: "ID1")
-    }
-
-    func didSetUIDetail() {
-        headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
-        headView.layer.shadowOffset = CGSize(width: 0, height: 1)
-        headView.layer.shadowOpacity = 0.3
-        headView.layer.shadowRadius = 2.75
-        headView.layer.cornerRadius = 5
-        headView.layer.borderWidth = 1
-        headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
-        backButton.layer.borderColor = ColorFromString(hex: "#2764fe").cgColor
-    }
-    //提交和返回按钮
-    @IBAction func didClickSubmitButton(_ sender: UIButton) {
+        dealWithUI()
 
     }
 
-    @IBAction func didClickBackButton(_ sender: UIButton) {
+    func dealWithUI() {
+        tabbedButtonView.buttonTitles = ["HEX", "UTF8"]
+        tabbedButtonView.delegate = self
+        valueTextField.rightViewMode = .always
+        valueTextField.rightView = valueRightView
+        gasTextField.rightViewMode = .always
+        gasTextField.rightView = gasRightView
+
     }
 
-    //tableview代理
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 4 {
-            return 180
-        } else {
-            return 95
-        }
+    @IBAction func didClickRejectButton(_ sender: UIButton) {
+
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+    @IBAction func didClickConfirmButton(_ sender: UIButton) {
+
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+}
 
-        if indexPath.row == 4 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! ConTractLastTableViewCell
+extension ContractController: TabbedButtonsViewDelegate {
+    func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
 
-            return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! ContractTableViewCell
-            cell.headLabStr = headArray[indexPath.row]
-            cell.textFieldStr = textArray[indexPath.row]
-            cell.unitLabStr = unitArray[indexPath.row]
-            return cell
-        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 }
