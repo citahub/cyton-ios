@@ -10,13 +10,12 @@ import UIKit
 import LYEmptyView
 
 /// ERC-721 List
-class NFTViewController: UITableViewController {
+class NFTViewController: UITableViewController, ErrorOverlayPresentable {
     var dataArray: [AssetsModel] = []
     private let testAddress = "0xac30bce77cf849d869aa37e39b983fa50767a2dd"
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.ly_emptyView = LYEmptyView.empty(withImageStr: "", titleStr: "暂无藏品", detailStr: "")
         getListData()
         addNotify()
     }
@@ -40,8 +39,14 @@ class NFTViewController: UITableViewController {
             switch result {
             case .success(let nftModel):
                 self.dataArray = nftModel.assets ?? []
+                if self.dataArray.count == 0 {
+                    self.showBlankOverlay()
+                } else {
+                    self.removeOverlay()
+                }
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
+                self.showNetworkFailOverlay()
             }
             self.tableView.reloadData()
         }
