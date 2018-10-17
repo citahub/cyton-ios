@@ -9,14 +9,14 @@
 import UIKit
 
 extension UIControl {
-    private static var ExpandAreaAssiciationKey: Int = 0
+    private static var expandAreaAssiciationKey: Int = 0
 
     @IBInspectable var expandArea: CGFloat {
         set {
-            objc_setAssociatedObject(self, &UIControl.ExpandAreaAssiciationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &UIControl.expandAreaAssiciationKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
         get {
-            guard let insetsValue = objc_getAssociatedObject(self, &UIControl.ExpandAreaAssiciationKey) as? NSNumber else { return 0.0 }
+            guard let insetsValue = objc_getAssociatedObject(self, &UIControl.expandAreaAssiciationKey) as? NSNumber else { return 0.0 }
             return CGFloat(insetsValue.doubleValue)
         }
     }
