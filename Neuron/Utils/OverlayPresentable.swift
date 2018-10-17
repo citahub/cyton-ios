@@ -13,6 +13,7 @@ protocol OverlayPresentable: NSObjectProtocol {
     var overlay: Overlay { get }
 
     func showOverlay()
+
     func removeOverlay()
 }
 
@@ -21,6 +22,7 @@ extension OverlayPresentable where Self: UIViewController {
         overlay.frame = view.bounds
         view.addSubview(overlay)
     }
+
     func removeOverlay() {
         overlay.removeFromSuperview()
     }
@@ -51,9 +53,7 @@ class ErrorOverlayViewController: UIViewController {
         }
     }
     var refreshBlock: (() -> Void)?
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+
     @IBAction func refresh(_ sender: Any) {
         refreshBlock?()
     }
@@ -61,7 +61,9 @@ class ErrorOverlayViewController: UIViewController {
 
 protocol ErrorOverlayPresentable: OverlayPresentable {
     var errorOverlayRefreshBlock: (() -> Void)? { get set }
+
     func showBlankOverlay()
+    
     func showNetworkFailOverlay()
 }
 
@@ -87,10 +89,12 @@ extension ErrorOverlayPresentable {
             errorOverlaycontroller.refreshBlock = newValue
         }
     }
+
     func showBlankOverlay() {
         errorOverlaycontroller.style = .blank
         showOverlay()
     }
+
     func showNetworkFailOverlay() {
         errorOverlaycontroller.style = .networkFail
         showOverlay()
