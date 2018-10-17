@@ -27,12 +27,12 @@ window.Neuron.init(rpcURL, {
     if (tx.chainType == "ETH") {
         var gasLimit = tx.gasLimit || tx.gas || null;
         var gasPrice = tx.gasPrice || null;
-        chainId = -1;
-        webkit.messageHandlers.signTransaction.postMessage({"name": "signTransaction", "object": tx, id: id})
+        tx.chainId = -1;
+        webkit.messageHandlers.signTransaction.postMessage({"name": "signTransaction","chainType": chainType, "object": tx, id: id})
     } else {
         var quota = tx.quota || null;
         var validUntilBlock = tx.validUntilBlock || 0;
-        webkit.messageHandlers.signTransaction.postMessage({"name": "signTransaction", "object": tx, id: id})
+        webkit.messageHandlers.signTransaction.postMessage({"name": "signTransaction","chainType": chainType, "object": tx, id: id})
     }
   },
   signMessage: function (msgParams, cb) {
@@ -40,21 +40,21 @@ window.Neuron.init(rpcURL, {
     const { data, chainType } = msgParams
     const { id = 8888 } = msgParams
     Neuron.addCallback(id, cb)
-    webkit.messageHandlers.signMessage.postMessage({"name": "signMessage", "object": { data }, id: id})
+    webkit.messageHandlers.signMessage.postMessage({"name": "signMessage","chainType": chainType, "object": { data }, id: id})
   },
   signPersonalMessage: function (msgParams, cb) {
     console.log('signPersonalMessage', msgParams)
     const { data, chainType } = msgParams
     const { id = 8888 } = msgParams
     Neuron.addCallback(id, cb)
-    webkit.messageHandlers.signPersonalMessage.postMessage({"name": "signPersonalMessage", "object": { data }, id: id})
+    webkit.messageHandlers.signPersonalMessage.postMessage({"name": "signPersonalMessage","chainType": chainType, "object": { data }, id: id})
   },
   signTypedMessage: function (msgParams, cb) {
     console.log('signTypedMessage ', msgParams)
     const { data } = msgParams
     const { id = 8888 } = msgParams
     Neuron.addCallback(id, cb)
-    webkit.messageHandlers.signTypedMessage.postMessage({"name": "signTypedMessage", "object": { data }, id: id})
+    webkit.messageHandlers.signTypedMessage.postMessage({"name": "signTypedMessage","chainType": chainType, "object": { data }, id: id})
   }
 }, {
     address: addressHex,
@@ -74,3 +74,10 @@ window.web3.eth.defaultAccount = addressHex
 
 window.isNervosReady = true
 window.isMetaMask = true
+window.neuron = Object()
+window.neuron.getAccount = function() {
+    return addressHex
+}
+window.neuron.getAccounts = function() {
+    return accounts.split(",")
+}

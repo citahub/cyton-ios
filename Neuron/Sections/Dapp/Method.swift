@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum Method: String {
+enum Method: String, Decodable {
     case sendTransaction
     case signTransaction
     case signPersonalMessage

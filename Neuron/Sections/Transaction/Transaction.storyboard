@@ -1144,7 +1144,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="17" height="16"/>
+        <image name="close" width="20" height="20"/>
         <image name="qrCode" width="22" height="22"/>
     </resources>
 </document>

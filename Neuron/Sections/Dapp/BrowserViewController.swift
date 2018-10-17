@@ -84,6 +84,23 @@ class BrowserViewController: UIViewController, WKUIDelegate {
 
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
+        switch dappCommonModel.name {
+        case .sendTransaction, .signTransaction:
+            presentTransaction(dappCommonModel: dappCommonModel)
+        case .signPersonalMessage, .signMessage, .signTypedMessage:
+            presentSignMessage(dappCommonModel: dappCommonModel)
+        case .unknown: break
+        }
+    }
+}
+
+extension BrowserViewController {
+    private func presentTransaction(dappCommonModel: DAppCommonModel) {
+
+    }
+
+    private func presentSignMessage(dappCommonModel: DAppCommonModel) {
 
     }
 }

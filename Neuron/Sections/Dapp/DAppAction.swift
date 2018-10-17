@@ -14,6 +14,7 @@ struct DAppAction {
     enum Error: Swift.Error {
         case manifestRequestFailed
         case emptyChainHosts
+        case emptyTX
     }
 
     func dealWithManifestJson(with link: String) {
