@@ -10,8 +10,6 @@ import UIKit
 import Toast_Swift
 
 struct Toast {
-    private static var loadingView = ToastActivityView.loadFromNib()
-
     static func showToast(text: String) {
         ToastManager.shared.style.messageFont = UIFont.systemFont(ofSize: 13)
         ToastManager.shared.position = .center
@@ -23,6 +21,7 @@ struct Toast {
     }
 
     static func showHUD(text: String? = nil) {
+        let loadingView = ToastActivityView.loadFromNib()
         loadingView.text = text
         keyWindow?.isUserInteractionEnabled = false
         keyWindow?.showToast(loadingView, duration: 60, position: .center) // Do not hide until 60 secs
@@ -30,7 +29,7 @@ struct Toast {
 
     static func hideHUD() {
         keyWindow?.isUserInteractionEnabled = true
-        keyWindow?.hideToast(loadingView)
+        keyWindow?.hideAllToasts()
     }
 
     private static var rootView: UIView? {
