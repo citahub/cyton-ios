@@ -223,8 +223,9 @@ struct WalletTool {
 
     static func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
         do {
-            let privateKey = try keyStore.exportPrivateKey(wallet: wallet, password: password)
-            return ImportResult.succeed(result: privateKey.toHexString())
+            let account = wallet.accounts.first!
+            let privateKey = try account.privateKey(password: password)
+            return ImportResult.succeed(result: privateKey.data.toHexString())
         } catch {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
         }
