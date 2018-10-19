@@ -114,7 +114,7 @@ class PayCoverViewController: UIViewController {
         ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in
             switch result {
             case .success(let value):
-                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash, error: nil)
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.addHexPrefix(), error: nil)
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
             }

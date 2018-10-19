@@ -37,6 +37,11 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         return config
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(webview)
