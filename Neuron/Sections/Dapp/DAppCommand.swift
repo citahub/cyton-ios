@@ -8,24 +8,6 @@
 
 import Foundation
 
-//struct AppChainDAppModel: Decodable {
-//    let name: Method
-//    let id: Int
-//    let chainType: String
-//    let object: AppChainObject
-//}
-
-struct AppChainObject: Decodable {
-    let chainId: Int
-    let data: String
-    let nonce: Double
-    let quota: Double
-    let to: String
-    let validUntilBlock: Double
-    let value: String
-    let version: Int
-}
-
 struct DAppCommonModel: Decodable {
     let name: Method
     let id: Int
@@ -59,11 +41,29 @@ struct DAppCommonModel: Decodable {
     }
 }
 
+struct AppChainObject: Decodable {
+    let chainId: Int
+    let data: String
+    let nonce: Double
+    let quota: Double
+    let to: String
+    let validUntilBlock: Double
+    let value: String
+    let version: Int
+}
+
 struct ETHObject: Decodable {
     let chainId: Int
-    let Data: String?
+    let value: String?
+    let data: String?
     let from: String
     let to: String?
     let gasLimit: Double?
     let gasPrice: Double?
+}
+
+enum DAppError: Error {
+    case cancelled
+    case signTransactionFailed
+    case sendTransactionFailed
 }

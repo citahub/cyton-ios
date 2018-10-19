@@ -635,6 +635,7 @@
 				8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */,
 				89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */,
 				89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */,
+				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
 				8928C25020AEA6A600C3103E /* View */,
 			);
 			path = Dapp;
@@ -682,7 +683,6 @@
 			isa = PBXGroup;
 			children = (
 				89C25C6A20BD41D800007EC1 /* TableviewCell */,
-				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
 				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
 				8964A17B20BE7F750086848F /* MessageSignController.swift */,
 				8964A17C20BE7F750086848F /* MessageSignController.xib */,

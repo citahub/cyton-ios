@@ -48,7 +48,7 @@ class BrowserViewController: UIViewController, WKUIDelegate {
     }
 
     func getRequestStr(requestStr: String) -> String {
-        if requestUrlStr.hasPrefix("http") {
+        if requestUrlStr.hasPrefix("http://") || requestUrlStr.hasPrefix("https://") {
             return requestStr
         } else {
             return "https://" + requestStr
@@ -98,6 +98,9 @@ extension BrowserViewController: WKScriptMessageHandler {
 extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
+        contractController.delegate = self
+        contractController.requestAddress = webview.url!.absoluteString
+        contractController.dappCommonModel = dappCommonModel
         navigationController?.pushViewController(contractController, animated: true)
     }
 
@@ -146,5 +149,18 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
+    }
+}
+
+extension BrowserViewController: ContractControllerDelegate {
+    func callBackWebView(id: Int, value: String, error: DAppError?) {
+        let script: String = {
+            if error == nil {
+                return "onSignSuccessful(\(id), \"\(value)\")"
+            } else {
+                return "onSignError(\(id), \"\(error!)\")"
+            }
+        }()
+        webview.evaluateJavaScript(script, completionHandler: nil)
     }
 }
