@@ -17,11 +17,9 @@ class WalletToolTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        let fileManager = FileManager.default
-
         keyDirectory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("KeyStoreTests")
-        try? fileManager.removeItem(at: keyDirectory)
-        try? fileManager.createDirectory(at: keyDirectory, withIntermediateDirectories: true, attributes: nil)
+        try? FileManager.default.removeItem(at: keyDirectory)
+        try? FileManager.default.createDirectory(at: keyDirectory, withIntermediateDirectories: true, attributes: nil)
     }
 
     func testExportPrivateKeyFromKeyWallet() throws {
@@ -36,7 +34,11 @@ class WalletToolTests: XCTestCase {
 
     func testExportPrivateKeyFromHDWallet() throws {
         let keyStore = try KeyStore(keyDirectory: keyDirectory)
-        let hdWallet = try keyStore.import(mnemonic: "begin auction word young address dawn chief maid brave arrive copy process", encryptPassword: "password", derivationPath: DerivationPath(WalletTool.defaultDerivationPath)!)
+        let hdWallet = try keyStore.import(
+            mnemonic: "begin auction word young address dawn chief maid brave arrive copy process",
+            encryptPassword: "password",
+            derivationPath: DerivationPath(WalletTool.defaultDerivationPath)!
+        )
         guard case .succeed(let exported) = WalletTool.exportPrivateKey(wallet: hdWallet, password: "password") else {
             return XCTFail("Export fail")
         }
