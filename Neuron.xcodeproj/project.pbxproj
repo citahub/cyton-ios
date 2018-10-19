@@ -21,6 +21,7 @@
 		1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1A2BFA19213513D60065496B /* Wallet.storyboard */; };
 		1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3C652B212EAC4800F1A0AA /* String+Extension.swift */; };
 		1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A9204E321634212004B54DC /* ToastActivityView.xib */; };
+		1AB287742179654300DCC14D /* WalletToolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB287732179654300DCC14D /* WalletToolTests.swift */; };
 		1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */; };
 		1AB3D1D221709F9600557E9D /* UIStoryboardExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */; };
 		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
@@ -223,6 +224,7 @@
 		1A2BFA19213513D60065496B /* Wallet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Wallet.storyboard; sourceTree = "<group>"; };
 		1A3C652B212EAC4800F1A0AA /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		1A9204E321634212004B54DC /* ToastActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastActivityView.xib; sourceTree = "<group>"; };
+		1AB287732179654300DCC14D /* WalletToolTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletToolTests.swift; sourceTree = "<group>"; };
 		1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboardExtensionTests.swift; path = NeuronTests/Extensions/UIStoryboardExtensionTests.swift; sourceTree = SOURCE_ROOT; };
 		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
@@ -472,6 +474,22 @@
 				6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1AB28771217964F500DCC14D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1AB287722179651200DCC14D /* WalletTools */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		1AB287722179651200DCC14D /* WalletTools */ = {
+			isa = PBXGroup;
+			children = (
+				1AB287732179654300DCC14D /* WalletToolTests.swift */,
+			);
+			path = WalletTools;
 			sourceTree = "<group>";
 		};
 		1AB3D1D021709F7600557E9D /* Extensions */ = {
@@ -809,6 +827,7 @@
 		896D044020AE69C5002CFF6A /* NeuronTests */ = {
 			isa = PBXGroup;
 			children = (
+				1AB28771217964F500DCC14D /* Service */,
 				1AB3D1D021709F7600557E9D /* Extensions */,
 				1A1E841521717E8800B15E88 /* Utils */,
 				896D044120AE69C5002CFF6A /* NeuronTests.swift */,
@@ -1448,6 +1467,7 @@
 				89A87C8B217312CC00588674 /* WalletNameValidatorTests.swift in Sources */,
 				1AB3D1D221709F9600557E9D /* UIStoryboardExtensionTests.swift in Sources */,
 				896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */,
+				1AB287742179654300DCC14D /* WalletToolTests.swift in Sources */,
 				1A1E841821717EBD00B15E88 /* PasswordValidatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
