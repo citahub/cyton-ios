@@ -22,7 +22,10 @@ struct DAppAction {
             do {
                 guard let responseData = response.data else { throw Error.manifestRequestFailed }
                 let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
-                try? self.getMateDataForDAppChain(with: manifest!)
+                guard let model = manifest else {
+                    return
+                }
+                try? self.getMateDataForDAppChain(with: model)
             } catch {
 
             }

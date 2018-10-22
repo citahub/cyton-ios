@@ -55,7 +55,6 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
                 try WalletCryptoService.updatePassword(address: address, password: self.oldPassword, newPassword: self.newPassword)
             } catch {
                 DispatchQueue.main.async {
-                    // TODO: check if hideHUD prevents next showToast from showing up
                     Toast.hideHUD()
                     Toast.showToast(text: "密码错误")
                 }

@@ -102,15 +102,18 @@ extension BrowserViewController: WKScriptMessageHandler {
 
 extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
-        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
-        contractController.delegate = self
-        contractController.requestAddress = webview.url!.absoluteString
-        contractController.dappCommonModel = dappCommonModel
-        navigationController?.pushViewController(contractController, animated: true)
+//        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
+//        contractController.delegate = self
+//        contractController.requestAddress = webview.url!.absoluteString
+//        contractController.dappCommonModel = dappCommonModel
+//        navigationController?.pushViewController(contractController, animated: true)
+        let messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as! MessageSignController
+        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-
+        let messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as! MessageSignController
+        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
     }
 }
 
