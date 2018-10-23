@@ -187,6 +187,7 @@
                         <outlet property="icon" destination="NZc-Vm-fN3" id="COQ-bi-q18"/>
                         <outlet property="name" destination="c8T-ar-axm" id="JOh-0F-hV3"/>
                         <outlet property="requestPaymentButtonItem" destination="26M-ch-g5f" id="5F3-WW-78g"/>
+                        <outlet property="switchWalletButton" destination="3S1-FO-geS" id="jPj-fJ-G6z"/>
                         <outlet property="switchWalletButtonItem" destination="C0H-hr-lhb" id="pyo-1T-Odl"/>
                         <outlet property="tabHeader" destination="t1o-zF-Pti" id="IgJ-Hg-cHg"/>
                         <outlet property="tabbedButtonView" destination="BAg-0O-OgE" id="M66-55-21E"/>
@@ -207,11 +208,30 @@
                 </barButtonItem>
                 <view contentMode="scaleToFill" id="s9e-Nm-DZw" userLabel="NavBarTitle">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
-                            <state key="normal" image="switch_wallet"/>
+                            <rect key="frame" x="78" y="11" width="84" height="22"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="22" id="LWp-MS-ed2"/>
+                                <constraint firstAttribute="width" constant="84" id="yAs-mb-q8a"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
+                            <state key="normal" title="切换钱包" image="switch_wallet_icon">
+                                <color key="titleColor" red="0.1764705882352941" green="0.19215686274509802" blue="0.23137254901960785" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="11"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4V8-pX-BA8"/>
                             </connections>
@@ -219,10 +239,8 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="c5v-Li-QRF" firstAttribute="trailing" secondItem="3S1-FO-geS" secondAttribute="trailing" id="BIN-D1-7r7"/>
-                        <constraint firstItem="3S1-FO-geS" firstAttribute="leading" secondItem="c5v-Li-QRF" secondAttribute="leading" id="FQQ-ym-3VD"/>
-                        <constraint firstItem="3S1-FO-geS" firstAttribute="top" secondItem="c5v-Li-QRF" secondAttribute="top" id="K0U-4W-6sZ"/>
-                        <constraint firstItem="c5v-Li-QRF" firstAttribute="bottom" secondItem="3S1-FO-geS" secondAttribute="bottom" id="OAC-F1-O3f"/>
+                        <constraint firstItem="3S1-FO-geS" firstAttribute="centerY" secondItem="s9e-Nm-DZw" secondAttribute="centerY" id="McN-ye-Ei1"/>
+                        <constraint firstItem="3S1-FO-geS" firstAttribute="centerX" secondItem="s9e-Nm-DZw" secondAttribute="centerX" id="XYl-mh-yS1"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="c5v-Li-QRF"/>
                 </view>
@@ -498,7 +516,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDD-Nn-vgu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2559.1999999999998" y="-277.51124437781112"/>
+            <point key="canvasLocation" x="2594" y="-269"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="82x-J8-bup">
@@ -524,7 +542,7 @@
         <image name="add_asset" width="93" height="23"/>
         <image name="copy_address" width="14" height="14"/>
         <image name="switchWallet" width="24" height="24"/>
-        <image name="switch_wallet" width="84" height="22"/>
+        <image name="switch_wallet_icon" width="24" height="20"/>
         <image name="walletQRCode" width="22" height="22"/>
         <image name="wallet_detail" width="22" height="4"/>
     </resources>
