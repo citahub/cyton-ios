@@ -46,22 +46,27 @@ class WalletDetailController: UITableViewController {
     private func deleteWallet(password: String) {
         // TODO: wrap realm and keystore operation as an atom transaction
         let address = walletModel.address
-        try! WalletRealmTool.realm.write {
-            if appModel.wallets.count == 1 {
-                WalletRealmTool.realm.deleteAll()
-                NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
-            } else {
-                appModel.currentWallet = appModel.wallets[0]
-                WalletRealmTool.realm.delete(walletModel)
-            }
-        }
+        Toast.showHUD()
         do {
             try WalletCryptoService.deleteWallet(address: address, password: password)
+            try WalletRealmTool.realm.write {
+                if appModel.wallets.count == 1 {
+                    WalletRealmTool.realm.deleteAll()
+                    NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
+                } else {
+                    appModel.currentWallet = appModel.wallets.filter({ (model) -> Bool in
+                        return model.address != address
+                    }).first!
+                    WalletRealmTool.realm.delete(walletModel)
+                }
+            }
+            Toast.hideHUD()
+            Toast.showToast(text: "删除成功")
+            navigationController?.popToRootViewController(animated: true)
         } catch {
+            Toast.hideHUD()
             return Toast.showToast(text: "密码错误")
         }
-        Toast.showToast(text: "删除成功")
-        navigationController?.popToRootViewController(animated: true)
     }
 
     private func exportKeystore(password: String) {
