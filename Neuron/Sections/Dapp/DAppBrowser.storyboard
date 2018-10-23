@@ -509,8 +509,9 @@
                                         <color key="textColor" red="0.59607843140000005" green="0.61176470589999998" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdC-4h-tKB">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xdC-4h-tKB">
                                         <rect key="frame" x="15" y="105" width="340" height="30"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="m3d-A2-Npx"/>
@@ -610,6 +611,9 @@
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="YES"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstItem="xdC-4h-tKB" firstAttribute="top" secondItem="S7N-cE-4jx" secondAttribute="bottom" constant="5" id="11d-Y4-1fh"/>
                                     <constraint firstItem="Iep-ui-Grf" firstAttribute="top" secondItem="NdT-bG-w3r" secondAttribute="bottom" constant="8" symbolic="YES" id="2Sf-t2-gkh"/>
@@ -640,6 +644,9 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
                         <constraints>
                             <constraint firstItem="4h2-4Y-Lkq" firstAttribute="bottom" secondItem="U7f-9h-J5k" secondAttribute="bottom" id="9YA-Bi-nDE"/>
                             <constraint firstItem="U7f-9h-J5k" firstAttribute="leading" secondItem="4h2-4Y-Lkq" secondAttribute="leading" id="FLr-Te-ABO"/>
@@ -664,7 +671,7 @@
         <!--Page View Controller-->
         <scene sceneID="zfx-H3-Wwj">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="kl0-ge-3mG" sceneMemberID="viewController">
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="kl0-ge-3mG" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Esw-75-qtS" kind="showDetail" id="PJ7-Ll-hYr"/>
                         <segue destination="qAz-XW-cpI" kind="showDetail" id="O6U-yx-3VC"/>

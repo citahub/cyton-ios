@@ -107,6 +107,7 @@ class MessageSignController: UIViewController {
                 self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
             Toast.hideHUD()
+            self.view.removeFromSuperview()
         }
     }
 
@@ -120,6 +121,7 @@ class MessageSignController: UIViewController {
                 self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
             Toast.hideHUD()
+            self.view.removeFromSuperview()
         }
     }
 
@@ -132,6 +134,7 @@ class MessageSignController: UIViewController {
     }
 
     func removeView() {
+        delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.userCanceled)
         view.removeFromSuperview()
     }
 
@@ -144,7 +147,7 @@ class MessageSignController: UIViewController {
 
 extension MessageSignController: MessageSignShowViewControllerDelegate {
     func clickAgreeButton() {
-        messageSignPageVC.setViewControllers([confirmSendViewController], direction: .forward, animated: false)
+        messageSignPageVC.setViewControllers([confirmSendViewController], direction: .forward, animated: true)
     }
 
     func clickRejectButton() {

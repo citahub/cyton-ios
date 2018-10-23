@@ -12,6 +12,7 @@ import WebKit
 class BrowserViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    private var messageSignController: MessageSignController!
     var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
@@ -122,7 +123,7 @@ extension BrowserViewController {
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-        let messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as! MessageSignController
+        messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as? MessageSignController
         messageSignController.delegate = self
         messageSignController.dappCommonModel = dappCommonModel
         messageSignController.requestUrlString = webview.url!.absoluteString

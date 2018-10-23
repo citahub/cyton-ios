@@ -37,8 +37,7 @@ struct DAppCommonModel: Decodable {
         if chainType == "AppChain" {
             object = try! values.decode(AppChainObject.self, forKey: .object)
         } else {
-            let value = try! values.decode(ETHObject.self, forKey: .object)
-            object = value
+            object = try! values.decode(ETHObject.self, forKey: .object)
         }
     }
 }
@@ -70,4 +69,5 @@ enum DAppError: Error {
     case sendTransactionFailed
     case signMessageFailed
     case signPersonalMessagFailed
+    case userCanceled
 }

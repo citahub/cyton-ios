@@ -14,7 +14,11 @@ protocol MessageSignShowViewControllerDelegate: class {
 }
 
 class MessageSignShowViewController: UIViewController {
-    var dataText = ""
+    var dataText = "" {
+        didSet {
+            dataTextView.text = dataText
+        }
+    }
     @IBOutlet weak var icomImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var addressLabel: UILabel!
@@ -36,7 +40,6 @@ class MessageSignShowViewController: UIViewController {
         nameLabel.text = walletModel.name
         addressLabel.text = walletModel.address
         icomImageView.image = UIImage(data: walletModel.iconData)
-        dataTextView.text = dataText
     }
 
     @IBAction func agreeAction(_ sender: UIButton) {
