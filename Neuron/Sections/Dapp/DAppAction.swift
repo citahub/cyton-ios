@@ -21,14 +21,14 @@ struct DAppAction {
             do {
                 guard let responseData = response.data else { throw Error.manifestRequestFailed }
                 let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
-                try? self.getMateDataForDAppChain(with: manifest!)
+                try? self.getMetaDataForDAppChain(with: manifest!)
             } catch {
 
             }
         }
     }
 
-    func getMateDataForDAppChain(with manifestModel: ManifestModel) throws {
+    func getMetaDataForDAppChain(with manifestModel: ManifestModel) throws {
         guard let chainHosts = manifestModel.chainSet.values.first else {
             throw Error.emptyChainHosts
         }
