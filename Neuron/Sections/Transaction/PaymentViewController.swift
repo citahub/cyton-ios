@@ -46,7 +46,7 @@ class PaymentViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "转账"
+        title = "\(tokenModel.symbol)转账"
         amountTextField.delegate = self
         addressTextField.delegate = self
         simpleGasViewController = storyboard!.instantiateViewController(withIdentifier: "simpleGasViewController") as? SimpleGasViewController
@@ -100,10 +100,11 @@ class PaymentViewController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: UIButton) {
         if canProceedNextStep() {
+            let amount = payValue.hasPrefix(".") ? "0" + payValue : payValue
             let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
             payCoverViewController.tokenModel = tokenModel
             payCoverViewController.walletAddress = walletModel.address
-            payCoverViewController.amount = payValue
+            payCoverViewController.amount = amount
             payCoverViewController.toAddress = destinationAddress
             payCoverViewController.gasCost = gasCost
             payCoverViewController.tokenType = tokenType
