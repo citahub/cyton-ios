@@ -38,6 +38,7 @@ class SureMnemonicViewModel: NSObject {
         // 通过助记词导入钱包
         Toast.showHUD(text: "钱包创建中...")
         WalletTool.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTool.defaultDerivationPath, completion: { (result) in
+            Toast.hideHUD()
             switch result {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
@@ -47,7 +48,6 @@ class SureMnemonicViewModel: NSObject {
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
-            Toast.hideHUD()
         })
     }
 

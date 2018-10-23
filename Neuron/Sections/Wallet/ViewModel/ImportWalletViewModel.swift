@@ -57,6 +57,7 @@ class ImportWalletViewModel: NSObject {
         walletModel.name = name
         let importType = ImportType.keystore(keystore: keystore, password: password)
         WalletTool.importWallet(with: importType) { (result) in
+            Toast.hideHUD()
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
@@ -72,7 +73,6 @@ class ImportWalletViewModel: NSObject {
                     SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
                 }
             }
-            Toast.hideHUD()
         }
     }
 
@@ -125,6 +125,7 @@ class ImportWalletViewModel: NSObject {
         walletModel.name = name
         let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
         WalletTool.importWallet(with: importType) { (result) in
+            Toast.hideHUD()
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
@@ -140,7 +141,6 @@ class ImportWalletViewModel: NSObject {
                     SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
                 }
             }
-            Toast.hideHUD()
         }
     }
 
@@ -173,6 +173,7 @@ class ImportWalletViewModel: NSObject {
         walletModel.name = name
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
         WalletTool.importWallet(with: importType) { (result) in
+            Toast.hideHUD()
             switch result {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
@@ -188,7 +189,6 @@ class ImportWalletViewModel: NSObject {
                     SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: false)
                 }
             }
-            Toast.hideHUD()
         }
     }
 }

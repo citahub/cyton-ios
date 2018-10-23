@@ -31,6 +31,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func didClickAddButton(_ sender: UIButton) {
+        Toast.hideHUD()
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
             Toast.showToast(text: "请输入正确的合约地址")
             if isUseQRCode {
@@ -53,7 +54,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
                 SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
             }
         }
-        Toast.hideHUD()
         navigationController?.popViewController(animated: true)
     }
     //tableview代理
@@ -141,6 +141,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         let appmodel = WalletRealmTool.getCurrentAppModel()
         Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
+            Toast.hideHUD()
             switch result {
             case .success(let tokenM):
                 self.tokenModel = tokenM
@@ -149,7 +150,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
             }
-            Toast.hideHUD()
             self.aTable.reloadData()
         }
     }
