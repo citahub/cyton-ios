@@ -43,8 +43,12 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        Toast.showHUD()
         let appModel = WalletRealmTool.getCurrentAppModel()
+        if appModel.extraTokenList.contains(tokenModel) {
+            Toast.showToast(text: "不可重复添加")
+            return
+        }
+        Toast.showHUD()
         tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
