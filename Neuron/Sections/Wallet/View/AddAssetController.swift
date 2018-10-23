@@ -31,6 +31,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func didClickAddButton(_ sender: UIButton) {
+        Toast.hideHUD()
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
             Toast.showToast(text: "请输入正确的合约地址")
             if isUseQRCode {
@@ -42,8 +43,12 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        Toast.showHUD()
         let appModel = WalletRealmTool.getCurrentAppModel()
+        if appModel.extraTokenList.contains(tokenModel) {
+            Toast.showToast(text: "不可重复添加")
+            return
+        }
+        Toast.showHUD()
         tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
@@ -53,7 +58,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
                 SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
             }
         }
-        Toast.hideHUD()
         navigationController?.popViewController(animated: true)
     }
     //tableview代理
@@ -100,7 +104,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     func didClickSelectCoinBtn() {
         nView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
         nView.delegate = self
-        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "Nervos", "id": "101"]]
+        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "test-chain", "id": "101"]]
         nView.selectDict = ["name": "以太坊eth", "id": "100"]
         UIApplication.shared.keyWindow?.addSubview(nView)
     }
@@ -141,6 +145,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         let appmodel = WalletRealmTool.getCurrentAppModel()
         Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
+            Toast.hideHUD()
             switch result {
             case .success(let tokenM):
                 self.tokenModel = tokenM
@@ -149,7 +154,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
             }
-            Toast.hideHUD()
             self.aTable.reloadData()
         }
     }

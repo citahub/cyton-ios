@@ -188,7 +188,7 @@ extension LAError {
             if code == LAError.biometryNotEnrolled {
                 return "未设置 Face ID"
             } else if code == LAError.biometryNotAvailable {
-                return "需要 Face ID 权限"
+                return "您的Face ID未开启，请输入密码登陆"
             } else if code == LAError.biometryLockout {
                 return "多次验证失败被锁定"
             }
@@ -199,7 +199,7 @@ extension LAError {
         case LAError.touchIDLockout:
             return "多次验证失败被锁定"
         default:
-            return "识别失败，请重试"
+            return "验证失败，请重新验证"
         }
     }
 }

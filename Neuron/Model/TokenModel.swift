@@ -69,3 +69,14 @@ class TokenModel: Object, Decodable {
         case logo
     }
 }
+
+extension TokenModel {
+    public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
+        return lhs.address == rhs.address
+    }
+    
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? TokenModel else { return false }
+        return object.address == address
+    }
+}

@@ -23,6 +23,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var address: UILabel!
+    @IBOutlet weak var switchWalletButton: UIButton!
     private var tokensViewController: TokensViewController!
     private var nftViewController: UIViewController!
     private var assetPageViewController: UIPageViewController!
@@ -124,6 +125,13 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
             navigationItem.titleView = titleView
         }
         setNeedsStatusBarAppearanceUpdate()
+        if WalletRealmTool.getCurrentAppModel().wallets.count == 1 {
+            switchWalletButton.setTitle("添加钱包", for: .normal)
+            switchWalletButton.setImage(UIImage(named: "add_wallet_icon")!, for: .normal)
+        } else {
+            switchWalletButton.setTitle("切换钱包", for: .normal)
+            switchWalletButton.setImage(UIImage(named: "switch_wallet_icon")!, for: .normal)
+        }
     }
 
     func addNotify() {
