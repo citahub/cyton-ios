@@ -100,7 +100,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     func didClickSelectCoinBtn() {
         nView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
         nView.delegate = self
-        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "Nervos", "id": "101"]]
+        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "test-chain", "id": "101"]]
         nView.selectDict = ["name": "以太坊eth", "id": "100"]
         UIApplication.shared.keyWindow?.addSubview(nView)
     }
