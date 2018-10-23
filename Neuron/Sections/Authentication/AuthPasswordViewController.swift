@@ -39,9 +39,11 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
         }
         guard let password = passwordTextField.text else { return }
         passwordTextField.resignFirstResponder()
+        Toast.showHUD()
         DispatchQueue.global().async {
             let isPasswordCorrect = WalletTool.checkPassword(wallet: wallet, password: password)
             DispatchQueue.main.sync { [weak self] in
+                Toast.hideHUD()
                 if isPasswordCorrect {
                     self?.delegate?.authenticationSuccessful()
                 } else {
