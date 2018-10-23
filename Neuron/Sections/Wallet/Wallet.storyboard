@@ -210,12 +210,24 @@
                     <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sff-ax-DYa">
+                            <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <state key="normal">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
+                                    <real key="value" value="10"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4Yi-Oq-ytW"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
                             <rect key="frame" x="78" y="11" width="84" height="22"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="22" id="LWp-MS-ed2"/>
-                                <constraint firstAttribute="width" constant="84" id="yAs-mb-q8a"/>
-                            </constraints>
+                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="8" maxY="0.0"/>
                             <state key="normal" title="切换钱包" image="switch_wallet_icon">
@@ -233,14 +245,16 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4V8-pX-BA8"/>
+                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="c3u-Wj-7bo"/>
                             </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="3S1-FO-geS" firstAttribute="centerY" secondItem="s9e-Nm-DZw" secondAttribute="centerY" id="McN-ye-Ei1"/>
-                        <constraint firstItem="3S1-FO-geS" firstAttribute="centerX" secondItem="s9e-Nm-DZw" secondAttribute="centerX" id="XYl-mh-yS1"/>
+                        <constraint firstItem="c5v-Li-QRF" firstAttribute="trailing" secondItem="Sff-ax-DYa" secondAttribute="trailing" id="8Rd-d5-Yd8"/>
+                        <constraint firstItem="Sff-ax-DYa" firstAttribute="top" secondItem="c5v-Li-QRF" secondAttribute="top" id="BVB-Jv-ybI"/>
+                        <constraint firstItem="c5v-Li-QRF" firstAttribute="bottom" secondItem="Sff-ax-DYa" secondAttribute="bottom" id="F9V-lA-B7D"/>
+                        <constraint firstItem="Sff-ax-DYa" firstAttribute="leading" secondItem="c5v-Li-QRF" secondAttribute="leading" id="wen-bR-aj2"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="c5v-Li-QRF"/>
                 </view>
@@ -547,6 +561,6 @@
         <image name="wallet_detail" width="22" height="4"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4V8-pX-BA8"/>
+        <segue reference="4Yi-Oq-ytW"/>
     </inferredMetricsTieBreakers>
 </document>
