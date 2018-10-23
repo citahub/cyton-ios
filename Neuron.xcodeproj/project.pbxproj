@@ -925,7 +925,7 @@
 		89B296E720F4CA57008558A7 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				89B296E820F4CA57008558A7 /* TransactionService.swift */,
+				6E851CD1217DBB3D00769E00 /* TransactionHistoryService.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -1343,6 +1343,7 @@
 				89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */,
 				6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
+				6E851CD2217DBB3D00769E00 /* TransactionHistoryService.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
@@ -1639,7 +1640,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1672,7 +1673,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
