@@ -33,10 +33,12 @@ struct DAppCommonModel: Decodable {
         name = try! values.decode(Method.self, forKey: .name)
         id = try! values.decode(Int.self, forKey: .id)
         chainType = try! values.decode(String.self, forKey: .chainType)
+
         if chainType == "AppChain" {
             object = try! values.decode(AppChainObject.self, forKey: .object)
         } else {
-            object = try! values.decode(ETHObject.self, forKey: .object)
+            let value = try! values.decode(ETHObject.self, forKey: .object)
+            object = value
         }
     }
 }
@@ -60,11 +62,6 @@ struct ETHObject: Decodable {
     var to: String?
     var gasLimit: Double?
     var gasPrice: Double?
-
-    enum CodingKeys: String, CodingKey {
-        case data
-        case from
-    }
 }
 
 enum DAppError: Error {
