@@ -13,7 +13,7 @@ class TransactionModel: NSObject, Decodable {
     var from = ""
     var to = ""
     var hashString = ""
-    var timeStamp = ""
+    var time: Date?
     var chainName = ""
     var gasUsed = ""
     var gas = ""
@@ -22,15 +22,16 @@ class TransactionModel: NSObject, Decodable {
     var symbol = ""
     var transactionType = "ETH" //default "ETH" include ERC20 transaction,  another one is "Nervos"
     var totleGas = ""
-    var formatTime = ""
 
     var chainId = ""
+    var formatTime = ""
 
     enum CodingKeys: String, CodingKey {
         case from
         case to
         case hashString = "hash"
-        case timeStamp = "timestamp"
+        case timeStamp
+        case timestamp
         case gasPrice
         case gas
         case gasUsed
@@ -38,6 +39,8 @@ class TransactionModel: NSObject, Decodable {
         case value
         case chainName
         case chainId
+        case tokenSymbol
+        case tokenName
     }
 
     override init() {
@@ -53,23 +56,59 @@ class TransactionModel: NSObject, Decodable {
         gas = (try? values.decode(String.self, forKey: .gas)) ?? ""
         gasUsed = (try? values.decode(String.self, forKey: .gasUsed)) ?? ""
         blockNumber = try values.decode(String.self, forKey: .blockNumber)
-        value = try values.decode(String.self, forKey: .value)
-        chainName = (try? values.decode(String.self, forKey: .chainName)) ?? ""
 
-        let timestamp = try? values.decode(Int.self, forKey: .timeStamp)
-        timeStamp = "\(timestamp ?? 0)"
+        if let string = try? values.decode(String.self, forKey: .value) {
+            value = string
+        } else if let number = try? values.decode(UInt.self, forKey: .value) {
+            value = "\(number)"
+        }
+
+        if let value = try? values.decode(String.self, forKey: .chainName) {
+            chainName = value
+        } else if let value = try? values.decode(String.self, forKey: .tokenName) {
+            chainName = value
+        }
+
+        if let value = try? values.decode(String.self, forKey: .tokenSymbol) {
+            symbol = value
+        }
+
+        if let timestamp = try? values.decode(Int.self, forKey: .timestamp) {
+            time = Date(timeIntervalSince1970: Double(timestamp) / 1000.0)
+        } else if let string = try? values.decode(String.self, forKey: .timeStamp) {
+            if let timestamp = Double(string) {
+                time = Date(timeIntervalSince1970: timestamp)
+            }
+        }
+        if let date = time {
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            formatTime = dateformatter.string(from: date)
+        }
+
         let i_chainId = (try? values.decode(Int.self, forKey: .chainId)) ?? 0
         chainId = "\(i_chainId)"
     }
 }
 
 struct TransactionResponse: Decodable {
-
     let result: Result
-
     struct Result: Decodable {
         let count: UInt
         let transactions: [TransactionModel]
     }
+}
 
+struct NervosErc20TransactionResponse: Decodable {
+    let result: Result
+    struct Result: Decodable {
+        let count: UInt
+        let transfers: [TransactionModel]
+    }
+}
+
+struct Erc20TransactionResponse: Decodable {
+    let status: String
+    let message: String
+    let result: [TransactionModel]
 }
