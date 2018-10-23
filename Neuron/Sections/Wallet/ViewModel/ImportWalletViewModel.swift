@@ -62,10 +62,6 @@ class ImportWalletViewModel: NSObject {
             case .succeed(let account):
                 self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
                 self.saveWalletToRealm()
-                SensorsAnalytics.Track.importWallet(type: .keystone, address: self.walletModel.address)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
-                }
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
                 SensorsAnalytics.Track.importWallet(type: .keystone, address: nil)
@@ -78,20 +74,36 @@ class ImportWalletViewModel: NSObject {
 
     private func saveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppModel()
+        let result: [WalletModel] = appModel.wallets.filter { (wallet) -> Bool in
+            return wallet.address == self.walletModel.address
+        }
+        if result.count >= 1 {
+            Toast.showToast(text: "已存在该钱包")
+            return
+        }
+
         let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()!
-        try! WalletRealmTool.realm.write {
-            appModel.currentWallet = walletModel
-            appModel.wallets.append(walletModel)
-            WalletRealmTool.addObject(appModel: appModel)
+        do {
+            try WalletRealmTool.realm.write {
+                appModel.currentWallet = walletModel
+                appModel.wallets.append(walletModel)
+                WalletRealmTool.addObject(appModel: appModel)
+            }
+            Toast.showToast(text: "导入成功")
+            SensorsAnalytics.Track.importWallet(type: .keystone, address: self.walletModel.address)
+            if self.isUseQRCode {
+                SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
+            }
+            if isFirstWallet {
+                NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
+            }
+            NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
+            delegate?.didPopToRootView()
+        } catch {
+            Toast.showToast(text: error.localizedDescription)
         }
-        Toast.showToast(text: "导入成功")
-        if isFirstWallet {
-            NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
-        }
-        NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
-        delegate?.didPopToRootView()
     }
 
     /// import wallet with mnemonic
