@@ -96,6 +96,7 @@
 		896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */; };
 		896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044120AE69C5002CFF6A /* NeuronTests.swift */; };
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
+		89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89733043217ED041001B8D93 /* ETHSignMessageService.swift */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
@@ -310,6 +311,7 @@
 		896D044820AE69C5002CFF6A /* NeuronUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeuronUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D044C20AE69C5002CFF6A /* NeuronUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronUITests.swift; sourceTree = "<group>"; };
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89733043217ED041001B8D93 /* ETHSignMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHSignMessageService.swift; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				89733042217ED022001B8D93 /* DAppService */,
 				6E90D06721704C1100B98363 /* SensorsAnalytics */,
 				89C6145A2141036B00DC3DF4 /* SettingsService */,
 				89B296E720F4CA57008558A7 /* Transaction */,
@@ -846,6 +849,14 @@
 				896D044E20AE69C5002CFF6A /* Info.plist */,
 			);
 			path = NeuronUITests;
+			sourceTree = "<group>";
+		};
+		89733042217ED022001B8D93 /* DAppService */ = {
+			isa = PBXGroup;
+			children = (
+				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
+			);
+			path = DAppService;
 			sourceTree = "<group>";
 		};
 		898A19F220B53EF500ECB465 /* TableViewCell */ = {
@@ -1328,6 +1339,7 @@
 				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */,
 				6E867E07216C54B500BD6FE5 /* UIResponder+Extension.swift in Sources */,
+				89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,
 				8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */,
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,

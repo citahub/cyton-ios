@@ -85,6 +85,18 @@ class BrowserViewController: UIViewController, WKUIDelegate {
     @IBAction func dudCkucjCloseButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+
+    func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
+        let script: String = {
+            if error == nil {
+                return "onSignSuccessful(\(id), \"\(value)\")"
+            } else {
+                return "onSignError(\(id), \"\(error!)\")"
+            }
+        }()
+        webview.evaluateJavaScript(script, completionHandler: nil)
+    }
+
 }
 
 extension BrowserViewController: WKScriptMessageHandler {
@@ -102,17 +114,18 @@ extension BrowserViewController: WKScriptMessageHandler {
 
 extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
-//        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
-//        contractController.delegate = self
-//        contractController.requestAddress = webview.url!.absoluteString
-//        contractController.dappCommonModel = dappCommonModel
-//        navigationController?.pushViewController(contractController, animated: true)
-        let messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as! MessageSignController
-        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
+        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
+        contractController.delegate = self
+        contractController.requestAddress = webview.url!.absoluteString
+        contractController.dappCommonModel = dappCommonModel
+        navigationController?.pushViewController(contractController, animated: true)
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
         let messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as! MessageSignController
+        messageSignController.delegate = self
+        messageSignController.dappCommonModel = dappCommonModel
+        messageSignController.requestUrlString = webview.url!.absoluteString
         UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
     }
 }
@@ -125,7 +138,8 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             closeButton.isHidden = true
         }
-        webView.evaluateJavaScript("document.querySelector('head').querySelector('link[rel=manifest]').href;") { (manifest, _) in
+        let js = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+        webView.evaluateJavaScript(js) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
@@ -160,15 +174,11 @@ extension BrowserViewController: WKNavigationDelegate {
     }
 }
 
-extension BrowserViewController: ContractControllerDelegate {
+extension BrowserViewController: ContractControllerDelegate, MessageSignControllerDelegate {
+    func messageSignCallBackWebView(id: Int, value: String, error: DAppError?) {
+        evaluateJavaScryptWebView(id: id, value: value, error: error)
+    }
     func callBackWebView(id: Int, value: String, error: DAppError?) {
-        let script: String = {
-            if error == nil {
-                return "onSignSuccessful(\(id), \"\(value)\")"
-            } else {
-                return "onSignError(\(id), \"\(error!)\")"
-            }
-        }()
-        webview.evaluateJavaScript(script, completionHandler: nil)
+        evaluateJavaScryptWebView(id: id, value: value, error: error)
     }
 }

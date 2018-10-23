@@ -53,17 +53,24 @@ struct AppChainObject: Decodable {
 }
 
 struct ETHObject: Decodable {
-    let chainId: Int
-    let value: String?
-    let data: String?
-    let from: String
-    let to: String?
-    let gasLimit: Double?
-    let gasPrice: Double?
+    var chainId: Int?
+    var value: String?
+    var data: String?
+    var from: String?
+    var to: String?
+    var gasLimit: Double?
+    var gasPrice: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case data
+        case from
+    }
 }
 
 enum DAppError: Error {
     case cancelled
     case signTransactionFailed
     case sendTransactionFailed
+    case signMessageFailed
+    case signPersonalMessagFailed
 }

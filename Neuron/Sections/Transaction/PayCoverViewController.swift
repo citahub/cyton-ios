@@ -140,7 +140,7 @@ class PayCoverViewController: UIViewController {
             return
         }
         switch dappModel.name {
-        case .sendTransaction,.signTransaction:
+        case .sendTransaction, .signTransaction:
             self.sendDAppEthTransaction(password: password, transaction: transaction)
         default:
             break
@@ -207,7 +207,7 @@ class PayCoverViewController: UIViewController {
             sendNervosTransaction(password: password, transaction: transaction)
         } else {
             switch dappCommonModel!.name {
-            case .sendTransaction,.signTransaction:
+            case .sendTransaction, .signTransaction:
                 self.sendDappAppChainTransaction(password: password, transaction: transaction)
             default:
                 break
@@ -278,7 +278,7 @@ class PayCoverViewController: UIViewController {
 }
 
 extension PayCoverViewController: ConfirmSendViewControllerDelegate, ConfirmAmountViewControllerDelegate {
-    func sendTransaction(confirmSendViewController: ConfirmSendViewController, password: String) {
+    func confirmPassword(confirmSendViewController: ConfirmSendViewController, password: String) {
         Toast.showHUD()
         switch tokenType {
         case .ethereumToken:

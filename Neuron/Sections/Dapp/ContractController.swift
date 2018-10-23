@@ -104,7 +104,6 @@ class ContractController: UIViewController {
             valueTextField.text = formatScientValue(value: dappCommonModel.eth?.value ?? "0x")
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
             dataTextView.text = dappCommonModel.eth?.data
-
         }
         getTokenModel()
     }
