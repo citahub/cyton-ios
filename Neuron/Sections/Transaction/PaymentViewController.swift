@@ -152,11 +152,13 @@ class PaymentViewController: UITableViewController {
     }
 }
 
-extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate, UITextFieldDelegate, PayCoverViewControllerDelegate {
+extension PaymentViewController: PayCoverViewControllerDelegate {
     func popToRootView() {
         navigationController?.popViewController(animated: true)
     }
+}
 
+extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate {
     func getTransactionCostGas(gas: String) {
         gasCost = gas
     }
@@ -178,13 +180,17 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
             ethGasPrice = gasPrice
         }
     }
+}
 
+extension PaymentViewController: QRCodeControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
         destinationAddress = codeResult
         isUseQRCode = true
     }
+}
 
+extension PaymentViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == amountTextField {
             let character: String
