@@ -50,7 +50,8 @@ struct DAppAction {
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     tokenModel.chainHosts = chainHosts
                     self.saveToken(model: tokenModel)
-                case .failure(_): break
+                case .failure:
+                    break
                 }
             }
         }
