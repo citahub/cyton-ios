@@ -17,7 +17,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "资产管理"
+        title = "ERC20列表"
         didGetDataForList()
     }
 
