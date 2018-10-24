@@ -14,6 +14,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        hookSensorsDebugWarning()
+
         skipBackupFiles()
         RealmHelper.configureRealm()
 
@@ -45,6 +47,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
         paths.append(WalletTool.keysDirectory)
         SkipBackupFiles(paths: paths).skip()
+    }
+
+    private func hookSensorsDebugWarning() {
+        guard let cls = NSClassFromString("SensorsAnalyticsSDK") else { return }
+        let originalSelector = NSSelectorFromString("showDebugModeWarning:withNoMoreButton:")
+        let swizzledSelector = #selector(sensorsShowDebugModeWarning(message:showNoMore:))
+        guard let swizzledMethod = class_getInstanceMethod(self.classForCoder, swizzledSelector) else { return }
+        let swizzledMethodImp = method_getImplementation(swizzledMethod)
+        class_replaceMethod(cls, originalSelector, swizzledMethodImp, method_getTypeEncoding(swizzledMethod))
+    }
+
+    @objc func sensorsShowDebugModeWarning(message: String, showNoMore: Bool) {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

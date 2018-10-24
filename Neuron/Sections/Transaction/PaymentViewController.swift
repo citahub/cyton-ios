@@ -46,7 +46,7 @@ class PaymentViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "转账"
+        title = "\(tokenModel.symbol)转账"
         amountTextField.delegate = self
         addressTextField.delegate = self
         simpleGasViewController = storyboard!.instantiateViewController(withIdentifier: "simpleGasViewController") as? SimpleGasViewController
@@ -100,10 +100,11 @@ class PaymentViewController: UITableViewController {
 
     @IBAction func clickNextButton(_ sender: UIButton) {
         if canProceedNextStep() {
+            let amount = payValue.hasPrefix(".") ? "0" + payValue : payValue
             let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
             payCoverViewController.tokenModel = tokenModel
             payCoverViewController.walletAddress = walletModel.address
-            payCoverViewController.amount = payValue
+            payCoverViewController.amount = amount
             payCoverViewController.toAddress = destinationAddress
             payCoverViewController.gasCost = gasCost
             payCoverViewController.tokenType = tokenType
@@ -152,11 +153,13 @@ class PaymentViewController: UITableViewController {
     }
 }
 
-extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate, UITextFieldDelegate, PayCoverViewControllerDelegate {
+extension PaymentViewController: PayCoverViewControllerDelegate {
     func popToRootView() {
         navigationController?.popViewController(animated: true)
     }
+}
 
+extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate {
     func getTransactionCostGas(gas: String) {
         gasCost = gas
     }
@@ -178,13 +181,17 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, QRCodeControll
             ethGasPrice = gasPrice
         }
     }
+}
 
+extension PaymentViewController: QRCodeControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
         destinationAddress = codeResult
         isUseQRCode = true
     }
+}
 
+extension PaymentViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == amountTextField {
             let character: String

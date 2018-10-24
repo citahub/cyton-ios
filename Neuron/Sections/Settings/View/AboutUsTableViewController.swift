@@ -30,7 +30,7 @@ class AboutUsTableViewController: UITableViewController {
         "sourceCode": "https://github.com/cryptape/neuron-ios",
         "infua": "https://infura.io/",
         "PeckShield": "https://peckshield.com/",
-        "Cita": "https://github.com/cryptape/cita"
+        "CITA": "https://github.com/cryptape/cita"
     ]
 
     func setVersionLabel() {

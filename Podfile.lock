@@ -10,7 +10,7 @@ PODS:
   - IQKeyboardManagerSwift (6.2.0)
   - KeychainSwift (12.0.0)
   - LYEmptyView (1.2.2)
-  - NervosSwift (0.18.1):
+  - NervosSwift (0.19.0):
     - SwiftProtobuf (~> 1.0.3)
     - web3swift (~> 1.1.10)
   - PlainPing (0.5)
@@ -167,6 +167,9 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
+
 PODFILE CHECKSUM: 2180eb0225b5b257e21683ff0bbb7911a92bff6d
+
+
 
 COCOAPODS: 1.5.3

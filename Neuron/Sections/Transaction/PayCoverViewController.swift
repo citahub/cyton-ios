@@ -244,8 +244,8 @@ class PayCoverViewController: UIViewController {
     }
 
     private func success() {
-        Toast.showToast(text: "转账成功,请稍后刷新查看")
         Toast.hideHUD()
+        Toast.showToast(text: "转账成功,请稍后刷新查看")
         view.removeFromSuperview()
         popToRootView()
 
@@ -264,8 +264,8 @@ class PayCoverViewController: UIViewController {
     }
 
     private func failure(error: Error) {
-        Toast.showToast(text: error.localizedDescription)
         Toast.hideHUD()
+        Toast.showToast(text: error.localizedDescription)
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
         }
