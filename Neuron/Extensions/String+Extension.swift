@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import BigInt
 
 extension String {
     func removeHexPrefix() -> String {
         if self.hasPrefix("0x") {
-            let indexStart = index(startIndex, offsetBy: 2)
-            return String(self[indexStart...])
+            return String(self.dropFirst(2))
         }
         return self
     }
@@ -24,15 +24,8 @@ extension String {
         return "0x" + self
     }
 
-    var hexValue: Int {
-        let str: String = removeHexPrefix().uppercased()
-        var sum = 0
-        for i in str.utf8 {
-            sum = sum * 16 + Int(i) - 48
-            if i >= 65 {
-                sum -= 7
-            }
-        }
-        return sum
+    var hexValue: UInt {
+        guard let bigUint = BigUInt(removeHexPrefix(), radix: 16) else { return 0 }
+        return bigUint.words[0]
     }
 }
