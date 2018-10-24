@@ -536,7 +536,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="447"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="Rw5-ed-2ab">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="Rw5-ed-2ab">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="119"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -600,12 +600,12 @@
                                 <constraint firstAttribute="trailing" secondItem="XBf-kr-736" secondAttribute="trailing" constant="50" id="pap-J6-Dq2"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="k9d-aS-5qd">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="k9d-aS-5qd">
                             <rect key="frame" x="0.0" y="270" width="375" height="176"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edh-QW-W6T">
-                                    <rect key="frame" x="15" y="112" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="-64" width="345" height="44"/>
                                     <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="0QX-N4-mv2"/>
@@ -1046,10 +1046,10 @@
             </objects>
             <point key="canvasLocation" x="2533.5999999999999" y="1150.9745127436283"/>
         </scene>
-        <!--Nervos Quote View Controller-->
+        <!--Nervos Quota View Controller-->
         <scene sceneID="6ML-3X-H4w">
             <objects>
-                <viewController storyboardIdentifier="nervosQuoteViewController" id="38S-RF-fau" customClass="NervosQuoteViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="nervosQuotaViewController" id="38S-RF-fau" customClass="NervosQuotaViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ag2-M6-Fn1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

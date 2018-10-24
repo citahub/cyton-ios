@@ -55,7 +55,7 @@
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD5214A6617007CB446 /* SimpleGasViewController.swift */; };
 		89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD7214A6971007CB446 /* EthGasViewController.swift */; };
-		89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */; };
+		89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */; };
 		89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DDB214A6CBE007CB446 /* PaymentViewController.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
 		8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* UIStyle.swift */; };
@@ -263,7 +263,7 @@
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
 		89230DD5214A6617007CB446 /* SimpleGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGasViewController.swift; sourceTree = "<group>"; };
 		89230DD7214A6971007CB446 /* EthGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGasViewController.swift; sourceTree = "<group>"; };
-		89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuoteViewController.swift; sourceTree = "<group>"; };
+		89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuotaViewController.swift; sourceTree = "<group>"; };
 		89230DDB214A6CBE007CB446 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
@@ -881,7 +881,7 @@
 				89230DDB214A6CBE007CB446 /* PaymentViewController.swift */,
 				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
 				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
-				89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */,
+				89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */,
 				89A45A21214FA89A00900976 /* PayCoverViewController.swift */,
 				89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */,
 				89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */,
@@ -1442,7 +1442,7 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */,
-				89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */,
+				89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */,
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
