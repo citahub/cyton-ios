@@ -30,7 +30,7 @@ class NervosQuotaViewController: UIViewController {
         quotaTextField.delegate = self
         quotaTextField.text = quota.description
         getNervosTransactionCosted(with: quota)
-        delegate?.getNervosTransactionQuota(nervosQuoteViewController: self, quota: quota, data: data)
+        delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: data)
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) {
