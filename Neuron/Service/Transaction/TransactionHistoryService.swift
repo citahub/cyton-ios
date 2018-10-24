@@ -56,8 +56,8 @@ extension TransactionHistoryService {
                     var resultArr: [TransactionModel] = []
                     guard let self = self else { throw TransactionError.requestfailed }
                     for transaction in transactions {
-                        transaction.gasUsed = "\(Double(transaction.gasUsed.hexValue) / pow(10, 18))"
-                        transaction.blockNumber = "\(transaction.blockNumber.hexValue)"
+                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18))"
+                        transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
                         transaction.transactionType = "Nervos"
                         transaction.symbol = self.token.symbol
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
@@ -196,8 +196,8 @@ extension TransactionHistoryService {
                     var resultArr: [TransactionModel] = []
                     var insertions = [Int]()
                     for transaction in response.result.transfers {
-                        transaction.gasUsed = "\(Double(transaction.gasUsed.hexValue) / pow(10, 18))"
-                        transaction.blockNumber = "\(transaction.blockNumber.hexValue)"
+                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18))"
+                        transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
                         transaction.transactionType = "NervosErc20"
                         transaction.symbol = self.token.symbol
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!

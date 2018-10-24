@@ -23,9 +23,4 @@ extension String {
         }
         return "0x" + self
     }
-
-    var hexValue: UInt {
-        guard let bigUint = BigUInt(removeHexPrefix(), radix: 16) else { return 0 }
-        return bigUint.words[0]
-    }
 }
