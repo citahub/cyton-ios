@@ -63,7 +63,7 @@ protocol ErrorOverlayPresentable: OverlayPresentable {
     var errorOverlayRefreshBlock: (() -> Void)? { get set }
 
     func showBlankOverlay()
-    
+
     func showNetworkFailOverlay()
 }
 
