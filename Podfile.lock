@@ -72,7 +72,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KeychainSwift
   - LYEmptyView
-  - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.19.1`)
+  - NervosSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.1`)
   - PlainPing
   - PullToRefresher (from `https://github.com/xiaoluSF/PullToRefresh`, branch `swift4.2`)
   - RealmSwift
@@ -115,7 +115,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   NervosSwift:
-    :git: https://github.com/cryptape/nervos-swift
+    :git: https://github.com/cryptape/appchain-swift
     :tag: v0.19.1
   PullToRefresher:
     :branch: swift4.2
@@ -126,7 +126,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   NervosSwift:
-    :git: https://github.com/cryptape/nervos-swift
+    :git: https://github.com/cryptape/appchain-swift
     :tag: v0.19.1
   PullToRefresher:
     :commit: 949e5b0ba018c7a98c2a625ad0fd4335eafd7436
@@ -167,6 +167,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: f738a3ab399c48da1e09bfd315afaba37120b3a2
+PODFILE CHECKSUM: dc52eace1095ddae91bfd465993c93a02dc0957f
 
 COCOAPODS: 1.5.3
