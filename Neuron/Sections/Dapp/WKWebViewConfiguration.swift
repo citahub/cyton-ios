@@ -43,6 +43,7 @@ extension WKWebViewConfiguration {
         config.userContentController.add(messageHandler, name: Method.signPersonalMessage.rawValue)
         config.userContentController.add(messageHandler, name: Method.signMessage.rawValue)
         config.userContentController.add(messageHandler, name: Method.signTypedMessage.rawValue)
+        config.userContentController.add(messageHandler, name: "getTitleBar")
         config.userContentController.addUserScript(userScript)
         config.preferences.javaScriptEnabled = true
         return config

@@ -8,10 +8,12 @@
 
 import UIKit
 import WebKit
+import FWPopupView
 
 class BrowserViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var collectionButton: UIButton!
     private var messageSignController: MessageSignController!
     var requestUrlStr = ""
 
@@ -36,6 +38,23 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         let config = WKWebViewConfiguration.make(for: .main, in: ScriptMessageProxy(delegate: self))
         config.websiteDataStore = WKWebsiteDataStore.default()
         return config
+    }()
+
+    lazy var menuView: FWMenuView = {
+        let titles = ["收藏", "刷新"]
+        let menuProperty = FWMenuViewProperty()
+        menuProperty.popupCustomAlignment = .topRight
+        menuProperty.popupAnimationType = .scale
+        menuProperty.maskViewColor = UIColor(white: 0, alpha: 0.2)
+        menuProperty.touchWildToHide = "1"
+        menuProperty.popupViewEdgeInsets = UIEdgeInsets(top: StatusBar.statusBarHeight + StatusBar.navigationBarHeight, left: 0, bottom: 0, right: 8)
+        menuProperty.animationDuration = 0.2
+        menuProperty.popupArrowVertexScaleX = 1
+        menuProperty.popupArrowStyle = .round
+        let menuView = FWMenuView.menu(itemTitles: titles, itemBlock: { (_, index, _) in
+            
+        }, property: menuProperty)
+        return menuView
     }()
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,6 +106,10 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         navigationController?.popViewController(animated: true)
     }
 
+    @IBAction func didClickCollectionButton(_ sender: UIButton) {
+        menuView.show()
+    }
+
     func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
         let script: String = {
             if error == nil {
@@ -97,7 +120,6 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         }()
         webview.evaluateJavaScript(script, completionHandler: nil)
     }
-
 }
 
 extension BrowserViewController: WKScriptMessageHandler {

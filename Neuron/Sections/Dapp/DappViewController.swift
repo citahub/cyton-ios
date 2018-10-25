@@ -29,7 +29,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     func didAddSubLayout() {
         webView = WKWebView.init(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
-        let url = URL(string: "http://dapp.cryptape.com")
+//        let url = URL(string: "http://dapp.cryptape.com")
+        let url = URL(string: "http://192.168.10.100:3000")
         let request = URLRequest.init(url: url!)
 
         var js = ""
@@ -44,7 +45,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
-        webView.configuration.userContentController.add(self, name: "pushSearchView")
+        webView.configuration.userContentController.add(self, name: "getTitleBar")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
         if #available(iOS 11.0, *) {

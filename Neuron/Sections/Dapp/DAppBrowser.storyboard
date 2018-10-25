@@ -109,10 +109,21 @@
                                 </button>
                             </barButtonItem>
                         </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Vep-gW-6d4">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Omb-kN-Iy0">
+                                <rect key="frame" x="339" y="11" width="20" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="dappCollection"/>
+                                <connections>
+                                    <action selector="didClickCollectionButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="lXN-BQ-rzE"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="OKc-Dt-8LT" id="wGb-ol-WYm"/>
                         <outlet property="closeButton" destination="yMa-Me-R5K" id="aKA-Hh-hgt"/>
+                        <outlet property="collectionButton" destination="Omb-kN-Iy0" id="jL9-Dm-D7d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPQ-Pb-tqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -746,6 +757,7 @@
     </scenes>
     <resources>
         <image name="close" width="20" height="20"/>
+        <image name="dappCollection" width="20" height="17"/>
         <image name="nav_darkback" width="14" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
