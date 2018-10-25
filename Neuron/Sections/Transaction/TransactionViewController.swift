@@ -12,10 +12,16 @@ import PullToRefresh
 
 class TransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var transactionTableView: UITableView!
-    let service = TransactionService()
+    var service: TransactionHistoryService?
     var dataArray: [TransactionModel] = []
     var tokenType: TokenType = .erc20Token
-    var tokenModel = TokenModel()
+    var tokenModel: TokenModel! {
+        didSet {
+            guard tokenModel != nil else { return }
+            service = TransactionHistoryService.service(with: tokenModel)
+            loadData()
+        }
+    }
     let refresher = PullToRefresh()
 
     override func viewWillAppear(_ animated: Bool) {
@@ -25,7 +31,6 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "交易列表"
-        loadData()
         transactionTableView.delegate = self
         transactionTableView.dataSource = self
         transactionTableView.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有交易数据", detailStr: "")
@@ -48,41 +53,23 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     private func loadData() {
-        switch tokenType {
-        case .ethereumToken:
-            didGetEthTranscationData()
-        case .nervosToken:
-            didGetNervosTranscationData()
-        case .erc20Token:
-            transactionTableView.reloadData()
-        }
-    }
-
-    func didGetEthTranscationData() {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
-        service.didGetETHTransaction(walletAddress: (walletModel?.address)!) { (result) in
-            switch result {
-            case .success(let ethArray):
-                self.dataArray = ethArray
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
-            }
+        Toast.showHUD()
+        service?.reloadData { (_) in
+            Toast.hideHUD()
+            self.dataArray = self.service?.transactions ?? []
+            self.transactionTableView.reloadData()
             self.transactionTableView.endRefreshing(at: .top)
         }
     }
 
-    func didGetNervosTranscationData() {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
-        service.didGetNervosTransaction(walletAddress: (walletModel?.address)!) { (result) in
-            switch result {
-            case .success(let nervosArray):
-                self.dataArray = nervosArray
-                self.transactionTableView.reloadData()
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+    private func loadMoreData() {
+        service?.loadMoreDate(completion: { [weak self](insertions, _) in
+            var indexPaths = [IndexPath]()
+            for index in insertions {
+                indexPaths.append(IndexPath(row: index, section: 0))
             }
-            self.transactionTableView.endRefreshing(at: .top)
-        }
+            self?.transactionTableView.insertRows(at: indexPaths, with: .none)
+        })
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -93,15 +80,23 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: "transactionCell") as! TransactionTableviewCell
         let transModel = dataArray[indexPath.row]
         cell.dateLabel.text = transModel.formatTime
-        cell.exchangeLabel.text = transModel.value
         cell.networkLabel.text = transModel.chainName
         cell.statusImageView.image = UIImage(named: "transaction_success")
-        if transModel.value.first == "+" {
+        let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        if transModel.to.lowercased() == walletAddress.lowercased() {
             cell.addressLabel.text = transModel.from
+            cell.exchangeLabel.text = "+\(transModel.value)"
         } else {
             cell.addressLabel.text = transModel.to
+            cell.exchangeLabel.text = "-\(transModel.value)"
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row > dataArray.count - 4 {
+            loadMoreData()
+        }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
