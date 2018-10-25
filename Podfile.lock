@@ -10,18 +10,18 @@ PODS:
   - IQKeyboardManagerSwift (6.2.0)
   - KeychainSwift (12.0.0)
   - LYEmptyView (1.2.2)
-  - NervosSwift (0.19.0):
+  - NervosSwift (0.19.1):
     - SwiftProtobuf (~> 1.0.3)
     - web3swift (~> 1.1.10)
   - PlainPing (0.5)
-  - PromiseKit (6.5.1):
-    - PromiseKit/CorePromise (= 6.5.1)
-    - PromiseKit/Foundation (= 6.5.1)
-    - PromiseKit/UIKit (= 6.5.1)
-  - PromiseKit/CorePromise (6.5.1)
-  - PromiseKit/Foundation (6.5.1):
+  - PromiseKit (6.5.2):
+    - PromiseKit/CorePromise (= 6.5.2)
+    - PromiseKit/Foundation (= 6.5.2)
+    - PromiseKit/UIKit (= 6.5.2)
+  - PromiseKit/CorePromise (6.5.2)
+  - PromiseKit/Foundation (6.5.2):
     - PromiseKit/CorePromise
-  - PromiseKit/UIKit (6.5.1):
+  - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - PullToRefresher (3.0.2)
   - Realm (3.11.0):
@@ -72,7 +72,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - KeychainSwift
   - LYEmptyView
-  - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.19.0`)
+  - NervosSwift (from `https://github.com/cryptape/nervos-swift`, tag `v0.19.1`)
   - PlainPing
   - PullToRefresher (from `https://github.com/xiaoluSF/PullToRefresh`, branch `swift4.2`)
   - RealmSwift
@@ -116,7 +116,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
-    :tag: v0.19.0
+    :tag: v0.19.1
   PullToRefresher:
     :branch: swift4.2
     :git: https://github.com/xiaoluSF/PullToRefresh
@@ -127,7 +127,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   NervosSwift:
     :git: https://github.com/cryptape/nervos-swift
-    :tag: v0.19.0
+    :tag: v0.19.1
   PullToRefresher:
     :commit: 949e5b0ba018c7a98c2a625ad0fd4335eafd7436
     :git: https://github.com/xiaoluSF/PullToRefresh
@@ -145,9 +145,9 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
   LYEmptyView: 12c9db1f3946fa3c812674467ad95b7ae7c93614
-  NervosSwift: 38321fef1f3bc0e9da032ecc59026d539c28f0df
+  NervosSwift: e25f83b51dada08dc2a851961f4991432fcd8e3d
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
-  PromiseKit: 162f56c89aae9989ffc14476a5f821af17c3f4ba
+  PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PullToRefresher: 25a367871a70b1da0b28e8e7cecceb4ef04f5f56
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
@@ -167,6 +167,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 9fea7d03fb2a55b6f231ebdb7c007ef0d930a0dd
+PODFILE CHECKSUM: f738a3ab399c48da1e09bfd315afaba37120b3a2
 
 COCOAPODS: 1.5.3
