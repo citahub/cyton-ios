@@ -47,7 +47,6 @@ extension TokenModel {
     private func getEthereumProfile(complection: @escaping (TokenProfile?) -> Void) {
         let overview = TokenProfile.Overview(zh: "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。")
         let detailUrl = URL(string: "https://ntp.staging.cryptape.com?coin=ethereum")
-//        let detailUrl = URL(string: "http://192.168.10.231:3010?coin=ethereum")
         var profile = TokenProfile(symbol: symbol, address: address, overview: overview, imageUrl: nil, image: UIImage(named: "eth_logo"), possess: nil, detailUrl: detailUrl, price: nil)
 
         let currency = CurrencyService()
@@ -93,8 +92,7 @@ extension TokenModel {
         }
 
         group.notify(queue: .main) {
-//            profile?.detailUrl = URL(string: "https://ntp.staging.cryptape.com?token=\(address)")
-            profile?.detailUrl = URL(string: "http://192.168.10.231:3010?token=\(address)")
+            profile?.detailUrl = URL(string: "https://ntp.staging.cryptape.com?token=\(address)")
             if var profile = profile, let price = price {
                 let balance = Double(self.tokenBalance) ?? 0.0
                 let amount = balance * price
