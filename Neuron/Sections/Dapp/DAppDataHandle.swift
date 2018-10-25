@@ -19,4 +19,12 @@ struct DAppDataHandle {
         let objectModel = try! decoder.decode(DAppCommonModel.self, from: objectData)
         return objectModel
     }
+
+    static func fromTitleBarMessage(message: WKScriptMessage) -> TitleBarModel {
+        let decoder = JSONDecoder()
+        let body = message.body as! [String: String]
+        let objectJson = body["body"]!
+        let objectModel = try! decoder.decode(TitleBarModel.self, from: objectJson.data(using: String.Encoding.utf8)!)
+        return objectModel
+    }
 }

@@ -43,6 +43,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         let majorVersion = infoDictionary["CFBundleShortVersionString"]
         webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webView.configuration.userContentController.addUserScript(userScript)
+        webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
@@ -66,7 +67,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     //wkwebview
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .linkActivated {
+        if navigationAction.navigationType == .linkActivated /*|| navigationAction.request.url!.absoluteString.contains("/dapps/") */ {
             decisionHandler(.cancel)
             let browserViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "browserViewController") as! BrowserViewController
             browserViewController.requestUrlStr = navigationAction.request.url?.absoluteString ?? ""

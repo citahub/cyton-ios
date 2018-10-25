@@ -109,3 +109,13 @@ struct ManifestModel: Decodable {
         entry = try values.decode(String.self, forKey: .entry)
     }
 }
+
+struct TitleBarModel: Decodable {
+    var right: RightBarModel?
+}
+
+struct RightBarModel: Decodable {
+    var isShow: Bool?
+    var action: String?
+    var type: String?
+}

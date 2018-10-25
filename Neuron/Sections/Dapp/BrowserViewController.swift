@@ -128,13 +128,23 @@ class BrowserViewController: UIViewController, WKUIDelegate {
 
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
-        switch dappCommonModel.name {
-        case .sendTransaction, .signTransaction:
-            pushTransaction(dappCommonModel: dappCommonModel)
-        case .signPersonalMessage, .signMessage, .signTypedMessage:
-            pushSignMessage(dappCommonModel: dappCommonModel)
-        case .unknown: break
+        if message.name == "getTitleBar" {
+            let model = DAppDataHandle.fromTitleBarMessage(message: message)
+            if (model.right?.isShow)! {
+                collectionButton.isHidden = false
+            } else {
+                collectionButton.isHidden = true
+            }
+        } else {
+            collectionButton.isHidden = false
+            let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
+            switch dappCommonModel.name {
+            case .sendTransaction, .signTransaction:
+                pushTransaction(dappCommonModel: dappCommonModel)
+            case .signPersonalMessage, .signMessage, .signTypedMessage:
+                pushSignMessage(dappCommonModel: dappCommonModel)
+            case .unknown: break
+            }
         }
     }
 }
