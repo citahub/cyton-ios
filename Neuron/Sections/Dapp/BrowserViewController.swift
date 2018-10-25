@@ -22,6 +22,9 @@ class BrowserViewController: UIViewController, WKUIDelegate {
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
             configuration: self.config
         )
+        let infoDictionary = Bundle.main.infoDictionary!
+        let majorVersion = infoDictionary["CFBundleShortVersionString"]
+        webview.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webview.navigationDelegate = self
         webview.uiDelegate = self
         return webview
@@ -60,6 +63,7 @@ class BrowserViewController: UIViewController, WKUIDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.isTranslucent = false
     }
 
     override func viewDidLoad() {
