@@ -9,6 +9,7 @@
 import UIKit
 import BigInt
 import IQKeyboardManagerSwift
+import TrustCore
 
 class PaymentViewController: UITableViewController {
     @IBOutlet weak var iconImageView: UIImageView!
@@ -133,6 +134,17 @@ class PaymentViewController: UITableViewController {
         if destinationAddress.count == 0 {
             Toast.showToast(text: "转账地址不能为空")
             return false
+        }
+        if destinationAddress.count != 40 && destinationAddress.count != 42 {
+            Toast.showToast(text: "您的地址错误，请重新输入")
+            return false
+        }
+        if destinationAddress != destinationAddress.lowercased() {
+            let eip55String = TrustCore.EthereumAddress(string: destinationAddress)?.eip55String ?? ""
+            if eip55String != destinationAddress {
+                Toast.showToast(text: "您的地址错误，请重新输入")
+                return false
+            }
         }
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         if destinationAddress == walletModel.address {
