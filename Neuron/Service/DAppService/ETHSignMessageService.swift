@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Nervos
+import AppChain
 
 struct ETHSignMessageService {
     enum Error: Swift.Error {
