@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Nervos
+import AppChain
 
 struct NervosNetwork {
     private static let appHosts = "http://121.196.200.225:1337"
