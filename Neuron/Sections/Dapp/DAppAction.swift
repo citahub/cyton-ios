@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import Nervos
+import AppChain
 
 struct DAppAction {
     enum Error: Swift.Error {

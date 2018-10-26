@@ -9,7 +9,7 @@
 import UIKit
 import RSKPlaceholderTextView
 import BigInt
-import Nervos
+import AppChain
 
 protocol NervosQuotaViewControllerDelegate: class {
     func getNervosTransactionQuota(nervosQuotaViewController: NervosQuotaViewController, quota: BigUInt, data: Data)

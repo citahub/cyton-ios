@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Nervos
+import AppChain
 import BigInt
 
 class NervosTransactionService {
