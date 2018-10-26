@@ -6,7 +6,13 @@ target 'Neuron' do
   inhibit_all_warnings!
 
   pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.2"
-  pod 'PullToRefresher', git: "https://github.com/xiaoluSF/PullToRefresh", branch: "swift4.2"
+  pod 'TrustKeystore', '~> 0.5.2'
+  pod 'RealmSwift'
+  pod 'KeychainSwift'
+
+  pod 'Alamofire'
+  pod 'Alamofire-Synchronous'
+  pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
 
   pod 'PlainPing'
   pod 'LYEmptyView'
@@ -15,14 +21,9 @@ target 'Neuron' do
   pod 'EFQRCode'
   pod 'RSKPlaceholderTextView', "~> 4.0.0"
   pod 'Toast-Swift', "~> 4.0.0"
-  pod 'RealmSwift'
-  pod 'TrustKeystore', '~> 0.5.2'
-  pod 'KeychainSwift'
+  pod 'PullToRefresher', "~> 3.1"
   pod 'IGIdenticon', "~> 0.6"
   pod 'SCLAlertView'
-  pod 'Alamofire'
-  pod 'Alamofire-Synchronous'
-  pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
 
   target 'NeuronTests' do
     inherit! :search_paths

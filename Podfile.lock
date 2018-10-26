@@ -23,7 +23,7 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
-  - PullToRefresher (3.0.2)
+  - PullToRefresher (3.1)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
   - Realm/Headers (3.11.0)
@@ -74,7 +74,7 @@ DEPENDENCIES:
   - KeychainSwift
   - LYEmptyView
   - PlainPing
-  - PullToRefresher (from `https://github.com/xiaoluSF/PullToRefresh`, branch `swift4.2`)
+  - PullToRefresher (~> 3.1)
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
@@ -96,6 +96,7 @@ SPEC REPOS:
     - LYEmptyView
     - PlainPing
     - PromiseKit
+    - PullToRefresher
     - Realm
     - RealmSwift
     - Result
@@ -117,9 +118,6 @@ EXTERNAL SOURCES:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
     :tag: v0.19.2
-  PullToRefresher:
-    :branch: swift4.2
-    :git: https://github.com/xiaoluSF/PullToRefresh
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -128,9 +126,6 @@ CHECKOUT OPTIONS:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
     :tag: v0.19.2
-  PullToRefresher:
-    :commit: 949e5b0ba018c7a98c2a625ad0fd4335eafd7436
-    :git: https://github.com/xiaoluSF/PullToRefresh
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -148,7 +143,7 @@ SPEC CHECKSUMS:
   LYEmptyView: 12c9db1f3946fa3c812674467ad95b7ae7c93614
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
-  PullToRefresher: 25a367871a70b1da0b28e8e7cecceb4ef04f5f56
+  PullToRefresher: ec8c1942bd61bb512ff520c49f9f00903cfa86c7
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
@@ -167,6 +162,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: f95342ba7b9235a820df60455e1972365d356dcd
+PODFILE CHECKSUM: 3acbd1d43e3b38a0a93f67071a783c8f97dd6d50
 
 COCOAPODS: 1.5.3
