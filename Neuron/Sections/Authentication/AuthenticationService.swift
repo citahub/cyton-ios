@@ -168,6 +168,7 @@ class AuthenticationService {
 
     // MARK: - Notification
     @objc private func didBecomeActiveNotification() {
+        guard isValid else { return }
         guard isEnable else { return }
         guard !recognitionFlag else {
             recognitionFlag = false

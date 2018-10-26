@@ -496,7 +496,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="Cita" id="ewL-3v-W3U"/>
+                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="CITA" id="ewL-3v-W3U"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
