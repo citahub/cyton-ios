@@ -201,7 +201,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
         controller.tokenModel = token
         controller.tokenType = .ethereumToken
-        controller.didBackQRCodeMessage(codeResult: result)
+        controller.didBackQRCodeMessage(codeResult: codeResult)
         navigationController?.pushViewController(controller, animated: true)
     }
 
