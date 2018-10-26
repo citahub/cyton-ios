@@ -15,21 +15,20 @@ protocol QRCodeControllerDelegate: class {
 class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     weak var delegate: QRCodeControllerDelegate?
+    let shared = HRQRCodeScanTool()
 
     func scanQRCodeFaild(error: HRQRCodeTooError) {
-        print(error)
     }
 
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
-    let share = HRQRCodeScanTool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "扫描二维码"
-        share.delegate  = self
-        share.beginScanInView(view: view)
+        shared.delegate  = self
+        shared.beginScanInView(view: view)
     }
 }

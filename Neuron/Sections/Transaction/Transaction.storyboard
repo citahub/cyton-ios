@@ -233,7 +233,7 @@
         <!--Payment View Controller-->
         <scene sceneID="uqb-KF-BxL">
             <objects>
-                <tableViewController id="kLj-Uo-04C" customClass="PaymentViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="PaymentViewController" id="kLj-Uo-04C" customClass="PaymentViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="9" id="kFf-7I-Xdc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
