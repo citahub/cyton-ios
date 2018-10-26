@@ -97,16 +97,16 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     @IBAction func scanQRCode(_ sender: Any) {
         let controller = QRCodeController()
         controller.completion = { [weak self](result) in
-            for token in WalletRealmTool.getCurrentAppModel().nativeTokenList {
-                if token.symbol == "ETH" {
-                    let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
-                    controller.tokenModel = token
-                    controller.tokenType = .ethereumToken
-                    controller.didBackQRCodeMessage(codeResult: result)
-                    self?.navigationController?.pushViewController(controller, animated: true)
-                    return
-                }
+            guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.filter({ (model) -> Bool in
+                return model.symbol == "ETH"
+            }).first else {
+                return
             }
+            let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
+            controller.tokenModel = token
+            controller.tokenType = .ethereumToken
+            controller.didBackQRCodeMessage(codeResult: result)
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
         navigationController?.pushViewController(controller, animated: true)
     }
