@@ -187,6 +187,7 @@
                         <outlet property="icon" destination="NZc-Vm-fN3" id="COQ-bi-q18"/>
                         <outlet property="name" destination="c8T-ar-axm" id="JOh-0F-hV3"/>
                         <outlet property="requestPaymentButtonItem" destination="26M-ch-g5f" id="5F3-WW-78g"/>
+                        <outlet property="scanBarButtonItem" destination="HMJ-d0-27B" id="b7W-ou-4yp"/>
                         <outlet property="switchWalletButton" destination="3S1-FO-geS" id="jPj-fJ-G6z"/>
                         <outlet property="switchWalletButtonItem" destination="C0H-hr-lhb" id="pyo-1T-Odl"/>
                         <outlet property="tabHeader" destination="t1o-zF-Pti" id="IgJ-Hg-cHg"/>
@@ -196,12 +197,20 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tXy-kN-FrK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem image="nav_scan" id="HMJ-d0-27B">
+                    <color key="tintColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="scanQRCode:" destination="NFk-Vr-nsf" id="ujs-Pd-r3n"/>
+                    </connections>
+                </barButtonItem>
                 <barButtonItem image="switchWallet" id="C0H-hr-lhb">
+                    <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="uOJ-eb-Ope"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Item" image="walletQRCode" id="26M-ch-g5f">
+                    <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <segue destination="7a9-kY-o3s" kind="show" identifier="requestPayment" id="Ayf-xQ-gJ4"/>
                     </connections>
@@ -555,6 +564,7 @@
     <resources>
         <image name="add_asset" width="93" height="23"/>
         <image name="copy_address" width="14" height="14"/>
+        <image name="nav_scan" width="44" height="44"/>
         <image name="switchWallet" width="24" height="24"/>
         <image name="switch_wallet_icon" width="24" height="20"/>
         <image name="walletQRCode" width="22" height="22"/>

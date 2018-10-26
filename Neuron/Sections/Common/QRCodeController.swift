@@ -16,16 +16,15 @@ protocol QRCodeControllerDelegate: class {
 class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     weak var delegate: QRCodeControllerDelegate?
+    let shared = HRQRCodeScanTool()
 
     func scanQRCodeFaild(error: HRQRCodeTooError) {
-        print(error)
     }
 
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
-    let shared = HRQRCodeScanTool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
