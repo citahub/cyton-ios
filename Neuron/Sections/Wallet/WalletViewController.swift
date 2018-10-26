@@ -12,7 +12,7 @@ import web3swift
 import BigInt
 import PullToRefresh
 
-class WalletViewController: UITableViewController, SelectWalletControllerDelegate {
+class WalletViewController: UITableViewController, SelectWalletControllerDelegate, QRCodeControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
@@ -96,18 +96,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     @IBAction func scanQRCode(_ sender: Any) {
         let controller = QRCodeController()
-        controller.completion = { [weak self](result) in
-            guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.filter({ (model) -> Bool in
-                return model.symbol == "ETH"
-            }).first else {
-                return
-            }
-            let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
-            controller.tokenModel = token
-            controller.tokenType = .ethereumToken
-            controller.didBackQRCodeMessage(codeResult: result)
-            self?.navigationController?.pushViewController(controller, animated: true)
-        }
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 
@@ -185,6 +174,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         icon.image = UIImage(data: walletModel.iconData)
     }
 
+    // MAKR: - UITableView Delegate
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if #available(iOS 11.0, *) {
             return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom
@@ -199,6 +189,20 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tabHeader.frame.height
+    }
+
+    // MARK: - QRCodeControllerDelegate
+    func didBackQRCodeMessage(codeResult: String) {
+        guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.filter({ (model) -> Bool in
+            return model.symbol == "ETH"
+        }).first else {
+            return
+        }
+        let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        controller.tokenModel = token
+        controller.tokenType = .ethereumToken
+        controller.didBackQRCodeMessage(codeResult: result)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     deinit {
