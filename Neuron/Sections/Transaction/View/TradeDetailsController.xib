@@ -27,14 +27,14 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="voM-Uk-0uY">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="66"/>
+                    <rect key="frame" x="0.0" y="64" width="375" height="66"/>
                     <color key="backgroundColor" red="0.14901960784313725" green="0.30588235294117649" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="66" id="2qS-W8-C69"/>
                     </constraints>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hds-kn-c5O">
-                    <rect key="frame" x="15" y="0.0" width="345" height="110"/>
+                    <rect key="frame" x="15" y="64" width="345" height="110"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="igH-rg-oHH">
                             <rect key="frame" x="18" y="27" width="60" height="60"/>
@@ -94,7 +94,7 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="65" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="8iM-k3-GBa">
-                    <rect key="frame" x="0.0" y="110" width="375" height="557"/>
+                    <rect key="frame" x="0.0" y="174" width="375" height="493"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <view key="tableHeaderView" contentMode="scaleToFill" id="yNC-PD-aBC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
@@ -136,10 +136,10 @@
                 <constraint firstItem="voM-Uk-0uY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="AoD-Xx-Ja9"/>
                 <constraint firstItem="hds-kn-c5O" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ApF-5s-8tW"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8iM-k3-GBa" secondAttribute="trailing" id="MLr-S8-VFe"/>
-                <constraint firstItem="hds-kn-c5O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Mp9-pz-Oux"/>
+                <constraint firstItem="hds-kn-c5O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="Mp9-pz-Oux"/>
                 <constraint firstItem="8iM-k3-GBa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XKO-Ox-WBV"/>
                 <constraint firstItem="8iM-k3-GBa" firstAttribute="top" secondItem="hds-kn-c5O" secondAttribute="bottom" id="aaz-iH-1OX"/>
-                <constraint firstItem="voM-Uk-0uY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="hYN-FX-EGe"/>
+                <constraint firstItem="voM-Uk-0uY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="hYN-FX-EGe"/>
                 <constraint firstItem="voM-Uk-0uY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nwo-2z-W89"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8iM-k3-GBa" secondAttribute="bottom" id="sbp-vV-Nnz"/>
             </constraints>
