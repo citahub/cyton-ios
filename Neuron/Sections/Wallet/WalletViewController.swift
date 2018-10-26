@@ -96,7 +96,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     @IBAction func scanQRCode(_ sender: Any) {
         let controller = QRCodeController()
-        controller.complection = { [weak self](result) in
+        controller.completion = { [weak self](result) in
             for token in WalletRealmTool.getCurrentAppModel().nativeTokenList {
                 if token.symbol == "ETH" {
                     let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
