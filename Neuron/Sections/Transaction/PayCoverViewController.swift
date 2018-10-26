@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Nervos
+import AppChain
 import web3swift
 import struct BigInt.BigUInt
 
