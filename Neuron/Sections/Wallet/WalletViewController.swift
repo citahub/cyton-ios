@@ -19,6 +19,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     @IBOutlet weak var totleCurrencyLabel: UILabel!
     @IBOutlet weak var currencyBalanceLabel: UILabel!
     @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
+    @IBOutlet var scanBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var requestPaymentButtonItem: UIBarButtonItem!
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
@@ -93,6 +94,23 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         copyAddress()
     }
 
+    @IBAction func scanQRCode(_ sender: Any) {
+        let controller = QRCodeController()
+        controller.complection = { [weak self](result) in
+            for token in WalletRealmTool.getCurrentAppModel().nativeTokenList {
+                if token.symbol == "ETH" {
+                    let controller: PaymentViewController = UIStoryboard(name: .transaction).instantiateViewController()
+                    controller.tokenModel = token
+                    controller.tokenType = .ethereumToken
+                    controller.didBackQRCodeMessage(codeResult: result)
+                    self?.navigationController?.pushViewController(controller, animated: true)
+                    return
+                }
+            }
+        }
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
     @IBAction func unwind(seque: UIStoryboardSegue) { }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -117,10 +135,12 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     private func updateNavigationBar() {
         if isHeaderViewHidden {
+            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
             navigationItem.title = WalletRealmTool.getCurrentAppModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
+            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
             navigationItem.titleView = titleView
         }

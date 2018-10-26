@@ -15,6 +15,7 @@ protocol QRCodeControllerDelegate: class {
 class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     weak var delegate: QRCodeControllerDelegate?
+    var complection: ((String) -> Void)?
 
     func scanQRCodeFaild(error: HRQRCodeTooError) {
         print(error)
@@ -23,6 +24,7 @@ class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
+        complection?(resultStrs.first!)
     }
     let share = HRQRCodeScanTool()
 
