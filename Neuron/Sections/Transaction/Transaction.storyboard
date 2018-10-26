@@ -1105,10 +1105,10 @@
             </objects>
             <point key="canvasLocation" x="2533.5999999999999" y="1150.9745127436283"/>
         </scene>
-        <!--Nervos Quote View Controller-->
+        <!--Nervos Quota View Controller-->
         <scene sceneID="6ML-3X-H4w">
             <objects>
-                <viewController storyboardIdentifier="nervosQuoteViewController" id="38S-RF-fau" customClass="NervosQuoteViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="nervosQuotaViewController" id="38S-RF-fau" customClass="NervosQuotaViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ag2-M6-Fn1">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="215"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -60,7 +60,7 @@
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD5214A6617007CB446 /* SimpleGasViewController.swift */; };
 		89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD7214A6971007CB446 /* EthGasViewController.swift */; };
-		89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */; };
+		89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */; };
 		89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DDB214A6CBE007CB446 /* PaymentViewController.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
 		8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* UIStyle.swift */; };
@@ -76,6 +76,7 @@
 		8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */; };
 		8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C2A120B41BCA00C3103E /* SelectWalletController.swift */; };
 		892A1985215A55F400B2293D /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A1984215A55F400B2293D /* Double+Extension.swift */; };
+		893532F4217DECF400404C0B /* MessageSignShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 893532F3217DECF400404C0B /* MessageSignShowViewController.swift */; };
 		8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */; };
 		8935BA57216EEDEC00C37263 /* WKWebViewConfigConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */; };
 		8935BA59216EFCE700C37263 /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA58216EFCE700C37263 /* neuron.js */; };
@@ -85,7 +86,6 @@
 		8951A84C2170A5CC00043228 /* DAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951A84B2170A5CC00043228 /* DAppAction.swift */; };
 		8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955580420DCA7F700FC92D8 /* PasswordValidator.swift */; };
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
-		8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A17C20BE7F750086848F /* MessageSignController.xib */; };
 		8964A18020BE94F70086848F /* NEPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17F20BE94F70086848F /* NEPickerView.swift */; };
 		8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18520BFE6850086848F /* ImportWalletController.swift */; };
 		8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18920BFEF950086848F /* ImportTextViewCell.swift */; };
@@ -101,6 +101,7 @@
 		896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043520AE69C5002CFF6A /* LaunchScreen.storyboard */; };
 		896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044120AE69C5002CFF6A /* NeuronTests.swift */; };
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
+		89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89733043217ED041001B8D93 /* ETHSignMessageService.swift */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
@@ -132,6 +133,8 @@
 		899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */; };
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
 		899CADA320E0EDAC00FF9D27 /* WalletCryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */; };
+		89A196192175D9C800BD5FA4 /* DAppDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */; };
+		89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */; };
 		89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A21214FA89A00900976 /* PayCoverViewController.swift */; };
 		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
 		89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */; };
@@ -151,7 +154,6 @@
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
 		89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */; };
 		89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6B20BD421E00007EC1 /* ContractController.swift */; };
-		89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C6C20BD421E00007EC1 /* ContractController.xib */; };
 		89C25C7120BE369100007EC1 /* ContractTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */; };
 		89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */; };
 		89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */; };
@@ -270,7 +272,7 @@
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
 		89230DD5214A6617007CB446 /* SimpleGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGasViewController.swift; sourceTree = "<group>"; };
 		89230DD7214A6971007CB446 /* EthGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGasViewController.swift; sourceTree = "<group>"; };
-		89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuoteViewController.swift; sourceTree = "<group>"; };
+		89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuotaViewController.swift; sourceTree = "<group>"; };
 		89230DDB214A6CBE007CB446 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 		8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Sub2TableViewCell.xib; sourceTree = "<group>"; };
 		8928C2A120B41BCA00C3103E /* SelectWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWalletController.swift; sourceTree = "<group>"; };
 		892A1984215A55F400B2293D /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		893532F3217DECF400404C0B /* MessageSignShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignShowViewController.swift; sourceTree = "<group>"; };
 		8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfigConstants.swift; sourceTree = "<group>"; };
 		8935BA58216EFCE700C37263 /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
@@ -296,7 +299,6 @@
 		8951A84B2170A5CC00043228 /* DAppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppAction.swift; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
-		8964A17C20BE7F750086848F /* MessageSignController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageSignController.xib; sourceTree = "<group>"; };
 		8964A17F20BE94F70086848F /* NEPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEPickerView.swift; sourceTree = "<group>"; };
 		8964A18520BFE6850086848F /* ImportWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
 		8964A18920BFEF950086848F /* ImportTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTextViewCell.swift; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 		896D044820AE69C5002CFF6A /* NeuronUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeuronUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D044C20AE69C5002CFF6A /* NeuronUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronUITests.swift; sourceTree = "<group>"; };
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89733043217ED041001B8D93 /* ETHSignMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHSignMessageService.swift; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
@@ -349,6 +352,8 @@
 		899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNativeTokenService.swift; sourceTree = "<group>"; };
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
 		899CADA220E0EDAC00FF9D27 /* WalletCryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCryptoService.swift; sourceTree = "<group>"; };
+		89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDataHandle.swift; sourceTree = "<group>"; };
+		89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppCommand.swift; sourceTree = "<group>"; };
 		89A45A21214FA89A00900976 /* PayCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCoverViewController.swift; sourceTree = "<group>"; };
 		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
 		89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAmountViewController.swift; sourceTree = "<group>"; };
@@ -368,7 +373,6 @@
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronProgressView.swift; sourceTree = "<group>"; };
 		89C25C6B20BD421E00007EC1 /* ContractController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractController.swift; sourceTree = "<group>"; };
-		89C25C6C20BD421E00007EC1 /* ContractController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractController.xib; sourceTree = "<group>"; };
 		89C25C6F20BE369100007EC1 /* ContractTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractTableViewCell.swift; sourceTree = "<group>"; };
 		89C25C7020BE369100007EC1 /* ContractTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContractTableViewCell.xib; sourceTree = "<group>"; };
 		89C25C7320BE3DC100007EC1 /* ConTractLastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConTractLastTableViewCell.swift; sourceTree = "<group>"; };
@@ -571,6 +575,7 @@
 		8913437620C8E2A500A17AEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				89733042217ED022001B8D93 /* DAppService */,
 				6E90D06721704C1100B98363 /* SensorsAnalytics */,
 				89C6145A2141036B00DC3DF4 /* SettingsService */,
 				89B296E720F4CA57008558A7 /* Transaction */,
@@ -657,6 +662,11 @@
 				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
 				89B895B020F8B0CD00B9468B /* BrowserViewController.swift */,
 				8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */,
+				89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */,
+				89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */,
+				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
+				8964A17B20BE7F750086848F /* MessageSignController.swift */,
+				893532F3217DECF400404C0B /* MessageSignShowViewController.swift */,
 				8928C25020AEA6A600C3103E /* View */,
 			);
 			path = Dapp;
@@ -704,10 +714,6 @@
 			isa = PBXGroup;
 			children = (
 				89C25C6A20BD41D800007EC1 /* TableviewCell */,
-				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
-				89C25C6C20BD421E00007EC1 /* ContractController.xib */,
-				8964A17B20BE7F750086848F /* MessageSignController.swift */,
-				8964A17C20BE7F750086848F /* MessageSignController.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -855,6 +861,14 @@
 			path = NeuronUITests;
 			sourceTree = "<group>";
 		};
+		89733042217ED022001B8D93 /* DAppService */ = {
+			isa = PBXGroup;
+			children = (
+				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
+			);
+			path = DAppService;
+			sourceTree = "<group>";
+		};
 		898A19F220B53EF500ECB465 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -877,7 +891,7 @@
 				89230DDB214A6CBE007CB446 /* PaymentViewController.swift */,
 				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
 				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
-				89230DD9214A69B0007CB446 /* NervosQuoteViewController.swift */,
+				89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */,
 				89A45A21214FA89A00900976 /* PayCoverViewController.swift */,
 				89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */,
 				89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */,
@@ -1142,12 +1156,10 @@
 				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
 				89C3BF072134E3F200872BD0 /* AddWallet.storyboard in Resources */,
-				8964A17E20BE7F750086848F /* MessageSignController.xib in Resources */,
 				8935BA5B216EFCF000C37263 /* init.js in Resources */,
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
 				89C25C7620BE3DC100007EC1 /* ConTractLastTableViewCell.xib in Resources */,
 				89F7966F213BD5680064808A /* Assets.storyboard in Resources */,
-				89C25C6E20BD421E00007EC1 /* ContractController.xib in Resources */,
 				6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */,
 				1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */,
 				89C25C7220BE369100007EC1 /* ContractTableViewCell.xib in Resources */,
@@ -1205,6 +1217,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Neuron/Pods-Neuron-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-Synchronous/Alamofire_Synchronous.framework",
+				"${BUILT_PRODUCTS_DIR}/AppChainSwift/AppChain.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
@@ -1212,7 +1225,6 @@
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
-				"${BUILT_PRODUCTS_DIR}/NervosSwift/Nervos.framework",
 				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefresher/PullToRefresh.framework",
@@ -1238,6 +1250,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire_Synchronous.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AppChain.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
@@ -1245,7 +1258,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nervos.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefresh.framework",
@@ -1339,6 +1351,7 @@
 				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */,
 				6E867E07216C54B500BD6FE5 /* UIResponder+Extension.swift in Sources */,
+				89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,
 				8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */,
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
@@ -1347,6 +1360,7 @@
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
 				899CADA320E0EDAC00FF9D27 /* WalletCryptoService.swift in Sources */,
 				89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */,
+				893532F4217DECF400404C0B /* MessageSignShowViewController.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */,
@@ -1384,6 +1398,7 @@
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
 				6E876843218023520032EBCE /* CoinMarketCap.swift in Sources */,
 				898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */,
+				89A196192175D9C800BD5FA4 /* DAppDataHandle.swift in Sources */,
 				89C25C7520BE3DC100007EC1 /* ConTractLastTableViewCell.swift in Sources */,
 				89D84CEB2148C03B006B0287 /* NFTHeaderReusableView.swift in Sources */,
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
@@ -1442,7 +1457,8 @@
 				89D4AC2F20D59F270097E02B /* ImportError.swift in Sources */,
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
-				89230DDA214A69B0007CB446 /* NervosQuoteViewController.swift in Sources */,
+				89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */,
+				89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */,
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 
 protocol ConfirmSendViewControllerDelegate: class {
     func closePayCoverView()
-    func sendTransaction(confirmSendViewController: ConfirmSendViewController, password: String)
+    func confirmPassword(confirmSendViewController: ConfirmSendViewController, password: String)
 }
 
 class ConfirmSendViewController: UIViewController {
@@ -29,7 +29,7 @@ class ConfirmSendViewController: UIViewController {
 
     @IBAction func clickSendTransactionButton(_ sender: UIButton) {
         if passwordCorrect() {
-            delegate?.sendTransaction(confirmSendViewController: self, password: password)
+            delegate?.confirmPassword(confirmSendViewController: self, password: password)
         }
     }
 
