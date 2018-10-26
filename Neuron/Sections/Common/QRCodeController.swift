@@ -25,7 +25,7 @@ class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
         self.navigationController?.popViewController(animated: true)
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
-    let share = HRQRCodeScanTool()
+    let shared = HRQRCodeScanTool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
