@@ -31,11 +31,11 @@ class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
         super.viewDidLoad()
         title = "扫描二维码"
         view.backgroundColor = UIColor.black
-        share.delegate  = self
+        shared.delegate  = self
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self](result) in
             guard let self = self else { return }
             if result {
-                self.share.beginScanInView(view: self.view)
+                self.shared.beginScanInView(view: self.view)
             } else {
                 let alert = UIAlertController(title: "", message: "扫描二维码需要相机访问权限", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "开启", style: .default, handler: { (_) in

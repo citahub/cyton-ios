@@ -160,7 +160,7 @@ extension PaymentViewController: PayCoverViewControllerDelegate {
 }
 
 extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewControllerDelegate, NervosQuotaViewControllerDelegate {
-    func getTransactionCostGas(gas: String) {
+    func getTransactionGasCost(gas: String) {
         gasCost = gas
     }
 

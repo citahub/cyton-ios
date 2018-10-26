@@ -13,7 +13,7 @@ import AppChain
 
 protocol NervosQuotaViewControllerDelegate: class {
     func getNervosTransactionQuota(nervosQuotaViewController: NervosQuotaViewController, quota: BigUInt, data: Data)
-    func getTransactionCostGas(gas: String)
+    func getTransactionGasCost(gas: String)
 }
 
 class NervosQuotaViewController: UIViewController {
@@ -29,13 +29,13 @@ class NervosQuotaViewController: UIViewController {
         super.viewDidLoad()
         quotaTextField.delegate = self
         quotaTextField.text = quota.description
-        getNervosTransactionCosted(with: quota)
+        getNervosTransactionGasCost(with: quota)
         delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: data)
     }
 
-    func getNervosTransactionCosted(with quotaInput: BigUInt) {
+    func getNervosTransactionGasCost(with quotaInput: BigUInt) {
         gasLabel.text = Web3Utils.formatToEthereumUnits(quotaInput, toUnits: .eth, decimals: 4, fallbackToScientific: false)! + " \(tokenModel.symbol)"
-        delegate?.getTransactionCostGas(gas: gasLabel.text!)
+        delegate?.getTransactionGasCost(gas: gasLabel.text!)
     }
 }
 
@@ -63,7 +63,7 @@ extension NervosQuotaViewController: UITextFieldDelegate, UITextViewDelegate {
             return
         }
         quota = BigUInt(quotaInput)!
-        getNervosTransactionCosted(with: quota)
+        getNervosTransactionGasCost(with: quota)
         delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: data)
     }
 
