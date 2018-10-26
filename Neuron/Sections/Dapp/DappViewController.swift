@@ -28,9 +28,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func didAddSubLayout() {
-        webView = WKWebView.init(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
-        let url = URL(string: "http://dapp.cryptape.com")
-        let request = URLRequest.init(url: url!)
+        webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
+        let url = URL(string: "https://dapp.cryptape.com")!
+        let request = URLRequest(url: url)
 
         var js = ""
         if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
@@ -67,7 +67,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     //wkwebview
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .linkActivated /*|| navigationAction.request.url!.absoluteString.contains("/dapps/") */ {
+        if navigationAction.navigationType == .linkActivated || navigationAction.request.url!.absoluteString.contains("/dapps/") {
             decisionHandler(.cancel)
             let browserViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "browserViewController") as! BrowserViewController
             browserViewController.requestUrlStr = navigationAction.request.url?.absoluteString ?? ""

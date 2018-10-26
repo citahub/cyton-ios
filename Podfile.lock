@@ -6,7 +6,6 @@ PODS:
     - SipHash (~> 1.2)
   - CryptoSwift (0.12.0)
   - EFQRCode (4.3.0)
-  - FWPopupView (3.0.8)
   - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
   - KeychainSwift (12.0.0)
@@ -69,7 +68,6 @@ DEPENDENCIES:
   - Alamofire
   - Alamofire-Synchronous
   - EFQRCode
-  - FWPopupView
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
   - KeychainSwift
@@ -92,7 +90,6 @@ SPEC REPOS:
     - BigInt
     - CryptoSwift
     - EFQRCode
-    - FWPopupView
     - IGIdenticon
     - IQKeyboardManagerSwift
     - KeychainSwift
@@ -144,7 +141,6 @@ SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 1c07ca50843dd48bc54e6ea53d7a4dba3b645716
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
-  FWPopupView: e0f7e8fa4e411f97984bfa8440ff5ce1cfa8da1f
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   KeychainSwift: d5e776578587ee5958ce36601df22f168f65138a
@@ -171,6 +167,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: a328eb6e50c8d0e20d9276e104e0f43e4113d305
+PODFILE CHECKSUM: 7132217a38e27a0ce47f8e4e36f4a1f8f9978528
 
 COCOAPODS: 1.5.3

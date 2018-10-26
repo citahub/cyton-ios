@@ -23,7 +23,6 @@ target 'Neuron' do
   pod 'Alamofire'
   pod 'Alamofire-Synchronous'
   pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
-  pod 'FWPopupView'
   
   target 'NeuronTests' do
     inherit! :search_paths

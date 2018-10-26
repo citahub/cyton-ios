@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import FWPopupView
 
 class BrowserViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var backButton: UIButton!
@@ -43,23 +42,6 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         return config
     }()
 
-    lazy var menuView: FWMenuView = {
-        let titles = ["收藏", "刷新"]
-        let menuProperty = FWMenuViewProperty()
-        menuProperty.popupCustomAlignment = .topRight
-        menuProperty.popupAnimationType = .scale
-        menuProperty.maskViewColor = UIColor(white: 0, alpha: 0.2)
-        menuProperty.touchWildToHide = "1"
-        menuProperty.popupViewEdgeInsets = UIEdgeInsets(top: StatusBar.statusBarHeight + StatusBar.navigationBarHeight, left: 0, bottom: 0, right: 8)
-        menuProperty.animationDuration = 0.2
-        menuProperty.popupArrowVertexScaleX = 1
-        menuProperty.popupArrowStyle = .round
-        let menuView = FWMenuView.menu(itemTitles: titles, itemBlock: { (_, index, _) in
-            
-        }, property: menuProperty)
-        return menuView
-    }()
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -72,7 +54,7 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         view.addSubview(progressView)
         webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         let url = URL(string: getRequestStr(requestStr: requestUrlStr))
-        let request = URLRequest.init(url: url!)
+        let request = URLRequest(url: url!)
         webview.load(request)
     }
 
@@ -83,7 +65,7 @@ class BrowserViewController: UIViewController, WKUIDelegate {
             return "https://" + requestStr
         }
     }
-
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.alpha = 1.0
@@ -111,17 +93,15 @@ class BrowserViewController: UIViewController, WKUIDelegate {
     }
 
     @IBAction func didClickCollectionButton(_ sender: UIButton) {
-        menuView.show()
     }
 
     func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
-        let script: String = {
-            if error == nil {
-                return "onSignSuccessful(\(id), \"\(value)\")"
-            } else {
-                return "onSignError(\(id), \"\(error!)\")"
-            }
-        }()
+        let script: String
+        if error == nil {
+            script = "onSignSuccessful(\(id), \"\(value)\")"
+        } else {
+            script = "onSignError(\(id), \"\(error!)\")"
+        }
         webview.evaluateJavaScript(script, completionHandler: nil)
     }
 }
@@ -136,7 +116,6 @@ extension BrowserViewController: WKScriptMessageHandler {
                 collectionButton.isHidden = true
             }
         } else {
-            collectionButton.isHidden = false
             let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
             switch dappCommonModel.name {
             case .sendTransaction, .signTransaction:
@@ -180,6 +159,7 @@ extension BrowserViewController: WKNavigationDelegate {
             guard let link = manifest else {
                 return
             }
+            self.collectionButton.isHidden = false
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }

@@ -25,7 +25,7 @@ class MessageSignController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         view.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
-        view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0)
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -33,7 +33,7 @@ class MessageSignController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
         }, completion: { (_) in
-            self.view.backgroundColor = UIColor.init(red: 0, green: 0, blue: 0, alpha: 0.5)
+            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         })
     }
 
@@ -61,17 +61,19 @@ class MessageSignController: UIViewController {
 
     func getTokenModel() {
         let appModel = WalletRealmTool.getCurrentAppModel()
-        appModel.nativeTokenList.forEach { (tokenModel) in
-            switch chainType {
-            case .appChain:
-                if dappCommonModel.appChain!.chainId == Int(tokenModel.chainId) {
-                    self.tokenModel = tokenModel
-                }
-            case .eth:
-                if dappCommonModel.eth!.chainId == Int(tokenModel.chainId) {
-                    self.tokenModel = tokenModel
-                }
+        switch chainType {
+        case .appChain:
+            let result = appModel.nativeTokenList.filter { return Int($0.chainId) == self.dappCommonModel.appChain!.chainId}
+            guard let model = result.first else {
+                return
             }
+            self.tokenModel = model
+        case .eth:
+            let result = appModel.nativeTokenList.filter { return Int($0.chainId) == self.dappCommonModel.eth!.chainId}
+            guard let model = result.first else {
+                return
+            }
+            self.tokenModel = model
         }
     }
 
