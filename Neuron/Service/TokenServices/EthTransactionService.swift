@@ -102,4 +102,23 @@ class EthTransactionService {
             }
         }
     }
+
+    func sign(password: String, transaction: TransactionIntermediate, address: String, completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+        var transactionIntermediate = transaction
+        DispatchQueue.global().async {
+            guard let keyStoreStr = try? WalletCryptoService.getKeystoreForCurrentWallet(password: password) else {
+                DispatchQueue.main.async {
+                    completion(SendEthResult.error(SendEthError.invalidPassword))
+                }
+                return
+            }
+            let web3 = Web3Network.getWeb3()
+            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
+            try? Web3Signer.signIntermediate(intermediate: &transactionIntermediate, keystore: KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]), account: EthereumAddress(address)!, password: password)
+            DispatchQueue.main.async {
+                completion(SendEthResult.success(transactionIntermediate))
+            }
+        }
+    }
+
 }

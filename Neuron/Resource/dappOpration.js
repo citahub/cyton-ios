@@ -1,3 +1,3 @@
 function touchSearchbar(){
-    window.webkit.messageHandlers.pushSearchView.postMessage({body: 'zhurusuccess'})
+    window.webkit.messageHandlers.pushSearchView.postMessage({body: ''})
 }
