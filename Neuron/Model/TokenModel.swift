@@ -39,6 +39,28 @@ class TokenModel: Object, Decodable {
     }
     var logo: Logo?
 
+    enum `Type`: String, Decodable {
+        case erc20
+        case ethereum
+        case nervos
+        case nervosErc20
+    }
+    var type: Type {
+        if isNativeToken {
+            if chainId == NativeChainId.ethMainnetChainId {
+                return .ethereum
+            } else {
+                if address != "" {
+                    return .nervosErc20
+                } else {
+                    return .nervos
+                }
+            }
+        } else {
+            return .erc20
+        }
+    }
+
     enum CodingKeys: String, CodingKey {
         case name
         case address
@@ -52,7 +74,7 @@ extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
         return lhs.address == rhs.address
     }
-    
+
     override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? TokenModel else { return false }
         return object.address == address

@@ -13,7 +13,13 @@ extension WKWebViewConfiguration {
 
     static func make(for server: DAppServer, in messageHandler: WKScriptMessageHandler) -> WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        let walletModel = appModel.currentWallet!
+        var accounts: [String] = []
+        appModel.wallets.forEach { (model) in
+            accounts.append(model.address)
+        }
+
         var js = ""
         if let neuronPath = Bundle.main.path(forResource: "neuron", ofType: "js") {
             do {
@@ -21,10 +27,11 @@ extension WKWebViewConfiguration {
             } catch { }
         }
 
-        js = """
+        js += """
              const addressHex = "\(walletModel.address)";
              const rpcURL = "\(server.rpcUrl)";
              const chainID = "\(server.chainID)";
+             const accounts = "\(accounts.joined(separator: ","))"
              """
         if let initPath = Bundle.main.path(forResource: "init", ofType: "js") {
             do {
@@ -36,7 +43,9 @@ extension WKWebViewConfiguration {
         config.userContentController.add(messageHandler, name: Method.signPersonalMessage.rawValue)
         config.userContentController.add(messageHandler, name: Method.signMessage.rawValue)
         config.userContentController.add(messageHandler, name: Method.signTypedMessage.rawValue)
+        config.userContentController.add(messageHandler, name: "getTitleBar")
         config.userContentController.addUserScript(userScript)
+        config.preferences.javaScriptEnabled = true
         return config
     }
 }

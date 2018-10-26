@@ -25,6 +25,11 @@ enum SendEthResult<T> {
     case error(Error)
 }
 
+enum SignMessageResult<T> {
+    case success(T)
+    case error(Error)
+}
+
 enum SendEthError: Error {
     case invalidDestinationAddress
     case invalidAmountFormat

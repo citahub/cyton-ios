@@ -8,35 +8,7 @@
 
 import UIKit
 
-extension UINavigationBar {
-    var isDarkStyle: Bool {
-        set {
-            if newValue {
-                titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-                barTintColor = AppColor.newThemeColor
-                tintColor = .white
-                barStyle = .black
-                shadowImage = UIImage()
-            } else {
-                titleTextAttributes = [NSAttributedString.Key.foregroundColor: ColorFromString(hex: "#242b43")]
-                barTintColor = .white
-                tintColor = ColorFromString(hex: "#333333")
-                barStyle = .default
-                shadowImage = nil
-            }
-        }
-        get {
-            return barStyle == .black
-        }
-    }
-}
-
 class BaseNavigationController: UINavigationController {
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationBar.isTranslucent = false
-    }
-
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         viewController.hidesBottomBarWhenPushed = viewControllers.count > 0
         super.pushViewController(viewController, animated: animated)

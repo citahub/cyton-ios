@@ -1,5 +1,5 @@
 //
-//  NervosQuoteViewController.swift
+//  NervosQuotaViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/9/13.
@@ -9,28 +9,28 @@
 import UIKit
 import RSKPlaceholderTextView
 import BigInt
-import Nervos
+import AppChain
 
-protocol NervosQuoteViewControllerDelegate: class {
-    func getNervosTransactionQuota(nervosQuoteViewController: NervosQuoteViewController, quota: BigUInt, data: Data)
+protocol NervosQuotaViewControllerDelegate: class {
+    func getNervosTransactionQuota(nervosQuotaViewController: NervosQuotaViewController, quota: BigUInt, data: Data)
     func getTransactionCostGas(gas: String)
 }
 
-class NervosQuoteViewController: UIViewController {
+class NervosQuotaViewController: UIViewController {
     @IBOutlet weak var gasLabel: UILabel!
     @IBOutlet weak var quotaTextField: UITextField!
     @IBOutlet weak var hexTextView: RSKPlaceholderTextView!
     var tokenModel = TokenModel()
     var quota = BigUInt(1000000)
     var data = Data()
-    weak var delegate: NervosQuoteViewControllerDelegate?
+    weak var delegate: NervosQuotaViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         quotaTextField.delegate = self
         quotaTextField.text = quota.description
         getNervosTransactionCosted(with: quota)
-        delegate?.getNervosTransactionQuota(nervosQuoteViewController: self, quota: quota, data: data)
+        delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: data)
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) {
@@ -39,7 +39,7 @@ class NervosQuoteViewController: UIViewController {
     }
 }
 
-extension NervosQuoteViewController: UITextFieldDelegate, UITextViewDelegate {
+extension NervosQuotaViewController: UITextFieldDelegate, UITextViewDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard CharacterSet(charactersIn: "0123456789.").isSuperset(of: CharacterSet(charactersIn: string)) else {
             return false
@@ -64,7 +64,7 @@ extension NervosQuoteViewController: UITextFieldDelegate, UITextViewDelegate {
         }
         quota = BigUInt(quotaInput)!
         getNervosTransactionCosted(with: quota)
-        delegate?.getNervosTransactionQuota(nervosQuoteViewController: self, quota: quota, data: data)
+        delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: data)
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -75,6 +75,6 @@ extension NervosQuoteViewController: UITextFieldDelegate, UITextViewDelegate {
             return
         }
         data = tempData
-        delegate?.getNervosTransactionQuota(nervosQuoteViewController: self, quota: quota, data: tempData)
+        delegate?.getNervosTransactionQuota(nervosQuotaViewController: self, quota: quota, data: tempData)
     }
 }

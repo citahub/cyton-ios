@@ -8,12 +8,13 @@
 
 import Foundation
 import Alamofire
-import Nervos
+import AppChain
 
 struct DAppAction {
     enum Error: Swift.Error {
         case manifestRequestFailed
         case emptyChainHosts
+        case emptyTX
     }
 
     func dealWithManifestJson(with link: String) {
@@ -21,7 +22,10 @@ struct DAppAction {
             do {
                 guard let responseData = response.data else { throw Error.manifestRequestFailed }
                 let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
-                try? self.getMetaDataForDAppChain(with: manifest!)
+                guard let model = manifest else {
+                    return
+                }
+                try? self.getMetaDataForDAppChain(with: model)
             } catch {
 
             }
@@ -72,7 +76,6 @@ struct DAppAction {
 struct ManifestModel: Decodable {
     var shortName: String
     var name: String
-    var icon: String
     var startUrl: String
     var display: String
     var themeColor: String
@@ -84,7 +87,6 @@ struct ManifestModel: Decodable {
     enum CodingKeys: String, CodingKey {
         case shortName = "short_name"
         case name
-        case icon
         case startUrl = "start_url"
         case display
         case themeColor = "theme_color"
@@ -98,7 +100,6 @@ struct ManifestModel: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         shortName = try values.decode(String.self, forKey: .shortName)
         name = try values.decode(String.self, forKey: .name)
-        icon = try values.decode(String.self, forKey: .icon)
         startUrl = try values.decode(String.self, forKey: .startUrl)
         display = try values.decode(String.self, forKey: .display)
         themeColor = try values.decode(String.self, forKey: .themeColor)
@@ -107,4 +108,14 @@ struct ManifestModel: Decodable {
         chainSet = try values.decode([String: String].self, forKey: .chainSet)
         entry = try values.decode(String.self, forKey: .entry)
     }
+}
+
+struct TitleBarModel: Decodable {
+    var right: RightBarModel?
+}
+
+struct RightBarModel: Decodable {
+    var isShow: Bool?
+    var action: String?
+    var type: String?
 }

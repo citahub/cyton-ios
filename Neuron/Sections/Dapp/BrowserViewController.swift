@@ -12,6 +12,8 @@ import WebKit
 class BrowserViewController: UIViewController, WKUIDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var collectionButton: UIButton!
+    private var messageSignController: MessageSignController!
     var requestUrlStr = ""
 
     lazy private var webview: WKWebView = {
@@ -19,6 +21,9 @@ class BrowserViewController: UIViewController, WKUIDelegate {
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
             configuration: self.config
         )
+        let infoDictionary = Bundle.main.infoDictionary!
+        let majorVersion = infoDictionary["CFBundleShortVersionString"]
+        webview.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webview.navigationDelegate = self
         webview.uiDelegate = self
         return webview
@@ -37,24 +42,30 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         return config
     }()
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.navigationBar.isTranslucent = false
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(webview)
         view.addSubview(progressView)
         webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         let url = URL(string: getRequestStr(requestStr: requestUrlStr))
-        let request = URLRequest.init(url: url!)
+        let request = URLRequest(url: url!)
         webview.load(request)
     }
 
     func getRequestStr(requestStr: String) -> String {
-        if requestUrlStr.hasPrefix("http") {
+        if requestUrlStr.hasPrefix("http://") || requestUrlStr.hasPrefix("https://") {
             return requestStr
         } else {
             return "https://" + requestStr
         }
     }
-
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.alpha = 1.0
@@ -80,11 +91,58 @@ class BrowserViewController: UIViewController, WKUIDelegate {
     @IBAction func dudCkucjCloseButton(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+
+    @IBAction func didClickCollectionButton(_ sender: UIButton) {
+    }
+
+    func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
+        let script: String
+        if error == nil {
+            script = "onSignSuccessful(\(id), \"\(value)\")"
+        } else {
+            script = "onSignError(\(id), \"\(error!)\")"
+        }
+        webview.evaluateJavaScript(script, completionHandler: nil)
+    }
 }
 
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        if message.name == "getTitleBar" {
+            let model = DAppDataHandle.fromTitleBarMessage(message: message)
+            if (model.right?.isShow)! {
+                collectionButton.isHidden = false
+            } else {
+                collectionButton.isHidden = true
+            }
+        } else {
+            let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
+            switch dappCommonModel.name {
+            case .sendTransaction, .signTransaction:
+                pushTransaction(dappCommonModel: dappCommonModel)
+            case .signPersonalMessage, .signMessage, .signTypedMessage:
+                pushSignMessage(dappCommonModel: dappCommonModel)
+            case .unknown: break
+            }
+        }
+    }
+}
 
+extension BrowserViewController {
+    private func pushTransaction(dappCommonModel: DAppCommonModel) {
+        let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
+        contractController.delegate = self
+        contractController.requestAddress = webview.url!.absoluteString
+        contractController.dappCommonModel = dappCommonModel
+        navigationController?.pushViewController(contractController, animated: true)
+    }
+
+    private func pushSignMessage(dappCommonModel: DAppCommonModel) {
+        messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as? MessageSignController
+        messageSignController.delegate = self
+        messageSignController.dappCommonModel = dappCommonModel
+        messageSignController.requestUrlString = webview.url!.absoluteString
+        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
     }
 }
 
@@ -96,10 +154,12 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             closeButton.isHidden = true
         }
-        webView.evaluateJavaScript("document.querySelector('head').querySelector('link[rel=manifest]').href;") { (manifest, _) in
+        let js = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+        webView.evaluateJavaScript(js) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
+            self.collectionButton.isHidden = false
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }
@@ -128,5 +188,14 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             decisionHandler(.allow)
         }
+    }
+}
+
+extension BrowserViewController: ContractControllerDelegate, MessageSignControllerDelegate {
+    func messageSignCallBackWebView(id: Int, value: String, error: DAppError?) {
+        evaluateJavaScryptWebView(id: id, value: value, error: error)
+    }
+    func callBackWebView(id: Int, value: String, error: DAppError?) {
+        evaluateJavaScryptWebView(id: id, value: value, error: error)
     }
 }

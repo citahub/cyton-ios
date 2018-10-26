@@ -7,12 +7,12 @@
 //
 
 import Foundation
+import BigInt
 
 extension String {
     func removeHexPrefix() -> String {
         if self.hasPrefix("0x") {
-            let indexStart = self.index(self.startIndex, offsetBy: 2)
-            return String(self[indexStart...])
+            return String(self.dropFirst(2))
         }
         return self
     }
