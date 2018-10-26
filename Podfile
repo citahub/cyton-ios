@@ -5,7 +5,7 @@ target 'Neuron' do
   use_frameworks!
   inhibit_all_warnings!
 
-  pod 'NervosSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.1"
+  pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.2"
   pod 'PullToRefresher', git: "https://github.com/xiaoluSF/PullToRefresh", branch: "swift4.2"
 
   pod 'PlainPing'
