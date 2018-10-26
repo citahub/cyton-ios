@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BrowserViewController: UIViewController, WKUIDelegate {
+class BrowserViewController: UIViewController {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
@@ -54,7 +54,12 @@ class BrowserViewController: UIViewController, WKUIDelegate {
         view.addSubview(progressView)
         webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         let url = URL(string: getRequestStr(requestStr: requestUrlStr))
-        let request = URLRequest(url: url!)
+        let request: URLRequest
+        if let url = url {
+            request = URLRequest(url: url)
+        } else {
+            request = URLRequest(url: URL(string: "https://www.cryptape.com/#/")!)
+        }
         webview.load(request)
     }
 
@@ -65,7 +70,7 @@ class BrowserViewController: UIViewController, WKUIDelegate {
             return "https://" + requestStr
         }
     }
-    
+
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.alpha = 1.0
@@ -128,6 +133,54 @@ extension BrowserViewController: WKScriptMessageHandler {
     }
 }
 
+extension BrowserViewController: WKUIDelegate {
+    func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping () -> Void) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            completionHandler()
+        }))
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func webView(_ webView: WKWebView, runJavaScriptConfirmPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (Bool) -> Void) {
+        let alertController = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            completionHandler(true)
+        }))
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (_) in
+            completionHandler(false)
+        }))
+
+        present(alertController, animated: true, completion: nil)
+    }
+
+    func webView(_ webView: WKWebView, runJavaScriptTextInputPanelWithPrompt prompt: String, defaultText: String?, initiatedByFrame frame: WKFrameInfo,
+                 completionHandler: @escaping (String?) -> Void) {
+        let alertController = UIAlertController(title: nil, message: prompt, preferredStyle: .actionSheet)
+        alertController.addTextField { (textField) in
+            textField.text = defaultText
+        }
+
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { (_) in
+            if let text = alertController.textFields?.first?.text {
+                completionHandler(text)
+            } else {
+                completionHandler(defaultText)
+            }
+        }))
+
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (_) in
+            completionHandler(nil)
+        }))
+
+        present(alertController, animated: true, completion: nil)
+    }
+}
+
 extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
@@ -162,6 +215,10 @@ extension BrowserViewController: WKNavigationDelegate {
             self.collectionButton.isHidden = false
             DAppAction().dealWithManifestJson(with: link as! String)
         }
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        webview.load(URLRequest(url: URL(string: "https://www.cryptape.com/#/")!))
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
