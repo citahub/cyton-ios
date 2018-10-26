@@ -70,7 +70,7 @@ protocol ErrorOverlayPresentable: OverlayPresentable {
 private var ErrorOverlayControllerAssociationKey = 0
 
 extension ErrorOverlayPresentable {
-    fileprivate var errorOverlaycontroller: ErrorOverlayViewController {
+    var errorOverlaycontroller: ErrorOverlayViewController {
         if let controller = objc_getAssociatedObject(self, &ErrorOverlayControllerAssociationKey) as? ErrorOverlayViewController {
             return controller
         }
