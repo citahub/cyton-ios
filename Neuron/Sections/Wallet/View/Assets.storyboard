@@ -124,6 +124,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="6rS-hc-f3A">
                         <barButtonItem key="rightBarButtonItem" image="nav_addAsset" id="6GC-d4-Dob">
+                            <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="z2O-E2-HJL" kind="show" id="0Qy-Qk-tlj"/>
                             </connections>
