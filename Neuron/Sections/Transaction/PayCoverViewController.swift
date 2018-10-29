@@ -118,7 +118,7 @@ class PayCoverViewController: UIViewController {
         }
     }
 
-    func sendNervosTransaction(password: String, transaction: NervosTransaction) {
+    func sendNervosTransaction(password: String, transaction: Transaction) {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
             case .success:

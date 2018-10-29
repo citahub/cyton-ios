@@ -9,8 +9,6 @@
 import UIKit
 import RSKPlaceholderTextView
 import BigInt
-import web3swift
-import struct BigInt.BigUInt
 
 protocol EthGasViewControllerDelegate: class {
     func getTransactionGasPriceAndData(ethGasViewController: EthGasViewController, gasPrice: BigUInt, data: Data)
@@ -38,7 +36,7 @@ class EthGasViewController: UIViewController {
         gasPriceTextField.delegate = self
         gasTextField.delegate = self
         hexTextView.delegate = self
-        gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
+        gasPriceTextField.text = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
         gasTextField.text = String(gas)
         setGasLabelValue()
         getGasPrice()
@@ -46,7 +44,7 @@ class EthGasViewController: UIViewController {
 
     func setGasLabelValue() {
         let gasCosted = gas * Float(gasPrice)
-        let totleGas = Web3.Utils.formatToEthereumUnits(BigUInt(gasCosted), toUnits: .eth, decimals: 4, fallbackToScientific: false)
+        let totleGas = Web3Utils.formatToEthereumUnits(BigUInt(gasCosted), toUnits: .eth, decimals: 4, fallbackToScientific: false)
         gasLabel.text = totleGas! + "  eth"
         delegate?.getTransactionCostGas(gas: gasLabel.text!)
     }
@@ -56,7 +54,7 @@ class EthGasViewController: UIViewController {
             switch result {
             case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
-                self.gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPriceResult, toUnits: .Gwei, fallbackToScientific: false)
+                self.gasPriceTextField.text = Web3Utils.formatToEthereumUnits(gasPriceResult, toUnits: .Gwei, fallbackToScientific: false)
             case .error(let error):
                 Toast.showToast(text: error.localizedDescription)
             }
@@ -77,15 +75,15 @@ extension EthGasViewController: UITextFieldDelegate, UITextViewDelegate {
             guard let textFieldText = textField.text else {
                 return
             }
-            let tempGasPrice = Web3.Utils.parseToBigUInt(textFieldText, units: .Gwei)!
+            let tempGasPrice = Web3Utils.parseToBigUInt(textFieldText, units: .Gwei)!
             if tempGasPrice < gasPrice || tempGasPrice > (gasPrice * 10) {
-                let minGasPrice = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false) ?? ""
-                let maxGasPrice = Web3.Utils.formatToEthereumUnits(gasPrice * 10, toUnits: .Gwei, fallbackToScientific: false) ?? ""
+                let minGasPrice = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false) ?? ""
+                let maxGasPrice = Web3Utils.formatToEthereumUnits(gasPrice * 10, toUnits: .Gwei, fallbackToScientific: false) ?? ""
                 Toast.showToast(text: "Gas Price必须大于\(minGasPrice)并且小于\(maxGasPrice) Gwei")
-                textField.text = Web3.Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
+                textField.text = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, fallbackToScientific: false)
                 return
             }
-            gasPrice = Web3.Utils.parseToBigUInt(textFieldText, units: .Gwei)!
+            gasPrice = Web3Utils.parseToBigUInt(textFieldText, units: .Gwei)!
         }
         setGasLabelValue()
         delegate?.getTransactionGasPriceAndData(ethGasViewController: self, gasPrice: gasPrice, data: data)
@@ -101,5 +99,4 @@ extension EthGasViewController: UITextFieldDelegate, UITextViewDelegate {
         data = tempData
         delegate?.getTransactionGasPriceAndData(ethGasViewController: self, gasPrice: gasPrice, data: tempData)
     }
-
 }
