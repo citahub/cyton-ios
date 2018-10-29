@@ -97,8 +97,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                         currencyType: model.symbol,
                         currencyNumber: Double(model.currencyAmount) ?? 0
                     )
-                case .error(let error):
-                    Toast.showToast(text: error.localizedDescription)
+                case .error:
+                    Toast.showToast(text: "网络错误，请稍后再试.")
                 }
             }
         }
@@ -117,8 +117,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                     switch result {
                     case .success(let balance):
                         tm.tokenBalance = balance
-                    case .error(let error):
-                        Toast.showToast(text: error.localizedDescription)
+                    case .error:
+                        Toast.showToast(text: "网络错误，请稍后再试.")
                     }
                     group.leave()
                 }
@@ -128,8 +128,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                     switch result {
                     case .success(let balance):
                         tm.tokenBalance = balance
-                    case .error(let error):
-                        Toast.showToast(text: (error.localizedDescription))
+                    case .error:
+                        Toast.showToast(text: "网络错误，请稍后再试.")
                     }
                     group.leave()
                 }
@@ -140,8 +140,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                     case .success(let erc20Balance):
                         let balance = Web3.Utils.formatToPrecision(erc20Balance, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
                         tm.tokenBalance = balance!
-                    case .error(let error):
-                        Toast.showToast(text: error.localizedDescription)
+                    case .error:
+                        Toast.showToast(text: "网络错误，请稍后再试.")
                     }
                     group.leave()
                 }

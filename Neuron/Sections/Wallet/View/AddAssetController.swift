@@ -151,8 +151,8 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tokenModel = tokenM
                 self.tokenModel.address = token
                 self.isUseQRCode = false
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+            case .error:
+                Toast.showToast(text: "网络错误，请稍后再试.")
             }
             self.aTable.reloadData()
         }
