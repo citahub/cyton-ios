@@ -2,12 +2,16 @@ PODS:
   - Alamofire (4.7.3)
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
-  - AppChainSwift (0.19.2):
+  - AppChainSwift (0.19.3):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.13)
+    - PromiseKit (~> 6.5)
+    - Result (~> 4.0)
+    - secp256k1_swift (~> 1.0.3)
     - SwiftProtobuf (~> 1.0.3)
-    - web3swift (~> 1.1.10)
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
-  - CryptoSwift (0.12.0)
+  - CryptoSwift (0.13.0)
   - EFQRCode (4.3.0)
   - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
@@ -67,7 +71,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Alamofire-Synchronous
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.2`)
+  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.3`)
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
@@ -82,6 +86,7 @@ DEPENDENCIES:
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
   - TrustKeystore (~> 0.5.2)
+  - web3swift (from `https://github.com/matterinc/web3swift`, tag `1.1.10`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -112,30 +117,35 @@ SPEC REPOS:
     - TrezorCrypto
     - TrustCore
     - TrustKeystore
-    - web3swift
 
 EXTERNAL SOURCES:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.2
+    :tag: v0.19.3
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
+  web3swift:
+    :git: https://github.com/matterinc/web3swift
+    :tag: 1.1.10
 
 CHECKOUT OPTIONS:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.2
+    :tag: v0.19.3
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
+  web3swift:
+    :git: https://github.com/matterinc/web3swift
+    :tag: 1.1.10
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
-  AppChainSwift: 81c9295df6d8c567fd273c1a8ddbaca047182a7f
+  AppChainSwift: c9cfcf35bbdc954e9298a63fa4e9e72bd5a88f94
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
-  CryptoSwift: 1c07ca50843dd48bc54e6ea53d7a4dba3b645716
+  CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
@@ -162,6 +172,6 @@ SPEC CHECKSUMS:
   TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 3acbd1d43e3b38a0a93f67071a783c8f97dd6d50
+PODFILE CHECKSUM: ed4a48e550f864f9e56800fbff644e23609f9379
 
 COCOAPODS: 1.5.3
