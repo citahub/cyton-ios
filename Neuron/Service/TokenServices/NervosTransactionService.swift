@@ -17,6 +17,7 @@ class NervosTransactionService {
                                             quota: BigUInt = BigUInt(1000000),
                                             data: Data,
                                             value: String,
+                                            tokenHosts: String = "",
                                             chainId: BigUInt, completion: @escaping (SendNervosResult<Transaction>) -> Void) {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
@@ -80,5 +81,22 @@ class NervosTransactionService {
                 }
             }
         }
+    }
+
+    func sign(password: String, transaction: Transaction, completion: @escaping (SendNervosResult<String>) -> Void) {
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
+            return
+        }
+        guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
+            return
+        }
+        guard let signed = try? Signer().sign(transaction: transaction, with: privateKey) else {
+            completion(SendNervosResult.error(NervosSignError.signTXFailed))
+            return
+        }
+        completion(SendNervosResult.success(signed))
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 protocol QRCodeControllerDelegate: class {
     func didBackQRCodeMessage(codeResult: String)
@@ -15,21 +16,36 @@ protocol QRCodeControllerDelegate: class {
 class QRCodeController: UIViewController, HRQRCodeScanToolDelegate {
 
     weak var delegate: QRCodeControllerDelegate?
+    let shared = HRQRCodeScanTool()
 
     func scanQRCodeFaild(error: HRQRCodeTooError) {
-        print(error)
     }
 
     func scanQRCodeSuccess(resultStrs: [String]) {
         self.navigationController?.popViewController(animated: true)
         delegate?.didBackQRCodeMessage(codeResult: resultStrs.first!)
     }
-    let share = HRQRCodeScanTool()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "扫描二维码"
-        share.delegate  = self
-        share.beginScanInView(view: view)
+        view.backgroundColor = UIColor.black
+        shared.delegate  = self
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { [weak self](result) in
+            guard let self = self else { return }
+            if result {
+                self.shared.beginScanInView(view: self.view)
+            } else {
+                let alert = UIAlertController(title: "", message: "扫描二维码需要相机访问权限", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "开启", style: .default, handler: { (_) in
+                    let url = URL(string: UIApplication.openSettingsURLString)!
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }))
+                alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
+                    self.navigationController?.popViewController(animated: true)
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
     }
 }

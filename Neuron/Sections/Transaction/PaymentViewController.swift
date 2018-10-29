@@ -9,6 +9,7 @@
 import UIKit
 import BigInt
 import IQKeyboardManagerSwift
+import TrustCore
 
 class PaymentViewController: UITableViewController {
     @IBOutlet weak var iconImageView: UIImageView!
@@ -22,7 +23,7 @@ class PaymentViewController: UITableViewController {
     private var gasPageViewController: UIPageViewController!
     private var simpleGasViewController: SimpleGasViewController!
     private var ethGasViewController: EthGasViewController!
-    private var nervosQuoteViewController: NervosQuoteViewController!
+    private var nervosQuotaViewController: NervosQuotaViewController!
     var payCoverViewController: PayCoverViewController!
     var tokenType: TokenType = .nervosToken
     var tokenModel = TokenModel()
@@ -55,11 +56,11 @@ class PaymentViewController: UITableViewController {
         simpleGasViewController.tokenType = tokenType
         ethGasViewController = storyboard!.instantiateViewController(withIdentifier: "ethGasViewController") as? EthGasViewController
         ethGasViewController.delegate = self
-        nervosQuoteViewController = storyboard!.instantiateViewController(withIdentifier: "nervosQuoteViewController") as? NervosQuoteViewController
-        nervosQuoteViewController.delegate = self
+        nervosQuotaViewController = storyboard!.instantiateViewController(withIdentifier: "nervosQuotaViewController") as? NervosQuotaViewController
+        nervosQuotaViewController.delegate = self
         payCoverViewController = storyboard!.instantiateViewController(withIdentifier: "confirmViewController") as? PayCoverViewController
         payCoverViewController.delegate = self
-        nervosQuoteViewController.tokenModel = tokenModel
+        nervosQuotaViewController.tokenModel = tokenModel
         gasPageViewController.setViewControllers([simpleGasViewController], direction: .forward, animated: false)
         getBaseData()
     }
@@ -83,7 +84,7 @@ class PaymentViewController: UITableViewController {
         if sender.isOn {
             switch tokenType {
             case .nervosToken:
-                gasPageViewController.setViewControllers([nervosQuoteViewController], direction: .forward, animated: false)
+                gasPageViewController.setViewControllers([nervosQuotaViewController], direction: .forward, animated: false)
             default:
                 gasPageViewController.setViewControllers([ethGasViewController], direction: .forward, animated: false)
             }
@@ -134,6 +135,17 @@ class PaymentViewController: UITableViewController {
             Toast.showToast(text: "转账地址不能为空")
             return false
         }
+        if destinationAddress.count != 40 && destinationAddress.count != 42 {
+            Toast.showToast(text: "您的地址错误，请重新输入")
+            return false
+        }
+        if destinationAddress != destinationAddress.lowercased() {
+            let eip55String = TrustCore.EthereumAddress(string: destinationAddress)?.eip55String ?? ""
+            if eip55String != destinationAddress {
+                Toast.showToast(text: "您的地址错误，请重新输入")
+                return false
+            }
+        }
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         if destinationAddress == walletModel.address {
             Toast.showToast(text: "发送地址和收款地址不能相同")
@@ -159,12 +171,12 @@ extension PaymentViewController: PayCoverViewControllerDelegate {
     }
 }
 
-extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewControllerDelegate, NervosQuoteViewControllerDelegate {
-    func getTransactionCostGas(gas: String) {
+extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewControllerDelegate, NervosQuotaViewControllerDelegate {
+    func getTransactionGasCost(gas: String) {
         gasCost = gas
     }
 
-    func getNervosTransactionQuota(nervosQuoteViewController: NervosQuoteViewController, quota: BigUInt, data: Data) {
+    func getNervosTransactionQuota(nervosQuotaViewController: NervosQuotaViewController, quota: BigUInt, data: Data) {
         nervosQuota = quota
         extraData = data
     }

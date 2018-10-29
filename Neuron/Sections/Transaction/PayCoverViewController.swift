@@ -11,6 +11,10 @@ import AppChain
 import web3swift
 import struct BigInt.BigUInt
 
+protocol DAppPayCoverViewControllerDelegate: class {
+    func dappTransactionResult(id: Int, value: String, error: DAppError?)
+}
+
 protocol PayCoverViewControllerDelegate: class {
     func popToRootView()
 }
@@ -26,7 +30,10 @@ class PayCoverViewController: UIViewController {
     var contrackAddress: String = ""
     var tokenType: TokenType = .nervosToken
     var isUseQRCode = false
+    var dappCommonModel: DAppCommonModel?
+
     weak var delegate: PayCoverViewControllerDelegate?
+    weak var dappDelegate: DAppPayCoverViewControllerDelegate?
 
     private var ethTransactionService: EthTransactionService!
     private var nervosTransactionService: NervosTransactionService!
@@ -74,6 +81,7 @@ class PayCoverViewController: UIViewController {
         }
     }
 
+    // TODO: Refactor
     func prepareEthTransaction(password: String) {
         ethTransactionService = EthTransactionService()
         ethTransactionService.prepareETHTransactionForSending(destinationAddressString: toAddress,
@@ -84,11 +92,34 @@ class PayCoverViewController: UIViewController {
                                                               data: extraData!) { (result) in
                                                                 switch result {
                                                                 case .success(let value):
-                                                                    self.sendEthTransaction(password: password, transaction: value)
+                                                                    self.dealWithETHDAppCommonModel(password: password, transaction: value)
                                                                 case .error(let error):
                                                                     self.failure(error: error)
                                                                 }
         }
+    }
+
+    func signETHTransaction(password: String, transaction: TransactionIntermediate) {
+        ethTransactionService.sign(password: password, transaction: transaction, address: toAddress) { (result) in
+            switch result {
+            case .success(let transactionIntermediate):
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: transactionIntermediate.transaction.data.hexString, error: nil)
+            case .error:
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
+            }
+        }
+    }
+
+    func sendDAppEthTransaction(password: String, transaction: TransactionIntermediate) {
+        ethTransactionService.send(password: password, transaction: transaction, completion: { (result) in
+            switch result {
+            case .success(let value):
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.addHexPrefix(), error: nil)
+            case .error:
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
+            }
+            Toast.hideHUD()
+        })
     }
 
     func sendEthTransaction(password: String, transaction: TransactionIntermediate) {
@@ -99,19 +130,35 @@ class PayCoverViewController: UIViewController {
             case .error(let error):
                 self.failure(error: error)
             }
+            Toast.hideHUD()
         })
     }
 
+    func dealWithETHDAppCommonModel(password: String, transaction: TransactionIntermediate) {
+        guard let dappModel = dappCommonModel else {
+            sendEthTransaction(password: password, transaction: transaction)
+            return
+        }
+        switch dappModel.name {
+        case .sendTransaction, .signTransaction:
+            self.sendDAppEthTransaction(password: password, transaction: transaction)
+        default:
+            break
+        }
+    }
+
+    // TODO: Refactor
     func prepareNrevosTransaction(password: String) {
         nervosTransactionService = NervosTransactionService()
         nervosTransactionService.prepareNervosTransactionForSending(address: toAddress,
                                                                     quota: gasPrice,
                                                                     data: extraData,
                                                                     value: amount,
+                                                                    tokenHosts: tokenModel.chainHosts,
                                                                     chainId: BigUInt(tokenModel.chainId)!) { (reuslt) in
                                                                         switch reuslt {
                                                                         case .success(let transaction):
-                                                                            self.sendNervosTransaction(password: password, transaction: transaction)
+                                                                           self.dealWithAppChainDAppCommonModel(password: password, transaction: transaction)
                                                                         case .error(let error):
                                                                             self.failure(error: error)
                                                                         }
@@ -125,6 +172,45 @@ class PayCoverViewController: UIViewController {
                 self.success()
             case .error(let error):
                 self.failure(error: error)
+            }
+        }
+    }
+
+    func sendDappAppChainTransaction(password: String, transaction: Transaction) {
+        nervosTransactionService.send(password: password, transaction: transaction) { (result) in
+            switch result {
+            case .success(let value):
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.hexString.addHexPrefix(), error: nil)
+            case .error:
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
+            }
+            Toast.hideHUD()
+            self.view.removeFromSuperview()
+        }
+    }
+
+    func signNervosTransaction(password: String, transaction: Transaction) {
+        nervosTransactionService.sign(password: password, transaction: transaction) { (result) in
+            switch result {
+            case .success(let value):
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value, error: nil)
+            case .error:
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
+            }
+            Toast.hideHUD()
+            self.view.removeFromSuperview()
+        }
+    }
+
+    func dealWithAppChainDAppCommonModel(password: String, transaction: Transaction) {
+        if dappCommonModel == nil {
+            sendNervosTransaction(password: password, transaction: transaction)
+        } else {
+            switch dappCommonModel!.name {
+            case .sendTransaction, .signTransaction:
+                self.sendDappAppChainTransaction(password: password, transaction: transaction)
+            default:
+                break
             }
         }
     }
@@ -192,7 +278,7 @@ class PayCoverViewController: UIViewController {
 }
 
 extension PayCoverViewController: ConfirmSendViewControllerDelegate, ConfirmAmountViewControllerDelegate {
-    func sendTransaction(confirmSendViewController: ConfirmSendViewController, password: String) {
+    func confirmPassword(confirmSendViewController: ConfirmSendViewController, password: String) {
         Toast.showHUD()
         switch tokenType {
         case .ethereumToken:
