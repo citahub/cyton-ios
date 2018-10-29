@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class BrowserViewController: UIViewController {
+class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
@@ -57,10 +57,10 @@ class BrowserViewController: UIViewController {
         let request: URLRequest
         if let url = url {
             request = URLRequest(url: url)
+            webview.load(request)
         } else {
-            request = URLRequest(url: URL(string: "https://www.cryptape.com/#/")!)
+            showNetworkFailOverlay()
         }
-        webview.load(request)
     }
 
     func getRequestStr(requestStr: String) -> String {
@@ -218,7 +218,7 @@ extension BrowserViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        Toast.showToast(text: "网络异常.")
+        showNetworkFailOverlay()
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
