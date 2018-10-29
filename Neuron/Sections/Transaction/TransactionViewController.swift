@@ -80,8 +80,8 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
         Toast.showHUD()
         service?.reloadData { (_) in
             Toast.hideHUD()
-            self.tableView.reloadData()
             self.tableView.endRefreshing(at: .top)
+            self.tableView.reloadData()
             if self.service?.transactions.count == 0 {
                 self.errorOverlaycontroller.style = .blank
                 self.overlay.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
