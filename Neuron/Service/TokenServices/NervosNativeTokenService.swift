@@ -12,9 +12,9 @@ import BigInt
 
 struct NervosNativeTokenService {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
-        let nervos = NervosNetwork.getNervos()
+        let appChain = NervosNetwork.getNervos()
         DispatchQueue.global().async {
-            let result = nervos.appChain.getMetaData(blockNumber: blockNumber)
+            let result = appChain.rpc.getMetaData(blockNumber: blockNumber)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let metaData):
@@ -37,9 +37,9 @@ struct NervosNativeTokenService {
     }
 
     static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (NervosServiceResult<String>) -> Void) {
-        let nervos = NervosNetwork.getNervos()
+        let appChain = NervosNetwork.getNervos()
         DispatchQueue.global().async {
-            let result = nervos.appChain.getBalance(address: Address(walletAddress)!)
+            let result = appChain.rpc.getBalance(address: Address(walletAddress)!)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let balance):

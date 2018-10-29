@@ -12,13 +12,13 @@ import AppChain
 struct NervosNetwork {
     private static let appHosts = "http://121.196.200.225:1337"
 
-    static func getNervos(with urlString: String = appHosts) -> Nervos {
-        let provider: NervosProvider
+    static func getNervos(with urlString: String = appHosts) -> AppChain {
+        let provider: HTTPProvider
         if urlString.isEmpty {
-            provider = NervosProvider(URL(string: appHosts)!)!
+            provider = HTTPProvider(URL(string: appHosts)!)!
         } else {
-            provider = NervosProvider(URL(string: urlString)!)!
+            provider = HTTPProvider(URL(string: urlString)!)!
         }
-        return Nervos(provider: provider)
+        return AppChain(provider: provider)
     }
 }

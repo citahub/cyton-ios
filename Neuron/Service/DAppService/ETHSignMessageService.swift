@@ -30,7 +30,7 @@ struct ETHSignMessageService {
                 }
                 return
             }
-            guard let signed = try! ETHMessageSigner.sign(message: messageData, privateKey: privateKey) else {
+            guard let signed = try! EthereumMessageSigner().sign(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.signMessageFailed))
                 }
@@ -56,7 +56,7 @@ struct ETHSignMessageService {
                 }
                 return
             }
-            guard let signed = try! ETHMessageSigner.signPersonalMessage(message: messageData, privateKey: privateKey) else {
+            guard let signed = try! EthereumMessageSigner().signPersonalMessage(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.signMessageFailed))
                 }

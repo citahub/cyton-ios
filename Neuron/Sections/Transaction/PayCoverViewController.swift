@@ -165,7 +165,7 @@ class PayCoverViewController: UIViewController {
         }
     }
 
-    func sendNervosTransaction(password: String, transaction: NervosTransaction) {
+    func sendNervosTransaction(password: String, transaction: Transaction) {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
             case .success:
@@ -176,8 +176,8 @@ class PayCoverViewController: UIViewController {
         }
     }
 
-    func sendDappAppChainTransaction(password: String, transaction: NervosTransaction) {
-        nervosTransactionService.send(password: password, transaction: transaction, tokenHost: tokenModel.chainHosts) { (result) in
+    func sendDappAppChainTransaction(password: String, transaction: Transaction) {
+        nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
             case .success(let value):
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.hexString.addHexPrefix(), error: nil)
@@ -189,7 +189,7 @@ class PayCoverViewController: UIViewController {
         }
     }
 
-    func signNervosTransaction(password: String, transaction: NervosTransaction) {
+    func signNervosTransaction(password: String, transaction: Transaction) {
         nervosTransactionService.sign(password: password, transaction: transaction) { (result) in
             switch result {
             case .success(let value):
@@ -202,7 +202,7 @@ class PayCoverViewController: UIViewController {
         }
     }
 
-    func dealWithAppChainDAppCommonModel(password: String, transaction: NervosTransaction) {
+    func dealWithAppChainDAppCommonModel(password: String, transaction: Transaction) {
         if dappCommonModel == nil {
             sendNervosTransaction(password: password, transaction: transaction)
         } else {
