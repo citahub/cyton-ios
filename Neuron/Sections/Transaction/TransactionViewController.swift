@@ -78,33 +78,14 @@ class TransactionViewController: UIViewController, UITableViewDelegate, UITableV
 
     private func loadData() {
         Toast.showHUD()
-        let group = DispatchGroup()
-        var profile: TokenProfile?
-
-        group.enter()
         service?.reloadData { (_) in
-            group.leave()
-        }
-
-        group.enter()
-        tokenModel.getProfile { (tokenProfile) in
-            profile = tokenProfile
-            group.leave()
-        }
-
-        group.notify(queue: .main) {
             Toast.hideHUD()
-            self.setupTokenProfile(profile)
             self.tableView.reloadData()
             self.tableView.endRefreshing(at: .top)
-
             if self.service?.transactions.count == 0 {
-                if profile != nil {
-                    self.errorOverlaycontroller.style = .blank
-                    self.tableView.addSubview(self.overlay)
-                } else {
-                    self.showNetworkFailOverlay()
-                }
+                self.errorOverlaycontroller.style = .blank
+                self.overlay.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
+                self.tableView.addSubview(self.overlay)
             } else {
                 self.removeOverlay()
             }
