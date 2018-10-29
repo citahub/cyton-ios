@@ -152,7 +152,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
                 self.tokenModel.address = token
                 self.isUseQRCode = false
             case .error:
-                Toast.showToast(text: "网络错误，请稍后再试.")
+                Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
             }
             self.aTable.reloadData()
         }
