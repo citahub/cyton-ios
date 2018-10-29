@@ -44,7 +44,6 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var tTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.isTranslucent = false
         title = "交易详情"
         didSetUIDetail()
         tTable.delegate = self
