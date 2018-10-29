@@ -57,8 +57,8 @@ class EthGasViewController: UIViewController {
             case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
                 self.gasPriceTextField.text = Web3.Utils.formatToEthereumUnits(gasPriceResult, toUnits: .Gwei, fallbackToScientific: false)
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+            case .error:
+                Toast.showToast(text: "网络错误，请稍后再试.")
             }
         }
     }

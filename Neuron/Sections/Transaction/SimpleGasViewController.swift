@@ -61,8 +61,8 @@ class SimpleGasViewController: UIViewController {
             switch result {
             case .success(let gasPriceResult):
                 self.gasPrice = gasPriceResult
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+            case .error:
+                Toast.showToast(text: "网络错误，请稍后再试.")
             }
             self.setGasLabelValue(finalGasPrice: self.gasSlider.value * Float(self.gasPrice.description)!)
         }

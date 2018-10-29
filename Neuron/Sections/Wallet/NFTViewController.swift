@@ -44,8 +44,8 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
                 } else {
                     self.removeOverlay()
                 }
-            case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+            case .error:
+                Toast.showToast(text: "网络错误，请稍后再试.")
                 self.showNetworkFailOverlay()
             }
             self.tableView.reloadData()

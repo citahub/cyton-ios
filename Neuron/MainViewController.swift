@@ -33,8 +33,8 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
             switch result {
             case .success(let tokenModel):
                 tModel = tokenModel
-            case .error(let error):
-                Toast.showToast(text: (error.localizedDescription))
+            case .error:
+                Toast.showToast(text: "网络错误，请稍后再试.")
             }
             group.leave()
         }

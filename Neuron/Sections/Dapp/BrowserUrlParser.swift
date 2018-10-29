@@ -14,7 +14,6 @@ struct BrowserUrlParser {
         PlainPing.ping(urlString, withTimeout: 4.0, completionBlock: { ( timeElapsed: Double?, error: Error?) in
             if let error = error {
                 comletion(0, error)
-                print("error: \(error.localizedDescription)")
             } else {
                 if let latency = timeElapsed {
                     comletion(latency, nil)
