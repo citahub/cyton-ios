@@ -87,10 +87,6 @@ class WalletDetailController: UITableViewController {
                 didChangeWalletName()
             }
         } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let pCtrl = ChangePasswordController.init(nibName: "ChangePasswordController", bundle: nil)
-                navigationController?.pushViewController(pCtrl, animated: true)
-            }
             if indexPath.row == 1 {
                 let appearance = SCLAlertView.SCLAppearance(
                     showCloseButton: false
