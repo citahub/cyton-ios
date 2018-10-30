@@ -12,9 +12,6 @@ struct Account {
     let address: String
 }
 
-struct Wallet {
-}
-
 struct WalletTool {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
@@ -27,7 +24,7 @@ struct WalletTool {
     static let keystoreDir = URL(fileURLWithPath: keystorePath)
     static let keystoreManager = KeystoreManager.managerForPath(keystorePath)!
 
-    static func wallet(for address: String) -> Wallet? {
+    static func account(for address: String) -> Account? {
         // TODO
         return nil
     }
@@ -117,7 +114,7 @@ struct WalletTool {
         }
     }
 
-    public static func exportKeystore(wallet: Wallet, password: String) -> ExportResult<String> {
+    public static func exportKeystore(account: Account, password: String) -> ExportResult<String> {
         do {
             // TODO
             let keystore = ""
@@ -127,7 +124,7 @@ struct WalletTool {
         }
     }
 
-    static func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
+    static func exportPrivateKey(account: Account, password: String) -> ImportResult<String> {
         do {
             // TODO
             let privateKey = ""
@@ -140,20 +137,20 @@ struct WalletTool {
 
 extension WalletTool {
     static func updatePassword(address: String, password: String, newPassword: String) throws {
-        let wallet = WalletTool.wallet(for: address)!
+        let account = WalletTool.account(for: address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
 
     static func deleteWallet(address: String, password: String) throws {
-        let wallet = WalletTool.wallet(for: address)!
+        let account = WalletTool.account(for: address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
 
     static func getKeystoreForCurrentWallet(password: String) throws -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        let wallet = WalletTool.wallet(for: walletModel.address)!
+        let account = WalletTool.account(for: walletModel.address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
@@ -173,7 +170,7 @@ extension WalletTool {
         }
     }
 
-    static func checkPassword(wallet: Wallet, password: String) -> Bool {
+    static func checkPassword(account: Account, password: String) -> Bool {
         do {
             // TODO
             var privateKeyData = "todo"
