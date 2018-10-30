@@ -1,5 +1,5 @@
 //
-//  WalletToolTests.swift
+//  WalletManagerTests.swift
 //  NeuronTests
 //
 //  Created by James Chen on 2018/10/19.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Neuron
 
-class WalletToolTests: XCTestCase {
+class WalletManagerTests: XCTestCase {
     var keyDirectory: URL!
 
     override func setUp() {
@@ -22,7 +22,7 @@ class WalletToolTests: XCTestCase {
 
     func testExportPrivateKeyFromKeyWallet() throws {
         /* TODO
-        guard case .succeed(let exported) = WalletTool.exportPrivateKey(wallet: keyWallet, password: "password") else {
+        guard case .succeed(let exported) = WalletManager.exportPrivateKey(wallet: keyWallet, password: "password") else {
             return XCTFail("Export fail")
         }
         XCTAssertEqual(Data.fromHex(exported), privateKey.data)
@@ -35,9 +35,9 @@ class WalletToolTests: XCTestCase {
         let hdWallet = try keyStore.import(
             mnemonic: "begin auction word young address dawn chief maid brave arrive copy process",
             encryptPassword: "password",
-            derivationPath: DerivationPath(WalletTool.defaultDerivationPath)!
+            derivationPath: DerivationPath(WalletManager.defaultDerivationPath)!
         )
-        guard case .succeed(let exported) = WalletTool.exportPrivateKey(wallet: hdWallet, password: "password") else {
+        guard case .succeed(let exported) = WalletManager.exportPrivateKey(wallet: hdWallet, password: "password") else {
             return XCTFail("Export fail")
         }
         XCTAssertEqual(exported, "6e2c8766538873002c638137de5d2270a07b413468ae125ec2751526ffefcffa")
@@ -45,7 +45,7 @@ class WalletToolTests: XCTestCase {
     }
 
     func testGenerate12WordsMnemonic() {
-        let mnemonic = WalletTool.generateMnemonic()
+        let mnemonic = WalletManager.generateMnemonic()
         XCTAssertEqual(mnemonic.split(separator: " ").count, 12)
     }
 }

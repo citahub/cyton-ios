@@ -18,7 +18,7 @@ class EthTransactionService {
                                          gasPrice: BigUInt,
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        guard let keyStoreStr = try? WalletTool.getKeystoreForCurrentWallet(password: walletPassword) else {
+        guard let keyStoreStr = try? WalletManager.default.getKeystoreForCurrentWallet(password: walletPassword) else {
             DispatchQueue.main.async {
                 completion(SendEthResult.error(SendEthError.invalidPassword))
             }
@@ -106,7 +106,7 @@ class EthTransactionService {
     func sign(password: String, transaction: TransactionIntermediate, address: String, completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         var transactionIntermediate = transaction
         DispatchQueue.global().async {
-            guard let keyStoreStr = try? WalletTool.getKeystoreForCurrentWallet(password: password) else {
+            guard let keyStoreStr = try? WalletManager.default.getKeystoreForCurrentWallet(password: password) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.invalidPassword))
                 }

@@ -47,7 +47,7 @@ class WalletDetailController: UITableViewController {
         let address = walletModel.address
         Toast.showHUD()
         do {
-            try WalletTool.deleteWallet(address: address, password: password)
+            try WalletManager.default.deleteWallet(address: address, password: password)
             try WalletRealmTool.realm.write {
                 if appModel.wallets.count == 1 {
                     WalletRealmTool.realm.deleteAll()
@@ -70,7 +70,7 @@ class WalletDetailController: UITableViewController {
 
     private func exportKeystore(password: String) {
         do {
-            let keystore = try WalletTool.getKeystoreForCurrentWallet(password: password)
+            let keystore = try WalletManager.default.getKeystoreForCurrentWallet(password: password)
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
             exportController.keystoreString = keystore
             self.navigationController?.pushViewController(exportController, animated: true)

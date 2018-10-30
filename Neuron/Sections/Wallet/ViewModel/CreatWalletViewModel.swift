@@ -97,6 +97,6 @@ class CreatWalletViewModel: NSObject, CreatWalletViewModelInterface {
             return
         }
 
-        delegate?.doPush(mnemonic: WalletTool.generateMnemonic())
+        delegate?.doPush(mnemonic: WalletManager.generateMnemonic())
     }
 }

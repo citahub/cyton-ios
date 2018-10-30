@@ -1,39 +1,47 @@
 //
-//  WalletTool.swift
+//  WalletManager.swift
 //  Neuron
 //
 //
 
 import Foundation
 import web3swift
-import Result
 
 struct Account {
     let address: String
 }
 
-struct WalletTool {
-    static let defaultDerivationPath = "m/44'/60'/0'/0/0"
+struct WalletManager {
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
     typealias ExportPrivateCallback = (ImportResult<String>) -> Void
 
-    static var keystorePath: String = {
-        let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        return documentDir + "/keystore"
-    }()
-    static let keystoreDir = URL(fileURLWithPath: keystorePath)
-    static let keystoreManager = KeystoreManager.managerForPath(keystorePath)!
+    static let defaultDerivationPath = "m/44'/60'/0'/0/0"
 
-    static func account(for address: String) -> Account? {
-        // TODO
-        return nil
+    static let `default` = WalletManager(path: "keystore")
+
+    let keystorePath: String
+    var keystoreDir: URL {
+        return  URL(fileURLWithPath: keystorePath)
+    }
+    let keystoreManager: KeystoreManager
+
+    /// Path will be always under user's document directory and excluded from iCloud backup
+    init(path: String) {
+        let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        keystorePath =  documentDir + "/" + "keystore"
+        keystoreManager = KeystoreManager.managerForPath(keystorePath)!
     }
 
     static func generateMnemonic() -> String {
         return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
     }
 
-    static func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
+    func account(for address: String) -> Account? {
+        // TODO
+        return nil
+    }
+
+    func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
         switch importType {
         case .keystore(let keystore, let password):
             importKeystoreAsync(keystore: keystore, password: password, completion: completion)
@@ -44,16 +52,16 @@ struct WalletTool {
         }
     }
 
-    static func importMnemonicAsync(mnemonic: String, password: String, derivationPath: String, completion: @escaping ImportResultCallback) {
+    func importMnemonicAsync(mnemonic: String, password: String, derivationPath: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = importMnemonic(mnemonic: mnemonic, password: password, derivationPath: derivationPath)
+            let importResult = self.importMnemonic(mnemonic: mnemonic, password: password, derivationPath: derivationPath)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    static func importMnemonic(mnemonic: String, password: String, derivationPath: String) -> ImportResult<Account> {
+    func importMnemonic(mnemonic: String, password: String, derivationPath: String) -> ImportResult<Account> {
         do {
             guard let keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: derivationPath) else {
                 return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "钱包导入失败")
@@ -67,16 +75,16 @@ struct WalletTool {
         }
     }
 
-    static func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
+    func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = importKeystore(keystore, password: password)
+            let importResult = self.importKeystore(keystore, password: password)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    static func importKeystore(_ keystoreString: String, password: String) -> ImportResult<Account> {
+    func importKeystore(_ keystoreString: String, password: String) -> ImportResult<Account> {
         guard let keystore = EthereumKeystoreV3(keystoreString) else {
             return ImportResult.failed(error: ImportError.invalidateJSONKey, errorMessage: "无效的keystore")
         }
@@ -91,16 +99,16 @@ struct WalletTool {
         }
     }
 
-    static func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
+    func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = importPrivateKey(privateKey: privateKey, password: password)
+            let importResult = self.importPrivateKey(privateKey: privateKey, password: password)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    static func importPrivateKey(privateKey: String, password: String) -> ImportResult<Account> {
+    func importPrivateKey(privateKey: String, password: String) -> ImportResult<Account> {
         do {
             guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
                 let keystore = try EthereumKeystoreV3(privateKey: data, password: password) else {
@@ -114,7 +122,7 @@ struct WalletTool {
         }
     }
 
-    public static func exportKeystore(account: Account, password: String) -> ExportResult<String> {
+    public func exportKeystore(account: Account, password: String) -> ExportResult<String> {
         do {
             // TODO
             let keystore = ""
@@ -124,7 +132,7 @@ struct WalletTool {
         }
     }
 
-    static func exportPrivateKey(account: Account, password: String) -> ImportResult<String> {
+    func exportPrivateKey(account: Account, password: String) -> ImportResult<String> {
         do {
             // TODO
             let privateKey = ""
@@ -135,29 +143,29 @@ struct WalletTool {
     }
 }
 
-extension WalletTool {
-    static func updatePassword(address: String, password: String, newPassword: String) throws {
-        let account = WalletTool.account(for: address)!
+extension WalletManager {
+    func updatePassword(address: String, password: String, newPassword: String) throws {
+        let account = self.account(for: address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
 
-    static func deleteWallet(address: String, password: String) throws {
-        let account = WalletTool.account(for: address)!
+    func deleteWallet(address: String, password: String) throws {
+        let account = self.account(for: address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
 
-    static func getKeystoreForCurrentWallet(password: String) throws -> String {
+    func getKeystoreForCurrentWallet(password: String) throws -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        let account = WalletTool.account(for: walletModel.address)!
+        let account = self.account(for: walletModel.address)!
         // TODO
         throw KeystoreError.accountNotFound
     }
 }
 
-extension WalletTool {
-    static func checkWalletName(name: String) -> Bool {
+extension WalletManager {
+    func checkWalletName(name: String) -> Bool {
         let appModel = WalletRealmTool.getCurrentAppModel()
         var nameArr = [""]
         for wallModel in appModel.wallets {
@@ -170,7 +178,7 @@ extension WalletTool {
         }
     }
 
-    static func checkPassword(account: Account, password: String) -> Bool {
+    func checkPassword(account: Account, password: String) -> Bool {
         do {
             // TODO
             var privateKeyData = "todo"
@@ -185,8 +193,8 @@ extension WalletTool {
 }
 
 // MARK: - Keystore Disk Storage
-private extension WalletTool {
-    static func makeURL(for address: String?) -> URL {
+private extension WalletManager {
+    func makeURL(for address: String?) -> URL {
         let identifier: String
         if let address = address {
             identifier = address.removeHexPrefix()
@@ -197,11 +205,11 @@ private extension WalletTool {
         return keystoreDir.appendingPathComponent(generateFileName(identifier: identifier))
     }
 
-    static func generateFileName(identifier: String, date: Date = Date(), timeZone: TimeZone = .current) -> String {
+    func generateFileName(identifier: String, date: Date = Date(), timeZone: TimeZone = .current) -> String {
         return "UTC--\(filenameTimestamp(for: date, in: timeZone))--\(identifier)"
     }
 
-    static func filenameTimestamp(for date: Date, in timeZone: TimeZone = .current) -> String {
+    func filenameTimestamp(for date: Date, in timeZone: TimeZone = .current) -> String {
         let tz: String
         let offset = timeZone.secondsFromGMT()
         if offset == 0 {
@@ -214,7 +222,7 @@ private extension WalletTool {
         return "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!)-\(components.minute!)-\(components.second!).\(components.nanosecond!)\(tz)"
     }
 
-    static func save(data: Data, to url: URL) throws {
+    func save(data: Data, to url: URL) throws {
         //let json = try JSONEncoder().encode(key)
         try data.write(to: url, options: [.atomicWrite])
     }

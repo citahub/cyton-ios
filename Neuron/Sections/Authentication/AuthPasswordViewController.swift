@@ -34,14 +34,14 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
     }
 
     @IBAction func confirm(_ sender: Any) {
-        guard let currentWallet = currentWallet, let account = WalletTool.account(for: currentWallet.address) else {
+        guard let currentWallet = currentWallet, let account = WalletManager.default.account(for: currentWallet.address) else {
             return
         }
         guard let password = passwordTextField.text else { return }
         passwordTextField.resignFirstResponder()
         Toast.showHUD()
         DispatchQueue.global().async {
-            let isPasswordCorrect = WalletTool.checkPassword(account: account, password: password)
+            let isPasswordCorrect = WalletManager.default.checkPassword(account: account, password: password)
             DispatchQueue.main.sync { [weak self] in
                 Toast.hideHUD()
                 if isPasswordCorrect {
