@@ -34,9 +34,13 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="默认货币单位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KCU-3X-Rf4">
                                             <rect key="frame" x="51" y="15" width="104" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <gestureRecognizers/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <connections>
+                                                <outletCollection property="gestureRecognizers" destination="zx1-rh-aNP" appends="YES" id="mFg-SW-iPc"/>
+                                            </connections>
                                         </label>
                                         <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="currency" id="PoI-AK-ccJ">
                                             <rect key="frame" x="16" y="14" width="20" height="20"/>
@@ -156,6 +160,11 @@
                     <navigationItem key="navigationItem" title="设置" id="0CW-xZ-GRc"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFz-TJ-bUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer delaysTouchesBegan="YES" delaysTouchesEnded="NO" allowableMovement="10" minimumPressDuration="0.5" id="zx1-rh-aNP">
+                    <connections>
+                        <action selector="switchEthNetwork:" destination="cE0-S4-LPn" id="Qay-6N-pBb"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="44" y="190.25487256371815"/>
         </scene>
@@ -234,6 +243,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mPA-fZ-7qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1303" y="-114"/>
+        </scene>
+        <!--Switch Network View Controller-->
+        <scene sceneID="XG9-Ro-Kqm">
+            <objects>
+                <tableViewController storyboardIdentifier="switchNetworkViewController" id="8sp-Gz-rtW" customClass="SwitchNetworkViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q94-Os-svw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="pif-85-b0L">
+                            <rect key="frame" x="0.0" y="72" width="375" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchNetwork" id="KgP-ce-xfm" customClass="SwitchNetworkTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KgP-ce-xfm" id="4ez-ir-SIb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voK-YF-OcV">
+                                            <rect key="frame" x="15" y="0.0" width="187.5" height="43.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="187.5" id="t8R-Wx-J8T"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currency_selected" translatesAutoresizingMaskIntoConstraints="NO" id="npr-VO-Gda">
+                                            <rect key="frame" x="339" y="14" width="21" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="GnS-BX-BXG"/>
+                                                <constraint firstAttribute="width" constant="21" id="iUq-c5-or9"/>
+                                                <constraint firstAttribute="height" constant="15" id="mU5-WU-J4h"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="npr-VO-Gda" secondAttribute="bottom" constant="14.5" id="2dd-wj-ywG"/>
+                                        <constraint firstAttribute="bottom" secondItem="voK-YF-OcV" secondAttribute="bottom" id="7Lr-LE-kzt"/>
+                                        <constraint firstAttribute="trailing" secondItem="npr-VO-Gda" secondAttribute="trailing" constant="15" id="86g-hP-HbU"/>
+                                        <constraint firstItem="npr-VO-Gda" firstAttribute="top" secondItem="4ez-ir-SIb" secondAttribute="top" constant="14" id="ZI0-sG-maC"/>
+                                        <constraint firstItem="voK-YF-OcV" firstAttribute="leading" secondItem="4ez-ir-SIb" secondAttribute="leading" constant="15" id="dIO-qN-2gZ"/>
+                                        <constraint firstItem="voK-YF-OcV" firstAttribute="top" secondItem="4ez-ir-SIb" secondAttribute="top" id="uJm-X9-IaC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="networkLabel" destination="voK-YF-OcV" id="7w9-lm-0n1"/>
+                                    <outlet property="selectImage" destination="npr-VO-Gda" id="DGO-Qi-tmJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8sp-Gz-rtW" id="N2M-0Z-ZLq"/>
+                            <outlet property="delegate" destination="8sp-Gz-rtW" id="HPB-9a-sH0"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVb-Vy-aat" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="-115"/>
         </scene>
         <!--About Us Table View Controller-->
         <scene sceneID="xAg-ed-YKo">
@@ -525,6 +598,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y6N-xl-ghu">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <gestureRecognizers/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

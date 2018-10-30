@@ -51,6 +51,12 @@ class SettingsViewController: UITableViewController {
         return cell
     }
 
+    @IBAction func switchEthNetwork(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            let controller = storyboard!.instantiateViewController(withIdentifier: "switchNetworkViewController") as! SwitchNetworkViewController
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
     // MARK: UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

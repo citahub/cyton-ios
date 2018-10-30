@@ -11,6 +11,14 @@ import web3swift
 
 struct Web3Network {
     static func getWeb3() -> web3 {
-        return Web3.InfuraMainnetWeb3()
+        let selectedNetwork = EthereumNetworkService().getNetworkSelect()
+        switch selectedNetwork {
+        case .mainnet:
+            return Web3.InfuraMainnetWeb3()
+        case .rinkeby:
+            return Web3.InfuraRinkebyWeb3()
+        case .ropsten:
+            return Web3.InfuraRopstenWeb3()
+        }
     }
 }
