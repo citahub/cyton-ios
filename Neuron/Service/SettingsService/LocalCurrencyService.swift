@@ -9,7 +9,7 @@
 import UIKit
 
 class LocalCurrencyService {
-    let localCurrencyKey = "localCurrency"
+    private let localCurrencyKey = "localCurrency"
 
     func saveLocalCurrencyFirstLaunch() {
         let shortSelect = UserDefaults.standard.string(forKey: localCurrencyKey)

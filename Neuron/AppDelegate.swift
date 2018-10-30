@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func initEthereumNetwork() {
-        EthereumNetworkService().setNetworkFirstLaunch()
+        Web3Network().setNetworkFirstLaunch()
     }
 
     private func localCurrency() {

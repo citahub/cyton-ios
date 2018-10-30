@@ -131,7 +131,7 @@ class ContractController: UIViewController {
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
         Toast.showHUD()
         DispatchQueue.global().async {
-            let web3 = Web3Network.getWeb3()
+            let web3 = Web3Network().getWeb3()
             if ethGasPirce != nil {
                 self.gasPrice = BigUInt(ethGasPirce!)!
             } else {

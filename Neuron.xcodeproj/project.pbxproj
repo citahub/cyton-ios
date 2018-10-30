@@ -107,7 +107,6 @@
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
 		898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */; };
-		8989E2CD21880CAD008A1BDE /* EthereumNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989E2CC21880CAD008A1BDE /* EthereumNetworkService.swift */; };
 		8989E2CF21883400008A1BDE /* SwitchNetworkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989E2CE21883400008A1BDE /* SwitchNetworkViewController.swift */; };
 		8989E2D32188440D008A1BDE /* SwitchNetworkTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8989E2D22188440D008A1BDE /* SwitchNetworkTableViewCell.swift */; };
 		898A19EC20B5018B00ECB465 /* AssetsDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */; };
@@ -326,7 +325,6 @@
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatekeyViewController.swift; sourceTree = "<group>"; };
-		8989E2CC21880CAD008A1BDE /* EthereumNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumNetworkService.swift; sourceTree = "<group>"; };
 		8989E2CE21883400008A1BDE /* SwitchNetworkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchNetworkViewController.swift; sourceTree = "<group>"; };
 		8989E2D22188440D008A1BDE /* SwitchNetworkTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchNetworkTableViewCell.swift; sourceTree = "<group>"; };
 		898A19EA20B5018B00ECB465 /* AssetsDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsDetailController.swift; sourceTree = "<group>"; };
@@ -974,7 +972,6 @@
 			isa = PBXGroup;
 			children = (
 				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
-				8989E2CC21880CAD008A1BDE /* EthereumNetworkService.swift */,
 			);
 			path = SettingsService;
 			sourceTree = "<group>";
@@ -1469,7 +1466,6 @@
 				898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */,
 				1A1E8411216DF55D00B15E88 /* ExportError.swift in Sources */,
 				8913437520C7D3A400A17AEF /* Toast.swift in Sources */,
-				8989E2CD21880CAD008A1BDE /* EthereumNetworkService.swift in Sources */,
 				89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */,
 				89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */,
 			);
