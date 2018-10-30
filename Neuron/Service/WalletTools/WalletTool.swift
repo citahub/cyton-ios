@@ -4,7 +4,8 @@
 //
 //
 
-import UIKit
+import Foundation
+import web3swift
 import TrustKeystore
 import TrustCore
 import struct TrustCore.EthereumAddress
@@ -13,12 +14,15 @@ import Result
 struct WalletTool {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
     typealias ImportResultCallback = (ImportResult<Account>) -> Void
-    typealias GenerateMnemonicCallback = (String) -> Void
     typealias ExportPrivateCallback = (ImportResult<String>) -> Void
 
-    static let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-    static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
-    static let keyStore = try! KeyStore(keyDirectory: keysDirectory)
+    static var keystorePath: String = {
+        let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        return documentDir + "/keystore"
+    }()
+    static let keystoreDir = URL(fileURLWithPath: keystorePath)
+    static let keystoreManager = KeystoreManager.managerForPath(keystorePath)!
+    static let keyStore = try! KeyStore(keyDirectory: keystoreDir)
 
     static func wallet(for address: String) -> Wallet? {
         if let ethAddress = EthereumAddress(string: address) {
@@ -43,21 +47,8 @@ struct WalletTool {
         return wallet.accounts[0]
     }
 
-    /// 生成12位助记词
-    ///
-    /// - Parameter completion: 回调
-    static func generateMnemonic(completion: @escaping GenerateMnemonicCallback) {
-        let mnemonic = Crypto.generateMnemonic(strength: 128)
-        let words = mnemonic.components(separatedBy: " ")
-        var repeateWordsDetector = [String]()
-        for word in words {
-            if repeateWordsDetector.contains(word) {
-                generateMnemonic(completion: completion)
-                return
-            }
-            repeateWordsDetector.append(word)
-        }
-        completion(mnemonic)
+    static func generateMnemonic() -> String {
+        return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
     }
 
     /// 导入钱包
@@ -206,21 +197,6 @@ struct WalletTool {
         }
     }
 
-    /// exportPrivate async
-    ///
-    /// - Parameters:
-    ///   - account: account
-    ///   - password: password
-    ///   - completion: ImportResult<String>
-    static func exportPrivateKeyAsync(wallet: Wallet, password: String, completion:@escaping ExportPrivateCallback) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let privateKey = exportPrivateKey(wallet: wallet, password: password)
-            DispatchQueue.main.async {
-                completion(privateKey)
-            }
-        }
-    }
-
     static func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
         do {
             let account = wallet.accounts.first!
@@ -230,7 +206,9 @@ struct WalletTool {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
         }
     }
+}
 
+extension WalletTool {
     static func checkWalletName(name: String) -> Bool {
         let appModel = WalletRealmTool.getCurrentAppModel()
         var nameArr = [""]

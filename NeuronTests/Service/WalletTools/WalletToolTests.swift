@@ -44,4 +44,9 @@ class WalletToolTests: XCTestCase {
         }
         XCTAssertEqual(exported, "6e2c8766538873002c638137de5d2270a07b413468ae125ec2751526ffefcffa")
     }
+
+    func testGenerate12WordsMnemonic() {
+        let mnemonic = WalletTool.generateMnemonic()
+        XCTAssertEqual(mnemonic.split(separator: " ").count, 12)
+    }
 }

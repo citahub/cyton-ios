@@ -68,9 +68,7 @@ class CreateWalletController: UITableViewController {
             let generateMnemonicController = segue.destination as! GenerateMnemonicController
             generateMnemonicController.walletModel = walletModel
             generateMnemonicController.password = password!
-            WalletTool.generateMnemonic { (mnemonic) in
-                generateMnemonicController.mnemonicStr = mnemonic
-            }
+            generateMnemonicController.mnemonicStr = WalletTool.generateMnemonic()
         }
     }
 
