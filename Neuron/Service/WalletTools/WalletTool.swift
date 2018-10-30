@@ -16,7 +16,7 @@ struct WalletTool {
     typealias GenerateMnemonicCallback = (String) -> Void
     typealias ExportPrivateCallback = (ImportResult<String>) -> Void
 
-    static let documentDir = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, .userDomainMask, true)[0]
+    static let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
     static let keysDirectory: URL = URL(fileURLWithPath: documentDir + "/keystore")
     static let keyStore = try! KeyStore(keyDirectory: keysDirectory)
 

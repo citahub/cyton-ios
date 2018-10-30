@@ -44,7 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func skipBackupFiles() {
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
+        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).compactMap { URL(fileURLWithPath: $0) }
         paths.append(WalletTool.keysDirectory)
         SkipBackupFiles(paths: paths).skip()
     }
