@@ -6,10 +6,14 @@
 
 import Foundation
 import web3swift
-import TrustKeystore
-import TrustCore
-import struct TrustCore.EthereumAddress
 import Result
+
+struct Account {
+    let address: String
+}
+
+struct Wallet {
+}
 
 struct WalletTool {
     static let defaultDerivationPath = "m/44'/60'/0'/0/0"
@@ -22,40 +26,16 @@ struct WalletTool {
     }()
     static let keystoreDir = URL(fileURLWithPath: keystorePath)
     static let keystoreManager = KeystoreManager.managerForPath(keystorePath)!
-    static let keyStore = try! KeyStore(keyDirectory: keystoreDir)
 
     static func wallet(for address: String) -> Wallet? {
-        if let ethAddress = EthereumAddress(string: address) {
-            return keyStore.wallets.first(where: { wallet in
-                wallet.accounts[0].address.data == ethAddress.data
-            })
-        }
+        // TODO
         return nil
-    }
-
-    static func createAccount(with password: String, completion: @escaping (Result<Account, KeystoreError>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let account = self.createAccount(password: password)
-            DispatchQueue.main.async {
-                completion(.success(account))
-            }
-        }
-    }
-
-    static func createAccount(password: String) -> Account {
-        let wallet = try! keyStore.createWallet(password: password, derivationPaths: [DerivationPath(defaultDerivationPath)!])
-        return wallet.accounts[0]
     }
 
     static func generateMnemonic() -> String {
         return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
     }
 
-    /// 导入钱包
-    ///
-    /// - Parameters:
-    ///   - importType: 导入类型
-    ///   - completion: 导入结果回调
     static func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
         switch importType {
         case .keystore(let keystore, let password):
@@ -63,96 +43,57 @@ struct WalletTool {
         case .privateKey(let privateKey, let password):
             importPrivateKeyAsync(privateKey: privateKey, password: password, completion: completion)
         case .mnemonic(let mnemonic, let password, let derivationPath):
-            importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: derivationPath, completion: completion)
+            importMnemonicAsync(mnemonic: mnemonic, password: password, derivationPath: derivationPath, completion: completion)
         }
     }
 
-    /// 异步导入助记词钱包
-    ///
-    /// - Parameters:
-    ///   - mnemonic: 助记词
-    ///   - password: 钱包密码
-    ///   - devirationPath: devirationPath
-    ///   - completion: 导入结果回调
-    static func importMnemonicAsync(mnemonic: String, password: String, devirationPath: String, completion: @escaping ImportResultCallback) {
+    static func importMnemonicAsync(mnemonic: String, password: String, derivationPath: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = importMnemonic(mnemonic: mnemonic, password: password, devirationPath: devirationPath)
+            let importResult = importMnemonic(mnemonic: mnemonic, password: password, derivationPath: derivationPath)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    /// 导入助记词钱包
-    ///
-    /// - Parameters:
-    ///   - mnemonic: 助记词
-    ///   - password: 钱包密码
-    ///   - devirationPath: devirationPath
-    ///   - completion: 导入结果回调
-    static func importMnemonic(mnemonic: String, password: String, devirationPath: String) -> ImportResult<Account> {
+    static func importMnemonic(mnemonic: String, password: String, derivationPath: String) -> ImportResult<Account> {
         do {
-            let wallet = try keyStore.import(mnemonic: mnemonic, encryptPassword: password, derivationPath: DerivationPath(devirationPath)!)
-            return ImportResult.succeed(result: wallet.accounts[0])
-        } catch {
-            switch error {
-            case KeyStore.Error.accountAlreadyExists:
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已经存在")
-            case DecryptError.invalidPassword:
-                return ImportResult.failed(error: ImportError.wrongPassword, errorMessage: "密码错误")
-            case KeyStore.Error.invalidMnemonic:
-                return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "无效的助记词")
-            default:
-                return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
+            guard let keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: derivationPath) else {
+                return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "钱包导入失败")
             }
+
+            // TODO: check ImportError.accountAlreadyExists
+            // TODO: Save
+            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
+        } catch let error {
+            return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
         }
     }
 
-    /// 异步导入JSON密钥
-    ///
-    /// - Parameters:
-    ///   - keystore: json keystore密钥
-    ///   - password: 密码
-    ///   - completion: 回调
     static func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = importKeystore(keystore: keystore, password: password)
+            let importResult = importKeystore(keystore, password: password)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    /// 通过JSON形式的密钥导入钱包
-    ///
-    /// - Parameters:
-    ///   - json: json密钥
-    ///   - password: 密码
-    /// - Returns: 导入结果
-    static func importKeystore(keystore: String, password: String) -> ImportResult<Account> {
-        guard let data = keystore.data(using: .utf8) else {
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "无效的keystore")
+    static func importKeystore(_ keystoreString: String, password: String) -> ImportResult<Account> {
+        guard let keystore = EthereumKeystoreV3(keystoreString) else {
+            return ImportResult.failed(error: ImportError.invalidateJSONKey, errorMessage: "无效的keystore")
         }
 
         do {
-            let account = try keyStore.import(json: data, password: password, newPassword: password, coin: .ethereum).accounts[0]
-            return ImportResult.succeed(result: account)
+            try keystore.regenerate(oldPassword: password, newPassword: password)
+            // TODO: check ImportError.accountAlreadyExists
+            // TODO: Save
+            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
         } catch {
-            switch error {
-            case KeyStore.Error.accountAlreadyExists:
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已经存在")
-            default:
-                return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
-            }
+            return ImportResult.failed(error: ImportError.wrongPassword, errorMessage: "密码错误")
         }
     }
 
-    /// 使用私钥异步导入钱包
-    ///
-    /// - Parameters:
-    ///   - privateKey: 私钥
-    ///   - password: 钱包密码
-    /// - Returns: ImportResult
     static func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
             let importResult = importPrivateKey(privateKey: privateKey, password: password)
@@ -162,35 +103,24 @@ struct WalletTool {
         }
     }
 
-    /// 使用私钥导入钱包
-    ///
-    /// - Parameters:
-    ///   - privateKey: 私钥
-    ///   - password: 钱包密码
-    /// - Returns: ImportResult
     static func importPrivateKey(privateKey: String, password: String) -> ImportResult<Account> {
-        guard let data = Data(hexString: privateKey), let pk = PrivateKey(data: data) else {
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "导入私钥失败")
-        }
         do {
-            let wallet = try keyStore.import(privateKey: pk, password: password, coin: .ethereum)
-            return ImportResult.succeed(result: wallet.accounts[0])
-        } catch {
-            switch error {
-            case KeyStore.Error.accountAlreadyExists:
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已经存在")
-            default:
-                return ImportResult.failed(error: error, errorMessage: "钱包导入私钥失败失败")
+            guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
+                let keystore = try EthereumKeystoreV3(privateKey: data, password: password) else {
+                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
             }
+
+            // TODO: check ImportError.accountAlreadyExists
+            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
+        } catch {
+            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
         }
     }
 
     public static func exportKeystore(wallet: Wallet, password: String) -> ExportResult<String> {
         do {
-            let keystoreData = try keyStore.export(wallet: wallet, password: password, newPassword: password)
-            guard let keystore = String(data: keystoreData, encoding: .utf8) else {
-                return ExportResult.failed(error: ExportError.unknownError)
-            }
+            // TODO
+            let keystore = ""
             return ExportResult.succeed(result: keystore)
         } catch {
             return ExportResult.failed(error: ExportError.invalidPassword)
@@ -199,12 +129,33 @@ struct WalletTool {
 
     static func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
         do {
-            let account = wallet.accounts.first!
-            let privateKey = try account.privateKey(password: password)
-            return ImportResult.succeed(result: privateKey.data.toHexString())
+            // TODO
+            let privateKey = ""
+            return ImportResult.succeed(result: privateKey)
         } catch {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
         }
+    }
+}
+
+extension WalletTool {
+    static func updatePassword(address: String, password: String, newPassword: String) throws {
+        let wallet = WalletTool.wallet(for: address)!
+        // TODO
+        throw KeystoreError.accountNotFound
+    }
+
+    static func deleteWallet(address: String, password: String) throws {
+        let wallet = WalletTool.wallet(for: address)!
+        // TODO
+        throw KeystoreError.accountNotFound
+    }
+
+    static func getKeystoreForCurrentWallet(password: String) throws -> String {
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let wallet = WalletTool.wallet(for: walletModel.address)!
+        // TODO
+        throw KeystoreError.accountNotFound
     }
 }
 
@@ -224,13 +175,50 @@ extension WalletTool {
 
     static func checkPassword(wallet: Wallet, password: String) -> Bool {
         do {
-            var privateKeyData = try wallet.key.decrypt(password: password)
+            // TODO
+            var privateKeyData = "todo"
             defer {
-                privateKeyData.resetBytes(in: 0 ..< privateKeyData.count)
+                // TODO reset privateKeyData
             }
             return true
         } catch {
             return false
         }
+    }
+}
+
+// MARK: - Keystore Disk Storage
+private extension WalletTool {
+    static func makeURL(for address: String?) -> URL {
+        let identifier: String
+        if let address = address {
+            identifier = address.removeHexPrefix()
+        } else {
+            identifier = UUID().uuidString
+        }
+
+        return keystoreDir.appendingPathComponent(generateFileName(identifier: identifier))
+    }
+
+    static func generateFileName(identifier: String, date: Date = Date(), timeZone: TimeZone = .current) -> String {
+        return "UTC--\(filenameTimestamp(for: date, in: timeZone))--\(identifier)"
+    }
+
+    static func filenameTimestamp(for date: Date, in timeZone: TimeZone = .current) -> String {
+        let tz: String
+        let offset = timeZone.secondsFromGMT()
+        if offset == 0 {
+            tz = "Z"
+        } else {
+            tz = String(format: "%03d00", offset / 60)
+        }
+
+        let components = Calendar(identifier: .iso8601).dateComponents(in: timeZone, from: date)
+        return "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!)-\(components.minute!)-\(components.second!).\(components.nanosecond!)\(tz)"
+    }
+
+    static func save(data: Data, to url: URL) throws {
+        //let json = try JSONEncoder().encode(key)
+        try data.write(to: url, options: [.atomicWrite])
     }
 }

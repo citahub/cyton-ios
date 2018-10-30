@@ -103,7 +103,7 @@ class PayCoverViewController: UIViewController {
         ethTransactionService.sign(password: password, transaction: transaction, address: toAddress) { (result) in
             switch result {
             case .success(let transactionIntermediate):
-                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: transactionIntermediate.transaction.data.hexString, error: nil)
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: transactionIntermediate.transaction.data.toHexString(), error: nil)
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
@@ -180,7 +180,7 @@ class PayCoverViewController: UIViewController {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
             case .success(let value):
-                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.hexString.addHexPrefix(), error: nil)
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.toHexString().addHexPrefix(), error: nil)
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
             }

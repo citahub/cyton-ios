@@ -52,7 +52,7 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
                 return
             }
             do {
-                try WalletCryptoService.updatePassword(address: address, password: self.oldPassword, newPassword: self.newPassword)
+                try WalletTool.updatePassword(address: address, password: self.oldPassword, newPassword: self.newPassword)
             } catch {
                 DispatchQueue.main.async {
                     Toast.hideHUD()

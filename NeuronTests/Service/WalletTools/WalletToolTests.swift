@@ -8,8 +8,6 @@
 
 import XCTest
 @testable import Neuron
-import TrustKeystore
-import TrustCore
 
 class WalletToolTests: XCTestCase {
     var keyDirectory: URL!
@@ -23,16 +21,16 @@ class WalletToolTests: XCTestCase {
     }
 
     func testExportPrivateKeyFromKeyWallet() throws {
-        let keyStore = try KeyStore(keyDirectory: keyDirectory)
-        let privateKey = PrivateKey()
-        let keyWallet = try keyStore.import(privateKey: privateKey, password: "password", coin: .ethereum)
+        /* TODO
         guard case .succeed(let exported) = WalletTool.exportPrivateKey(wallet: keyWallet, password: "password") else {
             return XCTFail("Export fail")
         }
         XCTAssertEqual(Data.fromHex(exported), privateKey.data)
+        */
     }
 
     func testExportPrivateKeyFromHDWallet() throws {
+        /*
         let keyStore = try KeyStore(keyDirectory: keyDirectory)
         let hdWallet = try keyStore.import(
             mnemonic: "begin auction word young address dawn chief maid brave arrive copy process",
@@ -43,6 +41,7 @@ class WalletToolTests: XCTestCase {
             return XCTFail("Export fail")
         }
         XCTAssertEqual(exported, "6e2c8766538873002c638137de5d2270a07b413468ae125ec2751526ffefcffa")
+        */
     }
 
     func testGenerate12WordsMnemonic() {

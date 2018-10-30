@@ -18,7 +18,7 @@ class ERC20TransactionService {
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        guard let keyStoreStr = try? WalletCryptoService.getKeystoreForCurrentWallet(password: walletPassword) else {
+        guard let keyStoreStr = try? WalletTool.getKeystoreForCurrentWallet(password: walletPassword) else {
             DispatchQueue.main.async {
                 completion(SendEthResult.error(SendEthError.invalidPassword))
             }
