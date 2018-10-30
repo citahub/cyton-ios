@@ -25,10 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupKeyboard()
         localCurrency()
+        initEthereumNetwork()
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
         return true
+    }
+
+    private func initEthereumNetwork() {
+        EthereumNetworkService().setNetworkFirstLaunch()
     }
 
     private func localCurrency() {
