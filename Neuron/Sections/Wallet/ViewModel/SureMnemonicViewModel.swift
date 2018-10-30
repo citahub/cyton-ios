@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import TrustKeystore
-import struct TrustCore.EthereumAddress
+import web3swift
 import RealmSwift
 import IGIdenticon
 
@@ -42,7 +41,7 @@ class SureMnemonicViewModel: NSObject {
             switch result {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
-                self.walletAddress = EthereumAddress(data: account.address.data)!.eip55String
+                self.walletAddress = EthereumAddress.toChecksumAddress(account.address.description)!
                 SensorsAnalytics.Track.createWallet(address: self.walletAddress)
                 self.saveWallet()
             case .failed(_, let errorMessage):

@@ -8,7 +8,6 @@
 
 import UIKit
 import SCLAlertView
-import TrustKeystore
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!

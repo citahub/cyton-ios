@@ -8,7 +8,6 @@
 
 import UIKit
 import TrezorCrypto
-import TrustCore
 
 struct WalletCryptoService {
     static func updatePassword(address: String, password: String, newPassword: String) throws {
