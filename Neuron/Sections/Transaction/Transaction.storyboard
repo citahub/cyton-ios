@@ -13,7 +13,7 @@
         <!--Transaction View Controller-->
         <scene sceneID="LYw-Ut-HWd">
             <objects>
-                <viewController storyboardIdentifier="transactionViewController" id="zzs-A1-Sn6" customClass="TransactionViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionHistoryViewController" id="zzs-A1-Sn6" customClass="TransactionHistoryViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="C50-du-EEs">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

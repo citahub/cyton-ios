@@ -11,7 +11,7 @@ import LYEmptyView
 import PullToRefresh
 import WebKit
 
-class TransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
+class TransactionHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tokenProfleView: UIView!
     @IBOutlet weak var tokenIconView: UIImageView!

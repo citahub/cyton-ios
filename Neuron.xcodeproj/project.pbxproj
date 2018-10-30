@@ -160,7 +160,7 @@
 		89C614572140D4C500DC3DF4 /* currency.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C614562140D4C500DC3DF4 /* currency.plist */; };
 		89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */; };
 		89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */; };
-		89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145F2141421400DC3DF4 /* TransactionViewController.swift */; };
+		89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */; };
 		89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6E09820E07F8E00C94026 /* ShareItem.swift */; };
 		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
@@ -376,7 +376,7 @@
 		89C614562140D4C500DC3DF4 /* currency.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = currency.plist; sourceTree = "<group>"; };
 		89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCurrencyService.swift; sourceTree = "<group>"; };
-		89C6145F2141421400DC3DF4 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		89C6E09820E07F8E00C94026 /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		89CA1FAB213F822B00669B2C /* tokens-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-list.json"; sourceTree = "<group>"; };
 		89CA1FAD213F832800669B2C /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
@@ -873,7 +873,7 @@
 			children = (
 				898A1A1E20B7B4F300ECB465 /* View */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
-				89C6145F2141421400DC3DF4 /* TransactionViewController.swift */,
+				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
 				89230DDB214A6CBE007CB446 /* PaymentViewController.swift */,
 				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
 				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
@@ -1390,7 +1390,7 @@
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
-				89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */,
+				89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */,
 				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
