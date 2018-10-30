@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="akW-48-Rr6">
-                            <rect key="frame" x="0.0" y="278" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="328" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -34,6 +34,7 @@
                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="默认货币单位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KCU-3X-Rf4">
                                             <rect key="frame" x="51" y="15" width="104" height="20.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <gestureRecognizers/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -55,8 +56,40 @@
                                     <outlet property="localCurrencyLabel" destination="a1h-wv-ki9" id="j1k-Wa-Zdh"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingAuthenticationTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingAuthenticationTableViewCell" textLabel="TQb-nX-Gya" imageView="Ip1-JA-WH7" style="IBUITableViewCellStyleDefault" id="vWd-As-T0H" customClass="SettingAuthenticationTableViewCell" customModule="Neuron" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingSwitchEthereumNetwork" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SettingSwitchEthereumNetwork" textLabel="fSj-88-8Oz" detailTextLabel="f1a-Ka-oTx" imageView="Q5n-RG-olk" style="IBUITableViewCellStyleValue1" id="Klr-qB-UY5" customClass="SettingCurrencyTableViewCell" customModule="Neuron" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="78" width="375" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Klr-qB-UY5" id="SSO-0f-0vY">
+                                    <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="以太坊网络" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fSj-88-8Oz">
+                                            <rect key="frame" x="51" y="15" width="87" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <gestureRecognizers/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="ethereum_network" id="Q5n-RG-olk">
+                                            <rect key="frame" x="16" y="14" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </imageView>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="mainnet" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="f1a-Ka-oTx">
+                                            <rect key="frame" x="281.5" y="16" width="58.5" height="19.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.59607843140000005" green="0.61176470589999998" blue="0.66666666669999997" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="localCurrencyLabel" destination="f1a-Ka-oTx" id="C1b-SV-OZJ"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingAuthenticationTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingAuthenticationTableViewCell" textLabel="TQb-nX-Gya" imageView="Ip1-JA-WH7" style="IBUITableViewCellStyleDefault" id="vWd-As-T0H" customClass="SettingAuthenticationTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="128" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vWd-As-T0H" id="kAI-Pn-d3s">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -84,7 +117,7 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SettingAboutUsTableViewCell" textLabel="ctX-FE-pBX" imageView="559-8b-uVd" style="IBUITableViewCellStyleDefault" id="rSZ-Id-bNh" customClass="SettingAboutUsTableViewCell" customModule="Neuron" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="128" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="178" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rSZ-Id-bNh" id="YbG-qY-ILA">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
@@ -105,7 +138,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SettingForumsTableViewCell" textLabel="vzt-e8-oRb" imageView="hJB-fm-4cQ" style="IBUITableViewCellStyleDefault" id="16n-A7-Oa8" customClass="SettingAboutUsTableViewCell" customModule="Neuron" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="178" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="228" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="16n-A7-Oa8" id="LJe-tj-c7O">
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
@@ -126,7 +159,7 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="SettingContactCustomerServiceTableViewCell" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingContactCustomerServiceTableViewCell" textLabel="klL-ha-h2I" imageView="nGj-VW-HdZ" style="IBUITableViewCellStyleDefault" id="YRr-4r-aDc" customClass="SettingContactUsTableViewCell" customModule="Neuron" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="228" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="278" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YRr-4r-aDc" id="KTf-nk-czo">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -234,6 +267,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mPA-fZ-7qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1303" y="-114"/>
+        </scene>
+        <!--Switch Network View Controller-->
+        <scene sceneID="XG9-Ro-Kqm">
+            <objects>
+                <tableViewController storyboardIdentifier="switchNetworkViewController" id="8sp-Gz-rtW" customClass="SwitchNetworkViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q94-Os-svw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <view key="tableFooterView" contentMode="scaleToFill" id="pif-85-b0L">
+                            <rect key="frame" x="0.0" y="72" width="375" height="1"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchNetwork" id="KgP-ce-xfm" customClass="SwitchNetworkTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KgP-ce-xfm" id="4ez-ir-SIb">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voK-YF-OcV">
+                                            <rect key="frame" x="15" y="0.0" width="187.5" height="43.5"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="187.5" id="t8R-Wx-J8T"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="currency_selected" translatesAutoresizingMaskIntoConstraints="NO" id="npr-VO-Gda">
+                                            <rect key="frame" x="339" y="14" width="21" height="15"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="21" id="GnS-BX-BXG"/>
+                                                <constraint firstAttribute="width" constant="21" id="iUq-c5-or9"/>
+                                                <constraint firstAttribute="height" constant="15" id="mU5-WU-J4h"/>
+                                            </constraints>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="npr-VO-Gda" secondAttribute="bottom" constant="14.5" id="2dd-wj-ywG"/>
+                                        <constraint firstAttribute="bottom" secondItem="voK-YF-OcV" secondAttribute="bottom" id="7Lr-LE-kzt"/>
+                                        <constraint firstAttribute="trailing" secondItem="npr-VO-Gda" secondAttribute="trailing" constant="15" id="86g-hP-HbU"/>
+                                        <constraint firstItem="npr-VO-Gda" firstAttribute="top" secondItem="4ez-ir-SIb" secondAttribute="top" constant="14" id="ZI0-sG-maC"/>
+                                        <constraint firstItem="voK-YF-OcV" firstAttribute="leading" secondItem="4ez-ir-SIb" secondAttribute="leading" constant="15" id="dIO-qN-2gZ"/>
+                                        <constraint firstItem="voK-YF-OcV" firstAttribute="top" secondItem="4ez-ir-SIb" secondAttribute="top" id="uJm-X9-IaC"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="networkLabel" destination="voK-YF-OcV" id="7w9-lm-0n1"/>
+                                    <outlet property="selectImage" destination="npr-VO-Gda" id="DGO-Qi-tmJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="8sp-Gz-rtW" id="N2M-0Z-ZLq"/>
+                            <outlet property="delegate" destination="8sp-Gz-rtW" id="HPB-9a-sH0"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oVb-Vy-aat" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2105" y="-115"/>
         </scene>
         <!--About Us Table View Controller-->
         <scene sceneID="xAg-ed-YKo">
@@ -525,6 +622,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y6N-xl-ghu">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <gestureRecognizers/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -543,6 +641,7 @@
         <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
         <image name="currency_selected" width="21" height="15"/>
+        <image name="ethereum_network" width="20" height="20"/>
         <image name="icon_authentication" width="20" height="20"/>
         <image name="infua" width="20" height="20"/>
         <image name="nervos_network" width="20" height="20"/>
