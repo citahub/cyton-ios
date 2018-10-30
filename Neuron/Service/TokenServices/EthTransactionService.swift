@@ -40,7 +40,7 @@ class EthTransactionService {
                 return
             }
 
-            let web3 = Web3Network.getWeb3()
+            let web3 = Web3Network().getWeb3()
             guard let selectedKey = currentWalletAddress else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.noAvailableKeys))
@@ -112,7 +112,7 @@ class EthTransactionService {
                 }
                 return
             }
-            let web3 = Web3Network.getWeb3()
+            let web3 = Web3Network().getWeb3()
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             try? Web3Signer.signIntermediate(intermediate: &transactionIntermediate, keystore: KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]), account: EthereumAddress(address)!, password: password)
             DispatchQueue.main.async {

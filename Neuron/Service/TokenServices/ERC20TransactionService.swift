@@ -40,7 +40,7 @@ class ERC20TransactionService {
                 return
             }
 
-            let web3 = Web3Network.getWeb3()
+            let web3 = Web3Network().getWeb3()
             web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
             let token = erc20TokenAddress
             var options = Web3Options.defaultOptions()
