@@ -226,14 +226,10 @@ extension WalletManager {
     }
 
     func verifyPassword(wallet: Wallet, password: String) -> Bool {
-        do {
-            // TODO
-            var privateKeyData = "todo"
-            defer {
-                // TODO reset privateKeyData
-            }
+        switch exportKeystore(wallet: wallet, password: password) {
+        case .succeed(result: _):
             return true
-        } catch {
+        default:
             return false
         }
     }
