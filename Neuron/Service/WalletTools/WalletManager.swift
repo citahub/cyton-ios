@@ -32,6 +32,10 @@ struct WalletManager {
         keystoreManager = KeystoreManager.managerForPath(keystorePath)!
     }
 
+    var addresses: [String] {
+        return keystoreManager.addresses!.map { $0.address }
+    }
+
     static func generateMnemonic() -> String {
         return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
     }
@@ -67,9 +71,16 @@ struct WalletManager {
                 return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "钱包导入失败")
             }
 
-            // TODO: check ImportError.accountAlreadyExists
-            // TODO: Save
-            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
+            guard let address = keystore.addresses?.first?.address else {
+                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
+            }
+            if doesWalletExist(address: address) {
+                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
+            }
+
+            try save(data: keystore.serialize()!, to: makeURL(for: address))
+
+            return ImportResult.succeed(result: Account(address: address))
         } catch let error {
             return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
         }
@@ -89,14 +100,26 @@ struct WalletManager {
             return ImportResult.failed(error: ImportError.invalidateJSONKey, errorMessage: "无效的keystore")
         }
 
+        guard let address = keystore.getAddress()?.address else {
+            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
+        }
+        if doesWalletExist(address: address) {
+            return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
+        }
+
         do {
             try keystore.regenerate(oldPassword: password, newPassword: password)
-            // TODO: check ImportError.accountAlreadyExists
-            // TODO: Save
-            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
         } catch {
             return ImportResult.failed(error: ImportError.wrongPassword, errorMessage: "密码错误")
         }
+
+        do {
+            try save(data: keystore.serialize()!, to: makeURL(for: address))
+        } catch {
+            return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
+        }
+
+        return ImportResult.succeed(result: Account(address: address))
     }
 
     func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
@@ -115,10 +138,17 @@ struct WalletManager {
                 return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
             }
 
-            // TODO: check ImportError.accountAlreadyExists
-            return ImportResult.succeed(result: Account(address: keystore.addresses!.first!.address))
+            guard let address = keystore.getAddress()?.address else {
+                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
+            }
+            if doesWalletExist(address: address) {
+                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
+            }
+
+            try save(data: keystore.serialize()!, to: makeURL(for: address))
+            return ImportResult.succeed(result: Account(address: address))
         } catch {
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
+            return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
         }
     }
 
@@ -164,21 +194,17 @@ extension WalletManager {
     }
 }
 
+// MARK: - Validations
 extension WalletManager {
-    func checkWalletName(name: String) -> Bool {
-        let appModel = WalletRealmTool.getCurrentAppModel()
-        var nameArr = [""]
-        for wallModel in appModel.wallets {
-            nameArr.append(wallModel.name)
-        }
-        if  nameArr.contains(name) {
-            return false
-        } else {
-            return true
-        }
+    func doesWalletExist(address: String) -> Bool {
+        return addresses.map { $0.removeHexPrefix().lowercased() }.contains(address.removeHexPrefix().lowercased())
     }
 
-    func checkPassword(account: Account, password: String) -> Bool {
+    func doesWalletExist(name: String) -> Bool {
+        return WalletRealmTool.getCurrentAppModel().wallets.map { $0.name }.contains(name)
+    }
+
+    func verifyPassword(account: Account, password: String) -> Bool {
         do {
             // TODO
             var privateKeyData = "todo"
@@ -223,7 +249,6 @@ private extension WalletManager {
     }
 
     func save(data: Data, to url: URL) throws {
-        //let json = try JSONEncoder().encode(key)
         try data.write(to: url, options: [.atomicWrite])
     }
 }

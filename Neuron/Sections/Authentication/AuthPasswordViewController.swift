@@ -41,7 +41,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
         passwordTextField.resignFirstResponder()
         Toast.showHUD()
         DispatchQueue.global().async {
-            let isPasswordCorrect = WalletManager.default.checkPassword(account: account, password: password)
+            let isPasswordCorrect = WalletManager.default.verifyPassword(account: account, password: password)
             DispatchQueue.main.sync { [weak self] in
                 Toast.hideHUD()
                 if isPasswordCorrect {
