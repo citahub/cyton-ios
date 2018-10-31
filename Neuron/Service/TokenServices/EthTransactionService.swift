@@ -18,13 +18,13 @@ class EthTransactionService {
                                          gasPrice: BigUInt,
                                          data: Data,
                                          completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        guard let keyStoreStr = try? WalletManager.default.getKeystoreForCurrentWallet(password: walletPassword) else {
+        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+        guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: walletPassword) else {
             DispatchQueue.main.async {
                 completion(SendEthResult.error(SendEthError.invalidPassword))
             }
             return
         }
-        let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
 
         DispatchQueue.global().async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
@@ -41,15 +41,10 @@ class EthTransactionService {
             }
 
             let web3 = Web3Network().getWeb3()
-            guard let selectedKey = currentWalletAddress else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.noAvailableKeys))
-                }
-                return
-            }
-            let ethAddressFrom = EthereumAddress(selectedKey)
+            let ethAddressFrom = EthereumAddress(wallet.address)
 
-            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
+            // TODO: instead of getting keystore string and create EthereumKeystoreV3 on the fly, fetch keystore object directly first.
+            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keystore)!]))
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
             options.from = ethAddressFrom
@@ -106,15 +101,17 @@ class EthTransactionService {
     func sign(password: String, transaction: TransactionIntermediate, address: String, completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
         var transactionIntermediate = transaction
         DispatchQueue.global().async {
-            guard let keyStoreStr = try? WalletManager.default.getKeystoreForCurrentWallet(password: password) else {
+            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+            guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: password) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.invalidPassword))
                 }
                 return
             }
             let web3 = Web3Network().getWeb3()
-            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
-            try? Web3Signer.signIntermediate(intermediate: &transactionIntermediate, keystore: KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]), account: EthereumAddress(address)!, password: password)
+            // TODO: instead of getting keystore string and create EthereumKeystoreV3 on the fly, fetch keystore object directly first.
+            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keystore)!]))
+            try? Web3Signer.signIntermediate(intermediate: &transactionIntermediate, keystore: KeystoreManager([EthereumKeystoreV3(keystore)!]), account: EthereumAddress(address)!, password: password)
             DispatchQueue.main.async {
                 completion(SendEthResult.success(transactionIntermediate))
             }

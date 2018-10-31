@@ -18,7 +18,8 @@ class ERC20TransactionService {
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        guard let keyStoreStr = try? WalletManager.default.getKeystoreForCurrentWallet(password: walletPassword) else {
+        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+        guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: walletPassword) else {
             DispatchQueue.main.async {
                 completion(SendEthResult.error(SendEthError.invalidPassword))
             }
@@ -41,7 +42,8 @@ class ERC20TransactionService {
             }
 
             let web3 = Web3Network().getWeb3()
-            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
+            // TODO: instead of getting keystore string and create EthereumKeystoreV3 on the fly, fetch keystore object directly first.
+            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keystore)!]))
             let token = erc20TokenAddress
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
