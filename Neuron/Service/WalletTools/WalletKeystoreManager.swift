@@ -57,7 +57,7 @@ class WalletKeystoreManager {
     }
 
     func getPrivateKey(account: EthereumAddress, password: String) throws -> Data {
-        guard let keystore = self.walletForAddress(account) else {
+        guard let keystore = walletForAddress(account) else {
             throw AbstractKeystoreError.invalidAccountError
         }
         return try keystore.UNSAFE_getPrivateKeyData(password: password, account: account)
@@ -71,6 +71,18 @@ class WalletKeystoreManager {
         return addressToURLs[address.lowercased()]
     }
 
+    func save(data: Data, address: String, to url: URL) throws {
+        try data.write(to: url, options: [.atomicWrite])
+        register(url: url, for: address)
+    }
+
+    func delete(address: String, url: URL) throws {
+        try FileManager.default.removeItem(at: url)
+        unregister(address: address)
+    }
+}
+
+private extension WalletKeystoreManager {
     func register(url: URL, for address: String) {
         addressToURLs[address.lowercased()] = url
     }

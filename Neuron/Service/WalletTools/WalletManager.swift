@@ -80,10 +80,7 @@ struct WalletManager {
                 return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
             }
 
-            let url = makeURL(for: address)
-            try save(data: keystore.serialize()!, to: url)
-            keystoreManager.register(url: url, for: address)
-
+            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
             return ImportResult.succeed(result: Wallet(address: address))
         } catch let error {
             return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
@@ -118,9 +115,7 @@ struct WalletManager {
         }
 
         do {
-            let url = makeURL(for: address)
-            try save(data: keystore.serialize()!, to: url)
-            keystoreManager.register(url: url, for: address)
+            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
         } catch {
             return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
         }
@@ -151,9 +146,7 @@ struct WalletManager {
                 return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
             }
 
-            let url = makeURL(for: address)
-            try save(data: keystore.serialize()!, to: url)
-            keystoreManager.register(url: url, for: address)
+            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
             return ImportResult.succeed(result: Wallet(address: address))
         } catch {
             return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
@@ -196,7 +189,7 @@ extension WalletManager {
                 throw KeystoreError.accountNotFound
             }
 
-            try save(data: keystore.serialize()!, to: url)
+            try keystoreManager.save(data: keystore.serialize()!, address: wallet.address, to: url)
         } catch {
             throw KeystoreError.failedToUpdatePassword
         }
@@ -209,8 +202,7 @@ extension WalletManager {
         guard let url = keystoreManager.url(for: wallet.address) else {
             throw KeystoreError.failedToDeleteAccount
         }
-        try delete(url: url)
-        keystoreManager.unregister(address: wallet.address)
+        try keystoreManager.delete(address: wallet.address, url: url)
     }
 }
 
@@ -263,13 +255,5 @@ private extension WalletManager {
 
         let components = Calendar(identifier: .iso8601).dateComponents(in: timeZone, from: date)
         return "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!)-\(components.minute!)-\(components.second!).\(components.nanosecond!)\(tz)"
-    }
-
-    func save(data: Data, to url: URL) throws {
-        try data.write(to: url, options: [.atomicWrite])
-    }
-
-    func delete(url: URL) throws {
-        try FileManager.default.removeItem(at: url)
     }
 }
