@@ -35,10 +35,6 @@ struct WalletManager {
         keystoreManager = WalletKeystoreManager.managerForPath(keystorePath)!
     }
 
-    static func generateMnemonic() -> String {
-        return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
-    }
-
     func wallet(for address: String) -> Wallet? {
         if walletExists(address: address) {
             return Wallet(address: address)
@@ -49,7 +45,10 @@ struct WalletManager {
     func keystore(for address: String) -> EthereumKeystoreV3 {
         return keystoreManager.keystore(for: EthereumAddress(address)!)!
     }
+}
 
+// MARK: - Import
+extension WalletManager {
     func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
         switch importType {
         case .keystore(let keystore, let password):
@@ -160,7 +159,10 @@ struct WalletManager {
             return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
         }
     }
+}
 
+// MARK: - Export
+extension WalletManager {
     public func exportKeystore(wallet: Wallet, password: String) -> ExportResult<String> {
         guard verifyPassword(wallet: wallet, password: password) else {
             return ExportResult.failed(error: ExportError.invalidPassword)
@@ -188,6 +190,7 @@ struct WalletManager {
     }
 }
 
+// MARK: - Manage existing wallets
 extension WalletManager {
     func updatePassword(wallet: Wallet, password: String, newPassword: String) throws {
         do {
@@ -207,7 +210,7 @@ extension WalletManager {
     }
 }
 
-// MARK: - Validations
+// MARK: - Validations & Checks
 extension WalletManager {
     func walletExists(address: String) -> Bool {
         let allAddresses = keystoreManager.addresses.map { $0.address }
@@ -225,5 +228,12 @@ extension WalletManager {
         default:
             return false
         }
+    }
+}
+
+// MARK: - Generate mnemonic
+extension WalletManager {
+    static func generateMnemonic() -> String {
+        return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!
     }
 }
