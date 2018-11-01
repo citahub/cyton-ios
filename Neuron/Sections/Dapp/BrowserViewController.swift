@@ -114,12 +114,12 @@ class BrowserViewController: UIViewController {
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "getTitleBar" {
-            let model = DAppDataHandle.fromTitleBarMessage(message: message)
-            if (model.right?.isShow)! {
-                collectionButton.isHidden = false
-            } else {
-                collectionButton.isHidden = true
-            }
+//            let model = DAppDataHandle.fromTitleBarMessage(message: message)
+//            if (model.right?.isShow)! {
+//                collectionButton.isHidden = false
+//            } else {
+//                collectionButton.isHidden = true
+//            }
         } else {
             let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
             switch dappCommonModel.name {
