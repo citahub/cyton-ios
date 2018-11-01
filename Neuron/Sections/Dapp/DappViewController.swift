@@ -67,7 +67,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     //wkwebview
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.navigationType == .linkActivated /*|| navigationAction.request.url!.absoluteString.contains("/dapps/") */ {
+        if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
             let browserViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "browserViewController") as! BrowserViewController
             browserViewController.requestUrlStr = navigationAction.request.url?.absoluteString ?? ""

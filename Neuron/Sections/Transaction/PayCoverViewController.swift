@@ -263,7 +263,7 @@ class PayCoverViewController: UIViewController {
 
     private func failure(error: Error) {
         Toast.hideHUD()
-        Toast.showToast(text: error.localizedDescription)
+        Toast.showToast(text: "网络错误，请稍后再试.")
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
         }
