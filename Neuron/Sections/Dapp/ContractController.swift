@@ -21,49 +21,34 @@ protocol ContractControllerDelegate: class {
     func callBackWebView(id: Int, value: String, error: DAppError?)
 }
 
-class ContractController: UIViewController {
+class ContractController: UITableViewController {
     var requestAddress: String = ""
+    var dappName: String = ""
     var dappCommonModel: DAppCommonModel!
     private var chainType: ChainType = .appChain
     private var tokenModel = TokenModel()
     var payCoverViewController: PayCoverViewController!
     weak var delegate: ContractControllerDelegate?
 
-    lazy private var valueRightView: UILabel = {
-        let valueRightView = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 36))
-        valueRightView.font = UIFont.systemFont(ofSize: 14)
-        valueRightView.textColor = ColorFromString(hex: "#989CAA")
-        valueRightView.textAlignment = .center
-        return valueRightView
-    }()
-
-    lazy private var gasRightView: UILabel = {
-        let gasRightView = UILabel(frame: CGRect(x: 0, y: 0, width: 60, height: 36))
-        gasRightView.font = UIFont.systemFont(ofSize: 14)
-        gasRightView.textColor = ColorFromString(hex: "#989CAA")
-        gasRightView.textAlignment = .center
-        return gasRightView
-    }()
-
-    @IBOutlet weak var iconImage: UIImageView!
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var requestTextField: UITextField!
-    @IBOutlet weak var toTextField: UITextField!
-    @IBOutlet weak var valueTextField: UITextField!
-    @IBOutlet weak var gasTextField: UITextField!
-    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
-    @IBOutlet weak var dataTextView: UITextView!
+    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var gasLabel: UILabel!
+    @IBOutlet weak var totlePayLabel: UILabel!
+    @IBOutlet weak var dappNameLabel: UILabel!
+    @IBOutlet weak var requestStringLabel: UILabel!
+    @IBOutlet weak var toLabel: UILabel!
+    @IBOutlet weak var fromLabel: UILabel!
+//    @IBOutlet weak var gasTextField: UITextField!
+//    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
+//    @IBOutlet weak var dataTextView: UITextView!
 
     private var gasPrice = BigUInt()
     private var gasLimit = BigUInt()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "合约调用"
+        title = "支付详情"
         payCoverViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "confirmViewController") as? PayCoverViewController
         payCoverViewController.dappDelegate = self
-        dealWithUI()
         setUIData()
     }
 
@@ -81,40 +66,27 @@ class ContractController: UIViewController {
                 }
             }
         }
-        gasRightView.text = tokenModel.symbol
-        valueRightView.text = tokenModel.symbol
     }
 
     func setUIData() {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        walletNameLabel.text = walletModel.name
-        addressLabel.text = walletModel.address
-        iconImage.image = UIImage(data: walletModel.iconData)
-
-        requestTextField.text = requestAddress
+        fromLabel.text = walletModel.address
+        requestStringLabel.text = requestAddress
+        dappNameLabel.text = dappName
         if dappCommonModel.chainType == "AppChain" {
             chainType = .appChain
-            toTextField.text = dappCommonModel.appChain?.to
-            valueTextField.text = formatScientValue(value: dappCommonModel.appChain?.value ?? "0x")
-            gasTextField.text = getNervosTransactionCosted(with: BigUInt(dappCommonModel.appChain?.quota.clean ?? "1000000")!)
-            dataTextView.text = dappCommonModel.appChain?.data
+            toLabel.text = dappCommonModel.appChain?.to
+            valueLabel.text = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
+            gasLabel.text = getNervosTransactionCosted(with: BigUInt(dappCommonModel.appChain?.quota.clean ?? "1000000")!)
+//            dataTextView.text = dappCommonModel.appChain?.data
         } else {
             chainType = .eth
-            toTextField.text = dappCommonModel.eth?.to
-            valueTextField.text = formatScientValue(value: dappCommonModel.eth?.value ?? "0x")
+            toLabel.text = dappCommonModel.eth?.to
+            valueLabel.text = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
-            dataTextView.text = dappCommonModel.eth?.data
+//            dataTextView.text = dappCommonModel.eth?.data
         }
         getTokenModel()
-    }
-
-    func dealWithUI() {
-        tabbedButtonView.buttonTitles = ["HEX", "UTF8"]
-        tabbedButtonView.delegate = self
-        valueTextField.rightViewMode = .always
-        valueTextField.rightView = valueRightView
-        gasTextField.rightViewMode = .always
-        gasTextField.rightView = gasRightView
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) -> String {
@@ -143,7 +115,7 @@ class ContractController: UIViewController {
             }
 
             if ethGasLimit != nil {
-                self.gasLimit = BigUInt(ethGasLimit!) ?? BigUInt(100000)
+                self.gasLimit = BigUInt(ethGasLimit!) ?? BigUInt(1000000)
             } else {
                 var options = Web3Options.defaultOptions()
                 options.gasLimit = self.gasLimit
@@ -151,14 +123,14 @@ class ContractController: UIViewController {
                 options.value = BigUInt(self.dappCommonModel.eth?.value ?? "0")
                 let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))
                 guard let estimatedGas = contract!.method(options: options)?.estimateGas(options: nil).value else {
-                    self.gasLimit = BigUInt(100000)
+                    self.gasLimit = BigUInt(1000000)
                     return
                 }
                 self.gasLimit = estimatedGas
             }
             DispatchQueue.main.async {
                 let gas = self.gasPrice * self.gasLimit
-                self.gasTextField.text = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
+                self.gasLabel.text = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
                 Toast.hideHUD()
             }
         }
@@ -173,8 +145,8 @@ class ContractController: UIViewController {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         payCoverViewController.tokenModel = tokenModel
         payCoverViewController.walletAddress = walletModel.address
-        payCoverViewController.gasCost = gasTextField.text ?? "0" + tokenModel.symbol
-        payCoverViewController.amount = valueTextField.text ?? "0"
+        payCoverViewController.gasCost = gasLabel.text ?? "0" + tokenModel.symbol
+        payCoverViewController.amount = valueLabel.text ?? "0"
         payCoverViewController.dappCommonModel = dappCommonModel
         switch chainType {
         case .appChain:
@@ -203,9 +175,9 @@ extension ContractController: TabbedButtonsViewDelegate {
         }
 
         if index == 0 {
-            dataTextView.text = dataString
+//            dataTextView.text = dataString
         } else {
-            dataTextView.text = String(decoding: Data.fromHex(dataString)!, as: UTF8.self)
+//            dataTextView.text = String(decoding: Data.fromHex(dataString)!, as: UTF8.self)
         }
     }
 }
