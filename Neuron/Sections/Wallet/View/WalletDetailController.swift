@@ -8,7 +8,6 @@
 
 import UIKit
 import SCLAlertView
-import TrustKeystore
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -45,17 +44,17 @@ class WalletDetailController: UITableViewController {
 
     private func deleteWallet(password: String) {
         // TODO: wrap realm and keystore operation as an atom transaction
-        let address = walletModel.address
+        let wallet = walletModel.wallet!
         Toast.showHUD()
         do {
-            try WalletCryptoService.deleteWallet(address: address, password: password)
+            try WalletManager.default.deleteWallet(wallet: wallet, password: password)
             try WalletRealmTool.realm.write {
                 if appModel.wallets.count == 1 {
                     WalletRealmTool.realm.deleteAll()
                     NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
                 } else {
                     appModel.currentWallet = appModel.wallets.filter({ (model) -> Bool in
-                        return model.address != address
+                        return model.address.removeHexPrefix().lowercased() != wallet.address.removeHexPrefix().lowercased()
                     }).first!
                     WalletRealmTool.realm.delete(walletModel)
                 }
@@ -71,7 +70,10 @@ class WalletDetailController: UITableViewController {
 
     private func exportKeystore(password: String) {
         do {
-            let keystore = try WalletCryptoService.getKeystoreForCurrentWallet(password: password)
+            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+            guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: password) else {
+                throw ExportError.invalidPassword
+            }
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
             exportController.keystoreString = keystore
             self.navigationController?.pushViewController(exportController, animated: true)
@@ -87,10 +89,6 @@ class WalletDetailController: UITableViewController {
                 didChangeWalletName()
             }
         } else if indexPath.section == 1 {
-            if indexPath.row == 0 {
-                let pCtrl = ChangePasswordController.init(nibName: "ChangePasswordController", bundle: nil)
-                navigationController?.pushViewController(pCtrl, animated: true)
-            }
             if indexPath.row == 1 {
                 let appearance = SCLAlertView.SCLAppearance(
                     showCloseButton: false

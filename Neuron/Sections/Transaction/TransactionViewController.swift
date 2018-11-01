@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import TrustCore
+import web3swift
 
 class TransactionViewController: UITableViewController, TransactionServiceDelegate {
     // Wallet
@@ -114,7 +114,8 @@ extension TransactionViewController {
             Toast.showToast(text: "您的地址错误，请重新输入")
             return false
         } else if service.toAddress != service.toAddress.lowercased() {
-            let eip55String = TrustCore.EthereumAddress(string: service.toAddress)?.eip55String ?? ""
+            let eip55String = EthereumAddress.toChecksumAddress(service.toAddress) ?? ""
+//            let eip55String = TrustCore.EthereumAddress(string: service.toAddress)?.eip55String ?? ""
             if eip55String != service.toAddress {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false

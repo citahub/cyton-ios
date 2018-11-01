@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TrustCore
 import Alamofire
 import BigInt
 import web3swift
@@ -122,7 +121,7 @@ extension TransactionHistoryService {
         }
 
         func loadData(page: Int, completion: @escaping ([Int], Error?) -> Void) {
-            let address = TrustCore.EthereumAddress(string: token.address)?.eip55String ?? token.address
+            let address = EthereumAddress.toChecksumAddress(token.address) ?? token.address
             let parameters: [String: Any] = [
                 "module": "account",
                 "action": "tokentx",

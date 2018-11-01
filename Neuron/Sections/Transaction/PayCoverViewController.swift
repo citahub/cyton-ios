@@ -87,7 +87,6 @@ class PayCoverViewController: UIViewController {
         ethTransactionService.prepareETHTransactionForSending(destinationAddressString: toAddress,
                                                               amountString: amount,
                                                               gasLimit: 21000,
-                                                              walletPassword: password,
                                                               gasPrice: gasPrice,
                                                               data: extraData!) { (result) in
                                                                 switch result {
@@ -103,7 +102,7 @@ class PayCoverViewController: UIViewController {
         ethTransactionService.sign(password: password, transaction: transaction, address: toAddress) { (result) in
             switch result {
             case .success(let transactionIntermediate):
-                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: transactionIntermediate.transaction.data.hexString, error: nil)
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: transactionIntermediate.transaction.data.toHexString(), error: nil)
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
@@ -180,7 +179,7 @@ class PayCoverViewController: UIViewController {
         nervosTransactionService.send(password: password, transaction: transaction) { (result) in
             switch result {
             case .success(let value):
-                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.hexString.addHexPrefix(), error: nil)
+                self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: value.hash.toHexString().addHexPrefix(), error: nil)
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
             }
@@ -220,7 +219,6 @@ class PayCoverViewController: UIViewController {
         erc20TransactionService.prepareERC20TransactionForSending(destinationAddressString: toAddress,
                                                                   amountString: amount,
                                                                   gasLimit: 21000,
-                                                                  walletPassword: password,
                                                                   gasPrice: gasPrice,
                                                                   erc20TokenAddress: tokenModel.address) { (result) in
                                                                     switch result {
@@ -265,7 +263,7 @@ class PayCoverViewController: UIViewController {
 
     private func failure(error: Error) {
         Toast.hideHUD()
-        Toast.showToast(text: error.localizedDescription)
+        Toast.showToast(text: "网络错误，请稍后再试.")
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
         }

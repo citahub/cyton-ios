@@ -9,7 +9,6 @@
 import Foundation
 import AppChain
 import BigInt
-import TrustCore
 
 protocol TransactionServiceDelegate: NSObjectProtocol {
     func transactionCompletion(_ transactionService: TransactionService, error: Error?)
@@ -146,7 +145,7 @@ extension TransactionService {
             super.init(token: token)
             DispatchQueue.global().async {
                 self.gasLimit = 21000
-                let bigNumber = try? Web3Network.getWeb3().eth.getGasPrice().dematerialize()
+                let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
                 self.gasPrice = (bigNumber?.words.first ?? 1) * 4
                 self.changeGasLimitEnable = true
                 self.changeGasPriceEnable = true
@@ -157,9 +156,8 @@ extension TransactionService {
             ERC20TransactionService().prepareERC20TransactionForSending(
                 destinationAddressString: toAddress,
                 amountString: "\(amount)",
-                gasLimit: UInt(gasLimit),
-                walletPassword: password,
-                gasPrice: BigUInt(UInt(gasPrice)),
+                gasLimit: gasLimit,
+                gasPrice: BigUInt(gasPrice),
                 erc20TokenAddress: token.address) { (result) in
                 switch result {
                 case .success(let transaction):
@@ -185,7 +183,7 @@ extension TransactionService {
             super.init(token: token)
             DispatchQueue.global().async {
                 self.gasLimit = 21000
-                let bigNumber = try? Web3Network.getWeb3().eth.getGasPrice().dematerialize()
+                let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
                 self.gasPrice = (bigNumber?.words.first ?? 1) * 4
                 self.changeGasLimitEnable = true
                 self.changeGasPriceEnable = true
@@ -196,9 +194,8 @@ extension TransactionService {
             EthTransactionService().prepareETHTransactionForSending(
                 destinationAddressString: toAddress,
                 amountString: "\(amount)",
-                gasLimit: UInt(gasLimit),
-                walletPassword: wallet.address,
-                gasPrice: BigUInt(UInt(gasPrice)),
+                gasLimit: gasLimit,
+                gasPrice: BigUInt(gasPrice),
                 data: Data()) { (result) in
                 switch result {
                 case .success(let transaction):
@@ -236,5 +233,3 @@ extension TransactionService {
         }
     }
 }
-
-//0xA87498f97E14df93498f3F5818A421FaA5C21cFd

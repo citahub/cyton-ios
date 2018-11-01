@@ -18,7 +18,7 @@ struct ERC20TokenService {
     ///   - contractAddress: token address
     ///   - completion: balance result
     static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
-        let web3 = Web3Network.getWeb3()
+        let web3 = Web3Network().getWeb3()
         let contractETHAddress = EthereumAddress(contractAddress)!
         let coldWalletAddress = EthereumAddress(walletAddress)
         let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)
@@ -64,8 +64,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let name):
                     tokenModel.name = name
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })
@@ -75,8 +75,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let symbol):
                     tokenModel.symbol = symbol
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })
@@ -86,8 +86,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let decimals):
                     tokenModel.decimals = Int(decimals)
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })

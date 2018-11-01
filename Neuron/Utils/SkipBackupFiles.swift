@@ -18,8 +18,7 @@ struct SkipBackupFiles {
             try url.setResourceValue(true, forKey: .isExcludedFromBackupKey)
             try url.setResourceValue(false, forKey: .isUbiquitousItemKey)
             return true
-        } catch let error {
-            print(error.localizedDescription)
+        } catch {
             return false
         }
     }

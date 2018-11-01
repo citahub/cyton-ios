@@ -124,12 +124,12 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     private func updateNavigationBar() {
         if isHeaderViewHidden {
-            navigationItem.leftBarButtonItems = [scanBarButtonItem]
+//            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
             navigationItem.title = WalletRealmTool.getCurrentAppModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
-            navigationItem.leftBarButtonItems = [scanBarButtonItem]
+//            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
             navigationItem.titleView = titleView
         }
