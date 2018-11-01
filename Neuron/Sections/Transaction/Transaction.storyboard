@@ -361,6 +361,9 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="j4R-qD-vT9" id="Nke-qr-el4"/>
+                                        </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AV9-78-asF">
                                         <rect key="frame" x="15" y="140" width="360" height="1"/>
@@ -387,6 +390,9 @@
                                         <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="j4R-qD-vT9" id="XLM-Oc-OR8"/>
+                                        </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="znl-XL-Lfr">
                                         <rect key="frame" x="15" y="201" width="345" height="44"/>
@@ -595,7 +601,7 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
-                                                        <action selector="transactionAvailableBalance:" destination="KXN-bo-zdG" eventType="touchUpInside" id="njN-No-Ku3"/>
+                                                        <action selector="transactionAvailableBalance" destination="KXN-bo-zdG" eventType="touchUpInside" id="3Ej-nj-FDV"/>
                                                     </connections>
                                                 </button>
                                             </subviews>

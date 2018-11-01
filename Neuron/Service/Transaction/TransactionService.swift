@@ -11,7 +11,12 @@ import AppChain
 import BigInt
 import TrustCore
 
+protocol TransactionServiceDelegate: NSObjectProtocol {
+    func transactionCompletion(_ transactionService: TransactionService)
+}
+
 class TransactionService {
+    weak var delegate: TransactionServiceDelegate?
     var token: TokenModel!
     var wallet: WalletModel!
 
@@ -64,9 +69,24 @@ class TransactionService {
     }
 
     func sendTransaction() {
+        Toast.showHUD()
     }
 
     func success() {
+        Toast.hideHUD()
+        Toast.showToast(text: "转账成功,请稍后刷新查看")
+        SensorsAnalytics.Track.transaction(
+            chainType: token.chainId,
+            currencyType: token.symbol,
+            currencyNumber: amount,
+            receiveAddress: toAddress,
+            outcomeAddress: wallet.address,
+            transactionType: .normal
+        )
+        if isUseQRCode {
+            SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
+        }
+        delegate?.transactionCompletion(self)
     }
 
     func failure(error: Error) {
@@ -75,31 +95,6 @@ class TransactionService {
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
         }
-    }
-}
-
-extension TransactionService {
-    var isEffectiveTransferInfo: Bool {
-        if toAddress.count != 40 && toAddress.count != 42 {
-            Toast.showToast(text: "您的地址错误，请重新输入")
-            return false
-        } else if toAddress != toAddress.lowercased() {
-            let eip55String = TrustCore.EthereumAddress(string: toAddress)?.eip55String ?? ""
-            if eip55String != toAddress {
-                Toast.showToast(text: "您的地址错误，请重新输入")
-                return false
-            }
-        } else if amount > tokenBalance - gasCost {
-            let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
-
-            }))
-            alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
-
-            }))
-            return false
-        }
-        return true
     }
 }
 
@@ -119,6 +114,7 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
+            super.sendTransaction()
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit * gasPrice)),

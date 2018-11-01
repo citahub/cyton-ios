@@ -42,7 +42,6 @@ class TransactionConfirmViewController: UIViewController {
         contentViewController = controller
 
         registerEventStrategy(with: TransactionConfirmInfoViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmInfo))
-        registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmSend(userInfo:)))
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -80,16 +79,6 @@ class TransactionConfirmViewController: UIViewController {
         let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transaction).instantiateViewController()
         controller.service = service
         contentViewController = controller
-    }
-
-    @objc func confirmSend(userInfo: [String: String]) {
-        let password = userInfo["password"] ?? ""
-        if password.lengthOfBytes(using: .utf8) < 8 {
-            Toast.showToast(text: "请输入钱包密码")
-            return
-        }
-        service.password = password
-        service.sendTransaction()
     }
 
     @objc func keyBoardWillShow(node: Notification) {
@@ -133,8 +122,16 @@ class TransactionConfirmInfoViewController: UIViewController {
     var service: TransactionService! {
         didSet {
             _ = view // load view
-            amountLabel.text = "\(service.amount)" + service.token.symbol
+            let amount = service.amount
+            if amount == Double(Int(amount)) {
+                amountLabel.text = "\(Int(amount))"
+            } else {
+                amountLabel.text = "\(amount)"
+            }
+            amountLabel.text! += service.token.symbol
             let attributedText = NSMutableAttributedString(attributedString: amountLabel.attributedText!)
+            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), service.token.symbol.lengthOfBytes(using: .utf8))
+            attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = service.fromAddress
             toAddressLabel.text = service.toAddress
