@@ -134,7 +134,7 @@ class ImportWalletViewModel: NSObject {
 
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
+        let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password)
         WalletManager.default.importWallet(with: importType) { (result) in
             Toast.hideHUD()
             switch result {

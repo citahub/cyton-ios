@@ -24,7 +24,7 @@ struct WalletNameValidator {
             return .invalid("钱包名字不能超过15个字符")
         }
 
-        if WalletManager.default.doesWalletExist(name: walletName) {
+        if WalletManager.default.walletExists(name: walletName) {
             return .invalid("钱包名字已经存在")
         }
 

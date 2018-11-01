@@ -7,19 +7,14 @@
 import Foundation
 import web3swift
 
+// Plain object for passing around
 struct Wallet {
     let address: String
-
-    fileprivate var keystore: EthereumKeystoreV3 {
-        return WalletManager.default.keystoreManager.walletForAddress(EthereumAddress(address)!)!
-    }
 }
 
 struct WalletManager {
     typealias ImportResultCallback = (ImportResult<Wallet>) -> Void
     typealias ExportPrivateCallback = (ImportResult<String>) -> Void
-
-    static let defaultDerivationPath = "m/44'/60'/0'/0/0"
 
     static let `default` = WalletManager(path: "keystore")
 
@@ -29,10 +24,14 @@ struct WalletManager {
     }
     let keystoreManager: WalletKeystoreManager
 
-    /// Path will be always under user's document directory and excluded from iCloud backup
-    init(path: String) {
-        let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        keystorePath =  documentDir + "/" + "keystore"
+    /// If fullPath is false, path will be always under user's document directory and excluded from iCloud backup.
+    init(path: String, fullPath: Bool = false) {
+        if fullPath {
+            keystorePath = path
+        } else {
+            let documentDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+            keystorePath =  documentDir + "/" + path
+        }
         keystoreManager = WalletKeystoreManager.managerForPath(keystorePath)!
     }
 
@@ -41,10 +40,14 @@ struct WalletManager {
     }
 
     func wallet(for address: String) -> Wallet? {
-        if doesWalletExist(address: address) {
+        if walletExists(address: address) {
             return Wallet(address: address)
         }
         return nil
+    }
+
+    func keystore(for address: String) -> EthereumKeystoreV3 {
+        return keystoreManager.keystore(for: EthereumAddress(address)!)!
     }
 
     func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
@@ -53,35 +56,40 @@ struct WalletManager {
             importKeystoreAsync(keystore: keystore, password: password, completion: completion)
         case .privateKey(let privateKey, let password):
             importPrivateKeyAsync(privateKey: privateKey, password: password, completion: completion)
-        case .mnemonic(let mnemonic, let password, let derivationPath):
-            importMnemonicAsync(mnemonic: mnemonic, password: password, derivationPath: derivationPath, completion: completion)
+        case .mnemonic(let mnemonic, let password):
+            importMnemonicAsync(mnemonic: mnemonic, password: password, completion: completion)
         }
     }
 
-    func importMnemonicAsync(mnemonic: String, password: String, derivationPath: String, completion: @escaping ImportResultCallback) {
+    func importMnemonicAsync(mnemonic: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = self.importMnemonic(mnemonic: mnemonic, password: password, derivationPath: derivationPath)
+            let importResult = self.importMnemonic(mnemonic: mnemonic, password: password)
             DispatchQueue.main.async {
                 completion(importResult)
             }
         }
     }
 
-    func importMnemonic(mnemonic: String, password: String, derivationPath: String) -> ImportResult<Wallet> {
+    func importMnemonic(mnemonic: String, password: String) -> ImportResult<Wallet> {
         do {
-            guard let keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: derivationPath) else {
+            guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0") else {
                 return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "钱包导入失败")
             }
 
-            guard let address = keystore.addresses?.first?.address else {
-                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
+            guard let address = bip32Keystore.addresses?.first else {
+                return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "私钥不正确")
             }
-            if doesWalletExist(address: address) {
+            if walletExists(address: address.address) {
                 return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
             }
+            var privateKey = try bip32Keystore.UNSAFE_getPrivateKeyData(password: password, account: address)
+            defer { Data.zero(&privateKey) }
+            guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password) else {
+                throw ImportError.invalidateMnemonic
+            }
 
-            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
-            return ImportResult.succeed(result: Wallet(address: address))
+            try keystoreManager.add(keystore: keystore)
+            return ImportResult.succeed(result: Wallet(address: address.address))
         } catch let error {
             return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
         }
@@ -104,7 +112,7 @@ struct WalletManager {
         guard let address = keystore.getAddress()?.address else {
             return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
         }
-        if doesWalletExist(address: address) {
+        if walletExists(address: address) {
             return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
         }
 
@@ -115,7 +123,7 @@ struct WalletManager {
         }
 
         do {
-            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
+            try keystoreManager.add(keystore: keystore)
         } catch {
             return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
         }
@@ -142,11 +150,11 @@ struct WalletManager {
             guard let address = keystore.getAddress()?.address else {
                 return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
             }
-            if doesWalletExist(address: address) {
+            if walletExists(address: address) {
                 return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
             }
 
-            try keystoreManager.save(data: keystore.serialize()!, address: address, to: makeURL(for: address))
+            try keystoreManager.add(keystore: keystore)
             return ImportResult.succeed(result: Wallet(address: address))
         } catch {
             return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
@@ -159,7 +167,7 @@ struct WalletManager {
         }
 
         do {
-            if let data = try wallet.keystore.serialize() {
+            if let data = try keystore(for: wallet.address).serialize() {
                 return ExportResult.succeed(result: String(data: data, encoding: .utf8)!)
             }
 
@@ -171,9 +179,9 @@ struct WalletManager {
 
     func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
         do {
-            var privateKey = try wallet.keystore.UNSAFE_getPrivateKeyData(password: password, account: EthereumAddress(wallet.address)!)
+            var privateKey = try keystoreManager.privateKey(for: EthereumAddress(wallet.address)!, password: password)
             defer { Data.zero(&privateKey) }
-            return ImportResult.succeed(result: String(data: privateKey, encoding: .utf8)!)
+            return ImportResult.succeed(result: privateKey.toHexString())
         } catch let error {
             return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
         }
@@ -183,13 +191,9 @@ struct WalletManager {
 extension WalletManager {
     func updatePassword(wallet: Wallet, password: String, newPassword: String) throws {
         do {
-            let keystore = wallet.keystore
-            try keystore.regenerate(oldPassword: password, newPassword: password)
-            guard let url = keystoreManager.url(for: wallet.address) else {
-                throw KeystoreError.accountNotFound
-            }
-
-            try keystoreManager.save(data: keystore.serialize()!, address: wallet.address, to: url)
+            let keystore = self.keystore(for: wallet.address)
+            try keystore.regenerate(oldPassword: password, newPassword: newPassword)
+            try keystoreManager.update(keystore: keystore)
         } catch {
             throw KeystoreError.failedToUpdatePassword
         }
@@ -199,61 +203,27 @@ extension WalletManager {
         guard verifyPassword(wallet: wallet, password: password) else {
             throw KeystoreError.invalidPassword
         }
-        guard let url = keystoreManager.url(for: wallet.address) else {
-            throw KeystoreError.failedToDeleteAccount
-        }
-        try keystoreManager.delete(address: wallet.address, url: url)
+        try keystoreManager.remove(keystore: keystore(for: wallet.address))
     }
 }
 
 // MARK: - Validations
 extension WalletManager {
-    func doesWalletExist(address: String) -> Bool {
+    func walletExists(address: String) -> Bool {
         let allAddresses = keystoreManager.addresses.map { $0.address }
         return allAddresses.map { $0.removeHexPrefix().lowercased() }.contains(address.removeHexPrefix().lowercased())
     }
 
-    func doesWalletExist(name: String) -> Bool {
+    func walletExists(name: String) -> Bool {
         return WalletRealmTool.getCurrentAppModel().wallets.map { $0.name }.contains(name)
     }
 
     func verifyPassword(wallet: Wallet, password: String) -> Bool {
-        switch exportKeystore(wallet: wallet, password: password) {
+        switch exportPrivateKey(wallet: wallet, password: password) {
         case .succeed(result: _):
             return true
         default:
             return false
         }
-    }
-}
-
-// MARK: - Keystore Disk Storage
-private extension WalletManager {
-    func makeURL(for address: String?) -> URL {
-        let identifier: String
-        if let address = address {
-            identifier = address.removeHexPrefix().lowercased()
-        } else {
-            identifier = UUID().uuidString
-        }
-
-        return keystoreDir.appendingPathComponent(generateFileName(identifier: identifier))
-    }
-
-    func generateFileName(identifier: String, date: Date = Date(), timeZone: TimeZone = .current) -> String {
-        return "UTC--\(filenameTimestamp(for: date, in: timeZone))--\(identifier)"
-    }
-
-    func filenameTimestamp(for date: Date, in timeZone: TimeZone = .current) -> String {
-        let tz: String
-        let offset = timeZone.secondsFromGMT()
-        if offset == 0 {
-            tz = "Z"
-        } else {
-            tz = String(format: "%03d00", offset / 60)
-        }
-
-        let components = Calendar(identifier: .iso8601).dateComponents(in: timeZone, from: date)
-        return "\(components.year!)-\(components.month!)-\(components.day!)T\(components.hour!)-\(components.minute!)-\(components.second!).\(components.nanosecond!)\(tz)"
     }
 }
