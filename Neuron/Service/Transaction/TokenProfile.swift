@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import TrustCore
 import Alamofire
+import web3swift
 
 struct TokenProfile: Decodable {
     let symbol: String
@@ -73,7 +73,7 @@ extension TokenModel {
         var price: Double?
 
         group.enter()
-        let address = TrustCore.EthereumAddress(string: self.address)?.eip55String ?? self.address
+        let address = EthereumAddress.toChecksumAddress(self.address) ?? self.address
         let urlString = "https://raw.githubusercontent.com/consenlabs/token-profile/master/erc20/\(address).json"
         Alamofire.request(URL(string: urlString)!, method: .get, parameters: nil).responseData { (response) in
             defer { group.leave() }

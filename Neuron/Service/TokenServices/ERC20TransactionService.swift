@@ -14,17 +14,12 @@ class ERC20TransactionService {
     func prepareERC20TransactionForSending(destinationAddressString: String,
                                            amountString: String,
                                            gasLimit: UInt = 21000,
-                                           walletPassword: String,
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
                                            completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-        guard let keyStoreStr = try? WalletCryptoService.getKeystoreForCurrentWallet(password: walletPassword) else {
-            DispatchQueue.main.async {
-                completion(SendEthResult.error(SendEthError.invalidPassword))
-            }
-            return
-        }
-        let currentWalletAddress = WalletRealmTool.getCurrentAppModel().currentWallet?.address
+        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+        let currentWalletAddress = wallet.address
+        let keystore = WalletManager.default.keystore(for: wallet.address)
 
         DispatchQueue.global(qos: .userInitiated).async {
             guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
@@ -41,14 +36,14 @@ class ERC20TransactionService {
             }
 
             let web3 = Web3Network().getWeb3()
-            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
+            web3.addKeystoreManager(KeystoreManager([keystore]))
             let token = erc20TokenAddress
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = gasPrice
-            options.from = EthereumAddress(currentWalletAddress!)
+            options.from = EthereumAddress(currentWalletAddress)
             guard let tokenAddress = EthereumAddress(token),
-                let fromAddress = EthereumAddress(currentWalletAddress!),
+                let fromAddress = EthereumAddress(currentWalletAddress),
                 let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress, from: fromAddress, to: destinationEthAddress, amount: amountString)
                 else {
                     DispatchQueue.main.async {

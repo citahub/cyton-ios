@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import TrustKeystore
-import struct TrustCore.EthereumAddress
+import web3swift
 import IGIdenticon
 
 protocol ImportWalletViewModelDelegate: class {
@@ -56,11 +55,11 @@ class ImportWalletViewModel: NSObject {
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.keystore(keystore: keystore, password: password)
-        WalletTool.importWallet(with: importType) { (result) in
+        WalletManager.default.importWallet(with: importType) { (result) in
             Toast.hideHUD()
             switch result {
             case .succeed(let account):
-                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
+                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
                 self.saveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
@@ -135,12 +134,12 @@ class ImportWalletViewModel: NSObject {
 
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password, derivationPath: devirationPath)
-        WalletTool.importWallet(with: importType) { (result) in
+        let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password)
+        WalletManager.default.importWallet(with: importType) { (result) in
             Toast.hideHUD()
             switch result {
             case .succeed(let account):
-                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
+                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
                 self.saveWalletToRealm()
                 SensorsAnalytics.Track.importWallet(type: .mnemonic, address: self.walletModel.address)
                 if self.isUseQRCode {
@@ -184,11 +183,11 @@ class ImportWalletViewModel: NSObject {
         Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
         let importType = ImportType.privateKey(privateKey: privateKey, password: password)
-        WalletTool.importWallet(with: importType) { (result) in
+        WalletManager.default.importWallet(with: importType) { (result) in
             Toast.hideHUD()
             switch result {
             case .succeed(let account):
-                self.walletModel.address = EthereumAddress(data: account.address.data)!.eip55String
+                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
                 self.saveWalletToRealm()
                 SensorsAnalytics.Track.importWallet(type: .privatekey, address: self.walletModel.address)
                 if self.isUseQRCode {
