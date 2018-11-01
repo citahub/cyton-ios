@@ -27,11 +27,6 @@ class WalletKeystoreManager {
         }
     }
 
-    public init(_ keystores: [EthereumKeystoreV3]) {
-        self.keystores = keystores
-        path = ""
-    }
-
     private init?(_ path: String) throws {
         self.path = path
         var isDir: ObjCBool = false
@@ -83,17 +78,17 @@ class WalletKeystoreManager {
         keystores.removeAll(where: { $0.getAddress()! == keystore.getAddress()! })
         unregister(address: address)
     }
-
-    private func save(data: Data, to url: URL) throws {
-        try data.write(to: url, options: [.atomicWrite])
-    }
-
-    private func delete(url: URL) throws {
-        try FileManager.default.removeItem(at: url)
-    }
 }
 
 private extension WalletKeystoreManager {
+    func save(data: Data, to url: URL) throws {
+        try data.write(to: url, options: [.atomicWrite])
+    }
+
+    func delete(url: URL) throws {
+        try FileManager.default.removeItem(at: url)
+    }
+
     func register(url: URL, for address: String) {
         addressToURLs[address.lowercased()] = url
     }
