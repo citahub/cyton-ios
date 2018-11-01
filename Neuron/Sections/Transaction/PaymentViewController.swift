@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import BigInt
+import web3swift
+import struct BigInt.BigUInt
 import IQKeyboardManagerSwift
-import TrustCore
 
 class PaymentViewController: UITableViewController {
     @IBOutlet weak var iconImageView: UIImageView!
@@ -140,8 +140,8 @@ class PaymentViewController: UITableViewController {
             return false
         }
         if destinationAddress != destinationAddress.lowercased() {
-            let eip55String = TrustCore.EthereumAddress(string: destinationAddress)?.eip55String ?? ""
-            if eip55String != destinationAddress {
+            let checksumAddress = EthereumAddress.toChecksumAddress(destinationAddress) ?? ""
+            if checksumAddress != destinationAddress {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
             }

@@ -50,15 +50,6 @@ PODS:
   - SwiftRLP (1.0.1):
     - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
-  - TrezorCrypto (0.0.8)
-  - TrustCore (0.2.2):
-    - BigInt
-    - TrezorCrypto (~> 0.0.8)
-  - TrustKeystore (0.5.2):
-    - BigInt
-    - CryptoSwift
-    - TrezorCrypto
-    - TrustCore (~> 0.2.2)
   - web3swift (1.1.10):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.11)
@@ -85,7 +76,6 @@ DEPENDENCIES:
   - SDWebImage
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
-  - TrustKeystore (~> 0.5.2)
   - web3swift (from `https://github.com/matterinc/web3swift`, tag `1.1.10`)
 
 SPEC REPOS:
@@ -114,9 +104,6 @@ SPEC REPOS:
     - SwiftProtobuf
     - SwiftRLP
     - Toast-Swift
-    - TrezorCrypto
-    - TrustCore
-    - TrustKeystore
 
 EXTERNAL SOURCES:
   AppChainSwift:
@@ -167,11 +154,8 @@ SPEC CHECKSUMS:
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
   SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
-  TrezorCrypto: 938c4b715fff7824a9c891a105e65ee0e4e81662
-  TrustCore: fe2a3b842c50fd73af69f1ec4c040b7eefced188
-  TrustKeystore: 5945ed4e43cc424e305cbb672800ee2532ee7e70
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 8539732ac018c81225d406f1fd1ae86d8f659bf6
+PODFILE CHECKSUM: 26c92839bed8fe0a565c8179119fb6cb2f3b6cee
 
 COCOAPODS: 1.5.3

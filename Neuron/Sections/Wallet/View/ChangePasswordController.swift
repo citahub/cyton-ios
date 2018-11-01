@@ -46,13 +46,13 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
         }
 
         Toast.showHUD(text: "修改密码中...")
-        let address = walletModel.address
+        let wallet = walletModel.wallet!
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else {
                 return
             }
             do {
-                try WalletCryptoService.updatePassword(address: address, password: self.oldPassword, newPassword: self.newPassword)
+                try WalletManager.default.updatePassword(wallet: wallet, password: self.oldPassword, newPassword: self.newPassword)
             } catch {
                 DispatchQueue.main.async {
                     Toast.hideHUD()

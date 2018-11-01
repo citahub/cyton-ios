@@ -15,6 +15,10 @@ class WalletModel: Object {
     @objc dynamic var iconData: Data!
     var selectTokenList = List<TokenModel>()
 
+    var wallet: Wallet? {
+        return WalletManager.default.wallet(for: address)
+    }
+
     override static func primaryKey() -> String? {
         return "address"
     }
