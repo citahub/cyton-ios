@@ -8,51 +8,60 @@
 
 import UIKit
 
-class ChangePasswordController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate {
-    let titleArray = ["", "输入旧密码", "输入新密码", "再次输入新密码"]
-    let placeholderArray = ["", "输入旧密码", "填写新密码", "再次填写新密码"]
+class ChangePasswordController: UITableViewController, UITextFieldDelegate {
+    @IBOutlet weak var walletIconView: UIImageView!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var oldPasswordTextField: UITextField!
+    @IBOutlet weak var newPasswordTextField: UITextField!
+    @IBOutlet weak var reNewPasswordTextField: UITextField!
+    @IBOutlet weak var confirmButton: UIButton!
 
-    var walletModel = WalletModel()
-
-    var oldPassword: String = ""
-    var newPassword: String = ""
-    var confirmPassword: String = ""
-
-    @IBOutlet weak var changePwBtn: UIButton!
-    @IBOutlet weak var cTable: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "修改密码"
         view.backgroundColor = ColorFromString(hex: "#f5f5f9")
-        cTable.delegate = self
-        cTable.dataSource = self
-        cTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID1")
-        didGetData()
+
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        walletNameLabel.text = walletModel.name
+        walletIconView.image = UIImage(data: walletModel.iconData)
     }
 
-    func didGetData() {
-        walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        cTable.reloadData()
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let newString = NSString(string: textField.text ?? "").replacingCharacters(in: range, with: string)
+        let oldPassword = textField == oldPasswordTextField ? newString : oldPasswordTextField.text ?? ""
+        let newPassword = textField == newPasswordTextField ? newString : newPasswordTextField.text ?? ""
+        let reNewPassword = textField == reNewPasswordTextField ? newString : reNewPasswordTextField.text ?? ""
+
+        if oldPassword.lengthOfBytes(using: .utf8) >= 8 &&
+            newPassword.lengthOfBytes(using: .utf8) >= 8 &&
+            reNewPassword == newPassword {
+            confirmButton.backgroundColor = UIColor(red: 80/255.0, green: 114/255.0, blue: 251/255.0, alpha: 1.0)
+            confirmButton.isEnabled = true
+        } else {
+            confirmButton.backgroundColor = UIColor(red: 233/255.0, green: 235/255.0, blue: 240/255.0, alpha: 1.0)
+            confirmButton.isEnabled = false
+        }
+        return true
     }
 
-    @IBAction func changePasswordBtn(_ sender: UIButton) {
-        if case .invalid(let reason) = PasswordValidator.validate(password: newPassword) {
+    @IBAction func confirm(_ sender: Any) {
+        if case .invalid(let reason) = PasswordValidator.validate(password: newPasswordTextField.text!) {
             Toast.showToast(text: reason)
             return
         }
-        if newPassword != confirmPassword {
+        if newPasswordTextField.text! != reNewPasswordTextField.text! {
             Toast.showToast(text: "两次新密码输入不一致")
             return
         }
 
         Toast.showHUD(text: "修改密码中...")
-        let wallet = walletModel.wallet!
+        let oldPassword = oldPasswordTextField.text!
+        let newPassword = newPasswordTextField.text!
+        let wallet = WalletModel().wallet!
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-            guard let self = self else {
-                return
-            }
+            guard let self = self else { return }
             do {
-                try WalletManager.default.updatePassword(wallet: wallet, password: self.oldPassword, newPassword: self.newPassword)
+                try WalletManager.default.updatePassword(wallet: wallet, password: oldPassword, newPassword: newPassword)
             } catch {
                 DispatchQueue.main.async {
                     Toast.hideHUD()
@@ -65,56 +74,6 @@ class ChangePasswordController: UIViewController, UITableViewDelegate, UITableVi
                 Toast.showToast(text: "密码修改成功，请牢记！")
                 self.navigationController?.popViewController(animated: true)
             }
-        }
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            var cell = tableView.dequeueReusableCell(withIdentifier: "ID")
-            if cell == nil {
-                cell = UITableViewCell.init(style: .value1, reuseIdentifier: "ID")
-                cell?.textLabel?.textColor = ColorFromString(hex: "#333333")
-                cell?.textLabel?.font = UIFont.systemFont(ofSize: 15)
-                cell?.detailTextLabel?.textColor = ColorFromString(hex: "#333333")
-                cell?.detailTextLabel?.font = UIFont.systemFont(ofSize: 15)
-            }
-
-            cell?.textLabel?.text = "钱包名称"
-            cell?.detailTextLabel?.text = walletModel.name
-            return cell!
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ID1", for: indexPath) as! AddAssetTableViewCell
-            cell.delegate = self
-            cell.indexP = indexPath as NSIndexPath
-            cell.isSecretText = true
-            cell.headLabel.text = titleArray[indexPath.row]
-            cell.placeHolderStr = placeholderArray[indexPath.row]
-            return cell
-        }
-    }
-
-    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
-        switch index.row {
-        case 1:
-            oldPassword = text
-        case 2:
-            newPassword = text
-        case 3:
-            confirmPassword = text
-        default: break
-        }
-        if !oldPassword.isEmpty && !newPassword.isEmpty && !confirmPassword.isEmpty {
-            changePwBtn.isEnabled = true
-            changePwBtn.setTitleColor(.white, for: .normal)
-            changePwBtn.backgroundColor = AppColor.themeColor
-        } else {
-            changePwBtn.isEnabled = false
-            changePwBtn.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
-            changePwBtn.backgroundColor = ColorFromString(hex: "#F2F2F2")
         }
     }
 }

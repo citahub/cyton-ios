@@ -51,14 +51,7 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
         didSet {
             if selectRow == 0 {
                 rightTextField.rightViewMode = .always
-                firstBtn.setImage(UIImage.init(named: "Triangle"), for: .normal)
-                firstBtn.frame = CGRect(x: 0, y: 0, width: 35, height: 50)
-                firstBtn.addTarget(self, action: #selector(didSetUpPickView), for: .touchUpInside)
-                rightTextField.rightView = firstBtn
                 rightTextField.tag = 3000 // 根据tag来跟别的textfield区分
-                let tap = UITapGestureRecognizer.init(target: self, action: #selector(didSetUpPickView))
-
-                rightTextField.addGestureRecognizer(tap)
             } else if selectRow == 1 {
                 rightTextField.rightViewMode = .always
                 secBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)

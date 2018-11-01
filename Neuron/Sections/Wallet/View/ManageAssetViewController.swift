@@ -30,11 +30,6 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         }
     }
 
-    @IBAction func addAssetAction(_ sender: UIBarButtonItem) {
-        let aCtrl = AddAssetController.init(nibName: "AddAssetController", bundle: nil)
-        navigationController?.pushViewController(aCtrl, animated: true)
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
     }

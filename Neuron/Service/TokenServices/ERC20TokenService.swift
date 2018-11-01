@@ -64,8 +64,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let name):
                     tokenModel.name = name
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })
@@ -75,8 +75,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let symbol):
                     tokenModel.symbol = symbol
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })
@@ -86,8 +86,8 @@ struct ERC20TokenService {
                 switch result {
                 case .success(let decimals):
                     tokenModel.decimals = Int(decimals)
-                case .error(let error):
-                    print(error.localizedDescription)
+                case .error:
+                    break
                 }
                 disGroup.leave()
             })
