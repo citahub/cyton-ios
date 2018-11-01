@@ -87,7 +87,6 @@ class PayCoverViewController: UIViewController {
         ethTransactionService.prepareETHTransactionForSending(destinationAddressString: toAddress,
                                                               amountString: amount,
                                                               gasLimit: 21000,
-                                                              walletPassword: password,
                                                               gasPrice: gasPrice,
                                                               data: extraData!) { (result) in
                                                                 switch result {
@@ -220,7 +219,6 @@ class PayCoverViewController: UIViewController {
         erc20TransactionService.prepareERC20TransactionForSending(destinationAddressString: toAddress,
                                                                   amountString: amount,
                                                                   gasLimit: 21000,
-                                                                  walletPassword: password,
                                                                   gasPrice: gasPrice,
                                                                   erc20TokenAddress: tokenModel.address) { (result) in
                                                                     switch result {
