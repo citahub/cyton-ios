@@ -11,9 +11,16 @@ import UIKit
 class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var gasPriceTextField: UITextField!
+    @IBOutlet weak var gasLimitTextField: UITextField!
+    var service: TransactionService!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        gasPriceTextField.text = "\(service.gasPrice)"
+        gasLimitTextField.text = "\(service.gasLimit)"
+        gasPriceTextField.isEnabled = service.changeGasPriceEnable
+        gasLimitTextField.isEnabled = service.changeGasLimitEnable
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -26,10 +33,6 @@ class TransactionGasPriceViewController: UIViewController {
         }
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss()
-    }
-
     @IBAction func dismiss() {
         UIView.animate(withDuration: 0.33, animations: {
             self.backgroundView.alpha = 0.0
@@ -38,9 +41,12 @@ class TransactionGasPriceViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         })
     }
-
+    @IBAction func confirm(_ sender: Any) {
+        service.gasPrice = UInt(gasPriceTextField.text!) ?? 0
+        service.gasLimit = UInt(gasLimitTextField.text!) ?? 0
+        dismiss()
+    }
 }
-
 
 extension TransactionGasPriceViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

@@ -12,37 +12,39 @@ import BigInt
 import TrustCore
 
 protocol TransactionServiceDelegate: NSObjectProtocol {
-    func transactionCompletion(_ transactionService: TransactionService)
+    func transactionCompletion(_ transactionService: TransactionService, error: Error?)
+    func transactionGasCostChanged(_ transactionService: TransactionService)
 }
 
 class TransactionService {
     weak var delegate: TransactionServiceDelegate?
     var token: TokenModel!
     var wallet: WalletModel!
-
     var tokenBalance: Double = 0.0
-    var gasPrice: Double = 0.0 {
+    var gasPrice: UInt = 1 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(UInt(gasLimit * gasPrice)), toUnits: .Gwei, decimals: 20) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 20) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
-    var gasLimit: Double = 0.0 {
+    var gasLimit: UInt = 0 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(UInt(gasLimit * gasPrice)), toUnits: .Gwei, decimals: 20) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 20) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
-    var gasCost: Double = 0.0
+    var gasCost: Double = 0.0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.delegate?.transactionGasCostChanged(self)
+            }
+        }
+    }
     var gasCostAmount: Double = 0.0
     var changeGasLimitEnable = false
     var changeGasPriceEnable = false
-    var isSupportGasSetting: Bool {
-        return changeGasPriceEnable || changeGasLimitEnable
-    }
-    var fromAddress: String {
-        return wallet.address
-    }
+    var isSupportGasSetting: Bool { return changeGasPriceEnable || changeGasLimitEnable }
+    var fromAddress: String { return wallet.address }
     var toAddress = ""
     var amount = 0.0
     var password: String = ""
@@ -69,12 +71,9 @@ class TransactionService {
     }
 
     func sendTransaction() {
-        Toast.showHUD()
     }
 
     func success() {
-        Toast.hideHUD()
-        Toast.showToast(text: "转账成功,请稍后刷新查看")
         SensorsAnalytics.Track.transaction(
             chainType: token.chainId,
             currencyType: token.symbol,
@@ -86,12 +85,11 @@ class TransactionService {
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
         }
-        delegate?.transactionCompletion(self)
+        delegate?.transactionCompletion(self, error: nil)
     }
 
     func failure(error: Error) {
-        Toast.hideHUD()
-        Toast.showToast(text: error.localizedDescription)
+        delegate?.transactionCompletion(self, error: error)
         if isUseQRCode {
             SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
         }
@@ -102,15 +100,17 @@ extension TransactionService {
     class Nervos: TransactionService {
         override init(token: TokenModel) {
             super.init(token: token)
-            gasLimit = 21000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                gasPrice = Double(result.words.first ?? 1)
-            } catch {
-                gasPrice = 1.0
+            DispatchQueue.global().async {
+                self.gasLimit = 21000
+                do {
+                    let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
+                    self.gasPrice = result.words.first ?? 1
+                } catch {
+                    self.gasPrice = 1
+                }
+                self.changeGasLimitEnable = false
+                self.changeGasPriceEnable = false
             }
-            changeGasLimitEnable = false
-            changeGasPriceEnable = false
         }
 
         override func sendTransaction() {
@@ -142,10 +142,38 @@ extension TransactionService {
 
 extension TransactionService {
     class Ethereum: TransactionService {
-        override var token: TokenModel! {
-            didSet {
-                gasLimit = 21000
-                changeGasLimitEnable = false
+        override init(token: TokenModel) {
+            super.init(token: token)
+            DispatchQueue.global().async {
+                self.gasLimit = 21000
+                let bigNumber = try? Web3Network.getWeb3().eth.getGasPrice().dematerialize()
+                self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+                self.changeGasLimitEnable = true
+                self.changeGasPriceEnable = true
+            }
+        }
+
+        override func sendTransaction() {
+            ERC20TransactionService().prepareERC20TransactionForSending(
+                destinationAddressString: toAddress,
+                amountString: "\(amount)",
+                gasLimit: UInt(gasLimit),
+                walletPassword: password,
+                gasPrice: BigUInt(UInt(gasPrice)),
+                erc20TokenAddress: token.address) { (result) in
+                switch result {
+                case .success(let transaction):
+                    ERC20TransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
+                        switch result {
+                        case .success:
+                            self.success()
+                        case .error(let error):
+                            self.failure(error: error)
+                        }
+                    })
+                case .error(let error):
+                    self.failure(error: error)
+                }
             }
         }
     }
@@ -153,10 +181,38 @@ extension TransactionService {
 
 extension TransactionService {
     class Erc20: TransactionService {
-        override var token: TokenModel! {
-            didSet {
-                gasLimit = 21000
-                changeGasLimitEnable = true
+        override init(token: TokenModel) {
+            super.init(token: token)
+            DispatchQueue.global().async {
+                self.gasLimit = 21000
+                let bigNumber = try? Web3Network.getWeb3().eth.getGasPrice().dematerialize()
+                self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+                self.changeGasLimitEnable = true
+                self.changeGasPriceEnable = true
+            }
+        }
+
+        override func sendTransaction() {
+            EthTransactionService().prepareETHTransactionForSending(
+                destinationAddressString: toAddress,
+                amountString: "\(amount)",
+                gasLimit: UInt(gasLimit),
+                walletPassword: wallet.address,
+                gasPrice: BigUInt(UInt(gasPrice)),
+                data: Data()) { (result) in
+                switch result {
+                case .success(let transaction):
+                    EthTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
+                        switch result {
+                        case .success:
+                            self.success()
+                        case .error(let error):
+                            self.failure(error: error)
+                        }
+                    })
+                case .error(let error):
+                    self.failure(error: error)
+                }
             }
         }
     }
@@ -164,17 +220,18 @@ extension TransactionService {
 
 extension TransactionService {
     class NervosErc20: TransactionService {
-        override var token: TokenModel! {
-            didSet {
-                gasLimit = 100000
+        override init(token: TokenModel) {
+            super.init(token: token)
+            DispatchQueue.global().async {
+                self.gasLimit = 100000
                 do {
                     let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                    gasPrice = Double(result.words.first ?? 1)
+                    self.gasPrice = result.words.first ?? 1
                 } catch {
-                    gasPrice = 1.0
+                    self.gasPrice = 1
                 }
-                changeGasLimitEnable = false
-                changeGasPriceEnable = false
+                self.changeGasLimitEnable = false
+                self.changeGasPriceEnable = false
             }
         }
     }

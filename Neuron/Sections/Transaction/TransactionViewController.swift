@@ -22,6 +22,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     var token: TokenModel! {
         didSet {
             service = TransactionService.service(with: token)
+            service.delegate = self
         }
     }
 
@@ -34,6 +35,9 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TransactionConfirmViewController" {
             let controller = segue.destination as! TransactionConfirmViewController
+            controller.service = service
+        } else if segue.identifier == "TransactionGasPriceViewController" {
+            let controller = segue.destination as! TransactionGasPriceViewController
             controller.service = service
         }
     }
@@ -48,6 +52,12 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         }
     }
 
+    @IBAction func scanQRCode() {
+        let controller = QRCodeController()
+        controller.delegate = self
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
     @objc func confirmSend(userInfo: [String: String]) {
         let password = userInfo["password"] ?? ""
         if password.lengthOfBytes(using: .utf8) < 8 {
@@ -55,16 +65,32 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
             return
         }
         service.password = password
+        Toast.showHUD()
         service.sendTransaction()
     }
 
     @IBAction func transactionAvailableBalance() {
-        amountTextField.text = "\(service.tokenBalance - service.gasCost)"
+        let amount = service.tokenBalance - service.gasCost
+        guard amount > 0 else {
+            Toast.showToast(text: "请确保账户剩余\(token.symbol)高于矿工费用，以便顺利完成转账～")
+            return
+        }
+        amountTextField.text = "\(amount)"
     }
 
     // MARK: - TransactionServiceDelegate
-    func transactionCompletion(_ transactionService: TransactionService) {
-        navigationController?.popViewController(animated: true)
+    func transactionCompletion(_ transactionService: TransactionService, error: Error?) {
+        Toast.hideHUD()
+        if let error = error {
+            Toast.showToast(text: error.localizedDescription)
+        } else {
+            Toast.showToast(text: "转账成功,请稍后刷新查看")
+            navigationController?.popViewController(animated: true)
+        }
+    }
+
+    func transactionGasCostChanged(_ transactionService: TransactionService) {
+        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.symbol)
     }
 
     // MARK: -
@@ -78,7 +104,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         } else {
             tokenBalanceButton.setTitle(String(format: "%.8lf%@", service.tokenBalance, token.symbol), for: .normal)
         }
-        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.symbol)
+        gasCostLabel.text = ""
     }
 }
 
@@ -122,6 +148,12 @@ extension TransactionViewController: UITextFieldDelegate {
             return true
         }
         return true
+    }
+}
+
+extension TransactionViewController: QRCodeControllerDelegate {
+    func didBackQRCodeMessage(codeResult: String) {
+        addressTextField.text = codeResult
     }
 }
 
