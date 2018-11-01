@@ -5,8 +5,8 @@ target 'Neuron' do
   use_frameworks!
   inhibit_all_warnings!
 
-  pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.2"
-  pod 'TrustKeystore', '~> 0.5.2'
+  pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.5"
+  pod 'web3swift', git: 'https://github.com/matterinc/web3swift', tag: '1.1.10'
   pod 'RealmSwift'
   pod 'KeychainSwift'
 

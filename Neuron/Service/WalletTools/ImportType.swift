@@ -10,5 +10,5 @@ import Foundation
 enum ImportType {
     case keystore(keystore: String, password: String)
     case privateKey(privateKey: String, password: String)
-    case mnemonic(mnemonic: String, password: String, derivationPath: String)
+    case mnemonic(mnemonic: String, password: String)
 }

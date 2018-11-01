@@ -19,18 +19,18 @@ struct ETHSignMessageService {
     public static func sign(message: String, password: String, completion: @escaping (SignMessageResult<String>) -> Void) {
         let messageData = Data.fromHex(message) ?? Data()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+        guard let wallet = walletModel.wallet else {
             completion(SignMessageResult.error(Error.walletIsNull))
             return
         }
         DispatchQueue.global().async {
-            guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+            guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.privateKeyIsNull))
                 }
                 return
             }
-            guard let signed = try! ETHMessageSigner.sign(message: messageData, privateKey: privateKey) else {
+            guard let signed = try! EthereumMessageSigner().sign(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.signMessageFailed))
                 }
@@ -45,18 +45,18 @@ struct ETHSignMessageService {
     public static func signPersonal(message: String, password: String, completion: @escaping (SignMessageResult<String>) -> Void) {
         let messageData = Data.fromHex(message) ?? Data()
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+        guard let wallet = walletModel.wallet else {
             completion(SignMessageResult.error(Error.walletIsNull))
             return
         }
         DispatchQueue.global().async {
-            guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+            guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.privateKeyIsNull))
                 }
                 return
             }
-            guard let signed = try! ETHMessageSigner.signPersonalMessage(message: messageData, privateKey: privateKey) else {
+            guard let signed = try! EthereumMessageSigner().signPersonalMessage(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
                     completion(SignMessageResult.error(Error.signMessageFailed))
                 }

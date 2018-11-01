@@ -25,10 +25,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         setupKeyboard()
         localCurrency()
+        initEthereumNetwork()
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
         return true
+    }
+
+    private func initEthereumNetwork() {
+        Web3Network().setNetworkFirstLaunch()
     }
 
     private func localCurrency() {
@@ -44,8 +49,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func skipBackupFiles() {
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
-        paths.append(WalletTool.keysDirectory)
+        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).compactMap { URL(fileURLWithPath: $0) }
+        paths.append(WalletManager.default.keystoreDir)
         SkipBackupFiles(paths: paths).skip()
     }
 

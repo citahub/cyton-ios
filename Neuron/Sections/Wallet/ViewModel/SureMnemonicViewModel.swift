@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import TrustKeystore
-import struct TrustCore.EthereumAddress
+import web3swift
 import RealmSwift
 import IGIdenticon
 
@@ -37,21 +36,21 @@ class SureMnemonicViewModel: NSObject {
     public func importWallet(mnemonic: String, password: String) {
         // 通过助记词导入钱包
         Toast.showHUD(text: "钱包创建中...")
-        WalletTool.importMnemonicAsync(mnemonic: mnemonic, password: password, devirationPath: WalletTool.defaultDerivationPath, completion: { (result) in
+        WalletManager.default.importMnemonicAsync(mnemonic: mnemonic, password: password, completion: { (result) in
             Toast.hideHUD()
             switch result {
             case .succeed(let account):
                 self.walletName = self.walletModel.name
-                self.walletAddress = EthereumAddress(data: account.address.data)!.eip55String
+                self.walletAddress = EthereumAddress.toChecksumAddress(account.address)!
                 SensorsAnalytics.Track.createWallet(address: self.walletAddress)
-                self.saveWallet()
+                self.saveWalletToRealm()
             case .failed(_, let errorMessage):
                 Toast.showToast(text: errorMessage)
             }
         })
     }
 
-    private func saveWallet() {
+    private func saveWalletToRealm() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let isFirstWallet = appModel.wallets.count == 0
         walletModel.address = walletAddress

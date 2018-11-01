@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import web3swift
 import AppChain
-import BigInt
+import struct AppChain.TransactionSendingResult
+import struct BigInt.BigUInt
 
 class NervosTransactionService {
     func prepareNervosTransactionForSending(address: String,
@@ -16,7 +18,7 @@ class NervosTransactionService {
                                             data: Data,
                                             value: String,
                                             tokenHosts: String = "",
-                                            chainId: BigUInt, completion: @escaping (SendNervosResult<NervosTransaction>) -> Void) {
+                                            chainId: BigUInt, completion: @escaping (SendNervosResult<Transaction>) -> Void) {
         DispatchQueue.global().async {
             guard let destinationEthAddress = Address(address) else {
                 DispatchQueue.main.async {
@@ -31,12 +33,12 @@ class NervosTransactionService {
                 return
             }
             let nonce = UUID().uuidString
-            let nervos = NervosNetwork.getNervos(with: tokenHosts)
-            let result = nervos.appChain.blockNumber()
+            let appChain = NervosNetwork.getNervos()
+            let result = appChain.rpc.blockNumber()
             DispatchQueue.main.async {
                 switch result {
                 case .success(let blockNumber):
-                    let transaction = NervosTransaction(
+                    let transaction = Transaction(
                         to: destinationEthAddress,
                         nonce: nonce,
                         quota: UInt64(quota),
@@ -54,23 +56,22 @@ class NervosTransactionService {
         }
     }
 
-    func send(password: String, transaction: NervosTransaction, tokenHost: String = "", completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
-        let nervos = NervosNetwork.getNervos(with: tokenHost)
+    func send(password: String, transaction: Transaction, completion: @escaping (SendNervosResult<TransactionSendingResult>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+        guard let wallet = walletModel.wallet else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
-        guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+        guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
-        guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: privateKey) else {
+        guard let signed = try? Signer().sign(transaction: transaction, with: privateKey) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
         DispatchQueue.global().async {
-            let result = nervos.appChain.sendRawTransaction(signedTx: signed)
+            let result = NervosNetwork.getNervos().rpc.sendRawTransaction(signedTx: signed)
             DispatchQueue.main.async {
                 switch result {
                 case .success(let transaction):
@@ -82,17 +83,17 @@ class NervosTransactionService {
         }
     }
 
-    func sign(password: String, transaction: NervosTransaction, completion: @escaping (SendNervosResult<String>) -> Void) {
+    func sign(password: String, transaction: Transaction, completion: @escaping (SendNervosResult<String>) -> Void) {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = WalletTool.wallet(for: walletModel.address) else {
+        guard let wallet = walletModel.wallet else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
-        guard case .succeed(result: let privateKey) = WalletTool.exportPrivateKey(wallet: wallet, password: password) else {
+        guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }
-        guard let signed = try? NervosTransactionSigner.sign(transaction: transaction, with: privateKey) else {
+        guard let signed = try? Signer().sign(transaction: transaction, with: privateKey) else {
             completion(SendNervosResult.error(NervosSignError.signTXFailed))
             return
         }

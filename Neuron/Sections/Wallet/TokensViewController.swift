@@ -34,8 +34,13 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
 
     func addNotify() {
         NotificationCenter.default.addObserver(self, selector: #selector(changeLocalCurrency), name: .changeLocalCurrency, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadDataForNewNetwork), name: .switchEthNetwork, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(switchWalletLoadToken), name: .switchWallet, object: nil)
+    }
+
+    @objc private func reloadDataForNewNetwork() {
+        getBalance(isRefresh: false)
     }
 
     @objc private func changeLocalCurrency() {

@@ -36,9 +36,9 @@ struct DAppAction {
         guard let chainHosts = manifestModel.chainSet.values.first else {
             throw Error.emptyChainHosts
         }
-        let nervos = NervosNetwork.getNervos(with: chainHosts)
+        let appChain = NervosNetwork.getNervos(with: chainHosts)
         DispatchQueue.global().async {
-            let result = nervos.appChain.getMetaData()
+            let result = appChain.rpc.getMetaData()
             DispatchQueue.main.async {
                 switch result {
                 case .success(let metaData):
