@@ -58,6 +58,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             let paymentViewController = segue.destination as! PaymentViewController
             paymentViewController.tokenType = tokenType
             paymentViewController.tokenModel = tokenModel
+        } else if segue.identifier == "transaction" {
+            let controller = segue.destination as! TransactionViewController
+            controller.token = service?.token
         }
     }
 
