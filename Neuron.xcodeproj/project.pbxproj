@@ -486,17 +486,17 @@
 		1AB28771217964F500DCC14D /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				1AB287722179651200DCC14D /* WalletTools */,
+				1AB287722179651200DCC14D /* WalletManager */,
 			);
 			path = Service;
 			sourceTree = "<group>";
 		};
-		1AB287722179651200DCC14D /* WalletTools */ = {
+		1AB287722179651200DCC14D /* WalletManager */ = {
 			isa = PBXGroup;
 			children = (
 				1AB287732179654300DCC14D /* WalletManagerTests.swift */,
 			);
-			path = WalletTools;
+			path = WalletManager;
 			sourceTree = "<group>";
 		};
 		1AB3D1D021709F7600557E9D /* Extensions */ = {
