@@ -109,6 +109,9 @@ extension TransactionViewController {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
             }
+        } else if service.toAddress == service.fromAddress {
+            Toast.showToast(text: "发送地址和收款地址不能相同")
+            return false
         } else if service.amount > service.tokenBalance - service.gasCost {
             let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
