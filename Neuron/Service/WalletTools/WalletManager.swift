@@ -14,7 +14,6 @@ struct Wallet {
 
 struct WalletManager {
     typealias ImportResultCallback = (ImportResult<Wallet>) -> Void
-    typealias ExportPrivateCallback = (ImportResult<String>) -> Void
 
     static let `default` = WalletManager(path: "keystore")
 
