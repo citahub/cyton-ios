@@ -576,7 +576,7 @@
 				898CA98420EA21E90059ECA3 /* TokenServices */,
 				899CADA120E0ED9500FF9D27 /* WalletServices */,
 				89D4AC3420D8AFB00097E02B /* RealmTools */,
-				89D4AC1F20D59F270097E02B /* WalletTools */,
+				89D4AC1F20D59F270097E02B /* WalletManager */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -970,7 +970,7 @@
 			path = SettingsService;
 			sourceTree = "<group>";
 		};
-		89D4AC1F20D59F270097E02B /* WalletTools */ = {
+		89D4AC1F20D59F270097E02B /* WalletManager */ = {
 			isa = PBXGroup;
 			children = (
 				89D4AC2520D59F270097E02B /* WalletManager.swift */,
@@ -982,7 +982,7 @@
 				89D4AC2820D59F270097E02B /* ImportResult.swift */,
 				1A1E8412216DF6DC00B15E88 /* ExportResult.swift */,
 			);
-			path = WalletTools;
+			path = WalletManager;
 			sourceTree = "<group>";
 		};
 		89D4AC3420D8AFB00097E02B /* RealmTools */ = {
