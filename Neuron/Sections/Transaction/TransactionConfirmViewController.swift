@@ -10,15 +10,30 @@ import UIKit
 import IQKeyboardManagerSwift
 
 class TransactionConfirmViewController: UIViewController {
+    @IBOutlet weak var containTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containView: UIView!
-    var service: TransactionService!
+    var service: TransactionService! {
+        didSet {
+            _ = view // load view
+            let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
+            controller.service = service
+            contentViewController = controller
+        }
+    }
     var contentViewController: UIViewController? {
         didSet {
             guard let controller = contentViewController else { return }
-            controller.view.frame = containView.bounds
+            _ = view // load view
+            titleLabel.text = controller.title
+            controller.view.frame = CGRect(
+                x: 0,
+                y: containView.bounds.height - controller.preferredContentSize.height,
+                width: containView.bounds.size.width,
+                height: controller.preferredContentSize.height
+            )
             containView.addSubview(controller.view)
 
             if let oldValue = oldValue {
@@ -37,10 +52,7 @@ class TransactionConfirmViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
-        controller.service = service
-        contentViewController = controller
-
+        registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmSend(userInfo:)))
         registerEventStrategy(with: TransactionConfirmInfoViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmInfo))
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -62,8 +74,15 @@ class TransactionConfirmViewController: UIViewController {
         IQKeyboardManager.shared.enable = true
     }
 
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss()
+    @objc func confirmSend(userInfo: [String: String]) {
+        let password = userInfo["password"] ?? ""
+        if password.lengthOfBytes(using: .utf8) < 8 {
+            Toast.showToast(text: "请输入有效的钱包密码")
+            return
+        }
+        service.password = password
+        Toast.showHUD()
+        service.sendTransaction()
     }
 
     @IBAction func dismiss() {
@@ -77,7 +96,6 @@ class TransactionConfirmViewController: UIViewController {
 
     @objc func confirmInfo() {
         let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transaction).instantiateViewController()
-        controller.service = service
         contentViewController = controller
     }
 
@@ -128,9 +146,9 @@ class TransactionConfirmInfoViewController: UIViewController {
             } else {
                 amountLabel.text = "\(amount)"
             }
+            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), service.token.symbol.lengthOfBytes(using: .utf8))
             amountLabel.text! += service.token.symbol
             let attributedText = NSMutableAttributedString(attributedString: amountLabel.attributedText!)
-            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), service.token.symbol.lengthOfBytes(using: .utf8))
             attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = service.fromAddress
@@ -153,10 +171,9 @@ class TransactionConfirmSendViewController: UIViewController {
     }
 
     @IBOutlet weak var passwordTextField: UITextField!
-    var service: TransactionService!
 
     @IBAction func confirm(_ sender: Any) {
-        routerEvent(with: Event.confirm.rawValue, userInfo: ["password": passwordTextField.text ?? ""])
+        routerEvent(with: Event.confirm.rawValue, userInfo: ["password": passwordTextField.text ?? "", "controller": self])
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

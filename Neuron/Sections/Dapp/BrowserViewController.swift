@@ -13,8 +13,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
-    private var messageSignController: MessageSignController!
     var requestUrlStr = ""
+    var transactionConfirmViewController: TransactionConfirmViewController?
 
     lazy private var webview: WKWebView = {
         let webview = WKWebView(
@@ -181,7 +181,7 @@ extension BrowserViewController: WKUIDelegate {
     }
 }
 
-extension BrowserViewController {
+extension BrowserViewController: MessageSignShowViewControllerDelegate {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
@@ -191,11 +191,28 @@ extension BrowserViewController {
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-        messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as? MessageSignController
-        messageSignController.delegate = self
-        messageSignController.dappCommonModel = dappCommonModel
-        messageSignController.requestUrlString = webview.url!.absoluteString
-        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
+        let messageSignShowViewController = storyboard!.instantiateViewController(withIdentifier: "messageSignShowViewController") as! MessageSignShowViewController
+        _ = messageSignShowViewController.view // load view
+        messageSignShowViewController.delegate = self
+        messageSignShowViewController.requestTextField.text = webview.url!.absoluteString
+        if dappCommonModel.chainType == "AppChain" {
+            messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
+        } else {
+            messageSignShowViewController.dataText = dappCommonModel.eth?.data ?? ""
+        }
+        let controller: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.contentViewController = messageSignShowViewController
+        present(controller, animated: false, completion: nil)
+        transactionConfirmViewController = controller
+    }
+
+    func clickAgreeButton() {
+        transactionConfirmViewController?.confirmInfo()
+    }
+
+    func clickRejectButton() {
+        transactionConfirmViewController?.dismiss()
     }
 }
 

@@ -46,6 +46,7 @@ class TransactionService {
     var fromAddress: String { return wallet.address }
     var toAddress = ""
     var amount = 0.0
+    var extraData = Data()
     var password: String = ""
     var isUseQRCode = false
 
@@ -67,6 +68,9 @@ class TransactionService {
         } else {
             fatalError()
         }
+    }
+
+    func requestGasCost() {
     }
 
     func sendTransaction() {
@@ -97,19 +101,16 @@ class TransactionService {
 
 extension TransactionService {
     class Nervos: TransactionService {
-        override init(token: TokenModel) {
-            super.init(token: token)
-            DispatchQueue.global().async {
-                self.gasLimit = 21000
-                do {
-                    let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                    self.gasPrice = result.words.first ?? 1
-                } catch {
-                    self.gasPrice = 1
-                }
-                self.changeGasLimitEnable = false
-                self.changeGasPriceEnable = false
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            do {
+                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
+                self.gasPrice = result.words.first ?? 1
+            } catch {
+                self.gasPrice = 1
             }
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
         }
 
         override func sendTransaction() {
@@ -117,7 +118,7 @@ extension TransactionService {
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit * gasPrice)),
-                data: Data(),
+                data: extraData,
                 value: "\(amount)",
                 tokenHosts: token.chainHosts,
                 chainId: BigUInt(token.chainId)!) { (result) in
@@ -141,15 +142,12 @@ extension TransactionService {
 
 extension TransactionService {
     class Ethereum: TransactionService {
-        override init(token: TokenModel) {
-            super.init(token: token)
-            DispatchQueue.global().async {
-                self.gasLimit = 21000
-                let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-                self.gasPrice = (bigNumber?.words.first ?? 1) * 4
-                self.changeGasLimitEnable = true
-                self.changeGasPriceEnable = true
-            }
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
+            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            self.changeGasLimitEnable = true
+            self.changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
@@ -179,15 +177,12 @@ extension TransactionService {
 
 extension TransactionService {
     class Erc20: TransactionService {
-        override init(token: TokenModel) {
-            super.init(token: token)
-            DispatchQueue.global().async {
-                self.gasLimit = 21000
-                let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-                self.gasPrice = (bigNumber?.words.first ?? 1) * 4
-                self.changeGasLimitEnable = true
-                self.changeGasPriceEnable = true
-            }
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
+            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            self.changeGasLimitEnable = true
+            self.changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
@@ -196,7 +191,7 @@ extension TransactionService {
                 amountString: "\(amount)",
                 gasLimit: gasLimit,
                 gasPrice: BigUInt(gasPrice),
-                data: Data()) { (result) in
+                data: extraData) { (result) in
                 switch result {
                 case .success(let transaction):
                     EthTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
@@ -217,19 +212,16 @@ extension TransactionService {
 
 extension TransactionService {
     class NervosErc20: TransactionService {
-        override init(token: TokenModel) {
-            super.init(token: token)
-            DispatchQueue.global().async {
-                self.gasLimit = 100000
-                do {
-                    let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                    self.gasPrice = result.words.first ?? 1
-                } catch {
-                    self.gasPrice = 1
-                }
-                self.changeGasLimitEnable = false
-                self.changeGasPriceEnable = false
+        override func requestGasCost() {
+            self.gasLimit = 100000
+            do {
+                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
+                self.gasPrice = result.words.first ?? 1
+            } catch {
+                self.gasPrice = 1
             }
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
         }
     }
 }

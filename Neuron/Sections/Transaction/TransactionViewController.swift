@@ -19,17 +19,16 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     @IBOutlet weak var gasCostLabel: UILabel!
     @IBOutlet weak var addressTextField: UITextField!
     var service: TransactionService!
-    var token: TokenModel! {
-        didSet {
-            service = TransactionService.service(with: token)
-            service.delegate = self
-        }
-    }
+    var token: TokenModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        service = TransactionService.service(with: token)
+        service.delegate = self
+        DispatchQueue.global().async {
+            self.service.requestGasCost()
+        }
         setupUI()
-        registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(TransactionViewController.confirmSend(userInfo:)))
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,17 +57,6 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    @objc func confirmSend(userInfo: [String: String]) {
-        let password = userInfo["password"] ?? ""
-        if password.lengthOfBytes(using: .utf8) < 8 {
-            Toast.showToast(text: "请输入有效的钱包密码")
-            return
-        }
-        service.password = password
-        Toast.showHUD()
-        service.sendTransaction()
-    }
-
     @IBAction func transactionAvailableBalance() {
         let amount = service.tokenBalance - service.gasCost
         guard amount > 0 else {
@@ -95,10 +83,11 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
 
     // MARK: -
     func setupUI() {
+        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
         title = "\(token.symbol)转账"
-        walletIconView.image = UIImage(data: service.wallet.iconData)
-        walletNameLabel.text = service.wallet.name
-        walletAddressLabel.text = service.wallet.address
+        walletIconView.image = UIImage(data: wallet.iconData)
+        walletNameLabel.text = wallet.name
+        walletAddressLabel.text = wallet.address
         if service.tokenBalance == Double(Int(service.tokenBalance)) {
             tokenBalanceButton.setTitle(String(format: "%.0lf%@", service.tokenBalance, token.symbol), for: .normal)
         } else {
@@ -115,7 +104,6 @@ extension TransactionViewController {
             return false
         } else if service.toAddress != service.toAddress.lowercased() {
             let eip55String = EthereumAddress.toChecksumAddress(service.toAddress) ?? ""
-//            let eip55String = TrustCore.EthereumAddress(string: service.toAddress)?.eip55String ?? ""
             if eip55String != service.toAddress {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
@@ -159,7 +147,6 @@ extension TransactionViewController: QRCodeControllerDelegate {
 }
 
 extension TransactionViewController {
-    // MARK: - TableView Delegate
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return indexPath.row == 2 && service.isSupportGasSetting ? true : false
     }
