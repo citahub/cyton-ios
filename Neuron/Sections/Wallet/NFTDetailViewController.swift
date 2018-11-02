@@ -42,11 +42,9 @@ class NFTDetailViewController: UICollectionViewController {
         }
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "pushToDescription" {
-            let safariController = SFSafariViewController(url: URL(string: assetsModel.external_link ?? "https://www.nervos.org")!)
-            self.present(safariController, animated: true, completion: nil)
-        }
+    @IBAction func viewNFTDetail(_ sender: UIButton) {
+        let safariController = SFSafariViewController(url: URL(string: assetsModel.external_link ?? "https://www.nervos.org")!)
+        self.present(safariController, animated: true, completion: nil)
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {

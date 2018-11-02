@@ -1094,7 +1094,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Dw6-jA-k5w"/>
                     <connections>
-                        <outlet property="mnemonic" destination="G9D-oT-DhE" id="Bog-aE-jZZ"/>
+                        <outlet property="mnemonicTextView" destination="G9D-oT-DhE" id="iSe-D3-lIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4M-Qo-hxF" userLabel="First Responder" sceneMemberID="firstResponder"/>

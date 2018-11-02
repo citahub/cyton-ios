@@ -93,6 +93,8 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         let success = compareMnemonic(original: originalMnemonic, current: selectMnemonic)
         if success {
             importWallet(mnemonic: mnemonic!, password: password)
+        } else {
+            Toast.showToast(text: "助记词验证失败")
         }
     }
 
@@ -101,7 +103,6 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         if original == current {
             return true
         } else {
-            Toast.showToast(text: "助记词验证失败")
             return false
         }
     }

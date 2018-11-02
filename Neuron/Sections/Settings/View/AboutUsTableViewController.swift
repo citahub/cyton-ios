@@ -18,15 +18,15 @@ class AboutUsTableViewController: UITableViewController {
         setVersionLabel()
     }
 
-    private var firstSectionUrls = [
+    private var projectGithubUrls = [
         "https://github.com/cryptape/neuron-ios",
-        "https://github.com/cryptape/neuron-ios"
+        "https://docs.nervos.org/neuron-android/#/product-agreement"
     ]
 
     private var secondSectionUrls = [
-        "https://opensea.io/",
-        "https://github.com/cryptape/neuron-ios",
+        "https://www.nervos.org/",
         "https://infura.io/",
+        "https://opensea.io/",
         "https://peckshield.com/",
         "https://github.com/cryptape/cita"
     ]
@@ -53,7 +53,7 @@ class AboutUsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let urlString: String
         if indexPath.section == 1 {
-            urlString = firstSectionUrls[indexPath.row]
+            urlString = projectGithubUrls[indexPath.row]
         } else if indexPath.section == 2 {
             urlString = secondSectionUrls[indexPath.row]
         } else {

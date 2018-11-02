@@ -11,12 +11,12 @@ import UIKit
 class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverlayPresentable, UIGestureRecognizerDelegate {
     var password = ""
     var walletModel = WalletModel()
-    var mnemonicStr = ""
-    @IBOutlet weak var mnemonic: UITextView!
+    var mnemonic = ""
+    @IBOutlet weak var mnemonicTextView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mnemonic.text = mnemonicStr
+        mnemonicTextView.text = mnemonic
         title = "备份助记词"
         setupEnterBackOverlay()
     }
@@ -41,7 +41,7 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "confirmMnemonic" {
             let verifyMnemonicViewController = segue.destination as! VerifyMnemonicViewController
-            verifyMnemonicViewController.mnemonic = mnemonicStr
+            verifyMnemonicViewController.mnemonic = mnemonic
             verifyMnemonicViewController.password = password
             verifyMnemonicViewController.walletModel = walletModel
         }
