@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -416,9 +416,6 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="sourceCode" id="3ra-E3-8Kc"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="nZS-oK-Mgh" imageView="fex-CP-Gck" rowHeight="49" style="IBUITableViewCellStyleDefault" id="OIr-Ch-hlg">
                                         <rect key="frame" x="0.0" y="238" width="375" height="49"/>
@@ -440,9 +437,6 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="serviceTerms" id="tsg-Bx-yQn"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -468,9 +462,6 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="nervosNetwork" id="BgW-qg-nqP"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="DBe-59-RwN" detailTextLabel="fOl-lc-Nhm" imageView="isl-mZ-NAW" style="IBUITableViewCellStyleValue1" id="Hv5-Zo-Qyh">
                                         <rect key="frame" x="0.0" y="342" width="375" height="44"/>
@@ -499,9 +490,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="infua" id="YMg-tp-jzU"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Qq9-ma-kBf" detailTextLabel="TqJ-Rt-K74" imageView="g7H-LJ-2YN" style="IBUITableViewCellStyleValue1" id="Vk6-6m-Vdi">
                                         <rect key="frame" x="0.0" y="386" width="375" height="44"/>
@@ -530,9 +518,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="openSea" id="UnE-RX-ZKY"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="r99-YF-QHx" detailTextLabel="pyU-e3-sIb" imageView="FZd-lB-soh" style="IBUITableViewCellStyleValue1" id="80b-Cq-ai6">
                                         <rect key="frame" x="0.0" y="430" width="375" height="44"/>
@@ -561,9 +546,6 @@
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="PeckShield" id="9Vw-tY-wrT"/>
-                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="sEC-GN-Tjb" detailTextLabel="zxX-Y6-UFJ" imageView="6fs-eo-4c1" style="IBUITableViewCellStyleValue1" id="J3F-M8-X0N">
                                         <rect key="frame" x="0.0" y="474" width="375" height="44"/>
@@ -592,9 +574,6 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
-                                        <connections>
-                                            <segue destination="IoZ-7J-fyU" kind="show" identifier="CITA" id="ewL-3v-W3U"/>
-                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -652,7 +631,4 @@
         <image name="setting_on" width="22" height="22"/>
         <image name="source_code" width="20" height="20"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="ewL-3v-W3U"/>
-    </inferredMetricsTieBreakers>
 </document>
