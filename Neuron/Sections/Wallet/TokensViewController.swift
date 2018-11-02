@@ -153,8 +153,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
             }
         }
         group.notify(queue: .main) {
-            self.tableView.reloadData()
             NotificationCenter.default.post(name: .endRefresh, object: nil)
+            self.tableView.reloadData()
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 Toast.hideHUD()
