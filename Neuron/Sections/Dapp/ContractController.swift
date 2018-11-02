@@ -28,6 +28,7 @@ class ContractController: UITableViewController {
     private var chainType: ChainType = .appChain
     private var tokenModel = TokenModel()
     var payCoverViewController: PayCoverViewController!
+    var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
 
     @IBOutlet weak var valueLabel: UILabel!
@@ -37,35 +38,36 @@ class ContractController: UITableViewController {
     @IBOutlet weak var requestStringLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var fromLabel: UILabel!
-//    @IBOutlet weak var gasTextField: UITextField!
-//    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
-//    @IBOutlet weak var dataTextView: UITextView!
 
     private var gasPrice = BigUInt()
     private var gasLimit = BigUInt()
+    private var ethereumGas: String?
+    private var value: String! // both appChain'amount and Ethereum'amount
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "支付详情"
         payCoverViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "confirmViewController") as? PayCoverViewController
         payCoverViewController.dappDelegate = self
-        setUIData()
+        advancedViewController = storyboard!.instantiateViewController(withIdentifier: "advancedViewController") as? AdvancedViewController
+        advancedViewController.delegate = self
+        getTokenModel()
     }
 
     func getTokenModel() {
         let appModel = WalletRealmTool.getCurrentAppModel()
         appModel.nativeTokenList.forEach { (tokenModel) in
-            switch chainType {
-            case .appChain:
+            if dappCommonModel.chainType == "AppChain" {
                 if dappCommonModel.appChain!.chainId == Int(tokenModel.chainId) {
                     self.tokenModel = tokenModel
                 }
-            case .eth:
+            } else {
                 if dappCommonModel.eth!.chainId == Int(tokenModel.chainId) {
                     self.tokenModel = tokenModel
                 }
             }
         }
+        setUIData()
     }
 
     func setUIData() {
@@ -73,20 +75,22 @@ class ContractController: UITableViewController {
         fromLabel.text = walletModel.address
         requestStringLabel.text = requestAddress
         dappNameLabel.text = dappName
+
         if dappCommonModel.chainType == "AppChain" {
+            let appChainQuota = BigUInt(dappCommonModel.appChain?.quota.clean ?? "1000000")!
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
-            valueLabel.text = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
-            gasLabel.text = getNervosTransactionCosted(with: BigUInt(dappCommonModel.appChain?.quota.clean ?? "1000000")!)
-//            dataTextView.text = dappCommonModel.appChain?.data
+            value = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
+            valueLabel.text = value + tokenModel.symbol
+            gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
+            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value ?? "0", gas: appChainQuota) + tokenModel.symbol
         } else {
             chainType = .eth
             toLabel.text = dappCommonModel.eth?.to
-            valueLabel.text = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
+            value = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
+            valueLabel.text = value + tokenModel.symbol
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
-//            dataTextView.text = dappCommonModel.eth?.data
         }
-        getTokenModel()
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) -> String {
@@ -98,6 +102,15 @@ class ContractController: UITableViewController {
         let format = Web3Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
         let finalValue = Double(format)!
         return finalValue.clean
+    }
+
+    // gas is equal to appChain's quota
+    func getTotleValue(value: String, gas: BigUInt) -> String {
+        let biguInt = BigUInt(atof(value))
+        let finalValue = biguInt + gas
+        let formatValue = Web3Utils.formatToEthereumUnits(finalValue, toUnits: .eth, decimals: 8, fallbackToScientific: true)!
+        let finalCost = Double(formatValue)!
+        return finalCost.clean
     }
 
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
@@ -130,9 +143,20 @@ class ContractController: UITableViewController {
             }
             DispatchQueue.main.async {
                 let gas = self.gasPrice * self.gasLimit
-                self.gasLabel.text = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
+                self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
+                self.gasLabel.text = Double(self.ethereumGas!)!.clean + self.tokenModel.symbol
+                let bigUIntValue = Web3Utils.parseToBigUInt(self.value, units: .eth)!
+                self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.description, gas: gas) + self.tokenModel.symbol
                 Toast.hideHUD()
             }
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if dappCommonModel.chainType == "ETH" {
+            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
+            advancedViewController.gasLimit = gasLimit
+            UIApplication.shared.keyWindow?.addSubview(advancedViewController.view)
         }
     }
 
@@ -145,8 +169,8 @@ class ContractController: UITableViewController {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         payCoverViewController.tokenModel = tokenModel
         payCoverViewController.walletAddress = walletModel.address
-        payCoverViewController.gasCost = gasLabel.text ?? "0" + tokenModel.symbol
-        payCoverViewController.amount = valueLabel.text ?? "0"
+        payCoverViewController.amount = value
+        payCoverViewController.gasCost = gasLabel.text ?? "0"
         payCoverViewController.dappCommonModel = dappCommonModel
         switch chainType {
         case .appChain:
@@ -164,27 +188,20 @@ class ContractController: UITableViewController {
     }
 }
 
-extension ContractController: TabbedButtonsViewDelegate {
-    func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
-        var dataString: String
-        switch chainType {
-        case .appChain:
-            dataString = dappCommonModel.appChain?.data ?? ""
-        case .eth:
-            dataString = dappCommonModel.eth?.data ?? ""
-        }
-
-        if index == 0 {
-//            dataTextView.text = dataString
-        } else {
-//            dataTextView.text = String(decoding: Data.fromHex(dataString)!, as: UTF8.self)
-        }
-    }
-}
-
 extension ContractController: DAppPayCoverViewControllerDelegate {
     func dappTransactionResult(id: Int, value: String, error: DAppError?) {
         delegate?.callBackWebView(id: id, value: value, error: error)
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension ContractController: AdvancedViewControllerDelegate {
+    func getCustomGas(gasPrice: BigUInt, gas: BigUInt) {
+        self.gasPrice = gasPrice
+        ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: true) ?? "0"
+        let bigUIntValue = Web3Utils.parseToBigUInt(value, units: .eth)!
+        let totlePay = getTotleValue(value: bigUIntValue.description, gas: gas)
+        totlePayLabel.text = totlePay + tokenModel.symbol
+        gasLabel.text = Double(ethereumGas ?? "")!.clean + tokenModel.symbol
     }
 }
