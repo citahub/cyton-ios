@@ -96,38 +96,41 @@ extension WalletManager {
 
     func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = self.importKeystore(keystore, password: password)
+            let result: ImportResult<Wallet>
+            do {
+                let wallet = try self.importKeystore(keystore, password: password)
+                result = ImportResult.succeed(result: wallet)
+            } catch let error {
+                result = ImportResult.failed(error: error, errorMessage: "导入Keystore失败")
+            }
             DispatchQueue.main.async {
-                completion(importResult)
+                completion(result)
             }
         }
     }
 
-    func importKeystore(_ keystoreString: String, password: String) -> ImportResult<Wallet> {
-        guard let keystore = EthereumKeystoreV3(keystoreString) else {
-            return ImportResult.failed(error: ImportError.invalidateJSONKey, errorMessage: "无效的keystore")
+    func importKeystore(_ keystoreString: String, password: String) throws -> Wallet {
+        guard let keystore = EthereumKeystoreV3(keystoreString), let address = keystore.getAddress()?.address else {
+            throw ImportError.invalidateJSONKey
         }
 
-        guard let address = keystore.getAddress()?.address else {
-            return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
-        }
         if walletExists(address: address) {
-            return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
+            throw ImportError.accountAlreadyExists
         }
 
         do {
             try keystore.regenerate(oldPassword: password, newPassword: password)
         } catch {
-            return ImportResult.failed(error: ImportError.wrongPassword, errorMessage: "密码错误")
+            throw ImportError.wrongPassword
         }
 
         do {
             try keystoreManager.add(keystore: keystore)
         } catch {
-            return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
+            throw ImportError.unknown
         }
 
-        return ImportResult.succeed(result: Wallet(address: address))
+        return Wallet(address: address)
     }
 
     func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {

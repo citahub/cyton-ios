@@ -58,9 +58,7 @@ class WalletManagerTests: XCTestCase {
             return XCTFail("Export fail")
         }
         XCTAssertNoThrow(try walletManager.deleteWallet(wallet: oldWallet, password: "password"))
-        guard case .succeed = walletManager.importKeystore(exported, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        XCTAssertNoThrow(try walletManager.importKeystore(exported, password: "password"))
     }
 
     func testUpdatePassword() throws {
