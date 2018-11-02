@@ -1601,10 +1601,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eUE-Nf-hU0">
-                                <rect key="frame" x="345" y="17.5" width="15" height="15"/>
+                                <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="15" id="0Ty-ki-p1g"/>
-                                    <constraint firstAttribute="width" constant="15" id="EGf-sb-zbP"/>
+                                    <constraint firstAttribute="height" constant="40" id="0Ty-ki-p1g"/>
+                                    <constraint firstAttribute="width" constant="40" id="EGf-sb-zbP"/>
                                 </constraints>
                                 <state key="normal" image="close"/>
                                 <userDefinedRuntimeAttributes>
@@ -1621,14 +1621,14 @@
                         <constraints>
                             <constraint firstItem="lZL-rO-Gdd" firstAttribute="top" secondItem="TgQ-vv-KuO" secondAttribute="bottom" constant="40" id="4c8-z1-iFq"/>
                             <constraint firstItem="XDp-7d-Fhe" firstAttribute="trailing" secondItem="lZL-rO-Gdd" secondAttribute="trailing" constant="15" id="5QJ-8r-ASM"/>
-                            <constraint firstItem="eUE-Nf-hU0" firstAttribute="top" secondItem="XDp-7d-Fhe" secondAttribute="top" constant="17.5" id="9tv-Ht-2h2"/>
+                            <constraint firstItem="eUE-Nf-hU0" firstAttribute="top" secondItem="XDp-7d-Fhe" secondAttribute="top" id="9tv-Ht-2h2"/>
                             <constraint firstItem="lZL-rO-Gdd" firstAttribute="leading" secondItem="XDp-7d-Fhe" secondAttribute="leading" constant="15" id="BwU-oU-hjF"/>
+                            <constraint firstItem="eUE-Nf-hU0" firstAttribute="leading" secondItem="9zL-JN-AG0" secondAttribute="leading" id="CHp-PK-LQB"/>
                             <constraint firstItem="0ur-6y-gYs" firstAttribute="leading" secondItem="XDp-7d-Fhe" secondAttribute="leading" constant="50" id="JRD-AC-hrm"/>
                             <constraint firstItem="BRH-lc-Yrk" firstAttribute="leading" secondItem="XDp-7d-Fhe" secondAttribute="leading" constant="15" id="NSE-CG-T0V"/>
                             <constraint firstItem="XDp-7d-Fhe" firstAttribute="trailing" secondItem="BRH-lc-Yrk" secondAttribute="trailing" constant="15" id="OPg-aO-hif"/>
                             <constraint firstItem="WAE-KP-ZIe" firstAttribute="top" secondItem="lZL-rO-Gdd" secondAttribute="bottom" id="VUR-93-6rM"/>
                             <constraint firstItem="XDp-7d-Fhe" firstAttribute="trailing" secondItem="WAE-KP-ZIe" secondAttribute="trailing" constant="15" id="aVq-sK-OhX"/>
-                            <constraint firstItem="XDp-7d-Fhe" firstAttribute="trailing" secondItem="eUE-Nf-hU0" secondAttribute="trailing" constant="15" id="aic-md-jUx"/>
                             <constraint firstItem="XDp-7d-Fhe" firstAttribute="trailing" secondItem="0ur-6y-gYs" secondAttribute="trailing" constant="50" id="dUc-ZU-HPq"/>
                             <constraint firstItem="XDp-7d-Fhe" firstAttribute="bottom" secondItem="BRH-lc-Yrk" secondAttribute="bottom" constant="20" id="eHd-lW-4L4"/>
                             <constraint firstItem="0ur-6y-gYs" firstAttribute="top" secondItem="XDp-7d-Fhe" secondAttribute="top" id="fYH-AD-8e5"/>
