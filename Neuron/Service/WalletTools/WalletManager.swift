@@ -49,6 +49,7 @@ struct WalletManager {
 
 // MARK: - Import
 extension WalletManager {
+    // TODO: remove this and let the WalletManager user be responsible for create/use a queue.
     func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result: ImportResult<Wallet>
@@ -89,13 +90,7 @@ extension WalletManager {
             throw ImportError.invalidateMnemonic
         }
 
-        do {
-            try keystoreManager.add(keystore: keystore)
-        } catch {
-            throw ImportError.unknown
-        }
-
-        return Wallet(address: address.address)
+        return try add(keystore, address.address)
     }
 
     func importKeystore(_ keystoreString: String, password: String) throws -> Wallet {
@@ -113,13 +108,7 @@ extension WalletManager {
             throw ImportError.wrongPassword
         }
 
-        do {
-            try keystoreManager.add(keystore: keystore)
-        } catch {
-            throw ImportError.unknown
-        }
-
-        return Wallet(address: address)
+        return try add(keystore, address)
     }
 
     func importPrivateKey(privateKey: String, password: String) throws -> Wallet {
@@ -133,6 +122,10 @@ extension WalletManager {
             throw ImportError.accountAlreadyExists
         }
 
+        return try add(keystore, address)
+    }
+
+    private func add(_ keystore: EthereumKeystoreV3, _ address: String) throws -> Wallet {
         do {
             try keystoreManager.add(keystore: keystore)
         } catch {
