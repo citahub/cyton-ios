@@ -67,11 +67,12 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     // MARK: - TransactionServiceDelegate
-    func transactionCompletion(_ transactionService: TransactionService, error: Error?) {
+    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
         Toast.hideHUD()
-        if let error = error {
-            Toast.showToast(text: error.localizedDescription)
-        } else {
+        switch result {
+        case .error(let error):
+            Toast.showToast(text: error.rawValue)
+        default:
             Toast.showToast(text: "转账成功,请稍后刷新查看")
             navigationController?.popViewController(animated: true)
         }
@@ -81,7 +82,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.symbol)
     }
 
-    // MARK: -
+    // MARK: - UI
     func setupUI() {
         let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
         title = "\(token.symbol)转账"

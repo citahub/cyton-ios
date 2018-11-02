@@ -181,7 +181,7 @@ extension BrowserViewController: WKUIDelegate {
     }
 }
 
-extension BrowserViewController: MessageSignShowViewControllerDelegate {
+extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
@@ -192,27 +192,10 @@ extension BrowserViewController: MessageSignShowViewControllerDelegate {
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-        let messageSignShowViewController = storyboard!.instantiateViewController(withIdentifier: "messageSignShowViewController") as! MessageSignShowViewController
-        _ = messageSignShowViewController.view // load view
-        messageSignShowViewController.delegate = self
-        if dappCommonModel.chainType == "AppChain" {
-            messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
-        } else {
-            messageSignShowViewController.dataText = dappCommonModel.eth?.data ?? ""
-        }
-        let controller: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        let controller: MessageSignController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
-        controller.contentViewController = messageSignShowViewController
+        controller.dappCommonModel = dappCommonModel
         present(controller, animated: false, completion: nil)
-        transactionConfirmViewController = controller
-    }
-
-    func clickAgreeButton() {
-        transactionConfirmViewController?.confirmInfo()
-    }
-
-    func clickRejectButton() {
-        transactionConfirmViewController?.dismiss()
     }
 }
 

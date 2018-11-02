@@ -9,26 +9,39 @@
 import Foundation
 import AppChain
 import BigInt
+import web3swift
+import struct AppChain.TransactionSendingResult
 
 protocol TransactionServiceDelegate: NSObjectProtocol {
-    func transactionCompletion(_ transactionService: TransactionService, error: Error?)
+    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result)
     func transactionGasCostChanged(_ transactionService: TransactionService)
 }
 
 class TransactionService {
+    enum Result {
+        case error(Error)
+        case ethereum(web3swift.TransactionSendingResult)
+        case appChain(TransactionSendingResult)
+    }
+    enum Error: String, Swift.Error {
+        case cancel = ""
+        case prepareFailed
+        case sendFailed
+    }
+
     weak var delegate: TransactionServiceDelegate?
     var token: TokenModel!
     var wallet: WalletModel!
     var tokenBalance: Double = 0.0
     var gasPrice: UInt = 1 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 20) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
     var gasLimit: UInt = 0 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 20) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
@@ -76,26 +89,26 @@ class TransactionService {
     func sendTransaction() {
     }
 
-    func success() {
-        SensorsAnalytics.Track.transaction(
-            chainType: token.chainId,
-            currencyType: token.symbol,
-            currencyNumber: amount,
-            receiveAddress: toAddress,
-            outcomeAddress: wallet.address,
-            transactionType: .normal
-        )
-        if isUseQRCode {
-            SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
+    func completion(result: Result) {
+        switch result {
+        case .error:
+            if isUseQRCode {
+                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
+            }
+        default:
+            SensorsAnalytics.Track.transaction(
+                chainType: token.chainId,
+                currencyType: token.symbol,
+                currencyNumber: amount,
+                receiveAddress: toAddress,
+                outcomeAddress: wallet.address,
+                transactionType: .normal
+            )
+            if isUseQRCode {
+                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
+            }
         }
-        delegate?.transactionCompletion(self, error: nil)
-    }
-
-    func failure(error: Error) {
-        delegate?.transactionCompletion(self, error: error)
-        if isUseQRCode {
-            SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
-        }
+        delegate?.transactionCompletion(self, result: result)
     }
 }
 
@@ -117,7 +130,7 @@ extension TransactionService {
             super.sendTransaction()
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
-                quota: BigUInt(UInt(gasLimit * gasPrice)),
+                quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
                 data: extraData,
                 value: "\(amount)",
                 tokenHosts: token.chainHosts,
@@ -126,14 +139,14 @@ extension TransactionService {
                 case .success(let transaction):
                     NervosTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
                         switch result {
-                        case .success:
-                            self.success()
-                        case .error(let error):
-                            self.failure(error: error)
+                        case .success(let result):
+                            self.completion(result: Result.appChain(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
                         }
                     })
-                case .error(let error):
-                    self.failure(error: error)
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
                 }
             }
         }
@@ -161,14 +174,14 @@ extension TransactionService {
                 case .success(let transaction):
                     ERC20TransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
                         switch result {
-                        case .success:
-                            self.success()
-                        case .error(let error):
-                            self.failure(error: error)
+                        case .success(let result):
+                            self.completion(result: Result.ethereum(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
                         }
                     })
-                case .error(let error):
-                    self.failure(error: error)
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
                 }
             }
         }
@@ -196,14 +209,14 @@ extension TransactionService {
                 case .success(let transaction):
                     EthTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
                         switch result {
-                        case .success:
-                            self.success()
-                        case .error(let error):
-                            self.failure(error: error)
+                        case .success(let result):
+                            self.completion(result: Result.ethereum(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
                         }
                     })
-                case .error(let error):
-                    self.failure(error: error)
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
                 }
             }
         }

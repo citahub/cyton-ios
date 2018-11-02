@@ -53,11 +53,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             let requestPaymentViewController = segue.destination as! RequestPaymentViewController
             let appModel = WalletRealmTool.getCurrentAppModel()
             requestPaymentViewController.appModel = appModel
-        }
-        if segue.identifier == "payment" {
-            let paymentViewController = segue.destination as! PaymentViewController
-            paymentViewController.tokenType = tokenType
-            paymentViewController.tokenModel = tokenModel
         } else if segue.identifier == "transaction" {
             let controller = segue.destination as! TransactionViewController
             controller.token = service?.token

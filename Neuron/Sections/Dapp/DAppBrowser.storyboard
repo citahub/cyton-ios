@@ -638,6 +638,32 @@
             </objects>
             <point key="canvasLocation" x="7625" y="163"/>
         </scene>
+        <!--TransactionConfirmViewController-->
+        <scene sceneID="k0a-VR-Jha">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Transaction" referencedIdentifier="TransactionConfirmViewController" id="r9J-EJ-gjp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="foV-mV-0px" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6557" y="1548"/>
+        </scene>
+        <!--Message Sign Controller-->
+        <scene sceneID="DHH-7d-Ep9">
+            <objects>
+                <viewController storyboardIdentifier="MessageSignController" id="f6I-JV-T3P" customClass="MessageSignController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vpr-Ax-hyE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="0.30407213184931509" colorSpace="custom" customColorSpace="sRGB"/>
+                        <viewLayoutGuide key="safeArea" id="etf-Cd-c0m"/>
+                    </view>
+                    <connections>
+                        <segue destination="r9J-EJ-gjp" kind="presentation" identifier="TransactionConfirmViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="xxE-lz-bFe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1io-gq-OLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6559" y="1145"/>
+        </scene>
         <!--DApp签名信息确认-->
         <scene sceneID="LsS-sx-xeA">
             <objects>
