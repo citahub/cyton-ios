@@ -71,9 +71,7 @@ class WalletDetailController: UITableViewController {
     private func exportKeystore(password: String) {
         do {
             let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-            guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: password) else {
-                throw ExportError.invalidPassword
-            }
+            let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: password)
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
             exportController.keystoreString = keystore
             self.navigationController?.pushViewController(exportController, animated: true)

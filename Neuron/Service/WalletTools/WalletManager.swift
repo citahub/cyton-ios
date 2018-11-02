@@ -62,36 +62,42 @@ extension WalletManager {
 
     func importMnemonicAsync(mnemonic: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = self.importMnemonic(mnemonic: mnemonic, password: password)
+            let result: ImportResult<Wallet>
+            do {
+                let wallet = try self.importMnemonic(mnemonic: mnemonic, password: password)
+                result = ImportResult.succeed(result: wallet)
+            } catch let error {
+                result = ImportResult.failed(error: error, errorMessage: "导入助记词失败")
+            }
             DispatchQueue.main.async {
-                completion(importResult)
+                completion(result)
             }
         }
     }
 
-    func importMnemonic(mnemonic: String, password: String) -> ImportResult<Wallet> {
-        do {
-            guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0") else {
-                return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "钱包导入失败")
-            }
-
-            guard let address = bip32Keystore.addresses?.first else {
-                return ImportResult.failed(error: ImportError.invalidateMnemonic, errorMessage: "私钥不正确")
-            }
-            if walletExists(address: address.address) {
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
-            }
-            var privateKey = try bip32Keystore.UNSAFE_getPrivateKeyData(password: password, account: address)
-            defer { Data.zero(&privateKey) }
-            guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password) else {
-                throw ImportError.invalidateMnemonic
-            }
-
-            try keystoreManager.add(keystore: keystore)
-            return ImportResult.succeed(result: Wallet(address: address.address))
-        } catch let error {
-            return ImportResult.failed(error: error, errorMessage: "钱包导入失败")
+    func importMnemonic(mnemonic: String, password: String) throws -> Wallet {
+        guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0"),
+            let address = bip32Keystore.addresses?.first else {
+            throw ImportError.invalidateMnemonic
         }
+
+        if walletExists(address: address.address) {
+            throw ImportError.accountAlreadyExists
+        }
+
+        var privateKey = try bip32Keystore.UNSAFE_getPrivateKeyData(password: password, account: address)
+        defer { Data.zero(&privateKey) }
+        guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password) else {
+            throw ImportError.invalidateMnemonic
+        }
+
+        do {
+            try keystoreManager.add(keystore: keystore)
+        } catch {
+            throw ImportError.unknown
+        }
+
+        return Wallet(address: address.address)
     }
 
     func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
@@ -135,60 +141,61 @@ extension WalletManager {
 
     func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let importResult = self.importPrivateKey(privateKey: privateKey, password: password)
+            let result: ImportResult<Wallet>
+            do {
+                let wallet = try self.importPrivateKey(privateKey: privateKey, password: password)
+                result = ImportResult.succeed(result: wallet)
+            } catch let error {
+                result = ImportResult.failed(error: error, errorMessage: "导入私钥失败")
+            }
             DispatchQueue.main.async {
-                completion(importResult)
+                completion(result)
             }
         }
     }
 
-    func importPrivateKey(privateKey: String, password: String) -> ImportResult<Wallet> {
-        do {
-            guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
-                let keystore = try EthereumKeystoreV3(privateKey: data, password: password) else {
-                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
-            }
-
-            guard let address = keystore.getAddress()?.address else {
-                return ImportResult.failed(error: ImportError.invalidatePrivateKey, errorMessage: "私钥不正确")
-            }
-            if walletExists(address: address) {
-                return ImportResult.failed(error: ImportError.accountAlreadyExists, errorMessage: "钱包已存在")
-            }
-
-            try keystoreManager.add(keystore: keystore)
-            return ImportResult.succeed(result: Wallet(address: address))
-        } catch {
-            return ImportResult.failed(error: ImportError.unknown, errorMessage: "钱包导入失败")
+    func importPrivateKey(privateKey: String, password: String) throws -> Wallet {
+        guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
+            let keystore = try EthereumKeystoreV3(privateKey: data, password: password),
+            let address = keystore.getAddress()?.address else {
+            throw ImportError.invalidatePrivateKey
         }
+
+        if walletExists(address: address) {
+            throw ImportError.accountAlreadyExists
+        }
+
+        do {
+            try keystoreManager.add(keystore: keystore)
+        } catch {
+            throw ImportError.unknown
+        }
+
+        return Wallet(address: address)
     }
 }
 
 // MARK: - Export
 extension WalletManager {
-    public func exportKeystore(wallet: Wallet, password: String) -> ExportResult<String> {
+    public func exportKeystore(wallet: Wallet, password: String) throws -> String {
         guard verifyPassword(wallet: wallet, password: password) else {
-            return ExportResult.failed(error: ExportError.invalidPassword)
+            throw ExportError.invalidPassword
         }
 
-        do {
-            if let data = try keystore(for: wallet.address).serialize() {
-                return ExportResult.succeed(result: String(data: data, encoding: .utf8)!)
-            }
-
-            return ExportResult.failed(error: ExportError.accountNotFound)
-        } catch let error {
-            return ExportResult.failed(error: error)
+        if let data = try keystore(for: wallet.address).serialize() {
+            return String(data: data, encoding: .utf8)!
         }
+
+        throw ExportError.accountNotFound
     }
 
-    func exportPrivateKey(wallet: Wallet, password: String) -> ImportResult<String> {
+    func exportPrivateKey(wallet: Wallet, password: String) throws -> String {
         do {
             var privateKey = try keystoreManager.privateKey(for: EthereumAddress(wallet.address)!, password: password)
             defer { Data.zero(&privateKey) }
-            return ImportResult.succeed(result: privateKey.toHexString())
-        } catch let error {
-            return ImportResult.failed(error: error, errorMessage: "导出私钥失败")
+            return privateKey.toHexString()
+        } catch {
+            throw ExportError.invalidPassword
         }
     }
 }
@@ -225,10 +232,10 @@ extension WalletManager {
     }
 
     func verifyPassword(wallet: Wallet, password: String) -> Bool {
-        switch exportPrivateKey(wallet: wallet, password: password) {
-        case .succeed(result: _):
+        do {
+            _ = try exportPrivateKey(wallet: wallet, password: password)
             return true
-        default:
+        } catch {
             return false
         }
     }

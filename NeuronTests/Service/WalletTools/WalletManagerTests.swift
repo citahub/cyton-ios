@@ -27,44 +27,28 @@ class WalletManagerTests: XCTestCase {
     }
 
     func testImportMnemonic() throws {
-        guard case .succeed(result: let wallet) = walletManager.importMnemonic(mnemonic: mnemonic, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        let wallet = try! walletManager.importMnemonic(mnemonic: mnemonic, password: "password")
         XCTAssertEqual(wallet.address, address)
-        guard case .succeed(let exported) = walletManager.exportPrivateKey(wallet: wallet, password: "password") else {
-            return XCTFail("Export fail")
-        }
+        let exported = try! walletManager.exportPrivateKey(wallet: wallet, password: "password")
         XCTAssertEqual(exported, privateKey)
     }
 
     func testImportAndExportPrivateKey() throws {
-        guard case .succeed(result: let wallet) = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
-        guard case .succeed(let exported) = walletManager.exportPrivateKey(wallet: wallet, password: "password") else {
-            return XCTFail("Export fail")
-        }
+        let wallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
+        let exported = try! walletManager.exportPrivateKey(wallet: wallet, password: "password")
         XCTAssertEqual(exported, privateKey)
     }
 
     func testExportAndImportKeystore() throws {
-        guard case .succeed(result: let oldWallet) = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
-        guard case .failed = walletManager.exportKeystore(wallet: oldWallet, password: "wrong password") else {
-            return XCTFail("Export should not succeed with incorrect password")
-        }
-        guard case .succeed(let exported) = walletManager.exportKeystore(wallet: oldWallet, password: "password") else {
-            return XCTFail("Export fail")
-        }
+        let oldWallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
+        XCTAssertThrowsError(try walletManager.exportKeystore(wallet: oldWallet, password: "wrong password"))
+        let exported = try! walletManager.exportKeystore(wallet: oldWallet, password: "password")
         XCTAssertNoThrow(try walletManager.deleteWallet(wallet: oldWallet, password: "password"))
         XCTAssertNoThrow(try walletManager.importKeystore(exported, password: "password"))
     }
 
     func testUpdatePassword() throws {
-        guard case .succeed(result: let wallet) = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        let wallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
         XCTAssertTrue(walletManager.verifyPassword(wallet: wallet, password: "password"))
         XCTAssertThrowsError(try walletManager.updatePassword(wallet: wallet, password: "wrong old password", newPassword: "new password"))
         XCTAssertNoThrow(try walletManager.updatePassword(wallet: wallet, password: "password", newPassword: "new password"))
@@ -73,25 +57,19 @@ class WalletManagerTests: XCTestCase {
     }
 
     func testDeleteWallet() throws {
-        guard case .succeed(result: let wallet) = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        let wallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
         XCTAssertThrowsError(try walletManager.deleteWallet(wallet: wallet, password: "wrong password"))
         XCTAssertNoThrow(try walletManager.deleteWallet(wallet: wallet, password: "password"))
     }
 
-    func testWalletExists() {
+    func testWalletExists() throws {
         XCTAssertFalse(walletManager.walletExists(address: address))
-        guard case .succeed = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        _ = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
         XCTAssertTrue(walletManager.walletExists(address: address))
     }
 
     func testVerifyPassword() throws {
-        guard case .succeed(result: let wallet) = walletManager.importPrivateKey(privateKey: privateKey, password: "password") else {
-            return XCTFail("Import fail")
-        }
+        let wallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
         XCTAssertTrue(walletManager.verifyPassword(wallet: wallet, password: "password"))
         XCTAssertFalse(walletManager.verifyPassword(wallet: wallet, password: "wrong password"))
     }
