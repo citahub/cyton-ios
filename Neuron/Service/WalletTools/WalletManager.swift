@@ -50,25 +50,23 @@ struct WalletManager {
 // MARK: - Import
 extension WalletManager {
     func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
-        switch importType {
-        case .keystore(let keystore, let password):
-            importKeystoreAsync(keystore: keystore, password: password, completion: completion)
-        case .privateKey(let privateKey, let password):
-            importPrivateKeyAsync(privateKey: privateKey, password: password, completion: completion)
-        case .mnemonic(let mnemonic, let password):
-            importMnemonicAsync(mnemonic: mnemonic, password: password, completion: completion)
-        }
-    }
-
-    func importMnemonicAsync(mnemonic: String, password: String, completion: @escaping ImportResultCallback) {
         DispatchQueue.global(qos: .userInitiated).async {
             let result: ImportResult<Wallet>
             do {
-                let wallet = try self.importMnemonic(mnemonic: mnemonic, password: password)
+                let wallet: Wallet
+                switch importType {
+                case .keystore(let keystore, let password):
+                    wallet = try self.importKeystore(keystore, password: password)
+                case .privateKey(let privateKey, let password):
+                    wallet = try self.importPrivateKey(privateKey: privateKey, password: password)
+                case .mnemonic(let mnemonic, let password):
+                    wallet = try self.importMnemonic(mnemonic: mnemonic, password: password)
+                }
                 result = ImportResult.succeed(result: wallet)
             } catch let error {
-                result = ImportResult.failed(error: error, errorMessage: "导入助记词失败")
+                result = ImportResult.failed(error: error, errorMessage: "导入失败")
             }
+
             DispatchQueue.main.async {
                 completion(result)
             }
@@ -100,21 +98,6 @@ extension WalletManager {
         return Wallet(address: address.address)
     }
 
-    func importKeystoreAsync(keystore: String, password: String, completion: @escaping ImportResultCallback) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let result: ImportResult<Wallet>
-            do {
-                let wallet = try self.importKeystore(keystore, password: password)
-                result = ImportResult.succeed(result: wallet)
-            } catch let error {
-                result = ImportResult.failed(error: error, errorMessage: "导入Keystore失败")
-            }
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-    }
-
     func importKeystore(_ keystoreString: String, password: String) throws -> Wallet {
         guard let keystore = EthereumKeystoreV3(keystoreString), let address = keystore.getAddress()?.address else {
             throw ImportError.invalidateJSONKey
@@ -137,21 +120,6 @@ extension WalletManager {
         }
 
         return Wallet(address: address)
-    }
-
-    func importPrivateKeyAsync(privateKey: String, password: String, completion: @escaping ImportResultCallback) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let result: ImportResult<Wallet>
-            do {
-                let wallet = try self.importPrivateKey(privateKey: privateKey, password: password)
-                result = ImportResult.succeed(result: wallet)
-            } catch let error {
-                result = ImportResult.failed(error: error, errorMessage: "导入私钥失败")
-            }
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
     }
 
     func importPrivateKey(privateKey: String, password: String) throws -> Wallet {
