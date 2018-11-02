@@ -10,7 +10,7 @@ import XCTest
 @testable import Neuron
 
 class WalletManagerTests: XCTestCase {
-    let keyDirectory = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("KeystoreTests")
+    let keyDirectory =  FileManager.default.temporaryDirectory.appendingPathComponent("KeystoreTests")
     var walletManager: WalletManager!
 
     let privateKey = "95ba839425d01128a08722aa68984ae5da4352fdba5d5c0cfdb8d9a355a264d2"
