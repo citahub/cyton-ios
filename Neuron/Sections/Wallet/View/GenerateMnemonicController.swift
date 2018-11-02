@@ -11,10 +11,7 @@ import UIKit
 class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverlayPresentable, UIGestureRecognizerDelegate {
     var password = ""
     var walletModel = WalletModel()
-    var mnemonicStr = "" {
-        didSet {
-        }
-    }
+    var mnemonicStr = ""
     @IBOutlet weak var mnemonic: UITextView!
 
     override func viewDidLoad() {

@@ -7,16 +7,15 @@
 //
 
 import UIKit
+import web3swift
+import IGIdenticon
 
-class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, SureMnemonicViewModelDelegate, NoScreenshot, EnterBackOverlayPresentable {
+class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, NoScreenshot, EnterBackOverlayPresentable {
     private var showView: ButtonTagView! = nil
     private var selectView: ButtonTagUpView! = nil
     private var selectArray: [String] = []
-
     let sureButton = UIButton.init(type: .custom)
-
     private var titleArr: [String] = []
-    var viewModel = SureMnemonicViewModel()
     var password = ""
     var mnemonic: String? {
         didSet {
@@ -24,17 +23,12 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         }
     }
 
-    var walletModel = WalletModel() {
-        didSet {
-            viewModel.walletModel = walletModel
-        }
-    }
+    var walletModel = WalletModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "确认助记词"
         didDrawSubViews()
-        viewModel.delegate = self
         setupEnterBackOverlay()
     }
 
@@ -63,7 +57,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         view.addSubview(sureButton)
     }
 
-    //选择按钮的时候返回的选择的数组
+    // back selected button
     func callBackSelectButtonArray(array: [NSMutableDictionary]) {
         selectView.comArr = array
         selectArray.removeAll()
@@ -81,7 +75,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         }
     }
 
-    //点击删除按钮的时候 下方按钮改变选中状态
+    // change button select status when click cancel button
     func didDeleteSelectedButton(backDict: NSMutableDictionary) {
         showView.deleteDict = backDict
         selectArray = selectArray.filter({ (title) -> Bool in
@@ -96,13 +90,52 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         }
         let originalMnemonic = titleArr.joined()
         let selectMnemonic = selectArray.joined()
-        let success = viewModel.compareMnemonic(original: originalMnemonic, current: selectMnemonic)
+        let success = compareMnemonic(original: originalMnemonic, current: selectMnemonic)
         if success {
-            viewModel.importWallet(mnemonic: mnemonic!, password: password)
+            importWallet(mnemonic: mnemonic!, password: password)
         }
     }
 
-    func doPush() {
+    // Verify mnemonic
+    func compareMnemonic(original: String, current: String) -> Bool {
+        if original == current {
+            return true
+        } else {
+            Toast.showToast(text: "助记词验证失败")
+            return false
+        }
+    }
+
+    func importWallet(mnemonic: String, password: String) {
+        Toast.showHUD(text: "钱包创建中...")
+        WalletManager.default.importMnemonicAsync(mnemonic: mnemonic, password: password, completion: { (result) in
+            Toast.hideHUD()
+            switch result {
+            case .succeed(let account):
+                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address)!
+                SensorsAnalytics.Track.createWallet(address: self.walletModel.address)
+                self.saveWalletToRealm()
+            case .failed(_, let errorMessage):
+                Toast.showToast(text: errorMessage)
+            }
+        })
+    }
+
+    private func saveWalletToRealm() {
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        let isFirstWallet = appModel.wallets.count == 0
+        let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
+        walletModel.iconData = iconImage!.pngData()
+        try! WalletRealmTool.realm.write {
+            appModel.currentWallet = walletModel
+            appModel.wallets.append(walletModel)
+            WalletRealmTool.addObject(appModel: appModel)
+        }
         navigationController?.popToRootViewController(animated: true)
+        if isFirstWallet {
+            NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
+        }
+        NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
+        Toast.showToast(text: "创建成功")
     }
 }
