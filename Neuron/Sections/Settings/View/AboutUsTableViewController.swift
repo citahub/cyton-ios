@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class AboutUsTableViewController: UITableViewController {
     @IBOutlet weak var versionLabel: UILabel!
@@ -17,20 +18,17 @@ class AboutUsTableViewController: UITableViewController {
         setVersionLabel()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let urlString: String = URLs[segue.identifier ?? ""] ?? URLs.first!.value
-        let webViewController = segue.destination as! CommonWebViewController
-        webViewController.url = URL(string: urlString)!
-    }
+    private var firstSectionUrls = [
+        "https://github.com/cryptape/neuron-ios",
+        "https://github.com/cryptape/neuron-ios"
+    ]
 
-    private var URLs = [
-        "serviceTerms": "https://github.com/cryptape/neuron-ios",
-        "nervosNetwork": "https://github.com/cryptape/neuron-ios",
-        "openSea": "https://opensea.io/",
-        "sourceCode": "https://github.com/cryptape/neuron-ios",
-        "infua": "https://infura.io/",
-        "PeckShield": "https://peckshield.com/",
-        "CITA": "https://github.com/cryptape/cita"
+    private var secondSectionUrls = [
+        "https://opensea.io/",
+        "https://github.com/cryptape/neuron-ios",
+        "https://infura.io/",
+        "https://peckshield.com/",
+        "https://github.com/cryptape/cita"
     ]
 
     func setVersionLabel() {
@@ -50,5 +48,18 @@ class AboutUsTableViewController: UITableViewController {
             let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
             let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date { return infoDate }
         return Date()
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let urlString: String
+        if indexPath.section == 1 {
+            urlString = firstSectionUrls[indexPath.row]
+        } else if indexPath.section == 2 {
+            urlString = secondSectionUrls[indexPath.row]
+        } else {
+            urlString = ""
+        }
+        let safariController = SFSafariViewController(url: URL(string: urlString)!)
+        self.present(safariController, animated: true, completion: nil)
     }
 }
