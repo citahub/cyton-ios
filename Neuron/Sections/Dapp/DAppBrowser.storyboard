@@ -638,10 +638,10 @@
             </objects>
             <point key="canvasLocation" x="7625" y="163"/>
         </scene>
-        <!--Message Sign Show View Controller-->
+        <!--DApp签名信息确认-->
         <scene sceneID="LsS-sx-xeA">
             <objects>
-                <viewController storyboardIdentifier="messageSignShowViewController" id="Esw-75-qtS" customClass="MessageSignShowViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messageSignShowViewController" title="DApp签名信息确认" id="Esw-75-qtS" customClass="MessageSignShowViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Krj-DL-raa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -649,30 +649,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7f-9h-J5k">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxf-Ym-TTd">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="C9O-17-8Lp"/>
-                                            <constraint firstAttribute="height" constant="40" id="HAK-z0-AMF"/>
-                                        </constraints>
-                                        <state key="normal" image="close"/>
-                                        <connections>
-                                            <action selector="rejectAction:" destination="Esw-75-qtS" eventType="touchUpInside" id="vHp-Qh-had"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skG-l6-lnV">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="J9R-g3-AMT"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DApp签名信息确认" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gi-3E-DES">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wz3-qU-RBp">
                                         <rect key="frame" x="15" y="216" width="341" height="44"/>
                                         <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -692,7 +668,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-Af-8g2">
-                                        <rect key="frame" x="40" y="71" width="295" height="0.0"/>
+                                        <rect key="frame" x="40" y="60" width="295" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -703,20 +679,11 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstItem="6gi-3E-DES" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="15" id="9bj-Eh-leo"/>
+                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" constant="60" id="3wl-3J-SOF"/>
                                     <constraint firstAttribute="trailing" secondItem="BFe-Af-8g2" secondAttribute="trailing" constant="40" id="ArV-5m-Zd1"/>
-                                    <constraint firstItem="Yxf-Ym-TTd" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" id="DZq-o7-ytQ"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" constant="50" id="GHa-Qi-fdl"/>
                                     <constraint firstAttribute="trailing" secondItem="Wz3-qU-RBp" secondAttribute="trailing" constant="19" id="L68-yc-FlL"/>
-                                    <constraint firstAttribute="trailing" secondItem="6gi-3E-DES" secondAttribute="trailing" constant="15" id="N3G-Nw-lK0"/>
-                                    <constraint firstAttribute="trailing" secondItem="skG-l6-lnV" secondAttribute="trailing" id="Nay-oW-VB0"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="top" secondItem="6gi-3E-DES" secondAttribute="bottom" id="QKM-8O-25r"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" id="QNT-Se-uwe"/>
                                     <constraint firstItem="Wz3-qU-RBp" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="15" id="f2h-6z-Odm"/>
-                                    <constraint firstItem="6gi-3E-DES" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" id="fJ0-qC-Jfz"/>
                                     <constraint firstItem="BFe-Af-8g2" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="40" id="ljj-0z-UjZ"/>
-                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="top" secondItem="skG-l6-lnV" secondAttribute="bottom" constant="20" id="sWp-lT-L2p"/>
-                                    <constraint firstItem="Yxf-Ym-TTd" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" id="uKT-5w-wA2"/>
                                     <constraint firstAttribute="bottom" secondItem="Wz3-qU-RBp" secondAttribute="bottom" constant="20" id="zmD-5b-FZy"/>
                                 </constraints>
                             </view>
@@ -733,6 +700,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4h2-4Y-Lkq"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="375" height="310"/>
                     <connections>
                         <outlet property="dataLabel" destination="BFe-Af-8g2" id="9sZ-Lv-79k"/>
                     </connections>

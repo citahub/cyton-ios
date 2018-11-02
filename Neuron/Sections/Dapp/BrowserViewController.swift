@@ -195,7 +195,6 @@ extension BrowserViewController: MessageSignShowViewControllerDelegate {
         let messageSignShowViewController = storyboard!.instantiateViewController(withIdentifier: "messageSignShowViewController") as! MessageSignShowViewController
         _ = messageSignShowViewController.view // load view
         messageSignShowViewController.delegate = self
-        messageSignShowViewController.requestTextField.text = webview.url!.absoluteString
         if dappCommonModel.chainType == "AppChain" {
             messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
         } else {
