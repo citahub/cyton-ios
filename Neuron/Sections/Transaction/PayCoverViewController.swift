@@ -81,6 +81,11 @@ class PayCoverViewController: UIViewController {
         }
     }
 
+    func hideView() {
+        Toast.hideHUD()
+        view.removeFromSuperview()
+    }
+
     // TODO: Refactor
     func prepareEthTransaction(password: String) {
         ethTransactionService = EthTransactionService()
@@ -106,6 +111,7 @@ class PayCoverViewController: UIViewController {
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
+            self.hideView()
         }
     }
 
@@ -117,7 +123,7 @@ class PayCoverViewController: UIViewController {
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
             }
-            Toast.hideHUD()
+            self.hideView()
         })
     }
 
@@ -183,8 +189,7 @@ class PayCoverViewController: UIViewController {
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.sendTransactionFailed)
             }
-            Toast.hideHUD()
-            self.view.removeFromSuperview()
+            self.hideView()
         }
     }
 
@@ -196,8 +201,7 @@ class PayCoverViewController: UIViewController {
             case .error:
                 self.dappDelegate?.dappTransactionResult(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
             }
-            Toast.hideHUD()
-            self.view.removeFromSuperview()
+            self.hideView()
         }
     }
 

@@ -114,12 +114,12 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "getTitleBar" {
-            let model = DAppDataHandle.fromTitleBarMessage(message: message)
-            if (model.right?.isShow)! {
-                collectionButton.isHidden = false
-            } else {
-                collectionButton.isHidden = true
-            }
+//            let model = DAppDataHandle.fromTitleBarMessage(message: message)
+//            if (model.right?.isShow)! {
+//                collectionButton.isHidden = false
+//            } else {
+//                collectionButton.isHidden = true
+//            }
         } else {
             let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
             switch dappCommonModel.name {
@@ -186,6 +186,7 @@ extension BrowserViewController {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
         contractController.requestAddress = webview.url!.absoluteString
+        contractController.dappName = webview.title ?? "DApp"
         contractController.dappCommonModel = dappCommonModel
         navigationController?.pushViewController(contractController, animated: true)
     }
@@ -212,7 +213,7 @@ extension BrowserViewController: WKNavigationDelegate {
             guard let link = manifest else {
                 return
             }
-            self.collectionButton.isHidden = false
+//            self.collectionButton.isHidden = false
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }

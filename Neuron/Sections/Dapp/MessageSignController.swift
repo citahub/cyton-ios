@@ -48,7 +48,6 @@ class MessageSignController: UIViewController {
     }
 
     func setUIData() {
-        messageSignShowViewController.requestTextField.text = requestUrlString
         if dappCommonModel.chainType == "AppChain" {
             chainType = .appChain
             messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
