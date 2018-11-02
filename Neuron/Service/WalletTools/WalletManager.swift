@@ -18,11 +18,11 @@ struct WalletManager {
 
     static let `default` = WalletManager(path: "keystore")
 
-    let keystorePath: String
+    private let keystorePath: String
     var keystoreDir: URL {
-        return  URL(fileURLWithPath: keystorePath)
+        return URL(fileURLWithPath: keystorePath)
     }
-    let keystoreManager: WalletKeystoreManager
+    private let keystoreManager: WalletKeystoreManager
 
     /// If fullPath is false, path will be always under user's document directory and excluded from iCloud backup.
     init(path: String, fullPath: Bool = false) {
