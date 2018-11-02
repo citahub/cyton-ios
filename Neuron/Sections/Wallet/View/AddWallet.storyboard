@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H7J-Ii-bw7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="H7J-Ii-bw7">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -35,7 +35,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1a-0K-NPB">
-                                <rect key="frame" x="15" y="15" width="345" height="271"/>
+                                <rect key="frame" x="15" y="15" width="570" height="271"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="没有「找回密码」！" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40V-bt-nvz">
                                         <rect key="frame" x="0.0" y="151" width="345" height="18"/>
@@ -76,7 +76,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XTK-ab-Tg0">
-                                <rect key="frame" x="15" y="306" width="345" height="44"/>
+                                <rect key="frame" x="15" y="306" width="570" height="44"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="EUS-Lr-Q9n"/>
@@ -96,7 +96,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z5W-FJ-GwR">
-                                <rect key="frame" x="14" y="357" width="345" height="30"/>
+                                <rect key="frame" x="14" y="357" width="566" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9dm-pf-jHc"/>
                                 </constraints>
@@ -154,7 +154,7 @@
                                         <integer key="value" value="0"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="margin">
-                                        <integer key="value" value="0"/>
+                                        <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="underlineWith">
                                         <integer key="value" value="80"/>
@@ -251,7 +251,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jWe-xh-hfy" customClass="RSKPlaceholderTextView" customModule="RSKPlaceholderTextView">
-                                                    <rect key="frame" x="15" y="15" width="345" height="104.5"/>
+                                                    <rect key="frame" x="15" y="15" width="570" height="104.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -273,7 +273,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T0u-32-tzp">
-                                                    <rect key="frame" x="310" y="71.5" width="50" height="50"/>
+                                                    <rect key="frame" x="535" y="71.5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="4Zz-Nr-QrE"/>
                                                         <constraint firstAttribute="width" constant="50" id="CAA-8P-Mls"/>
@@ -370,7 +370,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请按顺序输入您的助记词，并选择助记词路径。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Xu-Ka-QDa">
-                                    <rect key="frame" x="45" y="0.0" width="283" height="35"/>
+                                    <rect key="frame" x="45" y="0.0" width="508" height="35"/>
                                     <color key="backgroundColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="SrV-o6-nEG"/>
@@ -397,11 +397,11 @@
                             </constraints>
                         </view>
                         <view key="tableFooterView" contentMode="scaleToFill" id="c4m-L7-lGA">
-                            <rect key="frame" x="0.0" y="391" width="375" height="95"/>
+                            <rect key="frame" x="0.0" y="341" width="375" height="95"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S3y-P6-3bn">
-                                    <rect key="frame" x="15" y="40" width="345" height="45"/>
+                                    <rect key="frame" x="15" y="40" width="570" height="45"/>
                                     <color key="backgroundColor" red="0.91372549020000005" green="0.92156862750000001" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <state key="normal" title="开始导入"/>
@@ -415,7 +415,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码包含大写字母、小写字母、数字、特殊符号的至少三类，且长度在8位以上！" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0hH-qy-OHH">
-                                    <rect key="frame" x="15" y="2" width="345" height="30"/>
+                                    <rect key="frame" x="15" y="2" width="570" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="aCT-rG-8Nb"/>
                                     </constraints>
@@ -446,7 +446,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="D59-KK-kpw" customClass="RSKPlaceholderTextView" customModule="RSKPlaceholderTextView">
-                                                    <rect key="frame" x="15" y="15" width="345" height="104.5"/>
+                                                    <rect key="frame" x="15" y="15" width="570" height="104.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -468,7 +468,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j70-mB-3t5">
-                                                    <rect key="frame" x="310" y="71.5" width="50" height="50"/>
+                                                    <rect key="frame" x="535" y="71.5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="50" id="99G-Rv-L1W"/>
                                                         <constraint firstAttribute="height" constant="50" id="pMW-Ff-3pf"/>
@@ -494,35 +494,8 @@
                             </tableViewSection>
                             <tableViewSection id="A6z-zQ-hnG">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="0CO-oN-JX5" detailTextLabel="xlR-qp-x4U" rowHeight="50" style="IBUITableViewCellStyleValue1" id="EZU-au-igC">
-                                        <rect key="frame" x="0.0" y="181" width="375" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EZU-au-igC" id="ymy-Ys-u6E">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="路径" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0CO-oN-JX5">
-                                                    <rect key="frame" x="16" y="16" width="31" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.14117647058823529" green="0.16862745098039217" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="metamask/jaxx兼容" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xlR-qp-x4U">
-                                                    <rect key="frame" x="226" y="16" width="133" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.54117647058823526" green="0.55294117647058827" blue="0.62352941176470589" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="accessoryView" destination="ONB-TR-tY6" id="nPN-jg-5T3"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="Fn2-1Z-sQr">
-                                        <rect key="frame" x="0.0" y="231" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="181" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fn2-1Z-sQr" id="Lzt-9d-oVE">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -542,7 +515,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="2GV-Oy-fYT">
-                                        <rect key="frame" x="0.0" y="281" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="231" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2GV-Oy-fYT" id="8iC-eJ-uvf">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -562,7 +535,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="50" id="zCT-uh-OXf">
-                                        <rect key="frame" x="0.0" y="331" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="281" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zCT-uh-OXf" id="Chq-pq-oop">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
@@ -590,16 +563,11 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="devirationPath" destination="xlR-qp-x4U" id="ezg-Wd-YTD"/>
                         <outlet property="importButton" destination="S3y-P6-3bn" id="Jey-Da-dIn"/>
                         <outlet property="mnemonicTextView" destination="D59-KK-kpw" id="Z6P-Vi-Nx4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Mb-V9-hUd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Triangle" id="ONB-TR-tY6">
-                    <rect key="frame" x="0.0" y="0.0" width="9" height="6"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                </imageView>
             </objects>
             <point key="canvasLocation" x="512.79999999999995" y="2565.9670164917543"/>
         </scene>
@@ -616,7 +584,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入您的私钥，或通过二维码扫描输入。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CSW-VZ-iqd">
-                                    <rect key="frame" x="41" y="0.0" width="293" height="35"/>
+                                    <rect key="frame" x="41" y="0.0" width="518" height="35"/>
                                     <color key="backgroundColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="0.0" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="Ebk-gk-G31"/>
@@ -662,7 +630,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码包含大写字母、小写字母、数字、特殊符号中的至少三类，且长度在8位以上。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Arf-FK-9fa">
-                                    <rect key="frame" x="15" y="2" width="345" height="30"/>
+                                    <rect key="frame" x="15" y="2" width="570" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="Z9w-Lr-S7T"/>
                                     </constraints>
@@ -689,7 +657,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MWk-hi-im6" customClass="RSKPlaceholderTextView" customModule="RSKPlaceholderTextView">
-                                                    <rect key="frame" x="15" y="15" width="345" height="104.5"/>
+                                                    <rect key="frame" x="15" y="15" width="570" height="104.5"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -711,7 +679,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </textView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SOU-tB-bMH">
-                                                    <rect key="frame" x="310" y="71.5" width="50" height="50"/>
+                                                    <rect key="frame" x="535" y="71.5" width="50" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="4bY-7r-lYm"/>
                                                         <constraint firstAttribute="width" constant="50" id="sfM-Iw-ufA"/>
@@ -835,7 +803,7 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码包含大写字母、小写字母、数字、特殊符号中的至少三类，且长度在8位以上。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gT5-41-7tF">
-                                    <rect key="frame" x="37" y="0.0" width="323" height="0.0"/>
+                                    <rect key="frame" x="37" y="0.0" width="548" height="0.0"/>
                                     <color key="backgroundColor" red="0.99215686274509807" green="0.98431372549019602" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                     <color key="textColor" red="0.792156862745098" green="0.41568627450980389" blue="0.035294117647058823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -858,7 +826,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U24-p5-MkP">
-                                    <rect key="frame" x="15" y="20" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="20" width="570" height="44"/>
                                     <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="4zc-YM-MTa"/>
@@ -878,7 +846,7 @@
                                     </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码包含大写字母、小写字母、数字、特殊符号中的至少三类，且长度在8位以上。" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clU-Mx-05J">
-                                    <rect key="frame" x="15" y="74" width="345" height="30"/>
+                                    <rect key="frame" x="15" y="74" width="570" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="30" id="ASe-c1-B5i"/>
                                     </constraints>
@@ -908,7 +876,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="钱包名称" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kMb-xZ-n5I">
-                                                    <rect key="frame" x="15" y="0.0" width="360" height="49.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="585" height="49.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>
@@ -933,7 +901,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="设定密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AQZ-qN-6oX">
-                                                    <rect key="frame" x="15" y="0.0" width="360" height="49.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="585" height="49.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -958,7 +926,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="重复密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0qy-Vg-EOF">
-                                                    <rect key="frame" x="15" y="0.0" width="360" height="49.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="585" height="49.5"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -1003,7 +971,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jrm-Js-j3P">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="87"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="87"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="wFJ-CP-cIz">
                                         <rect key="frame" x="15" y="15" width="14" height="14"/>
@@ -1073,7 +1041,7 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="asd " textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9D-oT-DhE">
-                                <rect key="frame" x="15" y="98" width="345" height="133"/>
+                                <rect key="frame" x="15" y="98" width="570" height="133"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="133" id="1Sc-ST-nUP"/>
@@ -1094,7 +1062,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textView>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uif-Ne-6rO">
-                                <rect key="frame" x="15" y="261" width="345" height="44"/>
+                                <rect key="frame" x="15" y="261" width="570" height="44"/>
                                 <color key="backgroundColor" red="0.18039215689999999" green="0.2901960784" blue="0.94901960780000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="ACG-re-51J"/>
@@ -1126,7 +1094,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Dw6-jA-k5w"/>
                     <connections>
-                        <outlet property="mnemonic" destination="G9D-oT-DhE" id="Bog-aE-jZZ"/>
+                        <outlet property="mnemonicTextView" destination="G9D-oT-DhE" id="iSe-D3-lIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4M-Qo-hxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1142,7 +1110,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nyO-Ub-LXP">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="35"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="warn" translatesAutoresizingMaskIntoConstraints="NO" id="NoD-gF-Fp3">
                                         <rect key="frame" x="15" y="10" width="14" height="14"/>
@@ -1152,7 +1120,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请按顺序点击助记词，以确认你的备份助记词正确" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejK-JV-5WO">
-                                        <rect key="frame" x="39" y="10" width="286" height="15"/>
+                                        <rect key="frame" x="39" y="10" width="511" height="15"/>
                                         <color key="backgroundColor" red="0.99215686274509807" green="0.98431372549019602" blue="0.90196078431372551" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="15" id="ErX-mo-aW4"/>
@@ -1188,7 +1156,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Triangle" width="9" height="6"/>
         <image name="importWallet" width="149" height="86"/>
         <image name="qrCode" width="22" height="22"/>
         <image name="warn" width="14" height="14"/>

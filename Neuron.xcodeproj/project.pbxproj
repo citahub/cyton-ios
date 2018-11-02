@@ -187,7 +187,6 @@
 		89F79671213BD8C40064808A /* Transaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F79670213BD8C40064808A /* Transaction.storyboard */; };
 		89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */; };
 		89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */; };
-		89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */; };
 		89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */; };
 		89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */; };
 		89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */; };
@@ -405,7 +404,6 @@
 		89F79670213BD8C40064808A /* Transaction.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Transaction.storyboard; sourceTree = "<group>"; };
 		89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeystoreController.swift; sourceTree = "<group>"; };
 		89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeystoreController.xib; sourceTree = "<group>"; };
-		89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SureMnemonicViewModel.swift; sourceTree = "<group>"; };
 		89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFiles.swift; sourceTree = "<group>"; };
 		89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokenService.swift; sourceTree = "<group>"; };
@@ -767,7 +765,6 @@
 			isa = PBXGroup;
 			children = (
 				8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */,
-				89FC542420D3589C00D5D27C /* SureMnemonicViewModel.swift */,
 				89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */,
 				898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */,
 				89BEBE6820EF3A99007D2705 /* TAViewModel.swift */,
@@ -1385,7 +1382,6 @@
 				8964A19320C115A70086848F /* VerifyMnemonicViewController.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
-				89FC542520D3589C00D5D27C /* SureMnemonicViewModel.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
 				89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */,
 				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,

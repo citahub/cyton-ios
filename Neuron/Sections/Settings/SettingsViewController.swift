@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class SettingsViewController: UITableViewController {
     var rowIdentifiers = [
@@ -70,9 +71,8 @@ class SettingsViewController: UITableViewController {
             let controller: AboutUsTableViewController = UIStoryboard(name: .settings).instantiateViewController()
             navigationController?.pushViewController(controller, animated: true)
         } else if cell.reuseIdentifier == "SettingForumsTableViewCell" {
-            let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
-            controller.url = URL(string: "https://forums.nervos.org/")
-            navigationController?.pushViewController(controller, animated: true)
+            let safariController = SFSafariViewController(url: URL(string: "https://forums.nervos.org/")!)
+            self.present(safariController, animated: true, completion: nil)
         } else if cell.reuseIdentifier == "SettingContactCustomerServiceTableViewCell" {
             UIPasteboard.general.string = "Nervos-Neuron"
             Toast.showToast(text: "客服微信已复制")
