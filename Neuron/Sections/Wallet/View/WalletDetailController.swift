@@ -26,7 +26,6 @@ class WalletDetailController: UITableViewController {
     }
 
     @IBAction func didDeleteWallet(_ sender: UIButton) {
-//<<<<<<< HEAD
         InputTextViewController.viewController(title: "删除钱包", placeholder: "请输入钱包密码", isSecureTextEntry: true, confirmHandler: { (controller, text) in
             let wallet = self.walletModel.wallet!
             Toast.showHUD()
