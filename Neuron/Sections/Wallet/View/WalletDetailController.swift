@@ -26,6 +26,7 @@ class WalletDetailController: UITableViewController {
     }
 
     @IBAction func didDeleteWallet(_ sender: UIButton) {
+//<<<<<<< HEAD
         InputTextViewController.viewController(title: "删除钱包", placeholder: "请输入钱包密码", isSecureTextEntry: true, confirmHandler: { (controller, text) in
             let wallet = self.walletModel.wallet!
             Toast.showHUD()
@@ -45,9 +46,9 @@ class WalletDetailController: UITableViewController {
                 Toast.hideHUD()
                 Toast.showToast(text: "删除成功")
                 self.navigationController?.popToRootViewController(animated: true)
-            } catch {
+            } catch let error {
                 Toast.hideHUD()
-                return Toast.showToast(text: "密码错误")
+                return Toast.showToast(text: error.localizedDescription)
             }
         }, cancelHandler: { (controller) in
             controller.dismiss()
@@ -58,15 +59,13 @@ class WalletDetailController: UITableViewController {
         InputTextViewController.viewController(title: "导出keystore", placeholder: "请输入钱包密码", isSecureTextEntry: true, confirmHandler: { (controller, text) in
             do {
                 let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-                guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: text) else {
-                    throw ExportError.invalidPassword
-                }
+                let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: text)
                 controller.dismiss()
                 let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
                 exportController.keystoreString = keystore
                 self.navigationController?.pushViewController(exportController, animated: true)
-            } catch {
-                Toast.showToast(text: "密码错误")
+            } catch let error {
+                Toast.showToast(text: error.localizedDescription)
             }
         }, cancelHandler: { (controller) in
             controller.dismiss()

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeControllerDelegate {
+class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
 
     let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
     let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]
@@ -113,9 +113,9 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didClickQRCodeBtn() {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     func didBackQRCodeMessage(codeResult: String) {

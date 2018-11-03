@@ -32,6 +32,7 @@ extension UIStoryboard {
         case overlay
         case transaction
         case walletManagement
+        case dAppBrowser
 
         var capitalized: String {
             let capital = String(rawValue.prefix(1)).uppercased()

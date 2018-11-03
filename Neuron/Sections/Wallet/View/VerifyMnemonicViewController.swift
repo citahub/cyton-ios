@@ -109,17 +109,22 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
 
     func importWallet(mnemonic: String, password: String) {
         Toast.showHUD(text: "钱包创建中...")
-        WalletManager.default.importMnemonicAsync(mnemonic: mnemonic, password: password, completion: { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .succeed(let account):
-                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address)!
-                SensorsAnalytics.Track.createWallet(address: self.walletModel.address)
-                self.saveWalletToRealm()
-            case .failed(_, let errorMessage):
-                Toast.showToast(text: errorMessage)
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let wallet = try WalletManager.default.importMnemonic(mnemonic: mnemonic, password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
+                    SensorsAnalytics.Track.createWallet(address: self.walletModel.address)
+                    self.saveWalletToRealm()
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    Toast.showToast(text: error.localizedDescription)
+                }
             }
-        })
+        }
     }
 
     private func saveWalletToRealm() {

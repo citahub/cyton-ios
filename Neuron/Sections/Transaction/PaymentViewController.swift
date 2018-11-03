@@ -94,9 +94,9 @@ class PaymentViewController: UITableViewController {
     }
 
     @IBAction func clickQRButton(_ sender: UIButton) {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
+        let qRCodeViewController = QRCodeViewController()
+        qRCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qRCodeViewController, animated: true)
     }
 
     @IBAction func clickNextButton(_ sender: UIButton) {
@@ -195,7 +195,7 @@ extension PaymentViewController: SimpleGasViewControllerDelegate, EthGasViewCont
     }
 }
 
-extension PaymentViewController: QRCodeControllerDelegate {
+extension PaymentViewController: QRCodeViewControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
         destinationAddress = codeResult
