@@ -8,7 +8,8 @@
 
 import Foundation
 import Alamofire
-import web3swift
+import Web3swift
+import EthereumAddress
 
 struct TokenProfile: Decodable {
     let symbol: String

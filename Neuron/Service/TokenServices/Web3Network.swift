@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import web3swift
+import Web3swift
 
 struct Web3Network {
     func getWeb3() -> web3 {

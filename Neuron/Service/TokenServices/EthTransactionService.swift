@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import web3swift
+import Web3swift
+import EthereumAddress
 import struct BigInt.BigUInt
 
 class EthTransactionService {

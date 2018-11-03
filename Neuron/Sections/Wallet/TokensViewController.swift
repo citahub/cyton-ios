@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import web3swift
+import Web3swift
 
 protocol TokensViewControllerDelegate: class {
     func getCurrentCurrencyModel(currencyModel: LocalCurrency, totleCurrency: Double)

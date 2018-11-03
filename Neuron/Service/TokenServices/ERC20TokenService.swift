@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import web3swift
+import Web3swift
+import EthereumAddress
 import struct BigInt.BigUInt
 
 struct ERC20TokenService {
@@ -22,10 +23,9 @@ struct ERC20TokenService {
         let contractETHAddress = EthereumAddress(contractAddress)!
         let coldWalletAddress = EthereumAddress(walletAddress)
         let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)
-        let options = Web3Options.defaultOptions()
 
         DispatchQueue.global().async {
-            guard let result = contract?.method("balanceOf", parameters: [coldWalletAddress as AnyObject], options: options)?.call(options: nil) else {
+            guard let result = contract?.method("balanceOf", parameters: [coldWalletAddress as AnyObject])?.call(transactionOptions: nil) else {
                 return
             }
             DispatchQueue.main.async {

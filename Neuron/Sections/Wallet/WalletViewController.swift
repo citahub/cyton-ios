@@ -8,7 +8,7 @@
 
 import UIKit
 import RealmSwift
-import web3swift
+import Web3swift
 import BigInt
 import PullToRefresh
 

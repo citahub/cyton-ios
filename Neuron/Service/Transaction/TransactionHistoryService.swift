@@ -9,7 +9,8 @@
 import Foundation
 import Alamofire
 import BigInt
-import web3swift
+import Web3swift
+import EthereumAddress
 
 class TransactionHistoryService {
     var transactions = [TransactionModel]()

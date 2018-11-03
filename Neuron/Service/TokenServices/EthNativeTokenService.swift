@@ -8,7 +8,8 @@
 
 import Foundation
 import BigInt
-import web3swift
+import Web3swift
+import EthereumAddress
 import struct BigInt.BigUInt
 
 struct EthNativeTokenService {
@@ -21,13 +22,13 @@ struct EthNativeTokenService {
         let address = EthereumAddress(walletAddress)!
         let web3Main = Web3Network().getWeb3()
         DispatchQueue.global().async {
-            let balanceResult = web3Main.eth.getBalance(address: address)
-            DispatchQueue.main.async {
-                switch balanceResult {
-                case .success(let balance):
-                    let balanceNumber = self.formatBalanceValue(value: balance)
-                    completion(EthServiceResult.success(balanceNumber))
-                case .failure(let error):
+            do {
+                let balance = try web3Main.eth.getBalance(address: address)
+                DispatchQueue.main.async {
+                    completion(EthServiceResult.success(self.formatBalanceValue(value: balance)))
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(EthServiceResult.error(error))
                 }
             }

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import web3swift
+import Web3swift
+import EthereumAddress
 
 class TransactionViewController: UITableViewController, TransactionServiceDelegate {
     // Wallet

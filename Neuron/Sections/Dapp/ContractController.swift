@@ -10,7 +10,8 @@ import UIKit
 import AppChain
 import BigInt
 import struct BigInt.BigUInt
-import web3swift
+import Web3swift
+import EthereumAddress
 
 enum ChainType {
     case appChain

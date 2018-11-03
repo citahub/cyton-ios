@@ -6,7 +6,7 @@ target 'Neuron' do
   inhibit_all_warnings!
 
   pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.6"
-  pod 'web3swift', git: 'https://github.com/matterinc/web3swift', tag: '1.5.1'
+  pod 'web3swift', "~> 2.0"
   pod 'RealmSwift'
 
   pod 'Alamofire'

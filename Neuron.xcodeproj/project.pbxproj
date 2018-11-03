@@ -145,7 +145,6 @@
 		89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* ServerAPI.swift */; };
 		89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895AA20F8507200B9468B /* BrowserUrlParser.swift */; };
 		89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserViewController.swift */; };
-		89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6820EF3A99007D2705 /* TAViewModel.swift */; };
 		89BEBE6B20EF82B6007D2705 /* Web3Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* Web3Network.swift */; };
 		89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */; };
 		89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */; };
@@ -354,7 +353,6 @@
 		89B296EC20F4CBA7008558A7 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		89B895AA20F8507200B9468B /* BrowserUrlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUrlParser.swift; sourceTree = "<group>"; };
 		89B895B020F8B0CD00B9468B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
-		89BEBE6820EF3A99007D2705 /* TAViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TAViewModel.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* Web3Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Network.swift; sourceTree = "<group>"; };
 		89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthTransactionService.swift; sourceTree = "<group>"; };
 		89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TransactionService.swift; sourceTree = "<group>"; };
@@ -751,7 +749,6 @@
 				8913437220C7B2F700A17AEF /* CreatWalletViewModel.swift */,
 				89D4AC3920DA31F60097E02B /* ImportWalletViewModel.swift */,
 				898CA98B20EA2F000059ECA3 /* AssetViewModel.swift */,
-				89BEBE6820EF3A99007D2705 /* TAViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1171,6 +1168,8 @@
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/EFQRCode/EFQRCode.framework",
+				"${BUILT_PRODUCTS_DIR}/EthereumABI/EthereumABI.framework",
+				"${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework",
 				"${BUILT_PRODUCTS_DIR}/IGIdenticon/IGIdenticon.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/LYEmptyView/LYEmptyView.framework",
@@ -1191,7 +1190,7 @@
 				"${BUILT_PRODUCTS_DIR}/Toast-Swift/Toast_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/scrypt/scrypt.framework",
 				"${BUILT_PRODUCTS_DIR}/secp256k1_swift/secp256k1_swift.framework",
-				"${BUILT_PRODUCTS_DIR}/web3swift/web3swift.framework",
+				"${BUILT_PRODUCTS_DIR}/web3swift/Web3swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1200,6 +1199,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BigInt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EFQRCode.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumABI.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumAddress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGIdenticon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LYEmptyView.framework",
@@ -1220,7 +1221,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Toast_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/scrypt.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/secp256k1_swift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/web3swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Web3swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1383,7 +1384,6 @@
 				89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */,
 				6E867E05216C3F1500BD6FE5 /* AuthPasswordViewController.swift in Sources */,
 				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
-				89BEBE6920EF3A99007D2705 /* TAViewModel.swift in Sources */,
 				8989E2CF21883400008A1BDE /* SwitchNetworkViewController.swift in Sources */,
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
 				899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */,
