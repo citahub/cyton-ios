@@ -9,12 +9,10 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class MnemonicViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate, NEPickerViewDelegate {
+class MnemonicViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
-    @IBOutlet weak var devirationPath: UILabel!
     @IBOutlet weak var mnemonicTextView: RSKPlaceholderTextView!
 
-    let pickerView =  NEPickerView()
     var selectFormatId = "0"
     var name: String? = ""
     var password: String? = ""
@@ -27,8 +25,6 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
         mnemonicTextView.placeholder = "请输入助记词+空格"
         mnemonicTextView.delegate = self
         viewModel.delegate = self
-        pickerView.delegate = self
-        devirationPath.text = "m/44'/60'/0'/0/0"
     }
 
     @IBAction func nameChanged(_ sender: UITextField) {
@@ -61,11 +57,6 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
         judgeImportButtonEnabled()
     }
 
-    func callBackDictionnary(dict: [String: String]) {
-        devirationPath.text = dict["name"]
-        selectFormatId = dict["id"]!
-    }
-
     func judgeImportButtonEnabled() {
         let nameClean = name?.trimmingCharacters(in: .whitespaces)
         if nameClean!.isEmpty || password!.isEmpty || confirmPassword!.isEmpty || mnemonic!.isEmpty {
@@ -83,18 +74,8 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
         self.navigationController?.pushViewController(qrCtrl, animated: true)
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 && indexPath.row == 0 {
-            pickerView.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
-            pickerView.delegate = self
-            pickerView.dataArray = [["name": "m/44'/60'/0'/0/0", "id": "0"], ["name": "m/44'/60'/0'/0", "id": "1"], ["name": "m/44'/60'/1'/0/0", "id": "2"]]
-            pickerView.selectDict = ["name": devirationPath.text!, "id": selectFormatId]
-            UIApplication.shared.keyWindow?.addSubview(pickerView)
-        }
-    }
-
     @IBAction func importWallet(_ sender: UIButton) {
-        viewModel.importWalletWithMnemonic(mnemonic: mnemonic!, password: password!, confirmPassword: confirmPassword!, devirationPath: devirationPath.text!, name: name!)
+        viewModel.importWalletWithMnemonic(mnemonic: mnemonic!, password: password!, confirmPassword: confirmPassword!, name: name!)
     }
 
     func didPopToRootView() {

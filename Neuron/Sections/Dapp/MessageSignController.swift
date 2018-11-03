@@ -13,42 +13,45 @@ protocol MessageSignControllerDelegate: class {
 }
 
 class MessageSignController: UIViewController {
-    var requestUrlString = ""
     var dappCommonModel: DAppCommonModel!
     weak var delegate: MessageSignControllerDelegate?
     private var chainType: ChainType = .appChain
     private var tokenModel = TokenModel()
     private var messageSignShowViewController: MessageSignShowViewController!
-    private var confirmSendViewController: ConfirmSendViewController!
-    private var messageSignPageVC: UIPageViewController!
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        view.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
-        }, completion: { (_) in
-            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        })
-    }
+    private var confirmController: TransactionConfirmViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         messageSignShowViewController = storyboard!.instantiateViewController(withIdentifier: "messageSignShowViewController") as? MessageSignShowViewController
         messageSignShowViewController.delegate = self
-        confirmSendViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "confirmSendViewController") as? ConfirmSendViewController
-        confirmSendViewController.delegate = self
-        messageSignPageVC.setViewControllers([messageSignShowViewController], direction: .forward, animated: false)
+
+        let confirmController: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        addChild(confirmController)
+        view.addSubview(confirmController.view)
+        confirmController.contentViewController = messageSignShowViewController
+        self.confirmController = confirmController
+
         setUIData()
+        registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(confirmWalletPassword(userInfo:)))
+        registerEventStrategy(with: TransactionConfirmViewController.Event.userCanceled.rawValue, action: #selector(closeConfirmWalletPasswordView))
+    }
+
+    @objc func confirmWalletPassword(userInfo: [String: String]) {
+        let password = userInfo["password"] ?? ""
+        switch chainType {
+        case .appChain:
+            appChainSign(password: password)
+        case .eth:
+            ethSign(password: password)
+        }
+    }
+
+    @objc func closeConfirmWalletPasswordView() {
+        delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.userCanceled)
+        dismiss(animated: false, completion: nil)
     }
 
     func setUIData() {
-        messageSignShowViewController.requestTextField.text = requestUrlString
         if dappCommonModel.chainType == "AppChain" {
             chainType = .appChain
             messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
@@ -76,7 +79,20 @@ class MessageSignController: UIViewController {
             self.tokenModel = model
         }
     }
+}
 
+extension MessageSignController: MessageSignShowViewControllerDelegate {
+    func clickAgreeButton() {
+        confirmController.confirmInfo()
+    }
+
+    func clickRejectButton() {
+        confirmController.dismiss()
+    }
+}
+
+// MARK: - Sign
+extension MessageSignController {
     func ethSign(password: String) {
         switch dappCommonModel.name {
         case .signMessage:
@@ -128,46 +144,8 @@ class MessageSignController: UIViewController {
     }
 
     func appChainSignMessage(password: String) {
-
     }
 
     func appChainSignPersonalMessage(password: String) {
-
-    }
-
-    func removeView() {
-        delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.userCanceled)
-        view.removeFromSuperview()
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "dappPageViewController" {
-            messageSignPageVC = segue.destination as? UIPageViewController
-        }
-    }
-}
-
-extension MessageSignController: MessageSignShowViewControllerDelegate {
-    func clickAgreeButton() {
-        messageSignPageVC.setViewControllers([confirmSendViewController], direction: .forward, animated: true)
-    }
-
-    func clickRejectButton() {
-        removeView()
-    }
-}
-
-extension  MessageSignController: ConfirmSendViewControllerDelegate {
-    func closePayCoverView() {
-        removeView()
-    }
-
-    func confirmPassword(confirmSendViewController: ConfirmSendViewController, password: String) {
-        switch chainType {
-        case .appChain:
-            appChainSign(password: password)
-        case .eth:
-            ethSign(password: password)
-        }
     }
 }

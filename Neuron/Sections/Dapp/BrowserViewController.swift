@@ -13,8 +13,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
-    private var messageSignController: MessageSignController!
     var requestUrlStr = ""
+    var transactionConfirmViewController: TransactionConfirmViewController?
 
     lazy private var webview: WKWebView = {
         let webview = WKWebView(
@@ -114,12 +114,12 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
 extension BrowserViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "getTitleBar" {
-            let model = DAppDataHandle.fromTitleBarMessage(message: message)
-            if (model.right?.isShow)! {
-                collectionButton.isHidden = false
-            } else {
-                collectionButton.isHidden = true
-            }
+//            let model = DAppDataHandle.fromTitleBarMessage(message: message)
+//            if (model.right?.isShow)! {
+//                collectionButton.isHidden = false
+//            } else {
+//                collectionButton.isHidden = true
+//            }
         } else {
             let dappCommonModel = try! DAppDataHandle.fromMessage(message: message)
             switch dappCommonModel.name {
@@ -186,16 +186,16 @@ extension BrowserViewController {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
         contractController.requestAddress = webview.url!.absoluteString
+        contractController.dappName = webview.title ?? "DApp"
         contractController.dappCommonModel = dappCommonModel
         navigationController?.pushViewController(contractController, animated: true)
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-        messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as? MessageSignController
-        messageSignController.delegate = self
-        messageSignController.dappCommonModel = dappCommonModel
-        messageSignController.requestUrlString = webview.url!.absoluteString
-        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
+        let controller: MessageSignController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.dappCommonModel = dappCommonModel
+        present(controller, animated: false, completion: nil)
     }
 }
 
@@ -212,7 +212,7 @@ extension BrowserViewController: WKNavigationDelegate {
             guard let link = manifest else {
                 return
             }
-            self.collectionButton.isHidden = false
+//            self.collectionButton.isHidden = false
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }

@@ -11,6 +11,7 @@ import Toast_Swift
 
 struct Toast {
     static func showToast(text: String) {
+        guard text.lengthOfBytes(using: .utf8) > 0 else { return }
         ToastManager.shared.style.messageFont = UIFont.systemFont(ofSize: 13)
         ToastManager.shared.position = .center
         UIApplication.shared.keyWindow?.makeToast(text, duration: 2.0, style: ToastManager.shared.style)

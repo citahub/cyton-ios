@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.7.3)
   - Alamofire-Synchronous (4.0.0):
     - Alamofire (~> 4.0)
-  - AppChainSwift (0.19.5):
+  - AppChainSwift (0.19.6):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - PromiseKit (~> 6.5)
@@ -62,7 +62,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Alamofire-Synchronous
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.5`)
+  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.6`)
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
@@ -108,7 +108,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.5
+    :tag: v0.19.6
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -119,7 +119,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.5
+    :tag: v0.19.6
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -130,7 +130,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   Alamofire-Synchronous: eedf1e6e961c3795a63c74990b3f7d9fbfac7e50
-  AppChainSwift: 0d16d4bc1a7be770ad265eb22254338b66ec96c7
+  AppChainSwift: dede5206f36322d822e84b697fdb8bdb9d5ba4ea
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
@@ -156,6 +156,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
 
-PODFILE CHECKSUM: 26c92839bed8fe0a565c8179119fb6cb2f3b6cee
+PODFILE CHECKSUM: f77133b3e02f999f2daab6033ef6e31de3e344c4
 
 COCOAPODS: 1.5.3

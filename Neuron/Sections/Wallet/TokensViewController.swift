@@ -153,8 +153,8 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
             }
         }
         group.notify(queue: .main) {
-            self.tableView.reloadData()
             NotificationCenter.default.post(name: .endRefresh, object: nil)
+            self.tableView.reloadData()
             self.getCurrencyPrice(currencyModel: self.currentCurrencyModel)
             if isRefresh {
                 Toast.hideHUD()
@@ -183,19 +183,19 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let transactionViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "transactionViewController") as! TransactionViewController
+        let controller: TransactionHistoryViewController = UIStoryboard(name: .transaction).instantiateViewController()
         let model = tokenArray[indexPath.row]
-        transactionViewController.tokenModel = model
+        controller.tokenModel = model
         if model.isNativeToken {
             if model.chainId == NativeChainId.ethMainnetChainId {
-                transactionViewController.tokenType = .ethereumToken
+                controller.tokenType = .ethereumToken
             } else {
-                transactionViewController.tokenType = .nervosToken
+                controller.tokenType = .nervosToken
             }
         } else {
-            transactionViewController.tokenType = .erc20Token
+            controller.tokenType = .erc20Token
         }
-        navigationController?.pushViewController(transactionViewController, animated: true)
+        navigationController?.pushViewController(controller, animated: true)
     }
 
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
