@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Neuron
+
+  Created by James Chen on 2018/11/03.
+  Copyright © 2018 Cryptape. All rights reserved.
+*/
+
+// Wallet Manager Errors
+
+"WalletManager.invalidPassword" = "Invalid password";
+"WalletManager.invalidPrivateKey" = "Invalid Private Key";
+"WalletManager.invalidKeystore" = "Invalid Keystore";
+"WalletManager.invalidMnemonic" = "Invalid Mnemonic";
+"WalletManager.accountAlreadyExists" = "You already have this wallet";
+"WalletManager.accountNotFound" = "Wallet not found";
+"WalletManager.failedToDeleteAccount" = "Failed to delete wallet";
+"WalletManager.failedToUpdatePassword" = "Failed to update wallet password";
+"WalletManager.failedToSaveKeystore" = "Failed to save the keystore";
+"WalletManager.unknown" = "Unknow error";

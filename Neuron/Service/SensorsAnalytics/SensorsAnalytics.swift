@@ -58,19 +58,21 @@ class SensorsAnalytics {
 
 extension SensorsAnalytics {
     enum ImportType: String {
-        case keystone = "1"
+        case keystore = "1"
         case mnemonic = "2"
-        case privatekey = "3"
+        case privateKey = "3"
     }
+
     enum TransactionType: String {
         case normal = "2"
         case dApp = "1"
     }
+
     enum ScanQRCodeType: String {
         case none = "0"
         case walletAddress = "1"
-        case privatekey = "2"
-        case keystone = "3"
+        case privateKey = "2"
+        case keystore = "3"
         case mnemonic = "4"
     }
 

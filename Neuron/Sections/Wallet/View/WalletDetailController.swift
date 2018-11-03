@@ -43,7 +43,6 @@ class WalletDetailController: UITableViewController {
     }
 
     private func deleteWallet(password: String) {
-        // TODO: wrap realm and keystore operation as an atom transaction
         let wallet = walletModel.wallet!
         Toast.showHUD()
         do {
@@ -62,23 +61,21 @@ class WalletDetailController: UITableViewController {
             Toast.hideHUD()
             Toast.showToast(text: "删除成功")
             navigationController?.popToRootViewController(animated: true)
-        } catch {
+        } catch let error {
             Toast.hideHUD()
-            return Toast.showToast(text: "密码错误")
+            return Toast.showToast(text: error.localizedDescription)
         }
     }
 
     private func exportKeystore(password: String) {
         do {
             let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-            guard case .succeed(result: let keystore) = WalletManager.default.exportKeystore(wallet: wallet, password: password) else {
-                throw ExportError.invalidPassword
-            }
+            let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: password)
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
             exportController.keystoreString = keystore
             self.navigationController?.pushViewController(exportController, animated: true)
-        } catch {
-            Toast.showToast(text: "密码错误")
+        } catch let error {
+            Toast.showToast(text: error.localizedDescription)
         }
     }
 

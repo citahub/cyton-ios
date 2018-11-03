@@ -24,20 +24,18 @@ struct ETHSignMessageService {
             return
         }
         DispatchQueue.global().async {
-            guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
-                DispatchQueue.main.async {
-                    completion(SignMessageResult.error(Error.privateKeyIsNull))
+            do {
+                let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
+                guard let signed = try EthereumMessageSigner().sign(message: messageData, privateKey: privateKey) else {
+                    throw Error.signMessageFailed
                 }
-                return
-            }
-            guard let signed = try! EthereumMessageSigner().sign(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
-                    completion(SignMessageResult.error(Error.signMessageFailed))
+                    completion(SignMessageResult.success(signed))
                 }
-                return
-            }
-            DispatchQueue.main.async {
-                completion(SignMessageResult.success(signed))
+            } catch let error {
+                DispatchQueue.main.async {
+                    completion(SignMessageResult.error(error))
+                }
             }
         }
     }
@@ -50,20 +48,18 @@ struct ETHSignMessageService {
             return
         }
         DispatchQueue.global().async {
-            guard case .succeed(result: let privateKey) = WalletManager.default.exportPrivateKey(wallet: wallet, password: password) else {
-                DispatchQueue.main.async {
-                    completion(SignMessageResult.error(Error.privateKeyIsNull))
+            do {
+                let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
+                guard let signed = try EthereumMessageSigner().signPersonalMessage(message: messageData, privateKey: privateKey) else {
+                    throw Error.signMessageFailed
                 }
-                return
-            }
-            guard let signed = try! EthereumMessageSigner().signPersonalMessage(message: messageData, privateKey: privateKey) else {
                 DispatchQueue.main.async {
-                    completion(SignMessageResult.error(Error.signMessageFailed))
+                    completion(SignMessageResult.success(signed))
                 }
-                return
-            }
-            DispatchQueue.main.async {
-                completion(SignMessageResult.success(signed))
+            } catch let error {
+                DispatchQueue.main.async {
+                    completion(SignMessageResult.error(error))
+                }
             }
         }
     }
