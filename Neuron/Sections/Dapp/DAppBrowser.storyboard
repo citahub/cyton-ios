@@ -607,74 +607,45 @@
             </objects>
             <point key="canvasLocation" x="6420" y="152.47376311844079"/>
         </scene>
-        <!--Message Sign Controller-->
-        <scene sceneID="pcI-0z-RfN">
+        <!--TransactionConfirmViewController-->
+        <scene sceneID="k0a-VR-Jha">
             <objects>
-                <viewController storyboardIdentifier="messageSignController" id="nFz-rW-57M" customClass="MessageSignController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rtz-ht-Qxb">
+                <viewControllerPlaceholder storyboardName="Transaction" referencedIdentifier="TransactionConfirmViewController" id="r9J-EJ-gjp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="foV-mV-0px" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6557" y="1548"/>
+        </scene>
+        <!--Message Sign Controller-->
+        <scene sceneID="DHH-7d-Ep9">
+            <objects>
+                <viewController storyboardIdentifier="MessageSignController" id="f6I-JV-T3P" customClass="MessageSignController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Vpr-Ax-hyE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kG3-nb-EEb">
-                                <rect key="frame" x="0.0" y="387" width="375" height="280"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="280" id="bk6-4e-Aze"/>
-                                </constraints>
-                                <connections>
-                                    <segue destination="kl0-ge-3mG" kind="embed" identifier="dappPageViewController" id="Cng-ge-BUd"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="kG3-nb-EEb" secondAttribute="bottom" id="3AU-Pt-XT3"/>
-                            <constraint firstItem="kG3-nb-EEb" firstAttribute="leading" secondItem="k5d-lf-7uS" secondAttribute="leading" id="RfX-D4-pgA"/>
-                            <constraint firstItem="kG3-nb-EEb" firstAttribute="trailing" secondItem="k5d-lf-7uS" secondAttribute="trailing" id="r7d-5V-NMQ"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="k5d-lf-7uS"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="etf-Cd-c0m"/>
                     </view>
+                    <connections>
+                        <segue destination="r9J-EJ-gjp" kind="presentation" identifier="TransactionConfirmViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="xxE-lz-bFe"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lsT-OI-VQ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1io-gq-OLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7625" y="163"/>
+            <point key="canvasLocation" x="6559" y="1145"/>
         </scene>
-        <!--Message Sign Show View Controller-->
+        <!--DApp签名信息确认-->
         <scene sceneID="LsS-sx-xeA">
             <objects>
-                <viewController storyboardIdentifier="messageSignShowViewController" id="Esw-75-qtS" customClass="MessageSignShowViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="messageSignShowViewController" title="DApp签名信息确认" id="Esw-75-qtS" customClass="MessageSignShowViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Krj-DL-raa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7f-9h-J5k">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxf-Ym-TTd">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="C9O-17-8Lp"/>
-                                            <constraint firstAttribute="height" constant="40" id="HAK-z0-AMF"/>
-                                        </constraints>
-                                        <state key="normal" image="close"/>
-                                        <connections>
-                                            <action selector="rejectAction:" destination="Esw-75-qtS" eventType="touchUpInside" id="vHp-Qh-had"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="skG-l6-lnV">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="J9R-g3-AMT"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DApp签名信息确认" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gi-3E-DES">
-                                        <rect key="frame" x="15" y="0.0" width="345" height="50"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wz3-qU-RBp">
-                                        <rect key="frame" x="15" y="216" width="341" height="44"/>
+                                        <rect key="frame" x="15" y="246" width="341" height="44"/>
                                         <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="EYZ-oE-gO1"/>
@@ -692,7 +663,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-Af-8g2">
-                                        <rect key="frame" x="40" y="71" width="295" height="0.0"/>
+                                        <rect key="frame" x="40" y="60" width="295" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                         <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -703,20 +674,11 @@
                                     <bool key="isElement" value="YES"/>
                                 </accessibility>
                                 <constraints>
-                                    <constraint firstItem="6gi-3E-DES" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="15" id="9bj-Eh-leo"/>
+                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" constant="60" id="3wl-3J-SOF"/>
                                     <constraint firstAttribute="trailing" secondItem="BFe-Af-8g2" secondAttribute="trailing" constant="40" id="ArV-5m-Zd1"/>
-                                    <constraint firstItem="Yxf-Ym-TTd" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" id="DZq-o7-ytQ"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" constant="50" id="GHa-Qi-fdl"/>
                                     <constraint firstAttribute="trailing" secondItem="Wz3-qU-RBp" secondAttribute="trailing" constant="19" id="L68-yc-FlL"/>
-                                    <constraint firstAttribute="trailing" secondItem="6gi-3E-DES" secondAttribute="trailing" constant="15" id="N3G-Nw-lK0"/>
-                                    <constraint firstAttribute="trailing" secondItem="skG-l6-lnV" secondAttribute="trailing" id="Nay-oW-VB0"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="top" secondItem="6gi-3E-DES" secondAttribute="bottom" id="QKM-8O-25r"/>
-                                    <constraint firstItem="skG-l6-lnV" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" id="QNT-Se-uwe"/>
                                     <constraint firstItem="Wz3-qU-RBp" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="15" id="f2h-6z-Odm"/>
-                                    <constraint firstItem="6gi-3E-DES" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" id="fJ0-qC-Jfz"/>
                                     <constraint firstItem="BFe-Af-8g2" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="40" id="ljj-0z-UjZ"/>
-                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="top" secondItem="skG-l6-lnV" secondAttribute="bottom" constant="20" id="sWp-lT-L2p"/>
-                                    <constraint firstItem="Yxf-Ym-TTd" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" id="uKT-5w-wA2"/>
                                     <constraint firstAttribute="bottom" secondItem="Wz3-qU-RBp" secondAttribute="bottom" constant="20" id="zmD-5b-FZy"/>
                                 </constraints>
                             </view>
@@ -733,34 +695,15 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4h2-4Y-Lkq"/>
                     </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="375" height="310"/>
+                    <size key="freeformSize" width="375" height="310"/>
                     <connections>
                         <outlet property="dataLabel" destination="BFe-Af-8g2" id="9sZ-Lv-79k"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8bi-lO-lDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7382" y="1441"/>
-        </scene>
-        <!--Page View Controller-->
-        <scene sceneID="zfx-H3-Wwj">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="kl0-ge-3mG" sceneMemberID="viewController">
-                    <connections>
-                        <segue destination="Esw-75-qtS" kind="showDetail" id="PJ7-Ll-hYr"/>
-                        <segue destination="qAz-XW-cpI" kind="showDetail" id="O6U-yx-3VC"/>
-                    </connections>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dby-kJ-K8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7382" y="846"/>
-        </scene>
-        <!--confirmSendViewController-->
-        <scene sceneID="FwN-66-Oot">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Transaction" referencedIdentifier="confirmSendViewController" id="qAz-XW-cpI" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pun-Sw-DM5" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7984" y="1307"/>
+            <point key="canvasLocation" x="7271" y="1247"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EWm-qr-9S2">

@@ -13,8 +13,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
-    private var messageSignController: MessageSignController!
     var requestUrlStr = ""
+    var transactionConfirmViewController: TransactionConfirmViewController?
 
     lazy private var webview: WKWebView = {
         let webview = WKWebView(
@@ -192,11 +192,10 @@ extension BrowserViewController {
     }
 
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
-        messageSignController = storyboard!.instantiateViewController(withIdentifier: "messageSignController") as? MessageSignController
-        messageSignController.delegate = self
-        messageSignController.dappCommonModel = dappCommonModel
-        messageSignController.requestUrlString = webview.url!.absoluteString
-        UIApplication.shared.keyWindow?.addSubview(messageSignController.view)
+        let controller: MessageSignController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.dappCommonModel = dappCommonModel
+        present(controller, animated: false, completion: nil)
     }
 }
 

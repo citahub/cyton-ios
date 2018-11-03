@@ -27,6 +27,10 @@
 		1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */; };
 		1AB3D1D221709F9600557E9D /* UIStoryboardExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */; };
 		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
+		6E4F9618218973F200372D3E /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F9617218973F200372D3E /* TransactionService.swift */; };
+		6E4F961B2189A82900372D3E /* TransactionConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */; };
+		6E8168F7218874B1007641BA /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8168F6218874B1007641BA /* TransactionViewController.swift */; };
+		6E8168F921887A31007641BA /* TransactionGasPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */; };
 		6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB88216F573100029324 /* ProductAgreementViewController.swift */; };
 		6E83CB8E216F573100029324 /* GuideService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB89216F573100029324 /* GuideService.swift */; };
 		6E83CB8F216F573100029324 /* Guide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB8A216F573100029324 /* Guide.storyboard */; };
@@ -60,10 +64,6 @@
 		8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437720CA56CA00A17AEF /* RealmHelper.swift */; };
 		891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */; };
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
-		89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD5214A6617007CB446 /* SimpleGasViewController.swift */; };
-		89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD7214A6971007CB446 /* EthGasViewController.swift */; };
-		89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */; };
-		89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89230DDB214A6CBE007CB446 /* PaymentViewController.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
 		8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* UIStyle.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
@@ -138,9 +138,6 @@
 		899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* NervosNetwork.swift */; };
 		89A196192175D9C800BD5FA4 /* DAppDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */; };
 		89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */; };
-		89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A21214FA89A00900976 /* PayCoverViewController.swift */; };
-		89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */; };
-		89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */; };
 		89A87C892173097000588674 /* WalletNameValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A87C882173097000588674 /* WalletNameValidator.swift */; };
 		89A87C8B217312CC00588674 /* WalletNameValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A87C8A217312CC00588674 /* WalletNameValidatorTests.swift */; };
 		89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */; };
@@ -162,7 +159,7 @@
 		89C614572140D4C500DC3DF4 /* currency.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C614562140D4C500DC3DF4 /* currency.plist */; };
 		89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */; };
 		89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */; };
-		89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145F2141421400DC3DF4 /* TransactionViewController.swift */; };
+		89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */; };
 		89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6E09820E07F8E00C94026 /* ShareItem.swift */; };
 		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
@@ -235,6 +232,10 @@
 		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
 		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
 		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6E4F9617218973F200372D3E /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
+		6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionConfirmViewController.swift; sourceTree = "<group>"; };
+		6E8168F6218874B1007641BA /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGasPriceViewController.swift; sourceTree = "<group>"; };
 		6E83CB88216F573100029324 /* ProductAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductAgreementViewController.swift; sourceTree = "<group>"; };
 		6E83CB89216F573100029324 /* GuideService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideService.swift; sourceTree = "<group>"; };
 		6E83CB8A216F573100029324 /* Guide.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Guide.storyboard; sourceTree = "<group>"; };
@@ -269,10 +270,6 @@
 		8913437720CA56CA00A17AEF /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
 		891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WalletManagement.storyboard; sourceTree = "<group>"; };
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
-		89230DD5214A6617007CB446 /* SimpleGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGasViewController.swift; sourceTree = "<group>"; };
-		89230DD7214A6971007CB446 /* EthGasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthGasViewController.swift; sourceTree = "<group>"; };
-		89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosQuotaViewController.swift; sourceTree = "<group>"; };
-		89230DDB214A6CBE007CB446 /* PaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
 		8928C23420AE8F7C00C3103E /* UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyle.swift; sourceTree = "<group>"; };
@@ -354,9 +351,6 @@
 		899AD19A211011F300A8AC09 /* NervosNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNetwork.swift; sourceTree = "<group>"; };
 		89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDataHandle.swift; sourceTree = "<group>"; };
 		89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppCommand.swift; sourceTree = "<group>"; };
-		89A45A21214FA89A00900976 /* PayCoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayCoverViewController.swift; sourceTree = "<group>"; };
-		89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSendViewController.swift; sourceTree = "<group>"; };
-		89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmAmountViewController.swift; sourceTree = "<group>"; };
 		89A87C882173097000588674 /* WalletNameValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNameValidator.swift; sourceTree = "<group>"; };
 		89A87C8A217312CC00588674 /* WalletNameValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletNameValidatorTests.swift; sourceTree = "<group>"; };
 		89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletTableViewCell.swift; sourceTree = "<group>"; };
@@ -378,7 +372,7 @@
 		89C614562140D4C500DC3DF4 /* currency.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = currency.plist; sourceTree = "<group>"; };
 		89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCurrencyService.swift; sourceTree = "<group>"; };
-		89C6145F2141421400DC3DF4 /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
 		89C6E09820E07F8E00C94026 /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		89CA1FAB213F822B00669B2C /* tokens-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-list.json"; sourceTree = "<group>"; };
 		89CA1FAD213F832800669B2C /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
@@ -873,14 +867,10 @@
 			children = (
 				898A1A1E20B7B4F300ECB465 /* View */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
-				89C6145F2141421400DC3DF4 /* TransactionViewController.swift */,
-				89230DDB214A6CBE007CB446 /* PaymentViewController.swift */,
-				89230DD5214A6617007CB446 /* SimpleGasViewController.swift */,
-				89230DD7214A6971007CB446 /* EthGasViewController.swift */,
-				89230DD9214A69B0007CB446 /* NervosQuotaViewController.swift */,
-				89A45A21214FA89A00900976 /* PayCoverViewController.swift */,
-				89A45A29214FB6C400900976 /* ConfirmAmountViewController.swift */,
-				89A45A25214FA8FD00900976 /* ConfirmSendViewController.swift */,
+				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
+				6E8168F6218874B1007641BA /* TransactionViewController.swift */,
+				6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */,
+				6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -937,6 +927,7 @@
 				6E851CD1217DBB3D00769E00 /* TransactionHistoryService.swift */,
 				6E876840218022F30032EBCE /* TokenProfile.swift */,
 				6E876842218023520032EBCE /* CoinMarketCap.swift */,
+				6E4F9617218973F200372D3E /* TransactionService.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -1324,14 +1315,13 @@
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
 				8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */,
-				89A45A26214FA8FD00900976 /* ConfirmSendViewController.swift in Sources */,
 				893532F4217DECF400404C0B /* MessageSignShowViewController.swift in Sources */,
 				898A19F520B53F3800ECB465 /* DetailIconCell.swift in Sources */,
 				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */,
 				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
 				89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */,
-				89A45A22214FA89A00900976 /* PayCoverViewController.swift in Sources */,
+				6E8168F921887A31007641BA /* TransactionGasPriceViewController.swift in Sources */,
 				6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */,
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				6E851CD2217DBB3D00769E00 /* TransactionHistoryService.swift in Sources */,
@@ -1351,7 +1341,6 @@
 				8964A18020BE94F70086848F /* NEPickerView.swift in Sources */,
 				89C25C6520BBF03700007EC1 /* NeuronProgressView.swift in Sources */,
 				1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */,
-				89A45A2A214FB6C400900976 /* ConfirmAmountViewController.swift in Sources */,
 				899AD19B211011F300A8AC09 /* NervosNetwork.swift in Sources */,
 				1A207DD52137D8CF008DC306 /* TabbedButtonsView.swift in Sources */,
 				8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */,
@@ -1359,6 +1348,7 @@
 				89BEBE6F20F094A6007D2705 /* ERC20TransactionService.swift in Sources */,
 				897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */,
 				898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */,
+				6E4F9618218973F200372D3E /* TransactionService.swift in Sources */,
 				6E867E0D216C92A900BD6FE5 /* OverlayPresentable.swift in Sources */,
 				89D84CE121475755006B0287 /* NFTService.swift in Sources */,
 				898A1A2A20B7F0FC00ECB465 /* TradeDetailsController.swift in Sources */,
@@ -1375,6 +1365,7 @@
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
 				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */,
+				6E8168F7218874B1007641BA /* TransactionViewController.swift in Sources */,
 				89D4AC3120D59F270097E02B /* ImportResult.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
 				6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */,
@@ -1383,15 +1374,13 @@
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
-				89C614602141421400DC3DF4 /* TransactionViewController.swift in Sources */,
+				89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */,
 				89BEBE6D20F091A9007D2705 /* EthTransactionService.swift in Sources */,
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
-				89230DD8214A6971007CB446 /* EthGasViewController.swift in Sources */,
 				6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
-				89230DD6214A6617007CB446 /* SimpleGasViewController.swift in Sources */,
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				6E876845218031670032EBCE /* UIntExtension.swift in Sources */,
@@ -1423,14 +1412,12 @@
 				898A1A2F20B8044900ECB465 /* TradeTableViewCell.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */,
-				89230DDA214A69B0007CB446 /* NervosQuotaViewController.swift in Sources */,
 				89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */,
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898A19FF20B55FE300ECB465 /* AddWalletController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
 				1A1E8413216DF6DC00B15E88 /* ExportResult.swift in Sources */,
-				89230DDC214A6CBE007CB446 /* PaymentViewController.swift in Sources */,
 				89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */,
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
@@ -1443,6 +1430,7 @@
 				89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
+				6E4F961B2189A82900372D3E /* TransactionConfirmViewController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
 				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,
