@@ -57,7 +57,8 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
         Toast.showHUD(text: "修改密码中...")
         let oldPassword = oldPasswordTextField.text!
         let newPassword = newPasswordTextField.text!
-        let wallet = WalletModel().wallet!
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let wallet = WalletManager.default.wallet(for: walletModel.address)!
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else { return }
             do {

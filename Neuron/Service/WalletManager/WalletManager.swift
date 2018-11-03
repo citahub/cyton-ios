@@ -136,9 +136,13 @@ extension WalletManager {
 // MARK: - Manage existing wallets
 extension WalletManager {
     func updatePassword(wallet: Wallet, password: String, newPassword: String) throws {
+        let keystore = self.keystore(for: wallet.address)
         do {
-            let keystore = self.keystore(for: wallet.address)
             try keystore.regenerate(oldPassword: password, newPassword: newPassword)
+        } catch {
+            throw Error.invalidPassword
+        }
+        do {
             try keystoreManager.update(keystore: keystore)
         } catch {
             throw Error.failedToUpdatePassword
