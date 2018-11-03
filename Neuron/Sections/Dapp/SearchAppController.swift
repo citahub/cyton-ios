@@ -59,9 +59,9 @@ class SearchAppController: UITableViewController {
 
     // click qrButton
     @objc func didClickQRButton() {
-        let qRCodeController = QRCodeController()
-        qRCodeController.delegate = self
-        self.navigationController?.pushViewController(qRCodeController, animated: true)
+        let qRCodeViewController = QRCodeViewController()
+        qRCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qRCodeViewController, animated: true)
     }
 
     // tbaleview delegate
@@ -113,7 +113,7 @@ class SearchAppController: UITableViewController {
     }
 }
 
-extension SearchAppController: QRCodeControllerDelegate, UITextFieldDelegate {
+extension SearchAppController: QRCodeViewControllerDelegate, UITextFieldDelegate {
     //textfield delelgate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let txt = textField.text {

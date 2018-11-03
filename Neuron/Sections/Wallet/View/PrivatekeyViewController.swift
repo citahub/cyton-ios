@@ -9,7 +9,7 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate, EnterBackOverlayPresentable {
+class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeViewControllerDelegate, EnterBackOverlayPresentable {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var privatekeyTextView: RSKPlaceholderTextView!
     var name: String? = ""
@@ -63,9 +63,9 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
     }
 
    @IBAction func didClickQRBtn() {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
+        let qRCodeViewController = QRCodeViewController()
+        qRCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qRCodeViewController, animated: true)
     }
 
     @IBAction func importWallet(_ sender: UIButton) {
