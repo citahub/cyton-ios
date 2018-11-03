@@ -95,9 +95,9 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     @IBAction func scanQRCode(_ sender: Any) {
-        let qRCodeViewController = QRCodeViewController()
-        qRCodeViewController.delegate = self
-        navigationController?.pushViewController(qRCodeViewController, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func unwind(seque: UIStoryboardSegue) { }

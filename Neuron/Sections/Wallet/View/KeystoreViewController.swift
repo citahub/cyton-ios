@@ -58,9 +58,9 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     @IBAction func didClickQRBtn() {
-        let qRCodeViewController = QRCodeViewController()
-        qRCodeViewController.delegate = self
-        self.navigationController?.pushViewController(qRCodeViewController, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func importWallet(_ sender: UIButton) {

@@ -59,9 +59,9 @@ class SearchAppController: UITableViewController {
 
     // click qrButton
     @objc func didClickQRButton() {
-        let qRCodeViewController = QRCodeViewController()
-        qRCodeViewController.delegate = self
-        self.navigationController?.pushViewController(qRCodeViewController, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     // tbaleview delegate
