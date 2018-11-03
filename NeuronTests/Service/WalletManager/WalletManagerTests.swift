@@ -33,10 +33,19 @@ class WalletManagerTests: XCTestCase {
         XCTAssertEqual(exported, privateKey)
     }
 
+    func testImportInvalidMnemonic() throws {
+        XCTAssertThrowsError(try walletManager.importMnemonic(mnemonic: "abc", password: "password"))
+        XCTAssertThrowsError(try walletManager.importMnemonic(mnemonic: " " + mnemonic + " ", password: "password"))
+    }
+
     func testImportAndExportPrivateKey() throws {
         let wallet = try! walletManager.importPrivateKey(privateKey: privateKey, password: "password")
         let exported = try! walletManager.exportPrivateKey(wallet: wallet, password: "password")
         XCTAssertEqual(exported, privateKey)
+    }
+
+    func testImportInvalidPrivateKey() throws {
+        XCTAssertThrowsError(try walletManager.importPrivateKey(privateKey: "abc", password: "password"))
     }
 
     func testExportAndImportKeystore() throws {
@@ -45,6 +54,10 @@ class WalletManagerTests: XCTestCase {
         let exported = try! walletManager.exportKeystore(wallet: oldWallet, password: "password")
         XCTAssertNoThrow(try walletManager.deleteWallet(wallet: oldWallet, password: "password"))
         XCTAssertNoThrow(try walletManager.importKeystore(exported, password: "password"))
+    }
+
+    func testImportInvalidKeystore() throws {
+        XCTAssertThrowsError(try walletManager.importKeystore("{}", password: "password"))
     }
 
     func testUpdatePassword() throws {
