@@ -20,7 +20,7 @@ protocol TransactionServiceDelegate: NSObjectProtocol {
 class TransactionService {
     enum Result {
         case error(Error)
-        case ethereum(web3swift.TransactionSendingResult)
+        case ethereum(Web3swift.TransactionSendingResult)
         case appChain(TransactionSendingResult)
     }
     enum Error: String, Swift.Error {
@@ -157,8 +157,12 @@ extension TransactionService {
     class Ethereum: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            do {
+                let bigNumber = try Web3Network().getWeb3().eth.getGasPrice()
+                self.gasPrice = (bigNumber.words.first ?? 1) * 4
+            } catch {
+                self.gasPrice = 4
+            }
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -192,8 +196,12 @@ extension TransactionService {
     class Erc20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            do {
+                let bigNumber = try Web3Network().getWeb3().eth.getGasPrice()
+                self.gasPrice = (bigNumber.words.first ?? 1) * 4
+            } catch {
+                self.gasPrice = 4
+            }
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }

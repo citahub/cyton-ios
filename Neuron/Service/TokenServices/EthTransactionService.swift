@@ -56,7 +56,7 @@ class EthTransactionService {
             }
             options.gasLimit = estimatedGas
             options.gasPrice = gasPrice
-            guard let transaction = contract.method(extraData: Data(), options: options) else {
+            guard let transaction = contract.method(options, extraData: Data()) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.createTransactionIssue))
                 }

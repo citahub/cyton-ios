@@ -14,13 +14,21 @@ import struct BigInt.BigUInt
 struct CustomERC20TokenService {
     static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(ERC20Token: token)
-            let transaction = contract?.method("decimals", parameters: [AnyObject](), options: self.defaultOptions(wAddress: walletAddress))
-            let decimals = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
-            DispatchQueue.main.async {
-                if let decimals = decimals?.value?["0"] as? BigUInt {
-                    completion(EthServiceResult.success(decimals))
+            let contract = self.contract(ERC20Token: token)!
+            var options = TransactionOptions()
+            options.from = EthereumAddress(walletAddress)
+            let transaction = contract.method("decimals", parameters: [AnyObject]())!
+            do {
+                let decimals = try transaction.call(transactionOptions: options)
+                if let decimals = decimals["0"] as? BigUInt {
+                    DispatchQueue.main.async {
+                        completion(EthServiceResult.success(decimals))
+                    }
                 } else {
+                    throw CustomTokenError.wrongBalanceError
+                }
+            } catch {
+                DispatchQueue.main.async {
                     completion(EthServiceResult.error(CustomTokenError.wrongBalanceError))
                 }
             }
@@ -28,20 +36,19 @@ struct CustomERC20TokenService {
     }
 
     static func name(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
-        let contract = self.contract(ERC20Token: token)
-        if let transaction = contract?.method("name", parameters: [AnyObject](), options: self.defaultOptions(wAddress: walletAddress)) {
-
-            let reult = transaction.call(options: self.defaultOptions(wAddress: walletAddress), onBlock: "latest")
-            switch reult {
-            case .success(let name):
-
+        let contract = self.contract(ERC20Token: token)!
+        if let transaction = contract.method("name", parameters: [AnyObject]()) {
+            var options = TransactionOptions()
+            options.from = EthereumAddress(walletAddress)
+            do {
+                let name = try transaction.call(transactionOptions: options)
                 if let names = name["0"] as? String, !names.isEmpty {
                     completion(EthServiceResult.success(names))
                 } else {
-                    completion(EthServiceResult.error(CustomTokenError.badNameError))
+                    throw CustomTokenError.badNameError
                 }
-            case .failure(let error):
-                completion(EthServiceResult.error(error))
+            } catch {
+                completion(EthServiceResult.error(CustomTokenError.badNameError))
             }
         } else {
             completion(EthServiceResult.error(CustomTokenError.badNameError))
@@ -50,13 +57,21 @@ struct CustomERC20TokenService {
 
     static func symbol(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(ERC20Token: token)
-            let transaction = contract?.method("symbol", parameters: [AnyObject](), options: self.defaultOptions(wAddress: walletAddress))
-            let symbol = transaction?.call(options: self.defaultOptions(wAddress: walletAddress))
-            DispatchQueue.main.async {
-                if let symbol = symbol?.value?["0"] as? String, !symbol.isEmpty {
-                    completion(EthServiceResult.success(symbol))
+            let contract = self.contract(ERC20Token: token)!
+            let transaction = contract.method("symbol", parameters: [AnyObject]())!
+            var options = TransactionOptions()
+            options.from = EthereumAddress(walletAddress)
+            do {
+                let symbol = try transaction.call(transactionOptions: options)
+                if let symbol = symbol["0"] as? String, !symbol.isEmpty {
+                    DispatchQueue.main.async {
+                        completion(EthServiceResult.success(symbol))
+                    }
                 } else {
+                    throw CustomTokenError.badSymbolError
+                }
+            } catch {
+                DispatchQueue.main.async {
                     completion(EthServiceResult.error(CustomTokenError.badSymbolError))
                 }
             }
