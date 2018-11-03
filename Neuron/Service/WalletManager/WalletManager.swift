@@ -49,17 +49,17 @@ extension WalletManager {
     func importMnemonic(mnemonic: String, password: String) throws -> Wallet {
         guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0"),
             let address = bip32Keystore.addresses?.first else {
-            throw ImportError.invalidateMnemonic
+            throw Error.invalidMnemonic
         }
 
         if walletExists(address: address.address) {
-            throw ImportError.accountAlreadyExists
+            throw Error.accountAlreadyExists
         }
 
         var privateKey = try bip32Keystore.UNSAFE_getPrivateKeyData(password: password, account: address)
         defer { Data.zero(&privateKey) }
         guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password) else {
-            throw ImportError.invalidateMnemonic
+            throw Error.invalidMnemonic
         }
 
         return try add(keystore, address.address)
@@ -67,17 +67,17 @@ extension WalletManager {
 
     func importKeystore(_ keystoreString: String, password: String) throws -> Wallet {
         guard let keystore = EthereumKeystoreV3(keystoreString), let address = keystore.getAddress()?.address else {
-            throw ImportError.invalidateJSONKey
+            throw Error.invalidKeystore
         }
 
         if walletExists(address: address) {
-            throw ImportError.accountAlreadyExists
+            throw Error.accountAlreadyExists
         }
 
         do {
             try keystore.regenerate(oldPassword: password, newPassword: password)
         } catch {
-            throw ImportError.wrongPassword
+            throw Error.invalidPassword
         }
 
         return try add(keystore, address)
@@ -87,11 +87,11 @@ extension WalletManager {
         guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
             let keystore = try EthereumKeystoreV3(privateKey: data, password: password),
             let address = keystore.getAddress()?.address else {
-            throw ImportError.invalidatePrivateKey
+            throw Error.invalidPrivateKey
         }
 
         if walletExists(address: address) {
-            throw ImportError.accountAlreadyExists
+            throw Error.accountAlreadyExists
         }
 
         return try add(keystore, address)
@@ -101,7 +101,7 @@ extension WalletManager {
         do {
             try keystoreManager.add(keystore: keystore)
         } catch {
-            throw ImportError.unknown
+            throw Error.failedToSaveKeystore
         }
 
         return Wallet(address: address)
@@ -112,14 +112,14 @@ extension WalletManager {
 extension WalletManager {
     public func exportKeystore(wallet: Wallet, password: String) throws -> String {
         guard verifyPassword(wallet: wallet, password: password) else {
-            throw ExportError.invalidPassword
+            throw Error.invalidPassword
         }
 
         if let data = try keystore(for: wallet.address).serialize() {
             return String(data: data, encoding: .utf8)!
         }
 
-        throw ExportError.accountNotFound
+        throw Error.accountNotFound
     }
 
     func exportPrivateKey(wallet: Wallet, password: String) throws -> String {
@@ -128,7 +128,7 @@ extension WalletManager {
             defer { Data.zero(&privateKey) }
             return privateKey.toHexString()
         } catch {
-            throw ExportError.invalidPassword
+            throw Error.invalidPassword
         }
     }
 }
@@ -141,15 +141,19 @@ extension WalletManager {
             try keystore.regenerate(oldPassword: password, newPassword: newPassword)
             try keystoreManager.update(keystore: keystore)
         } catch {
-            throw KeystoreError.failedToUpdatePassword
+            throw Error.failedToUpdatePassword
         }
     }
 
     func deleteWallet(wallet: Wallet, password: String) throws {
         guard verifyPassword(wallet: wallet, password: password) else {
-            throw KeystoreError.invalidPassword
+            throw Error.invalidPassword
         }
-        try keystoreManager.remove(keystore: keystore(for: wallet.address))
+        do {
+            try keystoreManager.remove(keystore: keystore(for: wallet.address))
+        } catch {
+            throw Error.failedToDeleteAccount
+        }
     }
 }
 

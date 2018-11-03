@@ -62,17 +62,16 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
             guard let self = self else { return }
             do {
                 try WalletManager.default.updatePassword(wallet: wallet, password: oldPassword, newPassword: newPassword)
-            } catch {
                 DispatchQueue.main.async {
                     Toast.hideHUD()
-                    Toast.showToast(text: "密码错误")
+                    Toast.showToast(text: "密码修改成功，请牢记！")
+                    self.navigationController?.popViewController(animated: true)
                 }
-                return
-            }
-            DispatchQueue.main.async {
-                Toast.hideHUD()
-                Toast.showToast(text: "密码修改成功，请牢记！")
-                self.navigationController?.popViewController(animated: true)
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    Toast.showToast(text: error.localizedDescription)
+                }
             }
         }
     }
