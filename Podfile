@@ -8,10 +8,8 @@ target 'Neuron' do
   pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.6"
   pod 'web3swift', git: 'https://github.com/matterinc/web3swift', tag: '1.5.1'
   pod 'RealmSwift'
-  pod 'KeychainSwift'
 
   pod 'Alamofire'
-  pod 'Alamofire-Synchronous'
   pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
 
   pod 'PlainPing'
