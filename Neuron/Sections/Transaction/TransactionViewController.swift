@@ -52,9 +52,9 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     @IBAction func scanQRCode() {
-        let controller = QRCodeController()
-        controller.delegate = self
-        navigationController?.pushViewController(controller, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func transactionAvailableBalance() {
@@ -144,7 +144,7 @@ extension TransactionViewController: UITextFieldDelegate {
     }
 }
 
-extension TransactionViewController: QRCodeControllerDelegate {
+extension TransactionViewController: QRCodeViewControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
     }

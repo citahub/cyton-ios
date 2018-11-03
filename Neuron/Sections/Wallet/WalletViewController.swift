@@ -12,7 +12,7 @@ import web3swift
 import BigInt
 import PullToRefresh
 
-class WalletViewController: UITableViewController, SelectWalletControllerDelegate, QRCodeControllerDelegate {
+class WalletViewController: UITableViewController, SelectWalletControllerDelegate, QRCodeViewControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
@@ -95,9 +95,9 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
     }
 
     @IBAction func scanQRCode(_ sender: Any) {
-        let controller = QRCodeController()
-        controller.delegate = self
-        navigationController?.pushViewController(controller, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func unwind(seque: UIStoryboardSegue) { }

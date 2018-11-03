@@ -25,6 +25,7 @@ PODS:
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
   - PullToRefresher (3.1)
+  - QRCodeReader.swift (9.0.1)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
   - Realm/Headers (3.11.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - LYEmptyView
   - PlainPing
   - PullToRefresher (~> 3.1)
+  - QRCodeReader.swift
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
   - SCLAlertView
@@ -85,6 +87,7 @@ SPEC REPOS:
     - PlainPing
     - PromiseKit
     - PullToRefresher
+    - QRCodeReader.swift
     - Realm
     - RealmSwift
     - Result
@@ -132,6 +135,7 @@ SPEC CHECKSUMS:
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PullToRefresher: ec8c1942bd61bb512ff520c49f9f00903cfa86c7
+  QRCodeReader.swift: 96292a5612fbc2fd9a0b26f93fa5164c8d02f59d
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
@@ -147,6 +151,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: d80d1b9a3feca16e614acec9eea47ec26310d37d
 
-PODFILE CHECKSUM: d178cdab74ba44cd747c6859a1f6d7e602a82d0f
+PODFILE CHECKSUM: 275ce148c312395196ccf3ff60f911e1bb4873cd
 
 COCOAPODS: 1.5.3

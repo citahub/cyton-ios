@@ -9,7 +9,7 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class MnemonicViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class MnemonicViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeViewControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var mnemonicTextView: RSKPlaceholderTextView!
 
@@ -69,9 +69,9 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
    @IBAction func didClickQRBtn() {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func importWallet(_ sender: UIButton) {

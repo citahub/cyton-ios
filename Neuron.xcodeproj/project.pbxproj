@@ -71,8 +71,6 @@
 		8928C24920AE91E600C3103E /* DappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* DappViewController.swift */; };
 		8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C25820AEB18100C3103E /* NibLoadable.swift */; };
 		8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26920AED5C100C3103E /* SearchAppController.swift */; };
-		8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C26F20B2644C00C3103E /* QRCodeController.swift */; };
-		8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */; };
 		8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27820B2A61900C3103E /* WalletViewController.swift */; };
 		8928C27E20B3AAFA00C3103E /* Sub2TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27C20B3AAFA00C3103E /* Sub2TableViewCell.swift */; };
 		8928C27F20B3AAFA00C3103E /* Sub2TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */; };
@@ -106,6 +104,7 @@
 		8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972FD0E218B54A100C27147 /* AdvancedViewController.swift */; };
 		89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89733043217ED041001B8D93 /* ETHSignMessageService.swift */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
+		8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89812129218D3161000813C8 /* QRCodeViewController.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
 		898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */; };
@@ -275,8 +274,6 @@
 		8928C24820AE91E600C3103E /* DappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappViewController.swift; sourceTree = "<group>"; };
 		8928C25820AEB18100C3103E /* NibLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NibLoadable.swift; sourceTree = "<group>"; };
 		8928C26920AED5C100C3103E /* SearchAppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAppController.swift; sourceTree = "<group>"; };
-		8928C26F20B2644C00C3103E /* QRCodeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeController.swift; sourceTree = "<group>"; };
-		8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HRQRCodeScanTool.swift; sourceTree = "<group>"; };
 		8928C27820B2A61900C3103E /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		8928C27C20B3AAFA00C3103E /* Sub2TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sub2TableViewCell.swift; sourceTree = "<group>"; };
 		8928C27D20B3AAFA00C3103E /* Sub2TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Sub2TableViewCell.xib; sourceTree = "<group>"; };
@@ -316,6 +313,7 @@
 		8972FD0E218B54A100C27147 /* AdvancedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		89733043217ED041001B8D93 /* ETHSignMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHSignMessageService.swift; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
+		89812129218D3161000813C8 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatekeyViewController.swift; sourceTree = "<group>"; };
@@ -665,8 +663,7 @@
 		8928C22A20AE7CB500C3103E /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				8928C27120B2949C00C3103E /* HRQRCodeScanTool.swift */,
-				8928C26F20B2644C00C3103E /* QRCodeController.swift */,
+				89812129218D3161000813C8 /* QRCodeViewController.swift */,
 				89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */,
 				8964A17F20BE94F70086848F /* NEPickerView.swift */,
 				1A207DD42137D8CF008DC306 /* TabbedButtonsView.swift */,
@@ -1180,6 +1177,7 @@
 				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefresher/PullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
@@ -1208,6 +1206,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
@@ -1351,7 +1350,6 @@
 				89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
-				8928C27020B2644C00C3103E /* QRCodeController.swift in Sources */,
 				6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */,
 				6E8168F7218874B1007641BA /* TransactionViewController.swift in Sources */,
 				8913437320C7B2F700A17AEF /* CreatWalletViewModel.swift in Sources */,
@@ -1407,11 +1405,11 @@
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
 				8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */,
 				89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */,
-				8928C27220B2949C00C3103E /* HRQRCodeScanTool.swift in Sources */,
 				898CA98C20EA2F000059ECA3 /* AssetViewModel.swift in Sources */,
 				8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */,
 				89CFA12621424CAB00635A54 /* AboutUsTableViewController.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
+				8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				6E4F961B2189A82900372D3E /* TransactionConfirmViewController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
