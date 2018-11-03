@@ -47,17 +47,17 @@ PODS:
   - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.2.0)
-  - SwiftRLP (1.0.1):
+  - SwiftRLP (1.1):
     - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
-  - web3swift (1.1.10):
+  - web3swift (1.5.1):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.11)
     - PromiseKit (~> 6.3)
     - Result (~> 4.0)
     - scrypt (~> 2.0)
     - secp256k1_swift (~> 1.0.3)
-    - SwiftRLP (~> 1.0.1)
+    - SwiftRLP (~> 1.1)
 
 DEPENDENCIES:
   - Alamofire
@@ -76,7 +76,7 @@ DEPENDENCIES:
   - SDWebImage
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
-  - web3swift (from `https://github.com/matterinc/web3swift`, tag `1.1.10`)
+  - web3swift (from `https://github.com/matterinc/web3swift`, tag `1.5.1`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -114,7 +114,7 @@ EXTERNAL SOURCES:
     :git: https://github.com/sensorsdata/sa-sdk-ios
   web3swift:
     :git: https://github.com/matterinc/web3swift
-    :tag: 1.1.10
+    :tag: 1.5.1
 
 CHECKOUT OPTIONS:
   AppChainSwift:
@@ -125,7 +125,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/sensorsdata/sa-sdk-ios
   web3swift:
     :git: https://github.com/matterinc/web3swift
-    :tag: 1.1.10
+    :tag: 1.5.1
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -152,10 +152,10 @@ SPEC CHECKSUMS:
   SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
-  SwiftRLP: 9de2c9512a9a6bf0909cd84cc143a7ff1aff7820
+  SwiftRLP: 5512899925f1a9e1c78c902ed3bf857880e814a0
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
-  web3swift: 843dd5295d2ae755e6f80e9e0bdabe2868a5c7d8
+  web3swift: d80d1b9a3feca16e614acec9eea47ec26310d37d
 
-PODFILE CHECKSUM: f77133b3e02f999f2daab6033ef6e31de3e344c4
+PODFILE CHECKSUM: 20b6b35201a74351647967ef0f21ee15a02e0db3
 
 COCOAPODS: 1.5.3
