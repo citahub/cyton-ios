@@ -56,7 +56,7 @@ extension TokenModel {
             complection(profile)
             return
         }
-        let currencyType = LocalCurrencyService().getLocalCurrencySelect().short
+        let currencyType = LocalCurrencyService.shared.getLocalCurrencySelect().short
         currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyType) { (result) in
             switch result {
             case .success(let value):
@@ -86,7 +86,7 @@ extension TokenModel {
         }
 
         group.enter()
-        let currency = LocalCurrencyService().getLocalCurrencySelect()
+        let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         CoinMarketCap.shared.tokenQuotes(symbol: symbol, currency: currency.short) { (quotes, _) in
             defer { group.leave() }
             price = quotes?.price

@@ -16,7 +16,7 @@ protocol TokensViewControllerDelegate: class {
 /// ERC-20 Token List
 class TokensViewController: UITableViewController, ErrorOverlayPresentable {
     var tokenArray: [TokenModel] = []
-    var currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
+    var currentCurrencyModel = LocalCurrencyService.shared.getLocalCurrencySelect()
     weak var delegate: TokensViewControllerDelegate?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,7 +44,7 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
     }
 
     @objc private func changeLocalCurrency() {
-        currentCurrencyModel = LocalCurrencyService().getLocalCurrencySelect()
+        currentCurrencyModel = LocalCurrencyService.shared.getLocalCurrencySelect()
         getCurrencyPrice(currencyModel: currentCurrencyModel)
     }
 

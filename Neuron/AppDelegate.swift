@@ -24,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         setupKeyboard()
-        localCurrency()
         initEthereumNetwork()
         GuideService.shared.register()
         AuthenticationService.shared.register()
@@ -34,10 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private func initEthereumNetwork() {
         Web3Network().setNetworkFirstLaunch()
-    }
-
-    private func localCurrency() {
-        LocalCurrencyService().saveLocalCurrencyFirstLaunch()
     }
 
     private func setupKeyboard() {
