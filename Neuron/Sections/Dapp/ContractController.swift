@@ -27,7 +27,6 @@ class ContractController: UITableViewController {
     var dappCommonModel: DAppCommonModel!
     private var chainType: ChainType = .appChain
     private var tokenModel = TokenModel()
-    var payCoverViewController: PayCoverViewController!
     var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
 
@@ -47,8 +46,6 @@ class ContractController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "支付详情"
-        payCoverViewController = UIStoryboard(name: "Transaction", bundle: nil).instantiateViewController(withIdentifier: "confirmViewController") as? PayCoverViewController
-        payCoverViewController.dappDelegate = self
         advancedViewController = storyboard!.instantiateViewController(withIdentifier: "advancedViewController") as? AdvancedViewController
         advancedViewController.delegate = self
         getTokenModel()
@@ -166,32 +163,45 @@ class ContractController: UITableViewController {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        payCoverViewController.tokenModel = tokenModel
-        payCoverViewController.walletAddress = walletModel.address
-        payCoverViewController.amount = value
-        payCoverViewController.gasCost = gasLabel.text ?? "0"
-        payCoverViewController.dappCommonModel = dappCommonModel
+        let service = TransactionService.service(with: tokenModel)
+        service.amount = Double(value) ?? 0.0
+        service.gasLimit = gasLimit.words.first!
         switch chainType {
         case .appChain:
-            payCoverViewController.tokenType = .nervosToken
-            payCoverViewController.toAddress = dappCommonModel.appChain?.to ?? ""
-            payCoverViewController.extraData = Data.init(hex: dappCommonModel.appChain?.data ?? "")
-            payCoverViewController.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "") ?? BigUInt(1000000)
+            service.toAddress = dappCommonModel.appChain?.to ?? ""
+            service.extraData = Data.init(hex: dappCommonModel.appChain?.data ?? "")
+            service.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
-            payCoverViewController.tokenType = .ethereumToken
-            payCoverViewController.toAddress = dappCommonModel.eth?.to ?? ""
-            payCoverViewController.extraData = Data.init(hex: dappCommonModel.eth?.data ?? "")
-            payCoverViewController.gasPrice = gasPrice
+            service.toAddress = dappCommonModel.eth?.to ?? ""
+            service.extraData = Data.init(hex: dappCommonModel.eth?.data ?? "")
+            service.gasPrice = gasPrice.words.first!
         }
-        UIApplication.shared.keyWindow?.addSubview(payCoverViewController.view)
+        let controller: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        controller.modalPresentationStyle = .overCurrentContext
+        controller.service = service
+        present(controller, animated: false, completion: nil)
     }
 }
 
-extension ContractController: DAppPayCoverViewControllerDelegate {
-    func dappTransactionResult(id: Int, value: String, error: DAppError?) {
-        delegate?.callBackWebView(id: id, value: value, error: error)
-        navigationController?.popViewController(animated: true)
+extension ContractController: TransactionServiceDelegate {
+    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
+        switch result {
+        case .error(let error):
+            if error == .cancel {
+                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.cancelled)
+            } else {
+                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
+            }
+            navigationController?.popViewController(animated: true)
+        case .ethereum(let transaction):
+            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.addHexPrefix(), error: nil)
+            navigationController?.popViewController(animated: true)
+        case .appChain(let transaction):
+            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.toHexString(), error: nil)
+            navigationController?.popViewController(animated: true)
+        }
+    }
+    func transactionGasCostChanged(_ transactionService: TransactionService) {
     }
 }
 

@@ -2,197 +2,164 @@
 //  TransactionViewController.swift
 //  Neuron
 //
-//  Created by XiaoLu on 2018/9/6.
-//  Copyright © 2018年 Cryptape. All rights reserved.
+//  Created by 晨风 on 2018/10/30.
+//  Copyright © 2018 Cryptape. All rights reserved.
 //
 
 import UIKit
-import LYEmptyView
-import PullToRefresh
-import WebKit
+import web3swift
 
-class TransactionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tokenProfleView: UIView!
-    @IBOutlet weak var tokenIconView: UIImageView!
-    @IBOutlet weak var tokenNameLabel: UILabel!
-    @IBOutlet weak var tokenOverviewLabel: UILabel!
-    @IBOutlet weak var tokenAmountLabel: UILabel!
-
-    var service: TransactionHistoryService?
-    var tokenProfile: TokenProfile?
-    var tokenType: TokenType = .erc20Token
-    var tokenModel: TokenModel! {
-        didSet {
-            guard tokenModel != nil else { return }
-            service = TransactionHistoryService.service(with: tokenModel)
-            loadData()
-        }
-    }
-    let refresher = PullToRefresh()
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+class TransactionViewController: UITableViewController, TransactionServiceDelegate {
+    // Wallet
+    @IBOutlet weak var walletIconView: UIImageView!
+    @IBOutlet weak var walletNameLabel: UILabel!
+    @IBOutlet weak var walletAddressLabel: UILabel!
+    @IBOutlet weak var tokenBalanceButton: UIButton!
+    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var gasCostLabel: UILabel!
+    @IBOutlet weak var addressTextField: UITextField!
+    var service: TransactionService!
+    var token: TokenModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "交易列表"
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.addPullToRefresh(refresher) {
-            self.loadData()
+        service = TransactionService.service(with: token)
+        service.delegate = self
+        DispatchQueue.global().async {
+            self.service.requestGasCost()
         }
-        setupTokenProfile(nil)
-
-        tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
+        setupUI()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "requestPayment" {
-            let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppModel()
-            requestPaymentViewController.appModel = appModel
-        }
-        if segue.identifier == "payment" {
-            let paymentViewController = segue.destination as! PaymentViewController
-            paymentViewController.tokenType = tokenType
-            paymentViewController.tokenModel = tokenModel
+        if segue.identifier == "TransactionConfirmViewController" {
+            let controller = segue.destination as! TransactionConfirmViewController
+            controller.service = service
+        } else if segue.identifier == "TransactionGasPriceViewController" {
+            let controller = segue.destination as! TransactionGasPriceViewController
+            controller.service = service
         }
     }
 
-    @objc func clickTokenProfile() {
-        guard let url = tokenProfile?.detailUrl else { return }
-        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
-        controller.url = url
-        let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
-        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
-            guard message.name == "getTokenPrice" else { return }
-            let currency = LocalCurrencyService().getLocalCurrencySelect()
-            let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
-            message.webView?.evaluateJavaScript("handlePrice('\(price)')", completionHandler: nil)
+    // MARK: - Event
+    @IBAction func next(_ sender: Any) {
+        let amountText = amountTextField.text ?? ""
+        service.toAddress = addressTextField.text ?? ""
+        service.amount = Double(amountText.hasPrefix(".") ? "0" + amountText : amountText) ?? 0.0
+        if isEffectiveTransferInfo {
+            performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
         }
+    }
+
+    @IBAction func scanQRCode() {
+        let controller = QRCodeController()
+        controller.delegate = self
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    private func loadData() {
-        Toast.showHUD()
-        service?.reloadData { (_) in
-            Toast.hideHUD()
-            self.tableView.endRefreshing(at: .top)
-            self.tableView.reloadData()
-            if self.service?.transactions.count == 0 {
-                self.errorOverlaycontroller.style = .blank
-                self.overlay.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
-                self.tableView.addSubview(self.overlay)
-            } else {
-                self.removeOverlay()
-            }
-        }
-    }
-
-    private func setupTokenProfile(_ profile: TokenProfile?) {
-        tokenProfile = profile
-        guard var profile = profile else {
-            self.overlay.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
-            self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 1)
-            self.tokenProfleView.isHidden = true
+    @IBAction func transactionAvailableBalance() {
+        let amount = service.tokenBalance - service.gasCost
+        guard amount > 0 else {
+            Toast.showToast(text: "请确保账户剩余\(token.symbol)高于矿工费用，以便顺利完成转账～")
             return
         }
-        self.overlay.frame = CGRect(x: 0, y: 125, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
-        self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 125)
-        self.tokenProfleView.isHidden = false
-        self.tokenNameLabel.text = profile.symbol
-
-        let textFont = self.tokenOverviewLabel.font!
-        var overview = profile.overview.zh
-        func overviewWidth() -> CGFloat {
-            let rect = CGSize(width: 1000, height: textFont.lineHeight)
-            return NSString(string: overview).boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [.font: textFont], context: nil).size.width
-        }
-        while overviewWidth() > self.tokenOverviewLabel.bounds.size.width * 1.7 {
-            let index = overview.index(overview.endIndex, offsetBy: -6)
-            overview = String(overview[...index])
-        }
-        if profile.overview.zh.count != overview.count {
-            overview += "..."
-        }
-        self.tokenOverviewLabel.text = overview
-
-        if let imageUrl = URL(string: profile.imageUrl ?? "") {
-            self.tokenIconView.sd_setImage(with: imageUrl) { (image, error, _, _) in
-                if image == nil {
-                    print(error!)
-                }
-            }
-        } else if let image = profile.image {
-            self.tokenIconView.image = image
-        }
-        self.tokenAmountLabel.text = profile.possess
+        amountTextField.text = "\(amount)"
     }
 
-    private func loadMoreData() {
-        service?.loadMoreDate(completion: { [weak self](insertions, _) in
-            var indexPaths = [IndexPath]()
-            for index in insertions {
-                indexPaths.append(IndexPath(row: index, section: 0))
-            }
-            self?.tableView.insertRows(at: indexPaths, with: .none)
-        })
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return service?.transactions.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
-        cell.transaction = service!.transactions[indexPath.row]
-        return cell
-    }
-
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > service!.transactions.count - 4 {
-            loadMoreData()
+    // MARK: - TransactionServiceDelegate
+    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
+        Toast.hideHUD()
+        switch result {
+        case .error(let error):
+            Toast.showToast(text: error.rawValue)
+        default:
+            Toast.showToast(text: "转账成功,请稍后刷新查看")
+            navigationController?.popViewController(animated: true)
         }
     }
 
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
-        controller.tModel = service!.transactions[indexPath.row]
-        navigationController?.pushViewController(controller, animated: true)
+    func transactionGasCostChanged(_ transactionService: TransactionService) {
+        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.symbol)
     }
 
-    deinit {
-        tableView.removeAllPullToRefresh()
+    // MARK: - UI
+    func setupUI() {
+        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
+        title = "\(token.symbol)转账"
+        walletIconView.image = UIImage(data: wallet.iconData)
+        walletNameLabel.text = wallet.name
+        walletAddressLabel.text = wallet.address
+        if service.tokenBalance == Double(Int(service.tokenBalance)) {
+            tokenBalanceButton.setTitle(String(format: "%.0lf%@", service.tokenBalance, token.symbol), for: .normal)
+        } else {
+            tokenBalanceButton.setTitle(String(format: "%.8lf%@", service.tokenBalance, token.symbol), for: .normal)
+        }
+        gasCostLabel.text = ""
     }
 }
 
-enum TokenType {
-    case ethereumToken
-    case nervosToken
-    case erc20Token
+extension TransactionViewController {
+    var isEffectiveTransferInfo: Bool {
+        if service.toAddress.count != 40 && service.toAddress.count != 42 {
+            Toast.showToast(text: "您的地址错误，请重新输入")
+            return false
+        } else if service.toAddress != service.toAddress.lowercased() {
+            let eip55String = EthereumAddress.toChecksumAddress(service.toAddress) ?? ""
+            if eip55String != service.toAddress {
+                Toast.showToast(text: "您的地址错误，请重新输入")
+                return false
+            }
+        } else if service.toAddress == service.fromAddress {
+            Toast.showToast(text: "发送地址和收款地址不能相同")
+            return false
+        } else if service.amount > service.tokenBalance - service.gasCost {
+            let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
+                self.transactionAvailableBalance()
+            }))
+            alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
+                self.amountTextField.text = ""
+            }))
+            return false
+        }
+        return true
+    }
 }
 
-class TransactionHistoryTableViewCell: UITableViewCell {
-    @IBOutlet weak var addressLabel: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var numberLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
-    var transaction: TransactionModel? {
-        didSet {
-            guard let transaction = transaction else { return }
-            dateLabel.text = transaction.formatTime
-            let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-            if transaction.to.lowercased() == walletAddress.lowercased() {
-                addressLabel.text = transaction.from
-                numberLabel.text = "+\(transaction.value)"
+extension TransactionViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == amountTextField {
+            let character: String
+            if (textField.text?.contains("."))! {
+                character = "0123456789"
             } else {
-                addressLabel.text = transaction.to
-                numberLabel.text = "-\(transaction.value)"
+                character = "0123456789."
             }
+            guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: string)) else {
+                return false
+            }
+            return true
         }
+        return true
+    }
+}
+
+extension TransactionViewController: QRCodeControllerDelegate {
+    func didBackQRCodeMessage(codeResult: String) {
+        addressTextField.text = codeResult
+    }
+}
+
+extension TransactionViewController {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.row == 2 && service.isSupportGasSetting ? true : false
+    }
+
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return indexPath.row == 2 && service.isSupportGasSetting ? indexPath : nil
+    }
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
