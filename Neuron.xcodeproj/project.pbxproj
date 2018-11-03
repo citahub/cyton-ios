@@ -670,6 +670,7 @@
 		8928C22A20AE7CB500C3103E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				89812129218D3161000813C8 /* QRCodeViewController.swift */,
 				89C25C6420BBF03700007EC1 /* NeuronProgressView.swift */,
 				8964A17F20BE94F70086848F /* NEPickerView.swift */,
 				1A207DD42137D8CF008DC306 /* TabbedButtonsView.swift */,
@@ -692,7 +693,6 @@
 				1A60B6FB2186DB1C00FEFB3A /* Web3Utils.swift */,
 				6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */,
 				6E859CB72176DC3100637E1C /* Overlay.storyboard */,
-				89812129218D3161000813C8 /* QRCodeViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
