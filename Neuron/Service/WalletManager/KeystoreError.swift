@@ -1,4 +1,4 @@
-// Copyright SIX DAY LLC. All rights reserved.
+//  Copyright © 2018年 Cryptape. All rights reserved.
 
 import Foundation
 

@@ -52,20 +52,29 @@ class ImportWalletViewModel: NSObject {
             Toast.showToast(text: "解锁密码不能为空")
             return
         }
-        Toast.showHUD(text: "导入钱包中")
+
         walletModel.name = name
-        let importType = ImportType.keystore(keystore: keystore, password: password)
-        WalletManager.default.importWallet(with: importType) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .succeed(let account):
-                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
-                self.saveWalletToRealm()
-            case .failed(_, let errorMessage):
-                Toast.showToast(text: errorMessage)
-                SensorsAnalytics.Track.importWallet(type: .keystone, address: nil)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
+        Toast.showHUD(text: "导入钱包中")
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let wallet = try WalletManager.default.importKeystore(keystore, password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
+                    self.saveWalletToRealm()
+                    SensorsAnalytics.Track.importWallet(type: .keystore, address: self.walletModel.address)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .keystore, scanResult: true)
+                    }
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    Toast.showToast(text: error.localizedDescription)
+                    SensorsAnalytics.Track.importWallet(type: .keystore, address: nil)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .keystore, scanResult: false)
+                    }
                 }
             }
         }
@@ -91,9 +100,9 @@ class ImportWalletViewModel: NSObject {
                 WalletRealmTool.addObject(appModel: appModel)
             }
             Toast.showToast(text: "导入成功")
-            SensorsAnalytics.Track.importWallet(type: .keystone, address: self.walletModel.address)
+            SensorsAnalytics.Track.importWallet(type: .keystore, address: self.walletModel.address)
             if self.isUseQRCode {
-                SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
+                SensorsAnalytics.Track.scanQRCode(scanType: .keystore, scanResult: true)
             }
             if isFirstWallet {
                 NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
@@ -132,24 +141,28 @@ class ImportWalletViewModel: NSObject {
             return
         }
 
-        Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        let importType = ImportType.mnemonic(mnemonic: mnemonic, password: password)
-        WalletManager.default.importWallet(with: importType) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .succeed(let account):
-                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
-                self.saveWalletToRealm()
-                SensorsAnalytics.Track.importWallet(type: .mnemonic, address: self.walletModel.address)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: true)
+        Toast.showHUD(text: "导入钱包中")
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let wallet = try WalletManager.default.importMnemonic(mnemonic: mnemonic, password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
+                    self.saveWalletToRealm()
+                    SensorsAnalytics.Track.importWallet(type: .mnemonic, address: self.walletModel.address)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .mnemonic, scanResult: true)
+                    }
                 }
-            case .failed(_, let errorMessage):
-                Toast.showToast(text: errorMessage)
-                SensorsAnalytics.Track.importWallet(type: .mnemonic, address: nil)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .keystone, scanResult: false)
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    Toast.showToast(text: error.localizedDescription)
+                    SensorsAnalytics.Track.importWallet(type: .mnemonic, address: nil)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .mnemonic, scanResult: false)
+                    }
                 }
             }
         }
@@ -180,24 +193,28 @@ class ImportWalletViewModel: NSObject {
             return
         }
 
-        Toast.showHUD(text: "导入钱包中")
         walletModel.name = name
-        let importType = ImportType.privateKey(privateKey: privateKey, password: password)
-        WalletManager.default.importWallet(with: importType) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .succeed(let account):
-                self.walletModel.address = EthereumAddress.toChecksumAddress(account.address.description)!
-                self.saveWalletToRealm()
-                SensorsAnalytics.Track.importWallet(type: .privatekey, address: self.walletModel.address)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: true)
+        Toast.showHUD(text: "导入钱包中")
+        DispatchQueue.global(qos: .userInitiated).async {
+            do {
+                let wallet = try WalletManager.default.importPrivateKey(privateKey: privateKey, password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
+                    self.saveWalletToRealm()
+                    SensorsAnalytics.Track.importWallet(type: .privateKey, address: self.walletModel.address)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .privateKey, scanResult: true)
+                    }
                 }
-            case .failed(_, let errorMessage):
-                Toast.showToast(text: errorMessage)
-                SensorsAnalytics.Track.importWallet(type: .privatekey, address: nil)
-                if self.isUseQRCode {
-                    SensorsAnalytics.Track.scanQRCode(scanType: .privatekey, scanResult: false)
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    Toast.showToast(text: error.localizedDescription)
+                    SensorsAnalytics.Track.importWallet(type: .privateKey, address: nil)
+                    if self.isUseQRCode {
+                        SensorsAnalytics.Track.scanQRCode(scanType: .privateKey, scanResult: false)
+                    }
                 }
             }
         }

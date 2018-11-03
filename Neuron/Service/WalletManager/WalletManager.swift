@@ -13,8 +13,6 @@ struct Wallet {
 }
 
 struct WalletManager {
-    typealias ImportResultCallback = (ImportResult<Wallet>) -> Void
-
     static let `default` = WalletManager(path: "keystore")
 
     private let keystorePath: String
@@ -48,31 +46,6 @@ struct WalletManager {
 
 // MARK: - Import
 extension WalletManager {
-    // TODO: remove this and let the WalletManager user be responsible for create/use a queue.
-    func importWallet(with importType: ImportType, completion: @escaping ImportResultCallback) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let result: ImportResult<Wallet>
-            do {
-                let wallet: Wallet
-                switch importType {
-                case .keystore(let keystore, let password):
-                    wallet = try self.importKeystore(keystore, password: password)
-                case .privateKey(let privateKey, let password):
-                    wallet = try self.importPrivateKey(privateKey: privateKey, password: password)
-                case .mnemonic(let mnemonic, let password):
-                    wallet = try self.importMnemonic(mnemonic: mnemonic, password: password)
-                }
-                result = ImportResult.succeed(result: wallet)
-            } catch let error {
-                result = ImportResult.failed(error: error, errorMessage: "导入失败")
-            }
-
-            DispatchQueue.main.async {
-                completion(result)
-            }
-        }
-    }
-
     func importMnemonic(mnemonic: String, password: String) throws -> Wallet {
         guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0"),
             let address = bip32Keystore.addresses?.first else {
