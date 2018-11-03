@@ -9,7 +9,7 @@
 import UIKit
 import RSKPlaceholderTextView
 
-class KeystoreViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeControllerDelegate {
+class KeystoreViewController: UITableViewController, ImportWalletViewModelDelegate, QRCodeViewControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
     @IBOutlet weak var keyStoreTextView: RSKPlaceholderTextView!
     var name: String? = ""
@@ -58,9 +58,9 @@ class KeystoreViewController: UITableViewController, ImportWalletViewModelDelega
     }
 
     @IBAction func didClickQRBtn() {
-        let qrCtrl = QRCodeController()
-        qrCtrl.delegate = self
-        self.navigationController?.pushViewController(qrCtrl, animated: true)
+        let qrCodeViewController = QRCodeViewController()
+        qrCodeViewController.delegate = self
+        self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
     @IBAction func importWallet(_ sender: UIButton) {

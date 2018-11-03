@@ -24,6 +24,7 @@ target 'Neuron' do
   pod 'PullToRefresher', "~> 3.1"
   pod 'IGIdenticon', "~> 0.6"
   pod 'SCLAlertView'
+  pod 'QRCodeReader.swift'
   target 'NeuronTests' do
     inherit! :search_paths
     # Pods for testing
