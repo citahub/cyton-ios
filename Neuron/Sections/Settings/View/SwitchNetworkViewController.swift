@@ -24,7 +24,7 @@ class SwitchNetworkViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchNetwork") as! SwitchNetworkTableViewCell
         let network = Web3Network.EthereumNetworkType.allValues[indexPath.row]
-        cell.networkLabel.text = network
+        cell.networkLabel.text = network.capitalized
         let selectNetwork = Web3Network().getCurrentNetwork()
         if selectNetwork.rawValue == network {
             cell.selectImage.isHidden = false

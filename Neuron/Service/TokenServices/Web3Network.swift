@@ -19,6 +19,9 @@ struct Web3Network {
             return Web3.InfuraRinkebyWeb3()
         case .ropsten:
             return Web3.InfuraRopstenWeb3()
+        case .kovan:
+            let infura = InfuraProvider(.Kovan)!
+            return web3(provider: infura)
         }
     }
 
@@ -26,8 +29,9 @@ struct Web3Network {
         case mainnet
         case rinkeby
         case ropsten
+        case kovan
 
-        static let allValues = ["mainnet", "rinkeby", "ropsten"]
+        static let allValues = ["mainnet", "rinkeby", "ropsten", "kovan"]
     }
 
     private let currentNetworkKey = "selectedNetwork"
