@@ -17,64 +17,62 @@ class ERC20TransactionService {
                                            gasLimit: UInt = 21000,
                                            gasPrice: BigUInt,
                                            erc20TokenAddress: String,
-                                           completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+                                           completion: @escaping (SendEthResult<WriteTransaction>) -> Void) {
         let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-        let currentWalletAddress = wallet.address
         let keystore = WalletManager.default.keystore(for: wallet.address)
 
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
-                }
-                return
-            }
-            guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.invalidAmountFormat))
-                }
-                return
-            }
+        guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
+            return completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
+        }
 
+        guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
+            return completion(SendEthResult.error(SendEthError.invalidAmountFormat))
+        }
+
+        guard let tokenAddress = EthereumAddress(erc20TokenAddress), let fromAddress = EthereumAddress(wallet.address) else {
+            return completion(SendEthResult.error(SendEthError.createTransactionIssue))
+        }
+
+        DispatchQueue.global(qos: .userInitiated).async {
             let web3 = Web3Network().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
-            let token = erc20TokenAddress
+
             var options = Web3Options.defaultOptions()
             options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = gasPrice
-            options.from = EthereumAddress(currentWalletAddress)
-            guard let tokenAddress = EthereumAddress(token),
-                let fromAddress = EthereumAddress(currentWalletAddress),
-                let intermediate = web3.eth.sendERC20tokensWithNaturalUnits(tokenAddress: tokenAddress, from: fromAddress, to: destinationEthAddress, amount: amountString)
-                else {
-                    DispatchQueue.main.async {
-                        completion(SendEthResult.error(SendEthError.createTransactionIssue))
-                    }
-                    return
-            }
-            DispatchQueue.main.async {
-                completion(SendEthResult.success(intermediate))
+            options.from = fromAddress
+
+            do {
+                guard let intermediate = try web3.eth.sendERC20tokensWithNaturalUnits(
+                    tokenAddress: tokenAddress,
+                    from: fromAddress,
+                    to: destinationEthAddress,
+                    amount: amountString
+                ) else {
+                    throw SendEthError.createTransactionIssue
+                }
+                DispatchQueue.main.async {
+                    completion(SendEthResult.success(intermediate))
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    completion(SendEthResult.error(SendEthError.createTransactionIssue))
+                }
             }
         }
     }
 
-    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
+    func send(password: String, transaction: WriteTransaction, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: password, options: nil)
-            if let error = result.error {
+            do {
+                let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
+                DispatchQueue.main.async {
+                    completion(SendEthResult.success(result))
+                }
+            } catch let error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(error))
                 }
-                return
-            }
-            guard let value = result.value else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.emptyResult))
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                completion(SendEthResult.success(value))
             }
         }
     }

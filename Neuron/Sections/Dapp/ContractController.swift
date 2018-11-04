@@ -118,22 +118,23 @@ class ContractController: UITableViewController {
             if ethGasPirce != nil {
                 self.gasPrice = BigUInt(ethGasPirce!)!
             } else {
-                guard let gp = web3.eth.getGasPrice().value else {
+                do {
+                    let gasPrice = try web3.eth.getGasPrice()
+                    self.gasPrice = gasPrice
+                } catch {
                     self.gasPrice = BigUInt(8)
-                    return
                 }
-                self.gasPrice = gp
             }
 
             if ethGasLimit != nil {
                 self.gasLimit = BigUInt(ethGasLimit!) ?? BigUInt(1000000)
             } else {
-                var options = Web3Options.defaultOptions()
-                options.gasLimit = self.gasLimit
+                var options = TransactionOptions()
+                options.gasLimit = .limited(self.gasLimit)
                 options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
                 options.value = BigUInt(self.dappCommonModel.eth?.value ?? "0")
-                let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))
-                guard let estimatedGas = contract!.method(options: options)?.estimateGas(options: nil).value else {
+                let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
+                guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
                     self.gasLimit = BigUInt(1000000)
                     return
                 }

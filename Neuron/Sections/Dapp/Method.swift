@@ -16,7 +16,7 @@ enum Method: String, Decodable {
     case signTypedMessage
     case unknown
 
-    var rawValue: String{
+    var rawValue: String {
         switch self {
         case .sendTransaction:
             return "sendTransaction"
@@ -32,6 +32,7 @@ enum Method: String, Decodable {
             return "unknown"
         }
     }
+
     init(string: String) {
         self = Method(rawValue: string) ?? .unknown
     }

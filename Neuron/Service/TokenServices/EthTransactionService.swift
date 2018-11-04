@@ -17,30 +17,22 @@ class EthTransactionService {
                                          gasLimit: UInt = 21000,
                                          gasPrice: BigUInt,
                                          data: Data,
-                                         completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+                                         completion:  @escaping (SendEthResult<WriteTransaction>) -> Void) {
         let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
         let keystore = WalletManager.default.keystore(for: wallet.address)
 
-        DispatchQueue.global().async {
-            guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
-                }
-                return
-            }
-            guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.invalidAmountFormat))
-                }
-                return
-            }
+        guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
+            return completion(SendEthResult.error(SendEthError.invalidDestinationAddress))
+        }
 
+        guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
+            return completion(SendEthResult.error(SendEthError.invalidAmountFormat))
+        }
+
+        DispatchQueue.global().async {
             let web3 = Web3Network().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
-            var options = Web3Options.defaultOptions()
-            options.gasLimit = BigUInt(gasLimit)
-            options.from = EthereumAddress(wallet.address)
-            options.value = BigUInt(amount)
+
             guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.contractLoadingError))
@@ -48,15 +40,20 @@ class EthTransactionService {
                 return
             }
 
-            guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
+            var options = TransactionOptions()
+            options.gasLimit = .limited(BigUInt(gasLimit))
+            options.from = EthereumAddress(wallet.address)
+            options.value = BigUInt(amount)
+
+            guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.retrievingEstimatedGasError))
                 }
                 return
             }
-            options.gasLimit = estimatedGas
-            options.gasPrice = gasPrice
-            guard let transaction = contract.method(options, extraData: Data()) else {
+            options.gasLimit = .limited(estimatedGas)
+            options.gasPrice = .manual(gasPrice)
+            guard let transaction = contract.method(transactionOptions: options) else {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(SendEthError.createTransactionIssue))
                 }
@@ -69,28 +66,22 @@ class EthTransactionService {
         }
     }
 
-    func send(password: String, transaction: TransactionIntermediate, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
+    func send(password: String, transaction: WriteTransaction, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
-            let result = transaction.send(password: password, options: nil)
-            if let error = result.error {
+            do {
+                let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
+                DispatchQueue.main.async {
+                    completion(SendEthResult.success(result))
+                }
+            } catch let error {
                 DispatchQueue.main.async {
                     completion(SendEthResult.error(error))
                 }
-                return
-            }
-            guard let value = result.value else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.emptyResult))
-                }
-                return
-            }
-            DispatchQueue.main.async {
-                completion(SendEthResult.success(value))
             }
         }
     }
-
-    func sign(password: String, transaction: TransactionIntermediate, address: String, completion: @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
+/*
+    func sign(password: String, transaction: WriteTransaction, address: String, completion: @escaping (SendEthResult<WriteTransaction>) -> Void) {
         var transactionIntermediate = transaction
         DispatchQueue.global().async {
             let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
@@ -100,6 +91,5 @@ class EthTransactionService {
                 completion(SendEthResult.success(transactionIntermediate))
             }
         }
-    }
-
+    }*/
 }
