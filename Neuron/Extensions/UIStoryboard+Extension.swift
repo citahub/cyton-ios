@@ -31,6 +31,7 @@ extension UIStoryboard {
         case main
         case overlay
         case transaction
+        case walletManagement
         case dAppBrowser
 
         var capitalized: String {
