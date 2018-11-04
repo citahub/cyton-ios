@@ -939,16 +939,7 @@
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="转账"/>
                                 <connections>
-                                    <segue destination="kLj-Uo-04C" kind="show" identifier="payment" id="zWB-SQ-d6i"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jpo-HD-d21">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.21960784310000001" green="0.75686274509999996" blue="0.53725490200000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <segue destination="KXN-bo-zdG" kind="show" identifier="transaction" id="afD-fO-XeX"/>
+                                    <segue destination="KXN-bo-zdG" kind="show" identifier="transaction" id="ROf-WD-U6u"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtj-4O-Ty2">

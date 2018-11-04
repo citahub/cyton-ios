@@ -21,7 +21,6 @@ target 'Neuron' do
   pod 'Toast-Swift', "~> 4.0.0"
   pod 'PullToRefresher', "~> 3.1"
   pod 'IGIdenticon', "~> 0.6"
-  pod 'SCLAlertView'
   pod 'QRCodeReader.swift'
   target 'NeuronTests' do
     inherit! :search_paths

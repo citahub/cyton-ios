@@ -33,7 +33,6 @@ PODS:
     - Realm (= 3.11.0)
   - Result (4.0.0)
   - RSKPlaceholderTextView (4.0.0)
-  - SCLAlertView (0.8)
   - scrypt (2.0):
     - CryptoSwift (~> 0.11)
   - SDWebImage (4.4.2):
@@ -69,7 +68,6 @@ DEPENDENCIES:
   - QRCodeReader.swift
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
-  - SCLAlertView
   - SDWebImage
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
@@ -92,7 +90,6 @@ SPEC REPOS:
     - RealmSwift
     - Result
     - RSKPlaceholderTextView
-    - SCLAlertView
     - scrypt
     - SDWebImage
     - secp256k1_swift
@@ -140,7 +137,6 @@ SPEC CHECKSUMS:
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
   Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RSKPlaceholderTextView: 15f1dc1883e103ea605874b863f19ff6b08496d5
-  SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
@@ -151,6 +147,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: d80d1b9a3feca16e614acec9eea47ec26310d37d
 
-PODFILE CHECKSUM: bef532e30afa8bc5dd014caaa07763cb68a63185
+PODFILE CHECKSUM: f62cc4fd2a4f6e2f176cc1e30e932d9348f10393
 
 COCOAPODS: 1.5.3
