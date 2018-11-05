@@ -48,7 +48,7 @@
 		6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */; };
 		6E876841218022F30032EBCE /* TokenProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876840218022F30032EBCE /* TokenProfile.swift */; };
 		6E876843218023520032EBCE /* CoinMarketCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876842218023520032EBCE /* CoinMarketCap.swift */; };
-		6E876845218031670032EBCE /* UIntExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876844218031670032EBCE /* UIntExtension.swift */; };
+		6E876845218031670032EBCE /* UInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876844218031670032EBCE /* UInt+Extension.swift */; };
 		6E8768472180321A0032EBCE /* UIntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8768462180321A0032EBCE /* UIntExtensionTests.swift */; };
 		6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */; };
 		6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */; };
@@ -223,7 +223,7 @@
 		1A9204E321634212004B54DC /* ToastActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastActivityView.xib; sourceTree = "<group>"; };
 		1AB287732179654300DCC14D /* WalletManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagerTests.swift; sourceTree = "<group>"; };
 		1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
-		1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboardExtensionTests.swift; path = NeuronTests/Extensions/UIStoryboardExtensionTests.swift; sourceTree = SOURCE_ROOT; };
+		1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboardExtensionTests.swift; path = NeuronTests/Extensions/UIKit/UIStoryboardExtensionTests.swift; sourceTree = SOURCE_ROOT; };
 		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
 		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
 		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,7 +248,7 @@
 		6E867E10216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		6E876840218022F30032EBCE /* TokenProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProfile.swift; sourceTree = "<group>"; };
 		6E876842218023520032EBCE /* CoinMarketCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketCap.swift; sourceTree = "<group>"; };
-		6E876844218031670032EBCE /* UIntExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIntExtension.swift; sourceTree = "<group>"; };
+		6E876844218031670032EBCE /* UInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Extension.swift"; sourceTree = "<group>"; };
 		6E8768462180321A0032EBCE /* UIntExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIntExtensionTests.swift; sourceTree = "<group>"; };
 		6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorsAnalytics.swift; sourceTree = "<group>"; };
 		6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationService.swift; sourceTree = "<group>"; };
@@ -455,14 +455,73 @@
 		1A3C652A212EAC0F00F1A0AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				1A694657219046DB000093A2 /* Foundation */,
+				1A694658219046E8000093A2 /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A694655219044FE000093A2 /* Ethereum */ = {
+			isa = PBXGroup;
+			children = (
+				89BEBE6A20EF82B6007D2705 /* Web3Network.swift */,
+				6E4F9617218973F200372D3E /* TransactionService.swift */,
+				89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */,
+				89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */,
+				898CA98720EA23940059ECA3 /* EthNativeTokenService.swift */,
+				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
+				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
+				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
+				89D84CE021475755006B0287 /* NFTService.swift */,
+				6E876840218022F30032EBCE /* TokenProfile.swift */,
+			);
+			path = Ethereum;
+			sourceTree = "<group>";
+		};
+		1A69465621904551000093A2 /* AppChain */ = {
+			isa = PBXGroup;
+			children = (
+				899AD19A211011F300A8AC09 /* NervosNetwork.swift */,
+				89971F10212D049900E86C34 /* NervosTransactionService.swift */,
+				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
+			);
+			path = AppChain;
+			sourceTree = "<group>";
+		};
+		1A694657219046DB000093A2 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				6E876844218031670032EBCE /* UInt+Extension.swift */,
 				1A3C652B212EAC4800F1A0AA /* String+Extension.swift */,
 				892A1984215A55F400B2293D /* Double+Extension.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		1A694658219046E8000093A2 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
 				89C3BF08213521DE00872BD0 /* UIView+Extension.swift */,
 				1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */,
 				6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */,
-				6E876844218031670032EBCE /* UIntExtension.swift */,
 			);
-			path = Extensions;
+			path = UIKit;
+			sourceTree = "<group>";
+		};
+		1A69465921904710000093A2 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				6E8768462180321A0032EBCE /* UIntExtensionTests.swift */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		1A69465A21904718000093A2 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		1AB28771217964F500DCC14D /* Service */ = {
@@ -484,8 +543,8 @@
 		1AB3D1D021709F7600557E9D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */,
-				6E8768462180321A0032EBCE /* UIntExtensionTests.swift */,
+				1A69465921904710000093A2 /* Foundation */,
+				1A69465A21904718000093A2 /* UIKit */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -515,14 +574,6 @@
 			path = Guide;
 			sourceTree = "<group>";
 		};
-		6E90D06721704C1100B98363 /* SensorsAnalytics */ = {
-			isa = PBXGroup;
-			children = (
-				6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */,
-			);
-			path = SensorsAnalytics;
-			sourceTree = "<group>";
-		};
 		6E9D7CBB216B37E90044176D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -537,7 +588,7 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		8913436F20C78D9600A17AEF /* Model */ = {
+		8913436F20C78D9600A17AEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				89B296EA20F4CB6B008558A7 /* TransactionModel.swift */,
@@ -545,22 +596,18 @@
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
-		8913437620C8E2A500A17AEF /* Service */ = {
+		8913437620C8E2A500A17AEF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				89733042217ED022001B8D93 /* DAppService */,
-				6E90D06721704C1100B98363 /* SensorsAnalytics */,
-				89C6145A2141036B00DC3DF4 /* SettingsService */,
-				89B296E720F4CA57008558A7 /* Transaction */,
-				898CA98420EA21E90059ECA3 /* TokenServices */,
-				899CADA120E0ED9500FF9D27 /* WalletServices */,
-				89D4AC3420D8AFB00097E02B /* RealmTools */,
+				898CA98420EA21E90059ECA3 /* Common */,
+				1A69465621904551000093A2 /* AppChain */,
+				1A694655219044FE000093A2 /* Ethereum */,
 				89D4AC1F20D59F270097E02B /* WalletManager */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		8922685820DE4EA50021A85F /* Settings */ = {
@@ -789,10 +836,10 @@
 			isa = PBXGroup;
 			children = (
 				1A3C652A212EAC0F00F1A0AA /* Extensions */,
-				8928C23120AE84AB00C3103E /* Utils */,
 				8928C22420AE7C6200C3103E /* Constants */,
-				8913436F20C78D9600A17AEF /* Model */,
-				8913437620C8E2A500A17AEF /* Service */,
+				8928C23120AE84AB00C3103E /* Utils */,
+				8913436F20C78D9600A17AEF /* Models */,
+				8913437620C8E2A500A17AEF /* Services */,
 				8928C22620AE7C6200C3103E /* Sections */,
 				8928C22520AE7C6200C3103E /* Resource */,
 				896D042C20AE69C1002CFF6A /* AppDelegate.swift */,
@@ -827,14 +874,6 @@
 				896D044E20AE69C5002CFF6A /* Info.plist */,
 			);
 			path = NeuronUITests;
-			sourceTree = "<group>";
-		};
-		89733042217ED022001B8D93 /* DAppService */ = {
-			isa = PBXGroup;
-			children = (
-				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
-			);
-			path = DAppService;
 			sourceTree = "<group>";
 		};
 		898A19F220B53EF500ECB465 /* TableViewCell */ = {
@@ -883,41 +922,18 @@
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
-		898CA98420EA21E90059ECA3 /* TokenServices */ = {
+		898CA98420EA21E90059ECA3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				898CA98720EA23940059ECA3 /* EthNativeTokenService.swift */,
-				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
-				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				89FE21DD20EDB70000A09302 /* ServiceErrors.swift */,
-				89BEBE6C20F091A9007D2705 /* EthTransactionService.swift */,
-				89BEBE6E20F094A6007D2705 /* ERC20TransactionService.swift */,
-				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
-				89971F10212D049900E86C34 /* NervosTransactionService.swift */,
-				89BEBE6A20EF82B6007D2705 /* Web3Network.swift */,
-				899AD19A211011F300A8AC09 /* NervosNetwork.swift */,
-			);
-			path = TokenServices;
-			sourceTree = "<group>";
-		};
-		899CADA120E0ED9500FF9D27 /* WalletServices */ = {
-			isa = PBXGroup;
-			children = (
-				89CA1FAD213F832800669B2C /* CurrencyService.swift */,
-				89D84CE021475755006B0287 /* NFTService.swift */,
-			);
-			path = WalletServices;
-			sourceTree = "<group>";
-		};
-		89B296E720F4CA57008558A7 /* Transaction */ = {
-			isa = PBXGroup;
-			children = (
-				6E851CD1217DBB3D00769E00 /* TransactionHistoryService.swift */,
-				6E876840218022F30032EBCE /* TokenProfile.swift */,
+				89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */,
 				6E876842218023520032EBCE /* CoinMarketCap.swift */,
-				6E4F9617218973F200372D3E /* TransactionService.swift */,
+				89CA1FAD213F832800669B2C /* CurrencyService.swift */,
+				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
+				6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */,
+				6E851CD1217DBB3D00769E00 /* TransactionHistoryService.swift */,
 			);
-			path = Transaction;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		89BCA81AE0CA58529FA94CB3 /* Frameworks */ = {
@@ -941,14 +957,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		89C6145A2141036B00DC3DF4 /* SettingsService */ = {
-			isa = PBXGroup;
-			children = (
-				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
-			);
-			path = SettingsService;
-			sourceTree = "<group>";
-		};
 		89D4AC1F20D59F270097E02B /* WalletManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,14 +965,6 @@
 				1A5515E421898A1000D34791 /* WalletKeystoreManager.swift */,
 			);
 			path = WalletManager;
-			sourceTree = "<group>";
-		};
-		89D4AC3420D8AFB00097E02B /* RealmTools */ = {
-			isa = PBXGroup;
-			children = (
-				89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */,
-			);
-			path = RealmTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1366,7 +1366,7 @@
 				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
-				6E876845218031670032EBCE /* UIntExtension.swift in Sources */,
+				6E876845218031670032EBCE /* UInt+Extension.swift in Sources */,
 				6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,

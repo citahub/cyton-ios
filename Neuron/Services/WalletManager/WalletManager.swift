@@ -46,6 +46,7 @@ struct WalletManager {
 }
 
 // MARK: - Import
+
 extension WalletManager {
     func importMnemonic(mnemonic: String, password: String) throws -> Wallet {
         guard let bip32Keystore = try BIP32Keystore(mnemonics: mnemonic, password: password, prefixPath: "m/44'/60'/0'/0"),
@@ -110,6 +111,7 @@ extension WalletManager {
 }
 
 // MARK: - Export
+
 extension WalletManager {
     public func exportKeystore(wallet: Wallet, password: String) throws -> String {
         guard verifyPassword(wallet: wallet, password: password) else {
@@ -135,6 +137,7 @@ extension WalletManager {
 }
 
 // MARK: - Manage existing wallets
+
 extension WalletManager {
     func updatePassword(wallet: Wallet, password: String, newPassword: String) throws {
         let keystore = self.keystore(for: wallet.address)
@@ -163,6 +166,7 @@ extension WalletManager {
 }
 
 // MARK: - Validations & Checks
+
 extension WalletManager {
     func walletExists(address: String) -> Bool {
         let allAddresses = keystoreManager.addresses.map { $0.address }
@@ -184,6 +188,7 @@ extension WalletManager {
 }
 
 // MARK: - Generate mnemonic
+
 extension WalletManager {
     static func generateMnemonic() -> String {
         return try! BIP39.generateMnemonics(bitsOfEntropy: 128)!

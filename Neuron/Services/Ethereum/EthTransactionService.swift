@@ -69,7 +69,7 @@ class EthTransactionService {
     func send(password: String, transaction: WriteTransaction, completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
         DispatchQueue.global(qos: .userInitiated).async {
             do {
-                let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
+                let result = try transaction.sendPromise(password: password).wait()
                 DispatchQueue.main.async {
                     completion(SendEthResult.success(result))
                 }
@@ -80,16 +80,4 @@ class EthTransactionService {
             }
         }
     }
-/*
-    func sign(password: String, transaction: WriteTransaction, address: String, completion: @escaping (SendEthResult<WriteTransaction>) -> Void) {
-        var transactionIntermediate = transaction
-        DispatchQueue.global().async {
-            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-            let keystore = WalletManager.default.keystore(for: wallet.address)
-            try? Web3Signer.signIntermediate(intermediate: &transactionIntermediate, keystore: KeystoreManager([keystore]), account: EthereumAddress(address)!, password: password)
-            DispatchQueue.main.async {
-                completion(SendEthResult.success(transactionIntermediate))
-            }
-        }
-    }*/
 }

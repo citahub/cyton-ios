@@ -100,6 +100,7 @@ private extension WalletKeystoreManager {
 }
 
 // MARK: - Keystore name(URL)
+
 private extension WalletKeystoreManager {
     func url(for address: String) -> URL? {
         return addressToURLs[address.lowercased()]

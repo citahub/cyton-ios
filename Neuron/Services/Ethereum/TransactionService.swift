@@ -23,6 +23,7 @@ class TransactionService {
         case ethereum(Web3swift.TransactionSendingResult)
         case appChain(TransactionSendingResult)
     }
+
     enum Error: String, Swift.Error {
         case cancel = ""
         case prepareFailed
