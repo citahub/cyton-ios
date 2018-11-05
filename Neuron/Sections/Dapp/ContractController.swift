@@ -29,6 +29,7 @@ class ContractController: UITableViewController {
     private var tokenModel = TokenModel()
     var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
+    var confirmViewController: TransactionConfirmViewController?
 
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var gasLabel: UILabel!
@@ -194,6 +195,7 @@ class ContractController: UITableViewController {
         controller.modalPresentationStyle = .overCurrentContext
         controller.service = service
         present(controller, animated: false, completion: nil)
+        confirmViewController = controller
     }
 }
 
@@ -206,14 +208,13 @@ extension ContractController: TransactionServiceDelegate {
             } else {
                 delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
             }
-            navigationController?.popViewController(animated: true)
         case .ethereum(let transaction):
             delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.addHexPrefix(), error: nil)
-            navigationController?.popViewController(animated: true)
         case .appChain(let transaction):
             delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.toHexString(), error: nil)
-            navigationController?.popViewController(animated: true)
         }
+        confirmViewController?.dismiss()
+        navigationController?.popViewController(animated: true)
     }
     func transactionGasCostChanged(_ transactionService: TransactionService) {
     }
