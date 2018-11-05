@@ -20,6 +20,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     @IBOutlet weak var addressTextField: UITextField!
     var service: TransactionService!
     var token: TokenModel!
+    var confirmViewController: TransactionConfirmViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         if segue.identifier == "TransactionConfirmViewController" {
             let controller = segue.destination as! TransactionConfirmViewController
             controller.service = service
+            confirmViewController = controller
         } else if segue.identifier == "TransactionGasPriceViewController" {
             let controller = segue.destination as! TransactionGasPriceViewController
             controller.service = service
@@ -74,6 +76,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
             Toast.showToast(text: error.rawValue)
         default:
             Toast.showToast(text: "转账成功,请稍后刷新查看")
+            confirmViewController?.dismiss()
             navigationController?.popViewController(animated: true)
         }
     }
