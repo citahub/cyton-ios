@@ -159,7 +159,7 @@ class TransactionConfirmInfoViewController: UIViewController {
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = service.fromAddress
             toAddressLabel.text = service.toAddress
-            gasCostLabel.text = "\(service.gasCost)"
+            gasCostLabel.text = "\(service.gasCost)" + "\(service.token.symbol)"
         }
     }
 
