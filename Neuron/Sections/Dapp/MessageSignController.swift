@@ -124,6 +124,7 @@ extension MessageSignController {
             }
             Toast.hideHUD()
             self.view.removeFromSuperview()
+            self.confirmController.dismiss()
         }
     }
 
@@ -138,6 +139,7 @@ extension MessageSignController {
             }
             Toast.hideHUD()
             self.view.removeFromSuperview()
+            self.confirmController.dismiss()
         }
     }
 
