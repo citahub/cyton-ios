@@ -25,6 +25,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
         didSet {
             let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
             controller.service = service
+            controller.delegate = self
             contentViewController = controller
         }
     }
