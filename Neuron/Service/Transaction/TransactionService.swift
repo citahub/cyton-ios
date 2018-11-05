@@ -154,7 +154,7 @@ extension TransactionService {
 }
 
 extension TransactionService {
-    class Ethereum: TransactionService {
+    class Erc20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
             do {
@@ -193,7 +193,7 @@ extension TransactionService {
 }
 
 extension TransactionService {
-    class Erc20: TransactionService {
+    class Ethereum: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
             do {
