@@ -149,15 +149,27 @@ class ContractController: UITableViewController {
         }
     }
 
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if indexPath.section == 0 && indexPath.row == 0 {
+            if dappCommonModel.chainType == "ETH" {
+                cell.accessoryType = .disclosureIndicator
+            } else {
+                cell.accessoryType = .none
+            }
+        }
+        return cell
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if dappCommonModel.chainType == "ETH" {
+        if dappCommonModel.chainType == "ETH" && indexPath.section == 0 && indexPath.row == 0 {
             advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
             advancedViewController.gasLimit = gasLimit
             UIApplication.shared.keyWindow?.addSubview(advancedViewController.view)
         }
     }
 
-    @IBAction func didClickRejectButton(_ sender: UIButton) {
+    @IBAction func clickBackButton(_ sender: UIButton) {
         delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.cancelled)
         navigationController?.popViewController(animated: true)
     }
@@ -165,13 +177,15 @@ class ContractController: UITableViewController {
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
         let service = TransactionService.service(with: tokenModel)
         service.amount = Double(value) ?? 0.0
-        service.gasLimit = gasLimit.words.first!
+
         switch chainType {
         case .appChain:
+            service.gasLimit = 10000000
             service.toAddress = dappCommonModel.appChain?.to ?? ""
             service.extraData = Data.init(hex: dappCommonModel.appChain?.data ?? "")
             service.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
+            service.gasLimit = gasLimit.words.first!
             service.toAddress = dappCommonModel.eth?.to ?? ""
             service.extraData = Data.init(hex: dappCommonModel.eth?.data ?? "")
             service.gasPrice = gasPrice.words.first!

@@ -369,7 +369,18 @@
                             <outlet property="delegate" destination="lQg-MV-0hM" id="i5Q-BU-0qc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="FIO-pN-vHP"/>
+                    <navigationItem key="navigationItem" id="FIO-pN-vHP">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="UKo-Gc-64f">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QTb-dh-miG">
+                                <rect key="frame" x="16" y="7" width="14" height="22"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="nav_darkback"/>
+                                <connections>
+                                    <action selector="clickBackButton:" destination="lQg-MV-0hM" eventType="touchUpInside" id="sU1-4D-yu4"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="dappNameLabel" destination="9EY-yv-UDF" id="YjP-Qf-uhJ"/>
                         <outlet property="fromLabel" destination="ayO-wA-N2y" id="DP7-UO-i5e"/>
