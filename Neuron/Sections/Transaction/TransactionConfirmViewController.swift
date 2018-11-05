@@ -9,10 +9,13 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class TransactionConfirmViewController: UIViewController {
-    enum Event: String {
-        case userCanceled
-    }
+protocol TransactionConfirmViewControllerDelegate: NSObjectProtocol {
+    func transactionConfirmWalletPassword(_ controller: TransactionConfirmViewController, password: String)
+    func transactionCanceled(_ controller: TransactionConfirmViewController)
+}
+
+class TransactionConfirmViewController: UIViewController, TransactionConfirmSendViewControllerDelegate, TransactionConfirmInfoViewControllerDelegate {
+    weak var delegate: TransactionConfirmViewControllerDelegate?
     @IBOutlet weak var containTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var contentView: UIView!
@@ -22,6 +25,7 @@ class TransactionConfirmViewController: UIViewController {
         didSet {
             let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
             controller.service = service
+            controller.delegate = self
             contentViewController = controller
         }
     }
@@ -54,10 +58,6 @@ class TransactionConfirmViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if service != nil {
-            registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmSend(userInfo:)))
-        }
-        registerEventStrategy(with: TransactionConfirmInfoViewController.Event.confirm.rawValue, action: #selector(TransactionConfirmViewController.confirmInfo))
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -84,20 +84,24 @@ class TransactionConfirmViewController: UIViewController {
             self.contentView.transform = CGAffineTransform(translationX: 0, y: self.contentView.bounds.size.height)
         }, completion: { (_) in
             self.dismiss(animated: false, completion: nil)
-            self.routerEvent(with: Event.userCanceled.rawValue, userInfo: nil)
+            self.delegate?.transactionCanceled(self)
         })
     }
 
-    @objc func confirmInfo() {
-        let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transaction).instantiateViewController()
-        contentViewController = controller
+    func confirmWalletPassword(password: String) {
+        if let service = service {
+            service.password = password
+            Toast.showHUD()
+            service.sendTransaction()
+        } else {
+            delegate?.transactionConfirmWalletPassword(self, password: password)
+        }
     }
 
-    @objc func confirmSend(userInfo: [String: String]) {
-        let password = userInfo["password"] ?? ""
-        service.password = password
-        Toast.showHUD()
-        service.sendTransaction()
+    func confirmTransactionInfo() {
+        let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        controller.delegate = self
+        contentViewController = controller
     }
 
     @objc func keyBoardWillShow(node: Notification) {
@@ -129,11 +133,12 @@ class TransactionConfirmViewController: UIViewController {
     }
 }
 
-class TransactionConfirmInfoViewController: UIViewController {
-    enum Event: String {
-        case confirm = "TransactionConfirmInfoViewController.Event.confirm"
-    }
+protocol TransactionConfirmInfoViewControllerDelegate: NSObjectProtocol {
+    func confirmTransactionInfo()
+}
 
+class TransactionConfirmInfoViewController: UIViewController {
+    weak var delegate: TransactionConfirmInfoViewControllerDelegate?
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var fromAddressLabel: UILabel!
     @IBOutlet weak var toAddressLabel: UILabel!
@@ -159,18 +164,19 @@ class TransactionConfirmInfoViewController: UIViewController {
     }
 
     @IBAction func confirm(_ sender: Any) {
-        routerEvent(with: Event.confirm.rawValue, userInfo: nil)
+        delegate?.confirmTransactionInfo()
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
 }
 
-class TransactionConfirmSendViewController: UIViewController {
-    enum Event: String {
-        case confirm = "TransactionConfirmSendViewController.Event.confirm"
-    }
+protocol TransactionConfirmSendViewControllerDelegate: NSObjectProtocol {
+    func confirmWalletPassword(password: String)
+}
 
+class TransactionConfirmSendViewController: UIViewController {
+    weak var delegate: TransactionConfirmSendViewControllerDelegate?
     @IBOutlet weak var passwordTextField: UITextField!
 
     @IBAction func confirm(_ sender: Any) {
@@ -179,7 +185,7 @@ class TransactionConfirmSendViewController: UIViewController {
             Toast.showToast(text: "请输入有效的钱包密码")
             return
         }
-        routerEvent(with: Event.confirm.rawValue, userInfo: ["password": password, "controller": self])
+        delegate?.confirmWalletPassword(password: password)
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

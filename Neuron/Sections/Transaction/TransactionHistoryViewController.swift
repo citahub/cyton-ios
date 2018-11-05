@@ -31,10 +31,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
     let refresher = PullToRefresh()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "交易列表"
