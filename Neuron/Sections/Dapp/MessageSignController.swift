@@ -12,7 +12,7 @@ protocol MessageSignControllerDelegate: class {
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?)
 }
 
-class MessageSignController: UIViewController {
+class MessageSignController: UIViewController, TransactionConfirmViewControllerDelegate {
     var dappCommonModel: DAppCommonModel!
     weak var delegate: MessageSignControllerDelegate?
     private var chainType: ChainType = .appChain
@@ -26,18 +26,16 @@ class MessageSignController: UIViewController {
         messageSignShowViewController.delegate = self
 
         let confirmController: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        confirmController.delegate = self
         addChild(confirmController)
         view.addSubview(confirmController.view)
         confirmController.contentViewController = messageSignShowViewController
         self.confirmController = confirmController
 
         setUIData()
-        registerEventStrategy(with: TransactionConfirmSendViewController.Event.confirm.rawValue, action: #selector(confirmWalletPassword(userInfo:)))
-        registerEventStrategy(with: TransactionConfirmViewController.Event.userCanceled.rawValue, action: #selector(closeConfirmWalletPasswordView))
     }
 
-    @objc func confirmWalletPassword(userInfo: [String: String]) {
-        let password = userInfo["password"] ?? ""
+    func transactionConfirmWalletPassword(_ controller: TransactionConfirmViewController, password: String) {
         switch chainType {
         case .appChain:
             appChainSign(password: password)
@@ -46,7 +44,7 @@ class MessageSignController: UIViewController {
         }
     }
 
-    @objc func closeConfirmWalletPasswordView() {
+    func transactionCanceled(_ controller: TransactionConfirmViewController) {
         delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.userCanceled)
         dismiss(animated: false, completion: nil)
     }
@@ -83,7 +81,7 @@ class MessageSignController: UIViewController {
 
 extension MessageSignController: MessageSignShowViewControllerDelegate {
     func clickAgreeButton() {
-        confirmController.confirmInfo()
+        confirmController.confirmTransactionInfo()
     }
 
     func clickRejectButton() {
