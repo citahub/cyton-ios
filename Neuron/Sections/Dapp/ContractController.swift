@@ -167,6 +167,7 @@ class ContractController: UITableViewController {
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
         let service = TransactionService.service(with: tokenModel)
+        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.amount = Double(value) ?? 0.0
         service.gasLimit = gasLimit.words.first!
         switch chainType {

@@ -26,6 +26,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         service = TransactionService.service(with: token)
+        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.delegate = self
         DispatchQueue.global().async {
             self.service.requestGasCost()
