@@ -54,6 +54,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     @IBAction func scanQRCode() {
+        UIApplication.shared.keyWindow?.endEditing(true)
         let qrCodeViewController = QRCodeViewController()
         qrCodeViewController.delegate = self
         navigationController?.pushViewController(qrCodeViewController, animated: true)

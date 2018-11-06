@@ -730,6 +730,7 @@
                     <connections>
                         <outlet property="addressTextField" destination="Meo-Zd-ui1" id="iNQ-Yn-lGD"/>
                         <outlet property="amountTextField" destination="gh1-96-Xfk" id="CZ0-Hw-OX1"/>
+                        <outlet property="gasCostLabel" destination="HsP-0t-rla" id="8xr-vY-uhN"/>
                         <outlet property="tokenBalanceButton" destination="Ecb-RA-cMW" id="vhn-TA-Ote"/>
                         <outlet property="walletAddressLabel" destination="O7D-md-LKB" id="mA0-Bv-BN4"/>
                         <outlet property="walletIconView" destination="M6M-Zr-d47" id="PIq-Zl-72y"/>
