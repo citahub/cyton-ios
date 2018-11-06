@@ -33,7 +33,7 @@ class WalletDetailController: UITableViewController {
                 try WalletManager.default.deleteWallet(wallet: wallet, password: text)
                 try WalletRealmTool.realm.write {
                     if self.appModel.wallets.count == 1 {
-                        WalletRealmTool.realm.deleteAll()
+                        WalletRealmTool.realm.delete(self.walletModel)
                         NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
                     } else {
                         self.appModel.currentWallet = self.appModel.wallets.filter({ (model) -> Bool in

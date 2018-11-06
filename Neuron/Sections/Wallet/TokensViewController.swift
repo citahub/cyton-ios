@@ -89,6 +89,7 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                     }
                     guard balance != 0 else {
                         if currencyTotle == 0 {
+                            model.currencyAmount = ""
                             self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                         }
                         return
