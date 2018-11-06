@@ -692,49 +692,28 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="58" id="o5C-8T-KyQ">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="klc-eo-sjp" detailTextLabel="HsP-0t-rla" rowHeight="58" style="IBUITableViewCellStyleValue1" id="o5C-8T-KyQ">
                                         <rect key="frame" x="0.0" y="296" width="375" height="58"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="o5C-8T-KyQ" id="bzo-7u-RU1">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="57.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="57.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="矿工费用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ga-6O-8Zw">
-                                                    <rect key="frame" x="16" y="20" width="64" height="18"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="64" id="jS2-KW-mdN"/>
-                                                        <constraint firstAttribute="height" constant="18" id="sye-dx-9gU"/>
-                                                    </constraints>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="矿工费用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="klc-eo-sjp">
+                                                    <rect key="frame" x="16" y="20" width="61.5" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet_switch_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="3Tm-Xv-ahN">
-                                                    <rect key="frame" x="353" y="23" width="7" height="12"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="12" id="9GJ-fi-RgB"/>
-                                                        <constraint firstAttribute="width" constant="7" id="rZC-KJ-BSe"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.50000ETH=¥11.44" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ztc-8Z-wpz">
-                                                    <rect key="frame" x="100" y="19" width="249" height="20"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="20" id="bot-Io-faB"/>
-                                                    </constraints>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="0.0002eth" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HsP-0t-rla">
+                                                    <rect key="frame" x="273" y="21" width="67" height="17"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.49803921568627452" green="0.52156862745098043" blue="0.58823529411764708" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="3Tm-Xv-ahN" secondAttribute="trailing" constant="15" id="FWS-BZ-alc"/>
-                                                <constraint firstItem="9ga-6O-8Zw" firstAttribute="leading" secondItem="bzo-7u-RU1" secondAttribute="leadingMargin" id="M9D-Nm-Qa8"/>
-                                                <constraint firstItem="3Tm-Xv-ahN" firstAttribute="centerY" secondItem="bzo-7u-RU1" secondAttribute="centerY" id="Ukm-Au-pCI"/>
-                                                <constraint firstItem="3Tm-Xv-ahN" firstAttribute="leading" secondItem="Ztc-8Z-wpz" secondAttribute="trailing" constant="4" id="brN-Bt-hrk"/>
-                                                <constraint firstItem="Ztc-8Z-wpz" firstAttribute="centerY" secondItem="bzo-7u-RU1" secondAttribute="centerY" id="frg-Gi-vuD"/>
-                                                <constraint firstItem="Ztc-8Z-wpz" firstAttribute="leading" secondItem="9ga-6O-8Zw" secondAttribute="trailing" constant="20" id="ohh-JX-kyY"/>
-                                                <constraint firstItem="9ga-6O-8Zw" firstAttribute="centerY" secondItem="bzo-7u-RU1" secondAttribute="centerY" id="qTL-9C-Jvs"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="j4R-qD-vT9" kind="presentation" identifier="TransactionGasPriceViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="Egq-5f-WVx"/>
@@ -751,7 +730,6 @@
                     <connections>
                         <outlet property="addressTextField" destination="Meo-Zd-ui1" id="iNQ-Yn-lGD"/>
                         <outlet property="amountTextField" destination="gh1-96-Xfk" id="CZ0-Hw-OX1"/>
-                        <outlet property="gasCostLabel" destination="Ztc-8Z-wpz" id="DiE-yV-Eyy"/>
                         <outlet property="tokenBalanceButton" destination="Ecb-RA-cMW" id="vhn-TA-Ote"/>
                         <outlet property="walletAddressLabel" destination="O7D-md-LKB" id="mA0-Bv-BN4"/>
                         <outlet property="walletIconView" destination="M6M-Zr-d47" id="PIq-Zl-72y"/>
@@ -1970,6 +1948,5 @@
         <image name="eth_logo" width="62" height="62"/>
         <image name="nav_scan" width="44" height="44"/>
         <image name="qrCode" width="22" height="22"/>
-        <image name="wallet_switch_arrow" width="7" height="12"/>
     </resources>
 </document>

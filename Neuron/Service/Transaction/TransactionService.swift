@@ -156,9 +156,9 @@ extension TransactionService {
 extension TransactionService {
     class Erc20: TransactionService {
         override func requestGasCost() {
-            self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            self.gasLimit = 21000 * 4
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.gasPrice = (bigNumber?.words.first ?? 1)
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -192,8 +192,8 @@ extension TransactionService {
     class Ethereum: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.gasPrice = (bigNumber?.words.first ?? 1)
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }

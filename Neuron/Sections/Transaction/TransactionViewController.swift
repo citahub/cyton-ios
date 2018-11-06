@@ -97,7 +97,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         } else {
             tokenBalanceButton.setTitle(String(format: "%.8lf%@", service.tokenBalance, token.symbol), for: .normal)
         }
-        gasCostLabel.text = ""
+        gasCostLabel.text = " "
     }
 }
 
@@ -164,5 +164,18 @@ extension TransactionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if indexPath.section == 0 && indexPath.row == 2 {
+            switch token.type {
+            case .erc20, .ethereum:
+                cell.accessoryType = .disclosureIndicator
+            case .nervos, .nervosErc20:
+                cell.accessoryType = .none
+            }
+        }
+        return cell
     }
 }
