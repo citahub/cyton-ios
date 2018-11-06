@@ -10,7 +10,6 @@ import Foundation
 import BigInt
 import Web3swift
 import EthereumAddress
-import struct BigInt.BigUInt
 
 struct EthNativeTokenService {
     /// get balance

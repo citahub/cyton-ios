@@ -20,11 +20,6 @@ enum CustomTokenError: Error {
     case undefinedError
 }
 
-enum SendEthResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum SignMessageResult<T> {
     case success(T)
     case error(Error)

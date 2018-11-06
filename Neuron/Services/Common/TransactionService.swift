@@ -11,6 +11,8 @@ import BigInt
 import Web3swift
 import struct AppChain.TransactionSendingResult
 
+typealias TxHash = String
+
 protocol TransactionServiceDelegate: NSObjectProtocol {
     func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result)
     func transactionGasCostChanged(_ transactionService: TransactionService)
@@ -25,7 +27,6 @@ class TransactionService {
 
     enum Error: String, Swift.Error {
         case cancel = ""
-        case prepareFailed
         case sendFailed
     }
 
@@ -69,7 +70,7 @@ class TransactionService {
 
     static func service(with token: TokenModel) -> TransactionService {
         if token.type == .erc20 {
-            return Erc20(token: token)
+            return ERC20(token: token)
         } else if token.type == .ethereum {
             return Ethereum(token: token)
         } else if token.type == .nervos {
@@ -88,6 +89,12 @@ class TransactionService {
     }
 
     func completion(result: Result) {
+        delegate?.transactionCompletion(self, result: result)
+        trackEvent(result)
+    }
+
+    // TODO: move this out of Transaction Service.
+    private func trackEvent(_ result: TransactionService.Result) {
         switch result {
         case .error:
             if isUseQRCode {
@@ -106,6 +113,5 @@ class TransactionService {
                 SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
             }
         }
-        delegate?.transactionCompletion(self, result: result)
     }
 }
