@@ -27,7 +27,7 @@ struct StatusBar {
 
 //isiPhoneX
 public func isiphoneX() -> Bool {
-    if ScreenSize.height == 812 {
+    if ScreenSize.height == 812 { // TODO FIXME: this won't work
         return true
     } else {
         return false
