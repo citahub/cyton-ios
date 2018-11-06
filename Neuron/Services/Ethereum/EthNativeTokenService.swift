@@ -19,7 +19,7 @@ struct EthNativeTokenService {
     ///   - completion: EthServiceResult<BigUInt>
     static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         let address = EthereumAddress(walletAddress)!
-        let web3Main = Web3Network().getWeb3()
+        let web3Main = EthereumNetwork().getWeb3()
         DispatchQueue.global().async {
             do {
                 let balance = try web3Main.eth.getBalance(address: address)

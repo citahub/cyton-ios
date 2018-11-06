@@ -21,13 +21,7 @@ protocol TransactionServiceDelegate: NSObjectProtocol {
 class TransactionService {
     enum Result {
         case error(Error)
-        case ethereum(Web3swift.TransactionSendingResult)
-        case appChain(TransactionSendingResult)
-    }
-
-    enum Error: String, Swift.Error {
-        case cancel = ""
-        case sendFailed
+        case succee(TxHash)
     }
 
     weak var delegate: TransactionServiceDelegate?

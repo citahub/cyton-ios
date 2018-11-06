@@ -24,15 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
 
         setupKeyboard()
-        initEthereumNetwork()
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
         return true
-    }
-
-    private func initEthereumNetwork() {
-        Web3Network().setNetworkFirstLaunch()
     }
 
     private func setupKeyboard() {

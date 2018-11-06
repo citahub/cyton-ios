@@ -59,11 +59,6 @@ enum SendNervosError: Error {
     case emptyNonce
 }
 
-enum SendNervosResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum NervosSignError: Error {
     case signTXFailed
 }

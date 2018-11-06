@@ -54,7 +54,7 @@ class AdvancedViewController: UIViewController {
         Toast.showHUD()
         DispatchQueue.global().async {
             do {
-                let web3 = Web3Network().getWeb3()
+                let web3 = EthereumNetwork().getWeb3()
                 let gasPrice = try web3.eth.getGasPrice()
                 DispatchQueue.main.async {
                     self.gasPrice = gasPrice

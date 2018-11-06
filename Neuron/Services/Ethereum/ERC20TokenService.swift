@@ -19,7 +19,7 @@ struct ERC20TokenService {
     ///   - contractAddress: token address
     ///   - completion: balance result
     static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
-        let web3 = Web3Network().getWeb3()
+        let web3 = EthereumNetwork().getWeb3()
         let contractETHAddress = EthereumAddress(contractAddress)!
         let coldWalletAddress = EthereumAddress(walletAddress)
         let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)!

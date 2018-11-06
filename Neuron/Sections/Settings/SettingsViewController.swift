@@ -48,7 +48,7 @@ class SettingsViewController: UITableViewController {
             if cell.reuseIdentifier == "SettingCurrencyTableViewCell" {
                 cell.localCurrencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
             } else if cell.reuseIdentifier == "SettingSwitchEthereumNetwork" {
-                cell.localCurrencyLabel.text = Web3Network().getCurrentNetwork().rawValue.capitalized
+                cell.localCurrencyLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
             }
         } else if let cell = cell as? SettingAuthenticationTableViewCell {
             cell.authenticationSwitch.isOn = AuthenticationService.shared.isEnable

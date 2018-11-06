@@ -1,5 +1,5 @@
 //
-//  Web3Network.swift
+//  EthereumNetwork.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/7/6.
@@ -9,10 +9,9 @@
 import Foundation
 import Web3swift
 
-struct Web3Network {
+struct EthereumNetwork {
     func getWeb3() -> web3 {
-        let selectedNetwork = getCurrentNetwork()
-        switch selectedNetwork {
+        switch currentNetwork {
         case .mainnet:
             return Web3.InfuraMainnetWeb3()
         case .rinkeby:
@@ -25,30 +24,25 @@ struct Web3Network {
         }
     }
 
-    public enum EthereumNetworkType: String {
+    enum EthereumNetworkType: String, CaseIterable {
         case mainnet
         case rinkeby
         case ropsten
         case kovan
 
-        static let allValues = ["mainnet", "rinkeby", "ropsten", "kovan"]
+        static let allValues = allCases.map { $0.rawValue }
     }
 
     private let currentNetworkKey = "selectedNetwork"
 
-    func setNetworkFirstLaunch() {
-        let networkSelect = UserDefaults.standard.string(forKey: currentNetworkKey)
-        if networkSelect == nil {
-            UserDefaults.standard.set(EthereumNetworkType.mainnet.rawValue, forKey: currentNetworkKey)
-        }
-    }
-
-    func saveSelectNetwork(_ network: String) {
-        UserDefaults.standard.set(network, forKey: currentNetworkKey)
-    }
-
-    func getCurrentNetwork() -> EthereumNetworkType {
+    var currentNetwork: EthereumNetworkType {
         let network = UserDefaults.standard.string(forKey: currentNetworkKey) ?? ""
         return EthereumNetworkType(rawValue: network) ?? .mainnet
+    }
+
+    func switchNetwork(_ network: String) {
+        if let network = EthereumNetworkType(rawValue: network) {
+            UserDefaults.standard.set(network.rawValue, forKey: currentNetworkKey)
+        }
     }
 }

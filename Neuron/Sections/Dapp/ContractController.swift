@@ -115,7 +115,7 @@ class ContractController: UITableViewController {
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
         Toast.showHUD()
         DispatchQueue.global().async {
-            let web3 = Web3Network().getWeb3()
+            let web3 = EthereumNetwork().getWeb3()
             if ethGasPirce != nil {
                 self.gasPrice = BigUInt(ethGasPirce!)!
             } else {
@@ -192,15 +192,9 @@ extension ContractController: TransactionServiceDelegate {
     func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
         switch result {
         case .error(let error):
-            if error == .cancel {
-                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.cancelled)
-            } else {
-                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
-            }
-        case .ethereum(let transaction):
-            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.addHexPrefix(), error: nil)
-        case .appChain(let transaction):
-            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.toHexString(), error: nil)
+            delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
+        case .succee(let txhash):
+            delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
         }
         confirmViewController?.dismiss()
         navigationController?.popViewController(animated: true)

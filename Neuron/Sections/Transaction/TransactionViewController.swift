@@ -75,7 +75,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         Toast.hideHUD()
         switch result {
         case .error(let error):
-            Toast.showToast(text: error.rawValue)
+            Toast.showToast(text: error.localizedDescription)
         default:
             Toast.showToast(text: "转账成功,请稍后刷新查看")
             confirmViewController?.dismiss()
