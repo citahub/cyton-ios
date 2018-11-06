@@ -33,6 +33,11 @@ class TransactionService {
     var token: TokenModel!
     var wallet: WalletModel!
     var tokenBalance: Double = 0.0
+    var estimatedGasPrice: UInt = 1 {
+        didSet {
+            gasPrice = estimatedGasPrice
+        }
+    }
     var gasPrice: UInt = 1 {
         didSet {
             let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
@@ -116,12 +121,8 @@ extension TransactionService {
     class Nervos: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
             self.changeGasLimitEnable = false
             self.changeGasPriceEnable = false
         }
@@ -158,7 +159,7 @@ extension TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000 * 4
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
-            self.gasPrice = (bigNumber?.words.first ?? 1)
+            self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -193,7 +194,7 @@ extension TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
-            self.gasPrice = (bigNumber?.words.first ?? 1)
+            self.estimatedGasPrice = bigNumber?.words.first ?? 1
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -227,12 +228,8 @@ extension TransactionService {
     class NervosErc20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 100000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
             self.changeGasLimitEnable = false
             self.changeGasPriceEnable = false
         }

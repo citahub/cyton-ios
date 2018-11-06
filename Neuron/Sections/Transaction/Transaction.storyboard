@@ -478,6 +478,7 @@
                     <connections>
                         <outlet property="backgroundView" destination="gGU-kQ-ER5" id="K2R-sy-AZf"/>
                         <outlet property="contentView" destination="Eui-gK-LqG" id="iOv-FC-yzk"/>
+                        <outlet property="estimatedGasPriceLabel" destination="fhT-tX-uzk" id="IRY-6e-dJz"/>
                         <outlet property="gasLimitTextField" destination="QSh-hC-kOP" id="MWh-FS-f3p"/>
                         <outlet property="gasPriceTextField" destination="M04-1u-NyG" id="b0m-AE-jZm"/>
                     </connections>
