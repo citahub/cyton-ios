@@ -21,8 +21,13 @@ class RequestPaymentViewController: UIViewController {
         icon.image = UIImage(data: appModel.currentWallet!.iconData!)
         name.text = appModel.currentWallet!.name
         address.text = appModel.currentWallet!.address
-        let imagea = EFQRCode.generate(content: appModel.currentWallet!.address)
-        QRCode.image = UIImage(cgImage: imagea!)
+        let walletAddress = self.appModel.currentWallet!.address
+        DispatchQueue.global().async {
+            let imagea = EFQRCode.generate(content: walletAddress)
+            DispatchQueue.main.async {
+                self.QRCode.image = UIImage(cgImage: imagea!)
+            }
+        }
     }
 
     @IBAction func copyAddress(_ sender: UIButton) {

@@ -26,8 +26,12 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         super.viewDidLoad()
         service = TransactionService.service(with: token)
         service.delegate = self
+        Toast.showHUD()
         DispatchQueue.global().async {
             self.service.requestGasCost()
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+            }
         }
         setupUI()
     }
