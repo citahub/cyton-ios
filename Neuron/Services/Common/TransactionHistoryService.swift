@@ -131,7 +131,7 @@ extension TransactionHistoryService {
                 "page": page,
                 "offset": 20,
                 "sort": "desc",
-                "apikey": "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z"
+                "apikey": "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z"  // TODO FIXME: do not hardcode api key
             ]
             loading = true
             Alamofire.request("https://api.etherscan.io/api", method: .get, parameters: parameters).responseData { [weak self](response) in

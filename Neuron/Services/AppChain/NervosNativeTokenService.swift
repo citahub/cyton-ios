@@ -11,7 +11,7 @@ import AppChain
 import BigInt
 
 struct NervosNativeTokenService {
-    static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (NervosServiceResult<TokenModel>) -> Void) {
+    static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (AppChainServiceResult<TokenModel>) -> Void) {
         let appChain = AppChainNetwork.appChain()
         DispatchQueue.global().async {
             let result = appChain.rpc.getMetaData(blockNumber: blockNumber)
@@ -26,17 +26,17 @@ struct NervosNativeTokenService {
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
-                    tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
+                    tokenModel.decimals = NativeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
-                    completion(NervosServiceResult.success(tokenModel))
+                    completion(AppChainServiceResult.success(tokenModel))
                 case .failure(let error):
-                    completion(NervosServiceResult.error(error))
+                    completion(AppChainServiceResult.error(error))
                 }
             }
         }
     }
 
-    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (NervosServiceResult<String>) -> Void) {
+    static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (AppChainServiceResult<String>) -> Void) {
         let appChain = AppChainNetwork.appChain()
         DispatchQueue.global().async {
             let result = appChain.rpc.getBalance(address: Address(walletAddress)!)
@@ -44,9 +44,9 @@ struct NervosNativeTokenService {
                 switch result {
                 case .success(let balance):
                     let balanceNumber = self.formatBalanceValue(value: balance)
-                    completion(NervosServiceResult.success(balanceNumber))
+                    completion(AppChainServiceResult.success(balanceNumber))
                 case .failure(let error):
-                    completion(NervosServiceResult.error(error))
+                    completion(AppChainServiceResult.error(error))
                 }
             }
         }

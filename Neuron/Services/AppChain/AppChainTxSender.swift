@@ -11,9 +11,9 @@ import AppChain
 import BigInt
 
 extension TransactionService {
-    class Nervos: TransactionService {
+    class AppChain: TransactionService {
         override func requestGasCost() {
-            self.gasLimit = 21000
+            self.gasLimit = 21_000
             do {
                 let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
                 self.gasPrice = result.words.first ?? 1
@@ -28,7 +28,7 @@ extension TransactionService {
             // TODO: queue async
             super.sendTransaction()
             do {
-                let txhash = try AppChainTransactionService().send(
+                let txhash = try AppChainTxSender().send(
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
                     data: extraData,
@@ -46,9 +46,9 @@ extension TransactionService {
 }
 
 extension TransactionService {
-    class NervosErc20: TransactionService {
+    class AppChainERC20: TransactionService {
         override func requestGasCost() {
-            self.gasLimit = 100000
+            self.gasLimit = 100_000
             do {
                 let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
                 self.gasPrice = result.words.first ?? 1
@@ -61,7 +61,7 @@ extension TransactionService {
     }
 }
 
-class AppChainTransactionService {
+class AppChainTxSender {
     func send(
         to: String,
         quota: BigUInt = BigUInt(21_000),
@@ -72,16 +72,16 @@ class AppChainTransactionService {
         password: String
     ) throws -> TxHash {
         guard let destinationEthAddress = Address(to) else {
-            throw SendNervosError.invalidDestinationAddress
+            throw SendTransactionError.invalidDestinationAddress
         }
         guard let amount = Web3Utils.parseToBigUInt(value, units: .eth) else {
-            throw SendNervosError.invalidAmountFormat
+            throw SendTransactionError.invalidAmountFormat
         }
 
         let nonce = UUID().uuidString
         let appChain = AppChainNetwork.appChain()
         guard case .success(let blockNumber) = appChain.rpc.blockNumber() else {
-            throw SendNervosError.createTransactionIssue
+            throw SendTransactionError.createTransactionIssue
         }
         let transaction = Transaction(
             to: destinationEthAddress,
@@ -95,7 +95,7 @@ class AppChainTransactionService {
         )
         let signed = try sign(transaction: transaction, password: password)
         guard case .success(let result) = AppChainNetwork.appChain().rpc.sendRawTransaction(signedTx: signed) else {
-            throw NervosSignError.signTXFailed
+            throw SendTransactionError.signTXFailed
         }
         return result.hash.toHexString()
     }
@@ -106,7 +106,7 @@ class AppChainTransactionService {
     ) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
         guard case .success(let result) = AppChainNetwork.appChain().rpc.sendRawTransaction(signedTx: signed) else {
-            throw NervosSignError.signTXFailed
+            throw SendTransactionError.signTXFailed
         }
         return result.hash.toHexString()
     }
@@ -114,11 +114,11 @@ class AppChainTransactionService {
     func sign(transaction: Transaction, password: String) throws -> String {
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         guard let wallet = walletModel.wallet else {
-            throw NervosSignError.signTXFailed
+            throw SendTransactionError.signTXFailed
         }
         let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
         guard let signed = try? Signer().sign(transaction: transaction, with: privateKey) else {
-            throw NervosSignError.signTXFailed
+            throw SendTransactionError.signTXFailed
         }
         return signed
     }

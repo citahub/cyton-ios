@@ -54,7 +54,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         ethModel.address = ""
         ethModel.chainId = NativeChainId.ethMainnetChainId
         ethModel.chainName = ""
-        ethModel.decimals = NaticeDecimals.nativeTokenDecimals
+        ethModel.decimals = NativeDecimals.nativeTokenDecimals
         ethModel.iconUrl = ""
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"

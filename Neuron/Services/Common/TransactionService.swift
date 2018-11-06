@@ -68,9 +68,9 @@ class TransactionService {
         } else if token.type == .ethereum {
             return Ethereum(token: token)
         } else if token.type == .nervos {
-            return Nervos(token: token)
+            return AppChain(token: token)
         } else if token.type == .nervosErc20 {
-            return NervosErc20(token: token)
+            return AppChainERC20(token: token)
         } else {
             fatalError()
         }

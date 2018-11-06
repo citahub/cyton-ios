@@ -1,5 +1,5 @@
 //
-//  EthereumTransactionService.swift
+//  EthereumTxSender.swift
 //  Neuron
 //
 //  Created by James Chen on 2018/11/06.
@@ -27,7 +27,7 @@ extension TransactionService {
 
         override func sendTransaction() {
             do {
-                let txhash = try EthereumTransactionService().sendETH(
+                let txhash = try EthereumTxSender().sendETH(
                     to: toAddress,
                     amountString: "\(amount)",
                     gasLimit: gasLimit,
@@ -59,7 +59,7 @@ extension TransactionService {
 
         override func sendTransaction() {
             do {
-                let txhash = try EthereumTransactionService().sendToken(
+                let txhash = try EthereumTxSender().sendToken(
                     to: toAddress,
                     amountString: "\(amount)",
                     gasLimit: gasLimit,
@@ -75,7 +75,7 @@ extension TransactionService {
     }
 }
 
-class EthereumTransactionService {
+class EthereumTxSender {
     // TODO: queue async
     func sendETH(
         to: String,
@@ -89,18 +89,18 @@ class EthereumTransactionService {
         let keystore = WalletManager.default.keystore(for: wallet.address)
 
         guard let destinationEthAddress = EthereumAddress(to) else {
-            throw SendEthError.invalidDestinationAddress
+            throw SendTransactionError.invalidDestinationAddress
         }
 
         guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
-            throw SendEthError.invalidAmountFormat
+            throw SendTransactionError.invalidAmountFormat
         }
 
         let web3 = EthereumNetwork().getWeb3()
         web3.addKeystoreManager(KeystoreManager([keystore]))
 
         guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
-            throw SendEthError.contractLoadingError
+            throw SendTransactionError.contractLoadingError
         }
 
         var options = TransactionOptions()
@@ -109,12 +109,12 @@ class EthereumTransactionService {
         options.value = BigUInt(amount)
 
         guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
-            throw SendEthError.retrievingEstimatedGasError
+            throw SendTransactionError.retrievingEstimatedGasError
         }
         options.gasLimit = .limited(estimatedGas)
         options.gasPrice = .manual(gasPrice)
         guard let transaction = contract.method(transactionOptions: options) else {
-            throw SendEthError.createTransactionIssue
+            throw SendTransactionError.createTransactionIssue
         }
 
         let result = try transaction.sendPromise(password: password).wait()
@@ -133,15 +133,15 @@ class EthereumTransactionService {
         let keystore = WalletManager.default.keystore(for: wallet.address)
 
         guard let destinationEthAddress = EthereumAddress(to) else {
-            throw SendEthError.invalidDestinationAddress
+            throw SendTransactionError.invalidDestinationAddress
         }
 
         guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
-            throw SendEthError.invalidAmountFormat
+            throw SendTransactionError.invalidAmountFormat
         }
 
         guard let tokenAddress = EthereumAddress(erc20TokenAddress), let fromAddress = EthereumAddress(wallet.address) else {
-            throw SendEthError.createTransactionIssue
+            throw SendTransactionError.createTransactionIssue
         }
 
         let web3 = EthereumNetwork().getWeb3()
@@ -159,13 +159,13 @@ class EthereumTransactionService {
                 to: destinationEthAddress,
                 amount: amountString
             ) else {
-                throw SendEthError.createTransactionIssue
+                throw SendTransactionError.createTransactionIssue
             }
 
             let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
             return result.hash
         } catch {
-            throw SendEthError.createTransactionIssue
+            throw SendTransactionError.createTransactionIssue
         }
     }
 }

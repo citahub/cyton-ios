@@ -50,7 +50,7 @@ struct DAppAction {
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
-                    tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
+                    tokenModel.decimals = NativeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     tokenModel.chainHosts = chainNode
                     self.saveToken(model: tokenModel)
