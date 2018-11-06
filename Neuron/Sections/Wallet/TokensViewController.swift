@@ -62,7 +62,9 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenArray += appModel.nativeTokenList
         let walletModel = appModel.currentWallet!
-        tokenArray.append(contentsOf: walletModel.selectTokenList)
+        if walletModel.selectTokenList.count != 0 {
+            tokenArray += walletModel.selectTokenList
+        }
         getBalance(isRefresh: true)
         if tokenArray.count == 0 {
             showBlankOverlay()

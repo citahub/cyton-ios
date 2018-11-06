@@ -207,12 +207,18 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             closeButton.isHidden = true
         }
-        let js = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
-        webView.evaluateJavaScript(js) { (manifest, _) in
+        let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
+        webView.evaluateJavaScript(relJs) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
-//            self.collectionButton.isHidden = false
+            DAppAction().dealWithManifestJson(with: link as! String)
+        }
+        webView.evaluateJavaScript(refJs) { (manifest, _) in
+            guard let link = manifest else {
+                return
+            }
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }
