@@ -54,8 +54,8 @@ class TransactionService {
     var toAddress = ""
     var amount = 0.0
     var extraData = Data()
-    var password: String = ""
-    var isUseQRCode = false
+    var password: String = ""  // TODO: Inject web3 instance instead of passing password.
+    var isUseQRCode = false    // TODO: Fix spelling.
 
     init(token: TokenModel) {
         self.token = token
