@@ -56,7 +56,12 @@ class TransactionGasPriceViewController: UIViewController {
         })
     }
     @IBAction func confirm(_ sender: Any) {
-        service.gasPrice = UInt((Double(gasPriceTextField.text!) ?? 0.0) * pow(10, 9))
+        let newGasPrice = UInt((Double(gasPriceTextField.text!) ?? 0.0) * pow(10, 9))
+        if newGasPrice < service.estimatedGasPrice {
+            Toast.showToast(text: "您的GasPrice设置过低，请确保输入大于等于推荐值以快速转账")
+            return
+        }
+        service.gasPrice = newGasPrice
         service.gasLimit = UInt(gasLimitTextField.text!) ?? 0
         dismiss()
     }
