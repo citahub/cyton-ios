@@ -29,7 +29,7 @@ extension TransactionService {
             do {
                 let txhash = try EthereumTxSender().sendETH(
                     to: toAddress,
-                    amountString: "\(amount)",
+                    amount: String(amount),
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     data: extraData,
@@ -79,7 +79,7 @@ class EthereumTxSender {
     // TODO: queue async
     func sendETH(
         to: String,
-        amountString: String,
+        amount: String,
         gasLimit: UInt = 21000,
         gasPrice: BigUInt,
         data: Data,
@@ -92,7 +92,7 @@ class EthereumTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
+        guard let value = Web3.Utils.parseToBigUInt(amount, units: .eth) else {
             throw SendTransactionError.invalidAmountFormat
         }
 
@@ -106,7 +106,7 @@ class EthereumTxSender {
         var options = TransactionOptions()
         options.gasLimit = .limited(BigUInt(gasLimit))
         options.from = EthereumAddress(wallet.address)
-        options.value = BigUInt(amount)
+        options.value = value
 
         guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
             throw SendTransactionError.retrievingEstimatedGasError
