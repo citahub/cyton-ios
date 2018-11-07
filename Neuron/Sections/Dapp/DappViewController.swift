@@ -73,7 +73,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
-            let browserViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "browserViewController") as! BrowserViewController
+            let browserViewController: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
             browserViewController.requestUrlStr = navigationAction.request.url?.absoluteString ?? ""
             self.navigationController?.pushViewController(browserViewController, animated: true)
             return

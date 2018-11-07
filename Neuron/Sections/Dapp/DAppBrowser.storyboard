@@ -79,7 +79,7 @@
         <!--Browser View Controller-->
         <scene sceneID="hLm-OP-54c">
             <objects>
-                <viewController storyboardIdentifier="browserViewController" id="nmb-oI-LyV" customClass="BrowserViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowserViewController" id="nmb-oI-LyV" customClass="BrowserViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DcO-5o-QAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
