@@ -14,6 +14,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]
 
     let nView =  NEPickerView.init()
+    var tokenArray: [TokenModel] = []
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var aTable: UITableView!
     var tokenModel = TokenModel()
@@ -43,7 +44,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        let result = AssetViewModel().getAssetListFromJSON().filter { (token) -> Bool in
+        let result = tokenArray.filter { (token) -> Bool in
             return token.address == tokenModel.address
         }
         if result.count > 0 {
@@ -51,7 +52,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             return
         }
         let appModel = WalletRealmTool.getCurrentAppModel()
-        Toast.showHUD()
         tokenModel.address = tokenModel.address.addHexPrefix()
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
