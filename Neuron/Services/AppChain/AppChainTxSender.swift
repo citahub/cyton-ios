@@ -26,7 +26,6 @@ class AppChainTxSender {
         quota: BigUInt = BigUInt(21_000),
         data: Data,
         value: String,
-        tokenHosts: String = "",
         chainId: BigUInt,
         password: String
     ) throws -> TxHash {

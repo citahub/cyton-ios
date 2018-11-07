@@ -40,6 +40,7 @@ enum SendTransactionError: Error {
     case noAvailableKeys
     case createTransactionIssue
     case invalidPassword
+    case invalidAppChainNode
     case signTXFailed
 }
 

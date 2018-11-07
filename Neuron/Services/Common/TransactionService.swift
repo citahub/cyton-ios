@@ -205,14 +205,15 @@ extension TransactionService {
             // TODO: queue async
             super.sendTransaction()
             do {
-                // TODO: pass in wallet and selected AppChain
-                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(), walletManager: WalletManager.default, from: fromAddress)
+                guard let appChainUrl = URL(string: token.chainHosts) else {
+                    throw SendTransactionError.invalidAppChainNode
+                }
+                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(url: appChainUrl), walletManager: WalletManager.default, from: fromAddress)
                 let txhash = try sender.send(
                     to: toAddress,
-                    quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
+                    quota: BigUInt(UInt(gasLimit)),
                     data: extraData,
                     value: "\(amount)",
-                    tokenHosts: token.chainHosts,
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
