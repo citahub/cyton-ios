@@ -57,11 +57,12 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     @objc func clickTokenProfile() {
         guard let url = tokenProfile?.detailUrl else { return }
-        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
-        controller.url = url
+        let controller: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
+//        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
+        controller.requestUrlStr = url.absoluteString
         let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
-        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
+        controller.webview.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        controller.webview.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
             let currency = LocalCurrencyService().getLocalCurrencySelect()
             let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
@@ -91,14 +92,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             self.setupTokenProfile(profile)
             self.tableView.reloadData()
             self.tableView.endRefreshing(at: .top)
-
             if self.service?.transactions.count == 0 {
-                if profile != nil {
-                    self.errorOverlaycontroller.style = .blank
-                    self.tableView.addSubview(self.overlay)
-                } else {
-                    self.showNetworkFailOverlay()
-                }
+                self.errorOverlaycontroller.style = .blank
+                self.tableView.addSubview(self.overlay)
             } else {
                 self.removeOverlay()
             }

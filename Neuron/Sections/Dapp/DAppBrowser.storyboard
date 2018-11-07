@@ -55,7 +55,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oc2-MG-Z29" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="添加Token名称或合约地址" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="5Ne-5Q-1BY">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入应用网址" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="5Ne-5Q-1BY">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -79,7 +79,7 @@
         <!--Browser View Controller-->
         <scene sceneID="hLm-OP-54c">
             <objects>
-                <viewController storyboardIdentifier="browserViewController" id="nmb-oI-LyV" customClass="BrowserViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BrowserViewController" id="nmb-oI-LyV" customClass="BrowserViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DcO-5o-QAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -372,7 +372,7 @@
                     <navigationItem key="navigationItem" id="FIO-pN-vHP">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="UKo-Gc-64f">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QTb-dh-miG">
-                                <rect key="frame" x="16" y="7" width="14" height="22"/>
+                                <rect key="frame" x="16" y="11" width="14" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="nav_darkback"/>
                                 <connections>

@@ -26,8 +26,12 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         super.viewDidLoad()
         service = TransactionService.service(with: token)
         service.delegate = self
+        Toast.showHUD()
         DispatchQueue.global().async {
             self.service.requestGasCost()
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+            }
         }
         setupUI()
     }
@@ -54,6 +58,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     @IBAction func scanQRCode() {
+        UIApplication.shared.keyWindow?.endEditing(true)
         let qrCodeViewController = QRCodeViewController()
         qrCodeViewController.delegate = self
         navigationController?.pushViewController(qrCodeViewController, animated: true)
@@ -97,7 +102,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         } else {
             tokenBalanceButton.setTitle(String(format: "%.8lf%@", service.tokenBalance, token.symbol), for: .normal)
         }
-        gasCostLabel.text = ""
+        gasCostLabel.text = " "
     }
 }
 
@@ -112,10 +117,12 @@ extension TransactionViewController {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
             }
-        } else if service.toAddress == service.fromAddress {
+        }
+        if service.toAddress == service.fromAddress {
             Toast.showToast(text: "发送地址和收款地址不能相同")
             return false
-        } else if service.amount > service.tokenBalance - service.gasCost {
+        }
+        if service.amount > service.tokenBalance - service.gasCost {
             let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
                 self.transactionAvailableBalance()
@@ -123,6 +130,7 @@ extension TransactionViewController {
             alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
                 self.amountTextField.text = ""
             }))
+            present(alert, animated: true, completion: nil)
             return false
         }
         return true
@@ -164,5 +172,18 @@ extension TransactionViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+        if indexPath.section == 0 && indexPath.row == 2 {
+            switch token.type {
+            case .erc20, .ethereum:
+                cell.accessoryType = .disclosureIndicator
+            case .nervos, .nervosErc20:
+                cell.accessoryType = .none
+            }
+        }
+        return cell
     }
 }

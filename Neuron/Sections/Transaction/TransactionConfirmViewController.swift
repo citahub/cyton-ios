@@ -182,7 +182,7 @@ class TransactionConfirmSendViewController: UIViewController {
     @IBAction func confirm(_ sender: Any) {
         let password = passwordTextField.text ?? ""
         if password.lengthOfBytes(using: .utf8) < 8 {
-            Toast.showToast(text: "请输入有效的钱包密码")
+            Toast.showToast(text: "密码不正确")
             return
         }
         delegate?.confirmWalletPassword(password: password)

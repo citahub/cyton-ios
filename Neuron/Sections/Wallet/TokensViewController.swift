@@ -62,7 +62,9 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenArray += appModel.nativeTokenList
         let walletModel = appModel.currentWallet!
-        tokenArray.append(contentsOf: walletModel.selectTokenList)
+        if walletModel.selectTokenList.count != 0 {
+            tokenArray += walletModel.selectTokenList
+        }
         getBalance(isRefresh: true)
         if tokenArray.count == 0 {
             showBlankOverlay()
@@ -87,6 +89,7 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
                     }
                     guard balance != 0 else {
                         if currencyTotle == 0 {
+                            model.currencyAmount = ""
                             self.delegate?.getCurrentCurrencyModel(currencyModel: currencyModel, totleCurrency: currencyTotle)
                         }
                         return

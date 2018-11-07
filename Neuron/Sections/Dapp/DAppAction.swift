@@ -33,7 +33,7 @@ struct DAppAction {
     }
 
     func getMetaDataForDAppChain(with manifestModel: ManifestModel) throws {
-        guard let chainHosts = manifestModel.chainSet.values.first else {
+        guard let chainHosts = manifestModel.chainSet?.values.first else {
             throw Error.emptyChainHosts
         }
         let appChain = NervosNetwork.getNervos(with: chainHosts)
@@ -74,15 +74,15 @@ struct DAppAction {
 }
 
 struct ManifestModel: Decodable {
-    var shortName: String
-    var name: String
-    var startUrl: String
-    var display: String
-    var themeColor: String
-    var backgroundColor: String
-    var blockViewer: String
-    var chainSet: [String: String]
-    var entry: String
+    var shortName: String?
+    var name: String?
+    var startUrl: String?
+    var display: String?
+    var themeColor: String?
+    var backgroundColor: String?
+    var blockViewer: String?
+    var chainSet: [String: String]?
+    var entry: String?
 
     enum CodingKeys: String, CodingKey {
         case shortName = "short_name"
@@ -98,15 +98,15 @@ struct ManifestModel: Decodable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        shortName = try values.decode(String.self, forKey: .shortName)
-        name = try values.decode(String.self, forKey: .name)
-        startUrl = try values.decode(String.self, forKey: .startUrl)
-        display = try values.decode(String.self, forKey: .display)
-        themeColor = try values.decode(String.self, forKey: .themeColor)
-        backgroundColor = try values.decode(String.self, forKey: .backgroundColor)
-        blockViewer = try values.decode(String.self, forKey: .blockViewer)
-        chainSet = try values.decode([String: String].self, forKey: .chainSet)
-        entry = try values.decode(String.self, forKey: .entry)
+        shortName = try? values.decode(String.self, forKey: .shortName)
+        name = try? values.decode(String.self, forKey: .name)
+        startUrl = try? values.decode(String.self, forKey: .startUrl)
+        display = try? values.decode(String.self, forKey: .display)
+        themeColor = try? values.decode(String.self, forKey: .themeColor)
+        backgroundColor = try? values.decode(String.self, forKey: .backgroundColor)
+        blockViewer = try? values.decode(String.self, forKey: .blockViewer)
+        chainSet = try? values.decode([String: String].self, forKey: .chainSet)
+        entry = try? values.decode(String.self, forKey: .entry)
     }
 }
 

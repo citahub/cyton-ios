@@ -55,7 +55,7 @@ extension TransactionHistoryService {
                     var resultArr: [TransactionModel] = []
                     guard let self = self else { throw TransactionError.requestfailed }
                     for transaction in transactions {
-                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18))"
+                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 9))"
                         transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
                         transaction.transactionType = "Nervos"
                         transaction.symbol = self.token.symbol

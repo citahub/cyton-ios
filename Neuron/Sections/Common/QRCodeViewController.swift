@@ -48,8 +48,8 @@ class QRCodeViewController: UIViewController {
 
 extension QRCodeViewController: QRCodeReaderViewControllerDelegate {
     func reader(_ reader: QRCodeReaderViewController, didScanResult result: QRCodeReaderResult) {
-        delegate?.didBackQRCodeMessage(codeResult: result.value)
         navigationController?.popViewController(animated: true)
+        delegate?.didBackQRCodeMessage(codeResult: result.value)
     }
 
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
