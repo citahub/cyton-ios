@@ -129,11 +129,12 @@ extension TransactionService {
 
         override func sendTransaction() {
             super.sendTransaction()
+            let amountText = String(format: "%lf", amount)
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
                 data: extraData,
-                value: "\(amount)",
+                value: amountText,
                 tokenHosts: token.chainHosts,
                 chainId: BigUInt(token.chainId)!) { (result) in
                 switch result {
