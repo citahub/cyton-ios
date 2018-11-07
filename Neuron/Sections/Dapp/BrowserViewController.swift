@@ -194,6 +194,7 @@ extension BrowserViewController {
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
         let controller: MessageSignController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
+        controller.delegate = self
         controller.dappCommonModel = dappCommonModel
         present(controller, animated: false, completion: nil)
     }
