@@ -105,14 +105,10 @@ class EthereumTxSender {
 
         var options = TransactionOptions()
         options.gasLimit = .limited(BigUInt(gasLimit))
+        options.gasPrice = .manual(gasPrice)
         options.from = EthereumAddress(wallet.address)
         options.value = value
 
-        guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
-            throw SendTransactionError.retrievingEstimatedGasError
-        }
-        options.gasLimit = .limited(estimatedGas)
-        options.gasPrice = .manual(gasPrice)
         guard let transaction = contract.method(transactionOptions: options) else {
             throw SendTransactionError.createTransactionIssue
         }
@@ -151,6 +147,7 @@ class EthereumTxSender {
         options.gasLimit = BigUInt(gasLimit)
         options.gasPrice = gasPrice
         options.from = fromAddress
+        // TODO: estimate gas
 
         do {
             guard let transaction = try web3.eth.sendERC20tokensWithNaturalUnits(
