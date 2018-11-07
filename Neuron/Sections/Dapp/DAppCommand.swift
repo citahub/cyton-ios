@@ -61,6 +61,43 @@ struct ETHObject: Decodable {
     var to: String?
     var gasLimit: Double?
     var gasPrice: Double?
+
+    enum CodingKeys: String, CodingKey {
+        case chainId
+        case value
+        case data
+        case from
+        case to
+        case gasLimit
+        case gasPrice
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        if let chainId = try? values.decode(Int.self, forKey: .chainId) {
+            self.chainId = chainId
+        }
+        if let value = try? values.decode(String.self, forKey: .value) {
+            self.value = value
+        }
+        if let data = try? values.decode(String.self, forKey: .data) {
+            self.data = data
+        }
+        if let from = try? values.decode(String.self, forKey: .from){
+            self.from = from
+        }
+        if let to = try? values.decode(String.self, forKey: .to) {
+            self.to = to
+        }
+        if let gasLimit = try? values.decode(Double.self, forKey: .gasLimit) {
+            self.gasLimit = gasLimit
+        } else if let gasLimitString = try? values.decode(String.self, forKey: .gasLimit) {
+            self.gasLimit = Double(gasLimitString)
+        }
+        if let gasPrice = try? values.decode(Double.self, forKey: .gasPrice) {
+            self.gasPrice = gasPrice
+        }
+    }
 }
 
 enum DAppError: Error {
