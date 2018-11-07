@@ -28,7 +28,9 @@ extension TransactionService {
             // TODO: queue async
             super.sendTransaction()
             do {
-                let txhash = try AppChainTxSender().send(
+                // TODO: pass in wallet and selected AppChain
+                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(), walletManager: WalletManager.default, from: fromAddress)
+                let txhash = try sender.send(
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
                     data: extraData,
@@ -62,6 +64,16 @@ extension TransactionService {
 }
 
 class AppChainTxSender {
+    private let appChain: AppChain
+    private let walletManager: WalletManager
+    private let from: String
+
+    init(appChain: AppChain, walletManager: WalletManager, from: String) {
+        self.appChain = appChain
+        self.walletManager = walletManager
+        self.from = from
+    }
+
     func send(
         to: String,
         quota: BigUInt = BigUInt(21_000),
@@ -94,7 +106,7 @@ class AppChainTxSender {
             version: UInt32(0)
         )
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = AppChainNetwork.appChain().rpc.sendRawTransaction(signedTx: signed) else {
+        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
             throw SendTransactionError.signTXFailed
         }
         return result.hash.toHexString()
@@ -105,18 +117,17 @@ class AppChainTxSender {
         password: String
     ) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = AppChainNetwork.appChain().rpc.sendRawTransaction(signedTx: signed) else {
+        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
             throw SendTransactionError.signTXFailed
         }
         return result.hash.toHexString()
     }
 
     func sign(transaction: Transaction, password: String) throws -> String {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        guard let wallet = walletModel.wallet else {
-            throw SendTransactionError.signTXFailed
+        guard let wallet = walletManager.wallet(for: from) else {
+            throw SendTransactionError.noAvailableKeys
         }
-        let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
+        let privateKey = try walletManager.exportPrivateKey(wallet: wallet, password: password)
         guard let signed = try? Signer().sign(transaction: transaction, with: privateKey) else {
             throw SendTransactionError.signTXFailed
         }

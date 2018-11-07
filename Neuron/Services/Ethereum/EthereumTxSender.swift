@@ -26,8 +26,14 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
+            // TODO: extract this
+            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let web3 = EthereumNetwork().getWeb3()
+            web3.addKeystoreManager(KeystoreManager([keystore]))
+
             do {
-                let txhash = try EthereumTxSender().sendETH(
+                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                let txhash = try sender.sendETH(
                     to: toAddress,
                     amount: String(amount),
                     gasLimit: gasLimit,
@@ -58,8 +64,14 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
+            // TODO: extract this
+            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let web3 = EthereumNetwork().getWeb3()
+            web3.addKeystoreManager(KeystoreManager([keystore]))
+
             do {
-                let txhash = try EthereumTxSender().sendToken(
+                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                let txhash = try sender.sendToken(
                     to: toAddress,
                     amountString: "\(amount)",
                     gasLimit: gasLimit,
@@ -76,6 +88,14 @@ extension TransactionService {
 }
 
 class EthereumTxSender {
+    private let web3: web3
+    private let from: String
+
+    init(web3: web3, from: String) {
+        self.web3 = web3
+        self.from = from
+    }
+
     // TODO: queue async
     func sendETH(
         to: String,
@@ -85,9 +105,6 @@ class EthereumTxSender {
         data: Data,
         password: String
     ) throws -> TxHash {
-        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-        let keystore = WalletManager.default.keystore(for: wallet.address)
-
         guard let destinationEthAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
         }
@@ -96,9 +113,6 @@ class EthereumTxSender {
             throw SendTransactionError.invalidAmountFormat
         }
 
-        let web3 = EthereumNetwork().getWeb3()
-        web3.addKeystoreManager(KeystoreManager([keystore]))
-
         guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
             throw SendTransactionError.contractLoadingError
         }
@@ -106,7 +120,7 @@ class EthereumTxSender {
         var options = TransactionOptions()
         options.gasLimit = .limited(BigUInt(gasLimit))
         options.gasPrice = .manual(gasPrice)
-        options.from = EthereumAddress(wallet.address)
+        options.from = EthereumAddress(from)
         options.value = value
 
         guard let transaction = contract.method(transactionOptions: options) else {
@@ -125,9 +139,6 @@ class EthereumTxSender {
         erc20TokenAddress: String,
         password: String
     ) throws -> TxHash {
-        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-        let keystore = WalletManager.default.keystore(for: wallet.address)
-
         guard let destinationEthAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
         }
@@ -136,12 +147,9 @@ class EthereumTxSender {
             throw SendTransactionError.invalidAmountFormat
         }
 
-        guard let tokenAddress = EthereumAddress(erc20TokenAddress), let fromAddress = EthereumAddress(wallet.address) else {
+        guard let tokenAddress = EthereumAddress(erc20TokenAddress), let fromAddress = EthereumAddress(from) else {
             throw SendTransactionError.createTransactionIssue
         }
-
-        let web3 = EthereumNetwork().getWeb3()
-        web3.addKeystoreManager(KeystoreManager([keystore]))
 
         var options = Web3Options.defaultOptions()
         options.gasLimit = BigUInt(gasLimit)

@@ -57,4 +57,6 @@ extension GasCalculator {
         let fee = gasPrice * BigUInt(gasLimit)
         return Double(Web3Utils.formatToEthereumUnits(fee, toUnits: .eth, decimals: 10)!)!
     }
+
+    // TODO: provide estimate gas functionality
 }
