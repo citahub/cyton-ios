@@ -158,7 +158,7 @@ extension TransactionService {
 extension TransactionService {
     class Erc20: TransactionService {
         override func requestGasCost() {
-            self.gasLimit = 21000 * 4
+            self.gasLimit = 100000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
             self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
             self.changeGasLimitEnable = true
