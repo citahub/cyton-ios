@@ -11,82 +11,6 @@ import BigInt
 import EthereumAddress
 import Web3swift
 
-extension TransactionService {
-    class Ethereum: TransactionService {
-        override func requestGasCost() {
-            self.gasLimit = 21000
-            do {
-                let bigNumber = try EthereumNetwork().getWeb3().eth.getGasPrice()
-                self.gasPrice = (bigNumber.words.first ?? 1) * 4
-            } catch {
-                self.gasPrice = 4
-            }
-            self.changeGasLimitEnable = true
-            self.changeGasPriceEnable = true
-        }
-
-        override func sendTransaction() {
-            // TODO: extract this
-            let keystore = WalletManager.default.keystore(for: fromAddress)
-            let web3 = EthereumNetwork().getWeb3()
-            web3.addKeystoreManager(KeystoreManager([keystore]))
-
-            do {
-                let sender = EthereumTxSender(web3: web3, from: fromAddress)
-                let txhash = try sender.sendETH(
-                    to: toAddress,
-                    amount: String(amount),
-                    gasLimit: gasLimit,
-                    gasPrice: BigUInt(gasPrice),
-                    data: extraData,
-                    password: password
-                )
-                self.completion(result: Result.succee(txhash))
-            } catch let error {
-                self.completion(result: Result.error(error))
-            }
-        }
-    }
-}
-
-extension TransactionService {
-    class ERC20: TransactionService {
-        override func requestGasCost() {
-            self.gasLimit = 21000
-            do {
-                let bigNumber = try EthereumNetwork().getWeb3().eth.getGasPrice()
-                self.gasPrice = (bigNumber.words.first ?? 1) * 4
-            } catch {
-                self.gasPrice = 4
-            }
-            self.changeGasLimitEnable = true
-            self.changeGasPriceEnable = true
-        }
-
-        override func sendTransaction() {
-            // TODO: extract this
-            let keystore = WalletManager.default.keystore(for: fromAddress)
-            let web3 = EthereumNetwork().getWeb3()
-            web3.addKeystoreManager(KeystoreManager([keystore]))
-
-            do {
-                let sender = EthereumTxSender(web3: web3, from: fromAddress)
-                let txhash = try sender.sendToken(
-                    to: toAddress,
-                    amountString: "\(amount)",
-                    gasLimit: gasLimit,
-                    gasPrice: BigUInt(gasPrice),
-                    erc20TokenAddress: token.address,
-                    password: password
-                )
-                self.completion(result: Result.succee(txhash))
-            } catch let error {
-                self.completion(result: Result.error(error))
-            }
-        }
-    }
-}
-
 class EthereumTxSender {
     private let web3: web3
     private let from: String
@@ -96,7 +20,6 @@ class EthereumTxSender {
         self.from = from
     }
 
-    // TODO: queue async
     func sendETH(
         to: String,
         amount: String,
@@ -133,7 +56,7 @@ class EthereumTxSender {
 
     func sendToken(
         to: String,
-        amountString: String,
+        amount: String,
         gasLimit: UInt = 21000,
         gasPrice: BigUInt,
         erc20TokenAddress: String,
@@ -143,7 +66,7 @@ class EthereumTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard Web3.Utils.parseToBigUInt(amountString, units: .eth) != nil else {
+        guard Web3.Utils.parseToBigUInt(amount, units: .eth) != nil else {
             throw SendTransactionError.invalidAmountFormat
         }
 
@@ -155,14 +78,13 @@ class EthereumTxSender {
         options.gasLimit = BigUInt(gasLimit)
         options.gasPrice = gasPrice
         options.from = fromAddress
-        // TODO: estimate gas
 
         do {
             guard let transaction = try web3.eth.sendERC20tokensWithNaturalUnits(
                 tokenAddress: tokenAddress,
                 from: fromAddress,
                 to: destinationEthAddress,
-                amount: amountString
+                amount: amount
             ) else {
                 throw SendTransactionError.createTransactionIssue
             }

@@ -10,59 +10,6 @@ import Foundation
 import AppChain
 import BigInt
 
-extension TransactionService {
-    class AppChain: TransactionService {
-        override func requestGasCost() {
-            self.gasLimit = 21_000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
-            self.changeGasLimitEnable = false
-            self.changeGasPriceEnable = false
-        }
-
-        override func sendTransaction() {
-            // TODO: queue async
-            super.sendTransaction()
-            do {
-                // TODO: pass in wallet and selected AppChain
-                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(), walletManager: WalletManager.default, from: fromAddress)
-                let txhash = try sender.send(
-                    to: toAddress,
-                    quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
-                    data: extraData,
-                    value: "\(amount)",
-                    tokenHosts: token.chainHosts,
-                    chainId: BigUInt(token.chainId)!,
-                    password: password
-                )
-                self.completion(result: Result.succee(txhash))
-            } catch let error {
-                self.completion(result: Result.error(error))
-            }
-        }
-    }
-}
-
-extension TransactionService {
-    class AppChainERC20: TransactionService {
-        override func requestGasCost() {
-            self.gasLimit = 100_000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
-            self.changeGasLimitEnable = false
-            self.changeGasPriceEnable = false
-        }
-    }
-}
-
 class AppChainTxSender {
     private let appChain: AppChain
     private let walletManager: WalletManager
@@ -112,10 +59,7 @@ class AppChainTxSender {
         return result.hash.toHexString()
     }
 
-    func sendToken(
-        transaction: Transaction,
-        password: String
-    ) throws -> TxHash {
+    func sendToken(transaction: Transaction, password: String) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
         guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
             throw SendTransactionError.signTXFailed

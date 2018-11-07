@@ -11,6 +11,7 @@ import BigInt
 import Web3swift
 import EthereumAddress
 
+// TODO: create balanceLoader
 struct EthNativeTokenService {
     /// get balance
     ///

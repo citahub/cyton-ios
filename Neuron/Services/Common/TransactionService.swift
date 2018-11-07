@@ -7,8 +7,9 @@
 //
 
 import Foundation
-import BigInt
+import AppChain
 import Web3swift
+import BigInt
 import struct AppChain.TransactionSendingResult
 
 typealias TxHash = String
@@ -106,6 +107,135 @@ class TransactionService {
             if isUseQRCode {
                 SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
             }
+        }
+    }
+}
+extension TransactionService {
+    class Ethereum: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            do {
+                let bigNumber = try EthereumNetwork().getWeb3().eth.getGasPrice()
+                self.gasPrice = (bigNumber.words.first ?? 1) * 4
+            } catch {
+                self.gasPrice = 4
+            }
+            self.changeGasLimitEnable = true
+            self.changeGasPriceEnable = true
+        }
+
+        override func sendTransaction() {
+            // TODO: extract this
+            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let web3 = EthereumNetwork().getWeb3()
+            web3.addKeystoreManager(KeystoreManager([keystore]))
+
+            do {
+                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                let txhash = try sender.sendETH(
+                    to: toAddress,
+                    amount: String(amount),
+                    gasLimit: gasLimit,
+                    gasPrice: BigUInt(gasPrice),
+                    data: extraData,
+                    password: password
+                )
+                self.completion(result: Result.succee(txhash))
+            } catch let error {
+                self.completion(result: Result.error(error))
+            }
+        }
+    }
+}
+
+extension TransactionService {
+    class ERC20: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            do {
+                let bigNumber = try EthereumNetwork().getWeb3().eth.getGasPrice()
+                self.gasPrice = (bigNumber.words.first ?? 1) * 4
+            } catch {
+                self.gasPrice = 4
+            }
+            self.changeGasLimitEnable = true
+            self.changeGasPriceEnable = true
+        }
+
+        override func sendTransaction() {
+            // TODO: extract this
+            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let web3 = EthereumNetwork().getWeb3()
+            web3.addKeystoreManager(KeystoreManager([keystore]))
+
+            do {
+                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                // TODO: estimate gas
+                let txhash = try sender.sendToken(
+                    to: toAddress,
+                    amount: "\(amount)",
+                    gasLimit: gasLimit,
+                    gasPrice: BigUInt(gasPrice),
+                    erc20TokenAddress: token.address,
+                    password: password
+                )
+                self.completion(result: Result.succee(txhash))
+            } catch let error {
+                self.completion(result: Result.error(error))
+            }
+        }
+    }
+}
+
+extension TransactionService {
+    class AppChain: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 21_000
+            do {
+                let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
+                self.gasPrice = result.words.first ?? 1
+            } catch {
+                self.gasPrice = 1
+            }
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
+        }
+
+        override func sendTransaction() {
+            // TODO: queue async
+            super.sendTransaction()
+            do {
+                // TODO: pass in wallet and selected AppChain
+                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(), walletManager: WalletManager.default, from: fromAddress)
+                let txhash = try sender.send(
+                    to: toAddress,
+                    quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
+                    data: extraData,
+                    value: "\(amount)",
+                    tokenHosts: token.chainHosts,
+                    chainId: BigUInt(token.chainId)!,
+                    password: password
+                )
+                self.completion(result: Result.succee(txhash))
+            } catch let error {
+                self.completion(result: Result.error(error))
+            }
+        }
+    }
+}
+
+extension TransactionService {
+    class AppChainERC20: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 100_000
+            do {
+                let result = try Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
+                self.gasPrice = result.words.first ?? 1
+            } catch {
+                self.gasPrice = 1
+            }
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
         }
     }
 }
