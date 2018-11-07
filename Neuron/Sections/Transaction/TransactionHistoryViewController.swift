@@ -91,14 +91,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             self.setupTokenProfile(profile)
             self.tableView.reloadData()
             self.tableView.endRefreshing(at: .top)
-
             if self.service?.transactions.count == 0 {
-                if profile != nil {
-                    self.errorOverlaycontroller.style = .blank
-                    self.tableView.addSubview(self.overlay)
-                } else {
-                    self.showNetworkFailOverlay()
-                }
+                self.errorOverlaycontroller.style = .blank
+                self.tableView.addSubview(self.overlay)
             } else {
                 self.removeOverlay()
             }
