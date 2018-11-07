@@ -28,7 +28,11 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func didAddSubLayout() {
-        webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
+        if isBangsScreen() {
+            webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 40))
+        } else {
+            webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
+        }
         let url = URL(string: "https://dapp.cryptape.com")!
         let request = URLRequest(url: url)
 
