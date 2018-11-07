@@ -116,30 +116,30 @@ extension MessageSignController {
     func ethSignPersonalMessage(password: String) {
         Toast.showHUD()
         ETHSignMessageService.signPersonal(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
+            Toast.hideHUD()
             switch result {
             case .success(let signed):
                 self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: signed, error: nil)
-            case .error:
-                self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
+                self.view.removeFromSuperview()
+                self.confirmController.dismiss()
+            case .error(let error):
+                Toast.showToast(text: error.localizedDescription)
             }
-            Toast.hideHUD()
-            self.view.removeFromSuperview()
-            self.confirmController.dismiss()
         }
     }
 
     func ethSignMessage(password: String) {
         Toast.showHUD()
         ETHSignMessageService.sign(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
+            Toast.hideHUD()
             switch result {
             case .success(let signed):
                 self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: signed, error: nil)
-            case .error:
-                self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.signTransactionFailed)
+                self.view.removeFromSuperview()
+                self.confirmController.dismiss()
+            case .error(let error):
+                Toast.showToast(text: error.localizedDescription)
             }
-            Toast.hideHUD()
-            self.view.removeFromSuperview()
-            self.confirmController.dismiss()
         }
     }
 
