@@ -27,6 +27,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         didSet {
             guard tokenModel != nil else { return }
             service = TransactionHistoryService.service(with: tokenModel)
+            Toast.showHUD()
             loadData()
         }
     }
@@ -80,7 +81,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     private func loadData() {
-        Toast.showHUD()
         let group = DispatchGroup()
         var profile: TokenProfile?
 
