@@ -60,6 +60,15 @@ class TokenModel: Object, Decodable {
             return .erc20
         }
     }
+    var gasSymbol: String {
+        switch type {
+        case .erc20, .ethereum:
+            return "ETH"
+        case .nervos, .nervosErc20:
+            return self.symbol
+        }
+    }
+
 
     enum CodingKeys: String, CodingKey {
         case name
