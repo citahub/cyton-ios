@@ -11,7 +11,7 @@ import UIKit
 class TradeDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var tModel = TransactionModel() {
         didSet {
-            if tModel.transactionType == "ETH" {
+            if tModel.transactionType == TransactionType.ETH.rawValue {
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "GasPrice", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [tModel.chainName,
                              tModel.to,
@@ -21,7 +21,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                              tModel.hashString,
                              tModel.blockNumber,
                              tModel.formatTime]
-            } else if tModel.transactionType == "Nervos" {
+            } else if tModel.transactionType == TransactionType.AppChain.rawValue {
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [tModel.chainName,
                              tModel.to,

@@ -8,18 +8,30 @@
 
 import Foundation
 import Alamofire
-import BigInt
+import struct BigInt.BigUInt
 import web3swift
+import AppChain
 
 class TransactionHistoryService {
+    private let ethereumSymbol = " ETH"
     var transactions = [TransactionModel]()
     let token: TokenModel
+    let quotaPrice: Double
+
     var walletAddress: String {
         return WalletRealmTool.getCurrentAppModel().currentWallet!.address
     }
 
     fileprivate init(token: TokenModel) {
         self.token = token
+        let appChain = NervosNetwork.getNervos(with: self.token.chainHosts)
+        let result = Utils.getQuotaPrice(appChain: appChain)
+        switch result {
+        case .success(let quotaPrice):
+            self.quotaPrice = Double(quotaPrice)
+        case .failure(_):
+            self.quotaPrice = pow(10, 9)
+        }
     }
 
     static func service(with token: TokenModel) -> TransactionHistoryService {
@@ -55,9 +67,9 @@ extension TransactionHistoryService {
                     var resultArr: [TransactionModel] = []
                     guard let self = self else { throw TransactionError.requestfailed }
                     for transaction in transactions {
-                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 9))"
+                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18) * self.quotaPrice)"
                         transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
-                        transaction.transactionType = "Nervos"
+                        transaction.transactionType = TransactionType.AppChain.rawValue
                         transaction.symbol = self.token.symbol
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
                         resultArr.append(transaction)
@@ -86,8 +98,8 @@ extension TransactionHistoryService {
                         transaction.chainName = "Ethereum Mainnet"
                         let gasPriceBigNumber = BigUInt(Int(transaction.gasPrice)!)
                         transaction.gasPrice = Web3.Utils.formatToEthereumUnits(gasPriceBigNumber, toUnits: .Gwei, decimals: 8, fallbackToScientific: false) ?? ""
-                        transaction.transactionType = "ETH"
-                        transaction.symbol = "ETH"
+                        transaction.transactionType = TransactionType.ETH.rawValue
+                        transaction.symbol = self.ethereumSymbol
                         let totleGasBigNumber = BigUInt(Int(transaction.gasUsed)! * Int(transaction.gasPrice)!)
                         transaction.totleGas = Web3.Utils.formatToEthereumUnits(totleGasBigNumber, toUnits: .eth, decimals: 8, fallbackToScientific: false) ?? ""
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
@@ -141,7 +153,7 @@ extension TransactionHistoryService {
                     var insertions = [Int]()
                     for transaction in response.result {
                         transaction.chainId = self.token.chainId
-                        transaction.transactionType = "Erc20"
+                        transaction.transactionType = TransactionType.ERC20.rawValue
                         let totleGasBigNumber = BigUInt(Int(transaction.gasUsed)! * Int(transaction.gasPrice)!)
                         transaction.totleGas = Web3.Utils.formatToEthereumUnits(totleGasBigNumber, toUnits: .eth, decimals: 8, fallbackToScientific: false) ?? ""
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
@@ -197,7 +209,7 @@ extension TransactionHistoryService {
                     for transaction in response.result.transfers {
                         transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18))"
                         transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
-                        transaction.transactionType = "NervosErc20"
+                        transaction.transactionType = TransactionType.AppChainERC20.rawValue
                         transaction.symbol = self.token.symbol
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
                         insertions.append(resultArr.count + self.transactions.count)
