@@ -18,6 +18,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenNameLabel: UILabel!
     @IBOutlet weak var tokenOverviewLabel: UILabel!
     @IBOutlet weak var tokenAmountLabel: UILabel!
+    @IBOutlet var warningView: UIView!
 
     var service: TransactionHistoryService?
     var tokenProfile: TokenProfile?
@@ -42,6 +43,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         setupTokenProfile(nil)
 
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
+        if tokenModel.symbol == "MBA" ||
+            tokenModel.symbol == "NATT" {
+            warningView.isHidden = false
+            tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        } else {
+            warningView.isHidden = true
+            tableView.contentInset = UIEdgeInsets.zero
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
