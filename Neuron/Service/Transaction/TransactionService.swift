@@ -33,6 +33,11 @@ class TransactionService {
     var token: TokenModel!
     var wallet: WalletModel!
     var tokenBalance: Double = 0.0
+    var estimatedGasPrice: UInt = 1 {
+        didSet {
+            gasPrice = estimatedGasPrice
+        }
+    }
     var gasPrice: UInt = 1 {
         didSet {
             let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
@@ -116,23 +121,20 @@ extension TransactionService {
     class Nervos: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
             self.changeGasLimitEnable = false
             self.changeGasPriceEnable = false
         }
 
         override func sendTransaction() {
             super.sendTransaction()
+            let amountText = String(format: "%lf", amount)
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
                 data: extraData,
-                value: "\(amount)",
+                value: amountText,
                 tokenHosts: token.chainHosts,
                 chainId: BigUInt(token.chainId)!) { (result) in
                 switch result {
@@ -156,9 +158,9 @@ extension TransactionService {
 extension TransactionService {
     class Erc20: TransactionService {
         override func requestGasCost() {
-            self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            self.gasLimit = 100000
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -192,8 +194,8 @@ extension TransactionService {
     class Ethereum: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
-            let bigNumber = try? Web3Network().getWeb3().eth.getGasPrice().dematerialize()
-            self.gasPrice = (bigNumber?.words.first ?? 1) * 4
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.estimatedGasPrice = bigNumber?.words.first ?? 1
             self.changeGasLimitEnable = true
             self.changeGasPriceEnable = true
         }
@@ -227,12 +229,8 @@ extension TransactionService {
     class NervosErc20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 100000
-            do {
-                let result = try Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).dematerialize()
-                self.gasPrice = result.words.first ?? 1
-            } catch {
-                self.gasPrice = 1
-            }
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
             self.changeGasLimitEnable = false
             self.changeGasPriceEnable = false
         }

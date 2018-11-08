@@ -47,13 +47,7 @@ class EthTransactionService {
                 return
             }
 
-            guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
-                DispatchQueue.main.async {
-                    completion(SendEthResult.error(SendEthError.retrievingEstimatedGasError))
-                }
-                return
-            }
-            options.gasLimit = estimatedGas
+            options.gasLimit = BigUInt(gasLimit)
             options.gasPrice = gasPrice
             guard let transaction = contract.method(extraData: Data(), options: options) else {
                 DispatchQueue.main.async {
