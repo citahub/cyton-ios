@@ -129,7 +129,7 @@ extension TransactionService {
 
         override func sendTransaction() {
             super.sendTransaction()
-            let amountText = String(format: "%lf", amount)
+            let amountText = String(format: "%.8lf", amount)
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
@@ -166,7 +166,7 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
-            let amountText = String(format: "%lf", amount)
+            let amountText = String(format: "%.8lf", amount)
             ERC20TransactionService().prepareERC20TransactionForSending(
                 destinationAddressString: toAddress,
                 amountString: amountText,
@@ -202,7 +202,7 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
-            let amountText = String(format: "%lf", amount)
+            let amountText = String(format: "%.8lf", amount)
             EthTransactionService().prepareETHTransactionForSending(
                 destinationAddressString: toAddress,
                 amountString: amountText,
