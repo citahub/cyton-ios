@@ -60,6 +60,10 @@ class TransactionHistoryService {
 
 extension TransactionHistoryService {
     private class Nervos: TransactionHistoryService {
+        override init(token: TokenModel) {
+            super.init(token: token)
+            getAppChainQuotaPrice()
+        }
         override func reloadData(completion: @escaping (Error?) -> Void) {
             let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
             Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
@@ -177,6 +181,11 @@ extension TransactionHistoryService {
     private class NervosErc20: TransactionHistoryService {
         var loading = false
         private var page = 1
+        
+        override init(token: TokenModel) {
+            super.init(token: token)
+            getAppChainQuotaPrice()
+        }
 
         override func reloadData(completion: @escaping (Error?) -> Void) {
             guard loading == false else { return }
