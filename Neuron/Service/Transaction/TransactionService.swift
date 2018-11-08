@@ -161,7 +161,7 @@ extension TransactionService {
             self.gasLimit = 100000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
             self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
-            self.changeGasLimitEnable = true
+            self.changeGasLimitEnable = false
             self.changeGasPriceEnable = true
         }
 
@@ -197,7 +197,7 @@ extension TransactionService {
             self.gasLimit = 21000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
             self.estimatedGasPrice = bigNumber?.words.first ?? 1
-            self.changeGasLimitEnable = true
+            self.changeGasLimitEnable = false
             self.changeGasPriceEnable = true
         }
 
