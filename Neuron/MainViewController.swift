@@ -26,30 +26,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     // get native token for nervos  'just temporary'
     func addNativeTokenMsgToRealm() {
-        var tModel = TokenModel()
-        let group = DispatchGroup()
-        group.enter()
-        NervosNativeTokenService.getNervosNativeTokenMsg { (result) in
-            switch result {
-            case .success(let tokenModel):
-                tModel = tokenModel
-            case .error:
-                Toast.showToast(text: "网络错误，请稍后再试.")
-            }
-            group.leave()
-        }
-
         let appModel = WalletRealmTool.getCurrentAppModel()
-        group.notify(queue: .main) {
-            let alreadyContain = appModel.nativeTokenList.contains(where: {$0.chainidName == tModel.chainidName})
-            try? WalletRealmTool.realm.write {
-                WalletRealmTool.realm.add(tModel, update: true)
-                if !alreadyContain {
-                    appModel.nativeTokenList.append(tModel)
-                }
-            }
-        }
-
         let ethModel = TokenModel()
         ethModel.address = ""
         ethModel.chainId = NativeChainId.ethMainnetChainId

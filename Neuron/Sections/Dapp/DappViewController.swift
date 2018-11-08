@@ -10,8 +10,9 @@ import UIKit
 import WebKit
 import JavaScriptCore
 import Toast_Swift
-class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate {
+class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate, ErrorOverlayPresentable {
     private var webView = WKWebView()
+    private var mainUrl: URL?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
@@ -25,6 +26,17 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         didAddSubLayout()
+
+        errorOverlayRefreshBlock = { [weak self] () in
+            self?.removeOverlay()
+            guard let url = self?.mainUrl else { return }
+            self?.webView.load(URLRequest(url: url))
+        }
+
+        let url = URL(string: "https://dapp.cryptape.com")!
+        let request = URLRequest(url: url)
+        webView.load(request)
+        mainUrl = url
     }
 
     func didAddSubLayout() {
@@ -33,8 +45,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         } else {
             webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
         }
-        let url = URL(string: "https://dapp.cryptape.com")!
-        let request = URLRequest(url: url)
 
         var js = ""
         if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
@@ -61,7 +71,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.navigationDelegate = self
         webView.uiDelegate = self
         view.addSubview(webView)
-        webView.load(request)
     }
 
     //scrollView代理
@@ -80,6 +89,17 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
 
         decisionHandler(.allow)
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        let error = error as NSError
+        errorOverlaycontroller.style = .networkFail
+        if error.code == -1009 {
+            errorOverlaycontroller.messageLabel.text = "似乎已断开与互联网的连接"
+        } else {
+            errorOverlaycontroller.messageLabel.text = "页面加载失败"
+        }
+        showOverlay()
     }
 
     //WKScriptMessageHandler

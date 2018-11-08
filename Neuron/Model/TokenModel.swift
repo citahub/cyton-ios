@@ -69,7 +69,6 @@ class TokenModel: Object, Decodable {
         }
     }
 
-
     enum CodingKeys: String, CodingKey {
         case name
         case address
