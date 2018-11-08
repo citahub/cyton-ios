@@ -15,10 +15,14 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     var selectArr: List<TokenModel>?
     var selectAddressArray: [String] = []
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        didGetDataForList()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "ERC20列表"
-        didGetDataForList()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -35,6 +39,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         for tokenItem in selectArr! {
             selectAddressArray.append(tokenItem.address)
         }
+        tableView.reloadData()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

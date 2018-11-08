@@ -50,6 +50,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         }
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenModel.address = tokenModel.address.addHexPrefix()
+        tokenModel.isNativeToken = false
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)
