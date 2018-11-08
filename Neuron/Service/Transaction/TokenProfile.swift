@@ -59,6 +59,10 @@ extension TokenModel {
         currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyType) { (result) in
             switch result {
             case .success(let value):
+                let balance = Double(self.tokenBalance) ?? 0.0
+                let amount = balance * value
+                let possess = String(format: "%@ %.2f", LocalCurrencyService().getLocalCurrencySelect().symbol, amount)
+                profile.possess = possess
                 profile.price = value
             default:
                 break
