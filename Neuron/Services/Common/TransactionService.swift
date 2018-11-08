@@ -10,7 +10,6 @@ import Foundation
 import AppChain
 import Web3swift
 import BigInt
-import struct AppChain.TransactionSendingResult
 
 typealias TxHash = String
 
@@ -110,10 +109,15 @@ class TransactionService {
         }
     }
 }
+
 extension TransactionService {
     class Ethereum: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21000
+            /*
+            GasCalculator.getGasPrice { price in
+                self.gasPrice = price
+            }*/
             do {
                 let bigNumber = try EthereumNetwork().getWeb3().eth.getGasPrice()
                 self.gasPrice = (bigNumber.words.first ?? 1) * 4
