@@ -17,17 +17,17 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     var transactionConfirmViewController: TransactionConfirmViewController?
     var mainUrl: URL?
 
-    lazy var webview: WKWebView = {
-        let webview = WKWebView(
+    lazy var webView: WKWebView = {
+        let webView = WKWebView(
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
             configuration: self.config
         )
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]
-        webview.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
-        webview.navigationDelegate = self
-        webview.uiDelegate = self
-        return webview
+        webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
+        webView.navigationDelegate = self
+        webView.uiDelegate = self
+        return webView
     }()
 
     lazy private var progressView: UIProgressView = {
@@ -51,12 +51,12 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(webview)
+        view.addSubview(webView)
         view.addSubview(progressView)
-        webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
-            webview.load(URLRequest(url: url))
+            webView.load(URLRequest(url: url))
         } else {
             errorOverlaycontroller.messageLabel.text = "无效的链接地址"
             errorOverlaycontroller.style = .blank
@@ -65,7 +65,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         errorOverlayRefreshBlock = { [weak self] () in
             self?.removeOverlay()
             guard let url = self?.mainUrl else { return }
-            self?.webview.load(URLRequest(url: url))
+            self?.webView.load(URLRequest(url: url))
         }
     }
 
@@ -80,8 +80,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "estimatedProgress" {
             progressView.alpha = 1.0
-            progressView.setProgress(Float(webview.estimatedProgress), animated: true)
-            if webview.estimatedProgress >= 1.0 {
+            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+            if webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
                     self.progressView.alpha = 0
                 }, completion: { (_) in
@@ -92,8 +92,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     }
 
     @IBAction func didClickBackButton(_ sender: UIButton) {
-        if webview.canGoBack {
-            webview.goBack()
+        if webView.canGoBack {
+            webView.goBack()
         } else {
             navigationController?.popViewController(animated: true)
         }
@@ -113,7 +113,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         } else {
             script = "onSignError(\(id), \"\(error!)\")"
         }
-        webview.evaluateJavaScript(script, completionHandler: nil)
+        webView.evaluateJavaScript(script, completionHandler: nil)
     }
 }
 
@@ -191,8 +191,8 @@ extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
-        contractController.requestAddress = webview.url!.absoluteString
-        contractController.dappName = webview.title ?? "DApp"
+        contractController.requestAddress = webView.url!.absoluteString
+        contractController.dappName = webView.title ?? "DApp"
         contractController.dappCommonModel = dappCommonModel
         navigationController?.pushViewController(contractController, animated: true)
     }
