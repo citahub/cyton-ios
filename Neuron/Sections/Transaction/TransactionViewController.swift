@@ -67,7 +67,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     @IBAction func transactionAvailableBalance() {
         let amount = service.tokenBalance - service.gasCost
         guard amount > 0 else {
-            Toast.showToast(text: "请确保账户剩余\(token.symbol)高于矿工费用，以便顺利完成转账～")
+            Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
             return
         }
         amountTextField.text = "\(amount)"
@@ -87,7 +87,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     func transactionGasCostChanged(_ transactionService: TransactionService) {
-        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.symbol)
+        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.gasSymbol)
     }
 
     // MARK: - UI
