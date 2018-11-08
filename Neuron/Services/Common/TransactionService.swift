@@ -185,7 +185,7 @@ extension TransactionService {
                     amount: "\(amount)",
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
-                    erc20TokenAddress: token.address,
+                    contractAddress: token.address,
                     password: password
                 )
                 self.completion(result: Result.succee(txhash))

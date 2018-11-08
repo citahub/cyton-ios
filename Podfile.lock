@@ -50,10 +50,10 @@ PODS:
   - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.2.0)
-  - SwiftRLP (1.1):
+  - SwiftRLP (1.2):
     - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
-  - web3swift (2.0.0):
+  - web3swift (2.0.1):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - EthereumABI (~> 1.1.1)
@@ -78,7 +78,7 @@ DEPENDENCIES:
   - SDWebImage
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
-  - web3swift (~> 2.0)
+  - web3swift (~> 2.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -149,10 +149,10 @@ SPEC CHECKSUMS:
   SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
-  SwiftRLP: 5512899925f1a9e1c78c902ed3bf857880e814a0
+  SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
-  web3swift: d2abc44359f487ab606b412650f40efde27ff2ed
+  web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: 568526b0f96fd39150229c449b93af3ef4ed4f69
+PODFILE CHECKSUM: 99f6c6788044389220317c30b15309a4efb868ec
 
 COCOAPODS: 1.5.3

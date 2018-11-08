@@ -28,7 +28,7 @@ class EthereumTxSender {
         data: Data,
         password: String
     ) throws -> TxHash {
-        guard let destinationEthAddress = EthereumAddress(to) else {
+        guard let toAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
         }
 
@@ -36,19 +36,17 @@ class EthereumTxSender {
             throw SendTransactionError.invalidAmountFormat
         }
 
-        guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
+        guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2) else {
             throw SendTransactionError.contractLoadingError
         }
 
-        var options = TransactionOptions()
-        options.gasLimit = .limited(BigUInt(gasLimit))
-        options.gasPrice = .manual(gasPrice)
-        options.from = EthereumAddress(from)
-        options.value = value
-
-        guard let transaction = contract.method(transactionOptions: options) else {
+        guard let transaction = contract.write("fallback") else {
             throw SendTransactionError.createTransactionIssue
         }
+        transaction.transactionOptions.gasLimit = .manual(BigUInt(gasLimit))
+        transaction.transactionOptions.gasPrice = .manual(gasPrice)
+        transaction.transactionOptions.from = EthereumAddress(from)
+        transaction.transaction.value = value
 
         let result = try transaction.sendPromise(password: password).wait()
         return result.hash
@@ -59,7 +57,7 @@ class EthereumTxSender {
         amount: String,
         gasLimit: UInt = 21000,
         gasPrice: BigUInt,
-        erc20TokenAddress: String,
+        contractAddress: String,
         password: String
     ) throws -> TxHash {
         guard let destinationEthAddress = EthereumAddress(to) else {
@@ -70,7 +68,7 @@ class EthereumTxSender {
             throw SendTransactionError.invalidAmountFormat
         }
 
-        guard let tokenAddress = EthereumAddress(erc20TokenAddress), let fromAddress = EthereumAddress(from) else {
+        guard let tokenAddress = EthereumAddress(contractAddress), let fromAddress = EthereumAddress(from) else {
             throw SendTransactionError.createTransactionIssue
         }
 
