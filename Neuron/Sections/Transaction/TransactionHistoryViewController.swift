@@ -61,8 +61,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 //        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
         controller.requestUrlStr = url.absoluteString
         let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
-        controller.webview.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        controller.webview.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
+        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
             let currency = LocalCurrencyService().getLocalCurrencySelect()
             let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
