@@ -11,7 +11,7 @@ import RealmSwift
 
 class GuideService {
     static let shared = GuideService()
-    var window: UIWindow?
+    var controller: UIViewController?
     private var notificationToken: NotificationToken?
 
     private init() {
@@ -40,20 +40,14 @@ class GuideService {
     }
 
     private func showGuide() {
-        guard window == nil else { return }
-        let controller: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = BaseNavigationController(rootViewController: controller)
-        window?.windowLevel = .alert
-        window?.makeKeyAndVisible()
+        guard controller == nil else { return }
+        let guideController: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
+        controller = BaseNavigationController(rootViewController: guideController)
+        UIApplication.shared.keyWindow?.rootViewController?.present(controller!, animated: true, completion: nil)
     }
 
     private func hideGuide() {
-        guard let window = window else { return }
-        UIView.animate(withDuration: 0.4, animations: {
-            window.transform = CGAffineTransform.init(translationX: 0, y: window.bounds.size.height)
-        }, completion: { (_) in
-            self.window = nil
-        })
+        controller?.dismiss(animated: true, completion: nil)
+        controller = nil
     }
 }
