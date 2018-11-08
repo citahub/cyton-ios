@@ -44,15 +44,13 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        let result = tokenArray.filter { (token) -> Bool in
-            return token.address == tokenModel.address
-        }
-        if result.count > 0 {
+        if tokenArray.contains(where: { $0.address == tokenModel.address }) {
             Toast.showToast(text: "不可重复添加")
             return
         }
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenModel.address = tokenModel.address.addHexPrefix()
+        tokenModel.isNativeToken = false
         try? WalletRealmTool.realm.write {
             WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)

@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum TransactionType: String {
+    case ETH
+    case ERC20
+    case AppChain
+    case AppChainERC20
+}
+
 class TransactionModel: NSObject, Decodable {
     var value = ""
     var from = ""
@@ -20,7 +27,7 @@ class TransactionModel: NSObject, Decodable {
     var gasPrice = ""
     var blockNumber = ""
     var symbol = ""
-    var transactionType = "ETH" //default "ETH" include ERC20 transaction,  another one is "Nervos"
+    var transactionType = TransactionType.ETH.rawValue //default "ETH" include ERC20 transaction,  another one is "Nervos"
     var totleGas = ""
 
     var chainId = ""

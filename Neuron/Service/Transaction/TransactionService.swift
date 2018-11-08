@@ -129,7 +129,7 @@ extension TransactionService {
 
         override func sendTransaction() {
             super.sendTransaction()
-            let amountText = String(format: "%lf", amount)
+            let amountText = String(format: "%.8lf", amount)
             NervosTransactionService().prepareNervosTransactionForSending(
                 address: toAddress,
                 quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
@@ -161,14 +161,15 @@ extension TransactionService {
             self.gasLimit = 100000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
             self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
-            self.changeGasLimitEnable = true
+            self.changeGasLimitEnable = false
             self.changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
+            let amountText = String(format: "%.8lf", amount)
             ERC20TransactionService().prepareERC20TransactionForSending(
                 destinationAddressString: toAddress,
-                amountString: "\(amount)",
+                amountString: amountText,
                 gasLimit: gasLimit,
                 gasPrice: BigUInt(gasPrice),
                 erc20TokenAddress: token.address) { (result) in
@@ -196,14 +197,15 @@ extension TransactionService {
             self.gasLimit = 21000
             let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
             self.estimatedGasPrice = bigNumber?.words.first ?? 1
-            self.changeGasLimitEnable = true
+            self.changeGasLimitEnable = false
             self.changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
+            let amountText = String(format: "%.8lf", amount)
             EthTransactionService().prepareETHTransactionForSending(
                 destinationAddressString: toAddress,
-                amountString: "\(amount)",
+                amountString: amountText,
                 gasLimit: gasLimit,
                 gasPrice: BigUInt(gasPrice),
                 data: extraData) { (result) in
