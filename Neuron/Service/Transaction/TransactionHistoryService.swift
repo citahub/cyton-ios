@@ -16,7 +16,7 @@ class TransactionHistoryService {
     private let ethereumSymbol = " ETH"
     var transactions = [TransactionModel]()
     let token: TokenModel
-    let quotaPrice: Double
+    var quotaPrice: Double = pow(10, 9)
 
     var walletAddress: String {
         return WalletRealmTool.getCurrentAppModel().currentWallet!.address
@@ -24,14 +24,6 @@ class TransactionHistoryService {
 
     fileprivate init(token: TokenModel) {
         self.token = token
-        let appChain = NervosNetwork.getNervos(with: self.token.chainHosts)
-        let result = Utils.getQuotaPrice(appChain: appChain)
-        switch result {
-        case .success(let quotaPrice):
-            self.quotaPrice = Double(quotaPrice)
-        case .failure(_):
-            self.quotaPrice = pow(10, 9)
-        }
     }
 
     static func service(with token: TokenModel) -> TransactionHistoryService {
@@ -53,10 +45,25 @@ class TransactionHistoryService {
 
     func loadMoreDate(completion: @escaping ([Int], Error?) -> Void) {
     }
+
+    func getAppChainQuotaPrice() {
+        let appChain = NervosNetwork.getNervos(with: self.token.chainHosts)
+        let result = Utils.getQuotaPrice(appChain: appChain)
+        switch result {
+        case .success(let quotaPrice):
+            self.quotaPrice = Double(quotaPrice)
+        case .failure(_):
+            self.quotaPrice = pow(10, 9)
+        }
+    }
 }
 
 extension TransactionHistoryService {
     private class Nervos: TransactionHistoryService {
+        override init(token: TokenModel) {
+            super.init(token: token)
+            getAppChainQuotaPrice()
+        }
         override func reloadData(completion: @escaping (Error?) -> Void) {
             let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
             Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
@@ -174,6 +181,11 @@ extension TransactionHistoryService {
     private class NervosErc20: TransactionHistoryService {
         var loading = false
         private var page = 1
+        
+        override init(token: TokenModel) {
+            super.init(token: token)
+            getAppChainQuotaPrice()
+        }
 
         override func reloadData(completion: @escaping (Error?) -> Void) {
             guard loading == false else { return }
@@ -207,7 +219,7 @@ extension TransactionHistoryService {
                     var resultArr: [TransactionModel] = []
                     var insertions = [Int]()
                     for transaction in response.result.transfers {
-                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18))"
+                        transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18) * self.quotaPrice)"
                         transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
                         transaction.transactionType = TransactionType.AppChainERC20.rawValue
                         transaction.symbol = self.token.symbol
