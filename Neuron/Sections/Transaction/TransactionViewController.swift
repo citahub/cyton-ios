@@ -127,6 +127,10 @@ extension TransactionViewController {
             return false
         }
         if service.amount > service.tokenBalance - service.gasCost {
+            if service.tokenBalance == 0.0 {
+                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                return false
+            }
             let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
                 self.transactionAvailableBalance()
