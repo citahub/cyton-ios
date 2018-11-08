@@ -58,7 +58,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @objc func clickTokenProfile() {
         guard let url = tokenProfile?.detailUrl else { return }
         let controller: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
-//        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
         controller.requestUrlStr = url.absoluteString
         let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
         controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
