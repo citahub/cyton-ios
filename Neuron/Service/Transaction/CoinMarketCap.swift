@@ -84,10 +84,10 @@ class CoinMarketCap {
 
     private func requestTokenList(complection: @escaping () -> Void) {
         Alamofire.request(URL(string: "https://api.coinmarketcap.com/v2/listings/")!).response(queue: DispatchQueue.global()) { (response) in
-            guard let data = response.data else { complection(); return }
-            let response = try? JSONDecoder().decode(CoinMarketCapToken.Response.self, from: data)
-            guard let tokens = response?.data else { complection(); return }
             DispatchQueue.main.async {
+                guard let data = response.data else { complection(); return }
+                let response = try? JSONDecoder().decode(CoinMarketCapToken.Response.self, from: data)
+                guard let tokens = response?.data else { complection(); return }
                 try? self.realm.write {
                     self.realm.add(tokens, update: true)
                 }
