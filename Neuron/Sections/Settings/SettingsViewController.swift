@@ -22,7 +22,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if !AuthenticationService.shared.isValid {
-            rowIdentifiers.remove(at: 1)
+            rowIdentifiers.remove(at: 2)
         }
     }
 

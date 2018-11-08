@@ -56,6 +56,11 @@ class TransactionService {
     var extraData = Data()
     var password: String = ""  // TODO: Inject web3 instance instead of passing password.
     var isUseQRCode = false    // TODO: Fix spelling.
+    var estimatedGasPrice: UInt = 1 {
+        didSet {
+            gasPrice = estimatedGasPrice
+        }
+    }
 
     init(token: TokenModel) {
         self.token = token

@@ -52,7 +52,7 @@ class SearchAppController: UITableViewController {
             UserDefaults.standard.set(searchHistorys, forKey: "searchHistory")
             tableView.reloadData()
         }
-        let browserViewController = self.storyboard!.instantiateViewController(withIdentifier: "browserViewController") as! BrowserViewController
+        let browserViewController: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
         browserViewController.requestUrlStr = urlString
         self.navigationController?.pushViewController(browserViewController, animated: true)
     }

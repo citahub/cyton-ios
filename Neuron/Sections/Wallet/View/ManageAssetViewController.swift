@@ -21,6 +21,13 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         didGetDataForList()
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AddAssetController" {
+            let controller = segue.destination as! AddAssetController
+            controller.tokenArray = dataArray
+        }
+    }
+
     func didGetDataForList() {
         selectAddressArray.removeAll()
         dataArray = viewModel.getAssetListFromJSON()

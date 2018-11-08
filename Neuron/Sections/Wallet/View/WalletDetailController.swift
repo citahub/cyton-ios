@@ -33,7 +33,7 @@ class WalletDetailController: UITableViewController {
                 try WalletManager.default.deleteWallet(wallet: wallet, password: text)
                 try WalletRealmTool.realm.write {
                     if self.appModel.wallets.count == 1 {
-                        WalletRealmTool.realm.deleteAll()
+                        WalletRealmTool.realm.delete(self.walletModel)
                         NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
                     } else {
                         self.appModel.currentWallet = self.appModel.wallets.filter({ (model) -> Bool in
@@ -44,6 +44,7 @@ class WalletDetailController: UITableViewController {
                 }
                 Toast.hideHUD()
                 Toast.showToast(text: "删除成功")
+                controller.dismiss()
                 self.navigationController?.popToRootViewController(animated: true)
             } catch let error {
                 Toast.hideHUD()
@@ -62,6 +63,7 @@ class WalletDetailController: UITableViewController {
                 controller.dismiss()
                 let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
                 exportController.keystoreString = keystore
+                controller.dismiss()
                 self.navigationController?.pushViewController(exportController, animated: true)
             } catch let error {
                 Toast.showToast(text: error.localizedDescription)

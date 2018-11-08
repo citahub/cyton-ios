@@ -15,8 +15,9 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var collectionButton: UIButton!
     var requestUrlStr = ""
     var transactionConfirmViewController: TransactionConfirmViewController?
+    var mainUrl: URL?
 
-    lazy private var webview: WKWebView = {
+    lazy var webview: WKWebView = {
         let webview = WKWebView(
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
             configuration: self.config
@@ -53,13 +54,18 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         view.addSubview(webview)
         view.addSubview(progressView)
         webview.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
-        let url = URL(string: getRequestStr(requestStr: requestUrlStr))
-        let request: URLRequest
-        if let url = url {
-            request = URLRequest(url: url)
-            webview.load(request)
+        mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
+        if let url = mainUrl {
+            webview.load(URLRequest(url: url))
         } else {
-            showNetworkFailOverlay()
+            errorOverlaycontroller.messageLabel.text = "无效的链接地址"
+            errorOverlaycontroller.style = .blank
+            showOverlay()
+        }
+        errorOverlayRefreshBlock = { [weak self] () in
+            self?.removeOverlay()
+            guard let url = self?.mainUrl else { return }
+            self?.webview.load(URLRequest(url: url))
         }
     }
 
@@ -194,6 +200,7 @@ extension BrowserViewController {
     private func pushSignMessage(dappCommonModel: DAppCommonModel) {
         let controller: MessageSignController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
+        controller.delegate = self
         controller.dappCommonModel = dappCommonModel
         present(controller, animated: false, completion: nil)
     }
@@ -207,18 +214,31 @@ extension BrowserViewController: WKNavigationDelegate {
         } else {
             closeButton.isHidden = true
         }
-        let js = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
-        webView.evaluateJavaScript(js) { (manifest, _) in
+        let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
+        webView.evaluateJavaScript(relJs) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
-//            self.collectionButton.isHidden = false
+            DAppAction().dealWithManifestJson(with: link as! String)
+        }
+        webView.evaluateJavaScript(refJs) { (manifest, _) in
+            guard let link = manifest else {
+                return
+            }
             DAppAction().dealWithManifestJson(with: link as! String)
         }
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        showNetworkFailOverlay()
+        let error = error as NSError
+        errorOverlaycontroller.style = .networkFail
+        if error.code == -1009 {
+            errorOverlaycontroller.messageLabel.text = "似乎已断开与互联网的连接"
+        } else {
+            errorOverlaycontroller.messageLabel.text = "页面加载失败"
+        }
+        showOverlay()
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

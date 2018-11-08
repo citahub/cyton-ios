@@ -25,11 +25,10 @@ struct StatusBar {
     static let navigationBarHeight: CGFloat = 44.0
 }
 
-//isiPhoneX
-public func isiphoneX() -> Bool {
-    if ScreenSize.height == 812 { // TODO FIXME: this won't work
-        return true
-    } else {
+//is bangs screen
+func isBangsScreen() -> Bool {
+    guard #available(iOS 11.0, *) else {
         return false
     }
+    return UIApplication.shared.windows[0].safeAreaInsets.bottom > 0.0
 }
