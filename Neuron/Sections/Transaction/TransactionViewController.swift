@@ -50,8 +50,12 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
         let amountText = amountTextField.text ?? ""
+        let amountValue = Double(amountText.hasPrefix(".") ? "0" + amountText : amountText) ?? 0.0
+        let decimalNumber = NSDecimalNumber(value: amountValue)
+        let roundingBehavior = NSDecimalNumberHandler(roundingMode: .down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+
         service.toAddress = addressTextField.text ?? ""
-        service.amount = Double(amountText.hasPrefix(".") ? "0" + amountText : amountText) ?? 0.0
+        service.amount = decimalNumber.rounding(accordingToBehavior: roundingBehavior).doubleValue
         if isEffectiveTransferInfo {
             performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
         }
