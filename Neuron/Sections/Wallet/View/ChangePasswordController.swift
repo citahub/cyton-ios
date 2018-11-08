@@ -49,11 +49,14 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
             Toast.showToast(text: reason)
             return
         }
+        if oldPasswordTextField.text == newPasswordTextField.text {
+            Toast.showToast(text: "您输入的密码和原密码一致，请重新输入")
+            return
+        }
         if newPasswordTextField.text! != reNewPasswordTextField.text! {
             Toast.showToast(text: "两次新密码输入不一致")
             return
         }
-
         Toast.showHUD(text: "修改密码中...")
         let oldPassword = oldPasswordTextField.text!
         let newPassword = newPasswordTextField.text!

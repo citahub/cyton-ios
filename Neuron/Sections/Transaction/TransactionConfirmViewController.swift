@@ -159,7 +159,7 @@ class TransactionConfirmInfoViewController: UIViewController {
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = service.fromAddress
             toAddressLabel.text = service.toAddress
-            gasCostLabel.text = "\(service.gasCost)" + "\(service.token.symbol)"
+            gasCostLabel.text = "\(service.gasCost)" + "\(service.token.gasSymbol)"
         }
     }
 
@@ -181,8 +181,8 @@ class TransactionConfirmSendViewController: UIViewController {
 
     @IBAction func confirm(_ sender: Any) {
         let password = passwordTextField.text ?? ""
-        if password.lengthOfBytes(using: .utf8) < 8 {
-            Toast.showToast(text: "密码不正确")
+        if case .invalid(let reason) = PasswordValidator.validate(password: password) {
+            Toast.showToast(text: reason)
             return
         }
         delegate?.confirmWalletPassword(password: password)

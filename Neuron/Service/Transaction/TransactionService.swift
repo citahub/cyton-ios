@@ -166,9 +166,10 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
+            let amountText = String(format: "%lf", amount)
             ERC20TransactionService().prepareERC20TransactionForSending(
                 destinationAddressString: toAddress,
-                amountString: "\(amount)",
+                amountString: amountText,
                 gasLimit: gasLimit,
                 gasPrice: BigUInt(gasPrice),
                 erc20TokenAddress: token.address) { (result) in
@@ -201,9 +202,10 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
+            let amountText = String(format: "%lf", amount)
             EthTransactionService().prepareETHTransactionForSending(
                 destinationAddressString: toAddress,
-                amountString: "\(amount)",
+                amountString: amountText,
                 gasLimit: gasLimit,
                 gasPrice: BigUInt(gasPrice),
                 data: extraData) { (result) in

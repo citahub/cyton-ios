@@ -18,6 +18,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenNameLabel: UILabel!
     @IBOutlet weak var tokenOverviewLabel: UILabel!
     @IBOutlet weak var tokenAmountLabel: UILabel!
+    @IBOutlet var warningView: UIView!
 
     var service: TransactionHistoryService?
     var tokenProfile: TokenProfile?
@@ -42,6 +43,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         setupTokenProfile(nil)
 
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
+        if tokenModel.symbol == "MBA" ||
+            tokenModel.symbol == "NATT" {
+            warningView.isHidden = false
+            tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+        } else {
+            warningView.isHidden = true
+            tableView.contentInset = UIEdgeInsets.zero
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -58,11 +67,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @objc func clickTokenProfile() {
         guard let url = tokenProfile?.detailUrl else { return }
         let controller: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
-//        let controller: CommonWebViewController = UIStoryboard(name: .settings).instantiateViewController()
         controller.requestUrlStr = url.absoluteString
         let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
-        controller.webview.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        controller.webview.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
+        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+        controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
             let currency = LocalCurrencyService().getLocalCurrencySelect()
             let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
