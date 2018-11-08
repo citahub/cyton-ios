@@ -44,10 +44,8 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        let result = tokenArray.filter { (token) -> Bool in
-            return token.address == tokenModel.address
-        }
-        if result.count > 0 {
+        let result = tokenArray.contains {$0.address == tokenModel.address}
+        if result {
             Toast.showToast(text: "不可重复添加")
             return
         }
