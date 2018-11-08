@@ -49,13 +49,14 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
 
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
-        let amountText = amountTextField.text ?? ""
+        var amountText = amountTextField.text ?? ""
         let amountValue = Double(amountText.hasPrefix(".") ? "0" + amountText : amountText) ?? 0.0
         let decimalNumber = NSDecimalNumber(value: amountValue)
         let roundingBehavior = NSDecimalNumberHandler(roundingMode: .down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
+        amountText = decimalNumber.rounding(accordingToBehavior: roundingBehavior).stringValue
 
         service.toAddress = addressTextField.text ?? ""
-        service.amount = decimalNumber.rounding(accordingToBehavior: roundingBehavior).doubleValue
+        service.amount = Double(amountText) ?? 0.0
         if isEffectiveTransferInfo {
             performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
         }
@@ -91,7 +92,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     }
 
     func transactionGasCostChanged(_ transactionService: TransactionService) {
-        gasCostLabel.text = String(format: "%.8lf%@", service.gasCost, token.gasSymbol)
+        gasCostLabel.text = "\(service.gasCost.clean)\(token.gasSymbol)"
     }
 
     // MARK: - UI
@@ -104,7 +105,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         if service.tokenBalance == Double(Int(service.tokenBalance)) {
             tokenBalanceButton.setTitle(String(format: "%.0lf%@", service.tokenBalance, token.symbol), for: .normal)
         } else {
-            tokenBalanceButton.setTitle(String(format: "%.8lf%@", service.tokenBalance, token.symbol), for: .normal)
+            tokenBalanceButton.setTitle("\(service.tokenBalance.clean)\(token.symbol)", for: .normal)
         }
         gasCostLabel.text = " "
     }
