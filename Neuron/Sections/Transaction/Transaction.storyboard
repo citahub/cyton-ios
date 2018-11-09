@@ -146,7 +146,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="nwG-0e-WLd"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.14117647058823529" green="0.16862745098039217" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -155,7 +155,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="Kta-Ue-7GZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
                                 <color key="textColor" red="0.14117647058823529" green="0.16862745098039217" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -762,7 +762,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tKh-tV-Yeh">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="611"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="561"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="aON-I2-toO">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
@@ -988,9 +988,9 @@
                             <constraint firstItem="y2t-DP-6U9" firstAttribute="bottom" secondItem="DQl-uS-hTA" secondAttribute="bottom" id="POQ-gj-XFD"/>
                             <constraint firstItem="DQl-uS-hTA" firstAttribute="leading" secondItem="y2t-DP-6U9" secondAttribute="leading" id="YXh-Xn-qA0"/>
                             <constraint firstItem="tKh-tV-Yeh" firstAttribute="trailing" secondItem="y2t-DP-6U9" secondAttribute="trailing" id="ZLW-a4-839"/>
-                            <constraint firstItem="tKh-tV-Yeh" firstAttribute="top" secondItem="C50-du-EEs" secondAttribute="top" id="id4-sA-a2E"/>
                             <constraint firstItem="DQl-uS-hTA" firstAttribute="top" secondItem="tKh-tV-Yeh" secondAttribute="bottom" constant="1" id="lVA-QN-U3I"/>
                             <constraint firstItem="XPZ-mD-qY7" firstAttribute="top" secondItem="tKh-tV-Yeh" secondAttribute="bottom" constant="1" id="nEm-Sx-dsm"/>
+                            <constraint firstItem="tKh-tV-Yeh" firstAttribute="top" secondItem="T2y-fL-Z7k" secondAttribute="bottom" id="qV6-tL-2mm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="y2t-DP-6U9"/>
                     </view>
@@ -1001,12 +1001,13 @@
                         <outlet property="tokenNameLabel" destination="0Vn-x7-Dib" id="5s6-df-87S"/>
                         <outlet property="tokenOverviewLabel" destination="zkM-fD-nwj" id="aBQ-TC-tNx"/>
                         <outlet property="tokenProfleView" destination="aON-I2-toO" id="KdQ-E9-5It"/>
+                        <outlet property="warningHeight" destination="0dX-Pg-O8d" id="raX-b5-Whr"/>
                         <outlet property="warningView" destination="T2y-fL-Z7k" id="A8D-hr-hk7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSY-pv-yXa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226" y="211"/>
+            <point key="canvasLocation" x="-226.40000000000001" y="210.94452773613196"/>
         </scene>
         <!--Payment View Controller-->
         <scene sceneID="uqb-KF-BxL">
