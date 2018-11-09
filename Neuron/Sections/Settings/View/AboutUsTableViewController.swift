@@ -51,15 +51,15 @@ class AboutUsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let urlString: String
+        var urlString: String?
         if indexPath.section == 1 {
             urlString = projectGithubUrls[indexPath.row]
         } else if indexPath.section == 2 {
             urlString = secondSectionUrls[indexPath.row]
-        } else {
-            urlString = ""
         }
-        let safariController = SFSafariViewController(url: URL(string: urlString)!)
-        self.present(safariController, animated: true, completion: nil)
+        if let urlString = urlString {
+            let safariController = SFSafariViewController(url: URL(string: urlString)!)
+            self.present(safariController, animated: true, completion: nil)
+        }
     }
 }
