@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import web3swift
+import Web3swift
+import EthereumAddress
 import IGIdenticon
 
 protocol ImportWalletViewModelDelegate: class {

@@ -13,6 +13,11 @@ enum EthServiceResult<T> {
     case error(Error)
 }
 
+enum AppChainServiceResult<T> {
+    case success(T)
+    case error(Error)
+}
+
 enum CustomTokenError: Error {
     case wrongBalanceError
     case badNameError
@@ -20,17 +25,12 @@ enum CustomTokenError: Error {
     case undefinedError
 }
 
-enum SendEthResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum SignMessageResult<T> {
     case success(T)
     case error(Error)
 }
 
-enum SendEthError: Error {
+enum SendTransactionError: Error {
     case invalidDestinationAddress
     case invalidAmountFormat
     case contractLoadingError
@@ -40,35 +40,10 @@ enum SendEthError: Error {
     case noAvailableKeys
     case createTransactionIssue
     case invalidPassword
+    case invalidAppChainNode
+    case signTXFailed
 }
 
 enum TransactionError: Error {
     case requestfailed
-}
-
-// Nervos Error
-enum NervosServiceResult<T> {
-    case success(T)
-    case error(Error)
-}
-
-enum SendNervosError: Error {
-    case invalidDestinationAddress
-    case invalidAmountFormat
-    case contractLoadingError
-    case retrievingGasPriceError
-    case retrievingEstimatedGasError
-    case emptyResult
-    case noAvailableKeys
-    case createTransactionIssue
-    case emptyNonce
-}
-
-enum SendNervosResult<T> {
-    case success(T)
-    case error(Error)
-}
-
-enum NervosSignError: Error {
-    case signTXFailed
 }

@@ -8,12 +8,13 @@
 
 import UIKit
 
-class LocalCurrencyService {
+final class LocalCurrencyService {
     private let localCurrencyKey = "localCurrency"
+    static let shared = LocalCurrencyService()
 
-    func saveLocalCurrencyFirstLaunch() {
-        let shortSelect = UserDefaults.standard.string(forKey: localCurrencyKey)
-        if shortSelect == nil {
+    private init() {
+        let selected = UserDefaults.standard.string(forKey: localCurrencyKey)
+        if selected == nil {
             UserDefaults.standard.set("CNY", forKey: localCurrencyKey)
         }
     }

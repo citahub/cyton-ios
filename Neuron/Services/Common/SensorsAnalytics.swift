@@ -22,6 +22,9 @@ class SensorsAnalytics {
         #else
         sensors = SensorsAnalyticsSDK.sharedInstance(withServerURL: "https://banana.cryptape.com:8106/sa?project=production", andDebugMode: .off)
         #endif
+        sensors.enableLog(false)
+        sensors.enableTrackGPSLocation(false)
+        sensors.enableTrackScreenOrientation(false)
         sensors.login(getUserId())
         sensors.trackAppCrash()
         sensors.registerSuperProperties(["platformType": "iOS"])

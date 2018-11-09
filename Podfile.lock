@@ -11,6 +11,12 @@ PODS:
     - SipHash (~> 1.2)
   - CryptoSwift (0.13.0)
   - EFQRCode (4.3.0)
+  - EthereumABI (1.1.1):
+    - BigInt (~> 3.1)
+    - CryptoSwift (~> 0.13)
+    - EthereumAddress (~> 1.0.0)
+  - EthereumAddress (1.0.0):
+    - CryptoSwift (~> 0.13)
   - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
   - LYEmptyView (1.2.2)
@@ -44,14 +50,15 @@ PODS:
   - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.2.0)
-  - SwiftRLP (1.1):
+  - SwiftRLP (1.2):
     - BigInt (~> 3.1)
   - Toast-Swift (4.0.0)
-  - web3swift (1.5.1):
+  - web3swift (2.0.1):
     - BigInt (~> 3.1)
-    - CryptoSwift (~> 0.11)
+    - CryptoSwift (~> 0.13)
+    - EthereumABI (~> 1.1.1)
+    - EthereumAddress (~> 1.0.0)
     - PromiseKit (~> 6.3)
-    - Result (~> 4.0)
     - scrypt (~> 2.0)
     - secp256k1_swift (~> 1.0.3)
     - SwiftRLP (~> 1.1)
@@ -71,7 +78,7 @@ DEPENDENCIES:
   - SDWebImage
   - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
-  - web3swift (from `https://github.com/matterinc/web3swift`, tag `1.5.1`)
+  - web3swift (~> 2.0.1)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -79,6 +86,8 @@ SPEC REPOS:
     - BigInt
     - CryptoSwift
     - EFQRCode
+    - EthereumABI
+    - EthereumAddress
     - IGIdenticon
     - IQKeyboardManagerSwift
     - LYEmptyView
@@ -97,6 +106,7 @@ SPEC REPOS:
     - SwiftProtobuf
     - SwiftRLP
     - Toast-Swift
+    - web3swift
 
 EXTERNAL SOURCES:
   AppChainSwift:
@@ -105,9 +115,6 @@ EXTERNAL SOURCES:
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
-  web3swift:
-    :git: https://github.com/matterinc/web3swift
-    :tag: 1.5.1
 
 CHECKOUT OPTIONS:
   AppChainSwift:
@@ -116,9 +123,6 @@ CHECKOUT OPTIONS:
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
-  web3swift:
-    :git: https://github.com/matterinc/web3swift
-    :tag: 1.5.1
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -126,6 +130,8 @@ SPEC CHECKSUMS:
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
+  EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
+  EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   LYEmptyView: 12c9db1f3946fa3c812674467ad95b7ae7c93614
@@ -143,10 +149,10 @@ SPEC CHECKSUMS:
   SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
-  SwiftRLP: 5512899925f1a9e1c78c902ed3bf857880e814a0
+  SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
-  web3swift: d80d1b9a3feca16e614acec9eea47ec26310d37d
+  web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: f62cc4fd2a4f6e2f176cc1e30e932d9348f10393
+PODFILE CHECKSUM: 99f6c6788044389220317c30b15309a4efb868ec
 
 COCOAPODS: 1.5.3

@@ -7,7 +7,8 @@
 //
 
 import UIKit
-import web3swift
+import Web3swift
+import EthereumAddress
 
 class TransactionViewController: UITableViewController, TransactionServiceDelegate {
     // Wallet
@@ -25,6 +26,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         service = TransactionService.service(with: token)
+        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.delegate = self
         Toast.showHUD()
         DispatchQueue.global().async {
@@ -49,12 +51,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
 
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
-        var amountText = amountTextField.text ?? ""
-        let amountValue = Double(amountText.hasPrefix(".") ? "0" + amountText : amountText) ?? 0.0
-        let decimalNumber = NSDecimalNumber(value: amountValue)
-        let roundingBehavior = NSDecimalNumberHandler(roundingMode: .down, scale: 8, raiseOnExactness: false, raiseOnOverflow: false, raiseOnUnderflow: false, raiseOnDivideByZero: false)
-        amountText = decimalNumber.rounding(accordingToBehavior: roundingBehavior).stringValue
-
+        let amountText = amountTextField.text ?? ""
         service.toAddress = addressTextField.text ?? ""
         service.amount = Double(amountText) ?? 0.0
         if isEffectiveTransferInfo {
@@ -80,10 +77,9 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
 
     // MARK: - TransactionServiceDelegate
     func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
-        Toast.hideHUD()
         switch result {
         case .error(let error):
-            Toast.showToast(text: error.rawValue)
+            Toast.showToast(text: error.localizedDescription)
         default:
             Toast.showToast(text: "转账成功,请稍后刷新查看")
             confirmViewController?.dismiss()

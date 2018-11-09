@@ -7,6 +7,6 @@
 //
 
 import Foundation
-import web3swift
+import Web3swift
 
-typealias Web3Utils = web3swift.Web3Utils
+typealias Web3Utils = Web3swift.Web3Utils
