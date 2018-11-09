@@ -19,7 +19,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenOverviewLabel: UILabel!
     @IBOutlet weak var tokenAmountLabel: UILabel!
     @IBOutlet var warningView: UIView!
-
+    @IBOutlet weak var warningHeight: NSLayoutConstraint!
+    
     var service: TransactionHistoryService?
     var tokenProfile: TokenProfile?
     var tokenType: TokenType = .erc20Token
@@ -47,10 +48,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         if tokenModel.symbol == "MBA" ||
             tokenModel.symbol == "NATT" {
             warningView.isHidden = false
-            tableView.contentInset = UIEdgeInsets(top: 30, left: 0, bottom: 0, right: 0)
+            warningHeight.constant = 30.0
         } else {
             warningView.isHidden = true
-            tableView.contentInset = UIEdgeInsets.zero
+            warningHeight.constant = 0.0
         }
     }
 
@@ -98,8 +99,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         group.notify(queue: .main) {
             Toast.hideHUD()
             self.setupTokenProfile(profile)
-            self.tableView.reloadData()
             self.tableView.endRefreshing(at: .top)
+            self.tableView.reloadData()
             if self.service?.transactions.count == 0 {
                 self.errorOverlaycontroller.style = .blank
                 self.tableView.addSubview(self.overlay)
