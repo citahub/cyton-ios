@@ -92,7 +92,12 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
         if let service = service {
             service.password = password
             Toast.showHUD()
-            service.sendTransaction()
+            DispatchQueue.global().async {
+                DispatchQueue.main.async {
+                    self.service.sendTransaction()
+                    Toast.hideHUD()
+                }
+            }
         } else {
             delegate?.transactionConfirmWalletPassword(self, password: password)
         }

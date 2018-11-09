@@ -88,8 +88,10 @@ class TransactionService {
     }
 
     func completion(result: Result) {
-        delegate?.transactionCompletion(self, result: result)
-        trackEvent(result)
+        DispatchQueue.main.async {
+            self.delegate?.transactionCompletion(self, result: result)
+            self.trackEvent(result)
+        }
     }
 
     // TODO: move this out of Transaction Service.
@@ -139,7 +141,7 @@ extension TransactionService {
                 let sender = EthereumTxSender(web3: web3, from: fromAddress)
                 let txhash = try sender.sendETH(
                     to: toAddress,
-                    amount: String(amount),
+                    amount: String(format: "%.18lf", amount),
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     data: extraData,
@@ -174,7 +176,7 @@ extension TransactionService {
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,
-                    amount: "\(amount)",
+                    amount: String(format: "%.18lf", amount),
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     contractAddress: token.address,
@@ -210,7 +212,7 @@ extension TransactionService {
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit)),
                     data: extraData,
-                    value: "\(amount)",
+                    value: String(format: "%.18lf", amount),
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
