@@ -8,9 +8,10 @@
 
 import Foundation
 import BigInt
-import web3swift
-import struct BigInt.BigUInt
+import Web3swift
+import EthereumAddress
 
+// TODO: create balanceLoader
 struct EthNativeTokenService {
     /// get balance
     ///
@@ -19,15 +20,15 @@ struct EthNativeTokenService {
     ///   - completion: EthServiceResult<BigUInt>
     static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         let address = EthereumAddress(walletAddress)!
-        let web3Main = Web3Network().getWeb3()
+        let web3Main = EthereumNetwork().getWeb3()
         DispatchQueue.global().async {
-            let balanceResult = web3Main.eth.getBalance(address: address)
-            DispatchQueue.main.async {
-                switch balanceResult {
-                case .success(let balance):
-                    let balanceNumber = self.formatBalanceValue(value: balance)
-                    completion(EthServiceResult.success(balanceNumber))
-                case .failure(let error):
+            do {
+                let balance = try web3Main.eth.getBalance(address: address)
+                DispatchQueue.main.async {
+                    completion(EthServiceResult.success(self.formatBalanceValue(value: balance)))
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(EthServiceResult.error(error))
                 }
             }

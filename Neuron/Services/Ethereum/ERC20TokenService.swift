@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import web3swift
+import Web3swift
+import EthereumAddress
 import struct BigInt.BigUInt
 
 struct ERC20TokenService {
@@ -18,21 +19,19 @@ struct ERC20TokenService {
     ///   - contractAddress: token address
     ///   - completion: balance result
     static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
-        let web3 = Web3Network().getWeb3()
+        let web3 = EthereumNetwork().getWeb3()
         let contractETHAddress = EthereumAddress(contractAddress)!
         let coldWalletAddress = EthereumAddress(walletAddress)
-        let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)
-        let options = Web3Options.defaultOptions()
+        let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)!
 
         DispatchQueue.global().async {
-            guard let result = contract?.method("balanceOf", parameters: [coldWalletAddress as AnyObject], options: options)?.call(options: nil) else {
-                return
-            }
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let erc20Balance):
-                    completion(EthServiceResult.success(erc20Balance["0"] as! BigUInt))
-                case .failure(let error):
+            do {
+                let result = try contract.method("balanceOf", parameters: [coldWalletAddress as AnyObject])!.call(transactionOptions: nil)
+                DispatchQueue.main.async {
+                    completion(EthServiceResult.success(result["0"] as! BigUInt))
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(EthServiceResult.error(error))
                 }
             }

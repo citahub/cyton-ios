@@ -26,7 +26,7 @@ struct StatusBar {
 }
 
 //is bangs screen
-public func isBangsScreen() -> Bool {
+func isBangsScreen() -> Bool {
     guard #available(iOS 11.0, *) else {
         return false
     }

@@ -8,8 +8,9 @@
 
 import Foundation
 import Alamofire
-import struct BigInt.BigUInt
-import web3swift
+import BigInt
+import Web3swift
+import EthereumAddress
 import AppChain
 
 class TransactionHistoryService {
@@ -47,12 +48,12 @@ class TransactionHistoryService {
     }
 
     func getAppChainQuotaPrice() {
-        let appChain = NervosNetwork.getNervos(with: self.token.chainHosts)
+        let appChain = AppChainNetwork.appChain(url: URL(string: token.chainHosts)!)
         let result = Utils.getQuotaPrice(appChain: appChain)
         switch result {
         case .success(let quotaPrice):
             self.quotaPrice = Double(quotaPrice)
-        case .failure(_):
+        case .failure:
             self.quotaPrice = pow(10, 9)
         }
     }
@@ -149,7 +150,7 @@ extension TransactionHistoryService {
                 "page": page,
                 "offset": 20,
                 "sort": "desc",
-                "apikey": "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z"
+                "apikey": ServerApi.etherScanKey
             ]
             loading = true
             Alamofire.request("https://api.etherscan.io/api", method: .get, parameters: parameters).responseData { [weak self](response) in

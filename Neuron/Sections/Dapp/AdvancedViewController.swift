@@ -53,18 +53,21 @@ class AdvancedViewController: UIViewController {
         dataTextView.text = dataString
         Toast.showHUD()
         DispatchQueue.global().async {
-            let web3 = Web3Network().getWeb3()
-            guard let gp = web3.eth.getGasPrice().value else {
-                self.ethereumSuggestLabel.text = "以太坊推荐 8"
-                self.gasPrice = BigUInt(8)
-                return
-            }
-            DispatchQueue.main.async {
-                self.gasPrice = gp
-                let ethereumGasPrice = Web3Utils.formatToEthereumUnits(gp, toUnits: .Gwei, decimals: 4, fallbackToScientific: false) ?? "8"
-                self.ethereumSuggestLabel.text = "以太坊推荐 " + ethereumGasPrice + "Gwei"
-                self.formatValue(gasPrice: self.gasPrice)
-                Toast.hideHUD()
+            do {
+                let web3 = EthereumNetwork().getWeb3()
+                let gasPrice = try web3.eth.getGasPrice()
+                DispatchQueue.main.async {
+                    self.gasPrice = gasPrice
+                    let ethereumGasPrice = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: false) ?? "8"
+                    self.ethereumSuggestLabel.text = "以太坊推荐 " + ethereumGasPrice + "Gwei"
+                    self.formatValue(gasPrice: gasPrice)
+                    Toast.hideHUD()
+                }
+            } catch {
+                DispatchQueue.main.async {
+                    self.ethereumSuggestLabel.text = "以太坊推荐 8"
+                    self.gasPrice = BigUInt(8)
+                }
             }
         }
     }

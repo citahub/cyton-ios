@@ -10,7 +10,8 @@ import UIKit
 import AppChain
 import BigInt
 import struct BigInt.BigUInt
-import web3swift
+import Web3swift
+import EthereumAddress
 
 enum ChainType {
     case appChain
@@ -114,26 +115,27 @@ class ContractController: UITableViewController {
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
         Toast.showHUD()
         DispatchQueue.global().async {
-            let web3 = Web3Network().getWeb3()
+            let web3 = EthereumNetwork().getWeb3()
             if ethGasPirce != nil {
                 self.gasPrice = BigUInt(ethGasPirce!)!
             } else {
-                guard let gp = web3.eth.getGasPrice().value else {
+                do {
+                    let gasPrice = try web3.eth.getGasPrice()
+                    self.gasPrice = gasPrice
+                } catch {
                     self.gasPrice = BigUInt(8)
-                    return
                 }
-                self.gasPrice = gp
             }
 
             if ethGasLimit != nil {
                 self.gasLimit = BigUInt(ethGasLimit!) ?? BigUInt(1000000)
             } else {
-                var options = Web3Options.defaultOptions()
-                options.gasLimit = self.gasLimit
+                var options = TransactionOptions()
+                options.gasLimit = .limited(self.gasLimit)
                 options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
                 options.value = BigUInt(self.dappCommonModel.eth?.value ?? "0")
-                let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))
-                guard let estimatedGas = contract!.method(options: options)?.estimateGas(options: nil).value else {
+                let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
+                guard let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) else {
                     self.gasLimit = BigUInt(1000000)
                     return
                 }
@@ -177,6 +179,7 @@ class ContractController: UITableViewController {
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
         let service = TransactionService.service(with: tokenModel)
+        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.amount = Double(value) ?? 0.0
 
         switch chainType {
@@ -203,15 +206,9 @@ extension ContractController: TransactionServiceDelegate {
     func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
         switch result {
         case .error(let error):
-            if error == .cancel {
-                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.cancelled)
-            } else {
-                delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
-            }
-        case .ethereum(let transaction):
-            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.addHexPrefix(), error: nil)
-        case .appChain(let transaction):
-            delegate?.callBackWebView(id: dappCommonModel.id, value: transaction.hash.toHexString(), error: nil)
+            delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
+        case .succee(let txhash):
+            delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
         }
         confirmViewController?.dismiss()
         navigationController?.popViewController(animated: true)

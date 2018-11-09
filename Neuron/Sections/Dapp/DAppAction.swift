@@ -33,10 +33,10 @@ struct DAppAction {
     }
 
     func getMetaDataForDAppChain(with manifestModel: ManifestModel) throws {
-        guard let chainHosts = manifestModel.chainSet?.values.first else {
+        guard let chainNode = manifestModel.chainSet?.values.first, let url = URL(string: chainNode) else {
             throw Error.emptyChainHosts
         }
-        let appChain = NervosNetwork.getNervos(with: chainHosts)
+        let appChain = AppChainNetwork.appChain(url: url)
         DispatchQueue.global().async {
             let result = appChain.rpc.getMetaData()
             DispatchQueue.main.async {
@@ -50,9 +50,9 @@ struct DAppAction {
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
-                    tokenModel.decimals = NaticeDecimals.nativeTokenDecimals
+                    tokenModel.decimals = NativeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
-                    tokenModel.chainHosts = chainHosts
+                    tokenModel.chainHosts = chainNode
                     self.saveToken(model: tokenModel)
                 case .failure:
                     break

@@ -8,7 +8,8 @@
 
 import Foundation
 import Alamofire
-import web3swift
+import Web3swift
+import EthereumAddress
 
 struct TokenProfile: Decodable {
     let symbol: String
@@ -55,13 +56,13 @@ extension TokenModel {
             complection(profile)
             return
         }
-        let currencyType = LocalCurrencyService().getLocalCurrencySelect().short
+        let currencyType = LocalCurrencyService.shared.getLocalCurrencySelect().short
         currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyType) { (result) in
             switch result {
             case .success(let value):
                 let balance = Double(self.tokenBalance) ?? 0.0
                 let amount = balance * value
-                let possess = String(format: "%@ %.2f", LocalCurrencyService().getLocalCurrencySelect().symbol, amount)
+                let possess = String(format: "%@ %.2f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, amount)
                 profile.possess = possess
                 profile.price = value
             default:
@@ -89,7 +90,7 @@ extension TokenModel {
         }
 
         group.enter()
-        let currency = LocalCurrencyService().getLocalCurrencySelect()
+        let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         CoinMarketCap.shared.tokenQuotes(symbol: symbol, currency: currency.short) { (quotes, _) in
             defer { group.leave() }
             price = quotes?.price
