@@ -89,7 +89,6 @@ struct ETHObject: Decodable {
 }
 
 enum DAppError: Error {
-    case cancelled
     case signTransactionFailed
     case sendTransactionFailed
     case signMessageFailed

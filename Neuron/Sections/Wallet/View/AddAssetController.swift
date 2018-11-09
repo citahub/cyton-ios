@@ -80,6 +80,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         if indexPath.row == 0 {
             cell.rightTextField.text = "以太坊"
         }
+        cell.selectionStyle = .none
 
         switch indexPath.row {
         case 0:
@@ -94,11 +95,15 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             cell.rightTextField.text = tokenModel.symbol
         case 4:
             cell.isEdit = false
-            cell.rightTextField.text = tokenModel.decimals == 0 ?"":String(tokenModel.decimals)
+            cell.rightTextField.text = tokenModel.decimals == 0 ? "" : String(tokenModel.decimals)
         default:
             break
         }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        return nil
     }
 
     //cell的代理 弹出pickerview

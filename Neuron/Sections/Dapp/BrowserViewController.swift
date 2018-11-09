@@ -271,8 +271,15 @@ extension BrowserViewController: WKNavigationDelegate {
 extension BrowserViewController: ContractControllerDelegate, MessageSignControllerDelegate {
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?) {
         evaluateJavaScryptWebView(id: id, value: value, error: error)
+        if let error = error {
+            error != .userCanceled ? Toast.showToast(text: "签名失败") : nil
+        }
     }
+
     func callBackWebView(id: Int, value: String, error: DAppError?) {
         evaluateJavaScryptWebView(id: id, value: value, error: error)
+        if let error = error {
+            error != .userCanceled ? Toast.showToast(text: "支付失败") : nil
+        }
     }
 }
