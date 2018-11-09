@@ -11,50 +11,61 @@ import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
 
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
+        hookSensorsDebugWarning()
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        initTheRealm()
-        self.window?.backgroundColor = UIColor.white
-        let mvc = MainViewController()
-        self.window!.rootViewController! = mvc
-        self.window?.makeKeyAndVisible()
-        UIApplication.shared.statusBarStyle = UIStatusBarStyle.lightContent
-        keyboardSetUp()
-        inializers()
+        skipBackupFiles()
+        RealmHelper.configureRealm()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = UIStoryboard(name: .main).instantiateInitialViewController()
+        window?.makeKeyAndVisible()
+
+        setupKeyboard()
+        localCurrency()
+        initEthereumNetwork()
+        GuideService.shared.register()
+        AuthenticationService.shared.register()
+        SensorsAnalytics.configureSensors()
         return true
     }
-    
-    func keyboardSetUp() {
+
+    private func initEthereumNetwork() {
+        Web3Network().setNetworkFirstLaunch()
+    }
+
+    private func localCurrency() {
+        LocalCurrencyService().saveLocalCurrencyFirstLaunch()
+    }
+
+    private func setupKeyboard() {
         IQKeyboardManager.shared.enable = true
-        //控制点击背景是否收起键盘
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        //控制键盘上的工具条文字颜色是否用户自定义
-        //将右边Done改成完成
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "完成"
-        // 控制是否显示键盘上的工具条
         IQKeyboardManager.shared.enableAutoToolbar = true
-        //最新版的设置键盘的returnKey的关键字 ,可以点击键盘上的next键，自动跳转到下一个输入框，最后一个输入框点击完成，自动收起键盘
         IQKeyboardManager.shared.toolbarManageBehaviour = .byPosition
     }
-    
-    func initTheRealm() {
-        RealmHelper.initEncryptionRealm()
-    }
-    
-    func inializers() {
-        let keystore = ETHKeyStore.shared
-        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true).compactMap { URL(fileURLWithPath: $0) }
-        paths.append(keystore.keysDirectory)
 
-        let initializers: [Initializer] = [
-            SkipBackupFilesInitializer(paths: paths),
-            ]
-        initializers.forEach { $0.perform() }
+    private func skipBackupFiles() {
+        var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).compactMap { URL(fileURLWithPath: $0) }
+        paths.append(WalletManager.default.keystoreDir)
+        SkipBackupFiles(paths: paths).skip()
     }
-    
+
+    private func hookSensorsDebugWarning() {
+        guard let cls = NSClassFromString("SensorsAnalyticsSDK") else { return }
+        let originalSelector = NSSelectorFromString("showDebugModeWarning:withNoMoreButton:")
+        let swizzledSelector = #selector(sensorsShowDebugModeWarning(message:showNoMore:))
+        guard let swizzledMethod = class_getInstanceMethod(self.classForCoder, swizzledSelector) else { return }
+        let swizzledMethodImp = method_getImplementation(swizzledMethod)
+        class_replaceMethod(cls, originalSelector, swizzledMethodImp, method_getTypeEncoding(swizzledMethod))
+    }
+
+    @objc func sensorsShowDebugModeWarning(message: String, showNoMore: Bool) {
+    }
+
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
@@ -76,7 +87,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
-

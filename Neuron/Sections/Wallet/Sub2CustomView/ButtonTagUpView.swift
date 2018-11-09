@@ -8,62 +8,58 @@
 
 import UIKit
 
-
-protocol ButtonTagUpViewDelegate {
-    
-    func didDeleteSelectedButton(backDict:NSMutableDictionary)
-    
+protocol ButtonTagUpViewDelegate: class {
+    func didDeleteSelectedButton(backDict: NSMutableDictionary)
 }
 
 class ButtonTagUpView: UIView {
-    
-    var delegate:ButtonTagUpViewDelegate?
-    
-    var comArr = [NSMutableDictionary](){//包含字典的数组 字典中放的是标题和按钮tag
-        didSet{
+
+    weak var delegate: ButtonTagUpViewDelegate?
+    var comArr = [NSMutableDictionary]() {//包含字典的数组 字典中放的是标题和按钮tag
+        didSet {
             for subView in self.subviews {
                 subView.removeFromSuperview()
             }
             didSetMainViews()
         }
     }
-    
-    var titleArray:Array<String>!{//标题数组
-        didSet{
+    var titleArray: [String]! {//标题数组
+        didSet {
 
         }
     }
-    var buttonArray = Array<AnyObject>()//存储所有按钮的数组
+    var buttonArray = [AnyObject]()//存储所有按钮的数组
     var selectArr = NSMutableArray()//存储所有按钮的数组
 
-    
-    
     //有关按钮的属性
-    private var buttonBackColor:UIColor = ColorFromString(hex: "#ffffff")
-    private var buttonTitleColor:UIColor = ColorFromString(hex: "#333333")
-    
-    private var hmargin:CGFloat = 10//按钮横向之间的距离
-    private var vmargin:CGFloat = 10//按钮垂直之间的距离
-    private var buttonHeight:CGFloat = 30//按钮的高度
-    
+    private var buttonBackColor: UIColor = ColorFromString(hex: "#ffffff")
+    private var buttonTitleColor: UIColor = ColorFromString(hex: "#333333")
+    private var hmargin: CGFloat = 10//按钮横向之间的距离
+    private var vmargin: CGFloat = 10//按钮垂直之间的距离
+    private var buttonHeight: CGFloat = 30//按钮的高度
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = ColorFromString(hex: "#f5f5f5")
-        
-        
+
+        setBackgroundView()
     }
-    
-    func didSetMainViews(){
-        
-        var totalWidth:CGFloat = 0.0//到当前循环为止 所有横向按钮加起来的宽度
-        var row:NSInteger = 0//第几行
+
+    func setBackgroundView() {
+        backgroundColor = .white
+        layer.cornerRadius = 5
+        layer.borderWidth = 1
+        layer.borderColor = ColorFromString(hex: "#E9EBF0").cgColor
+    }
+
+    func didSetMainViews() {
+
+        var totalWidth: CGFloat = 0.0//到当前循环为止 所有横向按钮加起来的宽度
+        var row: NSInteger = 0//第几行
         if comArr.count == 0 {
-            
-        }else{
+
+        } else {
             for i in 0...comArr.count-1 {
-                
                 let dict = comArr[i]
-                
                 let button = UIButton.init(type: .custom)
                 button.layer.cornerRadius = 2.5
                 button.setTitleColor(buttonTitleColor, for: .normal)
@@ -74,13 +70,13 @@ class ButtonTagUpView: UIView {
                 button.addTarget(self, action: #selector(didClickButton(sender:)), for: .touchUpInside)
                 buttonArray.append(button)
                 //计算每个标题文本的宽度
-                let itemWidth = returnTextWidth(text: (dict.value(forKey: "buttonTitle") as? String)! , font:UIFont.systemFont(ofSize: 15) , viewWidth: ScreenW - 30).width+20
+                let itemWidth = returnTextWidth(text: (dict.value(forKey: "buttonTitle") as? String)!, font: UIFont.systemFont(ofSize: 15), viewWidth: ScreenSize.width - 30).width+20
                 totalWidth = totalWidth+CGFloat(itemWidth)+hmargin
-                if totalWidth - hmargin > ScreenW - 30 {//代表着要换行了 row+1 并且计算总宽度
+                if totalWidth - hmargin > ScreenSize.width - 30 {//代表着要换行了 row+1 并且计算总宽度
                     totalWidth = CGFloat(itemWidth)+hmargin
                     row = row+1
                     button.frame = CGRect(x: 10, y: vmargin+CGFloat(row)*(buttonHeight+vmargin), width: CGFloat(itemWidth), height: buttonHeight)
-                }else{//不换行
+                } else {//不换行
                     //如果不换行的话 X是总宽度减去当前按钮的宽度和横向空隙
                     button.frame = CGRect(x: totalWidth-CGFloat(itemWidth), y: CGFloat(row)*(buttonHeight+vmargin)+vmargin, width: CGFloat(itemWidth), height: buttonHeight)
                 }
@@ -88,34 +84,32 @@ class ButtonTagUpView: UIView {
             }
         }
     }
-    
-    
+
     //点击事件
-    @objc func didClickButton(sender:UIButton){
-        
+    @objc func didClickButton(sender: UIButton) {
+
         comArr = comArr.filter({ (cDict) -> Bool in
             return cDict.value(forKey: "buttonTag") as! Int != sender.tag
         })
-        
         let dict = NSMutableDictionary()
         dict.setValue(sender.currentTitle, forKey: "buttonTitle")
         dict.setValue(sender.tag, forKey: "buttonTag")
-                
         delegate?.didDeleteSelectedButton(backDict: dict)
         sender.removeFromSuperview()
     }
-    
-    
+
     //计算文本宽度
-    func  returnTextWidth(text:String,font:UIFont,viewWidth:CGFloat) -> CGSize {
-        var attr = Dictionary<NSAttributedStringKey,AnyObject>()
-        attr[NSAttributedStringKey.font] = font
-        let textSize = text.boundingRect(with: CGSize(width:viewWidth,height:CGFloat(MAXFLOAT)), options:[.usesLineFragmentOrigin,.usesFontLeading], attributes: attr, context: nil).size
-        return textSize
+    func returnTextWidth(text: String, font: UIFont, viewWidth: CGFloat) -> CGSize {
+        return text.boundingRect(
+            with: CGSize(width: viewWidth, height: CGFloat(MAXFLOAT)),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            attributes: [NSAttributedString.Key.font: font],
+            context: nil
+        ).size
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
 }

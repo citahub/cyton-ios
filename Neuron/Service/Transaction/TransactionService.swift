@@ -2,186 +2,239 @@
 //  TransactionService.swift
 //  Neuron
 //
-//  Created by XiaoLu on 2018/7/9.
-//  Copyright © 2018年 cryptape. All rights reserved.
+//  Created by 晨风 on 2018/10/31.
+//  Copyright © 2018 Cryptape. All rights reserved.
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
-import web3swift
+import AppChain
 import BigInt
+import web3swift
+import struct AppChain.TransactionSendingResult
 
-protocol TransactionService {
-    func didGetETHTransaction(walletAddress:String,completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
-    func didGetNervosTransaction(walletAddress:String,completion:@escaping (EthServiceResult<[TransactionModel]>) -> Void)
+protocol TransactionServiceDelegate: NSObjectProtocol {
+    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result)
+    func transactionGasCostChanged(_ transactionService: TransactionService)
 }
 
-class TransactionServiceImp : TransactionService{
+class TransactionService {
+    enum Result {
+        case error(Error)
+        case ethereum(web3swift.TransactionSendingResult)
+        case appChain(TransactionSendingResult)
+    }
+    enum Error: String, Swift.Error {
+        case cancel = ""
+        case prepareFailed
+        case sendFailed
+    }
 
-    func didGetETHTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-
-        var resultArr:[TransactionModel] = []
-        let parameters:Dictionary = ["address":walletAddress]
-        Alamofire.request(ETH_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON(){ (response) in
-            let jsonObj = try? JSON(data: response.data!)
-            print(jsonObj!["status"])
-//            if jsonObj!["status"] != "1"{
-//                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
-//            }else{
-            if response.error == nil {
-                for (_, subJSON) : (String, JSON) in jsonObj!["result"] {
-                    let transacationModel = TransactionModel()
-                    transacationModel.from = subJSON["from"].stringValue
-                    transacationModel.to = subJSON["to"].stringValue
-                    transacationModel.hashString = subJSON["hash"].stringValue
-                    transacationModel.timeStamp = subJSON["timeStamp"].stringValue
-                    transacationModel.formatTime = self.formatTimeStamp(timeStamp: subJSON["timeStamp"].stringValue)
-                    transacationModel.chainName = "Ethereum Mainnet"
-                    transacationModel.gasPrice = self.formatGasToGwei(gas: subJSON["gasPrice"].stringValue)
-                    transacationModel.gas = subJSON["gas"].stringValue
-                    transacationModel.gasUsed = subJSON["gasUsed"].stringValue
-                    transacationModel.blockNumber = subJSON["blockNumber"].stringValue
-                    transacationModel.transactionType = "ETH"
-                    if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
-                    }else{
-                        transacationModel.value = "-" + self.formatValue(value: subJSON["value"].stringValue) + "ETH"
-                    }
-                    transacationModel.totleGas = self.getTotleGas(gasUsed: subJSON["gasUsed"].stringValue, gasPirce: subJSON["gasPrice"].stringValue)
-                    resultArr.append(transacationModel)
-                }
-                completion(EthServiceResult.Success(resultArr))
-            }else{
-                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
-            }
-//            }
+    weak var delegate: TransactionServiceDelegate?
+    var token: TokenModel!
+    var wallet: WalletModel!
+    var tokenBalance: Double = 0.0
+    var estimatedGasPrice: UInt = 1 {
+        didSet {
+            gasPrice = estimatedGasPrice
         }
     }
-    
-    func didGetNervosTransaction(walletAddress: String, completion: @escaping (EthServiceResult<[TransactionModel]>) -> Void) {
-        var resultArr:[TransactionModel] = []
-        let parameters:Dictionary = ["account":walletAddress]
-        let walletModel = WalletRealmTool.getCurrentAppmodel().currentWallet
-        Alamofire.request(NERVOS_TRANSACTION_URL, method: .get, parameters: parameters).responseJSON(){ (response) in
-            let jsonObj = try? JSON(data: response.data!)
-            if jsonObj!["result"]["count"] != "0" {
-                for (_, subJSON) : (String, JSON) in jsonObj!["result"]["transactions"] {
-                    let transacationModel = TransactionModel()
-//                    transacationModel.value = subJSON["value"].stringValue
-                    transacationModel.from = subJSON["from"].stringValue
-                    transacationModel.to = subJSON["to"].stringValue
-                    transacationModel.hashString = subJSON["hash"].stringValue
-                    transacationModel.timeStamp = String(subJSON["timestamp"].intValue)
-                    transacationModel.formatTime = self.formatTimestamp(timeStap: subJSON["timestamp"].intValue)
-                    transacationModel.chainName = "Nervos Mainnet"
-                    transacationModel.gasPrice = ""
-                    transacationModel.gas = ""
-                    transacationModel.gasUsed = self.changeValue(eStr: subJSON["gasUsed"].stringValue)
-                    transacationModel.blockNumber = self.changeValue(eStr: subJSON["blockNumber"].stringValue)
-                    transacationModel.transactionType = "Nervos"
-                    if walletModel?.address.lowercased() == subJSON["to"].stringValue {
-                        transacationModel.value = "+" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
-                    }else{
-                        transacationModel.value = "-" + self.formatScientValue(value: subJSON["value"].stringValue) + "NOS"
-                    }
-
-                    resultArr.append(transacationModel)
-                }
-                completion(EthServiceResult.Success(resultArr))
-            }else{
-                completion(EthServiceResult.Error(TransactionErrors.Requestfailed))
+    var gasPrice: UInt = 1 {
+        didSet {
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
+            gasCost = Double(result) ?? 0.0
+        }
+    }
+    var gasLimit: UInt = 0 {
+        didSet {
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
+            gasCost = Double(result) ?? 0.0
+        }
+    }
+    var gasCost: Double = 0.0 {
+        didSet {
+            DispatchQueue.main.async {
+                self.delegate?.transactionGasCostChanged(self)
             }
         }
     }
-    
-    func changeValue(eStr:String) -> String{
-        var fStr:String
-        if eStr.hasPrefix("0x") {
-            let start = eStr.index(eStr.startIndex, offsetBy: 2);
-            let str1 = String(eStr[start...])
-            fStr = str1.uppercased()
-        }else{
-            fStr = eStr.uppercased()
+    var gasCostAmount: Double = 0.0
+    var changeGasLimitEnable = false
+    var changeGasPriceEnable = false
+    var isSupportGasSetting: Bool { return changeGasPriceEnable || changeGasLimitEnable }
+    var fromAddress: String { return wallet.address }
+    var toAddress = ""
+    var amount = 0.0
+    var extraData = Data()
+    var password: String = ""
+    var isUseQRCode = false
+
+    fileprivate init(token: TokenModel) {
+        self.token = token
+        tokenBalance = Double(token.tokenBalance) ?? 0.0
+        wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
+    }
+
+    static func service(with token: TokenModel) -> TransactionService {
+        if token.type == .erc20 {
+            return Erc20(token: token)
+        } else if token.type == .ethereum {
+            return Ethereum(token: token)
+        } else if token.type == .nervos {
+            return Nervos(token: token)
+        } else if token.type == .nervosErc20 {
+            return NervosErc20(token: token)
+        } else {
+            fatalError()
         }
-        var sum = 0
-        for i in fStr.utf8 {
-            sum = sum * 16 + Int(i) - 48 // 0-9 从48开始
-            if i >= 65 {                 // A-Z 从65开始，但有初始值10，所以应该是减去55
-                sum -= 7
+    }
+
+    func requestGasCost() {
+    }
+
+    func sendTransaction() {
+    }
+
+    func completion(result: Result) {
+        switch result {
+        case .error:
+            if isUseQRCode {
+                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
+            }
+        default:
+            SensorsAnalytics.Track.transaction(
+                chainType: token.chainId,
+                currencyType: token.symbol,
+                currencyNumber: amount,
+                receiveAddress: toAddress,
+                outcomeAddress: wallet.address,
+                transactionType: .normal
+            )
+            if isUseQRCode {
+                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
             }
         }
-        return String(sum)
+        delegate?.transactionCompletion(self, result: result)
     }
-    
-    func formatValue(value:String) -> String {
-        
-        if value.count != 0 {
-            let vInt = Int(value)!
-            let biguInt = BigUInt(vInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
-            let strFload = Float(formatStr)
-            let finalStr = String(strFload!)
-            return finalStr
-        }else{
-            return value
-        }
-    }
-    
-    func formatScientValue(value:String) -> String {
-        let biguInt = BigUInt(atof("0x" + value))
-        let formatStr = Web3.Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 6, fallbackToScientific: false)!
-        return formatStr
-    }
-    
-    
-    func getTotleGas(gasUsed:String,gasPirce:String) -> String {
-        if gasUsed.count != 0 && gasUsed.count != 0 {
-            let gasUsedInt = Int(gasUsed)!
-            let gasPriceInt = Int(gasPirce)!
-            let gasT = BigUInt(gasUsedInt * gasPriceInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(gasT, toUnits: .eth, decimals: 6, fallbackToScientific: false)
-            let strFload = Float(formatStr!)
-            let finalGasStr = String(strFload!)
-            return finalGasStr
-        }else{
-            return ""
-        }
-    }
-    
-    func formatGasToGwei(gas:String) -> String {
-        if gas.count != 0 {
-            let vInt = Int(gas)!
-            let bigInt = BigUInt(vInt)
-            let formatStr = Web3.Utils.formatToEthereumUnits(bigInt, toUnits: .Gwei, decimals: 6, fallbackToScientific: false)!
-            return formatStr
-        }else{
-            return gas
-        }
-    }
-    
-    func formatTimeStamp(timeStamp:String) -> String {
-        let timeStampInt = Int(timeStamp)
-        let timeInterval:TimeInterval = TimeInterval(timeStampInt!)
-        let date = Date(timeIntervalSince1970: timeInterval)
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        let time = dateformatter.string(from: date)
-        return time
-    }
-    
-    func formatTimestamp(timeStap:Int) -> String {
-        print(timeStap)
-        let timeInterval:TimeInterval = TimeInterval(timeStap)
-        let date = Date(timeIntervalSince1970: timeInterval/1000)
-        let dateformatter = DateFormatter()
-        dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        let time = dateformatter.string(from: date)
-        return time
-    }
-    
 }
 
+extension TransactionService {
+    class Nervos: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
+        }
 
+        override func sendTransaction() {
+            super.sendTransaction()
+            let amountText = String(format: "%.8lf", amount)
+            NervosTransactionService().prepareNervosTransactionForSending(
+                address: toAddress,
+                quota: BigUInt(UInt(gasLimit/* * gasPrice*/)),
+                data: extraData,
+                value: amountText,
+                tokenHosts: token.chainHosts,
+                chainId: BigUInt(token.chainId)!) { (result) in
+                switch result {
+                case .success(let transaction):
+                    NervosTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
+                        switch result {
+                        case .success(let result):
+                            self.completion(result: Result.appChain(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
+                        }
+                    })
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
+                }
+            }
+        }
+    }
+}
 
+extension TransactionService {
+    class Erc20: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 100000
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.estimatedGasPrice = (bigNumber?.words.first ?? 1)
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = true
+        }
+
+        override func sendTransaction() {
+            let amountText = String(format: "%.8lf", amount)
+            ERC20TransactionService().prepareERC20TransactionForSending(
+                destinationAddressString: toAddress,
+                amountString: amountText,
+                gasLimit: gasLimit,
+                gasPrice: BigUInt(gasPrice),
+                erc20TokenAddress: token.address) { (result) in
+                switch result {
+                case .success(let transaction):
+                    ERC20TransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
+                        switch result {
+                        case .success(let result):
+                            self.completion(result: Result.ethereum(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
+                        }
+                    })
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
+                }
+            }
+        }
+    }
+}
+
+extension TransactionService {
+    class Ethereum: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 21000
+            let bigNumber = Web3Network().getWeb3().eth.getGasPrice().value
+            self.estimatedGasPrice = bigNumber?.words.first ?? 1
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = true
+        }
+
+        override func sendTransaction() {
+            let amountText = String(format: "%.8lf", amount)
+            EthTransactionService().prepareETHTransactionForSending(
+                destinationAddressString: toAddress,
+                amountString: amountText,
+                gasLimit: gasLimit,
+                gasPrice: BigUInt(gasPrice),
+                data: extraData) { (result) in
+                switch result {
+                case .success(let transaction):
+                    EthTransactionService().send(password: self.password, transaction: transaction, completion: { (result) in
+                        switch result {
+                        case .success(let result):
+                            self.completion(result: Result.ethereum(result))
+                        case .error:
+                            self.completion(result: Result.error(.sendFailed))
+                        }
+                    })
+                case .error:
+                    self.completion(result: Result.error(.prepareFailed))
+                }
+            }
+        }
+    }
+}
+
+extension TransactionService {
+    class NervosErc20: TransactionService {
+        override func requestGasCost() {
+            self.gasLimit = 100000
+            let result = Utils.getQuotaPrice(appChain: NervosNetwork.getNervos()).value
+            self.estimatedGasPrice = result?.words.first ?? 1
+            self.changeGasLimitEnable = false
+            self.changeGasPriceEnable = false
+        }
+    }
+}

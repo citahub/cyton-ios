@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>0.1.0</string>
+	<string>0.6.0</string>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>1</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
@@ -31,6 +31,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>调用相机以便来扫描二维码来进行导入钱包或者进行交易</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>使用 Face ID 进行身份认证</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>调用麦克风</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -41,12 +43,12 @@ Privacy-</key>
 	<string>使用通讯录</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
@@ -59,6 +61,6 @@ Privacy-</key>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
+	<true/>
 </dict>
 </plist>

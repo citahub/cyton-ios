@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Error Overlay View Controller-->
+        <scene sceneID="Rgf-yL-vls">
+            <objects>
+                <viewController storyboardIdentifier="ErrorOverlayViewController" id="WiG-P4-rga" customClass="ErrorOverlayViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eyz-Xy-Jz7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fail_icon" translatesAutoresizingMaskIntoConstraints="NO" id="867-Nl-GMT">
+                                <rect key="frame" x="0.0" y="105" width="375" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="4d5-R2-Hk1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="网络错误，请稍后再试" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zu4-K0-5tR">
+                                <rect key="frame" x="16" y="367" width="343" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="16" id="fQa-xh-DHZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <color key="textColor" red="0.59607843137254901" green="0.61176470588235299" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bHe-5B-0lZ">
+                                <rect key="frame" x="147.5" y="395" width="80" height="34"/>
+                                <color key="backgroundColor" red="0.21176470589999999" green="0.37254901959999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="UZ5-QH-NIs"/>
+                                    <constraint firstAttribute="height" constant="34" id="tGy-Bn-dPd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="刷新">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="WiG-P4-rga" eventType="touchUpInside" id="EBB-aB-p4k"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="867-Nl-GMT" firstAttribute="top" secondItem="dv8-ML-74O" secondAttribute="top" constant="85" id="1Mv-O1-bcF"/>
+                            <constraint firstItem="Zu4-K0-5tR" firstAttribute="leading" secondItem="dv8-ML-74O" secondAttribute="leading" constant="16" id="4rk-EK-Vtf"/>
+                            <constraint firstItem="867-Nl-GMT" firstAttribute="trailing" secondItem="dv8-ML-74O" secondAttribute="trailing" id="60P-o3-axW"/>
+                            <constraint firstItem="dv8-ML-74O" firstAttribute="trailing" secondItem="Zu4-K0-5tR" secondAttribute="trailing" constant="16" id="QsJ-t2-btk"/>
+                            <constraint firstItem="867-Nl-GMT" firstAttribute="leading" secondItem="dv8-ML-74O" secondAttribute="leading" id="V7D-Fq-zgN"/>
+                            <constraint firstItem="bHe-5B-0lZ" firstAttribute="centerX" secondItem="Eyz-Xy-Jz7" secondAttribute="centerX" id="Zd6-6W-a6H"/>
+                            <constraint firstItem="bHe-5B-0lZ" firstAttribute="top" secondItem="Zu4-K0-5tR" secondAttribute="bottom" constant="12" id="hM1-ZN-CuW"/>
+                            <constraint firstItem="Zu4-K0-5tR" firstAttribute="top" secondItem="867-Nl-GMT" secondAttribute="bottom" constant="12" id="mxh-cr-KE6"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dv8-ML-74O"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="867-Nl-GMT" id="dix-xf-vAD"/>
+                        <outlet property="messageLabel" destination="Zu4-K0-5tR" id="l7r-Ps-R70"/>
+                        <outlet property="refreshButton" destination="bHe-5B-0lZ" id="GUS-LB-56x"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZOS-yQ-NMI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-559.20000000000005" y="79.610194902548727"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="fail_icon" width="375" height="250"/>
+    </resources>
+</document>

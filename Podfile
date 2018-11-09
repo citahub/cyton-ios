@@ -1,34 +1,27 @@
-# Uncomment the next line to define a global platform for your project
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
 target 'Neuron' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'PlainPing'
-  pod 'MJRefresh'
-  pod 'LYEmptyView'
-  pod 'SDWebImage'                      #图片的加载及缓存
-  pod 'IQKeyboardManagerSwift'		#键盘
-  pod 'RTRootNavigationController'       #导航栏
-  pod 'PopupDialog'
-  pod 'EFQRCode'
-  pod 'RSKPlaceholderTextView'
-  pod 'Toast-Swift'
+  inhibit_all_warnings!
+
+  pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.19.6"
+  pod 'web3swift', git: 'https://github.com/matterinc/web3swift', tag: '1.5.1'
   pod 'RealmSwift'
-  pod 'MBProgressHUD'
-  pod 'TrustCore','~> 0.0.7'
-  pod 'TrustKeystore','~> 0.4.1'
-  pod 'Result'
-  pod 'KeychainSwift'
-  pod 'SwiftyJSON', :inhibit_warnings => true
-  pod 'IGIdenticon'
-  pod 'SCLAlertView'
-  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
-  pod 'web3swift', :git => 'https://github.com/BANKEX/web3swift',:branch => 'master'
+
   pod 'Alamofire'
-  pod 'Alamofire-Synchronous'
-  
+  pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
+
+  pod 'PlainPing'
+  pod 'LYEmptyView'
+  pod 'SDWebImage'
+  pod 'IQKeyboardManagerSwift'
+  pod 'EFQRCode'
+  pod 'RSKPlaceholderTextView', "~> 4.0.0"
+  pod 'Toast-Swift', "~> 4.0.0"
+  pod 'PullToRefresher', "~> 3.1"
+  pod 'IGIdenticon', "~> 0.6"
+  pod 'QRCodeReader.swift'
   target 'NeuronTests' do
     inherit! :search_paths
     # Pods for testing
@@ -38,5 +31,4 @@ target 'Neuron' do
     inherit! :search_paths
     # Pods for testing
   end
-
 end

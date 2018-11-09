@@ -8,127 +8,21 @@
 
 import Foundation
 import web3swift
-import BigInt
+import struct BigInt.BigUInt
 
-protocol TAViewModelProtocol {
-    func getGasPrice(completion:@escaping(EthServiceResult<BigUInt>) -> Void)
-
-}
-
-class TAViewModel:TAViewModelProtocol {
-    
-    func getGasPrice(completion:@escaping (EthServiceResult<BigUInt>) -> Void)  {
-        let web3 = Web3NetWork.getWeb3()
+class TAViewModel {
+    func getGasPrice(completion:@escaping (EthServiceResult<BigUInt>) -> Void) {
+        let web3 = Web3Network().getWeb3()
         DispatchQueue.global().async {
             let gasPriceResult = web3.eth.getGasPrice()
             DispatchQueue.main.async {
                 switch gasPriceResult {
                 case .success(let gasPrice):
-                    completion(EthServiceResult.Success(gasPrice))
+                    completion(EthServiceResult.success(gasPrice))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
+                    completion(EthServiceResult.error(error))
                 }
             }
         }
     }
-    
-    
-//    
-//    func prepareTransactionForSending(destinationAddressString: String,
-//                                      amountString: String,
-//                                      gasLimit: UInt = 21000,
-//                                      walletPassword:String,
-//                                      gasPrice:BigUInt = BigUInt(1000000000),
-//                                      completion:  @escaping (SendEthResult<TransactionIntermediate>) -> Void) {
-//        
-//        let keyStoreStr = WalletCryptService.didCheckoutKeyStoreWithCurrentWallet(password: walletPassword)
-//        let currentWalletAddress = WalletRealmTool.getCurrentAppmodel().currentWallet?.address
-//        
-//        DispatchQueue.global().async {
-//            guard let destinationEthAddress = EthereumAddress(destinationAddressString) else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.invalidDestinationAddress))
-//                }
-//                return
-//            }
-//            guard let amount = Web3.Utils.parseToBigUInt(amountString, units: .eth) else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.invalidAmountFormat))
-//                }
-//                return
-//            }
-//            
-//            let web3 = Web3NetWork.getWeb3()
-//            guard let selectedKey = currentWalletAddress else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.noAvailableKeys))
-//                }
-//                return
-//            }
-//            let ethAddressFrom = EthereumAddress(selectedKey)
-//            
-//            web3.addKeystoreManager(KeystoreManager([EthereumKeystoreV3(keyStoreStr)!]))
-//            var options = Web3Options.defaultOptions()
-//                        options.gasLimit = BigUInt(gasLimit)
-//            options.from = ethAddressFrom
-//            options.value = BigUInt(amount)
-//            guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: destinationEthAddress) else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.contractLoadingError))
-//                }
-//                return
-//            }
-//            
-//            guard let estimatedGas = contract.method(options: options)?.estimateGas(options: nil).value else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.retrievingEstimatedGasError))
-//                }
-//                return
-//            }
-//            options.gasLimit = estimatedGas
-////            guard let gasPrice = web3.eth.getGasPrice().value else {
-////                DispatchQueue.main.async {
-////                    completion(SendEthResult.Error(SendEthErrors.retrievingGasPriceError))
-////                }
-////                return
-////            }
-//            print(">>>>>>>>>>>" + gasPrice.description)
-//            options.gasPrice = gasPrice
-//            guard let transaction = contract.method(options: options) else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.createTransactionIssue))
-//                }
-//                return
-//            }
-//            
-//            DispatchQueue.main.async {
-//                completion(SendEthResult.Success(transaction))
-//            }
-//        }
-//    }
-//    
-//    func send(password:String,transaction:TransactionIntermediate,completion: @escaping (SendEthResult<TransactionSendingResult>) -> Void) {
-//        DispatchQueue.global(qos: .userInitiated).async {
-//            let result = transaction.send(password: password, options: nil)
-//            if let error = result.error {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(error))
-//                }
-//                return
-//            }
-//            guard let value = result.value else {
-//                DispatchQueue.main.async {
-//                    completion(SendEthResult.Error(SendEthErrors.emptyResult))
-//                }
-//                return
-//            }
-//            DispatchQueue.main.async {
-//                completion(SendEthResult.Success(value))
-//            }
-//        }
-//        
-//    }
-    
-    
-    
 }

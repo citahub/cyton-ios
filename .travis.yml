@@ -1,0 +1,7 @@
+language: objective-c
+osx_image: xcode10
+xcode_workspace: Neuron.xcworkspace
+xcode_scheme: Neuron
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
+before_install:
+  - travis_wait pod repo update --silent

@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Neuron
+
+  Created by James Chen on 2018/11/03.
+  Copyright © 2018 Cryptape. All rights reserved.
+*/
+
+// Wallet Manager Errors
+
+"WalletManager.invalidPassword" = "密码不正确";
+"WalletManager.invalidPrivateKey" = "私钥不正确";
+"WalletManager.invalidKeystore" = "Keystore不正确";
+"WalletManager.invalidMnemonic" = "助记词不正确";
+"WalletManager.accountAlreadyExists" = "该钱包已存在";
+"WalletManager.accountNotFound" = "未找到该钱包";
+"WalletManager.failedToDeleteAccount" = "删除钱包失败";
+"WalletManager.failedToUpdatePassword" = "修改密码失败";
+"WalletManager.failedToSaveKeystore" = "保存keystore失败";
+"WalletManager.unknown" = "未知错误";

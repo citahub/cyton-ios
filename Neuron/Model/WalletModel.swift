@@ -10,23 +10,16 @@ import UIKit
 import RealmSwift
 
 class WalletModel: Object {
-    
-    /// wallet name
     @objc dynamic var name = ""
-    /// wallet address
     @objc dynamic var address = ""
-    /// encrypt privatekey
-    @objc dynamic var encryptPrivateKey = ""
-    /// password MD5
-    @objc dynamic var MD5screatPassword = ""
-    /// icon data
-    @objc dynamic var iconData:Data!
-    /// select tokedn list
+    @objc dynamic var iconData: Data!
     var selectTokenList = List<TokenModel>()
-    
+
+    var wallet: Wallet? {
+        return WalletManager.default.wallet(for: address)
+    }
+
     override static func primaryKey() -> String? {
         return "address"
     }
 }
-
-

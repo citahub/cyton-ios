@@ -9,8 +9,5 @@
 #ifndef Neuron_Bridging_Header_h
 #define Neuron_Bridging_Header_h
 
-#import "MJRefresh.h"
-#import "RTRootNavigationController.h"
-#import "MBProgressHUD.h"
 
 #endif /* Neuron_Bridging_Header_h */

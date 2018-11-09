@@ -18,23 +18,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchImage" translatesAutoresizingMaskIntoConstraints="NO" id="dJl-55-Bkc">
-                                <rect key="frame" x="86" y="120" width="203" height="81"/>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dJl-55-Bkc">
+                                <rect key="frame" x="124" y="210" width="126" height="101"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="101" id="Vpe-1c-SlH"/>
+                                    <constraint firstAttribute="width" constant="126" id="hW1-SG-3nL"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEURON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh6-qT-Qkb">
-                                <rect key="frame" x="111" y="226" width="153.5" height="34"/>
-                                <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="34"/>
-                                <color key="textColor" red="0.17254901960784313" green="0.17254901960784313" blue="0.17254901960784313" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nervos_launch" translatesAutoresizingMaskIntoConstraints="NO" id="Cx1-07-dWq">
+                                <rect key="frame" x="147" y="593" width="80" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="GTg-Gf-pwA"/>
+                                    <constraint firstAttribute="height" constant="32" id="Qfq-Xj-NZ6"/>
+                                </constraints>
+                            </imageView>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peckshield" translatesAutoresizingMaskIntoConstraints="NO" id="3xp-ae-RTf">
+                                <rect key="frame" x="135" y="633" width="105" height="12"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="105" id="hVS-Xt-P15"/>
+                                    <constraint firstAttribute="height" constant="12" id="vl9-0X-7Kt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="dJl-55-Bkc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Iuq-p3-EpU"/>
-                            <constraint firstItem="hh6-qT-Qkb" firstAttribute="top" secondItem="dJl-55-Bkc" secondAttribute="bottom" constant="25" id="JmK-dc-m5C"/>
-                            <constraint firstItem="dJl-55-Bkc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="100" id="av5-hk-bSe"/>
-                            <constraint firstItem="dJl-55-Bkc" firstAttribute="centerX" secondItem="hh6-qT-Qkb" secondAttribute="centerX" id="ax9-l0-9tf"/>
-                            <constraint firstItem="dJl-55-Bkc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="86" id="ymD-cA-LJN"/>
+                            <constraint firstItem="3xp-ae-RTf" firstAttribute="centerX" secondItem="Cx1-07-dWq" secondAttribute="centerX" id="07T-xb-7Ds"/>
+                            <constraint firstItem="Cx1-07-dWq" firstAttribute="centerX" secondItem="dJl-55-Bkc" secondAttribute="centerX" id="2ui-x0-Ykd"/>
+                            <constraint firstItem="3xp-ae-RTf" firstAttribute="top" secondItem="Cx1-07-dWq" secondAttribute="bottom" constant="8" id="J51-kQ-05N"/>
+                            <constraint firstItem="dJl-55-Bkc" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="SWr-MG-Jt7"/>
+                            <constraint firstItem="dJl-55-Bkc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="190" id="UKF-R4-0ma"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Cx1-07-dWq" secondAttribute="bottom" constant="42" id="hGW-tw-YKY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -45,6 +58,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchImage" width="168" height="81"/>
+        <image name="launchIcon" width="126" height="101"/>
+        <image name="nervos_launch" width="80" height="32"/>
+        <image name="peckshield" width="120" height="12"/>
     </resources>
 </document>

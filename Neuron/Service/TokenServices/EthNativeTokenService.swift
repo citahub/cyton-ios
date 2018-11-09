@@ -9,43 +9,34 @@
 import Foundation
 import BigInt
 import web3swift
+import struct BigInt.BigUInt
 
-
-
-protocol EthNativeTokenServiceProtocol {
-    static func getEthNativeTokenBalance(walletAddress:String,completion:@escaping(EthServiceResult<BigUInt>)->Void)
-}
-
-
-class EthNativeTokenService:EthNativeTokenServiceProtocol {
-
-    
-
+struct EthNativeTokenService {
     /// get balance
     ///
     /// - Parameters:
     ///   - walletAddress: wallet address
     ///   - completion: EthServiceResult<BigUInt>
-    static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
+    static func getEthNativeTokenBalance(walletAddress: String, completion: @escaping (EthServiceResult<String>) -> Void) {
         let address = EthereumAddress(walletAddress)!
-        let web3Main = Web3NetWork.getWeb3()
+        let web3Main = Web3Network().getWeb3()
         DispatchQueue.global().async {
             let balanceResult = web3Main.eth.getBalance(address: address)
             DispatchQueue.main.async {
-                switch balanceResult{
+                switch balanceResult {
                 case .success(let balance):
-                    completion(EthServiceResult.Success(balance))
-                    break
+                    let balanceNumber = self.formatBalanceValue(value: balance)
+                    completion(EthServiceResult.success(balanceNumber))
                 case .failure(let error):
-                    completion(EthServiceResult.Error(error))
-                    break
+                    completion(EthServiceResult.error(error))
                 }
             }
         }
     }
-    
-    
 
-    
+    private static func formatBalanceValue(value: BigUInt) -> String {
+        let format = Web3.Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
+        let finalValue = Double(format)!
+        return finalValue.clean
+    }
 }
-

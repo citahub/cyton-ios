@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabbedButtonsView" customModule="Neuron" customModuleProvider="target">
+            <connections>
+                <outlet property="buttonContainer" destination="T7P-3g-Www" id="4F2-cq-N7o"/>
+                <outlet property="buttonContainerWidthContraint" destination="pho-tq-oIJ" id="sgz-FU-wbX"/>
+                <outlet property="underlineCenterXConstraint" destination="mWD-a6-7Zl" id="esd-PF-ZnP"/>
+                <outlet property="underlineWidthConstraint" destination="da5-PF-xlf" id="U4y-K7-zEZ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="438" height="71"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="T7P-3g-Www" userLabel="ButtonContainer">
+                    <rect key="frame" x="20" y="0.0" width="398" height="73"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="glT-rH-cau">
+                            <rect key="frame" x="0.0" y="0.0" width="199" height="73"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" red="0.14117647059999999" green="0.16862745100000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jfX-rX-Iez">
+                            <rect key="frame" x="199" y="0.0" width="199" height="73"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                            <state key="normal" title="Button">
+                                <color key="titleColor" red="0.54117647059999996" green="0.55294117649999996" blue="0.62352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZJS-24-FjH" userLabel="ButtonHairline">
+                    <rect key="frame" x="0.0" y="70.5" width="438" height="0.5"/>
+                    <color key="backgroundColor" red="0.83921568627450982" green="0.85490196078431369" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="iCZ-gg-8Up"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RIW-0W-ccr" userLabel="Underline">
+                    <rect key="frame" x="60" y="69" width="120" height="2"/>
+                    <color key="backgroundColor" red="0.30980392156862746" green="0.44705882352941173" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="da5-PF-xlf"/>
+                        <constraint firstAttribute="height" constant="2" id="gXP-Bj-B0F"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="ZJS-24-FjH" secondAttribute="bottom" id="0g3-vZ-R3j"/>
+                <constraint firstItem="T7P-3g-Www" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="8Hi-BK-pC6"/>
+                <constraint firstAttribute="bottom" secondItem="RIW-0W-ccr" secondAttribute="bottom" id="C8S-if-eZY"/>
+                <constraint firstItem="T7P-3g-Www" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" constant="2" id="Eky-Gl-owy"/>
+                <constraint firstItem="T7P-3g-Www" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="HyM-Af-NU7"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ZJS-24-FjH" secondAttribute="trailing" id="fTh-bT-7of"/>
+                <constraint firstItem="RIW-0W-ccr" firstAttribute="centerX" secondItem="T7P-3g-Www" secondAttribute="leading" constant="100" id="mWD-a6-7Zl"/>
+                <constraint firstItem="ZJS-24-FjH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="moh-97-ZAc"/>
+                <constraint firstItem="T7P-3g-Www" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" constant="-40" id="pho-tq-oIJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="188.80000000000001" y="-114.69265367316342"/>
+        </view>
+    </objects>
+</document>
