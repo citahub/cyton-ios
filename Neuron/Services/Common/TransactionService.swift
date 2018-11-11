@@ -54,7 +54,7 @@ class TransactionService {
     var toAddress = ""
     var amount = 0.0
     var extraData = Data()
-    var password: String = ""  // TODO: Inject web3 instance instead of passing password.
+    var password: String = ""
     var isUseQRCode = false    // TODO: Fix spelling.
     var estimatedGasPrice: UInt = 1 {
         didSet {
@@ -141,7 +141,7 @@ extension TransactionService {
                 let sender = EthereumTxSender(web3: web3, from: fromAddress)
                 let txhash = try sender.sendETH(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),
+                    amount: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     data: extraData,
@@ -176,7 +176,7 @@ extension TransactionService {
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),
+                    amount: String(format: "%.18lf", amount),  // TODO: Inject web3 instance instead of passing password.
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     contractAddress: token.address,
@@ -212,7 +212,7 @@ extension TransactionService {
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit)),
                     data: extraData,
-                    value: String(format: "%.18lf", amount),
+                    value: String(format: "%.18lf", amount),  // TODO: Inject web3 instance instead of passing password.
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
