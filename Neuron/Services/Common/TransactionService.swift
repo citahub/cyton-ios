@@ -30,13 +30,13 @@ class TransactionService {
     var tokenBalance: Double = 0.0
     var gasPrice: UInt = 1 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit) * BigUInt(gasPrice), toUnits: .eth, decimals: 10) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
-    var gasLimit: UInt = 0 {
+    var gasLimit: UInt64 = 0 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit * gasPrice), toUnits: .eth, decimals: 10) ?? ""
+            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit) * BigUInt(gasPrice), toUnits: .eth, decimals: 10) ?? ""
             gasCost = Double(result) ?? 0.0
         }
     }
@@ -138,10 +138,15 @@ extension TransactionService {
             web3.addKeystoreManager(KeystoreManager([keystore]))
 
             do {
+                // TODO: change amount to string which matches UI input exactly.
+                guard let value = Web3.Utils.parseToBigUInt(String(amount), units: .eth) else {
+                    throw SendTransactionError.invalidAmountFormat
+                }
+
                 let sender = EthereumTxSender(web3: web3, from: fromAddress)
                 let txhash = try sender.sendETH(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),
+                    value: value,
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     data: extraData,

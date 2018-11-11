@@ -190,7 +190,7 @@ class ContractController: UITableViewController {
             service.extraData = Data.init(hex: dappCommonModel.appChain?.data ?? "")
             service.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
-            service.gasLimit = gasLimit.words.first!
+            service.gasLimit = UInt64(gasLimit.words.first!)
             service.toAddress = dappCommonModel.eth?.to ?? ""
             service.extraData = Data.init(hex: dappCommonModel.eth?.data ?? "")
             service.gasPrice = gasPrice.words.first!

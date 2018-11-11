@@ -62,7 +62,7 @@ class TransactionGasPriceViewController: UIViewController {
             return
         }
         service.gasPrice = newGasPrice
-        service.gasLimit = UInt(gasLimitTextField.text!) ?? 0
+        service.gasLimit = UInt64(gasLimitTextField.text!) ?? 0
         dismiss()
     }
 }

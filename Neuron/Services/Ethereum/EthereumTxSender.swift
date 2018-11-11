@@ -20,20 +20,17 @@ class EthereumTxSender {
         self.from = from
     }
 
+    /// All parameters should be final, e.g., value should be 10**18 for 1.0 Ether, gasPrice should be 10**9 for 1Gwei.
     func sendETH(
         to: String,
-        amount: String,
-        gasLimit: UInt = 21000,
+        value: BigUInt,
+        gasLimit: UInt64 = 21_000,
         gasPrice: BigUInt,
         data: Data,
         password: String
     ) throws -> TxHash {
         guard let toAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
-        }
-
-        guard let value = Web3.Utils.parseToBigUInt(amount, units: .eth) else {
-            throw SendTransactionError.invalidAmountFormat
         }
 
         guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2) else {
@@ -55,7 +52,7 @@ class EthereumTxSender {
     func sendToken(
         to: String,
         amount: String,
-        gasLimit: UInt = 21000,
+        gasLimit: UInt64 = 21_000,
         gasPrice: BigUInt,
         contractAddress: String,
         password: String
