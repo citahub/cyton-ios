@@ -38,10 +38,9 @@ struct DAppAction {
         }
         let appChain = AppChainNetwork.appChain(url: url)
         DispatchQueue.global().async {
-            let result = appChain.rpc.getMetaData()
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let metaData):
+            do {
+                let metaData = try appChain.rpc.getMetaData()
+                DispatchQueue.main.async {
                     let tokenModel = TokenModel()
                     tokenModel.address = ""
                     tokenModel.chainId = metaData.chainId.description
@@ -54,9 +53,8 @@ struct DAppAction {
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     tokenModel.chainHosts = chainNode
                     self.saveToken(model: tokenModel)
-                case .failure:
-                    break
                 }
+            } catch {
             }
         }
     }

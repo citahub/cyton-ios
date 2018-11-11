@@ -194,8 +194,8 @@ extension TransactionService {
     class AppChain: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21_000
-            let result = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
-            estimatedGasPrice = result?.words.first ?? 1
+            let quotaPrice = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
+            estimatedGasPrice = quotaPrice?.words.first ?? 1
             changeGasLimitEnable = false
             changeGasPriceEnable = false
         }
@@ -228,7 +228,7 @@ extension TransactionService {
     class AppChainERC20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 100_000
-            let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
+            let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
             estimatedGasPrice = bigNumber?.words.first ?? 1
             changeGasLimitEnable = false
             changeGasPriceEnable = false
