@@ -143,7 +143,7 @@ extension TransactionService {
                     throw SendTransactionError.invalidAmountFormat
                 }
 
-                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                let sender = try EthereumTxSender(web3: web3, from: fromAddress)
                 let txhash = try sender.sendETH(
                     to: toAddress,
                     value: value,
@@ -177,7 +177,7 @@ extension TransactionService {
             web3.addKeystoreManager(KeystoreManager([keystore]))
 
             do {
-                let sender = EthereumTxSender(web3: web3, from: fromAddress)
+                let sender = try EthereumTxSender(web3: web3, from: fromAddress)
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,

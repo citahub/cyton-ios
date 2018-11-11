@@ -31,6 +31,7 @@ enum SignMessageResult<T> {
 }
 
 enum SendTransactionError: Error {
+    case invalidSourceAddress
     case invalidDestinationAddress
     case invalidAmountFormat
     case contractLoadingError
