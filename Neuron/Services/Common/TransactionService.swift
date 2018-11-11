@@ -176,7 +176,7 @@ extension TransactionService {
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),  // TODO: Inject web3 instance instead of passing password.
+                    amount: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     contractAddress: token.address,
@@ -212,7 +212,7 @@ extension TransactionService {
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit)),
                     data: extraData,
-                    value: String(format: "%.18lf", amount),  // TODO: Inject web3 instance instead of passing password.
+                    value: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
