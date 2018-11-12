@@ -1,10 +1,9 @@
 PODS:
   - Alamofire (4.7.3)
-  - AppChainSwift (0.19.6):
+  - AppChainSwift (0.20.1):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - PromiseKit (~> 6.5)
-    - Result (~> 4.0)
     - secp256k1_swift (~> 1.0.3)
     - SwiftProtobuf (~> 1.2.0)
   - BigInt (3.1.0):
@@ -37,7 +36,6 @@ PODS:
   - Realm/Headers (3.11.0)
   - RealmSwift (3.11.0):
     - Realm (= 3.11.0)
-  - Result (4.0.0)
   - RSKPlaceholderTextView (4.0.0)
   - scrypt (2.0):
     - CryptoSwift (~> 0.11)
@@ -65,7 +63,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.19.6`)
+  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.1`)
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
@@ -97,7 +95,6 @@ SPEC REPOS:
     - QRCodeReader.swift
     - Realm
     - RealmSwift
-    - Result
     - RSKPlaceholderTextView
     - scrypt
     - SDWebImage
@@ -111,7 +108,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.6
+    :tag: v0.20.1
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -119,14 +116,14 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.19.6
+    :tag: v0.20.1
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppChainSwift: dede5206f36322d822e84b697fdb8bdb9d5ba4ea
+  AppChainSwift: c576e17a9f7433f6c69b626969bd21b6a2db4573
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
@@ -141,7 +138,6 @@ SPEC CHECKSUMS:
   QRCodeReader.swift: 96292a5612fbc2fd9a0b26f93fa5164c8d02f59d
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
-  Result: 7645bb3f50c2ce726dd0ff2fa7b6f42bbe6c3713
   RSKPlaceholderTextView: 15f1dc1883e103ea605874b863f19ff6b08496d5
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
@@ -153,6 +149,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: 99f6c6788044389220317c30b15309a4efb868ec
+PODFILE CHECKSUM: 269ee06fe70f34b43d27938fb94c91addde4b51a
 
 COCOAPODS: 1.5.3
