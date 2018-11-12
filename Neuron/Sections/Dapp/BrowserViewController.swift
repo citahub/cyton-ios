@@ -27,6 +27,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
         webView.navigationDelegate = self
         webView.uiDelegate = self
+        webView.addAllNativeFunctionHandler()
         return webView
     }()
 

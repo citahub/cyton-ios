@@ -10,8 +10,9 @@ import UIKit
 import AVFoundation
 import QRCodeReader
 
-protocol QRCodeViewControllerDelegate: class {
+@objc protocol QRCodeViewControllerDelegate: class {
     func didBackQRCodeMessage(codeResult: String)
+    @objc optional func qrcodeReaderDidCancel()
 }
 
 class QRCodeViewController: UIViewController {
@@ -54,5 +55,6 @@ extension QRCodeViewController: QRCodeReaderViewControllerDelegate {
 
     func readerDidCancel(_ reader: QRCodeReaderViewController) {
         navigationController?.popViewController(animated: true)
+        delegate?.qrcodeReaderDidCancel?()
     }
 }

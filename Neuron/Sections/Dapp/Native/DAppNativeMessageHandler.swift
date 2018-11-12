@@ -1,0 +1,88 @@
+//
+//  DAppNativeMessageHandler.swift
+//  Neuron
+//
+//  Created by 晨风 on 2018/11/12.
+//  Copyright © 2018 Cryptape. All rights reserved.
+//
+
+import UIKit
+import WebKit
+
+class DAppNativeMessageHandler: NSObject, WKScriptMessageHandler {
+    enum Result {
+        case success([String: Any])
+        case fail(Int, String)
+    }
+    struct Callback: Decodable {
+        let callback: String
+    }
+
+    var callback: String?
+    weak var webView: WKWebView?
+    var messageNames: [String] { return [] }
+
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        webView = message.webView
+        guard let data = try? JSONSerialization.data(withJSONObject: message.body, options: .prettyPrinted) else { return }
+        callback = try? JSONDecoder().decode(Callback.self, from: data).callback
+    }
+
+    func callback(result: Result) {
+        guard let callback = callback else { return }
+        let resultDict: [String: Any]
+        switch result {
+        case .success(let info):
+            resultDict = [
+                "status": 1,
+                "info": info
+            ]
+        case .fail(let code, let msg):
+            resultDict = [
+                "status": 0,
+                "errorCode": code,
+                "errorMsg": msg
+            ]
+        }
+        self.callback(funcName: callback, result: resultDict)
+    }
+
+    func callback(funcName: String, result: [String: Any]) {
+        guard let data = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else { return }
+        let string = String(bytes: data.bytes, encoding: .utf8) ?? ""
+        let js = "\(funcName)(\'\(string)\')"
+        webView?.evaluateJavaScript(js, completionHandler: nil)
+    }
+}
+
+extension WKWebView {
+    func addNativeFunctionHandler(handler: DAppNativeMessageHandler) {
+        for name in handler.messageNames {
+            configuration.userContentController.add(handler, name: name)
+        }
+    }
+
+    func addAllNativeFunctionHandler() {
+//        addNativeFunctionHandler(handler: DAppTakePhotoMessageHandler())
+        addNativeFunctionHandler(handler: DAppQRCodeMessageHandler())
+        addNativeFunctionHandler(handler: DAppDeviceMotionMessageHandler())
+        addNativeFunctionHandler(handler: DAppGyroscopeMessageHandler())
+
+        // test
+//        let js = "window.webkit.messageHandlers.takePhoto.postMessage({quality: 'normal', callback: 'callback'})"
+//        let js = "window.webkit.messageHandlers.scanCode.postMessage({callback: 'callback'})"
+//        let js = "window.webkit.messageHandlers.startDeviceMotionListening.postMessage({interval: 'normal', callback: 'callback'})"
+//        let js = "window.webkit.messageHandlers.startGyroscope.postMessage({interval: 'normal', callback: 'callback'})"
+//        configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
+    }
+}
+
+extension UIResponder {
+    var viewController: UIViewController? {
+        if self.isKind(of: UIViewController.self) {
+            return self as? UIViewController
+        } else {
+            return next?.viewController
+        }
+    }
+}

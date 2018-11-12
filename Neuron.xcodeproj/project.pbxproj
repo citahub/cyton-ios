@@ -60,6 +60,11 @@
 		6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */; };
 		6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC0216B3AE40044176D /* Authentication.storyboard */; };
 		6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */; };
+		6EABFB0B21991BC200305ED5 /* DAppQRCodeMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */; };
+		6EABFB0D21991CB300305ED5 /* DAppNativeMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */; };
+		6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */; };
+		6EABFB122199520F00305ED5 /* DAppTakePhotoMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */; };
+		6EABFB1421995AB800305ED5 /* DAppGyroscopeMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */; };
 		6EF8F40C2175CAD9004B7587 /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */; };
 		6EF8F4102176029E004B7587 /* OpenAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF8F40F2176029E004B7587 /* OpenAuthViewController.swift */; };
 		8905660720D0AC120041D4B4 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905660620D0AC120041D4B4 /* AppModel.swift */; };
@@ -262,6 +267,11 @@
 		6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationViewController.swift; sourceTree = "<group>"; };
 		6E9D7CC0216B3AE40044176D /* Authentication.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Authentication.storyboard; sourceTree = "<group>"; };
 		6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDeviceViewController.swift; sourceTree = "<group>"; };
+		6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppQRCodeMessageHandler.swift; sourceTree = "<group>"; };
+		6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppNativeMessageHandler.swift; sourceTree = "<group>"; };
+		6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDeviceMotionMessageHandler.swift; sourceTree = "<group>"; };
+		6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppTakePhotoMessageHandler.swift; sourceTree = "<group>"; };
+		6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppGyroscopeMessageHandler.swift; sourceTree = "<group>"; };
 		6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		6EF8F40F2176029E004B7587 /* OpenAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAuthViewController.swift; sourceTree = "<group>"; };
 		71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -592,6 +602,26 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		6EABFB0921991AF900305ED5 /* Native */ = {
+			isa = PBXGroup;
+			children = (
+				6EABFB0E219930EC00305ED5 /* ViewController */,
+				6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */,
+				6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */,
+				6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */,
+				6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */,
+				6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */,
+			);
+			path = Native;
+			sourceTree = "<group>";
+		};
+		6EABFB0E219930EC00305ED5 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
 		8913436F20C78D9600A17AEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -681,6 +711,7 @@
 		8928C22720AE7CB500C3103E /* Dapp */ = {
 			isa = PBXGroup;
 			children = (
+				6EABFB0921991AF900305ED5 /* Native */,
 				8935BA5C216F48A800C37263 /* Method.swift */,
 				8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */,
 				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
@@ -1302,6 +1333,7 @@
 				1A69465C21916BE5000093A2 /* EthereumTxSender.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,
 				8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */,
+				6EABFB122199520F00305ED5 /* DAppTakePhotoMessageHandler.swift in Sources */,
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
@@ -1322,10 +1354,12 @@
 				89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */,
 				1A5515E521898A1000D34791 /* WalletKeystoreManager.swift in Sources */,
 				1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */,
+				6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */,
 				6EF8F40C2175CAD9004B7587 /* UIControl+Extension.swift in Sources */,
 				898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */,
 				8989E2D32188440D008A1BDE /* SwitchNetworkTableViewCell.swift in Sources */,
 				898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */,
+				6EABFB0D21991CB300305ED5 /* DAppNativeMessageHandler.swift in Sources */,
 				6E83CB91216F573100029324 /* GuideViewController.swift in Sources */,
 				8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */,
 				6E83CB8E216F573100029324 /* GuideService.swift in Sources */,
@@ -1414,6 +1448,7 @@
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
+				6EABFB0B21991BC200305ED5 /* DAppQRCodeMessageHandler.swift in Sources */,
 				6E4F961B2189A82900372D3E /* TransactionConfirmViewController.swift in Sources */,
 				89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */,
 				1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */,
@@ -1422,6 +1457,7 @@
 				89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */,
 				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,
 				6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */,
+				6EABFB1421995AB800305ED5 /* DAppGyroscopeMessageHandler.swift in Sources */,
 				898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */,
 				8913437520C7D3A400A17AEF /* Toast.swift in Sources */,
 				89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */,
