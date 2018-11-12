@@ -14,15 +14,18 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
     struct Parameters: Decodable {
         let interval: Interval
     }
+
     enum Interval: String, Decodable {
         case game
         case ui
         case normal
     }
+
     enum MessageName: String {
         case startDeviceMotionListening
         case stopDeviceMotionListening
     }
+
     override var messageNames: [String] {
         return [
             MessageName.startDeviceMotionListening.rawValue,

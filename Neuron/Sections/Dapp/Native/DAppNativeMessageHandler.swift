@@ -14,6 +14,7 @@ class DAppNativeMessageHandler: NSObject, WKScriptMessageHandler {
         case success([String: Any])
         case fail(Int, String)
     }
+
     struct Callback: Decodable {
         let callback: String
     }

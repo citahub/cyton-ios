@@ -14,14 +14,17 @@ class DAppTakePhotoMessageHandler: DAppNativeMessageHandler, UIImagePickerContro
     override var messageNames: [String] {
         return ["takePhoto"]
     }
+
     enum Quality: String, Decodable {
         case high
         case normal
         case low
     }
+
     struct Parameters: Decodable {
         var quality: Quality?
     }
+
     var quality: Quality?
 
     override func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
