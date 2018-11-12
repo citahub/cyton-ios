@@ -10,7 +10,6 @@ import UIKit
 import RealmSwift
 
 class ManageAssetViewController: UITableViewController, AssetTableViewCellDelegate {
-    let viewModel = AssetViewModel()
     var dataArray: [TokenModel] = []
     var selectArr: List<TokenModel>?
     var selectAddressArray: [String] = []
@@ -34,12 +33,40 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func didGetDataForList() {
         selectAddressArray.removeAll()
-        dataArray = viewModel.getAssetListFromJSON()
-        selectArr = viewModel.getSelectAsset()
+        dataArray = getAssetListFromJSON()
+        selectArr = getSelectAsset()
         for tokenItem in selectArr! {
             selectAddressArray.append(tokenItem.address)
         }
         tableView.reloadData()
+    }
+
+    func getAssetListFromJSON() -> [TokenModel] {
+        var tokenArray: [TokenModel] = []
+
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        for tModel in appModel.extraTokenList {
+            try? WalletRealmTool.realm.write {
+                WalletRealmTool.realm.add(tModel, update: true)
+            }
+            tokenArray.append(tModel)
+        }
+
+        let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
+        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)) else { return [] }
+        guard let tokens = try? JSONDecoder().decode([TokenModel].self, from: jsonData) else { return [] }
+
+        for token in tokens {
+            token.chainidName = token.name
+            token.iconUrl = token.logo?.src ?? ""
+            tokenArray.append(token)
+        }
+        return tokenArray
+    }
+
+    func getSelectAsset() -> List<TokenModel>? {
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        return appModel.currentWallet?.selectTokenList
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,13 +99,34 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func selectedAsset(model: TokenModel) {
         if selectAddressArray.contains(model.address) {
-            viewModel.deleteSelectedToken(tokenM: model)
+            deleteSelectedToken(tokenM: model)
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
                 return item == model.address
             })
         } else {
-            viewModel.addSelectToken(tokenM: model)
+            addSelectToken(tokenM: model)
         }
         didGetDataForList()
+    }
+
+    func deleteSelectedToken(tokenM: TokenModel) {
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
+        try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(tokenM, update: true)
+            filterResult?.forEach({ (tm) in
+                if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
+                    appModel.currentWallet?.selectTokenList.remove(at: index)
+                }
+            })
+        }
+    }
+
+    func addSelectToken(tokenM: TokenModel) {
+        let appModel = WalletRealmTool.getCurrentAppModel()
+        try? WalletRealmTool.realm.write {
+            WalletRealmTool.realm.add(tokenM, update: true)
+            appModel.currentWallet?.selectTokenList.append(tokenM)
+        }
     }
 }
