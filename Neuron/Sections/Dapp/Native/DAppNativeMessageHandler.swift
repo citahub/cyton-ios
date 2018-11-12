@@ -63,17 +63,9 @@ extension WKWebView {
     }
 
     func addAllNativeFunctionHandler() {
-//        addNativeFunctionHandler(handler: DAppTakePhotoMessageHandler())
         addNativeFunctionHandler(handler: DAppQRCodeMessageHandler())
         addNativeFunctionHandler(handler: DAppDeviceMotionMessageHandler())
         addNativeFunctionHandler(handler: DAppGyroscopeMessageHandler())
-
-        // test
-//        let js = "window.webkit.messageHandlers.takePhoto.postMessage({quality: 'normal', callback: 'callback'})"
-//        let js = "window.webkit.messageHandlers.scanCode.postMessage({callback: 'callback'})"
-//        let js = "window.webkit.messageHandlers.startDeviceMotionListening.postMessage({interval: 'normal', callback: 'callback'})"
-//        let js = "window.webkit.messageHandlers.startGyroscope.postMessage({interval: 'normal', callback: 'callback'})"
-//        configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
     }
 }
 
