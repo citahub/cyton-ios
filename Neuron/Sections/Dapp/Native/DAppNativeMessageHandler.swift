@@ -72,8 +72,8 @@ extension WKWebView {
 
 extension UIResponder {
     var viewController: UIViewController? {
-        if self.isKind(of: UIViewController.self) {
-            return self as? UIViewController
+        if let controller = self as? UIViewController {
+            return controller
         } else {
             return next?.viewController
         }
