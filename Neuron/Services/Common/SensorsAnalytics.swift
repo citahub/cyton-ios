@@ -24,7 +24,7 @@ class SensorsAnalytics {
         sensors = SensorsAnalyticsSDK.sharedInstance(withServerURL: "https://banana.cryptape.com:8106/sa?project=production", andDebugMode: .off)
         #endif
 
-        sensors.registerSuperProperties(["platformType": "iOS", "ip_id": getIpId()])
+        sensors.registerSuperProperties(["platformType": "iOS", "ip_id": getIpId(), "$ip": ""])
         let eventType: SensorsAnalyticsAutoTrackEventType = [
             .eventTypeAppStart,
             .eventTypeAppEnd,
@@ -37,6 +37,11 @@ class SensorsAnalytics {
         sensors.enableTrackScreenOrientation(false)
         sensors.login(getUserId())
         sensors.trackAppCrash()
+
+        if var automaticProperties = sensors.value(forKey: "automaticProperties") as? [String: Any] {
+            automaticProperties["$device_id"] = ""
+            sensors.setValue(automaticProperties, forKey: "automaticProperties")
+        }
     }
 
     static func configureSensors() {
