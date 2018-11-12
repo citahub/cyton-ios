@@ -14,10 +14,9 @@ struct NervosNativeTokenService {
     static func getNervosNativeTokenMsg(blockNumber: String = "latest", completion: @escaping (AppChainServiceResult<TokenModel>) -> Void) {
         let appChain = AppChainNetwork.appChain()
         DispatchQueue.global().async {
-            let result = appChain.rpc.getMetaData(blockNumber: blockNumber)
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let metaData):
+            do {
+                let metaData = try appChain.rpc.getMetaData(blockNumber: blockNumber)
+                DispatchQueue.main.async {
                     let tokenModel = TokenModel()
                     tokenModel.address = ""
                     tokenModel.chainId = metaData.chainId.description
@@ -29,7 +28,9 @@ struct NervosNativeTokenService {
                     tokenModel.decimals = NativeDecimals.nativeTokenDecimals
                     tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     completion(AppChainServiceResult.success(tokenModel))
-                case .failure(let error):
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(AppChainServiceResult.error(error))
                 }
             }
@@ -39,13 +40,13 @@ struct NervosNativeTokenService {
     static func getNervosNativeTokenBalance(walletAddress: String, completion: @escaping (AppChainServiceResult<String>) -> Void) {
         let appChain = AppChainNetwork.appChain()
         DispatchQueue.global().async {
-            let result = appChain.rpc.getBalance(address: Address(walletAddress)!)
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let balance):
-                    let balanceNumber = self.formatBalanceValue(value: balance)
-                    completion(AppChainServiceResult.success(balanceNumber))
-                case .failure(let error):
+            do {
+                let balance = try appChain.rpc.getBalance(address: Address(walletAddress)!)
+                DispatchQueue.main.async {
+                    completion(AppChainServiceResult.success(self.formatBalanceValue(value: balance)))
+                }
+            } catch let error {
+                DispatchQueue.main.async {
                     completion(AppChainServiceResult.error(error))
                 }
             }
@@ -57,5 +58,4 @@ struct NervosNativeTokenService {
         let finalValue = Double(format)!
         return finalValue.clean
     }
-
 }

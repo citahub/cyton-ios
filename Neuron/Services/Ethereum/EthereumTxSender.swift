@@ -78,6 +78,7 @@ class EthereumTxSender {
         options.from = fromAddress
 
         do {
+            // TODO: replace this with `sendERC20tokensWithKnownDecimals`.
             guard let transaction = try web3.eth.sendERC20tokensWithNaturalUnits(
                 tokenAddress: tokenAddress,
                 from: fromAddress,
