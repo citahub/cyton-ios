@@ -129,9 +129,9 @@ extension TransactionHistoryService {
 
     private class Ethereum: TransactionHistoryService {
         override func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
-            let url = EthereumNetwork().host()
+            let url = EthereumNetwork().host().appendingPathComponent("/api")
             let parameters: [String: Any] = [
-                "apikey": "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z",
+                "apikey": ServerApi.etherScanKey,
                 "module": "account",
                 "action": "txlist",
                 "sort": "desc",

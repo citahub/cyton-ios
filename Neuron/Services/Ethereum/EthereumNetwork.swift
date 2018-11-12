@@ -27,13 +27,13 @@ struct EthereumNetwork {
     func host() -> URL {
         switch currentNetwork {
         case .mainnet:
-            return URL(string: "http://api.etherscan.io/api")!
+            return URL(string: "http://api.etherscan.io")!
         case .rinkeby:
-            return URL(string: "http://api-rinkeby.etherscan.io/api")!
+            return URL(string: "http://api-rinkeby.etherscan.io")!
         case .ropsten:
-            return URL(string: "http://api-ropsten.etherscan.io/api")!
+            return URL(string: "http://api-ropsten.etherscan.io")!
         case .kovan:
-            return URL(string: "http://api-kovan.etherscan.io/api")!
+            return URL(string: "http://api-kovan.etherscan.io")!
         }
     }
 
