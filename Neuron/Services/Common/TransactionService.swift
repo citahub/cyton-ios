@@ -54,7 +54,7 @@ class TransactionService {
     var toAddress = ""
     var amount = 0.0
     var extraData = Data()
-    var password: String = ""  // TODO: Inject web3 instance instead of passing password.
+    var password: String = ""
     var isUseQRCode = false    // TODO: Fix spelling.
     var estimatedGasPrice: UInt = 1 {
         didSet {
@@ -141,7 +141,7 @@ extension TransactionService {
                 let sender = EthereumTxSender(web3: web3, from: fromAddress)
                 let txhash = try sender.sendETH(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),
+                    amount: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     data: extraData,
@@ -176,7 +176,7 @@ extension TransactionService {
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),
+                    amount: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     contractAddress: token.address,
@@ -194,8 +194,8 @@ extension TransactionService {
     class AppChain: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 21_000
-            let result = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
-            estimatedGasPrice = result?.words.first ?? 1
+            let quotaPrice = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
+            estimatedGasPrice = quotaPrice?.words.first ?? 1
             changeGasLimitEnable = false
             changeGasPriceEnable = false
         }
@@ -212,7 +212,7 @@ extension TransactionService {
                     to: toAddress,
                     quota: BigUInt(UInt(gasLimit)),
                     data: extraData,
-                    value: String(format: "%.18lf", amount),
+                    value: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
@@ -228,7 +228,7 @@ extension TransactionService {
     class AppChainERC20: TransactionService {
         override func requestGasCost() {
             self.gasLimit = 100_000
-            let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain()).dematerialize()
+            let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
             estimatedGasPrice = bigNumber?.words.first ?? 1
             changeGasLimitEnable = false
             changeGasPriceEnable = false

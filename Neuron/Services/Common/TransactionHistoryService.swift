@@ -49,11 +49,10 @@ class TransactionHistoryService {
 
     func getAppChainQuotaPrice() {
         let appChain = AppChainNetwork.appChain(url: URL(string: token.chainHosts)!)
-        let result = Utils.getQuotaPrice(appChain: appChain)
-        switch result {
-        case .success(let quotaPrice):
+        do {
+            let quotaPrice = try Utils.getQuotaPrice(appChain: appChain)
             self.quotaPrice = Double(quotaPrice)
-        case .failure:
+        } catch {
             self.quotaPrice = pow(10, 9)
         }
     }
