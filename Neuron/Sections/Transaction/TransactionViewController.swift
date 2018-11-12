@@ -84,6 +84,15 @@ class TransactionViewController: UITableViewController, TransactionParamBuilderD
             Toast.showToast(text: "转账成功,请稍后刷新查看")
             confirmViewController?.dismiss()
             navigationController?.popViewController(animated: true)
+
+            SensorsAnalytics.Track.transaction(
+                chainType: token.chainId,
+                currencyType: token.symbol,
+                currencyNumber: Double(amountTextField.text ?? "0")!,
+                receiveAddress: addressTextField.text ?? "",
+                outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+                transactionType: .normal
+            )
         }
     }
 

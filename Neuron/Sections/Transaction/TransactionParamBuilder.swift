@@ -86,24 +86,6 @@ class TransactionParamBuilder {
     func completion(result: Result) {
         DispatchQueue.main.async {
             self.delegate?.transactionCompletion(self, result: result)
-            self.trackEvent(result)
-        }
-    }
-
-    // TODO: move this out of Transaction Service.
-    private func trackEvent(_ result: TransactionParamBuilder.Result) {
-        switch result {
-        case .error:
-            break
-        default:
-            SensorsAnalytics.Track.transaction(
-                chainType: token.chainId,
-                currencyType: token.symbol,
-                currencyNumber: amount,
-                receiveAddress: toAddress,
-                outcomeAddress: fromAddress,
-                transactionType: .normal
-            )
         }
     }
 }

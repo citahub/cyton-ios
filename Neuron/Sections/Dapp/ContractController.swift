@@ -209,6 +209,14 @@ extension ContractController: TransactionParamBuilderDelegate {
         case .error:
             delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
         case .succee(let txhash):
+            SensorsAnalytics.Track.transaction(
+                chainType: tokenModel.chainId,
+                currencyType: tokenModel.symbol,
+                currencyNumber: Double(value) ?? 0.0,
+                receiveAddress: dappCommonModel.appChain?.to ?? "",
+                outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+                transactionType: .normal
+            )
             delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
         }
         confirmViewController?.dismiss()
