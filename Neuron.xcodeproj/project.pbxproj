@@ -100,7 +100,6 @@
 		8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18520BFE6850086848F /* ImportWalletController.swift */; };
 		8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18920BFEF950086848F /* ImportTextViewCell.swift */; };
 		8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */; };
-		8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */; };
 		8964A19320C115A70086848F /* VerifyMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19120C115A70086848F /* VerifyMnemonicViewController.swift */; };
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
@@ -309,7 +308,6 @@
 		8964A18520BFE6850086848F /* ImportWalletController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImportWalletController.swift; sourceTree = "<group>"; };
 		8964A18920BFEF950086848F /* ImportTextViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportTextViewCell.swift; sourceTree = "<group>"; };
 		8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateMnemonicController.swift; sourceTree = "<group>"; };
-		8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GenerateMnemonicController.xib; sourceTree = "<group>"; };
 		8964A19120C115A70086848F /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
@@ -814,7 +812,6 @@
 				898A1A1620B6BE6E00ECB465 /* ChangePasswordController.xib */,
 				898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */,
 				8964A18B20C0E4BE0086848F /* GenerateMnemonicController.swift */,
-				8964A18C20C0E4BE0086848F /* GenerateMnemonicController.xib */,
 				8964A19120C115A70086848F /* VerifyMnemonicViewController.swift */,
 				8964A18520BFE6850086848F /* ImportWalletController.swift */,
 				898889C52136521100D04AA8 /* KeystoreViewController.swift */,
@@ -1156,7 +1153,6 @@
 				8935BA59216EFCE700C37263 /* neuron.js in Resources */,
 				1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
-				8964A18E20C0E4BE0086848F /* GenerateMnemonicController.xib in Resources */,
 				89C614572140D4C500DC3DF4 /* currency.plist in Resources */,
 				898A1A3020B8044900ECB465 /* TradeTableViewCell.xib in Resources */,
 			);
@@ -1217,7 +1213,6 @@
 				"${BUILT_PRODUCTS_DIR}/RSKPlaceholderTextView/RSKPlaceholderTextView.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SensorsAnalyticsSDK/SensorsAnalyticsSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/SipHash/SipHash.framework",
@@ -1247,7 +1242,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RSKPlaceholderTextView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SensorsAnalyticsSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SipHash.framework",

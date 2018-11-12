@@ -38,7 +38,7 @@ class AppChainTxSender {
 
         let nonce = UUID().uuidString
         let appChain = AppChainNetwork.appChain()
-        guard case .success(let blockNumber) = appChain.rpc.blockNumber() else {
+        guard let blockNumber = try? appChain.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
         let transaction = Transaction(
@@ -48,22 +48,24 @@ class AppChainTxSender {
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
             value: amount,
-            chainId: UInt32(chainId),
+            chainId: chainId.description,
             version: UInt32(0)
         )
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
+        do {
+            return try appChain.rpc.sendRawTransaction(signedTx: signed)
+        } catch {
             throw SendTransactionError.signTXFailed
         }
-        return result.hash.toHexString()
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
+        do {
+            return try appChain.rpc.sendRawTransaction(signedTx: signed)
+        } catch {
             throw SendTransactionError.signTXFailed
         }
-        return result.hash.toHexString()
     }
 
     func sign(transaction: Transaction, password: String) throws -> String {

@@ -22,7 +22,6 @@ class MnemonicViewController: UITableViewController, ImportWalletViewModelDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mnemonicTextView.placeholder = "请输入助记词+空格"
         mnemonicTextView.delegate = self
         viewModel.delegate = self
     }
