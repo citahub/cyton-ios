@@ -17,7 +17,7 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "导出keystore"
+        title = "导出Keystore"
         walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         kestoreTextView.text = keystoreString
         setUpUI()
@@ -32,7 +32,7 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
         UIPasteboard.general.string = keystoreString
-        Toast.showToast(text: "keystore已经复制到粘贴板")
+        Toast.showToast(text: "Keystore已经复制到粘贴板")
     }
 
     @IBAction func didClickShareButton(_ sender: UIButton) {
