@@ -1,5 +1,5 @@
 //
-//  TransactionService.swift
+//  TransactionParamBuilder.swift
 //  Neuron
 //
 //  Created by 晨风 on 2018/10/31.
@@ -11,20 +11,18 @@ import AppChain
 import Web3swift
 import BigInt
 
-typealias TxHash = String
-
-protocol TransactionServiceDelegate: NSObjectProtocol {
-    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result)
-    func transactionGasCostChanged(_ transactionService: TransactionService)
+protocol TransactionParamBuilderDelegate: NSObjectProtocol {
+    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result)
+    func transactionGasCostChanged(_ transactionService: TransactionParamBuilder)
 }
 
-class TransactionService {
+class TransactionParamBuilder {
     enum Result {
         case error(Error)
         case succee(TxHash)
     }
 
-    weak var delegate: TransactionServiceDelegate?
+    weak var delegate: TransactionParamBuilderDelegate?
     var token: TokenModel!
     var fromAddress: String!
     var tokenBalance: Double = 0.0
@@ -54,7 +52,6 @@ class TransactionService {
     var toAddress = ""
     var amount = 0.0 // Change to BigUInt representing final value (smallet unit, e.g., wei).
     var extraData = Data()
-    var password: String = ""
     var isUseQRCode = false    // TODO: Fix spelling.
     var estimatedGasPrice: UInt = 1 {
         didSet {
@@ -67,7 +64,7 @@ class TransactionService {
         tokenBalance = Double(token.tokenBalance) ?? 0.0
     }
 
-    static func service(with token: TokenModel) -> TransactionService {
+    static func service(with token: TokenModel) -> TransactionParamBuilder {
         if token.type == .erc20 {
             return ERC20(token: token)
         } else if token.type == .ethereum {
@@ -84,7 +81,7 @@ class TransactionService {
     func requestGasCost() {
     }
 
-    func sendTransaction() {
+    func sendTransaction(password: String) {
     }
 
     func completion(result: Result) {
@@ -95,7 +92,7 @@ class TransactionService {
     }
 
     // TODO: move this out of Transaction Service.
-    private func trackEvent(_ result: TransactionService.Result) {
+    private func trackEvent(_ result: TransactionParamBuilder.Result) {
         switch result {
         case .error:
             if isUseQRCode {
@@ -117,8 +114,8 @@ class TransactionService {
     }
 }
 
-extension TransactionService {
-    class Ethereum: TransactionService {
+extension TransactionParamBuilder {
+    class Ethereum: TransactionParamBuilder {
         override func requestGasCost() {
             self.gasLimit = 21_000
             /*
@@ -131,7 +128,7 @@ extension TransactionService {
             changeGasPriceEnable = false
         }
 
-        override func sendTransaction() {
+        override func sendTransaction(password: String) {
             // TODO: extract this
             let keystore = WalletManager.default.keystore(for: fromAddress)
             let web3 = EthereumNetwork().getWeb3()
@@ -160,8 +157,8 @@ extension TransactionService {
     }
 }
 
-extension TransactionService {
-    class ERC20: TransactionService {
+extension TransactionParamBuilder {
+    class ERC20: TransactionParamBuilder {
         override func requestGasCost() {
             self.gasLimit = 21_000
             let bigNumber = try? EthereumNetwork().getWeb3().eth.getGasPrice()
@@ -170,7 +167,7 @@ extension TransactionService {
             changeGasPriceEnable = false
         }
 
-        override func sendTransaction() {
+        override func sendTransaction(password: String) {
             let keystore = WalletManager.default.keystore(for: fromAddress)
             let web3 = EthereumNetwork().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
@@ -199,8 +196,8 @@ extension TransactionService {
     }
 }
 
-extension TransactionService {
-    class AppChain: TransactionService {
+extension TransactionParamBuilder {
+    class AppChain: TransactionParamBuilder {
         override func requestGasCost() {
             self.gasLimit = 21_000
             let quotaPrice = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
@@ -209,8 +206,8 @@ extension TransactionService {
             changeGasPriceEnable = false
         }
 
-        override func sendTransaction() {
-            super.sendTransaction()
+        override func sendTransaction(password: String) {
+            super.sendTransaction(password: password)
             do {
                 guard let appChainUrl = URL(string: token.chainHosts) else {
                     throw SendTransactionError.invalidAppChainNode
@@ -235,8 +232,8 @@ extension TransactionService {
     }
 }
 
-extension TransactionService {
-    class AppChainERC20: TransactionService {
+extension TransactionParamBuilder {
+    class AppChainERC20: TransactionParamBuilder {
         override func requestGasCost() {
             self.gasLimit = 100_000
             let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())

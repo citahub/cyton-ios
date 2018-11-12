@@ -10,7 +10,7 @@ import UIKit
 import Web3swift
 import EthereumAddress
 
-class TransactionViewController: UITableViewController, TransactionServiceDelegate {
+class TransactionViewController: UITableViewController, TransactionParamBuilderDelegate {
     // Wallet
     @IBOutlet weak var walletIconView: UIImageView!
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -19,13 +19,13 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var gasCostLabel: UILabel!
     @IBOutlet weak var addressTextField: UITextField!
-    var service: TransactionService!
+    var service: TransactionParamBuilder!
     var token: TokenModel!
     var confirmViewController: TransactionConfirmViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        service = TransactionService.service(with: token)
+        service = TransactionParamBuilder.service(with: token)
         service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.delegate = self
         Toast.showHUD()
@@ -75,8 +75,8 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         amountTextField.text = "\(amount)"
     }
 
-    // MARK: - TransactionServiceDelegate
-    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
+    // MARK: - TransactionParamBuilderDelegate
+    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
         switch result {
         case .error(let error):
             Toast.showToast(text: error.localizedDescription)
@@ -87,7 +87,7 @@ class TransactionViewController: UITableViewController, TransactionServiceDelega
         }
     }
 
-    func transactionGasCostChanged(_ transactionService: TransactionService) {
+    func transactionGasCostChanged(_ transactionService: TransactionParamBuilder) {
         gasCostLabel.text = "\(service.gasCost.clean)\(token.gasSymbol)"
     }
 

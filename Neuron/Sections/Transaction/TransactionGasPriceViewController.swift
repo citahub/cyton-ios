@@ -16,7 +16,7 @@ class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var estimatedGasPriceLabel: UILabel!
     @IBOutlet weak var gasPriceTextField: UITextField!
     @IBOutlet weak var gasLimitTextField: UITextField!
-    var service: TransactionService!
+    var service: TransactionParamBuilder!
 
     override func viewDidLoad() {
         super.viewDidLoad()

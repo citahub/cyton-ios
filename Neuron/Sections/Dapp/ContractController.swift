@@ -178,7 +178,7 @@ class ContractController: UITableViewController {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        let service = TransactionService.service(with: tokenModel)
+        let service = TransactionParamBuilder.service(with: tokenModel)
         service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         service.amount = Double(value) ?? 0.0
         service.delegate = self
@@ -203,8 +203,8 @@ class ContractController: UITableViewController {
     }
 }
 
-extension ContractController: TransactionServiceDelegate {
-    func transactionCompletion(_ transactionService: TransactionService, result: TransactionService.Result) {
+extension ContractController: TransactionParamBuilderDelegate {
+    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
         switch result {
         case .error:
             delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
@@ -214,7 +214,7 @@ extension ContractController: TransactionServiceDelegate {
         confirmViewController?.dismiss()
         navigationController?.popViewController(animated: true)
     }
-    func transactionGasCostChanged(_ transactionService: TransactionService) {
+    func transactionGasCostChanged(_ transactionService: TransactionParamBuilder) {
     }
 }
 

@@ -21,7 +21,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containView: UIView!
-    var service: TransactionService! {
+    var service: TransactionParamBuilder! {
         didSet {
             let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
             controller.service = service
@@ -90,11 +90,10 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
 
     func confirmWalletPassword(password: String) {
         if let service = service {
-            service.password = password
             Toast.showHUD()
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
-                    self.service.sendTransaction()
+                    self.service.sendTransaction(password: password)
                     Toast.hideHUD()
                 }
             }
@@ -148,7 +147,7 @@ class TransactionConfirmInfoViewController: UIViewController {
     @IBOutlet weak var fromAddressLabel: UILabel!
     @IBOutlet weak var toAddressLabel: UILabel!
     @IBOutlet weak var gasCostLabel: UILabel!
-    var service: TransactionService! {
+    var service: TransactionParamBuilder! {
         didSet {
             _ = view // load view
             let amount = service.amount
