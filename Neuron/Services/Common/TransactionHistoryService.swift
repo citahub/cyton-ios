@@ -89,11 +89,22 @@ extension TransactionHistoryService {
             }
         }
     }
-
+//http://api-kovan.etherscan.io/api?module=account&action=txlist&address=0xabea5a6e72b02511bd6caf996a1b4c6ac477ff71
     private class Ethereum: TransactionHistoryService {
         override func reloadData(completion: @escaping (Error?) -> Void) {
-            let parameters: Dictionary = ["address": walletAddress]
-            Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { [weak self](response) in
+            let url = EthereumNetwork().host()
+            let parameters: [String: Any] = [
+                "apikey": "T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z",
+                "module": "account",
+                "action": "txlist",
+                "sort": "desc",
+                "address": walletAddress,
+                "page": 1,
+                "offset": 20
+            ]
+//            0xaBea5A6e72B02511Bd6cAf996A1b4C6aC477Ff71
+//            http://api-rinkeby.etherscan.io/api?module=account&action=txlist&address=0xaBea5A6e72B02511Bd6cAf996A1b4C6aC477Ff71&apikey=T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z&page=1&offset=6&sort=desc
+            Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self](response) in
                 do {
                     guard let responseData = response.data else { throw TransactionError.requestfailed }
                     print(String(bytes: responseData.bytes, encoding: .utf8) ?? "none")
@@ -181,7 +192,7 @@ extension TransactionHistoryService {
     private class AppChainErc20: TransactionHistoryService {
         var loading = false
         private var page = 1
-        
+
         override init(token: TokenModel) {
             super.init(token: token)
             getAppChainQuotaPrice()

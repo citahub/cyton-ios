@@ -24,6 +24,19 @@ struct EthereumNetwork {
         }
     }
 
+    func host() -> URL {
+        switch currentNetwork {
+        case .mainnet:
+            return URL(string: "http://api.etherscan.io/api")!
+        case .rinkeby:
+            return URL(string: "http://api-rinkeby.etherscan.io/api")!
+        case .ropsten:
+            return URL(string: "http://api-ropsten.etherscan.io/api")!
+        case .kovan:
+            return URL(string: "http://api-kovan.etherscan.io/api")!
+        }
+    }
+
     enum EthereumNetworkType: String, CaseIterable {
         case mainnet
         case rinkeby
