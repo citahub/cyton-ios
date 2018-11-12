@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="43o-jd-H7l">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="43o-jd-H7l">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -74,16 +74,16 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uy7-iq-qzf">
-                                        <rect key="frame" x="1" y="382" width="323" height="1"/>
+                                        <rect key="frame" x="1" y="380" width="323" height="1"/>
                                         <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="aVQ-rl-iJ8"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CGV-pC-L7a">
-                                        <rect key="frame" x="0.0" y="385" width="325" height="40"/>
+                                        <rect key="frame" x="0.0" y="381" width="325" height="44"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="c5a-kU-qgX"/>
+                                            <constraint firstAttribute="height" constant="44" id="c5a-kU-qgX"/>
                                         </constraints>
                                         <state key="normal" title="复制地址"/>
                                         <connections>
@@ -98,7 +98,7 @@
                                     <constraint firstAttribute="trailing" secondItem="CGV-pC-L7a" secondAttribute="trailing" id="Kz2-00-Mhr"/>
                                     <constraint firstAttribute="height" constant="425" id="O4G-aO-wJh"/>
                                     <constraint firstItem="mUl-Cb-nqB" firstAttribute="top" secondItem="lqe-gB-tY5" secondAttribute="bottom" constant="34" id="Wkh-FG-ck8"/>
-                                    <constraint firstAttribute="bottom" secondItem="uy7-iq-qzf" secondAttribute="bottom" constant="42" id="Wpi-gq-v0q"/>
+                                    <constraint firstAttribute="bottom" secondItem="uy7-iq-qzf" secondAttribute="bottom" constant="44" id="Wpi-gq-v0q"/>
                                     <constraint firstAttribute="trailing" secondItem="uy7-iq-qzf" secondAttribute="trailing" constant="1" id="bXy-Sa-KJO"/>
                                     <constraint firstItem="CGV-pC-L7a" firstAttribute="leading" secondItem="U0u-pF-C2P" secondAttribute="leading" id="ciS-Ce-mII"/>
                                     <constraint firstItem="mUl-Cb-nqB" firstAttribute="centerX" secondItem="U0u-pF-C2P" secondAttribute="centerX" id="e1S-53-uz1"/>

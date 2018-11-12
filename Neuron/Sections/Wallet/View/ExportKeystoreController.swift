@@ -11,7 +11,6 @@ import UIKit
 class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
     @IBOutlet weak var kestoreTextView: UITextView!
     @IBOutlet weak var copyButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
     var walletModel = WalletModel()
     var keystoreString = ""
 
@@ -20,25 +19,11 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
         title = "导出Keystore"
         walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         kestoreTextView.text = keystoreString
-        setUpUI()
         setupEnterBackOverlay()
-    }
-
-    func setUpUI() {
-        shareButton.layer.cornerRadius = 5
-        shareButton.layer.borderWidth = 1
-        shareButton.layer.borderColor = AppColor.themeColor.cgColor
     }
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
         UIPasteboard.general.string = keystoreString
         Toast.showToast(text: "Keystore已经复制到粘贴板")
-    }
-
-    @IBAction func didClickShareButton(_ sender: UIButton) {
-        let shareText = keystoreString
-        let shareItem = ShareItem.init(shareString: shareText)
-        let activityVC = UIActivityViewController.init(activityItems: [shareItem], applicationActivities: nil)
-        present(activityVC, animated: true, completion: nil)
     }
 }

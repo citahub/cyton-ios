@@ -43,11 +43,17 @@ class GuideService {
         guard controller == nil else { return }
         let guideController: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
         controller = BaseNavigationController(rootViewController: guideController)
+        controller?.modalPresentationStyle = .overCurrentContext
         UIApplication.shared.keyWindow?.rootViewController?.present(controller!, animated: true, completion: nil)
     }
 
     private func hideGuide() {
-        controller?.dismiss(animated: true, completion: nil)
-        controller = nil
+        UIView.animate(withDuration: 0.33, animations: {
+            let height = self.controller?.view.bounds.size.height ?? 0.0
+            self.controller?.view.transform = CGAffineTransform(translationX: 0, y: height)
+        }, completion: { (_) in
+            self.controller?.dismiss(animated: false, completion: nil)
+            self.controller = nil
+        })
     }
 }
