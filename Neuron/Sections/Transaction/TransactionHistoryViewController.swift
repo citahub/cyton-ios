@@ -20,7 +20,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenAmountLabel: UILabel!
     @IBOutlet var warningView: UIView!
     @IBOutlet weak var warningHeight: NSLayoutConstraint!
-    
+
     var service: TransactionHistoryService?
     var tokenProfile: TokenProfile?
     var tokenType: TokenType = .erc20Token
@@ -156,7 +156,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             for index in insertions {
                 indexPaths.append(IndexPath(row: index, section: 0))
             }
+            self?.tableView.beginUpdates()
             self?.tableView.insertRows(at: indexPaths, with: .none)
+            self?.tableView.endUpdates()
         })
     }
 
@@ -171,7 +173,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > service!.transactions.count - 4 {
+        if indexPath.row > service!.transactions.count - 6 {
             loadMoreData()
         }
     }
