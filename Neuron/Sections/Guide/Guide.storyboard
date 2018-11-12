@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,10 +69,20 @@
                                     <outlet property="delegate" destination="O3T-88-B97" id="4Ef-AJ-h9B"/>
                                 </connections>
                             </collectionView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rN5-2W-lBP">
-                                <rect key="frame" x="16" y="558" width="343" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-w6-Q3C">
+                                <rect key="frame" x="20" y="532" width="335" height="10"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="10" id="5hr-vH-ShC"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="currentPageIndicatorTintColor" red="0.28235294119999998" green="0.42745098040000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </pageControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rN5-2W-lBP">
+                                <rect key="frame" x="16" y="557" width="343" height="44"/>
                                 <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="5zE-3k-gVK"/>
+                                </constraints>
                                 <state key="normal" title="创建钱包">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -80,10 +90,12 @@
                                     <segue destination="xU9-L5-la2" kind="show" id="yXq-A8-yqJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0se-6B-q7Z">
-                                <rect key="frame" x="17" y="603" width="342" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0se-6B-q7Z">
+                                <rect key="frame" x="16" y="603" width="343" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="cee-cq-EtR"/>
+                                </constraints>
                                 <state key="normal" title="已有钱包">
                                     <color key="titleColor" red="0.086274509799999996" green="0.21176470589999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -93,16 +105,28 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="ncT-w6-Q3C" firstAttribute="leading" secondItem="B8M-ie-IVf" secondAttribute="leading" constant="20" id="2ye-sk-cnW"/>
+                            <constraint firstItem="rN5-2W-lBP" firstAttribute="top" secondItem="ncT-w6-Q3C" secondAttribute="bottom" constant="15" id="D0U-uz-ofx"/>
+                            <constraint firstItem="B8M-ie-IVf" firstAttribute="trailing" secondItem="ncT-w6-Q3C" secondAttribute="trailing" constant="20" id="MtC-yL-vAD"/>
+                            <constraint firstItem="B8M-ie-IVf" firstAttribute="trailing" secondItem="0se-6B-q7Z" secondAttribute="trailing" constant="16" id="Mz2-F7-P05"/>
+                            <constraint firstItem="0se-6B-q7Z" firstAttribute="top" secondItem="rN5-2W-lBP" secondAttribute="bottom" constant="2" id="NFz-ph-vEJ"/>
+                            <constraint firstItem="B8M-ie-IVf" firstAttribute="trailing" secondItem="rN5-2W-lBP" secondAttribute="trailing" constant="16" id="Uac-JE-BI5"/>
+                            <constraint firstItem="rN5-2W-lBP" firstAttribute="leading" secondItem="B8M-ie-IVf" secondAttribute="leading" constant="16" id="Z2C-hZ-HPV"/>
+                            <constraint firstItem="0se-6B-q7Z" firstAttribute="leading" secondItem="B8M-ie-IVf" secondAttribute="leading" constant="16" id="dca-dm-2nl"/>
+                            <constraint firstItem="B8M-ie-IVf" firstAttribute="bottom" secondItem="0se-6B-q7Z" secondAttribute="bottom" constant="20" id="zhv-DI-MbF"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="B8M-ie-IVf"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="1pw-Ug-Okf" id="QjW-NR-Ehf"/>
+                        <outlet property="pageControl" destination="ncT-w6-Q3C" id="9RT-Eb-WdF"/>
                         <segue destination="3Kq-lC-yon" kind="presentation" identifier="displayAgreement" modalPresentationStyle="overCurrentContext" id="LHJ-Nj-MeX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eki-mB-kOV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-702" y="-84"/>
+            <point key="canvasLocation" x="-703.20000000000005" y="-84.107946026986511"/>
         </scene>
         <!--Product Agreement View Controller-->
         <scene sceneID="sJW-Gw-4Km">
