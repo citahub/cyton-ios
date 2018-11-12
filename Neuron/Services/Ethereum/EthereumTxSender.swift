@@ -41,7 +41,12 @@ class EthereumTxSender {
         options.gasPrice = .manual(gasPrice)
         options.from = from
 
-        guard let transaction = web3.eth.sendETH(to: toAddress, amount: value, extraData: data, transactionOptions: options) else {
+        guard let transaction = web3.eth.sendETH(
+            to: toAddress,
+            amount: value,
+            extraData: data,
+            transactionOptions: options
+        ) else {
             throw SendTransactionError.createTransactionIssue
         }
 
@@ -50,32 +55,29 @@ class EthereumTxSender {
 
     func sendToken(
         to: String,
-        amount: String,
+        value: BigUInt,
         gasLimit: UInt64 = 21_000,
         gasPrice: BigUInt,
         contractAddress: String,
         password: String
     ) throws -> TxHash {
-        guard let destinationEthAddress = EthereumAddress(to) else {
+        guard let destinationAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
         }
 
         guard let tokenAddress = EthereumAddress(contractAddress) else {
-            throw SendTransactionError.createTransactionIssue
+            throw SendTransactionError.invalidContractAddress
         }
 
-        guard Web3.Utils.parseToBigUInt(amount, units: .eth) != nil else {
-            throw SendTransactionError.invalidAmountFormat
-        }
-
-        guard let transaction = try web3.eth.sendERC20tokensWithNaturalUnits(
+        guard let transaction = web3.eth.sendERC20tokensWithKnownDecimals(
             tokenAddress: tokenAddress,
             from: from,
-            to: destinationEthAddress,
-            amount: amount
+            to: destinationAddress,
+            amount: value
         ) else {
             throw SendTransactionError.createTransactionIssue
         }
+
         transaction.transactionOptions.gasLimit = .manual(BigUInt(gasLimit))
         transaction.transactionOptions.gasPrice = .manual(gasPrice)
 

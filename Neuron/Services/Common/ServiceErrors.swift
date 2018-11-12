@@ -33,6 +33,7 @@ enum SignMessageResult<T> {
 enum SendTransactionError: Error {
     case invalidSourceAddress
     case invalidDestinationAddress
+    case invalidContractAddress
     case invalidAmountFormat
     case contractLoadingError
     case retrievingGasPriceError

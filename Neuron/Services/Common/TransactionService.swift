@@ -52,7 +52,7 @@ class TransactionService {
     var changeGasPriceEnable = false
     var isSupportGasSetting: Bool { return changeGasPriceEnable || changeGasLimitEnable }
     var toAddress = ""
-    var amount = 0.0
+    var amount = 0.0 // Change to BigUInt representing final value (smallet unit, e.g., wei).
     var extraData = Data()
     var password: String = ""
     var isUseQRCode = false    // TODO: Fix spelling.
@@ -171,17 +171,21 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
-            // TODO: extract this
             let keystore = WalletManager.default.keystore(for: fromAddress)
             let web3 = EthereumNetwork().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
 
             do {
+                // TODO: Get token decimal and convert
+                guard let value = Web3.Utils.parseToBigUInt(String(amount), units: .eth) else {
+                    throw SendTransactionError.invalidAmountFormat
+                }
+
                 let sender = try EthereumTxSender(web3: web3, from: fromAddress)
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,
-                    amount: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
+                    value: value,
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
                     contractAddress: token.address,
@@ -206,18 +210,20 @@ extension TransactionService {
         }
 
         override func sendTransaction() {
-            // TODO: queue async
             super.sendTransaction()
             do {
                 guard let appChainUrl = URL(string: token.chainHosts) else {
                     throw SendTransactionError.invalidAppChainNode
                 }
-                let sender = AppChainTxSender(appChain: AppChainNetwork.appChain(url: appChainUrl), walletManager: WalletManager.default, from: fromAddress)
+                guard let value = Web3Utils.parseToBigUInt(String(amount), units: .eth) else {
+                    throw SendTransactionError.invalidAmountFormat
+                }
+                let sender = try AppChainTxSender(appChain: AppChainNetwork.appChain(url: appChainUrl), walletManager: WalletManager.default, from: fromAddress)
                 let txhash = try sender.send(
                     to: toAddress,
-                    quota: BigUInt(UInt(gasLimit)),
+                    value: value,
+                    quota: gasLimit,
                     data: extraData,
-                    value: String(format: "%.18lf", amount),  // TODO: Fix this. Use BigUInt!!!
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )

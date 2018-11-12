@@ -1,5 +1,5 @@
 //
-//  AppChainTransactionService.swift
+//  AppChainTxSender.swift
 //  Neuron
 //
 //  Created by James Chen on 2018/11/06.
@@ -13,27 +13,27 @@ import BigInt
 class AppChainTxSender {
     private let appChain: AppChain
     private let walletManager: WalletManager
-    private let from: String
+    private let from: Address
 
-    init(appChain: AppChain, walletManager: WalletManager, from: String) {
+    init(appChain: AppChain, walletManager: WalletManager, from: String) throws {
         self.appChain = appChain
         self.walletManager = walletManager
-        self.from = from
+        guard let fromAddress = Address(from) else {
+            throw SendTransactionError.invalidSourceAddress
+        }
+        self.from = fromAddress
     }
 
     func send(
         to: String,
-        quota: BigUInt = BigUInt(21_000),
+        value: BigUInt,
+        quota: UInt64 = 21_000,
         data: Data,
-        value: String,
         chainId: BigUInt,
         password: String
     ) throws -> TxHash {
         guard let destinationEthAddress = Address(to) else {
             throw SendTransactionError.invalidDestinationAddress
-        }
-        guard let amount = Web3Utils.parseToBigUInt(value, units: .eth) else {
-            throw SendTransactionError.invalidAmountFormat
         }
 
         let nonce = UUID().uuidString
@@ -44,32 +44,24 @@ class AppChainTxSender {
         let transaction = Transaction(
             to: destinationEthAddress,
             nonce: nonce,
-            quota: UInt64(quota),
+            quota: quota,
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
-            value: amount,
+            value: value,
             chainId: chainId.description,
             version: UInt32(0)
         )
         let signed = try sign(transaction: transaction, password: password)
-        do {
-            return try appChain.rpc.sendRawTransaction(signedTx: signed)
-        } catch {
-            throw SendTransactionError.signTXFailed
-        }
+        return try appChain.rpc.sendRawTransaction(signedTx: signed)
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
-        do {
-            return try appChain.rpc.sendRawTransaction(signedTx: signed)
-        } catch {
-            throw SendTransactionError.signTXFailed
-        }
+        return try appChain.rpc.sendRawTransaction(signedTx: signed)
     }
 
     func sign(transaction: Transaction, password: String) throws -> String {
-        guard let wallet = walletManager.wallet(for: from) else {
+        guard let wallet = walletManager.wallet(for: from.address) else {
             throw SendTransactionError.noAvailableKeys
         }
         let privateKey = try walletManager.exportPrivateKey(wallet: wallet, password: password)
