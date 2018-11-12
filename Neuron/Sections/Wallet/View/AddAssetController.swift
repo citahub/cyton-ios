@@ -9,7 +9,6 @@
 import UIKit
 
 class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
-
     let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
     let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]
 
@@ -18,7 +17,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var aTable: UITableView!
     var tokenModel = TokenModel()
-    var isUseQRCode = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +33,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         Toast.hideHUD()
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
             Toast.showToast(text: "请输入正确的合约地址")
-            if isUseQRCode {
-                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
-            }
             return
         }
         if tokenModel.name.isEmpty || tokenModel.symbol.isEmpty || String(tokenModel.decimals).isEmpty {
@@ -55,9 +50,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             WalletRealmTool.realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)
             appModel.currentWallet?.selectTokenList.append(tokenModel)
-            if isUseQRCode {
-                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
-            }
         }
         navigationController?.popViewController(animated: true)
     }
@@ -128,7 +120,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         tokenModel.address = ""
         let finalText = codeResult.replacingOccurrences(of: " ", with: "")
         tokenModel.address = finalText
-        isUseQRCode = true
         if finalText.count == 40 || finalText.count == 42 {
             didGetERC20Token(token: finalText)
         }
@@ -138,7 +129,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
         let finalText = text.replacingOccurrences(of: " ", with: "")
         tokenModel.address = finalText
-        isUseQRCode = false
         if index.row == 1 {
             if finalText.count == 40 || finalText.count == 42 {
                 didGetERC20Token(token: finalText)
@@ -156,16 +146,10 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             case .success(let tokenM):
                 self.tokenModel = tokenM
                 self.tokenModel.address = token
-                self.isUseQRCode = false
             case .error:
                 Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
             }
             self.aTable.reloadData()
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }

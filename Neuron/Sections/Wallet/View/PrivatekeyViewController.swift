@@ -29,24 +29,26 @@ class PrivatekeyViewController: UITableViewController, ImportWalletViewModelDele
         name = sender.text
         judgeImportButtonEnabled()
     }
+
     @IBAction func passwordChanged(_ sender: UITextField) {
         sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         password = sender.text
         judgeImportButtonEnabled()
     }
+
     @IBAction func confirmPasswordChanged(_ sender: UITextField) {
         sender.text = sender.text?.trimmingCharacters(in: .whitespaces)
         confirmPassword = sender.text
         judgeImportButtonEnabled()
     }
+
     func didGetTextViewText(text: String) {
         privateKey = text
-        viewModel.isUseQRCode = false
         judgeImportButtonEnabled()
     }
+
     func didBackQRCodeMessage(codeResult: String) {
         privateKey = codeResult
-        viewModel.isUseQRCode = true
         privatekeyTextView.text = codeResult
         judgeImportButtonEnabled()
     }

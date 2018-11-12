@@ -52,7 +52,6 @@ class TransactionParamBuilder {
     var toAddress = ""
     var amount = 0.0 // Change to BigUInt representing final value (smallet unit, e.g., wei).
     var extraData = Data()
-    var isUseQRCode = false    // TODO: Fix spelling.
     var estimatedGasPrice: UInt = 1 {
         didSet {
             gasPrice = estimatedGasPrice
@@ -95,9 +94,7 @@ class TransactionParamBuilder {
     private func trackEvent(_ result: TransactionParamBuilder.Result) {
         switch result {
         case .error:
-            if isUseQRCode {
-                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: false)
-            }
+            break
         default:
             SensorsAnalytics.Track.transaction(
                 chainType: token.chainId,
@@ -107,9 +104,6 @@ class TransactionParamBuilder {
                 outcomeAddress: fromAddress,
                 transactionType: .normal
             )
-            if isUseQRCode {
-                SensorsAnalytics.Track.scanQRCode(scanType: .walletAddress, scanResult: true)
-            }
         }
     }
 }
