@@ -73,7 +73,6 @@ class SensorsAnalytics {
         for _ in 0..<64 {
             ipId += "\(arc4random_uniform(10))"
         }
-        print(ipId.lengthOfBytes(using: .utf8))
         UserDefaults.standard.set(ipId, forKey: UserDefaultsKey.ipId.rawValue)
         return ipId
     }
