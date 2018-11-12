@@ -33,9 +33,9 @@ class TransactionHistoryService {
         } else if token.type == .ethereum {
             return Ethereum(token: token)
         } else if token.type == .nervos {
-            return Nervos(token: token)
+            return AppChain(token: token)
         } else if token.type == .nervosErc20 {
-            return NervosErc20(token: token)
+            return AppChainErc20(token: token)
         } else {
             fatalError()
         }
@@ -59,7 +59,7 @@ class TransactionHistoryService {
 }
 
 extension TransactionHistoryService {
-    private class Nervos: TransactionHistoryService {
+    private class AppChain: TransactionHistoryService {
         override init(token: TokenModel) {
             super.init(token: token)
             getAppChainQuotaPrice()
@@ -178,7 +178,7 @@ extension TransactionHistoryService {
         }
     }
 
-    private class NervosErc20: TransactionHistoryService {
+    private class AppChainErc20: TransactionHistoryService {
         var loading = false
         private var page = 1
         
