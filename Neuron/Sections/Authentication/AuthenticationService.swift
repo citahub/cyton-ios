@@ -133,7 +133,7 @@ class AuthenticationService {
 
     func closeAuthentication() {
         guard let window = window else { return }
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             window.transform = CGAffineTransform.init(translationX: 0, y: window.bounds.size.height)
         }, completion: { (_) in
             self.window = nil

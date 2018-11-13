@@ -24,7 +24,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.80000000000000004" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U0u-pF-C2P">
-                                <rect key="frame" x="25" y="128" width="325" height="425"/>
+                                <rect key="frame" x="25" y="121" width="325" height="425"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lqe-gB-tY5">
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="114"/>
@@ -119,7 +119,7 @@
                         <constraints>
                             <constraint firstItem="pks-2G-pbg" firstAttribute="trailing" secondItem="U0u-pF-C2P" secondAttribute="trailing" constant="25" id="2Os-RD-MDV"/>
                             <constraint firstItem="U0u-pF-C2P" firstAttribute="leading" secondItem="pks-2G-pbg" secondAttribute="leading" constant="25" id="63a-eH-pQn"/>
-                            <constraint firstItem="U0u-pF-C2P" firstAttribute="top" secondItem="PtI-cs-k0Q" secondAttribute="topMargin" constant="108" id="fm0-0N-ACX"/>
+                            <constraint firstItem="U0u-pF-C2P" firstAttribute="centerY" secondItem="PtI-cs-k0Q" secondAttribute="centerY" id="byE-tN-q2n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pks-2G-pbg"/>
                     </view>
