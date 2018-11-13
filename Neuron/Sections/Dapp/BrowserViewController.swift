@@ -14,7 +14,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var collectionButton: UIButton!
     var requestUrlStr = ""
-    var transactionConfirmViewController: TransactionConfirmViewController?
     var mainUrl: URL?
 
     lazy var webView: WKWebView = {
