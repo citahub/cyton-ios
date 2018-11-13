@@ -68,6 +68,9 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
             guard let url = self?.mainUrl else { return }
             self?.webView.load(URLRequest(url: url))
         }
+        // fix swipe back
+        let gestureRecognizer = fixSwipeBack()
+        webView.addGestureRecognizer(gestureRecognizer)
     }
 
     func getRequestStr(requestStr: String) -> String {
