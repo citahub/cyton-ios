@@ -7,12 +7,10 @@
 //
 
 import UIKit
-import LYEmptyView
 
 /// ERC-721 List
 class NFTViewController: UITableViewController, ErrorOverlayPresentable {
     var dataArray: [AssetsModel] = []
-    private let testAddress = "0xac30bce77cf849d869aa37e39b983fa50767a2dd"
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -7,21 +7,20 @@
 //
 
 import UIKit
-import LYEmptyView
 
-class SearchAppController: UITableViewController {
+class SearchAppController: UITableViewController, ErrorOverlayPresentable {
     @IBOutlet var textField: UITextField!
     var searchHistorys: [String] = []
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: true)
+        setUpTableView()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpNavigationTitleView()
-        setUpTableView()
     }
 
     func setUpNavigationTitleView() {
@@ -42,7 +41,12 @@ class SearchAppController: UITableViewController {
     func setUpTableView() {
         searchHistorys = UserDefaults.standard.object(forKey: "searchHistory") as? [String] ?? []
         tableView.tableFooterView = UIView()
-        tableView.ly_emptyView = LYEmptyView.empty(withImageStr: "emptyData", titleStr: "您还没有搜索记录", detailStr: "")
+        if searchHistorys.count == 0 {
+            errorOverlaycontroller.style = .blank
+            showOverlay()
+        } else {
+            removeOverlay()
+        }
         tableView.reloadData()
     }
 
@@ -105,7 +109,12 @@ class SearchAppController: UITableViewController {
             self.searchHistorys.remove(at: indexPath.row)
             UserDefaults.standard.set(searchHistorys, forKey: "searchHistory")
             tableView.reloadData()
+            if self.searchHistorys.count == 0 {
+                errorOverlaycontroller.style = .blank
+                showOverlay()
+            }
         }
+
     }
 
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
