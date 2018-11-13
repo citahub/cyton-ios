@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import LYEmptyView
 import PullToRefresh
 import WebKit
 
