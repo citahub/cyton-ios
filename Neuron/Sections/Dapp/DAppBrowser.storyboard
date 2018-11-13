@@ -221,6 +221,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="rKo-aQ-G7f" kind="presentation" identifier="AdvancedViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="i1I-Y2-McX"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="HcX-eY-HkR" detailTextLabel="6CS-A7-scT" rowHeight="50" style="IBUITableViewCellStyleValue1" id="1pn-gN-HTf">
                                         <rect key="frame" x="0.0" y="155" width="375" height="50"/>
@@ -412,6 +415,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wp3-it-O51">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dMU-fH-rag">
                                 <rect key="frame" x="0.0" y="217" width="375" height="450"/>
                                 <subviews>
@@ -608,14 +616,21 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fZe-YV-Dzz" firstAttribute="trailing" secondItem="dMU-fH-rag" secondAttribute="trailing" id="5cX-pr-D7a"/>
+                            <constraint firstItem="Wp3-it-O51" firstAttribute="top" secondItem="Cvp-35-Htm" secondAttribute="top" id="CbS-O1-qfj"/>
+                            <constraint firstItem="Wp3-it-O51" firstAttribute="leading" secondItem="fZe-YV-Dzz" secondAttribute="leading" id="EfF-uT-y1Y"/>
+                            <constraint firstItem="fZe-YV-Dzz" firstAttribute="trailing" secondItem="Wp3-it-O51" secondAttribute="trailing" id="IJH-MF-qJI"/>
+                            <constraint firstItem="fZe-YV-Dzz" firstAttribute="bottom" secondItem="Wp3-it-O51" secondAttribute="bottom" id="K7k-CU-aiR"/>
                             <constraint firstItem="dMU-fH-rag" firstAttribute="bottom" secondItem="fZe-YV-Dzz" secondAttribute="bottom" id="TYL-O3-Ftl"/>
                             <constraint firstItem="dMU-fH-rag" firstAttribute="leading" secondItem="fZe-YV-Dzz" secondAttribute="leading" id="id3-ym-D3a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fZe-YV-Dzz"/>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="Wp3-it-O51" id="cAr-rh-jh8"/>
+                        <outlet property="contentView" destination="dMU-fH-rag" id="8sN-Na-bm0"/>
                         <outlet property="dataTextView" destination="NzZ-Gf-DTS" id="HRy-Tc-OIO"/>
                         <outlet property="ethereumSuggestLabel" destination="3Hh-pu-hiU" id="ByE-hM-hTW"/>
                         <outlet property="gasLabel" destination="4hJ-tt-4D6" id="tDt-X9-Uzq"/>

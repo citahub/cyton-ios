@@ -18,7 +18,6 @@ PODS:
     - CryptoSwift (~> 0.13)
   - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
-  - LYEmptyView (1.2.2)
   - PlainPing (0.5)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
@@ -67,7 +66,6 @@ DEPENDENCIES:
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
-  - LYEmptyView
   - PlainPing
   - PullToRefresher (~> 3.1)
   - QRCodeReader.swift
@@ -88,7 +86,6 @@ SPEC REPOS:
     - EthereumAddress
     - IGIdenticon
     - IQKeyboardManagerSwift
-    - LYEmptyView
     - PlainPing
     - PromiseKit
     - PullToRefresher
@@ -131,7 +128,6 @@ SPEC CHECKSUMS:
   EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  LYEmptyView: 12c9db1f3946fa3c812674467ad95b7ae7c93614
   PlainPing: 6b248b94d92be7ec0410952d1b09af43b9a39015
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   PullToRefresher: ec8c1942bd61bb512ff520c49f9f00903cfa86c7
@@ -149,6 +145,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: 269ee06fe70f34b43d27938fb94c91addde4b51a
+PODFILE CHECKSUM: 7addb053d8935593383989ad172214d6f76a0f1a
 
 COCOAPODS: 1.5.3
