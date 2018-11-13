@@ -10,7 +10,7 @@ import UIKit
 import Web3swift
 import EthereumAddress
 
-class TransactionViewController: UITableViewController, TransactionParamBuilderDelegate {
+class TransactionViewController: UITableViewController {
     // Wallet
     @IBOutlet weak var walletIconView: UIImageView!
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -27,7 +27,6 @@ class TransactionViewController: UITableViewController, TransactionParamBuilderD
         super.viewDidLoad()
         service = TransactionParamBuilder.service(with: token)
         service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        service.delegate = self
         Toast.showHUD()
         DispatchQueue.global().async {
             self.service.requestGasCost()
@@ -75,7 +74,7 @@ class TransactionViewController: UITableViewController, TransactionParamBuilderD
         amountTextField.text = "\(amount)"
     }
 
-    // MARK: - TransactionParamBuilderDelegate
+    // TODO: tx sent
     func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
         switch result {
         case .error(let error):
@@ -94,10 +93,6 @@ class TransactionViewController: UITableViewController, TransactionParamBuilderD
                 transactionType: .normal
             )
         }
-    }
-
-    func transactionGasCostChanged(_ transactionService: TransactionParamBuilder) {
-        gasCostLabel.text = "\(service.gasCost.clean)\(token.gasSymbol)"
     }
 
     // MARK: - UI

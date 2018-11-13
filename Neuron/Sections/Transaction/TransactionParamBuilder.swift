@@ -11,18 +11,12 @@ import AppChain
 import Web3swift
 import BigInt
 
-protocol TransactionParamBuilderDelegate: NSObjectProtocol {
-    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result)
-    func transactionGasCostChanged(_ transactionService: TransactionParamBuilder)
-}
-
 class TransactionParamBuilder {
     enum Result {
         case error(Error)
         case succee(TxHash)
     }
 
-    weak var delegate: TransactionParamBuilderDelegate?
     var token: TokenModel!
     var fromAddress: String!
     var tokenBalance: Double = 0.0
@@ -38,13 +32,7 @@ class TransactionParamBuilder {
             gasCost = Double(result) ?? 0.0
         }
     }
-    var gasCost: Double = 0.0 {
-        didSet {
-            DispatchQueue.main.async {
-                self.delegate?.transactionGasCostChanged(self)
-            }
-        }
-    }
+    var gasCost: Double = 0.0
     var gasCostAmount: Double = 0.0
     var changeGasLimitEnable = false
     var changeGasPriceEnable = false
@@ -84,9 +72,6 @@ class TransactionParamBuilder {
     }
 
     func completion(result: Result) {
-        DispatchQueue.main.async {
-            self.delegate?.transactionCompletion(self, result: result)
-        }
     }
 }
 
