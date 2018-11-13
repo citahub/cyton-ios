@@ -12,82 +12,79 @@ import Web3swift
 import BigInt
 
 class TransactionParamBuilder {
-    enum Result {
-        case error(Error)
-        case succee(TxHash)
+    var fromAddress: String!
+    var toAddress = ""
+    var value: BigUInt = 0
+    var data = Data()
+
+    var gasPrice: BigUInt = 0 {
+        didSet {
+            gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
+        }
     }
 
-    var token: TokenModel!
-    var fromAddress: String!
-    var tokenBalance: Double = 0.0
-    var gasPrice: UInt = 1 {
-        didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit) * BigUInt(gasPrice), toUnits: .eth, decimals: 10) ?? ""
-            gasCost = Double(result) ?? 0.0
-        }
-    }
     var gasLimit: UInt64 = 0 {
         didSet {
-            let result = Web3Utils.formatToEthereumUnits(BigUInt(gasLimit) * BigUInt(gasPrice), toUnits: .eth, decimals: 10) ?? ""
-            gasCost = Double(result) ?? 0.0
+            rebuildGasCalculator()
         }
     }
-    var gasCost: Double = 0.0
-    var gasCostAmount: Double = 0.0
-    var changeGasLimitEnable = false
-    var changeGasPriceEnable = false
-    var isSupportGasSetting: Bool { return changeGasPriceEnable || changeGasLimitEnable }
-    var toAddress = ""
-    var amount = 0.0 // Change to BigUInt representing final value (smallet unit, e.g., wei).
-    var extraData = Data()
-    var estimatedGasPrice: UInt = 1 {
-        didSet {
-            gasPrice = estimatedGasPrice
+
+    var txFee: BigUInt {
+        return gasCalculator.txFee
+    }
+
+    var txFeeNatural: Double {
+        return gasCalculator.txFeeNatural
+    }
+
+    var tokenBalance: BigUInt = 0
+
+    /// Note: this returns true even when native token (ETH) is not enough for tx fee
+    ///   when sending ERC20. UI layer should check that.
+    var hasSufficientBalance: Bool {
+        switch token.type {
+        case .ethereum, .nervos:
+            return tokenBalance >= txFee + value
+        case .erc20, .nervosErc20:
+            return tokenBalance >= value
         }
     }
+
+    private var token: TokenModel!
+    private var gasCalculator = GasCalculator(gasPrice: GasCalculator.defaultGasPrice, gasLimit: 21_000)
 
     init(token: TokenModel) {
         self.token = token
-        tokenBalance = Double(token.tokenBalance) ?? 0.0
+        tokenBalance = BigUInt(token.tokenBalance)! * BigUInt(10).power(token.decimals)
+
+        fetchGasPrice()
     }
 
-    static func service(with token: TokenModel) -> TransactionParamBuilder {
-        if token.type == .erc20 {
-            return ERC20(token: token)
-        } else if token.type == .ethereum {
-            return Ethereum(token: token)
-        } else if token.type == .nervos {
-            return AppChain(token: token)
-        } else if token.type == .nervosErc20 {
-            return AppChainERC20(token: token)
-        } else {
-            fatalError()
+    private func fetchGasPrice() {
+        let fetched = { [weak self] price -> Void in
+            DispatchQueue.main.async {
+                self?.gasPrice = price
+            }
+        }
+
+        DispatchQueue.global().async {
+            switch self.token.type {
+            case .ethereum, .erc20:
+                GasPriceFetcher().fetchGasPrice(then: fetched)
+            case .nervos, .nervosErc20:
+                GasPriceFetcher().fetchQuotaPrice(rpcNode: self.token.chainHosts, then: fetched)
+            }
         }
     }
 
-    func requestGasCost() {
-    }
-
-    func sendTransaction(password: String) {
-    }
-
-    func completion(result: Result) {
+    private func rebuildGasCalculator() {
+        gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
     }
 }
 
+/*
 extension TransactionParamBuilder {
     class Ethereum: TransactionParamBuilder {
-        override func requestGasCost() {
-            self.gasLimit = 21_000
-            /*
-            GasCalculator.getGasPrice { price in
-                self.gasPrice = price
-            }*/
-            let bigNumber = try? EthereumNetwork().getWeb3().eth.getGasPrice()
-            estimatedGasPrice = (bigNumber?.words.first ?? 1) * 4
-            changeGasLimitEnable = true
-            changeGasPriceEnable = false
-        }
 
         override func sendTransaction(password: String) {
             // TODO: extract this
@@ -107,12 +104,12 @@ extension TransactionParamBuilder {
                     value: value,
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
-                    data: extraData,
+                    data: data,
                     password: password
                 )
-                self.completion(result: Result.succee(txhash))
+                // TODO
             } catch let error {
-                self.completion(result: Result.error(error))
+                // TODO
             }
         }
     }
@@ -120,13 +117,6 @@ extension TransactionParamBuilder {
 
 extension TransactionParamBuilder {
     class ERC20: TransactionParamBuilder {
-        override func requestGasCost() {
-            self.gasLimit = 21_000
-            let bigNumber = try? EthereumNetwork().getWeb3().eth.getGasPrice()
-            estimatedGasPrice = (bigNumber?.words.first ?? 1) * 4
-            changeGasLimitEnable = true
-            changeGasPriceEnable = false
-        }
 
         override func sendTransaction(password: String) {
             let keystore = WalletManager.default.keystore(for: fromAddress)
@@ -149,9 +139,9 @@ extension TransactionParamBuilder {
                     contractAddress: token.address,
                     password: password
                 )
-                self.completion(result: Result.succee(txhash))
+                // TODO
             } catch let error {
-                self.completion(result: Result.error(error))
+                // TODO
             }
         }
     }
@@ -159,13 +149,6 @@ extension TransactionParamBuilder {
 
 extension TransactionParamBuilder {
     class AppChain: TransactionParamBuilder {
-        override func requestGasCost() {
-            self.gasLimit = 21_000
-            let quotaPrice = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
-            estimatedGasPrice = quotaPrice?.words.first ?? 1
-            changeGasLimitEnable = false
-            changeGasPriceEnable = false
-        }
 
         override func sendTransaction(password: String) {
             super.sendTransaction(password: password)
@@ -181,26 +164,15 @@ extension TransactionParamBuilder {
                     to: toAddress,
                     value: value,
                     quota: gasLimit,
-                    data: extraData,
+                    data: data,
                     chainId: BigUInt(token.chainId)!,
                     password: password
                 )
-                self.completion(result: Result.succee(txhash))
+                // TODO
             } catch let error {
-                self.completion(result: Result.error(error))
+                // TODO
             }
         }
     }
 }
-
-extension TransactionParamBuilder {
-    class AppChainERC20: TransactionParamBuilder {
-        override func requestGasCost() {
-            self.gasLimit = 100_000
-            let bigNumber = try? Utils.getQuotaPrice(appChain: AppChainNetwork.appChain())
-            estimatedGasPrice = bigNumber?.words.first ?? 1
-            changeGasLimitEnable = false
-            changeGasPriceEnable = false
-        }
-    }
-}
+ */

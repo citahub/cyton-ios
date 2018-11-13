@@ -21,10 +21,10 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var containView: UIView!
-    var service: TransactionParamBuilder! {
+    var paramBuilder: TransactionParamBuilder! {
         didSet {
             let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
-            controller.service = service
+            controller.paramBuilder = paramBuilder
             controller.delegate = self
             contentViewController = controller
         }
@@ -89,11 +89,12 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     }
 
     func confirmWalletPassword(password: String) {
-        if let service = service {
+        if let paramBuilder = paramBuilder {
             Toast.showHUD()
             DispatchQueue.global().async {
                 DispatchQueue.main.async {
-                    self.service.sendTransaction(password: password)
+                    // TODO: send tx
+                    //self.paramBuilder.sendTransaction(password: password)
                     Toast.hideHUD()
                 }
             }
@@ -147,23 +148,25 @@ class TransactionConfirmInfoViewController: UIViewController {
     @IBOutlet weak var fromAddressLabel: UILabel!
     @IBOutlet weak var toAddressLabel: UILabel!
     @IBOutlet weak var gasCostLabel: UILabel!
-    var service: TransactionParamBuilder! {
+    var paramBuilder: TransactionParamBuilder! {
         didSet {
             _ = view // load view
-            let amount = service.amount
+            /* TODO
+            let amount = paramBuilder.amount
             if amount == Double(Int(amount)) {
                 amountLabel.text = "\(Int(amount))"
             } else {
                 amountLabel.text = "\(amount)"
             }
-            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), service.token.symbol.lengthOfBytes(using: .utf8))
-            amountLabel.text! += service.token.symbol
+            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), paramBuilder.token.symbol.lengthOfBytes(using: .utf8))
+            amountLabel.text! += paramBuilder.token.symbol
             let attributedText = NSMutableAttributedString(attributedString: amountLabel.attributedText!)
             attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
             amountLabel.attributedText = attributedText
-            fromAddressLabel.text = service.fromAddress
-            toAddressLabel.text = service.toAddress
-            gasCostLabel.text = "\(service.gasCost)" + "\(service.token.gasSymbol)"
+            fromAddressLabel.text = paramBuilder.fromAddress
+            toAddressLabel.text = paramBuilder.toAddress
+            gasCostLabel.text = "\(paramBuilder.txFeeNatural)" + "\(paramBuilder.token.gasSymbol)"
+ */
         }
     }
 

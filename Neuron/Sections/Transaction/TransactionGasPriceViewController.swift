@@ -20,12 +20,9 @@ class TransactionGasPriceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let estimatedGasPrice = Double(service.estimatedGasPrice) / pow(10, 9)
-        if estimatedGasPrice == Double(UInt(estimatedGasPrice)) {
-            estimatedGasPriceLabel.text = "以太坊推荐值 \(UInt(estimatedGasPrice))Gwei"
-        } else {
-            estimatedGasPriceLabel.text = "以太坊推荐值 \(estimatedGasPrice)Gwei"
-        }
+        let estimatedGasPrice = service.gasPrice / BigUInt(10).power(9)
+        estimatedGasPriceLabel.text = "以太坊推荐值 \(estimatedGasPrice)Gwei"
+        // TODO: fix numbers and precision
         let gasPrice = Double(service.gasPrice) / pow(10, 9)
         if gasPrice == Double(UInt(gasPrice)) {
             gasPriceTextField.text = "\(UInt(gasPrice))"
@@ -33,8 +30,8 @@ class TransactionGasPriceViewController: UIViewController {
             gasPriceTextField.text = "\(gasPrice)"
         }
         gasLimitTextField.text = "\(service.gasLimit)"
-        gasPriceTextField.isEnabled = service.changeGasPriceEnable
-        gasLimitTextField.isEnabled = service.changeGasLimitEnable
+        gasPriceTextField.isEnabled = true
+        gasLimitTextField.isEnabled = true
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,8 +53,8 @@ class TransactionGasPriceViewController: UIViewController {
         })
     }
     @IBAction func confirm(_ sender: Any) {
-        let newGasPrice = UInt((Double(gasPriceTextField.text!) ?? 0.0) * pow(10, 9))
-        if newGasPrice < service.estimatedGasPrice {
+        let newGasPrice = BigUInt(gasPriceTextField.text!)! * BigUInt(10).power(9)
+        if newGasPrice < service.gasPrice {
             Toast.showToast(text: "您的GasPrice设置过低，请确保输入大于等于推荐值以快速转账")
             return
         }

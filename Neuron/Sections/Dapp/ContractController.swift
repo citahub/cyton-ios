@@ -178,25 +178,28 @@ class ContractController: UITableViewController {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        let service = TransactionParamBuilder.service(with: tokenModel)
-        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        service.amount = Double(value) ?? 0.0
+        let paramBuilder = TransactionParamBuilder(token: tokenModel)
+        paramBuilder.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        // TODO: set input amount
+        // paramBuilder.amount = Double(value) ?? 0.0
 
         switch chainType {
         case .appChain:
-            service.gasLimit = 10000000
-            service.toAddress = dappCommonModel.appChain?.to ?? ""
-            service.extraData = Data.init(hex: dappCommonModel.appChain?.data ?? "")
-            service.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
+            paramBuilder.gasLimit = 10000000
+            paramBuilder.toAddress = dappCommonModel.appChain?.to ?? ""
+            paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
+            // TODO: set gas price
+            // paramBuilder.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
-            service.gasLimit = UInt64(gasLimit.words.first!)
-            service.toAddress = dappCommonModel.eth?.to ?? ""
-            service.extraData = Data.init(hex: dappCommonModel.eth?.data ?? "")
-            service.gasPrice = gasPrice.words.first!
+            paramBuilder.gasLimit = UInt64(gasLimit.words.first!)
+            paramBuilder.toAddress = dappCommonModel.eth?.to ?? ""
+            paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
+            // TODO: set gas price
+            // paramBuilder.gasPrice = gasPrice.words.first!
         }
         let controller: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
-        controller.service = service
+        controller.paramBuilder = paramBuilder
         present(controller, animated: false, completion: nil)
         confirmViewController = controller
     }
@@ -204,6 +207,7 @@ class ContractController: UITableViewController {
 
 // TODO: tx sent
 extension ContractController {
+    /*
     func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
         switch result {
         case .error:
@@ -221,7 +225,7 @@ extension ContractController {
         }
         confirmViewController?.dismiss()
         navigationController?.popViewController(animated: true)
-    }
+    }*/
 }
 
 extension ContractController: AdvancedViewControllerDelegate {

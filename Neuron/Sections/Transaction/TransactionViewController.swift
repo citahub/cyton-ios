@@ -9,9 +9,9 @@
 import UIKit
 import Web3swift
 import EthereumAddress
+import BigInt
 
 class TransactionViewController: UITableViewController {
-    // Wallet
     @IBOutlet weak var walletIconView: UIImageView!
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var walletAddressLabel: UILabel!
@@ -19,40 +19,37 @@ class TransactionViewController: UITableViewController {
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var gasCostLabel: UILabel!
     @IBOutlet weak var addressTextField: UITextField!
-    var service: TransactionParamBuilder!
+
+    var paramBuilder: TransactionParamBuilder!
     var token: TokenModel!
     var confirmViewController: TransactionConfirmViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        service = TransactionParamBuilder.service(with: token)
-        service.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        Toast.showHUD()
-        DispatchQueue.global().async {
-            self.service.requestGasCost()
-            DispatchQueue.main.async {
-                Toast.hideHUD()
-            }
-        }
+
+        paramBuilder = TransactionParamBuilder(token: token)
+        paramBuilder.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+
         setupUI()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "TransactionConfirmViewController" {
             let controller = segue.destination as! TransactionConfirmViewController
-            controller.service = service
+            controller.paramBuilder = paramBuilder
             confirmViewController = controller
         } else if segue.identifier == "TransactionGasPriceViewController" {
             let controller = segue.destination as! TransactionGasPriceViewController
-            controller.service = service
+            controller.service = paramBuilder
         }
     }
 
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
         let amountText = amountTextField.text ?? ""
-        service.toAddress = addressTextField.text ?? ""
-        service.amount = Double(amountText) ?? 0.0
+        paramBuilder.toAddress = addressTextField.text ?? ""
+        // TODO: feed input amount to param builder
+        // paramBuilder.amount = Double(amountText) ?? 0.0
         if isEffectiveTransferInfo {
             performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
         }
@@ -66,8 +63,9 @@ class TransactionViewController: UITableViewController {
     }
 
     @IBAction func transactionAvailableBalance() {
-        let amount = service.tokenBalance - service.gasCost
-        guard amount > 0 else {
+        // TODO: FIXME: erc20 token requires ETH balance for tx fee
+        let amount = Double(token.tokenBalance)! - paramBuilder.txFeeNatural
+        guard paramBuilder.hasSufficientBalance else {
             Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
             return
         }
@@ -75,6 +73,7 @@ class TransactionViewController: UITableViewController {
     }
 
     // TODO: tx sent
+    /*
     func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
         switch result {
         case .error(let error):
@@ -93,7 +92,7 @@ class TransactionViewController: UITableViewController {
                 transactionType: .normal
             )
         }
-    }
+    }*/
 
     // MARK: - UI
     func setupUI() {
@@ -102,33 +101,30 @@ class TransactionViewController: UITableViewController {
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        if service.tokenBalance == Double(Int(service.tokenBalance)) {
-            tokenBalanceButton.setTitle(String(format: "%.0lf%@", service.tokenBalance, token.symbol), for: .normal)
-        } else {
-            tokenBalanceButton.setTitle("\(service.tokenBalance.clean)\(token.symbol)", for: .normal)
-        }
+        tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
         gasCostLabel.text = " "
     }
 }
 
 extension TransactionViewController {
     var isEffectiveTransferInfo: Bool {
-        if service.toAddress.count != 40 && service.toAddress.count != 42 {
+        if paramBuilder.toAddress.count != 40 && paramBuilder.toAddress.count != 42 {
             Toast.showToast(text: "您的地址错误，请重新输入")
             return false
-        } else if service.toAddress != service.toAddress.lowercased() {
-            let eip55String = EthereumAddress.toChecksumAddress(service.toAddress) ?? ""
-            if eip55String != service.toAddress {
+        } else if paramBuilder.toAddress != paramBuilder.toAddress.lowercased() {
+            let eip55String = EthereumAddress.toChecksumAddress(paramBuilder.toAddress) ?? ""
+            if eip55String != paramBuilder.toAddress {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
             }
         }
-        if service.toAddress == service.fromAddress {
+        if paramBuilder.toAddress == paramBuilder.fromAddress {
             Toast.showToast(text: "发送地址和收款地址不能相同")
             return false
         }
-        if service.amount > service.tokenBalance - service.gasCost {
-            if service.tokenBalance == 0.0 {
+        // TODO: FIXME: erc20 requires eth balance as tx fee
+        if !paramBuilder.hasSufficientBalance {
+            if paramBuilder.tokenBalance <= BigUInt(0) {
                 Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
                 return false
             }
@@ -172,11 +168,11 @@ extension TransactionViewController: QRCodeViewControllerDelegate {
 
 extension TransactionViewController {
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row == 2 && service.isSupportGasSetting ? true : false
+        return indexPath.row == 2
     }
 
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return indexPath.row == 2 && service.isSupportGasSetting ? indexPath : nil
+        return indexPath.row == 2 ? indexPath : nil
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
