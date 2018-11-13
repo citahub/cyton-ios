@@ -20,6 +20,8 @@ class AdvancedViewController: UIViewController {
     private var inputGasPrice: String?
     weak var delegate: AdvancedViewControllerDelegate?
 
+    @IBOutlet weak var backgroundView: UIView!
+    @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var ethereumSuggestLabel: UILabel!
     @IBOutlet weak var gasPriceTextField: UITextField!
     @IBOutlet weak var gasLabel: UILabel!
@@ -29,17 +31,12 @@ class AdvancedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         assignmentForUI()
-        view.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.frame = CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height)
-        }, completion: { (_) in
-            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
-        })
+        backgroundView.alpha = 0.0
+        contentView.transform = CGAffineTransform(translationX: 0, y: contentView.bounds.size.height)
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
+            self.backgroundView.alpha = 0.5
+            self.contentView.transform = CGAffineTransform.identity
+        }
     }
 
     override func viewDidLoad() {
@@ -87,11 +84,11 @@ class AdvancedViewController: UIViewController {
     }
 
     func hideView() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.view.frame = CGRect(x: 0, y: ScreenSize.height, width: ScreenSize.width, height: ScreenSize.height)
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
+            self.backgroundView.alpha = 0.0
+            self.contentView.transform = CGAffineTransform(translationX: 0, y: self.contentView.bounds.size.height)
         }, completion: { (_) in
-            self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
-            self.view.removeFromSuperview()
+            self.dismiss(animated: false, completion: nil)
         })
     }
 

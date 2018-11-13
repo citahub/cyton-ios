@@ -48,9 +48,23 @@ class ContractController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "支付详情"
-        advancedViewController = storyboard!.instantiateViewController(withIdentifier: "advancedViewController") as? AdvancedViewController
-        advancedViewController.delegate = self
         getTokenModel()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AdvancedViewController" {
+            advancedViewController = segue.destination as? AdvancedViewController
+            advancedViewController.delegate = self
+            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
+            advancedViewController.gasLimit = gasLimit
+        }
+    }
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "AdvancedViewController" {
+            return false
+        }
+        return true
     }
 
     func getTokenModel() {
@@ -166,9 +180,7 @@ class ContractController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if dappCommonModel.chainType == "ETH" && indexPath.section == 0 && indexPath.row == 0 {
-            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
-            advancedViewController.gasLimit = gasLimit
-            UIApplication.shared.keyWindow?.addSubview(advancedViewController.view)
+            performSegue(withIdentifier: "AdvancedViewController", sender: indexPath.row)
         }
     }
 
