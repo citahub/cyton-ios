@@ -41,14 +41,14 @@ class TransactionGasPriceViewController: UIViewController {
         super.viewWillAppear(animated)
         backgroundView.alpha = 0.0
         contentView.transform = CGAffineTransform(translationX: 0, y: contentView.bounds.size.height)
-        UIView.animate(withDuration: 0.33) {
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.backgroundView.alpha = 1.0
             self.contentView.transform = CGAffineTransform.identity
         }
     }
 
     @IBAction func dismiss() {
-        UIView.animate(withDuration: 0.33, animations: {
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             self.backgroundView.alpha = 0.0
             self.contentView.transform = CGAffineTransform(translationX: 0, y: self.contentView.bounds.size.height)
         }, completion: { (_) in

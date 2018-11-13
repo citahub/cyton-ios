@@ -48,7 +48,7 @@ class GuideService {
     }
 
     private func hideGuide() {
-        UIView.animate(withDuration: 0.33, animations: {
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             let height = self.controller?.view.bounds.size.height ?? 0.0
             self.controller?.view.transform = CGAffineTransform(translationX: 0, y: height)
         }, completion: { (_) in

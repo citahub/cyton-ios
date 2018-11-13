@@ -46,7 +46,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
                 let offset = oldValue.view.bounds.size.width
                 controller.view.transform = CGAffineTransform(translationX: offset, y: 0)
                 containView.addSubview(controller.view)
-                UIView.animate(withDuration: 0.33, animations: {
+                UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
                     oldValue.view.transform = CGAffineTransform(translationX: -offset, y: 0)
                     controller.view.transform = CGAffineTransform.identity
                 }, completion: { (_) in
@@ -66,7 +66,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
         super.viewWillAppear(animated)
         backgroundView.alpha = 0.0
         contentView.transform = CGAffineTransform(translationX: 0, y: contentView.bounds.size.height)
-        UIView.animate(withDuration: 0.33) {
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
             self.backgroundView.alpha = 1.0
             self.contentView.transform = CGAffineTransform.identity
         }
@@ -79,7 +79,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     }
 
     @IBAction func dismiss() {
-        UIView.animate(withDuration: 0.33, animations: {
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             self.backgroundView.alpha = 0.0
             self.contentView.transform = CGAffineTransform(translationX: 0, y: self.contentView.bounds.size.height)
         }, completion: { (_) in
