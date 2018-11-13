@@ -9,13 +9,10 @@
 import UIKit
 import WebKit
 
-class BrowserViewController: UIViewController, ErrorOverlayPresentable {
-    @IBOutlet weak var backButton: UIButton!
+class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
     @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var collectionButton: UIButton!
     var requestUrlStr = ""
     var mainUrl: URL?
-
     lazy var webView: WKWebView = {
         let webView = WKWebView(
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
@@ -67,6 +64,10 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
             guard let url = self?.mainUrl else { return }
             self?.webView.load(URLRequest(url: url))
         }
+        navigationItem.fixSpace()
+        // fix swipe back
+        let gestureRecognizer = fixSwipeBack()
+        webView.addGestureRecognizer(gestureRecognizer)
     }
 
     func getRequestStr(requestStr: String) -> String {
