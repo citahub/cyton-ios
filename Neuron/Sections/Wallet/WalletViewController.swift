@@ -60,7 +60,6 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         }
         tabbedButtonView.buttonTitles = ["代币", "藏品"]
         tabbedButtonView.delegate = self
-        UIViewControllerAnimatedTransitioning
     }
 
     @objc private func endRefresh() {
