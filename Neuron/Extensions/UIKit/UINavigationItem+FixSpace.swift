@@ -22,12 +22,9 @@ extension UINavigationItem {
 
     @objc func swizzle_setLeftBarButtonItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         if var items = items {
-//            let version = UIDevice.current.systemVersion.components(separatedBy: ".").first!
-//            if Double(version)! < 11.0 {
-                let fixSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-                fixSpaceBarButtonItem.width = -16
-                items.insert(fixSpaceBarButtonItem, at: 0)
-//            }
+            let fixSpaceBarButtonItem = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+            fixSpaceBarButtonItem.width = -10
+            items.insert(fixSpaceBarButtonItem, at: 0)
             swizzle_setLeftBarButtonItems(items, animated: animated)
         } else {
             swizzle_setLeftBarButtonItems(items, animated: animated)
