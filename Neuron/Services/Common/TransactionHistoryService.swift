@@ -18,6 +18,9 @@ class TransactionHistoryService {
     var transactions = [TransactionModel]()
     let token: TokenModel
     var quotaPrice: Double = pow(10, 9)
+    var loading = false
+    private var page = 1
+    private let pageSize = 20
 
     var walletAddress: String {
         return WalletRealmTool.getCurrentAppModel().currentWallet!.address
@@ -33,18 +36,46 @@ class TransactionHistoryService {
         } else if token.type == .ethereum {
             return Ethereum(token: token)
         } else if token.type == .nervos {
-            return Nervos(token: token)
+            return AppChain(token: token)
         } else if token.type == .nervosErc20 {
-            return NervosErc20(token: token)
+            return AppChainErc20(token: token)
         } else {
             fatalError()
         }
     }
 
     func reloadData(completion: @escaping (Error?) -> Void) {
+        guard loading == false else { return }
+        page = 1
+        transactions = []
+        loadMoreDate { (_, error) in
+            completion(error)
+        }
     }
 
     func loadMoreDate(completion: @escaping ([Int], Error?) -> Void) {
+        guard loading == false else { return }
+        loading = true
+        loadData(page: page) { [weak self](transactions, error) in
+            guard let self = self else { return }
+            if let error = error {
+                completion([], error)
+                return
+            }
+            if transactions.count > 0 {
+                self.loading = false
+                self.page += 1
+            }
+            var insertions = [Int]()
+            for idx in transactions.indices {
+                insertions.append(self.transactions.count + idx)
+            }
+            self.transactions.append(contentsOf: transactions)
+            completion(insertions, nil)
+        }
+    }
+
+    func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
     }
 
     func getAppChainQuotaPrice() {
@@ -59,14 +90,20 @@ class TransactionHistoryService {
 }
 
 extension TransactionHistoryService {
-    private class Nervos: TransactionHistoryService {
+    private class AppChain: TransactionHistoryService {
         override init(token: TokenModel) {
             super.init(token: token)
             getAppChainQuotaPrice()
         }
-        override func reloadData(completion: @escaping (Error?) -> Void) {
+
+        override func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
             let urlString = ServerApi.nervosTransactionURL + walletAddress.lowercased()
-            Alamofire.request(urlString, method: .get, parameters: nil).responseJSON { [weak self](response) in
+            let parameters: [String: Any] = [
+                "page": page,
+                "perPage": pageSize,
+                "valueFormat": "decimal"
+            ]
+            Alamofire.request(urlString, method: .get, parameters: parameters).responseJSON { [weak self](response) in
                 do {
                     guard let responseData = response.data else { throw TransactionError.requestfailed }
                     let nervosTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
@@ -81,24 +118,33 @@ extension TransactionHistoryService {
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
                         resultArr.append(transaction)
                     }
-                    self.transactions = resultArr
-                    completion(nil)
+                    completion(transactions, nil)
                 } catch {
-                    completion(error)
+                    completion([], error)
                 }
             }
         }
+
     }
 
     private class Ethereum: TransactionHistoryService {
-        override func reloadData(completion: @escaping (Error?) -> Void) {
-            let parameters: Dictionary = ["address": walletAddress]
-            Alamofire.request(ServerApi.etherScanURL, method: .get, parameters: parameters).responseJSON { [weak self](response) in
+        override func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
+            let url = EthereumNetwork().host().appendingPathComponent("/api")
+            let parameters: [String: Any] = [
+                "apikey": ServerApi.etherScanKey,
+                "module": "account",
+                "action": "txlist",
+                "sort": "desc",
+                "address": walletAddress,
+                "page": page,
+                "offset": pageSize
+            ]
+            Alamofire.request(url, method: .get, parameters: parameters).responseJSON { [weak self](response) in
                 do {
                     guard let responseData = response.data else { throw TransactionError.requestfailed }
                     print(String(bytes: responseData.bytes, encoding: .utf8) ?? "none")
-                    let ethTransaction = try? JSONDecoder().decode(TransactionResponse.self, from: responseData)
-                    guard let transactions = ethTransaction?.result.transactions else { throw TransactionError.requestfailed }
+                    let ethTransaction = try? JSONDecoder().decode(Erc20TransactionResponse.self, from: responseData)
+                    guard let transactions = ethTransaction?.result else { throw TransactionError.requestfailed }
                     var resultArr: [TransactionModel] = []
                     guard let self = self else { throw TransactionError.requestfailed }
                     for transaction in transactions {
@@ -107,39 +153,21 @@ extension TransactionHistoryService {
                         transaction.gasPrice = Web3.Utils.formatToEthereumUnits(gasPriceBigNumber, toUnits: .Gwei, decimals: 8, fallbackToScientific: false) ?? ""
                         transaction.transactionType = TransactionType.ETH.rawValue
                         transaction.symbol = self.ethereumSymbol
-                        let totleGasBigNumber = BigUInt(Int(transaction.gasUsed)! * Int(transaction.gasPrice)!)
+                        let totleGasBigNumber = BigUInt(Double(transaction.gasUsed)! * Double(transaction.gasPrice)!)
                         transaction.totleGas = Web3.Utils.formatToEthereumUnits(totleGasBigNumber, toUnits: .eth, decimals: 8, fallbackToScientific: false) ?? ""
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
                         resultArr.append(transaction)
                     }
-                    self.transactions = resultArr
-                    completion(nil)
+                    completion(resultArr, nil)
                 } catch {
-                    completion(error)
+                    completion([], error)
                 }
             }
         }
     }
 
     private class Erc20: TransactionHistoryService {
-        var loading = false
-        private var page = 1
-
-        override func reloadData(completion: @escaping (Error?) -> Void) {
-            guard loading == false else { return }
-            page = 1
-            transactions = []
-            loadData(page: page) { (_, error) in
-                completion(error)
-            }
-        }
-
-        override func loadMoreDate(completion: @escaping ([Int], Error?) -> Void) {
-            guard loading == false else { return }
-            loadData(page: page, completion: completion)
-        }
-
-        func loadData(page: Int, completion: @escaping ([Int], Error?) -> Void) {
+        override func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
             let address = EthereumAddress.toChecksumAddress(token.address) ?? token.address
             let parameters: [String: Any] = [
                 "module": "account",
@@ -147,7 +175,7 @@ extension TransactionHistoryService {
                 "contractaddress": address,
                 "address": walletAddress,
                 "page": page,
-                "offset": 20,
+                "offset": pageSize,
                 "sort": "desc",
                 "apikey": ServerApi.etherScanKey
             ]
@@ -157,20 +185,15 @@ extension TransactionHistoryService {
                     guard let data = response.data, let self = self else { return }
                     let response = try JSONDecoder().decode(Erc20TransactionResponse.self, from: data)
                     var results = [TransactionModel]()
-                    var insertions = [Int]()
                     for transaction in response.result {
                         transaction.chainId = self.token.chainId
                         transaction.transactionType = TransactionType.ERC20.rawValue
                         let totleGasBigNumber = BigUInt(Int(transaction.gasUsed)! * Int(transaction.gasPrice)!)
                         transaction.totleGas = Web3.Utils.formatToEthereumUnits(totleGasBigNumber, toUnits: .eth, decimals: 8, fallbackToScientific: false) ?? ""
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
-                        insertions.append(results.count + self.transactions.count)
                         results.append(transaction)
                     }
-                    self.transactions.append(contentsOf: results)
-                    self.page += 1
-                    self.loading = false
-                    completion(insertions, nil)
+                    completion(results, nil)
                 } catch {
                     completion([], error)
                 }
@@ -178,38 +201,20 @@ extension TransactionHistoryService {
         }
     }
 
-    private class NervosErc20: TransactionHistoryService {
-        var loading = false
-        private var page = 1
-        
+    private class AppChainErc20: TransactionHistoryService {
         override init(token: TokenModel) {
             super.init(token: token)
             getAppChainQuotaPrice()
         }
 
-        override func reloadData(completion: @escaping (Error?) -> Void) {
-            guard loading == false else { return }
-            page = 1
-            transactions = []
-            loadData(page: page) { (_, error) in
-                completion(error)
-            }
-        }
-
-        override func loadMoreDate(completion: @escaping ([Int], Error?) -> Void) {
-            guard loading == false else { return }
-            loadData(page: page, completion: completion)
-        }
-
-        func loadData(page: Int, completion: @escaping ([Int], Error?) -> Void) {
+        override func loadData(page: Int, completion: @escaping ([TransactionModel], Error?) -> Void) {
             let tokenAddress = token.address
             let parameters: [String: Any] = [
                 "address": tokenAddress,
                 "account": walletAddress,
                 "page": page,
-                "perPage": 20
+                "perPage": pageSize
             ]
-            loading = true
             Alamofire.request("https://microscope.cryptape.com:8888/api/erc20/transfers", method: .get, parameters: parameters).responseData { [weak self](response) in
                 do {
                     guard let self = self else { throw TransactionError.requestfailed }
@@ -217,20 +222,15 @@ extension TransactionHistoryService {
                     print(String(bytes: responseData.bytes, encoding: .utf8)!)
                     let response = try JSONDecoder().decode(NervosErc20TransactionResponse.self, from: responseData)
                     var resultArr: [TransactionModel] = []
-                    var insertions = [Int]()
                     for transaction in response.result.transfers {
                         transaction.gasUsed = "\(Double(UInt.fromHex(transaction.gasUsed)) / pow(10, 18) * self.quotaPrice)"
                         transaction.blockNumber = "\(UInt.fromHex(transaction.blockNumber))"
                         transaction.transactionType = TransactionType.AppChainERC20.rawValue
                         transaction.symbol = self.token.symbol
                         transaction.value = Web3.Utils.formatToEthereumUnits(BigUInt(atof(transaction.value)), toUnits: .eth, decimals: 8, fallbackToScientific: false)!
-                        insertions.append(resultArr.count + self.transactions.count)
                         resultArr.append(transaction)
                     }
-                    self.transactions.append(contentsOf: resultArr)
-                    self.page += 1
-                    self.loading = false
-                    completion(insertions, nil)
+                    completion(resultArr, nil)
                 } catch {
                     completion([], error)
                 }

@@ -806,13 +806,13 @@
                                                     <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详情 &gt;&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVD-6K-Qaw">
-                                                    <rect key="frame" x="310" y="78" width="50" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="详情 &gt;&gt;" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVD-6K-Qaw">
+                                                    <rect key="frame" x="310" y="76" width="50" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="6Yy-cg-TYr"/>
                                                         <constraint firstAttribute="width" constant="50" id="r02-nd-xRd"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" red="0.27058823529411763" green="0.42352941176470588" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -827,7 +827,7 @@
                                                 <constraint firstItem="zkM-fD-nwj" firstAttribute="top" secondItem="TVz-WV-pzU" secondAttribute="bottom" constant="10" id="OKb-54-PMK"/>
                                                 <constraint firstItem="0Vn-x7-Dib" firstAttribute="leading" secondItem="1Ut-bx-AaC" secondAttribute="trailing" constant="10" id="OgK-Mp-7gn"/>
                                                 <constraint firstAttribute="trailing" secondItem="zkM-fD-nwj" secondAttribute="trailing" constant="15" id="PUk-wi-Xn0"/>
-                                                <constraint firstAttribute="bottom" secondItem="xVD-6K-Qaw" secondAttribute="bottom" constant="20" id="Qpr-o4-2O8"/>
+                                                <constraint firstAttribute="bottom" secondItem="xVD-6K-Qaw" secondAttribute="bottom" constant="22" id="Qpr-o4-2O8"/>
                                                 <constraint firstItem="zkM-fD-nwj" firstAttribute="leading" secondItem="1Ut-bx-AaC" secondAttribute="trailing" constant="10" id="Wbn-wq-tGp"/>
                                                 <constraint firstItem="1Ut-bx-AaC" firstAttribute="centerY" secondItem="edD-4M-YuH" secondAttribute="centerY" id="pRV-9q-fDB"/>
                                                 <constraint firstItem="1Ut-bx-AaC" firstAttribute="leading" secondItem="edD-4M-YuH" secondAttribute="leading" constant="15" id="rGT-3T-vqX"/>
