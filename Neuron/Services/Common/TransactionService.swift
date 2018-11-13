@@ -127,8 +127,8 @@ extension TransactionService {
             }*/
             let bigNumber = try? EthereumNetwork().getWeb3().eth.getGasPrice()
             estimatedGasPrice = (bigNumber?.words.first ?? 1) * 4
-            changeGasLimitEnable = true
-            changeGasPriceEnable = false
+            changeGasLimitEnable = false
+            changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
@@ -161,8 +161,8 @@ extension TransactionService {
             self.gasLimit = 21_000
             let bigNumber = try? EthereumNetwork().getWeb3().eth.getGasPrice()
             estimatedGasPrice = (bigNumber?.words.first ?? 1) * 4
-            changeGasLimitEnable = true
-            changeGasPriceEnable = false
+            changeGasLimitEnable = false
+            changeGasPriceEnable = true
         }
 
         override func sendTransaction() {
