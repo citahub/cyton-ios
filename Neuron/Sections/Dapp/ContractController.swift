@@ -94,16 +94,25 @@ class ContractController: UITableViewController {
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
             value = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
-            valueLabel.text = value + tokenModel.symbol
+            valueLabel.text = value
             gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
             totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value ?? "0", gas: appChainQuota) + tokenModel.symbol
         } else {
             chainType = .eth
             toLabel.text = dappCommonModel.eth?.to
             value = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
-            valueLabel.text = value + tokenModel.symbol
+            valueLabel.text = value
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
         }
+        formatValueLabel(value: value)
+    }
+
+    func formatValueLabel(value: String) {
+        let range = NSMakeRange(valueLabel.text!.lengthOfBytes(using: .utf8), tokenModel.symbol.lengthOfBytes(using: .utf8))
+        valueLabel.text! += tokenModel.symbol
+        let attributedText = NSMutableAttributedString(attributedString: valueLabel.attributedText!)
+        attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
+        valueLabel.attributedText = attributedText
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) -> String {
