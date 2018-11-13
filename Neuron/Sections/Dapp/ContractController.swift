@@ -48,9 +48,23 @@ class ContractController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "支付详情"
-        advancedViewController = storyboard!.instantiateViewController(withIdentifier: "advancedViewController") as? AdvancedViewController
-        advancedViewController.delegate = self
         getTokenModel()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "AdvancedViewController" {
+            advancedViewController = segue.destination as? AdvancedViewController
+            advancedViewController.delegate = self
+            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
+            advancedViewController.gasLimit = gasLimit
+        }
+    }
+
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "AdvancedViewController" {
+            return false
+        }
+        return true
     }
 
     func getTokenModel() {
@@ -80,16 +94,25 @@ class ContractController: UITableViewController {
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
             value = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
-            valueLabel.text = value + tokenModel.symbol
+            valueLabel.text = value
             gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
             totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value ?? "0", gas: appChainQuota) + tokenModel.symbol
         } else {
             chainType = .eth
             toLabel.text = dappCommonModel.eth?.to
             value = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
-            valueLabel.text = value + tokenModel.symbol
+            valueLabel.text = value
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
         }
+        formatValueLabel(value: value)
+    }
+
+    func formatValueLabel(value: String) {
+        let range = NSMakeRange(valueLabel.text!.lengthOfBytes(using: .utf8), tokenModel.symbol.lengthOfBytes(using: .utf8))
+        valueLabel.text! += tokenModel.symbol
+        let attributedText = NSMutableAttributedString(attributedString: valueLabel.attributedText!)
+        attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
+        valueLabel.attributedText = attributedText
     }
 
     func getNervosTransactionCosted(with quotaInput: BigUInt) -> String {
@@ -166,9 +189,7 @@ class ContractController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if dappCommonModel.chainType == "ETH" && indexPath.section == 0 && indexPath.row == 0 {
-            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
-            advancedViewController.gasLimit = gasLimit
-            UIApplication.shared.keyWindow?.addSubview(advancedViewController.view)
+            performSegue(withIdentifier: "AdvancedViewController", sender: indexPath.row)
         }
     }
 
