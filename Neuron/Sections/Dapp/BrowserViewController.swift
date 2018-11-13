@@ -12,7 +12,6 @@ import WebKit
 class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
     @IBOutlet weak var closeButton: UIButton!
     var requestUrlStr = ""
-    var transactionConfirmViewController: TransactionConfirmViewController?
     var mainUrl: URL?
     lazy var webView: WKWebView = {
         let webView = WKWebView(
