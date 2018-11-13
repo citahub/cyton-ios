@@ -51,7 +51,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         super.viewDidLoad()
         view.addSubview(webView)
         view.addSubview(progressView)
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
             webView.load(URLRequest(url: url))
@@ -69,20 +68,11 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         // fix swipe back
         let gestureRecognizer = fixSwipeBack()
         webView.addGestureRecognizer(gestureRecognizer)
-    }
 
-    func getRequestStr(requestStr: String) -> String {
-        if requestUrlStr.hasPrefix("http://") || requestUrlStr.hasPrefix("https://") {
-            return requestStr
-        } else {
-            return "https://" + requestStr
-        }
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            progressView.alpha = 1.0
-            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        _ = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
+            guard let self = self else { return }
+            self.progressView.alpha = 1.0
+            self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
             if webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
                     self.progressView.alpha = 0
@@ -90,6 +80,14 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
                     self.progressView.setProgress(0.0, animated: false)
                 })
             }
+        }
+    }
+
+    func getRequestStr(requestStr: String) -> String {
+        if requestUrlStr.hasPrefix("http://") || requestUrlStr.hasPrefix("https://") {
+            return requestStr
+        } else {
+            return "https://" + requestStr
         }
     }
 
