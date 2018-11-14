@@ -28,7 +28,7 @@ class TransactionViewController: UITableViewController {
         super.viewDidLoad()
 
         paramBuilder = TransactionParamBuilder(token: token)
-        paramBuilder.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
 
         setupUI()
     }
@@ -47,7 +47,7 @@ class TransactionViewController: UITableViewController {
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
         let amountText = amountTextField.text ?? ""
-        paramBuilder.toAddress = addressTextField.text ?? ""
+        paramBuilder.to = addressTextField.text ?? ""
         // TODO: feed input amount to param builder
         // paramBuilder.amount = Double(amountText) ?? 0.0
         if isEffectiveTransferInfo {
@@ -108,17 +108,17 @@ class TransactionViewController: UITableViewController {
 
 extension TransactionViewController {
     var isEffectiveTransferInfo: Bool {
-        if paramBuilder.toAddress.count != 40 && paramBuilder.toAddress.count != 42 {
+        if paramBuilder.to.count != 40 && paramBuilder.to.count != 42 {
             Toast.showToast(text: "您的地址错误，请重新输入")
             return false
-        } else if paramBuilder.toAddress != paramBuilder.toAddress.lowercased() {
-            let eip55String = EthereumAddress.toChecksumAddress(paramBuilder.toAddress) ?? ""
-            if eip55String != paramBuilder.toAddress {
+        } else if paramBuilder.to != paramBuilder.to.lowercased() {
+            let eip55String = EthereumAddress.toChecksumAddress(paramBuilder.to) ?? ""
+            if eip55String != paramBuilder.to {
                 Toast.showToast(text: "您的地址错误，请重新输入")
                 return false
             }
         }
-        if paramBuilder.toAddress == paramBuilder.fromAddress {
+        if paramBuilder.to == paramBuilder.from {
             Toast.showToast(text: "发送地址和收款地址不能相同")
             return false
         }

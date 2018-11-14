@@ -163,8 +163,8 @@ class TransactionConfirmInfoViewController: UIViewController {
             let attributedText = NSMutableAttributedString(attributedString: amountLabel.attributedText!)
             attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
             amountLabel.attributedText = attributedText
-            fromAddressLabel.text = paramBuilder.fromAddress
-            toAddressLabel.text = paramBuilder.toAddress
+            fromAddressLabel.text = paramBuilder.from
+            toAddressLabel.text = paramBuilder.to
             gasCostLabel.text = "\(paramBuilder.txFeeNatural)" + "\(paramBuilder.token.gasSymbol)"
  */
         }

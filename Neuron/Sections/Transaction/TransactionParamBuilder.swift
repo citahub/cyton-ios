@@ -7,19 +7,18 @@
 //
 
 import Foundation
-import AppChain
-import Web3swift
 import BigInt
 
+/// Prepare tx params.
 class TransactionParamBuilder {
-    var fromAddress: String!
-    var toAddress = ""
+    var from: String!
+    var to = ""
     var value: BigUInt = 0
     var data = Data()
 
     var gasPrice: BigUInt = 0 {
         didSet {
-            gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
+            rebuildGasCalculator()
         }
     }
 
@@ -64,6 +63,7 @@ class TransactionParamBuilder {
         let fetched = { [weak self] price -> Void in
             DispatchQueue.main.async {
                 self?.gasPrice = price
+                // TODO: notify observer?
             }
         }
 
@@ -88,7 +88,7 @@ extension TransactionParamBuilder {
 
         override func sendTransaction(password: String) {
             // TODO: extract this
-            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let keystore = WalletManager.default.keystore(for: from)
             let web3 = EthereumNetwork().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
 
@@ -98,9 +98,9 @@ extension TransactionParamBuilder {
                     throw SendTransactionError.invalidAmountFormat
                 }
 
-                let sender = try EthereumTxSender(web3: web3, from: fromAddress)
+                let sender = try EthereumTxSender(web3: web3, from: from)
                 let txhash = try sender.sendETH(
-                    to: toAddress,
+                    to: to,
                     value: value,
                     gasLimit: gasLimit,
                     gasPrice: BigUInt(gasPrice),
@@ -119,7 +119,7 @@ extension TransactionParamBuilder {
     class ERC20: TransactionParamBuilder {
 
         override func sendTransaction(password: String) {
-            let keystore = WalletManager.default.keystore(for: fromAddress)
+            let keystore = WalletManager.default.keystore(for: from)
             let web3 = EthereumNetwork().getWeb3()
             web3.addKeystoreManager(KeystoreManager([keystore]))
 
@@ -129,7 +129,7 @@ extension TransactionParamBuilder {
                     throw SendTransactionError.invalidAmountFormat
                 }
 
-                let sender = try EthereumTxSender(web3: web3, from: fromAddress)
+                let sender = try EthereumTxSender(web3: web3, from: from)
                 // TODO: estimate gas
                 let txhash = try sender.sendToken(
                     to: toAddress,

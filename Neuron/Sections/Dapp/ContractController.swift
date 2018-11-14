@@ -200,20 +200,20 @@ class ContractController: UITableViewController {
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
         let paramBuilder = TransactionParamBuilder(token: tokenModel)
-        paramBuilder.fromAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         // TODO: set input amount
         // paramBuilder.amount = Double(value) ?? 0.0
 
         switch chainType {
         case .appChain:
             paramBuilder.gasLimit = 10000000
-            paramBuilder.toAddress = dappCommonModel.appChain?.to ?? ""
+            paramBuilder.to = dappCommonModel.appChain?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
             // TODO: set gas price
             // paramBuilder.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
             paramBuilder.gasLimit = UInt64(gasLimit.words.first!)
-            paramBuilder.toAddress = dappCommonModel.eth?.to ?? ""
+            paramBuilder.to = dappCommonModel.eth?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
             // TODO: set gas price
             // paramBuilder.gasPrice = gasPrice.words.first!
