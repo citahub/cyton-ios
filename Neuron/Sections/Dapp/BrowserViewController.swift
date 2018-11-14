@@ -20,7 +20,12 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         )
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]
-        webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
+        let customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
+        webView.evaluateJavaScript("navigator.userAgent", completionHandler: {(result, _) in
+            if let agent = result as? String {
+                webView.customUserAgent = customUserAgent + agent
+            }
+        })
         webView.navigationDelegate = self
         webView.uiDelegate = self
         webView.addAllNativeFunctionHandler()
@@ -51,12 +56,13 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         view.addSubview(webView)
         view.addSubview(progressView)
         webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
+        requestUrlStr = requestUrlStr.trimmingCharacters(in: .whitespaces)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
             webView.load(URLRequest(url: url))
         } else {
-            errorOverlaycontroller.messageLabel.text = "无效的链接地址"
             errorOverlaycontroller.style = .blank
+            errorOverlaycontroller.messageLabel.text = "无效的链接地址"
             showOverlay()
         }
         errorOverlayRefreshBlock = { [weak self] () in
