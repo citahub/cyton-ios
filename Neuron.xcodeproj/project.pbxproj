@@ -147,7 +147,6 @@
 		89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */; };
 		89B296EB20F4CB6B008558A7 /* TransactionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EA20F4CB6B008558A7 /* TransactionModel.swift */; };
 		89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* ServerAPI.swift */; };
-		89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895AA20F8507200B9468B /* BrowserUrlParser.swift */; };
 		89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserViewController.swift */; };
 		89BEBE6B20EF82B6007D2705 /* EthereumNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
@@ -355,7 +354,6 @@
 		89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DAppBrowser.storyboard; sourceTree = "<group>"; };
 		89B296EA20F4CB6B008558A7 /* TransactionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionModel.swift; sourceTree = "<group>"; };
 		89B296EC20F4CBA7008558A7 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
-		89B895AA20F8507200B9468B /* BrowserUrlParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserUrlParser.swift; sourceTree = "<group>"; };
 		89B895B020F8B0CD00B9468B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumNetwork.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
@@ -582,8 +580,8 @@
 		6E9D7CBB216B37E90044176D /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */,
 				6E9D7CC0216B3AE40044176D /* Authentication.storyboard */,
+				6E9D7CB9216B04EF0044176D /* AuthenticationService.swift */,
 				6E9D7CBC216B386F0044176D /* AuthenticationViewController.swift */,
 				6E9D7CC4216B490D0044176D /* AuthDeviceViewController.swift */,
 				6E867E04216C3F1500BD6FE5 /* AuthPasswordViewController.swift */,
@@ -596,7 +594,6 @@
 		6EABFB0921991AF900305ED5 /* Native */ = {
 			isa = PBXGroup;
 			children = (
-				6EABFB0E219930EC00305ED5 /* ViewController */,
 				6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */,
 				6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */,
 				6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */,
@@ -606,11 +603,32 @@
 			path = Native;
 			sourceTree = "<group>";
 		};
-		6EABFB0E219930EC00305ED5 /* ViewController */ = {
+		890E3112219BC56A00561F3D /* WebView */ = {
 			isa = PBXGroup;
 			children = (
+				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
+				8928C24820AE91E600C3103E /* DappViewController.swift */,
+				8928C26920AED5C100C3103E /* SearchAppController.swift */,
+				89B895B020F8B0CD00B9468B /* BrowserViewController.swift */,
+				8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */,
+				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
+				8972FD0E218B54A100C27147 /* AdvancedViewController.swift */,
+				8964A17B20BE7F750086848F /* MessageSignController.swift */,
+				893532F3217DECF400404C0B /* MessageSignShowViewController.swift */,
 			);
-			path = ViewController;
+			path = WebView;
+			sourceTree = "<group>";
+		};
+		890E3113219BC56A00561F3D /* Handler */ = {
+			isa = PBXGroup;
+			children = (
+				8935BA5C216F48A800C37263 /* Method.swift */,
+				8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */,
+				8951A84B2170A5CC00043228 /* DAppAction.swift */,
+				89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */,
+				89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */,
+			);
+			path = Handler;
 			sourceTree = "<group>";
 		};
 		8913436F20C78D9600A17AEF /* Models */ = {
@@ -638,9 +656,12 @@
 		8922685820DE4EA50021A85F /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				89C25C5820BBA38300007EC1 /* SettingsViewController.swift */,
 				1A2BFA1721338FEB0065496B /* Settings.storyboard */,
-				89BEBE7020F12621007D2705 /* View */,
+				89C25C5820BBA38300007EC1 /* SettingsViewController.swift */,
+				89BEBE7120F12647007D2705 /* CommonWebViewController.swift */,
+				897AFC592130129500383A12 /* CurrencyViewController.swift */,
+				89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */,
+				8989E2CE21883400008A1BDE /* SwitchNetworkViewController.swift */,
 				8922685920DE4EA50021A85F /* TableViewCell */,
 			);
 			path = Settings;
@@ -675,8 +696,8 @@
 			children = (
 				8935BA5A216EFCF000C37263 /* init.js */,
 				8935BA58216EFCE700C37263 /* neuron.js */,
-				6E83CB92216F581800029324 /* ProductAgreement.txt */,
 				896812CA20F726D000731C8C /* dappOpration.js */,
+				6E83CB92216F581800029324 /* ProductAgreement.txt */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				89CA1FAB213F822B00669B2C /* tokens-list.json */,
 				89C614562140D4C500DC3DF4 /* currency.plist */,
@@ -702,22 +723,9 @@
 		8928C22720AE7CB500C3103E /* Dapp */ = {
 			isa = PBXGroup;
 			children = (
+				890E3112219BC56A00561F3D /* WebView */,
+				890E3113219BC56A00561F3D /* Handler */,
 				6EABFB0921991AF900305ED5 /* Native */,
-				8935BA5C216F48A800C37263 /* Method.swift */,
-				8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */,
-				89B895AA20F8507200B9468B /* BrowserUrlParser.swift */,
-				8951A84B2170A5CC00043228 /* DAppAction.swift */,
-				8928C24820AE91E600C3103E /* DappViewController.swift */,
-				8928C26920AED5C100C3103E /* SearchAppController.swift */,
-				89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */,
-				89B895B020F8B0CD00B9468B /* BrowserViewController.swift */,
-				8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */,
-				89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */,
-				89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */,
-				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
-				8972FD0E218B54A100C27147 /* AdvancedViewController.swift */,
-				8964A17B20BE7F750086848F /* MessageSignController.swift */,
-				893532F3217DECF400404C0B /* MessageSignShowViewController.swift */,
 			);
 			path = Dapp;
 			sourceTree = "<group>";
@@ -939,25 +947,17 @@
 		898A1A1D20B7B4F300ECB465 /* Transaction */ = {
 			isa = PBXGroup;
 			children = (
-				898A1A1E20B7B4F300ECB465 /* View */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
-				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
-				6E4F9617218973F200372D3E /* TransactionParamBuilder.swift */,
 				6E8168F6218874B1007641BA /* TransactionViewController.swift */,
 				6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */,
 				6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */,
-			);
-			path = Transaction;
-			sourceTree = "<group>";
-		};
-		898A1A1E20B7B4F300ECB465 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				898A1A2C20B8033C00ECB465 /* TableViewCell */,
+				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
+				6E4F9617218973F200372D3E /* TransactionParamBuilder.swift */,
 				898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */,
 				898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */,
+				898A1A2C20B8033C00ECB465 /* TableViewCell */,
 			);
-			path = View;
+			path = Transaction;
 			sourceTree = "<group>";
 		};
 		898A1A2C20B8033C00ECB465 /* TableViewCell */ = {
@@ -992,17 +992,6 @@
 				3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		89BEBE7020F12621007D2705 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				89BEBE7120F12647007D2705 /* CommonWebViewController.swift */,
-				897AFC592130129500383A12 /* CurrencyViewController.swift */,
-				89CFA12521424CAB00635A54 /* AboutUsTableViewController.swift */,
-				8989E2CE21883400008A1BDE /* SwitchNetworkViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		89D4AC1F20D59F270097E02B /* WalletManager */ = {
@@ -1216,7 +1205,6 @@
 				"${BUILT_PRODUCTS_DIR}/EthereumAddress/EthereumAddress.framework",
 				"${BUILT_PRODUCTS_DIR}/IGIdenticon/IGIdenticon.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/PlainPing/PlainPing.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/PullToRefresher/PullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
@@ -1244,7 +1232,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EthereumAddress.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IGIdenticon.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlainPing.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
@@ -1404,7 +1391,6 @@
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
 				6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
-				89B895AB20F8507200B9468B /* BrowserUrlParser.swift in Sources */,
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				6E876845218031670032EBCE /* UInt+Extension.swift in Sources */,

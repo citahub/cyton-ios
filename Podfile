@@ -11,8 +11,6 @@ target 'Neuron' do
 
   pod 'Alamofire'
   pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
-
-  pod 'PlainPing'
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
   pod 'EFQRCode'
