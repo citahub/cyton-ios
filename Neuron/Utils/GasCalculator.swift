@@ -14,7 +14,7 @@ import BigInt
 /// Ether = Tx Fees = Gas Limit * Gas Price
 struct GasCalculator {
     // Default to 20 Gwei (which is not very reasonable when Ethereum is under congestion)
-    static let defaultGasPrice = Web3Utils.parseToBigUInt("20", units: .eth)!
+    static let defaultGasPrice = BigUInt(20).toWei(from: .gwei)
 
     var gasPrice: BigUInt
     var gasLimit: UInt64
