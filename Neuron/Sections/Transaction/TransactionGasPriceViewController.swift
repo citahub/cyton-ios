@@ -52,6 +52,7 @@ class TransactionGasPriceViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         })
     }
+    
     @IBAction func confirm(_ sender: Any) {
         let newGasPrice = BigUInt(gasPriceTextField.text!)! * BigUInt(10).power(9)
         if newGasPrice < service.gasPrice {

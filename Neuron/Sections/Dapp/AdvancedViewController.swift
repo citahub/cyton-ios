@@ -72,7 +72,7 @@ class AdvancedViewController: UIViewController {
     func formatValue(gasPrice: BigUInt) {
         let ethereumGasPrice = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: false) ?? "8"
         let gas = Web3Utils.formatToEthereumUnits(gasPrice * self.gasLimit, toUnits: .eth, decimals: 4, fallbackToScientific: true) ?? "0"
-        self.gasLabel.text = "Gas费用：\(gas) eth = Gaslimit(\(self.gasLimit.description))*Gasprice(\(ethereumGasPrice))"
+        self.gasLabel.text = "Gas费用：\(gas) ETH = Gaslimit(\(self.gasLimit.description))*Gasprice(\(ethereumGasPrice))"
     }
 
     @IBAction func textFieldValueChanged(_ sender: UITextField) {
