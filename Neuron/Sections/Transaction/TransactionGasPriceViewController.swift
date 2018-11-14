@@ -20,15 +20,10 @@ class TransactionGasPriceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let estimatedGasPrice = service.gasPrice / BigUInt(10).power(9)
+        let estimatedGasPrice = service.gasPrice.toGwei(from: .wei)
         estimatedGasPriceLabel.text = "以太坊推荐值 \(estimatedGasPrice)Gwei"
-        // TODO: fix numbers and precision
-        let gasPrice = Double(service.gasPrice) / pow(10, 9)
-        if gasPrice == Double(UInt(gasPrice)) {
-            gasPriceTextField.text = "\(UInt(gasPrice))"
-        } else {
-            gasPriceTextField.text = "\(gasPrice)"
-        }
+        let gasPrice = Double(service.gasPrice.toGwei(from: .wei))
+        gasPriceTextField.text = "\(gasPrice)"
         gasLimitTextField.text = "\(service.gasLimit)"
         gasPriceTextField.isEnabled = true
         gasLimitTextField.isEnabled = true
@@ -52,9 +47,9 @@ class TransactionGasPriceViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         })
     }
-    
+
     @IBAction func confirm(_ sender: Any) {
-        let newGasPrice = BigUInt(gasPriceTextField.text!)! * BigUInt(10).power(9)
+        let newGasPrice = BigUInt(gasPriceTextField.text!)!.toWei(from: .gwei)
         if newGasPrice < service.gasPrice {
             Toast.showToast(text: "您的GasPrice设置过低，请确保输入大于等于推荐值以快速转账")
             return
