@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 struct WalletRealmTool {
-    static let realm = RealmHelper.sharedInstance
+    static let realm = RealmHelper().realm
     /// according to wallet address to get WalletModel
     ///
     /// - Parameter walletName: walletName
