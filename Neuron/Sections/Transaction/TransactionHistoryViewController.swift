@@ -9,6 +9,7 @@
 import UIKit
 import PullToRefresh
 import WebKit
+import Web3swift
 
 class TransactionHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
     @IBOutlet weak var tableView: UITableView!
@@ -20,13 +21,13 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet var warningView: UIView!
     @IBOutlet weak var warningHeight: NSLayoutConstraint!
 
-    var service: TransactionHistoryService?
+    var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
     var tokenType: TokenType = .erc20Token
     var tokenModel: TokenModel! {
         didSet {
             guard tokenModel != nil else { return }
-            service = TransactionHistoryService.service(with: tokenModel)
+            presenter = TransactionHistoryPresenter(token: tokenModel)
             Toast.showHUD()
             loadData()
         }
@@ -42,6 +43,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             self.loadData()
         }
         setupTokenProfile(nil)
+
+//        TransactionStatusManager.service.test()
 
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
         if tokenModel.symbol == "MBA" ||
@@ -61,7 +64,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             requestPaymentViewController.appModel = appModel
         } else if segue.identifier == "transaction" {
             let controller = segue.destination as! TransactionViewController
-            controller.token = service?.token
+            controller.token = presenter?.token
         }
     }
 
@@ -85,9 +88,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         var profile: TokenProfile?
 
         group.enter()
-        service?.reloadData { (_) in
+        presenter?.reloadData(completion: { (_, _) in
             group.leave()
-        }
+        })
 
         group.enter()
         tokenModel.getProfile { (tokenProfile) in
@@ -100,7 +103,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             self.setupTokenProfile(profile)
             self.tableView.endRefreshing(at: .top)
             self.tableView.reloadData()
-            if self.service?.transactions.count == 0 {
+            if self.presenter?.transactions.count == 0 {
                 self.errorOverlaycontroller.style = .blank
                 self.tableView.addSubview(self.overlay)
             } else {
@@ -150,7 +153,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     private func loadMoreData() {
-        service?.loadMoreDate(completion: { [weak self](insertions, _) in
+        presenter?.loadMoreData(completion: { [weak self](insertions, _) in
             var indexPaths = [IndexPath]()
             for index in insertions {
                 indexPaths.append(IndexPath(row: index, section: 0))
@@ -162,17 +165,17 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return service?.transactions.count ?? 0
+        return presenter?.transactions.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
-        cell.transaction = service!.transactions[indexPath.row]
+        cell.transaction = presenter!.transactions[indexPath.row]
         return cell
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > service!.transactions.count - 6 {
+        if indexPath.row > presenter!.transactions.count - 6 {
             loadMoreData()
         }
     }
@@ -180,7 +183,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
-        controller.tModel = service!.transactions[indexPath.row]
+//        controller.tModel = presenter!.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
 
@@ -200,17 +203,22 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    var transaction: TransactionModel? {
+    var transaction: TransactionDetails? {
         didSet {
             guard let transaction = transaction else { return }
-            dateLabel.text = transaction.formatTime
+
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            dateLabel.text = dateformatter.string(from: transaction.date)
+
             let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+            let amount = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
             if transaction.to.lowercased() == walletAddress.lowercased() {
                 addressLabel.text = transaction.from
-                numberLabel.text = "+\(transaction.value)"
+                numberLabel.text = "+\(amount)"
             } else {
                 addressLabel.text = transaction.to
-                numberLabel.text = "-\(transaction.value)"
+                numberLabel.text = "-\(amount)"
             }
         }
     }

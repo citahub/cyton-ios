@@ -11,10 +11,10 @@ import Alamofire
 import PromiseKit
 
 class AppChainTransactionStatus: NSObject {
-    func getTransactionStatus(transaction: LocationTransactionDetails) -> TransactionStateResult {
+    func getTransactionStatus(transaction: SentTransaction) -> TransactionStateResult {
         do {
             // 查询交易数据
-            let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: transaction.details.hash)
+            let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: transaction.txHash)
 //            let details = try AppChainTransactionHistory().getTransaction(txhash: transaction.hashString, account: transaction.walletAddress, from: tr, to: <#T##String#>)
             print(details)
             // 交易成功
@@ -22,10 +22,10 @@ class AppChainTransactionStatus: NSObject {
         } catch {
             do {
                 let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
-                if transaction.details.blockNumber < currentBlockNumber {
+                if transaction.blockNumber < currentBlockNumber {
                     // 小于当前 block height
                     // 获取打包成功的 receipt
-                    if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: transaction.details.hash) {
+                    if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: transaction.txHash) {
                         // 交易进行中
                         print(receipt)
                         return .pending

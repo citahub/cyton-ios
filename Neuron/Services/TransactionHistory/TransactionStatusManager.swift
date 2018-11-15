@@ -9,6 +9,8 @@
 import UIKit
 import RealmSwift
 import BigInt
+import Web3swift
+import AppChain
 
 enum TransactionStateResult {
     case pending
@@ -16,50 +18,38 @@ enum TransactionStateResult {
     case failure
 }
 
-class LocationTransactionDetails: Object {
-    @objc dynamic var walletAddress: String = ""
-    @objc dynamic var tokenIdentifier: String = ""
-    @objc dynamic var detailsData: Data!
-//    @objc dynamic var token: TokenModel!
-    var details: TransactionDetails!
-//    {
-//        set {
-//            privateDetails = newValue
-//            detailsData = try? JSONEncoder().encode(privateDetails)
-//        }
-//        get {
-//            return privateDetails
-//        }
-//    }
-//    private lazy var privateDetails: TransactionDetails = {
-////        JSONDecoder().decode(TransactionDetails.self, from: <#T##Data#>)
-//        return TransactionDetails()
-//    }()
+protocol TransactionStatusManagerDelegate: NSObjectProtocol {
+    func transaction(transaction: TransactionDetails, didChangeStatus: TransactionState)
 }
 
 class TransactionStatusManager: NSObject {
     static let transactionStatusChangedNotification = Notification.Name("transactionStatusChangedNotification")
-    static let service = TransactionStatusManager()
+    static let manager = TransactionStatusManager()
     private let timeInterval: TimeInterval = 20.0
     private let realm: Realm
-    private var transactions = [LocationTransactionDetails]()
+    private var transactions = [SentTransaction]()
+    private let delegates: NSHashTable<NSObject>!
 
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
         let fileURL = document.appendingPathComponent("transaction_history")
         realm = try! Realm(fileURL: fileURL)
-        super.init()
+        let objects = realm.objects(SentTransaction.self)
+        transactions = objects.map { (transaction) -> SentTransaction in
+            return transaction
+        }
 
-//        realm.objects(SentTransactionEntity.sealf).observe { (change) in
-//            switch change {
-//            case .initial(let list):
-//                break
-//            case .update(let list, let deletions, let insertions, let modifications):
-//                break
-//            case .error(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+        delegates = NSHashTable(options: .weakMemory)
+        super.init()
+        checkSentTransactionStatus()
+    }
+
+    func addDelegate(delegate: TransactionStatusManagerDelegate) {
+        delegates.add(delegate as? NSObject)
+    }
+
+    func removeDelegate(delegate: TransactionStatusManagerDelegate) {
+        delegates.remove(delegate as? NSObject)
     }
 
     func test() {
@@ -77,50 +67,65 @@ class TransactionStatusManager: NSObject {
         }
     }
 
-    func insertTransaction(walletAddress: String, tokenIdentifier: String, transaction: LocationTransactionDetails) {
+    func insertTransaction(transaction: SentTransaction) {
         try? realm.write {
-            let transaction = realm.create(LocationTransactionDetails.self)
             realm.add(transaction)
-            realm.create(LocationTransactionDetails.self, value: [], update: true)
+//            realm.create(LocationTransactionDetails.self, value: [], update: true)
         }
+        transactions.append(transaction)
     }
 
 //    func mergeTransactions(from transactions: [TransactionDetails]) -> [TransactionDetails] {
 //        return transactions
 //    }
 
-    func getTransactions(walletAddress: String, tokenIdentifier: String) -> [LocationTransactionDetails] {
-        return realm.objects(LocationTransactionDetails.self).filter { (entity) -> Bool in
-            return entity.walletAddress == walletAddress && entity.tokenIdentifier == entity.tokenIdentifier
+    func getTransactions(walletAddress: String, token: TokenModel) -> [SentTransaction] {
+        return realm.objects(SentTransaction.self).filter { (entity) -> Bool in
+            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
         }.shuffled()
     }
 
     // MARK: - check transaction status
-    func beganStateCheck(walletAddress: String, tokenIdentifier: String) {
-        let result = realm.objects(LocationTransactionDetails.self)
+    func beganStateCheck(walletAddress: String, token: TokenModel) {
+        let result = realm.objects(SentTransaction.self)
         let list = result.filter { (entity) -> Bool in
-            return entity.walletAddress == walletAddress && entity.tokenIdentifier == tokenIdentifier
+            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
         }
         transactions.append(contentsOf: list)
         checkSentTransactionStatus()
     }
 
-    func stopStateCheck(walletAddress: String, tokenIdentifier: String) {
+    func stopStateCheck(walletAddress: String, token: TokenModel) {
         transactions = transactions.filter({ (entity) -> Bool in
-            return entity.walletAddress != walletAddress && entity.tokenIdentifier != tokenIdentifier
+            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
         })
     }
 
     @objc func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
+        guard self.transactions.count > 0 else { return }
+        guard !Thread.isMainThread else {
+            DispatchQueue.global().async {
+                self.checkSentTransactionStatus()
+            }
+            return
+        }
+
         let transactions = self.transactions
         for transaction in transactions {
-            let result = AppChainTransactionStatus().getTransactionStatus(transaction: transaction)
+            let result: TransactionStateResult
+            switch transaction.tokenType {
+            case .ethereum:
+                result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+            default:
+                fatalError()
+            }
+//            let result = AppChainTransactionStatus().getTransactionStatus(transaction: transaction)
             switch result {
             case .failure:
                 DispatchQueue.main.async {
                     try? self.realm.write {
-                        transaction.details.status = .failure
+                        transaction.status = .failure
                         self.realm.add(transaction, update: true)
                     }
                 }
@@ -134,9 +139,7 @@ class TransactionStatusManager: NSObject {
                 break
             }
         }
-        if self.transactions.count > 0 {
-            perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
-        }
+        perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
     }
 
     // MAKR: Utils

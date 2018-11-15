@@ -28,23 +28,26 @@ class TransactionHistoryPresenter {
     deinit {
     }
 
+    private var hasMoreData = true
+
     func reloadData(completion: @escaping ([Int], Error?) -> Void) {
         guard loading == false else { return }
-        transactions = []
         page = 1
+        hasMoreData = true
         loadMoreData(completion: completion)
     }
 
     func loadMoreData(completion: @escaping ([Int], Error?) -> Void) {
         guard loading == false else { return }
+        guard hasMoreData else { return }
         loading = true
         DispatchQueue.global().async {
             do {
                 let list = try self.loadData()
-                if list.count > 0 {
-                    self.loading = false
-                    self.page += 1
-                }
+                self.hasMoreData = list.count == self.pageSize
+                self.loading = false
+                self.page == 1 ? self.transactions = [] : nil
+                self.page += 1
                 var insertions = [Int]()
                 for idx in list.indices {
                     insertions.append(self.transactions.count + idx)
