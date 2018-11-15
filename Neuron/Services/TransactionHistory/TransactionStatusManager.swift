@@ -33,11 +33,18 @@ class TransactionStatusManager: NSObject {
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
         let fileURL = document.appendingPathComponent("transaction_history")
+//        try? FileManager.default.removeItem(at: fileURL)
         realm = try! Realm(fileURL: fileURL)
         let objects = realm.objects(SentTransaction.self)
         transactions = objects.map { (transaction) -> SentTransaction in
+            transaction.setupThreadSafe()
             return transaction
         }
+//
+//        let trans = transactions.first!
+//        DispatchQueue.global().async {
+//            print(trans.threadSafe.tokenType)
+//        }
 
         delegates = NSHashTable(options: .weakMemory)
         super.init()
@@ -114,7 +121,7 @@ class TransactionStatusManager: NSObject {
         let transactions = self.transactions
         for transaction in transactions {
             let result: TransactionStateResult
-            switch transaction.tokenType {
+            switch transaction.threadSafe.tokenType {
             case .ethereum:
                 result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
             default:

@@ -12,13 +12,52 @@ import BigInt
 import Web3swift
 import AppChain
 
+protocol ThreadSafeObject {
+}
+
+private var threadSafeReferenceAssiciationKey: Int = 0
+private var realmConfigurationAssiciationKey: Int = 0
+private var realmThreadAssiciationKey: Int = 0
+extension ThreadSafeObject where Self: Object {
+    private var threadSafeReference: ThreadSafeReference<Self>? {
+        return objc_getAssociatedObject(self, &threadSafeReferenceAssiciationKey) as? ThreadSafeReference<Self>
+    }
+    private var realmConfiguration: Realm.Configuration? {
+        return objc_getAssociatedObject(self, &realmConfigurationAssiciationKey) as? Realm.Configuration
+    }
+    private var realmThread: Thread? {
+        return objc_getAssociatedObject(self, &realmThreadAssiciationKey) as? Thread
+    }
+    var threadSafe: Self {
+        guard let configuration = realmConfiguration, let threadSafeReference = threadSafeReference else {
+            fatalError("Need to call `setupThreadSafe`")
+        }
+        guard realmThread != Thread.current else {
+            return self
+        }
+        let realm = try! Realm(configuration: configuration)
+        return  realm.resolve(threadSafeReference)!
+    }
+
+    func setupThreadSafe() {
+        let threadSafeReference = ThreadSafeReference(to: self)
+        objc_setAssociatedObject(self, &threadSafeReferenceAssiciationKey, threadSafeReference, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        if let realm = self.realm {
+            objc_setAssociatedObject(self, &realmConfigurationAssiciationKey, realm.configuration, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        } else {
+            fatalError("realm is nil")
+        }
+        objc_setAssociatedObject(self, &realmThreadAssiciationKey, Thread.current, .OBJC_ASSOCIATION_ASSIGN)
+    }
+}
+
 extension TokenModel {
     var identifier: String {
         return "\(address)_\(chainName ?? "")_\(name)"
     }
 }
 
-class SentTransaction: Object {
+class SentTransaction: Object, ThreadSafeObject {
     var tokenType: TokenModel.TokenType {
         set {
             privateTokenType = newValue.rawValue
