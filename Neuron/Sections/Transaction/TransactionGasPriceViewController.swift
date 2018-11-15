@@ -18,6 +18,8 @@ class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var gasLimitTextField: UITextField!
     var service: TransactionParamBuilder!
 
+    private let minGasPrice = 1.0
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let gasPrice = service.gasPrice.weiToGwei()
@@ -48,13 +50,12 @@ class TransactionGasPriceViewController: UIViewController {
     }
 
     @IBAction func confirm(_ sender: Any) {
-        let newGasPrice = Double(gasPriceTextField.text!)!.gweiToWei()
-        // TODO: should NOT disallow setting a lower gas price
-        if newGasPrice < service.gasPrice {
-            Toast.showToast(text: "您的GasPrice设置过低，请确保输入大于等于推荐值以快速转账")
+        let gasPrice = Double(gasPriceTextField.text!)!
+        if gasPrice < minGasPrice {
+            Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
             return
         }
-        service.gasPrice = newGasPrice
+        service.gasPrice = gasPrice.gweiToWei()
         service.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         dismiss()
     }
