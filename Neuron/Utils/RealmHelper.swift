@@ -10,7 +10,9 @@ import Foundation
 import RealmSwift
 
 class RealmHelper {
-    static var sharedInstance = try! Realm()
+    var realm: Realm {
+        return try! Realm()
+    }
     private static var schemaVersion: UInt64 = 3
 
     static func configureRealm() {
