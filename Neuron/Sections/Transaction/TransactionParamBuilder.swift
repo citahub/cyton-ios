@@ -22,7 +22,7 @@ class TransactionParamBuilder {
         }
     }
 
-    var gasLimit: UInt64 = 0 {
+    var gasLimit: UInt64 = GasCalculator.defaultGasLimit {
         didSet {
             rebuildGasCalculator()
         }
@@ -50,13 +50,14 @@ class TransactionParamBuilder {
     }
 
     private var token: TokenModel!
-    private var gasCalculator = GasCalculator(gasPrice: GasCalculator.defaultGasPrice, gasLimit: 21_000)
+    private var gasCalculator = GasCalculator()
 
     init(token: TokenModel) {
         self.token = token
-        tokenBalance = BigUInt(token.tokenBalance)! * BigUInt(10).power(token.decimals)
+        tokenBalance = Double(token.tokenBalance)!.toAmount(token.decimals)
 
         fetchGasPrice()
+        fetchGasLimit()
     }
 
     private func fetchGasPrice() {
@@ -67,13 +68,25 @@ class TransactionParamBuilder {
             }
         }
 
+        let tokenType = token.type
+        let tokenNode = token.chainHosts
         DispatchQueue.global().async {
-            switch self.token.type {
+            switch tokenType {
             case .ethereum, .erc20:
                 GasPriceFetcher().fetchGasPrice(then: fetched)
             case .nervos, .nervosErc20:
-                GasPriceFetcher().fetchQuotaPrice(rpcNode: self.token.chainHosts, then: fetched)
+                GasPriceFetcher().fetchQuotaPrice(rpcNode: tokenNode, then: fetched)
             }
+        }
+    }
+
+    // TODO: implement estimate gas
+    private func fetchGasLimit() {
+        switch token.type {
+        case .ethereum, .nervos:
+            gasLimit = GasCalculator.defaultGasLimit
+        case .erc20, .nervosErc20:
+            gasLimit = 100_000
         }
     }
 

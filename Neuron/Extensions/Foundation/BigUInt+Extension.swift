@@ -57,4 +57,8 @@ extension BigUInt {
     func fromQuota() -> BigUInt {
         return self / BigUInt(10).power(18)
     }
+
+    func weiToGwei() -> Double {
+        return Double.fromAmount(self, decimals: 9)
+    }
 }

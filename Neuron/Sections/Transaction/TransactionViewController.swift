@@ -102,7 +102,7 @@ class TransactionViewController: UITableViewController {
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
         tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
-        gasCostLabel.text = " "
+        gasCostLabel.text = paramBuilder.txFeeNatural.description + " \(token.symbol)" // TODO: should always displaying ETH or AppChain native token symbol
     }
 }
 
@@ -182,12 +182,7 @@ extension TransactionViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         if indexPath.section == 0 && indexPath.row == 2 {
-            switch token.type {
-            case .erc20, .ethereum:
-                cell.accessoryType = .disclosureIndicator
-            case .nervos, .nervosErc20:
-                cell.accessoryType = .none
-            }
+            cell.accessoryType = .disclosureIndicator
         }
         return cell
     }

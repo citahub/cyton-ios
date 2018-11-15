@@ -20,9 +20,8 @@ class TransactionGasPriceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let estimatedGasPrice = service.gasPrice.toGwei(from: .wei)
-        estimatedGasPriceLabel.text = "以太坊推荐值 \(estimatedGasPrice)Gwei"
-        let gasPrice = Double(service.gasPrice.toGwei(from: .wei))
+        let gasPrice = service.gasPrice.weiToGwei()
+        estimatedGasPriceLabel.text = "以太坊推荐值 \(gasPrice)Gwei" // TODO: trim trailing zeros
         gasPriceTextField.text = "\(gasPrice)"
         gasLimitTextField.text = "\(service.gasLimit)"
         gasPriceTextField.isEnabled = true
@@ -49,13 +48,14 @@ class TransactionGasPriceViewController: UIViewController {
     }
 
     @IBAction func confirm(_ sender: Any) {
-        let newGasPrice = BigUInt(gasPriceTextField.text!)!.toWei(from: .gwei)
+        let newGasPrice = Double(gasPriceTextField.text!)!.gweiToWei()
+        // TODO: should NOT disallow setting a lower gas price
         if newGasPrice < service.gasPrice {
             Toast.showToast(text: "您的GasPrice设置过低，请确保输入大于等于推荐值以快速转账")
             return
         }
         service.gasPrice = newGasPrice
-        service.gasLimit = UInt64(gasLimitTextField.text!) ?? 0
+        service.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         dismiss()
     }
 }
@@ -64,7 +64,7 @@ extension TransactionGasPriceViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let character: String
         if textField == gasPriceTextField {
-            if (textField.text?.contains("."))! {
+            if textField.text!.contains(".") {
                 character = "0123456789"
             } else {
                 character = "0123456789."

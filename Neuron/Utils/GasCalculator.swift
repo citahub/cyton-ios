@@ -15,11 +15,12 @@ import BigInt
 struct GasCalculator {
     // Default to 20 Gwei (which is not very reasonable when Ethereum is under congestion)
     static let defaultGasPrice = BigUInt(20).toWei(from: .gwei)
+    static let defaultGasLimit: UInt64 = 21_000
 
     var gasPrice: BigUInt
     var gasLimit: UInt64
 
-    init(gasPrice: BigUInt = GasCalculator.defaultGasPrice, gasLimit: UInt64 = 21_000) {
+    init(gasPrice: BigUInt = GasCalculator.defaultGasPrice, gasLimit: UInt64 = GasCalculator.defaultGasLimit) {
         self.gasPrice = gasPrice
         self.gasLimit = gasLimit
     }
@@ -37,12 +38,12 @@ struct GasCalculator {
     ///   - gasPrice: Gas price as GWei.
     ///   - gasLimit: Gas limit.
     /// - Returns: Calculated tx fee with unit wei.
-    static func txFee(gasPrice: BigUInt, gasLimit: UInt64 = 21_000) -> BigUInt {
+    static func txFee(gasPrice: BigUInt, gasLimit: UInt64 = GasCalculator.defaultGasLimit) -> BigUInt {
         return gasPrice * BigUInt(gasLimit)
     }
 
     /// Calculate tx fee (ETH) giving gas price and gas limit.
-    static func txFeeNatural(gasPrice: BigUInt, gasLimit: UInt64 = 21_000) -> Double {
+    static func txFeeNatural(gasPrice: BigUInt, gasLimit: UInt64 = GasCalculator.defaultGasLimit) -> Double {
         let fee = txFee(gasPrice: gasPrice, gasLimit: gasLimit)
         return Double(Web3Utils.formatToEthereumUnits(fee, toUnits: .eth, decimals: 10)!)!
     }

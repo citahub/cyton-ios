@@ -27,7 +27,7 @@ class AppChainTxSender {
     func send(
         to: String,
         value: BigUInt,
-        quota: UInt64 = 21_000,
+        quota: UInt64 = GasCalculator.defaultGasLimit,
         data: Data,
         chainId: BigUInt,
         password: String

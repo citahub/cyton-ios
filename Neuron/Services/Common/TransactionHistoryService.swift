@@ -79,7 +79,11 @@ class TransactionHistoryService {
     }
 
     func getAppChainQuotaPrice() {
-        let appChain = AppChainNetwork.appChain(url: URL(string: token.chainHosts)!)
+        // TODO: should use let but AppChain type conflicts with local AppChain...
+        var appChain = AppChainNetwork.appChain()
+        if let url = URL(string: token.chainHosts) {
+            appChain = AppChainNetwork.appChain(url: url)
+        }
         do {
             let quotaPrice = try Utils.getQuotaPrice(appChain: appChain)
             self.quotaPrice = Double(quotaPrice)

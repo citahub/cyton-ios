@@ -91,4 +91,11 @@ class BigUIntExtensionTests: XCTestCase {
             BigUInt("1000000000")!.fromQuota()
         )
     }
+
+    func testWeiToGwei() {
+        XCTAssertEqual(
+            20.5,
+            BigUInt("20500000000")!.weiToGwei()
+        )
+    }
 }
