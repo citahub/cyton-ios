@@ -37,6 +37,8 @@
 		6E4F9618218973F200372D3E /* TransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F9617218973F200372D3E /* TransactionService.swift */; };
 		6E4F961B2189A82900372D3E /* TransactionConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */; };
 		6E7D3831219B35220031177B /* TransactionStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3830219B35220031177B /* TransactionStatusManager.swift */; };
+		6E7D3833219BCC9E0031177B /* AppChainTransactionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3832219BCC9E0031177B /* AppChainTransactionStatus.swift */; };
+		6E7D3835219BCCB40031177B /* EthereumTransactionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3834219BCCB40031177B /* EthereumTransactionStatus.swift */; };
 		6E7D3838219C173D0031177B /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3837219C173D0031177B /* TransactionDetails.swift */; };
 		6E7D383A219C174B0031177B /* AppChainTransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3839219C174B0031177B /* AppChainTransactionDetails.swift */; };
 		6E7D383C219C175B0031177B /* EthereumTransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D383B219C175B0031177B /* EthereumTransactionDetails.swift */; };
@@ -257,6 +259,8 @@
 		6E4F9617218973F200372D3E /* TransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionService.swift; sourceTree = "<group>"; };
 		6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionConfirmViewController.swift; sourceTree = "<group>"; };
 		6E7D3830219B35220031177B /* TransactionStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatusManager.swift; sourceTree = "<group>"; };
+		6E7D3832219BCC9E0031177B /* AppChainTransactionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainTransactionStatus.swift; sourceTree = "<group>"; };
+		6E7D3834219BCCB40031177B /* EthereumTransactionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTransactionStatus.swift; sourceTree = "<group>"; };
 		6E7D3837219C173D0031177B /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		6E7D3839219C174B0031177B /* AppChainTransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainTransactionDetails.swift; sourceTree = "<group>"; };
 		6E7D383B219C175B0031177B /* EthereumTransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTransactionDetails.swift; sourceTree = "<group>"; };
@@ -654,6 +658,8 @@
 				6E7D3830219B35220031177B /* TransactionStatusManager.swift */,
 				6E9F9D61219AF9B8009ED8B2 /* AppChainTransactionHistory.swift */,
 				6E9F9D63219AFEF2009ED8B2 /* EthereumTransactionHistory.swift */,
+				6E7D3832219BCC9E0031177B /* AppChainTransactionStatus.swift */,
+				6E7D3834219BCCB40031177B /* EthereumTransactionStatus.swift */,
 			);
 			path = TransactionHistory;
 			sourceTree = "<group>";
@@ -1374,6 +1380,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E7D3835219BCCB40031177B /* EthereumTransactionStatus.swift in Sources */,
 				8964A18A20BFEF950086848F /* ImportTextViewCell.swift in Sources */,
 				8935BA57216EEDEC00C37263 /* WKWebViewConfigConstants.swift in Sources */,
 				892A1985215A55F400B2293D /* Double+Extension.swift in Sources */,
@@ -1469,6 +1476,7 @@
 				6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
+				6E7D3833219BCC9E0031177B /* AppChainTransactionStatus.swift in Sources */,
 				8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */,
 				1A60B6FC2186DB1C00FEFB3A /* Web3Utils.swift in Sources */,
 				6EF8F4102176029E004B7587 /* OpenAuthViewController.swift in Sources */,
