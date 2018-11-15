@@ -16,7 +16,6 @@ import AppChain
 class TransactionHistoryService {
     private let ethereumSymbol = " ETH"
     var transactions = [TransactionModel]()
-    let token: TokenModel
     var quotaPrice: Double = pow(10, 9)
     var loading = false
     private var page = 1
@@ -25,6 +24,8 @@ class TransactionHistoryService {
     var walletAddress: String {
         return WalletRealmTool.getCurrentAppModel().currentWallet!.address
     }
+
+    let token: TokenModel
 
     fileprivate init(token: TokenModel) {
         self.token = token
