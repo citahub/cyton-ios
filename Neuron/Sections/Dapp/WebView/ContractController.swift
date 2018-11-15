@@ -90,7 +90,7 @@ class ContractController: UITableViewController {
         dappNameLabel.text = dappName
 
         if dappCommonModel.chainType == "AppChain" {
-            let appChainQuota = BigUInt(dappCommonModel.appChain?.quota.clean ?? "1000000")!
+            let appChainQuota = BigUInt(dappCommonModel.appChain?.quota.trailingZerosTrimmed ?? "1000000")!
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
             value = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
@@ -102,7 +102,7 @@ class ContractController: UITableViewController {
             toLabel.text = dappCommonModel.eth?.to
             value = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
             valueLabel.text = value
-            getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.clean, ethGasLimit: dappCommonModel.eth?.gasLimit?.clean)
+            getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.trailingZerosTrimmed, ethGasLimit: dappCommonModel.eth?.gasLimit?.trailingZerosTrimmed)
         }
         formatValueLabel(value: value)
     }
@@ -123,7 +123,7 @@ class ContractController: UITableViewController {
         let biguInt = BigUInt(atof(value))
         let format = Web3Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
         let finalValue = Double(format)!
-        return finalValue.clean
+        return finalValue.trailingZerosTrimmed
     }
 
     // gas is equal to appChain's quota
@@ -132,7 +132,7 @@ class ContractController: UITableViewController {
         let finalValue = biguInt + gas
         let formatValue = Web3Utils.formatToEthereumUnits(finalValue, toUnits: .eth, decimals: 8, fallbackToScientific: true)!
         let finalCost = Double(formatValue)!
-        return finalCost.clean
+        return finalCost.trailingZerosTrimmed
     }
 
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
@@ -167,7 +167,7 @@ class ContractController: UITableViewController {
             DispatchQueue.main.async {
                 let gas = self.gasPrice * self.gasLimit
                 self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
-                self.gasLabel.text = Double(self.ethereumGas!)!.clean + self.tokenModel.symbol
+                self.gasLabel.text = Double(self.ethereumGas!)!.trailingZerosTrimmed + self.tokenModel.symbol
                 let bigUIntValue = Web3Utils.parseToBigUInt(self.value, units: .eth)!
                 self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.description, gas: gas) + self.tokenModel.symbol
                 Toast.hideHUD()
@@ -256,6 +256,6 @@ extension ContractController: AdvancedViewControllerDelegate {
         let bigUIntValue = Web3Utils.parseToBigUInt(value, units: .eth)!
         let totlePay = getTotleValue(value: bigUIntValue.description, gas: gas)
         totlePayLabel.text = totlePay + tokenModel.symbol
-        gasLabel.text = Double(ethereumGas ?? "")!.clean + tokenModel.symbol
+        gasLabel.text = Double(ethereumGas ?? "")!.trailingZerosTrimmed + tokenModel.symbol
     }
 }

@@ -56,6 +56,6 @@ struct NervosNativeTokenService {
     private static func formatBalanceValue(value: BigUInt) -> String {
         let format = Web3Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
         let finalValue = Double(format)!
-        return finalValue.clean
+        return finalValue.trailingZerosTrimmed
     }
 }

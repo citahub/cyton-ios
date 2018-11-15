@@ -10,13 +10,14 @@ import Foundation
 import BigInt
 
 /// Prepare tx params.
-class TransactionParamBuilder {
+class TransactionParamBuilder: NSObject {
     var from: String!
     var to = ""
     var value: BigUInt = 0
     var data = Data()
 
-    var gasPrice: BigUInt = 0 {
+    var fetchedGasPrice: BigUInt = 1  // Fetched from node as recommended gas price
+    var gasPrice: BigUInt = 1 {
         didSet {
             rebuildGasCalculator()
         }
@@ -32,9 +33,8 @@ class TransactionParamBuilder {
         return gasCalculator.txFee
     }
 
-    var txFeeNatural: Double {
-        return gasCalculator.txFeeNatural
-    }
+    @objc dynamic
+    private(set) var txFeeNatural: Double = 0
 
     var tokenBalance: BigUInt = 0
 
@@ -53,6 +53,8 @@ class TransactionParamBuilder {
     private var gasCalculator = GasCalculator()
 
     init(token: TokenModel) {
+        super.init()
+
         self.token = token
         tokenBalance = Double(token.tokenBalance)!.toAmount(token.decimals)
 
@@ -61,22 +63,18 @@ class TransactionParamBuilder {
     }
 
     private func fetchGasPrice() {
-        let fetched = { [weak self] price -> Void in
-            DispatchQueue.main.async {
-                self?.gasPrice = price
-                // TODO: notify observer?
-            }
+        func fetched(price: BigUInt) {
+            self.fetchedGasPrice = price
+            self.gasPrice = price
         }
 
         let tokenType = token.type
         let tokenNode = token.chainHosts
-        DispatchQueue.global().async {
-            switch tokenType {
-            case .ethereum, .erc20:
-                GasPriceFetcher().fetchGasPrice(then: fetched)
-            case .nervos, .nervosErc20:
-                GasPriceFetcher().fetchQuotaPrice(rpcNode: tokenNode, then: fetched)
-            }
+        switch tokenType {
+        case .ethereum, .erc20:
+            GasPriceFetcher().fetchGasPrice(then: fetched)
+        case .nervos, .nervosErc20:
+            GasPriceFetcher().fetchQuotaPrice(rpcNode: tokenNode, then: fetched)
         }
     }
 
@@ -92,6 +90,7 @@ class TransactionParamBuilder {
 
     private func rebuildGasCalculator() {
         gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
+        txFeeNatural = gasCalculator.txFeeNatural
     }
 }
 

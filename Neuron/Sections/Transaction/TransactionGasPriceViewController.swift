@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Web3swift
-import BigInt
 
 class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
@@ -16,16 +14,15 @@ class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var estimatedGasPriceLabel: UILabel!
     @IBOutlet weak var gasPriceTextField: UITextField!
     @IBOutlet weak var gasLimitTextField: UITextField!
-    var service: TransactionParamBuilder!
+    var param: TransactionParamBuilder!
 
     private let minGasPrice = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gasPrice = service.gasPrice.weiToGwei()
-        estimatedGasPriceLabel.text = "以太坊推荐值 \(gasPrice)Gwei" // TODO: trim trailing zeros
-        gasPriceTextField.text = "\(gasPrice)"
-        gasLimitTextField.text = "\(service.gasLimit)"
+        estimatedGasPriceLabel.text = "以太坊推荐值 \(param.fetchedGasPrice.weiToGwei().trailingZerosTrimmed)Gwei"
+        gasPriceTextField.text = param.gasPrice.weiToGwei().trailingZerosTrimmed
+        gasLimitTextField.text = param.gasLimit.description
         gasPriceTextField.isEnabled = true
         gasLimitTextField.isEnabled = true
     }
@@ -55,8 +52,8 @@ class TransactionGasPriceViewController: UIViewController {
             Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
             return
         }
-        service.gasPrice = gasPrice.gweiToWei()
-        service.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+        param.gasPrice = gasPrice.gweiToWei()
+        param.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         dismiss()
     }
 }

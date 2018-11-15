@@ -12,9 +12,9 @@ import BigInt
 
 class DoubleExtensionTests: XCTestCase {
     func testClean() {
-        XCTAssertEqual(0.001000.clean, "0.001")
-        XCTAssertEqual(2233.001000.clean, "2233.001")
-        XCTAssertEqual(2233.0010010.clean, "2233.001001")
+        XCTAssertEqual(0.001000.trailingZerosTrimmed, "0.001")
+        XCTAssertEqual(2233.001000.trailingZerosTrimmed, "2233.001")
+        XCTAssertEqual(2233.0010010.trailingZerosTrimmed, "2233.001001")
     }
 
     func testToAmount() {

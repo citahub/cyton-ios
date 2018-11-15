@@ -20,7 +20,8 @@ class TransactionViewController: UITableViewController {
     @IBOutlet weak var gasCostLabel: UILabel!
     @IBOutlet weak var addressTextField: UITextField!
 
-    var paramBuilder: TransactionParamBuilder!
+    private var paramBuilder: TransactionParamBuilder!
+    private var observers = [NSKeyValueObservation]()
     var token: TokenModel!
     var confirmViewController: TransactionConfirmViewController?
 
@@ -28,6 +29,9 @@ class TransactionViewController: UITableViewController {
         super.viewDidLoad()
 
         paramBuilder = TransactionParamBuilder(token: token)
+        observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
+            self.updateGasCost()
+        })
         paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
 
         setupUI()
@@ -40,7 +44,7 @@ class TransactionViewController: UITableViewController {
             confirmViewController = controller
         } else if segue.identifier == "TransactionGasPriceViewController" {
             let controller = segue.destination as! TransactionGasPriceViewController
-            controller.service = paramBuilder
+            controller.param = paramBuilder
         }
     }
 
@@ -102,7 +106,19 @@ class TransactionViewController: UITableViewController {
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
         tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
-        gasCostLabel.text = paramBuilder.txFeeNatural.description + " \(token.symbol)" // TODO: should always displaying ETH or AppChain native token symbol
+        updateGasCost()
+    }
+
+    private var txFeeFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 6
+        return formatter
+    }()
+
+    private func updateGasCost() {
+        gasCostLabel.text = txFeeFormatter.string(from: paramBuilder.txFeeNatural as NSNumber)! + " \(token.symbol)" // TODO: should always displaying ETH or AppChain native token symbol
     }
 }
 
