@@ -14,7 +14,9 @@ extension EthereumNetwork {
     func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
         do {
             let transactionDetails = try EthereumNetwork().getWeb3().eth.getTransactionDetails(sentTransaction.txHash) // TODO: cache
-            sentTransaction.blockNumber = transactionDetails.blockNumber ?? 0
+            try? sentTransaction.realm?.write {
+                sentTransaction.blockNumber = transactionDetails.blockNumber ?? 0
+            }
             let blockNumber = try EthereumNetwork().getWeb3().eth.getBlockNumber()
             if blockNumber - sentTransaction.blockNumber < 12 {
                 return .pending
