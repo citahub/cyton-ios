@@ -11,9 +11,9 @@ import BigInt
 
 // http://api-rinkeby.etherscan.io/api?action=txlist&address=0xaBea5A6e72B02511Bd6cAf996A1b4C6aC477Ff71&apikey=T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z&module=account&offset=20&page=1&sort=desc
 class EthereumTransactionDetails: TransactionDetails {
-    var nonce: Int = 0
+    var nonce: BigUInt = 0
     var blockHash: String = ""
-    var transactionIndex: Int = 0
+    var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
     var gasPrice: BigUInt = 0
     var input: String = ""
@@ -53,12 +53,12 @@ class EthereumTransactionDetails: TransactionDetails {
             date = Date(timeIntervalSince1970: TimeInterval(value) ?? 0.0)
         }
         if let value = try? values.decode(String.self, forKey: .nonce) {
-            nonce = Int(value) ?? 0
+            nonce = BigUInt(value) ?? 0
         }
         blockHash = (try? values.decode(String.self, forKey: .blockHash)) ?? ""
         contractAddress = (try? values.decode(String.self, forKey: .contractAddress)) ?? ""
         if let value = try? values.decode(String.self, forKey: .transactionIndex) {
-            transactionIndex = Int(value) ?? 0
+            transactionIndex = BigUInt(value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .gas) {
             gas = BigUInt(value) ?? 0

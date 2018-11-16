@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TransactionHistoryPresenter {
+class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private(set) var transactions = [TransactionDetails]()
     let token: TokenModel
 
@@ -17,15 +17,7 @@ class TransactionHistoryPresenter {
         walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
         tokenAddress = token.address
         tokenType = token.type
-//        NotificationCenter.default.addObserver(
-//            forName: TransactionStatusManager.transactionStatusChangedNotification,
-//            object: nil,
-//            queue: OperationQueue.main) { (notification) in
-//            print(notification.userInfo ?? [:])
-//        }
-    }
-
-    deinit {
+        super.init()
     }
 
     private var hasMoreData = true
@@ -83,5 +75,10 @@ class TransactionHistoryPresenter {
         case .nervosErc20:
             return try AppChainTransactionHistory().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
         }
+    }
+
+    // MARK: - TransactionStatusManagerDelegate
+    func transaction(transaction: TransactionDetails, didChangeStatus: TransactionState) {
+
     }
 }

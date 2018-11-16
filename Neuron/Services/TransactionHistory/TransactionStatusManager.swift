@@ -18,37 +18,77 @@ enum TransactionStateResult {
     case failure
 }
 
+extension Array where Element: Equatable {
+    @discardableResult func index(object: Element) -> Int? {
+        for (idx, obj) in enumerated() {
+            if obj == object {
+                return idx
+            }
+        }
+        return nil
+    }
+}
+
+//Array
+
 protocol TransactionStatusManagerDelegate: NSObjectProtocol {
     func transaction(transaction: TransactionDetails, didChangeStatus: TransactionState)
 }
 
 class TransactionStatusManager: NSObject {
+    private typealias Block = () -> Void
+    private class Task: NSObject {
+        let block: Block
+        init(block: @escaping Block) {
+            self.block = block
+        }
+    }
+
     static let transactionStatusChangedNotification = Notification.Name("transactionStatusChangedNotification")
     static let manager = TransactionStatusManager()
-    private let timeInterval: TimeInterval = 20.0
-    private let realm: Realm
+    private let timeInterval: TimeInterval = 4.0
+    private var realm: Realm!
     private var transactions = [SentTransaction]()
     private let delegates: NSHashTable<NSObject>!
+    private var objects: Results<SentTransaction>!
+    private var thread: Thread!
 
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
         let fileURL = document.appendingPathComponent("transaction_history")
 //        try? FileManager.default.removeItem(at: fileURL)
-        realm = try! Realm(fileURL: fileURL)
-        let objects = realm.objects(SentTransaction.self)
-        transactions = objects.map { (transaction) -> SentTransaction in
-            transaction.setupThreadSafe()
-            return transaction
-        }
-//
-//        let trans = transactions.first!
-//        DispatchQueue.global().async {
-//            print(trans.threadSafe.tokenType)
-//        }
-
         delegates = NSHashTable(options: .weakMemory)
         super.init()
-        checkSentTransactionStatus()
+
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "")
+        group.enter()
+        queue.async {
+            self.thread = Thread.current
+//            autoreleasepool<Void>(invoking: { () -> Void in
+//
+//            })
+            Thread.current.name = String(describing: TransactionStatusManager.self)
+            RunLoop.current.add(NSMachPort(), forMode: .default)
+
+            group.leave()
+            print(Thread.current)
+            RunLoop.current.run()
+//            RunLoop.current.run(mode: .default, before: Date.distantPast)
+        }
+        group.wait()
+        self.perform {
+            self.realm = try! Realm(fileURL: fileURL)
+            self.objects = self.realm.objects(SentTransaction.self)
+            self.transactions = self.objects.map { (transaction) -> SentTransaction in
+                transaction.setupThreadSafe()
+                return transaction
+            }
+        }
+        self.perform {
+            self.checkSentTransactionStatus()
+//            print(self.transactions.first?.blockNumber ?? 0)
+        }
     }
 
     func addDelegate(delegate: TransactionStatusManagerDelegate) {
@@ -75,11 +115,20 @@ class TransactionStatusManager: NSObject {
     }
 
     func insertTransaction(transaction: SentTransaction) {
+        guard Thread.current == thread else {
+            perform {
+                self.insertTransaction(transaction: transaction)
+            }
+            return
+        }
         try? realm.write {
             realm.add(transaction)
-//            realm.create(LocationTransactionDetails.self, value: [], update: true)
         }
         transactions.append(transaction)
+        print(objects.count)
+        if transactions.count == 1 {
+            checkSentTransactionStatus()
+        }
     }
 
 //    func mergeTransactions(from transactions: [TransactionDetails]) -> [TransactionDetails] {
@@ -87,9 +136,12 @@ class TransactionStatusManager: NSObject {
 //    }
 
     func getTransactions(walletAddress: String, token: TokenModel) -> [SentTransaction] {
-        return realm.objects(SentTransaction.self).filter { (entity) -> Bool in
-            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-        }.shuffled()
+        return transactions.filter({ (entity) -> Bool in
+            return entity.from == walletAddress && entity.isSendFromToken(token: token)
+        })
+//        return realm.objects(SentTransaction.self).filter { (entity) -> Bool in
+//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
+//        }.shuffled()
     }
 
     // MARK: - check transaction status
@@ -110,9 +162,12 @@ class TransactionStatusManager: NSObject {
 
     @objc func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
-        guard self.transactions.count > 0 else { return }
-        guard !Thread.isMainThread else {
-            DispatchQueue.global().async {
+        guard self.transactions.count > 0 else {
+            print("[TransactionStatus] - 全部交易状态检查完成")
+            return
+        }
+        guard Thread.current == thread else {
+            perform {
                 self.checkSentTransactionStatus()
             }
             return
@@ -121,36 +176,59 @@ class TransactionStatusManager: NSObject {
         let transactions = self.transactions
         for transaction in transactions {
             let result: TransactionStateResult
-            switch transaction.threadSafe.tokenType {
+            print("[TransactionStatus] - 开始检查交易状态: \(transaction.txHash)")
+            switch transaction.tokenType {
             case .ethereum:
                 result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
             default:
                 fatalError()
             }
-//            let result = AppChainTransactionStatus().getTransactionStatus(transaction: transaction)
+
             switch result {
             case .failure:
-                DispatchQueue.main.async {
-                    try? self.realm.write {
-                        transaction.status = .failure
-                        self.realm.add(transaction, update: true)
-                    }
+                print("[TransactionStatus] - 交易失败: \(transaction.txHash)")
+                if let idx = self.transactions.index(object: transaction) {
+                    self.transactions.remove(at: idx)
                 }
-            case .success(_):
-                DispatchQueue.main.async {
-                    try? self.realm.write {
-                        self.realm.delete(transaction)
+                try? self.realm.write {
+                    transaction.status = .failure
+                }
+            case .success(let details):
+                print("[TransactionStatus] - 交易成功: \(transaction.txHash)")
+                try? self.realm.write {
+                    transaction.status = .success
+                }
+                if let idx = self.transactions.index(object: transaction) {
+                    self.transactions.remove(at: idx)
+                }
+                for delegate in self.delegates.allObjects {
+                    if let delegate = delegate as? TransactionStatusManagerDelegate {
+                        delegate.transaction(transaction: details, didChangeStatus: details.status)
                     }
                 }
             case .pending:
-                break
+                print("[TransactionStatus] - 交易进行中: \(transaction.txHash)")
             }
         }
         perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
     }
 
     // MAKR: Utils
+    @objc private func perform(_ block: @escaping Block) {
+        let task = Task(block: block)
+        let sel = #selector(TransactionStatusManager.taskHandler(task:))
+        self.perform(sel, on: self.thread, with: task, waitUntilDone: false)
+    }
 
+    @objc private func syncPerform(_ block: @escaping Block) {
+        let task = Task(block: block)
+        let sel = #selector(TransactionStatusManager.taskHandler(task:))
+        self.perform(sel, on: self.thread, with: task, waitUntilDone: true)
+    }
+
+    @objc private func taskHandler(task: Task) {
+        task.block()
+    }
 }
 
 

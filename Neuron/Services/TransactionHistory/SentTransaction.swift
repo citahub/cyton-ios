@@ -36,7 +36,11 @@ extension ThreadSafeObject where Self: Object {
             return self
         }
         let realm = try! Realm(configuration: configuration)
-        return  realm.resolve(threadSafeReference)!
+        let object = realm.resolve(threadSafeReference)!
+        objc_setAssociatedObject(object, &threadSafeReferenceAssiciationKey, threadSafeReference, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(object, &realmConfigurationAssiciationKey, configuration, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(object, &realmThreadAssiciationKey, Thread.current, .OBJC_ASSOCIATION_ASSIGN)
+        return object
     }
 
     func setupThreadSafe() {
@@ -51,11 +55,11 @@ extension ThreadSafeObject where Self: Object {
     }
 }
 
-extension TokenModel {
-    var identifier: String {
-        return "\(address)_\(chainName ?? "")_\(name)"
-    }
-}
+//extension TokenModel {
+//    var identifier: String {
+//        return "\(address)_\(chainName ?? "")_\(name)"
+//    }
+//}
 
 class SentTransaction: Object, ThreadSafeObject {
     var tokenType: TokenModel.TokenType {
@@ -129,25 +133,25 @@ class SentTransaction: Object, ThreadSafeObject {
         print(result)
     }
 
-    required convenience init(
-        token: TokenModel,
-        hash: String,
-        blockNumber: BigUInt,
-        from: String,
-        to: String,
-        amount: BigUInt,
-        txFee: BigUInt
-        ) {
-        self.init()
-        contractAddress = token.identifier
-        self.token = token
-        txHash = hash
-        self.blockNumber = blockNumber
-        self.from = from
-        self.to = to
-        self.amount = amount
-        self.txFee = txFee
-    }
+//    required convenience init(
+//        token: TokenModel,
+//        hash: String,
+//        blockNumber: BigUInt,
+//        from: String,
+//        to: String,
+//        amount: BigUInt,
+//        txFee: BigUInt
+//        ) {
+//        self.init()
+////        contractAddress = token.identifier
+//        self.token = token
+//        txHash = hash
+//        self.blockNumber = blockNumber
+//        self.from = from
+//        self.to = to
+//        self.amount = amount
+//        self.txFee = txFee
+//    }
 
     // Ethereum
     required convenience init(tokenType: TokenModel.TokenType, from: String, sendingResult: Web3swift.TransactionSendingResult) {
@@ -192,8 +196,26 @@ class SentTransaction: Object, ThreadSafeObject {
         """
     }
 
-    func isSendingFromToken(token: TokenModel) -> Bool {
-        return true
+    func isSendFromToken(token: TokenModel) -> Bool {
+        return token.type == tokenType && contractAddress == token.address
+    }
+
+    func details() -> TransactionDetails {
+        let details = TransactionDetails()
+        return details
+    }
+}
+
+extension SentTransaction {
+    public static func == (lhs: SentTransaction, rhs: SentTransaction) -> Bool {
+        return lhs.threadSafe.txHash == rhs.threadSafe.txHash
+    }
+
+    override func isEqual(_ object: Any?) -> Bool {
+        guard let object = object as? SentTransaction  else {
+            return false
+        }
+        return object.threadSafe.txHash == threadSafe.txHash
     }
 }
 
