@@ -8,9 +8,17 @@
 
 import UIKit
 
+protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
+//    func insertTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?)
+    func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?)
+    func updateTransactions(transaction: [TransactionDetails], updates: [Int], error: Error?)
+}
+
 class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private(set) var transactions = [TransactionDetails]()
     let token: TokenModel
+    typealias CallbackBlock = ([Int], Error?) -> Void
+    var tokenProfile: TokenProfile?
 
     init(token: TokenModel) {
         self.token = token
@@ -18,18 +26,20 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         tokenAddress = token.address
         tokenType = token.type
         super.init()
+        TransactionStatusManager.manager.addDelegate(delegate: self)
     }
 
     private var hasMoreData = true
+    weak var delegate: TransactionHistoryPresenterDelegate?
 
-    func reloadData(completion: @escaping ([Int], Error?) -> Void) {
+    func reloadData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
         page = 1
         hasMoreData = true
         loadMoreData(completion: completion)
     }
 
-    func loadMoreData(completion: @escaping ([Int], Error?) -> Void) {
+    func loadMoreData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
         guard hasMoreData else { return }
         loading = true
@@ -46,11 +56,13 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 }
                 self.transactions.append(contentsOf: list)
                 DispatchQueue.main.async {
-                    completion(insertions, nil)
+                    completion?(insertions, nil)
+                    self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: insertions, error: nil)
                 }
             } catch {
                 DispatchQueue.main.async {
-                    completion([], error)
+                    completion?([], error)
+                    self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [], error: error)
                 }
             }
         }
@@ -78,7 +90,24 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     }
 
     // MARK: - TransactionStatusManagerDelegate
-    func transaction(transaction: TransactionDetails, didChangeStatus: TransactionState) {
-
+    func sentTransactionInserted(transaction: TransactionDetails) {
+        guard transaction.from == walletAddress else {
+            return
+        }
+        DispatchQueue.main.async {
+            self.transactions.insert(transaction, at: 0)
+            self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
+        }
+    }
+    func sentTransactionStatusChanged(transaction: TransactionDetails) {
+        DispatchQueue.main.async {
+            for (idx, trans) in self.transactions.enumerated() {
+                if trans.hash == transaction.hash {
+                    trans.status = transaction.status
+                    self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
+                    return
+                }
+            }
+        }
     }
 }

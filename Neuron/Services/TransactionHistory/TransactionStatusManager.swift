@@ -32,7 +32,8 @@ extension Array where Element: Equatable {
 //Array
 
 protocol TransactionStatusManagerDelegate: NSObjectProtocol {
-    func transaction(transaction: TransactionDetails, didChangeStatus: TransactionState)
+    func sentTransactionInserted(transaction: TransactionDetails)
+    func sentTransactionStatusChanged(transaction: TransactionDetails)
 }
 
 class TransactionStatusManager: NSObject {
@@ -65,14 +66,9 @@ class TransactionStatusManager: NSObject {
         group.enter()
         queue.async {
             self.thread = Thread.current
-//            autoreleasepool<Void>(invoking: { () -> Void in
-//
-//            })
             Thread.current.name = String(describing: TransactionStatusManager.self)
             RunLoop.current.add(NSMachPort(), forMode: .default)
-
             group.leave()
-            print(Thread.current)
             RunLoop.current.run()
 //            RunLoop.current.run(mode: .default, before: Date.distantPast)
         }
@@ -80,10 +76,14 @@ class TransactionStatusManager: NSObject {
         self.perform {
             self.realm = try! Realm(fileURL: fileURL)
             self.objects = self.realm.objects(SentTransaction.self)
-            self.transactions = self.objects.map { (transaction) -> SentTransaction in
-                transaction.setupThreadSafe()
-                return transaction
-            }
+//            self.transactions = self.objects.map { (transaction) -> SentTransaction in
+//                transaction.setupThreadSafe()
+//                return transaction
+//            }
+            self.transactions = self.objects.filter({ (transaction) -> Bool in
+                return transaction.status == .pending
+            })
+            print("[TransactionStatus] - 加载需要检查状态的交易: \(self.transactions.count)")
         }
         self.perform {
             self.checkSentTransactionStatus()
@@ -125,7 +125,13 @@ class TransactionStatusManager: NSObject {
             realm.add(transaction)
         }
         transactions.append(transaction)
-        print(objects.count)
+        print("[TransactionStatus] - 新增交易 \(transaction.txHash)")
+        let details = transaction.transactionDetails()
+        for delegate in self.delegates.allObjects {
+            if let delegate = delegate as? TransactionStatusManagerDelegate {
+                delegate.sentTransactionInserted(transaction: details)
+            }
+        }
         if transactions.count == 1 {
             checkSentTransactionStatus()
         }
@@ -139,26 +145,23 @@ class TransactionStatusManager: NSObject {
         return transactions.filter({ (entity) -> Bool in
             return entity.from == walletAddress && entity.isSendFromToken(token: token)
         })
-//        return realm.objects(SentTransaction.self).filter { (entity) -> Bool in
-//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-//        }.shuffled()
     }
 
     // MARK: - check transaction status
-    func beganStateCheck(walletAddress: String, token: TokenModel) {
-        let result = realm.objects(SentTransaction.self)
-        let list = result.filter { (entity) -> Bool in
-            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-        }
-        transactions.append(contentsOf: list)
-        checkSentTransactionStatus()
-    }
+//    func beganStateCheck(walletAddress: String, token: TokenModel) {
+//        let result = realm.objects(SentTransaction.self)
+//        let list = result.filter { (entity) -> Bool in
+//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
+//        }
+//        transactions.append(contentsOf: list)
+//        checkSentTransactionStatus()
+//    }
 
-    func stopStateCheck(walletAddress: String, token: TokenModel) {
-        transactions = transactions.filter({ (entity) -> Bool in
-            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-        })
-    }
+//    func stopStateCheck(walletAddress: String, token: TokenModel) {
+//        transactions = transactions.filter({ (entity) -> Bool in
+//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
+//        })
+//    }
 
     @objc func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
@@ -193,6 +196,12 @@ class TransactionStatusManager: NSObject {
                 try? self.realm.write {
                     transaction.status = .failure
                 }
+                let details = transaction.transactionDetails()
+                for delegate in self.delegates.allObjects {
+                    if let delegate = delegate as? TransactionStatusManagerDelegate {
+                        delegate.sentTransactionStatusChanged(transaction: details)
+                    }
+                }
             case .success(let details):
                 print("[TransactionStatus] - 交易成功: \(transaction.txHash)")
                 try? self.realm.write {
@@ -203,7 +212,7 @@ class TransactionStatusManager: NSObject {
                 }
                 for delegate in self.delegates.allObjects {
                     if let delegate = delegate as? TransactionStatusManagerDelegate {
-                        delegate.transaction(transaction: details, didChangeStatus: details.status)
+                        delegate.sentTransactionStatusChanged(transaction: details)
                     }
                 }
             case .pending:
@@ -230,10 +239,6 @@ class TransactionStatusManager: NSObject {
         task.block()
     }
 }
-
-
-
-
 
 
 

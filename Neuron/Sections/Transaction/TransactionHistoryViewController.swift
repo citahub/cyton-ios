@@ -28,8 +28,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         didSet {
             guard tokenModel != nil else { return }
             presenter = TransactionHistoryPresenter(token: tokenModel)
+            presenter?.delegate = self
             Toast.showHUD()
-            loadData()
+
+            tokenModel.getProfile { (tokenProfile) in
+                self.setupTokenProfile(tokenProfile)
+//                self.loadData()
+                self.presenter?.reloadData()
+            }
         }
     }
     let refresher = PullToRefresh()
@@ -40,12 +46,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addPullToRefresh(refresher) {
-            self.loadData()
+//            self.loadData()
+            self.presenter?.reloadData()
         }
         setupTokenProfile(nil)
-
-//        TransactionStatusManager.service.test()
-
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
         if tokenModel.symbol == "MBA" ||
             tokenModel.symbol == "NATT" {
@@ -84,23 +88,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     private func loadData() {
-        let group = DispatchGroup()
-        var profile: TokenProfile?
-
-        group.enter()
         presenter?.reloadData(completion: { (_, _) in
-            group.leave()
-        })
-
-        group.enter()
-        tokenModel.getProfile { (tokenProfile) in
-            profile = tokenProfile
-            group.leave()
-        }
-
-        group.notify(queue: .main) {
-            Toast.hideHUD()
-            self.setupTokenProfile(profile)
             self.tableView.endRefreshing(at: .top)
             self.tableView.reloadData()
             if self.presenter?.transactions.count == 0 {
@@ -109,7 +97,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             } else {
                 self.removeOverlay()
             }
-        }
+            Toast.hideHUD()
+        })
     }
 
     private func setupTokenProfile(_ profile: TokenProfile?) {
@@ -175,8 +164,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > presenter!.transactions.count - 6 {
-            loadMoreData()
+        if indexPath.row > presenter!.transactions.count - 2 {
+            tableView.startRefreshing(at: .bottom)
+//            loadMoreData()
+            presenter?.loadMoreData()
         }
     }
 
@@ -189,6 +180,42 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     deinit {
         tableView.removeAllPullToRefresh()
+    }
+}
+
+extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate {
+    func updateTransactions(transaction: [TransactionDetails], updates: [Int], error: Error?) {
+        var indexPaths = [IndexPath]()
+        for index in updates {
+            indexPaths.append(IndexPath(row: index, section: 0))
+        }
+        self.tableView.reloadRows(at: indexPaths, with: .none)
+    }
+
+    func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?) {
+        self.tableView.endRefreshing(at: .top)
+        self.tableView.endRefreshing(at: .bottom)
+
+        if self.presenter?.transactions.count == 0 {
+            self.errorOverlaycontroller.style = .blank
+            self.tableView.addSubview(self.overlay)
+        } else {
+            self.removeOverlay()
+        }
+
+        if insertions.first == 0 {
+            self.tableView.reloadData()
+        } else {
+            var indexPaths = [IndexPath]()
+            for index in insertions {
+                indexPaths.append(IndexPath(row: index, section: 0))
+            }
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexPaths, with: .none)
+            self.tableView.endUpdates()
+        }
+
+        Toast.hideHUD()
     }
 }
 
@@ -219,6 +246,18 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             } else {
                 addressLabel.text = transaction.to
                 numberLabel.text = "-\(amount)"
+            }
+
+            switch transaction.status {
+            case .success:
+                statusLabel.text = "交易成功"
+                statusLabel.textColor = UIColor(red: 56/255.0, green: 193/255.0, blue: 137/255.0, alpha: 1)
+            case .pending:
+                statusLabel.text = "交易进行中"
+                statusLabel.textColor = UIColor(red: 108/255.0, green: 113/255.0, blue: 132/255.0, alpha: 1)
+            case .failure:
+                statusLabel.text = "交易失败"
+                statusLabel.textColor = UIColor(red: 255/255.0, green: 69/255.0, blue: 69/255.0, alpha: 1)
             }
         }
     }

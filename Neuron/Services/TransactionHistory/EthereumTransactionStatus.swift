@@ -8,6 +8,13 @@
 
 import UIKit
 import BigInt
+import Web3swift
+
+extension SentTransaction {
+    var ethereumTransactionDetails: Web3swift.TransactionDetails? {
+        return nil
+    }
+}
 
 class EthereumTransactionStatus: NSObject {
     func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
@@ -30,7 +37,7 @@ class EthereumTransactionStatus: NSObject {
             if blockNumber - sentTransaction.blockNumber < 12 {
                 return .pending
             }
-
+            
             let receipt = try EthereumNetwork().getWeb3().eth.getTransactionReceipt(sentTransaction.txHash)
             switch receipt.status {
             case .ok:

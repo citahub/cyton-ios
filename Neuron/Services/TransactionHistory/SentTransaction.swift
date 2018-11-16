@@ -123,35 +123,10 @@ class SentTransaction: Object, ThreadSafeObject {
 
     func readValues() {
         let mirror = Mirror(reflecting: self)
-        var result = [String: Any]()
         for child in mirror.children {
-            guard let key = child.label else {
-                fatalError("Invalid key in child: \(child)")
-            }
-            result[key] = child.value
+            _ = child.value
         }
-        print(result)
     }
-
-//    required convenience init(
-//        token: TokenModel,
-//        hash: String,
-//        blockNumber: BigUInt,
-//        from: String,
-//        to: String,
-//        amount: BigUInt,
-//        txFee: BigUInt
-//        ) {
-//        self.init()
-////        contractAddress = token.identifier
-//        self.token = token
-//        txHash = hash
-//        self.blockNumber = blockNumber
-//        self.from = from
-//        self.to = to
-//        self.amount = amount
-//        self.txFee = txFee
-//    }
 
     // Ethereum
     required convenience init(tokenType: TokenModel.TokenType, from: String, sendingResult: Web3swift.TransactionSendingResult) {
@@ -168,10 +143,11 @@ class SentTransaction: Object, ThreadSafeObject {
         amount = sendingResult.transaction.value
         txFee = sendingResult.transaction.gasPrice * sendingResult.transaction.gasLimit
         self.contractAddress = contractAddress
+        status = .pending
     }
 
     // AppChain
-    required convenience init(from: String, hash: String, transaction: Transaction) {
+    required convenience init(tokenType: TokenModel.TokenType, from: String, hash: String, transaction: Transaction) {
         self.init()
         txHash = hash
         blockNumber = BigUInt(transaction.validUntilBlock)
@@ -179,6 +155,7 @@ class SentTransaction: Object, ThreadSafeObject {
         to = transaction.to?.address ?? ""
         amount = transaction.value
         txFee = BigUInt(transaction.quota)
+        status = .pending
     }
 
     // AppChainErc20
@@ -200,22 +177,29 @@ class SentTransaction: Object, ThreadSafeObject {
         return token.type == tokenType && contractAddress == token.address
     }
 
-    func details() -> TransactionDetails {
+    func transactionDetails() -> TransactionDetails {
         let details = TransactionDetails()
+        details.hash = txHash
+        details.to = to
+        details.from = from
+        details.value = amount
+        details.date = date
+        details.blockNumber = blockNumber
+        details.status = status
         return details
     }
 }
 
 extension SentTransaction {
     public static func == (lhs: SentTransaction, rhs: SentTransaction) -> Bool {
-        return lhs.threadSafe.txHash == rhs.threadSafe.txHash
+        return lhs.txHash == rhs.txHash
     }
 
     override func isEqual(_ object: Any?) -> Bool {
         guard let object = object as? SentTransaction  else {
             return false
         }
-        return object.threadSafe.txHash == threadSafe.txHash
+        return object.txHash == txHash
     }
 }
 
