@@ -10,8 +10,8 @@ import XCTest
 @testable import Neuron
 import BigInt
 
-class UIntExtensionTests: XCTestCase {
-    func testFromHex() {
+class BigUIntExtensionTests: XCTestCase {
+    func testTextToBigUInt() {
         XCTAssertEqual(BigUInt(string: "96016"), 96016)
         XCTAssertEqual(BigUInt(string: "0x96016"), 614422)
     }
