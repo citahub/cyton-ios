@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import BigInt
+import AppChain
 import Web3swift
 import EthereumAddress
-import BigInt
 
 class TransactionViewController: UITableViewController {
     @IBOutlet weak var walletIconView: UIImageView!
@@ -116,18 +117,8 @@ class TransactionViewController: UITableViewController {
 
 extension TransactionViewController {
     var isEffectiveTransferInfo: Bool {
-        if paramBuilder.to.count != 40 && paramBuilder.to.count != 42 {
+        guard Address.isValid(paramBuilder.to) else {
             Toast.showToast(text: "您的地址错误，请重新输入")
-            return false
-        } else if paramBuilder.to != paramBuilder.to.lowercased() {
-            let eip55String = EthereumAddress.toChecksumAddress(paramBuilder.to) ?? ""
-            if eip55String != paramBuilder.to {
-                Toast.showToast(text: "您的地址错误，请重新输入")
-                return false
-            }
-        }
-        if paramBuilder.to == paramBuilder.from {
-            Toast.showToast(text: "发送地址和收款地址不能相同")
             return false
         }
         // TODO: FIXME: erc20 requires eth balance as tx fee
