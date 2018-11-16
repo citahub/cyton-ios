@@ -33,7 +33,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             _ = view // load view
             tokenModel.getProfile { (tokenProfile) in
                 self.setupTokenProfile(tokenProfile)
-//                self.loadData()
                 self.presenter?.reloadData()
             }
         }
@@ -46,7 +45,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         tableView.delegate = self
         tableView.dataSource = self
         tableView.addPullToRefresh(refresher) {
-//            self.loadData()
             self.presenter?.reloadData()
         }
         setupTokenProfile(nil)
@@ -166,7 +164,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row > presenter!.transactions.count - 2 {
             tableView.startRefreshing(at: .bottom)
-//            loadMoreData()
             presenter?.loadMoreData()
         }
     }

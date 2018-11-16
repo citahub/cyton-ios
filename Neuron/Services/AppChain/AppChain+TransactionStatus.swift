@@ -20,7 +20,6 @@ extension AppChainNetwork {
                     print(error)
                     return .failure
                 } else {
-                    let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: sentTransaction.txHash)
                     if let transaction = try? AppChainNetwork().getTransaction(txhash: sentTransaction.txHash, account: sentTransaction.from, from: sentTransaction.from, to: sentTransaction.to) {
                         return .success(transaction: transaction)
                     } else {

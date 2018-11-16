@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SensorsAnalytics.configureSensors()
         UINavigationBar.fixSpace
         UINavigationItem.fixSpace
+        _ = TransactionStatusManager.manager
         return true
     }
 

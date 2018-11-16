@@ -51,7 +51,7 @@ class TransactionStatusManager: NSObject {
             self.transactions = objects.filter({ (transaction) -> Bool in
                 return transaction.status == .pending
             })
-            print("[TransactionStatus] - 加载需要检查状态的交易: \(self.transactions.count)")
+            self.debugLog("加载需要检查状态的交易: \(self.transactions.count)")
         }
         perform {
             self.checkSentTransactionStatus()
@@ -76,7 +76,7 @@ class TransactionStatusManager: NSObject {
                 self.realm.add(transaction)
             }
             self.transactions.append(transaction)
-            print("[TransactionStatus] - 新增交易 \(transaction.txHash)")
+            self.debugLog("新增交易 \(transaction.txHash)")
             let details = transaction.transactionDetails()
             for delegate in self.delegates.allObjects {
                 if let delegate = delegate as? TransactionStatusManagerDelegate {
@@ -112,7 +112,7 @@ class TransactionStatusManager: NSObject {
     @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.transactions.count > 0 else {
-            print("[TransactionStatus] - 全部交易状态检查完成")
+            debugLog("全部交易状态检查完成")
             return
         }
         guard Thread.current == thread else {
@@ -123,7 +123,7 @@ class TransactionStatusManager: NSObject {
         let transactions = self.transactions
         for sentTransaction in transactions {
             let result: TransactionStateResult
-            print("[TransactionStatus] - 开始检查交易状态: \(sentTransaction.txHash)")
+            debugLog("开始检查交易状态: \(sentTransaction.txHash)")
             switch sentTransaction.tokenType {
             case .ethereum:
                 result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
@@ -137,7 +137,7 @@ class TransactionStatusManager: NSObject {
 
             switch result {
             case .failure:
-                print("[TransactionStatus] - 交易失败: \(sentTransaction.txHash)")
+                debugLog("交易失败: \(sentTransaction.txHash)")
                 self.transactions.removeAll { (item) -> Bool in
                     return item == sentTransaction
                 }
@@ -146,7 +146,7 @@ class TransactionStatusManager: NSObject {
                 }
                 sentTransactionStatusChanged(transaction: sentTransaction.transactionDetails())
             case .success(let details):
-                print("[TransactionStatus] - 交易成功: \(sentTransaction.txHash)")
+                debugLog("交易成功: \(sentTransaction.txHash)")
                 self.transactions.removeAll { (item) -> Bool in
                     return item == sentTransaction
                 }
@@ -156,7 +156,7 @@ class TransactionStatusManager: NSObject {
                 }
                 sentTransactionStatusChanged(transaction: details)
             case .pending:
-                print("[TransactionStatus] - 交易进行中: \(sentTransaction.txHash)")
+                debugLog("交易进行中: \(sentTransaction.txHash)")
             }
         }
         perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
@@ -197,7 +197,7 @@ class TransactionStatusManager: NSObject {
     @objc private func taskHandler(task: Task) {
         task.block()
     }
-    
+
     //    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
     //        let value = block(self)
     //        return value
@@ -215,5 +215,13 @@ class TransactionStatusManager: NSObject {
             RunLoop.current.run()
         }
         group.wait()
+    }
+
+    // MARK: - Utils
+    private var isEnableDebugLog = false
+    private func debugLog(_ text: String) {
+        if isEnableDebugLog {
+            print("[TransactionStatus] - \(text)")
+        }
     }
 }

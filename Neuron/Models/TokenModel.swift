@@ -39,7 +39,6 @@ class TokenModel: Object, Decodable {
     }
     var logo: Logo?
 
-    enum `Type`: String, Decodable {
     enum TokenType: String, Decodable {
         case erc20
         case ethereum

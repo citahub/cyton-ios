@@ -68,7 +68,7 @@ class AppChainErc20TransactionDetails: AppChainTransactionDetails {
 
 extension AppChainNetwork {
     func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainTransactionDetails] {
-        let url = "https://microscope.cryptape.com:8888/api/transactions"
+        let url = AppChainNetwork().host().appendingPathComponent("/api/transactions")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "page": page,
@@ -89,7 +89,7 @@ extension AppChainNetwork {
     }
 
     func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainTransactionDetails] {
-        let url = "https://microscope.cryptape.com:8888/api/erc20/transfers"
+        let url = AppChainNetwork().host().appendingPathComponent("/api/erc20/transfers")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "address": tokenAddress,
@@ -111,7 +111,7 @@ extension AppChainNetwork {
     }
 
     func getTransaction(txhash: String, account: String, from: String, to: String) throws -> AppChainTransactionDetails {
-        let url = "https://microscope.cryptape.com:8888/api/transactions/\(txhash)"
+        let url = AppChainNetwork().host().appendingPathComponent("/api/transactions/\(txhash)")
         let parameters: [String: Any] = [
             "account": account,
             "from": from,
