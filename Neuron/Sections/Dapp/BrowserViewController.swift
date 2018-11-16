@@ -13,6 +13,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     @IBOutlet weak var closeButton: UIButton!
     var requestUrlStr = ""
     var mainUrl: URL?
+    var webViewProgressObservation: NSKeyValueObservation!
     lazy var webView: WKWebView = {
         let webView = WKWebView(
             frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
@@ -55,7 +56,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         super.viewDidLoad()
         view.addSubview(webView)
         view.addSubview(progressView)
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         requestUrlStr = requestUrlStr.trimmingCharacters(in: .whitespaces)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
@@ -75,7 +75,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         let gestureRecognizer = fixSwipeBack()
         webView.addGestureRecognizer(gestureRecognizer)
 
-        _ = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
+        webViewProgressObservation = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
             guard let self = self else { return }
             self.progressView.alpha = 1.0
             self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
@@ -120,6 +120,10 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
             script = "onSignError(\(id), \"\(error!)\")"
         }
         webView.evaluateJavaScript(script, completionHandler: nil)
+    }
+
+    deinit {
+        webViewProgressObservation.invalidate()
     }
 }
 
