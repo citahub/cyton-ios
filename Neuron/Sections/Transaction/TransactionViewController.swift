@@ -51,10 +51,10 @@ class TransactionViewController: UITableViewController {
 
     // MARK: - Event
     @IBAction func next(_ sender: Any) {
-        let amountText = amountTextField.text ?? ""
-        paramBuilder.to = addressTextField.text ?? ""
-        // TODO: feed input amount to param builder
-        // paramBuilder.amount = Double(amountText) ?? 0.0
+        let amount = Double(amountTextField.text!) ?? 0.0
+        paramBuilder.value = amount.toAmount(token.decimals)
+        paramBuilder.to = addressTextField.text!
+
         if isEffectiveTransferInfo {
             performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
         }
@@ -70,11 +70,12 @@ class TransactionViewController: UITableViewController {
     @IBAction func transactionAvailableBalance() {
         // TODO: FIXME: erc20 token requires ETH balance for tx fee
         let amount = Double(token.tokenBalance)! - paramBuilder.txFeeNatural
+        amountTextField.text = "\(amount)"
+        paramBuilder.value = amount.toAmount(token.decimals)
         guard paramBuilder.hasSufficientBalance else {
             Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
             return
         }
-        amountTextField.text = "\(amount)"
     }
 
     // TODO: tx sent
@@ -117,27 +118,29 @@ class TransactionViewController: UITableViewController {
 
 extension TransactionViewController {
     var isEffectiveTransferInfo: Bool {
-        guard Address.isValid(paramBuilder.to) else {
+        guard Address.isValid(paramBuilder.to) && paramBuilder.to != "0x" else {
             Toast.showToast(text: "您的地址错误，请重新输入")
             return false
         }
+
         // TODO: FIXME: erc20 requires eth balance as tx fee
-        if !paramBuilder.hasSufficientBalance {
-            if paramBuilder.tokenBalance <= BigUInt(0) {
-                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
-                return false
-            }
-            let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
-                self.transactionAvailableBalance()
-            }))
-            alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
-                self.amountTextField.text = ""
-            }))
-            present(alert, animated: true, completion: nil)
+        if paramBuilder.hasSufficientBalance {
+            return true
+        }
+
+        if paramBuilder.tokenBalance <= BigUInt(0) {
+            Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
             return false
         }
-        return true
+        let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
+            self.transactionAvailableBalance()
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
+            self.amountTextField.text = ""
+        }))
+        present(alert, animated: true, completion: nil)
+        return false
     }
 }
 

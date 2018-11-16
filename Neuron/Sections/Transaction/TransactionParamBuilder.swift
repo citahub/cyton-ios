@@ -49,6 +49,18 @@ class TransactionParamBuilder: NSObject {
         }
     }
 
+    var decimals: Int {
+        return token.decimals
+    }
+
+    var symbol: String {
+        return token.symbol
+    }
+
+    var nativeCoinSymbol: String {
+        return token.gasSymbol
+    }
+
     private var token: TokenModel!
     private var gasCalculator = GasCalculator()
 

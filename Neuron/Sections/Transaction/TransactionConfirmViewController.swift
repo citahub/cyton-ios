@@ -151,22 +151,15 @@ class TransactionConfirmInfoViewController: UIViewController {
     var paramBuilder: TransactionParamBuilder! {
         didSet {
             _ = view // load view
-            /* TODO
-            let amount = paramBuilder.amount
-            if amount == Double(Int(amount)) {
-                amountLabel.text = "\(Int(amount))"
-            } else {
-                amountLabel.text = "\(amount)"
-            }
-            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), paramBuilder.token.symbol.lengthOfBytes(using: .utf8))
-            amountLabel.text! += paramBuilder.token.symbol
+            amountLabel.text = Double.fromAmount(paramBuilder.value, decimals: paramBuilder.decimals).decimal
+            let range = NSMakeRange(amountLabel.text!.lengthOfBytes(using: .utf8), paramBuilder.symbol.lengthOfBytes(using: .utf8))
+            amountLabel.text! += paramBuilder.symbol
             let attributedText = NSMutableAttributedString(attributedString: amountLabel.attributedText!)
             attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = paramBuilder.from
             toAddressLabel.text = paramBuilder.to
-            gasCostLabel.text = "\(paramBuilder.txFeeNatural)" + "\(paramBuilder.token.gasSymbol)"
- */
+            gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)" + "\(paramBuilder.nativeCoinSymbol)"
         }
     }
 
