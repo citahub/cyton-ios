@@ -15,10 +15,11 @@ protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
 
 class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private(set) var transactions = [TransactionDetails]()
-    private var sentTransactions = [TransactionDetails]()
     let token: TokenModel
     typealias CallbackBlock = ([Int], Error?) -> Void
-    var tokenProfile: TokenProfile?
+    weak var delegate: TransactionHistoryPresenterDelegate?
+    private var hasMoreData = true
+    private var sentTransactions = [TransactionDetails]()
 
     init(token: TokenModel) {
         self.token = token
@@ -29,8 +30,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         TransactionStatusManager.manager.addDelegate(delegate: self)
     }
 
-    private var hasMoreData = true
-    weak var delegate: TransactionHistoryPresenterDelegate?
+
 
     func reloadData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
@@ -148,7 +148,6 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         DispatchQueue.main.async {
             for (idx, trans) in self.transactions.enumerated() {
                 if trans.hash == transaction.hash {
-//                    trans.status = transaction.status
                     self.transactions.remove(at: idx)
                     self.transactions.insert(transaction, at: idx)
                     self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)

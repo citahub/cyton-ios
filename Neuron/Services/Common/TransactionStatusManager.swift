@@ -24,15 +24,6 @@ protocol TransactionStatusManagerDelegate: NSObjectProtocol {
 }
 
 class TransactionStatusManager: NSObject {
-    private typealias Block = () -> Void
-    private class Task: NSObject {
-        let block: Block
-        init(block: @escaping Block) {
-            self.block = block
-        }
-    }
-
-    static let transactionStatusChangedNotification = Notification.Name("transactionStatusChangedNotification")
     static let manager = TransactionStatusManager()
     private var realm: Realm!
     private var transactions = [SentTransaction]()
@@ -173,6 +164,13 @@ class TransactionStatusManager: NSObject {
 
     // MARK: - Thread
     private var thread: Thread!
+    private typealias Block = () -> Void
+    private class Task: NSObject {
+        let block: Block
+        init(block: @escaping Block) {
+            self.block = block
+        }
+    }
 
     @objc private func perform(_ block: @escaping Block) {
         if Thread.current == thread {
