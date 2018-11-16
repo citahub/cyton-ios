@@ -15,6 +15,7 @@ protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
 
 class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private(set) var transactions = [TransactionDetails]()
+    private var sentTransactions = [TransactionDetails]()
     let token: TokenModel
     typealias CallbackBlock = ([Int], Error?) -> Void
     var tokenProfile: TokenProfile?
@@ -44,15 +45,23 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         loading = true
         DispatchQueue.global().async {
             do {
-                let list = try self.loadData()
+                var list = try self.loadData()
                 self.hasMoreData = list.count == self.pageSize
                 self.loading = false
-                self.page == 1 ? self.transactions = [] : nil
+                if self.page == 1 {
+                    self.transactions = []
+                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(walletAddress: self.walletAddress, tokenType: self.tokenType, tokenAddress: self.tokenAddress)
+                }
                 self.page += 1
+
+                // merge
+                list = self.mergeSentTransactions(from: list)
+
                 var insertions = [Int]()
                 for idx in list.indices {
                     insertions.append(self.transactions.count + idx)
                 }
+
                 self.transactions.append(contentsOf: list)
                 DispatchQueue.main.async {
                     completion?(insertions, nil)
@@ -65,6 +74,42 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 }
             }
         }
+    }
+
+    private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
+        let sDate: Date = self.transactions.first?.date ?? Date.distantFuture
+        let eDate: Date
+        if self.hasMoreData {
+            eDate = list.last?.date ?? Date.distantPast
+        } else {
+            eDate = Date.distantPast
+        }
+        let sentTransactions = self.sentTransactions
+        let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
+            // merge status
+            if let transaction = list.first(where: { (item) -> Bool in
+                return item.hash == sentTransaction.hash
+            }) {
+                // remove sentTransaction
+                self.sentTransactions.removeAll(where: { (entity) -> Bool in
+                    return entity.hash == sentTransaction.hash
+                })
+                transaction.status = sentTransaction.status
+                return false
+            }
+            if sentTransaction.date < sDate && sentTransaction.date > eDate {
+                // remove sentTransaction
+                self.sentTransactions.removeAll(where: { (entity) -> Bool in
+                    return entity.hash == sentTransaction.hash
+                })
+                return true
+            } else {
+                return false
+            }
+        })
+        return (list + sentList).sorted(by: { (details1, details2) -> Bool in
+            return details1.date > details2.date
+        })
     }
 
     // MARK: -

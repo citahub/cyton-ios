@@ -37,7 +37,7 @@ class EthereumTransactionStatus: NSObject {
             if blockNumber - sentTransaction.blockNumber < 12 {
                 return .pending
             }
-            
+
             let receipt = try EthereumNetwork().getWeb3().eth.getTransactionReceipt(sentTransaction.txHash)
             switch receipt.status {
             case .ok:

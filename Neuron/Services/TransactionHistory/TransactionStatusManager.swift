@@ -62,17 +62,12 @@ class TransactionStatusManager: NSObject {
         perform {
             self.realm = try! Realm(fileURL: fileURL)
             self.objects = self.realm.objects(SentTransaction.self)
-//            self.transactions = self.objects.map { (transaction) -> SentTransaction in
-//                transaction.setupThreadSafe()
-//                return transaction
-//            }
             self.transactions = self.objects.filter({ (transaction) -> Bool in
                 return transaction.status == .pending || transaction.status == .failure
             })
             print("[TransactionStatus] - 加载需要检查状态的交易: \(self.transactions.count)")
         }
 
-        ///
         perform {
             self.checkSentTransactionStatus()
         }
@@ -84,21 +79,6 @@ class TransactionStatusManager: NSObject {
 
     func removeDelegate(delegate: TransactionStatusManagerDelegate) {
         delegates.remove(delegate as? NSObject)
-    }
-
-    func test() {
-//        let transaction = SentTransactionEntity()
-//        transaction.hashString = "0x52c7dd85173d8d1ec96c6cf46bede4241bd937836181068ede04a2baa69013d3"
-//        transaction.blockNumber = BigUInt("4ce27", radix: 16)!
-//        let result = AppChainTransactionStatus().getTransactionStatus(transaction: transaction)
-//        print(result)
-        let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        DispatchQueue.global().async {
-//            let transactions = try? AppChainTransactionHistory().getTransactionHistory(walletAddress: walletAddress, page: 1, pageSize: 4)
-            let transactions = try? EthereumTransactionHistory().getTransactionHistory(walletAddress: walletAddress, page: 1, pageSize: 4)
-            print(transactions ?? [])
-            print(transactions ?? [])
-        }
     }
 
     func insertTransaction(transaction: SentTransaction) {
@@ -124,33 +104,21 @@ class TransactionStatusManager: NSObject {
         }
     }
 
-//    func mergeTransactions(from transactions: [TransactionDetails]) -> [TransactionDetails] {
-//        return transactions
-//    }
-
-    func getTransactions(walletAddress: String, token: TokenModel) -> [SentTransaction] {
-        return transactions.filter({ (entity) -> Bool in
-            return entity.from == walletAddress && entity.isSendFromToken(token: token)
-        })
+    func getTransactions(walletAddress: String, tokenType: TokenModel.TokenType, tokenAddress: String) -> [TransactionDetails] {
+        var transactions: [TransactionDetails]?
+        syncPerform {
+            transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
+                return transaction.from == walletAddress &&
+                    transaction.tokenType == tokenType &&
+                    transaction.contractAddress == tokenAddress
+            }).map({ (sent) -> TransactionDetails in
+                return sent.transactionDetails()
+            })
+        }
+        return transactions ?? []
     }
 
-    // MARK: - check transaction status
-//    func beganStateCheck(walletAddress: String, token: TokenModel) {
-//        let result = realm.objects(SentTransaction.self)
-//        let list = result.filter { (entity) -> Bool in
-//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-//        }
-//        transactions.append(contentsOf: list)
-//        checkSentTransactionStatus()
-//    }
-
-//    func stopStateCheck(walletAddress: String, token: TokenModel) {
-//        transactions = transactions.filter({ (entity) -> Bool in
-//            return entity.from == walletAddress && entity.tokenType == token.type && entity.contractAddress == token.address
-//        })
-//    }
-
-    @objc func checkSentTransactionStatus() {
+    @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.transactions.count > 0 else {
             print("[TransactionStatus] - 全部交易状态检查完成")
@@ -197,6 +165,7 @@ class TransactionStatusManager: NSObject {
                 print("[TransactionStatus] - 交易成功: \(transaction.txHash)")
                 try? self.realm.write {
                     transaction.status = .success
+//                    realm.delete(transaction)
                 }
                 if let idx = self.transactions.index(object: transaction) {
                     self.transactions.remove(at: idx)
@@ -227,6 +196,10 @@ class TransactionStatusManager: NSObject {
     }
 
     @objc private func syncPerform(_ block: @escaping Block) {
+        if Thread.current == thread {
+            block()
+            return
+        }
         let task = Task(block: block)
         let sel = #selector(TransactionStatusManager.taskHandler(task:))
         self.perform(sel, on: self.thread, with: task, waitUntilDone: true)
