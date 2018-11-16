@@ -69,7 +69,7 @@ struct WalletRealmTool {
             totalTokenList += appModel.nativeTokenList
             totalTokenList += appModel.extraTokenList
             // tokenModel.identifier is always exist
-            if let model = totalTokenList.first(where: {$0 == tokenModel}) {
+            if let model = totalTokenList.first(where: { $0 == tokenModel }) {
                 tokenModel.identifier = model.identifier
             }
             realm.add(tokenModel, update: true)
