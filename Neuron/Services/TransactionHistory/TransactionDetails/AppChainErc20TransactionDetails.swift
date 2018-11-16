@@ -9,5 +9,4 @@
 import UIKit
 
 class AppChainErc20TransactionDetails: AppChainTransactionDetails {
-
 }

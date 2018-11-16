@@ -13,7 +13,6 @@ import PromiseKit
 class AppChainTransactionStatus: NSObject {
     func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
         do {
-//            let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: sentTransaction.txHash)
             let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
             if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: sentTransaction.txHash) {
                 if let error = receipt.errorMessage {

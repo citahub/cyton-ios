@@ -9,7 +9,6 @@
 import UIKit
 import BigInt
 
-/// https://microscope.cryptape.com:8888/api/transactions?account=0xabea5a6e72b02511bd6caf996a1b4c6ac477ff71&page=1&perPage=20&valueFormat=decimal
 class AppChainTransactionDetails: TransactionDetails {
     var content: String = ""
     var gasUsed: BigUInt = 0

@@ -45,11 +45,8 @@ class TransactionStatusManager: NSObject {
 
     static let transactionStatusChangedNotification = Notification.Name("transactionStatusChangedNotification")
     static let manager = TransactionStatusManager()
-    private let timeInterval: TimeInterval = 4.0
     private var realm: Realm!
     private var transactions = [SentTransaction]()
-    private let delegates: NSHashTable<NSObject>!
-    private var objects: Results<SentTransaction>!
 
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
@@ -61,17 +58,19 @@ class TransactionStatusManager: NSObject {
         createTaskThread()
         perform {
             self.realm = try! Realm(fileURL: fileURL)
-            self.objects = self.realm.objects(SentTransaction.self)
-            self.transactions = self.objects.filter({ (transaction) -> Bool in
-                return transaction.status == .pending || transaction.status == .failure
+            let objects = self.realm.objects(SentTransaction.self)
+            self.transactions = objects.filter({ (transaction) -> Bool in
+                return transaction.status == .pending
             })
             print("[TransactionStatus] - 加载需要检查状态的交易: \(self.transactions.count)")
         }
-
         perform {
             self.checkSentTransactionStatus()
         }
     }
+
+    // MARK: - delegate
+    private let delegates: NSHashTable<NSObject>!
 
     func addDelegate(delegate: TransactionStatusManagerDelegate) {
         delegates.add(delegate as? NSObject)
@@ -81,29 +80,27 @@ class TransactionStatusManager: NSObject {
         delegates.remove(delegate as? NSObject)
     }
 
+    // MARK: - Add transaction
     func insertTransaction(transaction: SentTransaction) {
-        guard Thread.current == thread else {
-            perform {
-                self.insertTransaction(transaction: transaction)
+        perform {
+            try? self.realm.write {
+                self.realm.add(transaction)
             }
-            return
-        }
-        try? realm.write {
-            realm.add(transaction)
-        }
-        transactions.append(transaction)
-        print("[TransactionStatus] - 新增交易 \(transaction.txHash)")
-        let details = transaction.transactionDetails()
-        for delegate in self.delegates.allObjects {
-            if let delegate = delegate as? TransactionStatusManagerDelegate {
-                delegate.sentTransactionInserted(transaction: details)
+            self.transactions.append(transaction)
+            print("[TransactionStatus] - 新增交易 \(transaction.txHash)")
+            let details = transaction.transactionDetails()
+            for delegate in self.delegates.allObjects {
+                if let delegate = delegate as? TransactionStatusManagerDelegate {
+                    delegate.sentTransactionInserted(transaction: details)
+                }
             }
-        }
-        if transactions.count == 1 {
-            checkSentTransactionStatus()
+            if self.transactions.count == 1 {
+                self.checkSentTransactionStatus()
+            }
         }
     }
 
+    // MARK: -
     func getTransactions(walletAddress: String, tokenType: TokenModel.TokenType, tokenAddress: String) -> [TransactionDetails] {
         var transactions: [TransactionDetails]?
         syncPerform {
@@ -117,6 +114,9 @@ class TransactionStatusManager: NSObject {
         }
         return transactions ?? []
     }
+
+    // MARK: - Check transaction status
+    private let timeInterval: TimeInterval = 4.0
 
     @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
@@ -149,8 +149,8 @@ class TransactionStatusManager: NSObject {
             switch result {
             case .failure:
                 print("[TransactionStatus] - 交易失败: \(transaction.txHash)")
-                if let idx = self.transactions.index(object: transaction) {
-                    self.transactions.remove(at: idx)
+                self.transactions.removeAll { (item) -> Bool in
+                    return item == transaction
                 }
                 try? self.realm.write {
                     transaction.status = .failure
@@ -165,10 +165,10 @@ class TransactionStatusManager: NSObject {
                 print("[TransactionStatus] - 交易成功: \(transaction.txHash)")
                 try? self.realm.write {
                     transaction.status = .success
-//                    realm.delete(transaction)
+                    realm.delete(transaction)
                 }
-                if let idx = self.transactions.index(object: transaction) {
-                    self.transactions.remove(at: idx)
+                self.transactions.removeAll { (item) -> Bool in
+                    return item == transaction
                 }
                 for delegate in self.delegates.allObjects {
                     if let delegate = delegate as? TransactionStatusManagerDelegate {
@@ -182,7 +182,7 @@ class TransactionStatusManager: NSObject {
         perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
     }
 
-    // MAKR: Utils
+    // MARK: - Thread
     private var thread: Thread!
 
     @objc private func perform(_ block: @escaping Block) {
@@ -210,9 +210,7 @@ class TransactionStatusManager: NSObject {
     }
 //
 //    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
-//
 //        let value = block(self)
-//
 //        return value
 //    }
 
@@ -226,29 +224,7 @@ class TransactionStatusManager: NSObject {
             RunLoop.current.add(NSMachPort(), forMode: .default)
             group.leave()
             RunLoop.current.run()
-//            RunLoop.current.run(mode: .default, before: Date.distantPast)
         }
         group.wait()
     }
 }
-
-
-
-/**
- 管理交易状态
-
- 缓存发送的交易信息
- walletAddress tokenType transaction
-
- 开启交易状态检查 - 每隔一定时间查询处于 交易进行中 的交易记录的状态
- 指定 walletAddress 、 token 类型
- 如果交易成功，发送交易状态变更消息，并从数据库中删除对应记录
- 交易失败，从检查列表中移除
-
- 拉取交易记录时，合并相同时间段的 缓存的交易记录（交易进行中、交易失败的）
- 需要提供指定时间段内的缓存的交易记录
-
- 切换钱包，变更状态查询列表
- 切换Eth网络，变更状态查询列表
-
- */

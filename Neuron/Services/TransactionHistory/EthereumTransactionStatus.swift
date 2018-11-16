@@ -19,20 +19,7 @@ extension SentTransaction {
 class EthereumTransactionStatus: NSObject {
     func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
         do {
-//            // http://api-rinkeby.etherscan.io/api?
-//            action=txlistinternal
-//            &apikey=T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z
-//            &module=account
-//            &txhash=0xabe8f0231179757e095745964eef5210b2ec4ba04e41ce80f6db2f89025ad702
-//            // https://api.etherscan.io/api?
-//            module=account
-//            &action=txlistinternal
-//            &txhash=0x40eb908387324f2b575b4879cd9d7188f69c8fc9d87c901b9e2daaea4b442170
-//            &apikey=YourApiKeyToken
-
-//            let transaction = try EthereumTransactionHistory().getTransaction(txhash: sentTransaction.txHash)
             let transaction = try EthereumNetwork().getWeb3().eth.getTransactionDetails(sentTransaction.txHash)
-
             let blockNumber = try EthereumNetwork().getWeb3().eth.getBlockNumber()
             if blockNumber - sentTransaction.blockNumber < 12 {
                 return .pending

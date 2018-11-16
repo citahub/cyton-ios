@@ -9,7 +9,6 @@
 import UIKit
 import BigInt
 
-// http://api-rinkeby.etherscan.io/api?action=txlist&address=0xaBea5A6e72B02511Bd6cAf996A1b4C6aC477Ff71&apikey=T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z&module=account&offset=20&page=1&sort=desc
 class EthereumTransactionDetails: TransactionDetails {
     var nonce: BigUInt = 0
     var blockHash: String = ""

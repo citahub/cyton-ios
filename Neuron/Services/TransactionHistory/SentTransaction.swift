@@ -55,12 +55,6 @@ extension ThreadSafeObject where Self: Object {
     }
 }
 
-//extension TokenModel {
-//    var identifier: String {
-//        return "\(address)_\(chainName ?? "")_\(name)"
-//    }
-//}
-
 class SentTransaction: Object, ThreadSafeObject {
     var tokenType: TokenModel.TokenType {
         set {

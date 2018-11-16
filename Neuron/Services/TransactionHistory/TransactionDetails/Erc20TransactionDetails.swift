@@ -9,8 +9,6 @@
 import UIKit
 import BigInt
 
-// https://api.etherscan.io/api?module=account&action=tokentx&contractaddress=0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2&address=0x4e83362442b8d1bec281594cea3050c8eb01311c&page=1&offset=100&sort=asc&apikey=YourApiKeyToken
-// http://api-rinkeby.etherscan.io/api?action=tokentx&address=0x800a0668f848900E3F850e3F6Fce41286023D211&apikey=T9GV1IF4V7YDXQ8F53U1FK2KHCE2KUUD8Z&contractaddress=0x06a6299bdbf0596b8fda14012b81eeb0eeb5c3cb&module=account&offset=10&page=1&sort=desc
 class Erc20TransactionDetails: TransactionDetails {
     var nonce: BigUInt = 0
     var blockHash: String = ""
