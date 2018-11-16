@@ -58,4 +58,25 @@ struct WalletRealmTool {
     static func addObject(appModel: AppModel) {
         realm.add(appModel)
     }
+
+    /// Add token model
+    ///
+    /// - Parameter tokenModel: tokenModel instance
+    static func addTokenModel(tokenModel: TokenModel) {
+        let result = realm.objects(AppModel.self).first
+        if let appModel = result {
+            var totleTokenList: [TokenModel] = []
+            totleTokenList += appModel.nativeTokenList
+            totleTokenList += appModel.extraTokenList
+            var isContain = false
+            for model in totleTokenList where tokenModel == model {
+                tokenModel.identifier = model.identifier
+                realm.add(tokenModel, update: true)
+                isContain = true
+            }
+            if !isContain {
+                realm.add(tokenModel, update: true)
+            }
+        }
+    }
 }

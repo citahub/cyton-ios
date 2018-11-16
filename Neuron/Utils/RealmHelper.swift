@@ -11,7 +11,9 @@ import RealmSwift
 
 class RealmHelper {
     var realm: Realm {
-        return try! Realm()
+        let realm = try! Realm()
+        realm.autorefresh = true
+        return realm
     }
     private static var schemaVersion: UInt64 = 3
 

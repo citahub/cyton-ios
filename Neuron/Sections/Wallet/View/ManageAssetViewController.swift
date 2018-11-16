@@ -72,12 +72,12 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func selectedAsset(model: TokenModel) {
         if selectAddressArray.contains(model.address) {
-            viewModel.deleteSelectedToken(tokenM: model)
+            viewModel.deleteSelectedToken(tokenModel: model)
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
                 return item == model.address
             })
         } else {
-            viewModel.addSelectToken(tokenM: model)
+            viewModel.addSelectToken(tokenModel: model)
         }
         didGetDataForList()
     }
