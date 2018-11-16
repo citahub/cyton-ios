@@ -27,10 +27,9 @@ class MessageSignController: UIViewController, TransactionConfirmViewControllerD
 
         let confirmController: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
         confirmController.delegate = self
-        addChild(confirmController)
-        view.addSubview(confirmController.view)
         confirmController.contentViewController = messageSignShowViewController
         self.confirmController = confirmController
+        present(confirmController, animated: false, completion: nil)
 
         setUIData()
     }

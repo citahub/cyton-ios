@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 struct WalletRealmTool {
-    static let realm = RealmHelper.sharedInstance
+    static let realm = RealmHelper().realm
     /// according to wallet address to get WalletModel
     ///
     /// - Parameter walletName: walletName
@@ -57,5 +57,22 @@ struct WalletRealmTool {
     /// - Parameter appModel: appmodel instance
     static func addObject(appModel: AppModel) {
         realm.add(appModel)
+    }
+
+    /// Add token model
+    ///
+    /// - Parameter tokenModel: tokenModel instance
+    static func addTokenModel(tokenModel: TokenModel) {
+        let result = realm.objects(AppModel.self).first
+        if let appModel = result {
+            var totalTokenList: [TokenModel] = []
+            totalTokenList += appModel.nativeTokenList
+            totalTokenList += appModel.extraTokenList
+            // tokenModel.identifier is always exist
+            if let model = totalTokenList.first(where: { $0 == tokenModel }) {
+                tokenModel.identifier = model.identifier
+            }
+            realm.add(tokenModel, update: true)
+        }
     }
 }

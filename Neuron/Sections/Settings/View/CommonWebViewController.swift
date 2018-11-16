@@ -11,6 +11,7 @@ import WebKit
 
 class CommonWebViewController: UIViewController, WKNavigationDelegate {
     var url: URL!
+    var webViewProgressObservation: NSKeyValueObservation!
 
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
@@ -29,20 +30,12 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
         super.viewDidLoad()
         view.addSubview(webView)
         view.addSubview(progressView)
-        webView.addObserver(self, forKeyPath: "estimatedProgress", options: .new, context: nil)
         webView.load(URLRequest.init(url: url))
-    }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-
-        webView.frame = CGRect(origin: .zero, size: view.bounds.size)
-    }
-
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "estimatedProgress" {
-            progressView.alpha = 1.0
-            progressView.setProgress(Float(webView.estimatedProgress), animated: true)
+        webViewProgressObservation = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
+            guard let self = self else { return }
+            self.progressView.alpha = 1.0
+            self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
             if webView.estimatedProgress >= 1.0 {
                 UIView.animate(withDuration: 0.3, delay: 0.1, options: .curveEaseOut, animations: {
                     self.progressView.alpha = 0
@@ -53,7 +46,17 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
         }
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        webView.frame = CGRect(origin: .zero, size: view.bounds.size)
+    }
+
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
+    }
+
+    deinit {
+        webViewProgressObservation.invalidate()
     }
 }
