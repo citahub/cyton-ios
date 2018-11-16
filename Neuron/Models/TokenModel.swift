@@ -80,11 +80,7 @@ class TokenModel: Object, Decodable {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        if lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name {
-            return true
-        } else {
-            return false
-        }
+        return lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
 
     override func isEqual(_ object: Any?) -> Bool {
