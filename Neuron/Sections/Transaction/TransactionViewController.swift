@@ -109,16 +109,8 @@ class TransactionViewController: UITableViewController {
         updateGasCost()
     }
 
-    private var txFeeFormatter: NumberFormatter = {
-        let formatter = NumberFormatter()
-        formatter.minimumIntegerDigits = 1
-        formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 6
-        return formatter
-    }()
-
     private func updateGasCost() {
-        gasCostLabel.text = txFeeFormatter.string(from: paramBuilder.txFeeNatural as NSNumber)! + " \(token.symbol)" // TODO: should always displaying ETH or AppChain native token symbol
+        gasCostLabel.text = paramBuilder.txFeeNatural.decimal + " \(token.symbol)"
     }
 }
 

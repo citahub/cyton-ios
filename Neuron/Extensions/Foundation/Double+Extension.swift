@@ -11,7 +11,21 @@ import BigInt
 
 extension Double {
     var trailingZerosTrimmed: String {
-        return self.truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+        return truncatingRemainder(dividingBy: 1) == 0 ? String(format: "%.0f", self) : String(self)
+    }
+
+    /// Format to normal number string such as 3.1415926.
+    static var decimalFormatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.minimumIntegerDigits = 1
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 6
+        formatter.roundingMode = .halfUp
+        return formatter
+    }()
+
+    var decimal: String {
+        return Double.decimalFormatter.string(from: self as NSNumber)!
     }
 
     func toAmount(_ decimals: Int = 18) -> BigUInt {
