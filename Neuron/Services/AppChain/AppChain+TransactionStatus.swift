@@ -1,16 +1,17 @@
 //
-//  AppChainTransactionStatus.swift
+//  AppChain+TransactionStatus.swift
 //  Neuron
 //
-//  Created by 晨风 on 2018/11/14.
+//  Created by 晨风 on 2018/11/16.
 //  Copyright © 2018 Cryptape. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import Alamofire
 import PromiseKit
+import AppChain
 
-class AppChainTransactionStatus: NSObject {
+extension AppChainNetwork {
     func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
         do {
             let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
@@ -19,7 +20,8 @@ class AppChainTransactionStatus: NSObject {
                     print(error)
                     return .failure
                 } else {
-                    if let transaction = try? AppChainTransactionHistory().getTransaction(txhash: sentTransaction.txHash, account: sentTransaction.from, from: sentTransaction.from, to: sentTransaction.to) {
+                    let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: sentTransaction.txHash)
+                    if let transaction = try? AppChainNetwork().getTransaction(txhash: sentTransaction.txHash, account: sentTransaction.from, from: sentTransaction.from, to: sentTransaction.to) {
                         return .success(transaction: transaction)
                     } else {
                         if sentTransaction.blockNumber < currentBlockNumber {

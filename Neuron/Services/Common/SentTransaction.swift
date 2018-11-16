@@ -65,7 +65,6 @@ class SentTransaction: Object, ThreadSafeObject {
         }
     }
     @objc dynamic var contractAddress: String = ""
-    @objc dynamic var token: TokenModel!
     @objc dynamic var txHash: String = ""
     var blockNumber: BigUInt {
         set {
@@ -102,6 +101,7 @@ class SentTransaction: Object, ThreadSafeObject {
         }
     }
     @objc dynamic var date: Date = Date()
+    @objc dynamic var ethereumNetwork: String = ""
 
     @objc dynamic private var privateBlockNumber: String = ""
     @objc dynamic private var privateStatus: Int = 0
@@ -138,6 +138,7 @@ class SentTransaction: Object, ThreadSafeObject {
         txFee = sendingResult.transaction.gasPrice * sendingResult.transaction.gasLimit
         self.contractAddress = contractAddress
         status = .pending
+        ethereumNetwork = EthereumNetwork().host().absoluteString
     }
 
     // AppChain
@@ -172,7 +173,20 @@ class SentTransaction: Object, ThreadSafeObject {
     }
 
     func transactionDetails() -> TransactionDetails {
-        let details = TransactionDetails()
+        let details: TransactionDetails
+        if tokenType == .ethereum {
+            let ethereum = EthereumTransactionDetails()
+            details = ethereum
+        } else if tokenType == .erc20 {
+            let erc20 = Erc20TransactionDetails()
+            erc20.contractAddress = contractAddress
+            details = erc20
+        } else if tokenType == .nervos {
+            let appChain = AppChainTransactionDetails()
+            details = appChain
+        } else {
+            fatalError()
+        }
         details.hash = txHash
         details.to = to
         details.from = from

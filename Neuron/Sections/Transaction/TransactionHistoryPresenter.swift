@@ -76,6 +76,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         }
     }
 
+    // MARK: - Merge
     private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
         let sDate: Date = self.transactions.first?.date ?? Date.distantFuture
         let eDate: Date
@@ -112,7 +113,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         })
     }
 
-    // MARK: -
+    // MARK: - Load transactions
     private var loading = false
     private var page: UInt = 1
     private var pageSize: UInt = 10
@@ -123,13 +124,13 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private func loadData() throws -> [TransactionDetails] {
         switch tokenType {
         case .nervos:
-            return try AppChainTransactionHistory().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
+            return try AppChainNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
         case .ethereum:
-            return try EthereumTransactionHistory().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
+            return try EthereumNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
         case .erc20:
-            return try EthereumTransactionHistory().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
+            return try EthereumNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
         case .nervosErc20:
-            return try AppChainTransactionHistory().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
+            return try AppChainNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
         }
     }
 
@@ -147,7 +148,9 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         DispatchQueue.main.async {
             for (idx, trans) in self.transactions.enumerated() {
                 if trans.hash == transaction.hash {
-                    trans.status = transaction.status
+//                    trans.status = transaction.status
+                    self.transactions.remove(at: idx)
+                    self.transactions.insert(transaction, at: idx)
                     self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
                     return
                 }

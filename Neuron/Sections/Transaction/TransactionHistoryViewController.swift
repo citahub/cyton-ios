@@ -175,6 +175,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
 //        controller.tModel = presenter!.transactions[indexPath.row]
+        controller.transaction = presenter?.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
 

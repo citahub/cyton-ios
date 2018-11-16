@@ -1,12 +1,12 @@
 //
-//  TransactionStateService.swift
+//  TransactionStatusManager.swift
 //  Neuron
 //
-//  Created by 晨风 on 2018/11/14.
+//  Created by 晨风 on 2018/11/16.
 //  Copyright © 2018 Cryptape. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RealmSwift
 import BigInt
 import Web3swift
@@ -16,17 +16,6 @@ enum TransactionStateResult {
     case pending
     case success(transaction: TransactionDetails)
     case failure
-}
-
-extension Array where Element: Equatable {
-    @discardableResult func index(object: Element) -> Int? {
-        for (idx, obj) in enumerated() {
-            if obj == object {
-                return idx
-            }
-        }
-        return nil
-    }
 }
 
 protocol TransactionStatusManagerDelegate: NSObjectProtocol {
@@ -51,7 +40,7 @@ class TransactionStatusManager: NSObject {
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
         let fileURL = document.appendingPathComponent("transaction_history")
-//        try? FileManager.default.removeItem(at: fileURL)
+        try? FileManager.default.removeItem(at: fileURL)
         delegates = NSHashTable(options: .weakMemory)
         super.init()
 
@@ -104,10 +93,12 @@ class TransactionStatusManager: NSObject {
     func getTransactions(walletAddress: String, tokenType: TokenModel.TokenType, tokenAddress: String) -> [TransactionDetails] {
         var transactions: [TransactionDetails]?
         syncPerform {
+            let ethereumNetwork = EthereumNetwork().host().absoluteString
             transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
                 return transaction.from == walletAddress &&
                     transaction.tokenType == tokenType &&
-                    transaction.contractAddress == tokenAddress
+                    transaction.contractAddress == tokenAddress &&
+                    (transaction.ethereumNetwork == "" || transaction.ethereumNetwork == ethereumNetwork)
             }).map({ (sent) -> TransactionDetails in
                 return sent.transactionDetails()
             })
@@ -125,61 +116,59 @@ class TransactionStatusManager: NSObject {
             return
         }
         guard Thread.current == thread else {
-            perform {
-                self.checkSentTransactionStatus()
-            }
+            perform { self.checkSentTransactionStatus() }
             return
         }
 
         let transactions = self.transactions
-        for transaction in transactions {
+        for sentTransaction in transactions {
             let result: TransactionStateResult
-            print("[TransactionStatus] - 开始检查交易状态: \(transaction.txHash)")
-            switch transaction.tokenType {
+            print("[TransactionStatus] - 开始检查交易状态: \(sentTransaction.txHash)")
+            switch sentTransaction.tokenType {
             case .ethereum:
-                result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+                result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
             case .erc20:
-                result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+                result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
             case .nervos:
-                result = AppChainTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+                result = AppChainNetwork().getTransactionStatus(sentTransaction: sentTransaction)
             default:
                 fatalError()
             }
 
             switch result {
             case .failure:
-                print("[TransactionStatus] - 交易失败: \(transaction.txHash)")
+                print("[TransactionStatus] - 交易失败: \(sentTransaction.txHash)")
                 self.transactions.removeAll { (item) -> Bool in
-                    return item == transaction
+                    return item == sentTransaction
                 }
                 try? self.realm.write {
-                    transaction.status = .failure
+                    sentTransaction.status = .failure
                 }
-                let details = transaction.transactionDetails()
-                for delegate in self.delegates.allObjects {
-                    if let delegate = delegate as? TransactionStatusManagerDelegate {
-                        delegate.sentTransactionStatusChanged(transaction: details)
-                    }
-                }
+                sentTransactionStatusChanged(transaction: sentTransaction.transactionDetails())
             case .success(let details):
-                print("[TransactionStatus] - 交易成功: \(transaction.txHash)")
-                try? self.realm.write {
-                    transaction.status = .success
-                    realm.delete(transaction)
-                }
+                print("[TransactionStatus] - 交易成功: \(sentTransaction.txHash)")
                 self.transactions.removeAll { (item) -> Bool in
-                    return item == transaction
+                    return item == sentTransaction
                 }
-                for delegate in self.delegates.allObjects {
-                    if let delegate = delegate as? TransactionStatusManagerDelegate {
-                        delegate.sentTransactionStatusChanged(transaction: details)
-                    }
+                try? self.realm.write {
+                    sentTransaction.status = .success
+                    realm.delete(sentTransaction)
                 }
+                sentTransactionStatusChanged(transaction: details)
             case .pending:
-                print("[TransactionStatus] - 交易进行中: \(transaction.txHash)")
+                print("[TransactionStatus] - 交易进行中: \(sentTransaction.txHash)")
             }
         }
         perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
+    }
+
+    // MARK: - Callback
+    private func sentTransactionStatusChanged(transaction: TransactionDetails) {
+        for delegate in self.delegates.allObjects {
+            if let delegate = delegate as? TransactionStatusManagerDelegate {
+                delegate.sentTransactionStatusChanged(transaction: transaction)
+            }
+        }
     }
 
     // MARK: - Thread
@@ -208,11 +197,11 @@ class TransactionStatusManager: NSObject {
     @objc private func taskHandler(task: Task) {
         task.block()
     }
-//
-//    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
-//        let value = block(self)
-//        return value
-//    }
+    
+    //    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
+    //        let value = block(self)
+    //        return value
+    //    }
 
     private func createTaskThread() {
         let group = DispatchGroup()
