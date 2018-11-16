@@ -30,7 +30,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             presenter = TransactionHistoryPresenter(token: tokenModel)
             presenter?.delegate = self
             Toast.showHUD()
-
+            _ = view // load view
             tokenModel.getProfile { (tokenProfile) in
                 self.setupTokenProfile(tokenProfile)
 //                self.loadData()
