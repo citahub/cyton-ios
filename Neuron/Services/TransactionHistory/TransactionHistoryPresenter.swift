@@ -9,7 +9,6 @@
 import UIKit
 
 protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
-//    func insertTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?)
     func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?)
     func updateTransactions(transaction: [TransactionDetails], updates: [Int], error: Error?)
 }

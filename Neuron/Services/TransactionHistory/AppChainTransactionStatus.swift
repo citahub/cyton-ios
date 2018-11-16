@@ -11,37 +11,34 @@ import Alamofire
 import PromiseKit
 
 class AppChainTransactionStatus: NSObject {
-    func getTransactionStatus(transaction: SentTransaction) -> TransactionStateResult {
+    func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
         do {
-            // 查询交易数据
-            let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: transaction.txHash)
-//            let details = try AppChainTransactionHistory().getTransaction(txhash: transaction.hashString, account: transaction.walletAddress, from: tr, to: <#T##String#>)
-            print(details)
-            // 交易成功
-            return .success(transaction: AppChainTransactionDetails())
-        } catch {
-            do {
-                let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
-                if transaction.blockNumber < currentBlockNumber {
-                    // 小于当前 block height
-                    // 获取打包成功的 receipt
-                    if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: transaction.txHash) {
-                        // 交易进行中
-                        print(receipt)
-                        return .pending
-                    } else {
-                        // 交易失败
-                        return .failure
-                    }
+//            let details = try AppChainNetwork.appChain().rpc.getTransaction(txhash: sentTransaction.txHash)
+            let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
+            if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: sentTransaction.txHash) {
+                if let error = receipt.errorMessage {
+                    print(error)
+                    return .failure
                 } else {
-                    // 交易进行中
+                    if let transaction = try? AppChainTransactionHistory().getTransaction(txhash: sentTransaction.txHash, account: sentTransaction.from, from: sentTransaction.from, to: sentTransaction.to) {
+                        return .success(transaction: transaction)
+                    } else {
+                        if sentTransaction.blockNumber < currentBlockNumber {
+                            return .failure
+                        } else {
+                            return .pending
+                        }
+                    }
+                }
+            } else {
+                if sentTransaction.blockNumber < currentBlockNumber {
+                    return .failure
+                } else {
                     return .pending
                 }
-            } catch {
-                // 获取 block height 失败
-                // 交易进行中
-                return .pending
             }
+        } catch {
+            return .pending
         }
     }
 }

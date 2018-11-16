@@ -29,8 +29,6 @@ extension Array where Element: Equatable {
     }
 }
 
-//Array
-
 protocol TransactionStatusManagerDelegate: NSObjectProtocol {
     func sentTransactionInserted(transaction: TransactionDetails)
     func sentTransactionStatusChanged(transaction: TransactionDetails)
@@ -52,7 +50,6 @@ class TransactionStatusManager: NSObject {
     private var transactions = [SentTransaction]()
     private let delegates: NSHashTable<NSObject>!
     private var objects: Results<SentTransaction>!
-    private var thread: Thread!
 
     private override init() {
         let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
@@ -61,19 +58,8 @@ class TransactionStatusManager: NSObject {
         delegates = NSHashTable(options: .weakMemory)
         super.init()
 
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: "")
-        group.enter()
-        queue.async {
-            self.thread = Thread.current
-            Thread.current.name = String(describing: TransactionStatusManager.self)
-            RunLoop.current.add(NSMachPort(), forMode: .default)
-            group.leave()
-            RunLoop.current.run()
-//            RunLoop.current.run(mode: .default, before: Date.distantPast)
-        }
-        group.wait()
-        self.perform {
+        createTaskThread()
+        perform {
             self.realm = try! Realm(fileURL: fileURL)
             self.objects = self.realm.objects(SentTransaction.self)
 //            self.transactions = self.objects.map { (transaction) -> SentTransaction in
@@ -81,13 +67,14 @@ class TransactionStatusManager: NSObject {
 //                return transaction
 //            }
             self.transactions = self.objects.filter({ (transaction) -> Bool in
-                return transaction.status == .pending
+                return transaction.status == .pending || transaction.status == .failure
             })
             print("[TransactionStatus] - 加载需要检查状态的交易: \(self.transactions.count)")
         }
-        self.perform {
+
+        ///
+        perform {
             self.checkSentTransactionStatus()
-//            print(self.transactions.first?.blockNumber ?? 0)
         }
     }
 
@@ -183,6 +170,10 @@ class TransactionStatusManager: NSObject {
             switch transaction.tokenType {
             case .ethereum:
                 result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+            case .erc20:
+                result = EthereumTransactionStatus().getTransactionStatus(sentTransaction: transaction)
+            case .nervos:
+                result = AppChainTransactionStatus().getTransactionStatus(sentTransaction: transaction)
             default:
                 fatalError()
             }
@@ -223,7 +214,13 @@ class TransactionStatusManager: NSObject {
     }
 
     // MAKR: Utils
+    private var thread: Thread!
+
     @objc private func perform(_ block: @escaping Block) {
+        if Thread.current == thread {
+            block()
+            return
+        }
         let task = Task(block: block)
         let sel = #selector(TransactionStatusManager.taskHandler(task:))
         self.perform(sel, on: self.thread, with: task, waitUntilDone: false)
@@ -237,6 +234,28 @@ class TransactionStatusManager: NSObject {
 
     @objc private func taskHandler(task: Task) {
         task.block()
+    }
+//
+//    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
+//
+//        let value = block(self)
+//
+//        return value
+//    }
+
+    private func createTaskThread() {
+        let group = DispatchGroup()
+        let queue = DispatchQueue(label: "")
+        group.enter()
+        queue.async {
+            self.thread = Thread.current
+            Thread.current.name = String(describing: TransactionStatusManager.self)
+            RunLoop.current.add(NSMachPort(), forMode: .default)
+            group.leave()
+            RunLoop.current.run()
+//            RunLoop.current.run(mode: .default, before: Date.distantPast)
+        }
+        group.wait()
     }
 }
 

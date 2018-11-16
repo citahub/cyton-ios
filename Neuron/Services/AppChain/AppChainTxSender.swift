@@ -53,7 +53,10 @@ class AppChainTxSender {
         )
         let signed = try sign(transaction: transaction, password: password)
         do {
-            return try appChain.rpc.sendRawTransaction(signedTx: signed)
+            let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
+            let sentTransaction = SentTransaction(tokenType: .nervos, from: from, hash: txHash, transaction: transaction)
+            TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+            return txHash
         } catch {
             throw SendTransactionError.signTXFailed
         }

@@ -10,11 +10,11 @@ import UIKit
 import BigInt
 
 extension BigUInt {
-    public init?(_ text: String) {
-        if text.hasPrefix("0x") {
-            self.init(text.removeHexPrefix(), radix: 16)
+    public init?(string: String) {
+        if string.hasPrefix("0x") {
+            self.init(string.removeHexPrefix(), radix: 16)
         } else {
-            self.init(text, radix: 10)
+            self.init(string, radix: 10)
         }
     }
 }

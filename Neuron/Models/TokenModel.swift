@@ -40,12 +40,13 @@ class TokenModel: Object, Decodable {
     var logo: Logo?
 
     enum `Type`: String, Decodable {
+    enum TokenType: String, Decodable {
         case erc20
         case ethereum
         case nervos
         case nervosErc20
     }
-    var type: Type {
+    var type: TokenType {
         if isNativeToken {
             if chainId == NativeChainId.ethMainnetChainId {
                 return .ethereum
