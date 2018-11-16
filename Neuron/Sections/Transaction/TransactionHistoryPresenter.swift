@@ -30,8 +30,6 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         TransactionStatusManager.manager.addDelegate(delegate: self)
     }
 
-
-
     func reloadData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
         page = 1
@@ -88,29 +86,19 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
         let sentTransactions = self.sentTransactions
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
             // merge status
-            if let transaction = list.first(where: { (item) -> Bool in
-                return item.hash == sentTransaction.hash
-            }) {
-                // remove sentTransaction
-                self.sentTransactions.removeAll(where: { (entity) -> Bool in
-                    return entity.hash == sentTransaction.hash
-                })
+            if let transaction = list.first(where: { $0.hash == sentTransaction.hash }) {
+                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
                 transaction.status = sentTransaction.status
                 return false
             }
             if sentTransaction.date < sDate && sentTransaction.date > eDate {
-                // remove sentTransaction
-                self.sentTransactions.removeAll(where: { (entity) -> Bool in
-                    return entity.hash == sentTransaction.hash
-                })
+                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
                 return true
             } else {
                 return false
             }
         })
-        return (list + sentList).sorted(by: { (details1, details2) -> Bool in
-            return details1.date > details2.date
-        })
+        return (list + sentList).sorted(by: { $0.date > $1.date })
     }
 
     // MARK: - Load transactions

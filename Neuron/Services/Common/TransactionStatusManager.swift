@@ -85,14 +85,12 @@ class TransactionStatusManager: NSObject {
         var transactions: [TransactionDetails]?
         syncPerform {
             let ethereumNetwork = EthereumNetwork().host().absoluteString
-            transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
-                return transaction.from == walletAddress &&
-                    transaction.tokenType == tokenType &&
-                    transaction.contractAddress == tokenAddress &&
-                    (transaction.ethereumNetwork == "" || transaction.ethereumNetwork == ethereumNetwork)
-            }).map({ (sent) -> TransactionDetails in
-                return sent.transactionDetails()
-            })
+            transactions = self.realm.objects(SentTransaction.self).filter({
+                $0.from == walletAddress &&
+                $0.tokenType == tokenType &&
+                $0.contractAddress == tokenAddress &&
+                ($0.ethereumNetwork == "" || $0.ethereumNetwork == ethereumNetwork)
+            }).map({ $0.transactionDetails() })
         }
         return transactions ?? []
     }
@@ -129,18 +127,14 @@ class TransactionStatusManager: NSObject {
             switch result {
             case .failure:
                 debugLog("交易失败: \(sentTransaction.txHash)")
-                self.transactions.removeAll { (item) -> Bool in
-                    return item == sentTransaction
-                }
+                self.transactions.removeAll { $0 == sentTransaction }
                 try? self.realm.write {
                     sentTransaction.status = .failure
                 }
                 sentTransactionStatusChanged(transaction: sentTransaction.transactionDetails())
             case .success(let details):
                 debugLog("交易成功: \(sentTransaction.txHash)")
-                self.transactions.removeAll { (item) -> Bool in
-                    return item == sentTransaction
-                }
+                self.transactions.removeAll { $0 == sentTransaction }
                 try? self.realm.write {
                     sentTransaction.status = .success
                     realm.delete(sentTransaction)
