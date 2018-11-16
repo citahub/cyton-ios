@@ -16,18 +16,18 @@ class TokenModel: Object, Decodable {
     @objc dynamic var name = ""
     @objc dynamic var iconUrl: String? = ""
     @objc dynamic var address = ""
-    @objc dynamic var decimals = 0
+    @objc dynamic var decimals = 18
     @objc dynamic var symbol = ""
     @objc dynamic var chainName: String? = ""
-    @objc dynamic var chainidName = "" // chainId + name
     @objc dynamic var chainId = ""
     @objc dynamic var chainHosts = "" // manifest.json chainSet.values.first
+    @objc dynamic var identifier = UUID().uuidString // primary key == UUID
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false
 
     override class func primaryKey() -> String? {
-        return "chainidName"
+        return "identifier"
     }
 
     override static func ignoredProperties() -> [String] {
@@ -80,7 +80,7 @@ class TokenModel: Object, Decodable {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        return lhs.address == rhs.address
+        return lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
 
     override func isEqual(_ object: Any?) -> Bool {

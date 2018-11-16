@@ -18,11 +18,11 @@ class AssetViewModel: NSObject {
         var tokenArray: [TokenModel] = []
 
         let appModel = WalletRealmTool.getCurrentAppModel()
-        for tModel in appModel.extraTokenList {
+        for tokenModel in appModel.extraTokenList {
             try? WalletRealmTool.realm.write {
-                WalletRealmTool.realm.add(tModel, update: true)
+                WalletRealmTool.addTokenModel(tokenModel: tokenModel)
             }
-            tokenArray.append(tModel)
+            tokenArray.append(tokenModel)
         }
 
         let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
@@ -30,7 +30,6 @@ class AssetViewModel: NSObject {
         guard let tokens = try? JSONDecoder().decode([TokenModel].self, from: jsonData) else { return [] }
 
         for token in tokens {
-            token.chainidName = token.name
             token.iconUrl = token.logo?.src ?? ""
             tokenArray.append(token)
         }
@@ -42,19 +41,19 @@ class AssetViewModel: NSObject {
         return appModel.currentWallet?.selectTokenList
     }
 
-    func addSelectToken(tokenM: TokenModel) {
+    func addSelectToken(tokenModel: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppModel()
         try? WalletRealmTool.realm.write {
-            WalletRealmTool.realm.add(tokenM, update: true)
-            appModel.currentWallet?.selectTokenList.append(tokenM)
+            WalletRealmTool.addTokenModel(tokenModel: tokenModel)
+            appModel.currentWallet?.selectTokenList.append(tokenModel)
         }
     }
 
-    func deleteSelectedToken(tokenM: TokenModel) {
+    func deleteSelectedToken(tokenModel: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppModel()
-        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
+        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenModel.address)
         try? WalletRealmTool.realm.write {
-            WalletRealmTool.realm.add(tokenM, update: true)
+            WalletRealmTool.addTokenModel(tokenModel: tokenModel)
             filterResult?.forEach({ (tm) in
                 if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
                     appModel.currentWallet?.selectTokenList.remove(at: index)

@@ -11,6 +11,7 @@ import WebKit
 
 class CommonWebViewController: UIViewController, WKNavigationDelegate {
     var url: URL!
+    var webViewProgressObservation: NSKeyValueObservation!
 
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: CGRect.zero, configuration: WKWebViewConfiguration())
@@ -31,7 +32,7 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
         view.addSubview(progressView)
         webView.load(URLRequest.init(url: url))
 
-        _ = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
+        webViewProgressObservation = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
             guard let self = self else { return }
             self.progressView.alpha = 1.0
             self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
@@ -53,5 +54,9 @@ class CommonWebViewController: UIViewController, WKNavigationDelegate {
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
+    }
+
+    deinit {
+        webViewProgressObservation.invalidate()
     }
 }
