@@ -33,8 +33,7 @@ class AppChainTransactionHistory {
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "page": page,
-            "perPage": pageSize,
-            "valueFormat": "decimal"
+            "perPage": pageSize
         ]
         return try Promise<[AppChainTransactionDetails]>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in

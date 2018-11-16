@@ -53,24 +53,24 @@ class EthereumTransactionDetails: TransactionDetails {
             date = Date(timeIntervalSince1970: TimeInterval(value) ?? 0.0)
         }
         if let value = try? values.decode(String.self, forKey: .nonce) {
-            nonce = BigUInt(value) ?? 0
+            nonce = BigUInt(string: value) ?? 0
         }
         blockHash = (try? values.decode(String.self, forKey: .blockHash)) ?? ""
         contractAddress = (try? values.decode(String.self, forKey: .contractAddress)) ?? ""
         if let value = try? values.decode(String.self, forKey: .transactionIndex) {
-            transactionIndex = BigUInt(value) ?? 0
+            transactionIndex = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .gas) {
-            gas = BigUInt(value) ?? 0
+            gas = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .gasPrice) {
-            gasPrice = BigUInt(value) ?? 0
+            gasPrice = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .gasUsed) {
-            gasUsed = BigUInt(value) ?? 0
+            gasUsed = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .cumulativeGasUsed) {
-            cumulativeGasUsed = BigUInt(value) ?? 0
+            cumulativeGasUsed = BigUInt(string: value) ?? 0
         }
         input = (try? values.decode(String.self, forKey: .input)) ?? ""
         if let value = try? values.decode(String.self, forKey: .confirmations) {

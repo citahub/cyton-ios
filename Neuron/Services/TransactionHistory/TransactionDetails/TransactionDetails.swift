@@ -48,11 +48,7 @@ class TransactionDetails: Codable {
         if let value = try? values.decode(UInt.self, forKey: .value) {
             self.value = BigUInt(value)
         } else if let value = try? values.decode(String.self, forKey: .value) {
-            if value.hasPrefix("0x") {
-                self.value = BigUInt(value, radix: 16) ?? 0
-            } else {
-                self.value = BigUInt(value) ?? 0
-            }
+            self.value = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(TimeInterval.self, forKey: .timestamp) {
             date = Date(timeIntervalSince1970: value / 1000.0)

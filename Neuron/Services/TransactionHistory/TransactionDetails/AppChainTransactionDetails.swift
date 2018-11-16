@@ -36,10 +36,10 @@ class AppChainTransactionDetails: TransactionDetails {
         let values = try decoder.container(keyedBy: AppChainCodingKeys.self)
         content = (try? values.decode(String.self, forKey: .content)) ?? ""
         if let value = try? values.decode(String.self, forKey: .gasUsed) {
-            gasUsed = BigUInt(value) ?? 0
+            gasUsed = BigUInt(string: value) ?? 0
         }
         if let value = try? values.decode(String.self, forKey: .quotaUsed) {
-            quotaUsed = BigUInt(value) ?? 0
+            quotaUsed = BigUInt(string: value) ?? 0
         }
         chainId = (try? values.decode(Int.self, forKey: .chainId)) ?? 0
         chainName = (try? values.decode(String.self, forKey: .chainName)) ?? ""
