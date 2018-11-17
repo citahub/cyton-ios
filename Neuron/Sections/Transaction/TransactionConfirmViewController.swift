@@ -58,8 +58,8 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillShow(node:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyBoardWillHide(node:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -89,15 +89,8 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     }
 
     func confirmWalletPassword(password: String) {
-        if let paramBuilder = paramBuilder {
-            Toast.showHUD()
-            DispatchQueue.global().async {
-                DispatchQueue.main.async {
-                    // TODO: send tx
-                    //self.paramBuilder.sendTransaction(password: password)
-                    Toast.hideHUD()
-                }
-            }
+        if paramBuilder != nil {
+            sendTransaction()
         } else {
             delegate?.transactionConfirmWalletPassword(self, password: password)
         }
@@ -109,12 +102,12 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
         contentViewController = controller
     }
 
-    @objc func keyBoardWillShow(node: Notification) {
-        let boundsValue = node.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
+    @objc func keyboardWillShow(notification: Notification) {
+        let boundsValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue
         guard let bounds = boundsValue?.cgRectValue else { return }
-        let durationValue = node.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
+        let durationValue = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
         guard let duration = durationValue?.doubleValue else { return }
-        let curveValue = node.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let curveValue = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
         guard let curve = curveValue?.intValue else { return }
         let offset = view.bounds.size.height - contentView.bounds.size.height - bounds.size.height - contentView.frame.origin.y
         if duration > 0 {
@@ -126,15 +119,28 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
         }
     }
 
-    @objc func keyBoardWillHide(node: Notification) {
-        let durationValue = node.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
+    @objc func keyboardWillHide(notification: Notification) {
+        let durationValue = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber
         guard let duration = durationValue?.doubleValue else { return }
-        let curveValue = node.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
+        let curveValue = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey] as? NSNumber
         guard let curve = curveValue?.intValue else { return }
         let options = UIView.AnimationOptions(rawValue: UInt(curve << 16))
         UIView.animate(withDuration: duration, delay: 0, options: options, animations: {
             self.contentView.transform = CGAffineTransform.identity
         }, completion: nil)
+    }
+}
+
+private extension TransactionConfirmViewController {
+    func sendTransaction() {
+        Toast.showHUD()
+        DispatchQueue.global().async {
+            DispatchQueue.main.async {
+                // TODO: send tx
+                //self.paramBuilder.sendTransaction(password: password)
+                Toast.hideHUD()
+            }
+        }
     }
 }
 
@@ -159,7 +165,7 @@ class TransactionConfirmInfoViewController: UIViewController {
             amountLabel.attributedText = attributedText
             fromAddressLabel.text = paramBuilder.from
             toAddressLabel.text = paramBuilder.to
-            gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)" + "\(paramBuilder.nativeCoinSymbol)"
+            gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)\(paramBuilder.nativeCoinSymbol)"
         }
     }
 

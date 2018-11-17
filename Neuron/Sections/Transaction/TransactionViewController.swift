@@ -112,7 +112,7 @@ class TransactionViewController: UITableViewController {
     }
 
     private func updateGasCost() {
-        gasCostLabel.text = paramBuilder.txFeeNatural.decimal + " \(token.symbol)"
+        gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)\(paramBuilder.nativeCoinSymbol)"
     }
 }
 
