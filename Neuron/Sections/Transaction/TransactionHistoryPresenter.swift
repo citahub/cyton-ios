@@ -31,7 +31,9 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
-        guard loading == false else { return }
+        guard !loading else {
+            return 
+        }
         page = 1
         hasMoreData = true
         loadMoreData(completion: completion)
