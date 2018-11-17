@@ -41,7 +41,9 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     func loadMoreData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
-        guard hasMoreData else { return }
+        guard hasMoreData else {
+           return
+        }
         loading = true
         DispatchQueue.global().async {
             do {
