@@ -29,17 +29,13 @@ class TransactionStatusManager: NSObject {
     private var transactions = [SentTransaction]()
 
     private override init() {
-        let document = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0], isDirectory: true)
-        let fileURL = document.appendingPathComponent("transaction_history")
-        try? FileManager.default.removeItem(at: fileURL)
         delegates = NSHashTable(options: .weakMemory)
         super.init()
 
         createTaskThread()
         perform {
-            self.realm = try! Realm(fileURL: fileURL)
-            let objects = self.realm.objects(SentTransaction.self)
-            self.transactions = objects.filter({ (transaction) -> Bool in
+            self.realm = RealmHelper().realm
+            self.transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
                 return transaction.status == .pending
             })
         }
