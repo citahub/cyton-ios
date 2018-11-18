@@ -42,7 +42,6 @@ class TransactionStatusManager: NSObject {
             self.transactions = objects.filter({ (transaction) -> Bool in
                 return transaction.status == .pending
             })
-            self.debugLog("加载需要检查状态的交易: \(self.transactions.count)")
         }
         perform {
             self.checkSentTransactionStatus()
@@ -67,7 +66,6 @@ class TransactionStatusManager: NSObject {
                 self.realm.add(transaction)
             }
             self.transactions.append(transaction)
-            self.debugLog("新增交易 \(transaction.txHash)")
             let details = transaction.transactionDetails()
             for delegate in self.delegates.allObjects {
                 if let delegate = delegate as? TransactionStatusManagerDelegate {
@@ -101,7 +99,6 @@ class TransactionStatusManager: NSObject {
     @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.transactions.count > 0 else {
-            debugLog("全部交易状态检查完成")
             return
         }
         guard Thread.current == thread else {
@@ -112,7 +109,6 @@ class TransactionStatusManager: NSObject {
         let transactions = self.transactions
         for sentTransaction in transactions {
             let result: TransactionStateResult
-            debugLog("开始检查交易状态: \(sentTransaction.txHash)")
             switch sentTransaction.tokenType {
             case .ethereum:
                 result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
@@ -126,14 +122,12 @@ class TransactionStatusManager: NSObject {
 
             switch result {
             case .failure:
-                debugLog("交易失败: \(sentTransaction.txHash)")
                 self.transactions.removeAll { $0 == sentTransaction }
                 try? self.realm.write {
                     sentTransaction.status = .failure
                 }
                 sentTransactionStatusChanged(transaction: sentTransaction.transactionDetails())
             case .success(let details):
-                debugLog("交易成功: \(sentTransaction.txHash)")
                 self.transactions.removeAll { $0 == sentTransaction }
                 try? self.realm.write {
                     sentTransaction.status = .success
@@ -141,7 +135,7 @@ class TransactionStatusManager: NSObject {
                 }
                 sentTransactionStatusChanged(transaction: details)
             case .pending:
-                debugLog("交易进行中: \(sentTransaction.txHash)")
+                break
             }
         }
         perform(#selector(checkSentTransactionStatus), with: nil, afterDelay: timeInterval)
@@ -207,13 +201,5 @@ class TransactionStatusManager: NSObject {
             RunLoop.current.run()
         }
         group.wait()
-    }
-
-    // MARK: - Utils
-    private var isEnableDebugLog = false
-    private func debugLog(_ text: String) {
-        if isEnableDebugLog {
-            print("[TransactionStatus] - \(text)")
-        }
     }
 }
