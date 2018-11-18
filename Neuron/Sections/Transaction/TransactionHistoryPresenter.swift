@@ -80,12 +80,13 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     // MARK: - Merge
     private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
-        let sDate: Date = self.transactions.first?.date ?? Date.distantFuture
-        let eDate: Date
+        // Date range
+        let maxDate: Date = self.transactions.first?.date ?? Date.distantFuture
+        let minDate: Date
         if self.hasMoreData {
-            eDate = list.last?.date ?? Date.distantPast
+            minDate = list.last?.date ?? Date.distantPast
         } else {
-            eDate = Date.distantPast
+            minDate = Date.distantPast
         }
         let sentTransactions = self.sentTransactions
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
@@ -95,7 +96,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 transaction.status = sentTransaction.status
                 return false
             }
-            if sentTransaction.date < sDate && sentTransaction.date > eDate {
+            if sentTransaction.date < maxDate && sentTransaction.date > minDate {
                 self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
                 return true
             } else {
