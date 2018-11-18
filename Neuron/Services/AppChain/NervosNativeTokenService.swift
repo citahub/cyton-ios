@@ -26,7 +26,6 @@ struct NervosNativeTokenService {
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NativeDecimals.nativeTokenDecimals
-                    tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     completion(AppChainServiceResult.success(tokenModel))
                 }
             } catch let error {

@@ -57,7 +57,6 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         guard let tokens = try? JSONDecoder().decode([TokenModel].self, from: jsonData) else { return [] }
 
         for token in tokens {
-            token.chainidName = token.name
             token.iconUrl = token.logo?.src ?? ""
             tokenArray.append(token)
         }
@@ -82,11 +81,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         cell.addressLabel.text = tokenModel.address
         cell.nameLabel.text = tokenModel.symbol
         cell.selectionStyle = .none
-        if selectAddressArray.contains(tokenModel.address) {
-            cell.isSelected = true
-        } else {
-            cell.isSelected = false
-        }
+        cell.isSelected = selectAddressArray.contains(tokenModel.address)
 
         return cell
     }

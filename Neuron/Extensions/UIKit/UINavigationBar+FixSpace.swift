@@ -17,10 +17,10 @@ extension UINavigationBar {
 
     @objc func swizzle_layoutSubviews() {
         swizzle_layoutSubviews()
-        layoutMargins = .zero
+        layoutMargins = UIEdgeInsets(top: 8, left: 0, bottom: 8, right: 8)
         for view in subviews {
             if NSStringFromClass(view.classForCoder).contains("ContentView") {
-                view.layoutMargins = UIEdgeInsets.zero
+                view.layoutMargins = UIEdgeInsets(top: view.layoutMargins.top, left: 0, bottom: view.layoutMargins.bottom, right: view.layoutMargins.right)
             }
         }
     }

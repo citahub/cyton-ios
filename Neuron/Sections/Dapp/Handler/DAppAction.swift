@@ -50,7 +50,6 @@ struct DAppAction {
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NativeDecimals.nativeTokenDecimals
-                    tokenModel.chainidName = metaData.chainName + metaData.chainId.description
                     tokenModel.chainHosts = chainNode
                     self.saveToken(model: tokenModel)
                 }
@@ -61,9 +60,9 @@ struct DAppAction {
 
     private func saveToken(model: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppModel()
-        let alreadyContain = appModel.nativeTokenList.contains(where: {$0.chainidName == model.chainidName})
+        let alreadyContain = appModel.nativeTokenList.contains(where: {$0 == model})
         try? WalletRealmTool.realm.write {
-            WalletRealmTool.realm.add(model, update: true)
+            WalletRealmTool.addTokenModel(tokenModel: model)
             if !alreadyContain {
                 appModel.nativeTokenList.append(model)
             }
