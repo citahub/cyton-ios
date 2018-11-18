@@ -15,10 +15,12 @@ target 'Neuron' do
   pod 'IQKeyboardManagerSwift'
   pod 'EFQRCode'
   pod 'RSKPlaceholderTextView', "~> 4.0.0"
+  pod 'BulletinBoard', git: "https://github.com/alexaubry/BulletinBoard", commit: "7086607d3476cea29cd77a65d13df5c8ed0da52e" # 3.0.0
   pod 'Toast-Swift', "~> 4.0.0"
   pod 'PullToRefresher', "~> 3.1"
   pod 'IGIdenticon', "~> 0.6"
   pod 'QRCodeReader.swift'
+
   target 'NeuronTests' do
     inherit! :search_paths
     # Pods for testing
