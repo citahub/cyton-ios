@@ -15,7 +15,7 @@ class RealmHelper {
         realm.autorefresh = true
         return realm
     }
-    private static var schemaVersion: UInt64 = 3
+    private static var schemaVersion: UInt64 = 4
 
     static func configureRealm() {
         var config = Realm.Configuration()
