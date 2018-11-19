@@ -15,8 +15,8 @@ class PasswordPageItem: BLTNPageItem {
     var errorMessage: String? {
         didSet {
             if let message = errorMessage {
-                descriptionLabel!.textColor = .red
-                descriptionLabel!.text = message
+                descriptionLabel?.textColor = .red
+                descriptionLabel?.text = message
             } else {
                 // How to revert to default style?
             }
@@ -32,8 +32,10 @@ class PasswordPageItem: BLTNPageItem {
     }
 
     override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
-        passwordField = interfaceBuilder.makeTextField(placeholder: "请输入钱包密码", returnKey: .done, delegate: self)
-        passwordField.isSecureTextEntry = true
+        if passwordField == nil {
+            passwordField = interfaceBuilder.makeTextField(placeholder: "请输入钱包密码", returnKey: .done, delegate: self)
+            passwordField.isSecureTextEntry = true
+        }
         return [passwordField]
     }
 

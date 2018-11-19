@@ -29,23 +29,16 @@ class SendTransactionViewController: UITableViewController {
         return TxSummaryPageItem.create()
     }()
     private lazy var bulletinManager: BLTNItemManager = {
-        let passwordPageItem = PasswordPageItem.create()
-
+        let passwordPageItem = createPasswordPageItem()
         summaryPageItem.next = passwordPageItem
         summaryPageItem.actionHandler = { item in
             item.manager?.displayNextItem()
-        }
-
-        passwordPageItem.actionHandler = { [weak self] item in
-            item.manager?.displayActivityIndicator()
-            self?.sendTransaction(password: passwordPageItem.passwordField.text!)
         }
 
         return BLTNItemManager(rootItem: summaryPageItem)
     }()
 
     var token: TokenModel!
-    var confirmViewController: TransactionConfirmViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,11 +53,7 @@ class SendTransactionViewController: UITableViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TransactionConfirmViewController" {
-            let controller = segue.destination as! TransactionConfirmViewController
-            controller.paramBuilder = paramBuilder
-            confirmViewController = controller
-        } else if segue.identifier == "TransactionGasPriceViewController" {
+        if segue.identifier == "TransactionGasPriceViewController" {
             let controller = segue.destination as! TransactionGasPriceViewController
             controller.param = paramBuilder
         }
@@ -116,22 +105,52 @@ class SendTransactionViewController: UITableViewController {
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)\(paramBuilder.nativeCoinSymbol)"
     }
 
-    private func sendTransaction(password: String) {
-        DispatchQueue.global().async {
-            // TODO: send tx for real
-            Thread.sleep(forTimeInterval: 3)
-            DispatchQueue.main.async {
-                let successPageItem = SuccessPageItem.create(title: "交易已发送")
-                successPageItem.actionHandler = { item in
-                    item.manager?.dismissBulletin(animated: true)
-                }
-                self.bulletinManager.push(item: successPageItem)
+    private func createPasswordPageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create()
+
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
             }
+            self.sendTransaction(password: passwordPageItem.passwordField.text!)
         }
+
+        return passwordPageItem
     }
 }
 
-extension SendTransactionViewController {
+// MARK: - Send Transaction
+
+private extension SendTransactionViewController {
+    func sendTransaction(password: String) {
+        DispatchQueue.global().async {
+            do {
+                // TODO: send tx for real
+                Thread.sleep(forTimeInterval: 1)
+                throw SendTransactionError.invalidPassword
+
+                DispatchQueue.main.async {
+                    let successPageItem = SuccessPageItem.create(title: "交易已发送")
+                    successPageItem.actionHandler = { item in
+                        item.manager?.dismissBulletin(animated: true)
+                    }
+                    self.bulletinManager.push(item: successPageItem)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    self.bulletinManager.hideActivityIndicator()
+                    /// HACKHACK: Possible a bug of BulletinBoard, but after hiding activity indicator
+                    /// the previous page item's views stop responding to update. To get around that
+                    /// create a new item. Note this would leave more than one password item in the stack.
+                    let passwordPageItem = self.createPasswordPageItem()
+                    self.bulletinManager.push(item: passwordPageItem)
+                    passwordPageItem.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+
     var isEffectiveTransferInfo: Bool {
         guard Address.isValid(paramBuilder.to) && paramBuilder.to != "0x" else {
             Toast.showToast(text: "您的地址错误，请重新输入")

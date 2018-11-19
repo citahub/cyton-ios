@@ -10,73 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--请输入钱包密码-->
-        <scene sceneID="Nme-k7-AVZ">
-            <objects>
-                <viewController storyboardIdentifier="TransactionConfirmSendViewController" title="请输入钱包密码" id="g2l-q2-SDL" customClass="TransactionConfirmSendViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="RLJ-O2-wky">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="输入钱包密码" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-JL-thW">
-                                <rect key="frame" x="24" y="60" width="327" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="n3X-0m-32q"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                            </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Il-Ns-hLe">
-                                <rect key="frame" x="15" y="94" width="345" height="1"/>
-                                <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="bdT-td-URi"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q5c-ng-UKo">
-                                <rect key="frame" x="15" y="246" width="345" height="44"/>
-                                <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="VB9-qe-SIu"/>
-                                </constraints>
-                                <state key="normal" title="确认发送">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="confirm:" destination="g2l-q2-SDL" eventType="touchUpInside" id="Sxq-xI-a4L"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="q5c-ng-UKo" firstAttribute="leading" secondItem="c1s-QR-n1A" secondAttribute="leading" constant="15" id="HKA-Zi-I7h"/>
-                            <constraint firstItem="0Il-Ns-hLe" firstAttribute="leading" secondItem="c1s-QR-n1A" secondAttribute="leading" constant="15" id="KL5-Cv-hMB"/>
-                            <constraint firstItem="c1s-QR-n1A" firstAttribute="bottom" secondItem="q5c-ng-UKo" secondAttribute="bottom" constant="20" id="KaB-GO-WQX"/>
-                            <constraint firstItem="dc9-JL-thW" firstAttribute="leading" secondItem="c1s-QR-n1A" secondAttribute="leading" constant="24" id="O5K-F9-BiF"/>
-                            <constraint firstItem="c1s-QR-n1A" firstAttribute="trailing" secondItem="dc9-JL-thW" secondAttribute="trailing" constant="24" id="XFC-u8-i8O"/>
-                            <constraint firstItem="0Il-Ns-hLe" firstAttribute="top" secondItem="dc9-JL-thW" secondAttribute="bottom" constant="4" id="bPn-Bb-Qg8"/>
-                            <constraint firstItem="dc9-JL-thW" firstAttribute="top" secondItem="c1s-QR-n1A" secondAttribute="top" constant="60" id="bcJ-u4-9nl"/>
-                            <constraint firstItem="c1s-QR-n1A" firstAttribute="trailing" secondItem="q5c-ng-UKo" secondAttribute="trailing" constant="15" id="j99-TN-KtG"/>
-                            <constraint firstItem="c1s-QR-n1A" firstAttribute="trailing" secondItem="0Il-Ns-hLe" secondAttribute="trailing" constant="15" id="upY-b6-dQe"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="c1s-QR-n1A"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="375" height="310"/>
-                    <size key="freeformSize" width="375" height="310"/>
-                    <connections>
-                        <outlet property="passwordTextField" destination="dc9-JL-thW" id="7vc-93-HJZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1gE-2m-gLt" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-994" y="775"/>
-        </scene>
         <!--Transaction Gas Price View Controller-->
         <scene sceneID="2WD-5r-qQO">
             <objects>
@@ -259,7 +192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOW-6d-luO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="639" y="1209"/>
+            <point key="canvasLocation" x="660" y="1045"/>
         </scene>
         <!--Send Transaction View Controller-->
         <scene sceneID="fTm-pa-XUQ">
