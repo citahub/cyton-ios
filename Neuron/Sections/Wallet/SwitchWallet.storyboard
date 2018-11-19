@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="wZu-qn-7b6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="CMR-zg-SbC">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select Wallet Controller-->
+        <!--钱包切换-->
         <scene sceneID="WFs-Gs-eYU">
             <objects>
                 <tableViewController storyboardIdentifier="SelectWalletController" id="CMR-zg-SbC" customClass="SelectWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
@@ -17,12 +17,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="pDc-80-Z17">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="pDc-80-Z17">
                             <rect key="frame" x="0.0" y="161.5" width="375" height="60"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dy3-G8-SMr">
-                                    <rect key="frame" x="15" y="0.0" width="345" height="60"/>
+                                    <rect key="frame" x="15" y="0.0" width="345" height="0.0"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <state key="normal" image="add_wallet"/>
                                     <userDefinedRuntimeAttributes>
@@ -147,32 +147,9 @@
                             <outlet property="delegate" destination="CMR-zg-SbC" id="7B5-rf-LZY"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="NDu-vH-aKE">
-                        <nil key="title"/>
-                        <view key="titleView" contentMode="scaleToFill" id="Gwp-Zq-pQv">
-                            <rect key="frame" x="67.5" y="0.0" width="240" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRy-sk-5Eu">
-                                    <rect key="frame" x="0.0" y="0.0" width="240" height="44"/>
-                                    <state key="normal" image="pull_down"/>
-                                    <connections>
-                                        <segue destination="4ct-TX-3Ef" kind="unwind" unwindAction="unwindWithSeque:" id="Pny-7E-GUC"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="cRy-sk-5Eu" secondAttribute="trailing" id="7jU-Nm-O0q"/>
-                                <constraint firstItem="cRy-sk-5Eu" firstAttribute="top" secondItem="Gwp-Zq-pQv" secondAttribute="top" id="ELf-q0-PSh"/>
-                                <constraint firstItem="cRy-sk-5Eu" firstAttribute="leading" secondItem="Gwp-Zq-pQv" secondAttribute="leading" id="bAe-Ah-uJa"/>
-                                <constraint firstAttribute="bottom" secondItem="cRy-sk-5Eu" secondAttribute="bottom" id="dJ0-Bs-fy3"/>
-                            </constraints>
-                        </view>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="钱包切换" id="NDu-vH-aKE"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZN-oJ-kzK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="4ct-TX-3Ef" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="908" y="146.17691154422789"/>
         </scene>
@@ -198,6 +175,5 @@
     </scenes>
     <resources>
         <image name="add_wallet" width="346" height="48"/>
-        <image name="pull_down" width="70" height="26"/>
     </resources>
 </document>

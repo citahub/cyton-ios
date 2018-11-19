@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NFk-Vr-nsf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NFk-Vr-nsf">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -206,7 +206,7 @@
                 <barButtonItem image="switchWallet" id="C0H-hr-lhb">
                     <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
-                        <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="uOJ-eb-Ope"/>
+                        <segue destination="ZGv-cZ-bkz" kind="push" identifier="switchWallet" id="uOJ-eb-Ope"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Item" image="walletQRCode" id="26M-ch-g5f">
@@ -231,7 +231,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="4Yi-Oq-ytW"/>
+                                <segue destination="ZGv-cZ-bkz" kind="push" identifier="switchWallet" id="4Yi-Oq-ytW"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3S1-FO-geS">
@@ -254,7 +254,7 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                             <connections>
-                                <segue destination="ZGv-cZ-bkz" kind="presentation" identifier="switchWallet" id="c3u-Wj-7bo"/>
+                                <segue destination="ZGv-cZ-bkz" kind="push" identifier="switchWallet" id="c3u-Wj-7bo"/>
                             </connections>
                         </button>
                     </subviews>
@@ -332,7 +332,9 @@
         <!--SwitchWallet-->
         <scene sceneID="YQ8-C5-GWQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="SwitchWallet" id="ZGv-cZ-bkz" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="SwitchWallet" id="ZGv-cZ-bkz" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="7YX-Hs-Xlq"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="spe-LV-xNx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1882" y="-411"/>
@@ -354,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="7dH-r2-K0B">
-                            <rect key="frame" x="0.0" y="98" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="666" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -433,7 +435,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="YKM-Jx-bg8">
-                            <rect key="frame" x="0.0" y="98" width="375" height="46"/>
+                            <rect key="frame" x="0.0" y="621" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-4c-xcQ">
@@ -571,6 +573,6 @@
         <image name="wallet_detail" width="22" height="4"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="4Yi-Oq-ytW"/>
+        <segue reference="c3u-Wj-7bo"/>
     </inferredMetricsTieBreakers>
 </document>
