@@ -80,8 +80,7 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
             requestPaymentViewController.appModel = appModel
         }
         if segue.identifier == "switchWallet" {
-            let navigationController = segue.destination as! UINavigationController
-            let selectWalletController = navigationController.topViewController as! SelectWalletController
+            let selectWalletController = segue.destination as! SelectWalletController
             selectWalletController.delegate = self
         }
     }

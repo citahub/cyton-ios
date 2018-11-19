@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-enum TokenType {
+enum TokenType: String {
     case ether
     case erc20
     case appChain

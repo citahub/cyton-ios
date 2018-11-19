@@ -52,7 +52,10 @@ class AppChainTxSender {
             version: UInt32(0)
         )
         let signed = try sign(transaction: transaction, password: password)
-        return try appChain.rpc.sendRawTransaction(signedTx: signed)
+          let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
+          let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction)
+          TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+          return txHash
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {

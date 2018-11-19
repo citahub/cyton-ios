@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
+        _ = TransactionStatusManager.manager
         return true
     }
 

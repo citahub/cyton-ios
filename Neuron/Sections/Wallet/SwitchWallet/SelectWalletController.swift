@@ -63,6 +63,6 @@ class SelectWalletController: UITableViewController {
             appModel.currentWallet = walletModel
         }
         delegate?.selectWalletController(self, didSelectWallet: walletModel)
-        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
     }
 }

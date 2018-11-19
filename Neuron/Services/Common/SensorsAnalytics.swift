@@ -23,7 +23,7 @@ class SensorsAnalytics {
         #else
         sensors = SensorsAnalyticsSDK.sharedInstance(withServerURL: "https://banana.cryptape.com:8106/sa?project=production", andDebugMode: .off)
         #endif
-
+        sensors.enableLog(false)
         sensors.registerSuperProperties(["platformType": "iOS", "ip_id": getIpId(), "$ip": ""])
         let eventType: SensorsAnalyticsAutoTrackEventType = [
             .eventTypeAppStart,
@@ -32,7 +32,6 @@ class SensorsAnalytics {
             .eventTypeAppClick
         ]
         sensors.enableAutoTrack(eventType)
-        sensors.enableLog(false)
         sensors.enableTrackGPSLocation(false)
         sensors.enableTrackScreenOrientation(false)
         sensors.login(getUserId())

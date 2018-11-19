@@ -98,4 +98,9 @@ class BigUIntExtensionTests: XCTestCase {
             BigUInt("20500000000")!.weiToGwei()
         )
     }
+
+    func testStringToBigUInt() {
+        XCTAssertEqual(BigUInt(string: "96016"), 96016)
+        XCTAssertEqual(BigUInt(string: "0x96016"), 614422)
+    }
 }

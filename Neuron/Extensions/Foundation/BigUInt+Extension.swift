@@ -61,4 +61,12 @@ extension BigUInt {
     func weiToGwei() -> Double {
         return Double.fromAmount(self, decimals: 9)
     }
+
+    init?(string: String) {
+        if string.hasPrefix("0x") {
+            self.init(string.removeHexPrefix(), radix: 16)
+        } else {
+            self.init(string)
+        }
+    }
 }
