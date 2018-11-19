@@ -49,6 +49,10 @@ class EthereumTxSender {
         transaction.transaction.value = value
 
         let result = try transaction.sendPromise(password: password).wait()
+
+        let sentTransaction = SentTransaction(tokenType: .ethereum, from: from, sendingResult: result)
+        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+
         return result.hash
     }
 
@@ -89,6 +93,10 @@ class EthereumTxSender {
             }
 
             let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
+
+            let sentTransaction = SentTransaction(contractAddress: contractAddress, tokenType: .erc20, from: from, sendingResult: result)
+            TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+
             return result.hash
         } catch {
             throw SendTransactionError.createTransactionIssue

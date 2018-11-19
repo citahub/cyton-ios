@@ -15,4 +15,8 @@ struct AppChainNetwork {
     static func appChain(url: URL = URL(string: defaultNode)!) -> AppChain {
         return AppChain(provider: HTTPProvider(url)!)
     }
+
+    func host() -> URL {
+        return URL(string: "https://microscope.cryptape.com:8888")!
+    }
 }
