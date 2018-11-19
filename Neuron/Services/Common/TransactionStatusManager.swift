@@ -25,20 +25,11 @@ protocol TransactionStatusManagerDelegate: NSObjectProtocol {
 
 class TransactionStatusManager: NSObject {
     static let manager = TransactionStatusManager()
-    private var realm: Realm!
     private var transactions = [SentTransaction]()
 
     private override init() {
         delegates = NSHashTable(options: .weakMemory)
         super.init()
-
-        createTaskThread()
-        perform {
-            self.realm = RealmHelper().realm
-            self.transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
-                return transaction.status == .pending
-            })
-        }
         perform {
             self.checkSentTransactionStatus()
         }
@@ -76,17 +67,13 @@ class TransactionStatusManager: NSObject {
 
     // MARK: -
     func getTransactions(walletAddress: String, tokenType: TokenModel.TokenType, tokenAddress: String) -> [TransactionDetails] {
-        var transactions: [TransactionDetails]?
-        syncPerform {
-            let ethereumNetwork = EthereumNetwork().host().absoluteString
-            transactions = self.realm.objects(SentTransaction.self).filter({
-                $0.from == walletAddress &&
+        let ethereumNetwork = EthereumNetwork().host().absoluteString
+        return self.realm.objects(SentTransaction.self).filter({
+            $0.from == walletAddress &&
                 $0.tokenType == tokenType &&
                 $0.contractAddress == tokenAddress &&
                 ($0.ethereumNetwork == "" || $0.ethereumNetwork == ethereumNetwork)
-            }).map({ $0.transactionDetails() })
-        }
-        return transactions ?? []
+        }).map({ $0.transactionDetails() })
     }
 
     // MARK: - Check transaction status
@@ -95,6 +82,7 @@ class TransactionStatusManager: NSObject {
     @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.transactions.count > 0 else {
+            deleteTaskThread()
             return
         }
         guard Thread.current == thread else {
@@ -147,7 +135,8 @@ class TransactionStatusManager: NSObject {
     }
 
     // MARK: - Thread
-    private var thread: Thread!
+    private var thread: Thread?
+    private var runLoop: RunLoop?
     private typealias Block = () -> Void
     private class Task: NSObject {
         let block: Block
@@ -157,45 +146,63 @@ class TransactionStatusManager: NSObject {
     }
 
     @objc private func perform(_ block: @escaping Block) {
+        let thread = getTaskThread()
         if Thread.current == thread {
             block()
             return
         }
         let task = Task(block: block)
         let sel = #selector(TransactionStatusManager.taskHandler(task:))
-        self.perform(sel, on: self.thread, with: task, waitUntilDone: false)
+        self.perform(sel, on: thread, with: task, waitUntilDone: false)
     }
 
     @objc private func syncPerform(_ block: @escaping Block) {
+        let thread = getTaskThread()
         if Thread.current == thread {
             block()
             return
         }
         let task = Task(block: block)
         let sel = #selector(TransactionStatusManager.taskHandler(task:))
-        self.perform(sel, on: self.thread, with: task, waitUntilDone: true)
+        self.perform(sel, on: thread, with: task, waitUntilDone: true)
     }
 
     @objc private func taskHandler(task: Task) {
         task.block()
     }
 
-    //    func value<T>(_ block: (TransactionStatusManager) -> T) -> T {
-    //        let value = block(self)
-    //        return value
-    //    }
-
-    private func createTaskThread() {
+    private func getTaskThread() -> Thread {
+        if let thread = thread {
+            return thread
+        }
         let group = DispatchGroup()
         let queue = DispatchQueue(label: "")
         group.enter()
         queue.async {
             self.thread = Thread.current
+            self.runLoop = RunLoop.current
             Thread.current.name = String(describing: TransactionStatusManager.self)
             RunLoop.current.add(NSMachPort(), forMode: .default)
             group.leave()
-            RunLoop.current.run()
+            CFRunLoopRun()
         }
         group.wait()
+        perform {
+            self.transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
+                return transaction.status == .pending
+            })
+        }
+        return thread!
+    }
+
+    private func deleteTaskThread() {
+        self.thread = nil
+        if let runloop = self.runLoop?.getCFRunLoop() {
+            CFRunLoopStop(runloop)
+        }
+    }
+
+    private var realm: Realm! {
+        return RealmHelper().realm
     }
 }
