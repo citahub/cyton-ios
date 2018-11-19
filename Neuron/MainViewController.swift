@@ -9,13 +9,12 @@
 import UIKit
 
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         delegate = self
 
-        applyBarStyle()
+        applyStyle()
 
         determineWalletViewController()
         NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .allWalletsDeleted, object: nil)
@@ -45,7 +44,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         }
     }
 
-    private func applyBarStyle() {
+    private func applyStyle() {
         UITabBarItem.appearance().titlePositionAdjustment = UIOffset(horizontal: 0, vertical: -4)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: AppColor.newThemeColor], for: .selected)
 
@@ -55,6 +54,9 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
+
+        UINavigationBar.fixSpace
+        UINavigationItem.fixSpace
     }
 
     @objc

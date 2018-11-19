@@ -960,7 +960,7 @@
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="转账"/>
                                 <connections>
-                                    <segue destination="KXN-bo-zdG" kind="show" identifier="transaction" id="ROf-WD-U6u"/>
+                                    <segue destination="a1J-d8-eO4" kind="show" identifier="sendTransaction" id="bgB-dw-3Dw"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xtj-4O-Ty2">
@@ -1015,11 +1015,19 @@
                 <viewControllerPlaceholder storyboardName="RequestPayment" id="esu-jN-jR6" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaK-iK-kCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="798" y="211"/>
+            <point key="canvasLocation" x="-628" y="653"/>
+        </scene>
+        <!--SendTransaction-->
+        <scene sceneID="ftS-br-EtV">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SendTransaction" id="a1J-d8-eO4" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lF-bJ-ISa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="150" y="653"/>
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="20" height="20"/>
+        <image name="close" width="36" height="36"/>
         <image name="eth_logo" width="62" height="62"/>
         <image name="nav_scan" width="44" height="44"/>
         <image name="warn" width="14" height="14"/>

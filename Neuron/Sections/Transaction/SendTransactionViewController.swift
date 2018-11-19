@@ -7,22 +7,43 @@
 //
 
 import UIKit
+import BLTNBoard
 import BigInt
 import AppChain
 import Web3swift
 import EthereumAddress
 
 class SendTransactionViewController: UITableViewController {
-    @IBOutlet weak var walletIconView: UIImageView!
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var walletAddressLabel: UILabel!
-    @IBOutlet weak var tokenBalanceButton: UIButton!
-    @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var gasCostLabel: UILabel!
-    @IBOutlet weak var addressTextField: UITextField!
+    @IBOutlet private weak var walletIconView: UIImageView!
+    @IBOutlet private weak var walletNameLabel: UILabel!
+    @IBOutlet private weak var walletAddressLabel: UILabel!
+    @IBOutlet private weak var tokenBalanceButton: UIButton!
+    @IBOutlet private weak var amountTextField: UITextField!
+    @IBOutlet private weak var gasCostLabel: UILabel!
+    @IBOutlet private weak var addressTextField: UITextField!
 
     private var paramBuilder: TransactionParamBuilder!
     private var observers = [NSKeyValueObservation]()
+
+    private lazy var summaryPageItem: TxSummaryPageItem = {
+        return TxSummaryPageItem.create()
+    }()
+    private lazy var bulletinManager: BLTNItemManager = {
+        let passwordPageItem = PasswordPageItem.create()
+
+        summaryPageItem.next = passwordPageItem
+        summaryPageItem.actionHandler = { item in
+            item.manager?.displayNextItem()
+        }
+
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            self?.sendTransaction(password: passwordPageItem.passwordField.text!)
+        }
+
+        return BLTNItemManager(rootItem: summaryPageItem)
+    }()
+
     var token: TokenModel!
     var confirmViewController: TransactionConfirmViewController?
 
@@ -49,14 +70,16 @@ class SendTransactionViewController: UITableViewController {
         }
     }
 
-    // MARK: - Event
     @IBAction func next(_ sender: Any) {
+        view.endEditing(true)
+
         let amount = Double(amountTextField.text!) ?? 0.0
         paramBuilder.value = amount.toAmount(token.decimals)
         paramBuilder.to = addressTextField.text!
 
         if isEffectiveTransferInfo {
-            performSegue(withIdentifier: "TransactionConfirmViewController", sender: nil)
+            summaryPageItem.update(paramBuilder)
+            bulletinManager.showBulletin(above: self)
         }
     }
 
@@ -78,28 +101,6 @@ class SendTransactionViewController: UITableViewController {
         }
     }
 
-    // TODO: tx sent
-    /*
-    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
-        switch result {
-        case .error(let error):
-            Toast.showToast(text: error.localizedDescription)
-        default:
-            Toast.showToast(text: "转账成功,请稍后刷新查看")
-            confirmViewController?.dismiss()
-            navigationController?.popViewController(animated: true)
-
-            SensorsAnalytics.Track.transaction(
-                chainType: token.chainId,
-                currencyType: token.symbol,
-                currencyNumber: Double(amountTextField.text ?? "0")!,
-                receiveAddress: addressTextField.text ?? "",
-                outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
-                transactionType: .normal
-            )
-        }
-    }*/
-
     // MARK: - UI
     func setupUI() {
         let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
@@ -113,6 +114,20 @@ class SendTransactionViewController: UITableViewController {
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)\(paramBuilder.nativeCoinSymbol)"
+    }
+
+    private func sendTransaction(password: String) {
+        DispatchQueue.global().async {
+            // TODO: send tx for real
+            Thread.sleep(forTimeInterval: 3)
+            DispatchQueue.main.async {
+                let successPageItem = SuccessPageItem.create(title: "交易已发送")
+                successPageItem.actionHandler = { item in
+                    item.manager?.dismissBulletin(animated: true)
+                }
+                self.bulletinManager.push(item: successPageItem)
+            }
+        }
     }
 }
 
@@ -144,6 +159,12 @@ extension SendTransactionViewController {
     }
 }
 
+extension SendTransactionViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
 extension SendTransactionViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == amountTextField {
@@ -165,27 +186,5 @@ extension SendTransactionViewController: UITextFieldDelegate {
 extension SendTransactionViewController: QRCodeViewControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
         addressTextField.text = codeResult
-    }
-}
-
-extension SendTransactionViewController {
-    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row == 2
-    }
-
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return indexPath.row == 2 ? indexPath : nil
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        if indexPath.section == 0 && indexPath.row == 2 {
-            cell.accessoryType = .disclosureIndicator
-        }
-        return cell
     }
 }

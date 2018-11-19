@@ -21,6 +21,11 @@
 		1A5515E521898A1000D34791 /* WalletKeystoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5515E421898A1000D34791 /* WalletKeystoreManager.swift */; };
 		1A5515E7218D36B600D34791 /* WalletManager+Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A5515E6218D36B600D34791 /* WalletManager+Errors.swift */; };
 		1A5515EA218D3F0300D34791 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1A5515EC218D3F0300D34791 /* Localizable.strings */; };
+		1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A60079621A274D000C7B712 /* SendTransactionSummaryView.xib */; };
+		1A60079C21A28B8C00C7B712 /* TxSummaryPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60079B21A28B8C00C7B712 /* TxSummaryPageItem.swift */; };
+		1A60079E21A28C1400C7B712 /* PasswordPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60079D21A28C1400C7B712 /* PasswordPageItem.swift */; };
+		1A6007A021A29C2C00C7B712 /* SuccessPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60079F21A29C2C00C7B712 /* SuccessPageItem.swift */; };
+		1A6007A221A2AA9A00C7B712 /* PageItemAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6007A121A2AA9A00C7B712 /* PageItemAppearance.swift */; };
 		1A60B6FC2186DB1C00FEFB3A /* Web3Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A60B6FB2186DB1C00FEFB3A /* Web3Utils.swift */; };
 		1A69465C21916BE5000093A2 /* EthereumTxSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A69465B21916BE5000093A2 /* EthereumTxSender.swift */; };
 		1A69465E21916C3D000093A2 /* AppChainTxSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A69465D21916C3D000093A2 /* AppChainTxSender.swift */; };
@@ -220,6 +225,11 @@
 		1A5515E6218D36B600D34791 /* WalletManager+Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WalletManager+Errors.swift"; sourceTree = "<group>"; };
 		1A5515EB218D3F0300D34791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		1A5515ED218D3F4500D34791 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		1A60079621A274D000C7B712 /* SendTransactionSummaryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SendTransactionSummaryView.xib; sourceTree = "<group>"; };
+		1A60079B21A28B8C00C7B712 /* TxSummaryPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxSummaryPageItem.swift; sourceTree = "<group>"; };
+		1A60079D21A28C1400C7B712 /* PasswordPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordPageItem.swift; sourceTree = "<group>"; };
+		1A60079F21A29C2C00C7B712 /* SuccessPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessPageItem.swift; sourceTree = "<group>"; };
+		1A6007A121A2AA9A00C7B712 /* PageItemAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageItemAppearance.swift; sourceTree = "<group>"; };
 		1A60B6FB2186DB1C00FEFB3A /* Web3Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Web3Utils.swift; sourceTree = "<group>"; };
 		1A69465B21916BE5000093A2 /* EthereumTxSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTxSender.swift; sourceTree = "<group>"; };
 		1A69465D21916C3D000093A2 /* AppChainTxSender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainTxSender.swift; sourceTree = "<group>"; };
@@ -462,6 +472,18 @@
 				1A694658219046E8000093A2 /* UIKit */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1A60079A21A28B5600C7B712 /* PageItems */ = {
+			isa = PBXGroup;
+			children = (
+				1A60079621A274D000C7B712 /* SendTransactionSummaryView.xib */,
+				1A60079B21A28B8C00C7B712 /* TxSummaryPageItem.swift */,
+				1A60079D21A28C1400C7B712 /* PasswordPageItem.swift */,
+				1A60079F21A29C2C00C7B712 /* SuccessPageItem.swift */,
+				1A6007A121A2AA9A00C7B712 /* PageItemAppearance.swift */,
+			);
+			path = PageItems;
 			sourceTree = "<group>";
 		};
 		1A694655219044FE000093A2 /* Ethereum */ = {
@@ -716,7 +738,6 @@
 				8928C22720AE7CB500C3103E /* Dapp */,
 				8928C27320B29ABB00C3103E /* Wallet */,
 				8922685820DE4EA50021A85F /* Settings */,
-				8928C22820AE7CB500C3103E /* Base */,
 				8928C22A20AE7CB500C3103E /* Common */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
 				6E9D7CBB216B37E90044176D /* Authentication */,
@@ -734,17 +755,11 @@
 			path = Dapp;
 			sourceTree = "<group>";
 		};
-		8928C22820AE7CB500C3103E /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				8928C24420AE90C000C3103E /* BaseNavigationController.swift */,
-			);
-			path = Base;
-			sourceTree = "<group>";
-		};
 		8928C22A20AE7CB500C3103E /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1A60079A21A28B5600C7B712 /* PageItems */,
+				8928C24420AE90C000C3103E /* BaseNavigationController.swift */,
 				89812129218D3161000813C8 /* QRCodeViewController.swift */,
 				8964A17F20BE94F70086848F /* NEPickerView.swift */,
 				1A207DD42137D8CF008DC306 /* TabbedButtonsView.swift */,
@@ -954,26 +969,26 @@
 				1A75EBFC21A1948F008D484B /* SendTransaction.storyboard */,
 				1A75EBFE21A194B1008D484B /* SendTransactionViewController.swift */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
+				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
 				6E8168F6218874B1007641BA /* TransactionViewController.swift */,
 				6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */,
 				6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */,
-				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
 				6E4F9617218973F200372D3E /* TransactionParamBuilder.swift */,
 				898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */,
 				898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */,
-				898A1A2C20B8033C00ECB465 /* TableViewCell */,
+				898A1A2C20B8033C00ECB465 /* Views */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
 		};
-		898A1A2C20B8033C00ECB465 /* TableViewCell */ = {
+		898A1A2C20B8033C00ECB465 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				898A1A2420B7DAA300ECB465 /* TransactionTableviewCell.swift */,
 				898A1A2D20B8044900ECB465 /* TradeTableViewCell.swift */,
 				898A1A2E20B8044900ECB465 /* TradeTableViewCell.xib */,
 			);
-			path = TableViewCell;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		898CA98420EA21E90059ECA3 /* Common */ = {
@@ -1139,6 +1154,7 @@
 				891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
+				1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */,
 				1A207DD12137B412008DC306 /* RequestPayment.storyboard in Resources */,
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
@@ -1338,6 +1354,7 @@
 				893532F4217DECF400404C0B /* MessageSignShowViewController.swift in Sources */,
 				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				1AEBF3E4219BA1E700653FF5 /* BigUInt+Extension.swift in Sources */,
+				1A6007A221A2AA9A00C7B712 /* PageItemAppearance.swift in Sources */,
 				89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */,
 				1A207DCF2137B3F7008DC306 /* RequestPaymentViewController.swift in Sources */,
 				89D84CE72147C671006B0287 /* TraitsCollectionViewCell.swift in Sources */,
@@ -1395,6 +1412,7 @@
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
 				6E9F9D5A219AAF99009ED8B2 /* UINavigationItem+FixSpace.swift in Sources */,
+				1A60079E21A28C1400C7B712 /* PasswordPageItem.swift in Sources */,
 				89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */,
 				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
@@ -1414,6 +1432,7 @@
 				896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */,
 				6E867E03216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift in Sources */,
 				89BEBE6B20EF82B6007D2705 /* EthereumNetwork.swift in Sources */,
+				1A60079C21A28B8C00C7B712 /* TxSummaryPageItem.swift in Sources */,
 				89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */,
 				6E867E05216C3F1500BD6FE5 /* AuthPasswordViewController.swift in Sources */,
 				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
@@ -1431,6 +1450,7 @@
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
+				1A6007A021A29C2C00C7B712 /* SuccessPageItem.swift in Sources */,
 				89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */,
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
