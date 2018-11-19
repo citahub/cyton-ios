@@ -10,25 +10,30 @@ import UIKit
 import SafariServices
 
 class SettingsViewController: UITableViewController {
-    var rowIdentifiers = [
-        String(describing: SettingCurrencyTableViewCell.self),
-        "SettingSwitchEthereumNetwork",
-        String(describing: SettingAuthenticationTableViewCell.self),
-        "SettingAboutUsTableViewCell",
-        "SettingForumsTableViewCell",
-        "SettingContactCustomerServiceTableViewCell"
-    ]
-
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var ethereumNetworkLabel: UILabel!
+    @IBOutlet var authenticationSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if !AuthenticationService.shared.isValid {
-            rowIdentifiers.remove(at: 2)
-        }
+    }
+
+    func getDataForUI() {
+        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        nameLabel.text = walletModel.name
+        addressLabel.text = walletModel.address
+        iconImageView.image = UIImage(data: walletModel.iconData)
+        currencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
+        ethereumNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
+        authenticationSwitch.isOn = AuthenticationService.shared.isEnable
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        getDataForUI()
     }
 
     @IBAction func authenticationSwitchChanged(_ sender: UISwitch) {
@@ -37,45 +42,19 @@ class SettingsViewController: UITableViewController {
         }
     }
 
-    // MARK: UITableViewDataSource
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowIdentifiers.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: rowIdentifiers[indexPath.row])!
-        if let cell = cell as? SettingCurrencyTableViewCell {
-            if cell.reuseIdentifier == "SettingCurrencyTableViewCell" {
-                cell.localCurrencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
-            } else if cell.reuseIdentifier == "SettingSwitchEthereumNetwork" {
-                cell.localCurrencyLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
-            }
-        } else if let cell = cell as? SettingAuthenticationTableViewCell {
-            cell.authenticationSwitch.isOn = AuthenticationService.shared.isEnable
-            cell.authenticationSwitch.addTarget(self, action: #selector(authenticationSwitchChanged), for: .touchUpInside)
-        }
-        return cell
-    }
-
-    // MARK: UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let cell = tableView.cellForRow(at: indexPath) else { return }
-        if cell.reuseIdentifier == "SettingCurrencyTableViewCell" {
-            let controller: CurrencyViewController = UIStoryboard(name: .settings).instantiateViewController()
-            navigationController?.pushViewController(controller, animated: true)
-        } else if cell.reuseIdentifier == "SettingSwitchEthereumNetwork" {
-            let controller = storyboard!.instantiateViewController(withIdentifier: "switchNetworkViewController") as! SwitchNetworkViewController
-            navigationController?.pushViewController(controller, animated: true)
-        } else if cell.reuseIdentifier == "SettingAboutUsTableViewCell" {
-            let controller: AboutUsTableViewController = UIStoryboard(name: .settings).instantiateViewController()
-            navigationController?.pushViewController(controller, animated: true)
-        } else if cell.reuseIdentifier == "SettingForumsTableViewCell" {
-            let safariController = SFSafariViewController(url: URL(string: "https://forums.nervos.org/")!)
-            self.present(safariController, animated: true, completion: nil)
-        } else if cell.reuseIdentifier == "SettingContactCustomerServiceTableViewCell" {
-            UIPasteboard.general.string = "Nervos-Neuron"
-            Toast.showToast(text: "客服微信已复制")
+        if indexPath.section == 2 {
+            switch indexPath.row {
+            case 1:
+                UIPasteboard.general.string = "Nervos-Neuron"
+                Toast.showToast(text: "客服微信已复制")
+            case 2:
+                let safariController = SFSafariViewController(url: URL(string: "https://forums.nervos.org/")!)
+                self.present(safariController, animated: true, completion: nil)
+            default:
+                break
+            }
         }
     }
 }
