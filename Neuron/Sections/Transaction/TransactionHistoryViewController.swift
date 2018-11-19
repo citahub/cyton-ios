@@ -22,7 +22,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     var service: TransactionHistoryService?
     var tokenProfile: TokenProfile?
-    var tokenType: TokenType = .erc20Token
+    var tokenType: TokenType = .erc20
     var tokenModel: TokenModel! {
         didSet {
             guard tokenModel != nil else { return }
@@ -187,12 +187,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     deinit {
         tableView.removeAllPullToRefresh()
     }
-}
-
-enum TokenType {
-    case ethereumToken
-    case nervosToken
-    case erc20Token
 }
 
 class TransactionHistoryTableViewCell: UITableViewCell {

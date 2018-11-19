@@ -33,11 +33,11 @@ class TransactionHistoryService {
     static func service(with token: TokenModel) -> TransactionHistoryService {
         if token.type == .erc20 {
             return Erc20(token: token)
-        } else if token.type == .ethereum {
+        } else if token.type == .ether {
             return Ethereum(token: token)
-        } else if token.type == .nervos {
+        } else if token.type == .appChain {
             return AppChain(token: token)
-        } else if token.type == .nervosErc20 {
+        } else if token.type == .appChainErc20 {
             return AppChainErc20(token: token)
         } else {
             fatalError()

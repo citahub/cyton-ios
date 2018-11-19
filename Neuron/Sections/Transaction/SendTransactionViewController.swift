@@ -90,7 +90,6 @@ class SendTransactionViewController: UITableViewController {
         }
     }
 
-    // MARK: - UI
     func setupUI() {
         let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
         title = "\(token.symbol)转账"
@@ -102,7 +101,7 @@ class SendTransactionViewController: UITableViewController {
     }
 
     private func updateGasCost() {
-        gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal)\(paramBuilder.nativeCoinSymbol)"
+        gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
     }
 
     private func createPasswordPageItem() -> PasswordPageItem {
@@ -126,21 +125,26 @@ private extension SendTransactionViewController {
     func sendTransaction(password: String) {
         DispatchQueue.global().async {
             do {
-                // TODO: send tx for real
-                Thread.sleep(forTimeInterval: 1)
-                throw SendTransactionError.invalidPassword
+                let txHash: TxHash
+                if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
+                    txHash = try self.sendEthereumTransaction(password: password)
+                } else {
+                    txHash = try self.sendAppChainTransaction(password: password)
+                }
 
                 DispatchQueue.main.async {
+                    // TODO: send back txHash?
                     let successPageItem = SuccessPageItem.create(title: "交易已发送")
                     successPageItem.actionHandler = { item in
                         item.manager?.dismissBulletin(animated: true)
+                        self.navigationController?.popViewController(animated: true)
                     }
                     self.bulletinManager.push(item: successPageItem)
                 }
             } catch let error {
                 DispatchQueue.main.async {
                     self.bulletinManager.hideActivityIndicator()
-                    /// HACKHACK: Possible a bug of BulletinBoard, but after hiding activity indicator
+                    /// HACKHACKHACK: Possible a bug of BulletinBoard, but after hiding activity indicator
                     /// the previous page item's views stop responding to update. To get around that
                     /// create a new item. Note this would leave more than one password item in the stack.
                     let passwordPageItem = self.createPasswordPageItem()
@@ -148,6 +152,58 @@ private extension SendTransactionViewController {
                     passwordPageItem.errorMessage = error.localizedDescription
                 }
             }
+        }
+    }
+
+    func sendEthereumTransaction(password: String) throws -> TxHash {
+        let keystore = WalletManager.default.keystore(for: paramBuilder.from)
+        let web3 = EthereumNetwork().getWeb3()
+        web3.addKeystoreManager(KeystoreManager([keystore]))
+
+        if paramBuilder.tokenType == .ether {
+            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
+            return try sender.sendETH(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                gasLimit: paramBuilder.gasLimit,
+                gasPrice: BigUInt(paramBuilder.gasPrice),
+                data: paramBuilder.data,
+                password: password
+            )
+        } else {
+            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
+            // TODO: estimate gas
+            return try sender.sendToken(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                gasLimit: paramBuilder.gasLimit,
+                gasPrice: BigUInt(paramBuilder.gasPrice),
+                contractAddress: paramBuilder.contractAddress,
+                password: password
+            )
+        }
+    }
+
+    func sendAppChainTransaction(password: String) throws -> TxHash {
+        guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
+            throw SendTransactionError.invalidAppChainNode
+        }
+        if paramBuilder.tokenType == .appChain {
+            let sender = try AppChainTxSender(
+                appChain: AppChainNetwork.appChain(url: appChainUrl),
+                walletManager: WalletManager.default,
+                from: paramBuilder.from
+            )
+            return try sender.send(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                quota: paramBuilder.gasLimit,
+                data: paramBuilder.data,
+                chainId: BigUInt(paramBuilder.chainId)!,
+                password: password
+            )
+        } else {
+            return "" // TODO: AppChainErc20 not implemented yet.
         }
     }
 

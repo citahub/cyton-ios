@@ -8,7 +8,13 @@
 
 import Foundation
 import RealmSwift
-import BigInt
+
+enum TokenType {
+    case ether
+    case erc20
+    case appChain
+    case appChainErc20
+}
 
 class TokenModel: Object, Decodable {
     @objc dynamic var tokenBalance = ""
@@ -24,7 +30,7 @@ class TokenModel: Object, Decodable {
     @objc dynamic var identifier = UUID().uuidString // primary key == UUID
 
     // defaults false, eth and RPC "getMateData" is true.
-    @objc dynamic var isNativeToken = false
+    @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
 
     override class func primaryKey() -> String? {
         return "identifier"
@@ -39,21 +45,15 @@ class TokenModel: Object, Decodable {
     }
     var logo: Logo?
 
-    enum `Type`: String, Decodable {
-        case erc20
-        case ethereum
-        case nervos
-        case nervosErc20
-    }
-    var type: Type {
+    var type: TokenType {
         if isNativeToken {
             if chainId == NativeChainId.ethMainnetChainId {
-                return .ethereum
+                return .ether
             } else {
                 if address != "" {
-                    return .nervosErc20
+                    return .appChainErc20
                 } else {
-                    return .nervos
+                    return .appChain
                 }
             }
         } else {
@@ -62,11 +62,15 @@ class TokenModel: Object, Decodable {
     }
     var gasSymbol: String {
         switch type {
-        case .erc20, .ethereum:
+        case .ether, .erc20:
             return "ETH"
-        case .nervos, .nervosErc20:
+        case .appChain, .appChainErc20:
             return self.symbol
         }
+    }
+
+    var isEthereum: Bool {
+        return type == .ether || type == .erc20
     }
 
     enum CodingKeys: String, CodingKey {

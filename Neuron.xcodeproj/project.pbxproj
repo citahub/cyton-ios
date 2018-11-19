@@ -968,12 +968,12 @@
 			children = (
 				1A75EBFC21A1948F008D484B /* SendTransaction.storyboard */,
 				1A75EBFE21A194B1008D484B /* SendTransactionViewController.swift */,
+				6E4F9617218973F200372D3E /* TransactionParamBuilder.swift */,
 				89F79670213BD8C40064808A /* Transaction.storyboard */,
 				89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */,
 				6E8168F6218874B1007641BA /* TransactionViewController.swift */,
 				6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */,
 				6E4F961A2189A82900372D3E /* TransactionConfirmViewController.swift */,
-				6E4F9617218973F200372D3E /* TransactionParamBuilder.swift */,
 				898A1A2820B7F0FC00ECB465 /* TradeDetailsController.swift */,
 				898A1A2920B7F0FC00ECB465 /* TradeDetailsController.xib */,
 				898A1A2C20B8033C00ECB465 /* Views */,

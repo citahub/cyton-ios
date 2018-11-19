@@ -50,6 +50,7 @@ class EthereumTxSender {
             throw SendTransactionError.createTransactionIssue
         }
 
+        transaction.transaction.value = value  // Web3swift seems to be having bug setting value
         return try transaction.sendPromise(password: password).wait().hash
     }
 

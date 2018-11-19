@@ -189,12 +189,12 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
         controller.tokenModel = model
         if model.isNativeToken {
             if model.chainId == NativeChainId.ethMainnetChainId {
-                controller.tokenType = .ethereumToken
+                controller.tokenType = .ether
             } else {
-                controller.tokenType = .nervosToken
+                controller.tokenType = .appChain
             }
         } else {
-            controller.tokenType = .erc20Token
+            controller.tokenType = .erc20
         }
         navigationController?.pushViewController(controller, animated: true)
     }
