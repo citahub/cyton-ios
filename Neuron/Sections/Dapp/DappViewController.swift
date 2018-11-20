@@ -20,7 +20,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        super.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewDidLoad() {
@@ -40,11 +40,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     func didAddSubLayout() {
-        if isBangsScreen() {
-            webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 40))
-        } else {
-            webView = WKWebView(frame: CGRect(x: 0, y: 20, width: ScreenSize.width, height: ScreenSize.height - 49 - 20))
-        }
+        webView = WKWebView(frame: .zero)
 
         var js = ""
         if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
@@ -71,6 +67,10 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.navigationDelegate = self
         webView.uiDelegate = self
         view.addSubview(webView)
+    }
+
+    override func viewDidLayoutSubviews() {
+        self.webView.frame = self.view.bounds
     }
 
     //scrollView代理

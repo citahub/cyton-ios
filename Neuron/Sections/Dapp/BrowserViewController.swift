@@ -16,7 +16,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     var webViewProgressObservation: NSKeyValueObservation!
     lazy var webView: WKWebView = {
         let webView = WKWebView(
-            frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: ScreenSize.height - 64),
+            frame: .zero,
             configuration: self.config
         )
         let infoDictionary = Bundle.main.infoDictionary!
@@ -45,6 +45,10 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         config.websiteDataStore = WKWebsiteDataStore.default()
         return config
     }()
+
+    override func viewDidLayoutSubviews() {
+        self.webView.frame = self.view.bounds
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
