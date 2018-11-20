@@ -169,16 +169,16 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tokenTableviewcell") as! TokenTableViewCell
-        let model = tokenArray[indexPath.row]
-        cell.tokenImage.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
-        cell.balance.text = model.tokenBalance
-        cell.token.text = model.symbol
-        cell.network.text = (model.chainName?.isEmpty)! ? "Ethereum Mainnet": model.chainName
-        if model.currencyAmount.count != 0 {
-            cell.currency.text = currentCurrencyModel.symbol + model.currencyAmount
-        } else {
-            cell.currency.text = ""
-        }
+//        let model = tokenArray[indexPath.row]
+//        cell.tokenImage.sd_setImage(with: URL(string: model.iconUrl!), placeholderImage: UIImage(named: "eth_logo"))
+//        cell.balance.text = model.tokenBalance
+//        cell.token.text = model.symbol
+//        cell.network.text = (model.chainName?.isEmpty)! ? "Ethereum Mainnet": model.chainName
+//        if model.currencyAmount.count != 0 {
+//            cell.currency.text = currentCurrencyModel.symbol + model.currencyAmount
+//        } else {
+//            cell.currency.text = ""
+//        }
         return cell
     }
 

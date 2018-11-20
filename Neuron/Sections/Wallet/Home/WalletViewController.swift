@@ -8,235 +8,135 @@
 
 import UIKit
 import RealmSwift
-import Web3swift
-import BigInt
-import PullToRefresh
 
-class WalletViewController: UITableViewController, SelectWalletControllerDelegate {
-    @IBOutlet var titleView: UIView!
-    @IBOutlet var tabHeader: UIView!
-    @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
-    @IBOutlet weak var totleCurrencyLabel: UILabel!
-    @IBOutlet weak var currencyBalanceLabel: UILabel!
-    @IBOutlet weak var switchWalletButtonItem: UIBarButtonItem!
-    @IBOutlet var scanBarButtonItem: UIBarButtonItem!
-    @IBOutlet weak var requestPaymentButtonItem: UIBarButtonItem!
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var address: UILabel!
-    @IBOutlet weak var switchWalletButton: UIButton!
-    private var tokensViewController: TokensViewController!
-    private var nftViewController: UIViewController!
-    private var assetPageViewController: UIPageViewController!
-    private var isHeaderViewHidden = false {
-        didSet {
-            updateNavigationBar()
-        }
-    }
-    let refresher = PullToRefresh()
+class WalletViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var tableHeadView: UIView!
+    @IBOutlet weak var refreshButton: UIButton!
+    @IBOutlet var addWalletBarButton: UIBarButtonItem!
+    @IBOutlet var switchWalletBarButton: UIBarButtonItem!
+    @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var totalAmountLabel: UILabel!
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return isHeaderViewHidden ? .default : .lightContent
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        didGetDataForCurrentWallet()
-        updateNavigationBar()
-    }
-
+    private var presenter = WalletPresenter()
+    private var walletCountObserve: NotificationToken?
+//    private var observers = [NSKeyValueObservation]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        automaticallyAdjustsScrollViewInsets = true
-        addNotify()
-        tokensViewController = storyboard!.instantiateViewController(withIdentifier: "tokensViewController") as? TokensViewController
-        tokensViewController.delegate = self
-        nftViewController = storyboard!.instantiateViewController(withIdentifier: "nftViewController")
-        assetPageViewController.setViewControllers([tokensViewController], direction: .forward, animated: false)
-        assetPageViewController.dataSource = self
-        assetPageViewController.delegate = self
-        tableView.addPullToRefresh(refresher) {
-            self.loadData()
-        }
-        tabbedButtonView.buttonTitles = ["代币", "藏品"]
-        tabbedButtonView.delegate = self
-    }
+        // Do any additional setup after loading the view.
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
+        tableView.refreshControl = refresh
+        presenter.delegate = self
+        presenter.refresh()
 
-    @objc private func endRefresh() {
-        tableView.endRefreshing(at: .top)
-    }
-
-    private func loadData() {
-        NotificationCenter.default.post(name: .beginRefresh, object: nil)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "embedAssetPages" {
-            assetPageViewController = segue.destination as? UIPageViewController
-        }
-        if segue.identifier == "requestPayment" {
-            let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppModel()
-            requestPaymentViewController.appModel = appModel
-        }
-        if segue.identifier == "switchWallet" {
-            let selectWalletController = segue.destination as! SelectWalletController
-            selectWalletController.delegate = self
-        }
-    }
-
-    @IBAction func copyWalletAddress(_ sender: UITapGestureRecognizer) {
-        copyAddress()
-    }
-
-    @IBAction func copyWalletAddressWithButton(_ sender: UIButton) {
-        copyAddress()
-    }
-
-    @IBAction func scanQRCode(_ sender: Any) {
-        let qrCodeViewController = QRCodeViewController()
-        qrCodeViewController.delegate = self
-        navigationController?.pushViewController(qrCodeViewController, animated: true)
-    }
-
-    @IBAction func unwind(seque: UIStoryboardSegue) { }
-
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var offset = scrollView.contentOffset.y
-        if #available(iOS 11.0, *) {
-            offset += scrollView.adjustedContentInset.top
-        } else {
-            offset += scrollView.contentInset.top
-        }
-
-        isHeaderViewHidden = offset >= tableView.tableHeaderView!.bounds.height
-        [tokensViewController, nftViewController].forEach { listViewController in
-            (listViewController as? UITableViewController)?.tableView.isScrollEnabled = isHeaderViewHidden
-        }
-    }
-
-    private func copyAddress() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
-        UIPasteboard.general.string = appModel.currentWallet?.address
-        Toast.showToast(text: "地址已经复制到粘贴板")
-    }
-
-    private func updateNavigationBar() {
-        if isHeaderViewHidden {
-            navigationItem.rightBarButtonItems = [switchWalletButtonItem]
-            navigationItem.title = WalletRealmTool.getCurrentAppModel().currentWallet?.name
-            navigationItem.titleView = nil
-        } else {
-            navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
-            navigationItem.titleView = titleView
-        }
-        setNeedsStatusBarAppearanceUpdate()
-        if WalletRealmTool.getCurrentAppModel().wallets.count == 1 {
-            switchWalletButton.setTitle("添加钱包", for: .normal)
-            switchWalletButton.setImage(UIImage(named: "add_wallet_icon")!, for: .normal)
-        } else {
-            switchWalletButton.setTitle("切换钱包", for: .normal)
-            switchWalletButton.setImage(UIImage(named: "switch_wallet_icon")!, for: .normal)
-        }
-    }
-
-    func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(changeWallet(notification:)), name: .createWalletSuccess, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(endRefresh), name: .endRefresh, object: nil)
-    }
-
-    func didGetDataForCurrentWallet() {
-        if WalletRealmTool.hasWallet() {
-            let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-            refreshUI(walletModel: walletModel)
-            loadData()
-        }
-    }
-
-    //switch wallet delegate
-    func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel) {
-        didGetDataForCurrentWallet()
-        NotificationCenter.default.post(name: .switchWallet, object: nil)
-    }
-
-    @objc private func changeWallet(notification: Notification) {
-        let address = notification.userInfo!["address"] as! String
-        let walletModel = WalletRealmTool.getCreatWallet(walletAddress: address)
-        refreshUI(walletModel: walletModel)
-    }
-
-    func refreshUI(walletModel: WalletModel) {
-        name.text = walletModel.name
-        address.text = walletModel.address
-        icon.image = UIImage(data: walletModel.iconData)
-    }
-
-    // MAKR: - UITableView Delegate
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if #available(iOS 11.0, *) {
-            return tableView.frame.height - tabHeader.frame.height - tableView.adjustedContentInset.top - tableView.adjustedContentInset.bottom
-        } else {
-            return tableView.frame.height - tabHeader.frame.height - tableView.contentInset.top - tableView.contentInset.bottom
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tabHeader
-    }
-
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return tabHeader.frame.height
-    }
-
-    deinit {
-        tableView.removePullToRefresh(at: .top)
-    }
-}
-
-extension WalletViewController: QRCodeViewControllerDelegate {
-    func didBackQRCodeMessage(codeResult: String) {
-        guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.first(where: { $0.symbol == "ETH" }) else {
-            return
-        }
-        let controller: SendTransactionViewController = UIStoryboard(name: .sendTransaction).instantiateViewController()
-        controller.token = token
-        controller.recipientAddress = codeResult // TODO: At least do address validation here?
-        navigationController?.pushViewController(controller, animated: true)
-    }
-}
-
-extension WalletViewController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate, TokensViewControllerDelegate {
-    func getCurrentCurrencyModel(currencyModel: LocalCurrency, totleCurrency: Double) {
-        totleCurrencyLabel.text = "总资产(\(currencyModel.name))"
-        currencyBalanceLabel.text = String(format: "%.2f", totleCurrency)
-    }
-
-    func tabbedButtonsView(_ view: TabbedButtonsView, didSelectButtonAt index: Int) {
-        let viewControllerToShow = index == 0 ? tokensViewController : nftViewController
-        assetPageViewController.setViewControllers([viewControllerToShow!], direction: .forward, animated: false)
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if viewController == nftViewController {
-            return tokensViewController
-        }
-        return nil
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        if viewController == tokensViewController {
-            return nftViewController
-        }
-        return nil
-    }
-
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
-        if completed {
-            if previousViewControllers.first == tokensViewController {
-                tabbedButtonView.selectedIndex = 1
+        // observe wallet count
+        walletCountObserve = WalletRealmTool.realm.objects(WalletModel.self).observe { [weak self](_) in
+            if WalletRealmTool.realm.objects(WalletModel.self).count > 1 {
+                self?.navigationItem.rightBarButtonItem = self?.switchWalletBarButton
             } else {
-                tabbedButtonView.selectedIndex = 0
+                self?.navigationItem.rightBarButtonItem = self?.addWalletBarButton
             }
         }
+
+//        observers.append(presenter.observe(\.currency, options: [.initial]) { (_, _) in
+//        })
     }
+
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    }
+
+    // MARK: - Actions
+    @IBAction func refresh() {
+        guard !presenter.refreshing else { return }
+        presenter.refresh()
+    }
+    @IBAction func walletQRCode(_ sender: Any) {
+    }
+    @IBAction func transaction(_ sender: Any) {
+    }
+}
+
+extension WalletViewController: WalletPresenterDelegate {
+    func walletPresenter(presenter: WalletPresenter, didRefreshTokenAmount token: Token) {
+        guard let index = presenter.tokens.lastIndex(where: { $0 == token }) else { return }
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+    }
+
+    func walletPresenter(presenter: WalletPresenter, didRefreshToken tokens: [Token]) {
+        tableView.reloadData()
+    }
+
+    func walletPresenter(presenter: WalletPresenter, didRefreshCurrency currency: LocalCurrency) {
+        currencyLabel.text = "总资产(\(currency.name))"
+    }
+
+    func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
+        if amount == 0.0 {
+            totalAmountLabel.text = "暂无资产"
+        } else {
+            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + String(format: "%.8lf", amount)
+        }
+    }
+
+    func walletPresenterBeganRefresh(presenter: WalletPresenter) {
+        if !tableView.refreshControl!.isRefreshing {
+            UIView.beginAnimations("refresh", context: nil)
+            UIView.setAnimationDuration(0.4)
+            UIView.setAnimationRepeatCount(Float(Int.max))
+            UIView.setAnimationCurve(.linear)
+            refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
+            UIView.commitAnimations()
+        }
+    }
+
+    func walletPresenterEndedRefresh(presenter: WalletPresenter) {
+        if tableView.refreshControl!.isRefreshing {
+            tableView.refreshControl?.endRefreshing()
+        } else {
+            refreshButton.layer.removeAllAnimations()
+        }
+    }
+}
+
+extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return presenter.tokens.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let token = presenter.tokens[indexPath.row]
+        let cell: TokenTableViewCell
+        if token.balance == nil {
+            cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_Loading") as! TokenTableViewCell
+        } else if token.price == nil {
+            cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_NoPrice") as! TokenTableViewCell
+        } else {
+            cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell") as! TokenTableViewCell
+        }
+        cell.token = presenter.tokens[indexPath.row]
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableHeadView
+    }
+
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        refreshButton.alpha = 1 - scrollView.contentOffset.y / -60
+    }
+
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        print(#function)
+        self.refreshButton.alpha = 1.0
+        self.tableView.refreshControl?.endRefreshing()
+    }
+}
+
+extension WalletViewController {
 }
