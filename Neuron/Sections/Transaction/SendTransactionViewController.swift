@@ -192,12 +192,18 @@ private extension SendTransactionViewController {
     }
 
     func sendAppChainTransaction(password: String) throws -> TxHash {
-        guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
-            throw SendTransactionError.invalidAppChainNode
+        let appChain: AppChain
+        if paramBuilder.rpcNode.isEmpty {
+            appChain = AppChainNetwork.appChain()
+        } else {
+            guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
+                throw SendTransactionError.invalidAppChainNode
+            }
+            appChain = AppChainNetwork.appChain(url: appChainUrl)
         }
         if paramBuilder.tokenType == .appChain {
             let sender = try AppChainTxSender(
-                appChain: AppChainNetwork.appChain(url: appChainUrl),
+                appChain: appChain,
                 walletManager: WalletManager.default,
                 from: paramBuilder.from
             )
