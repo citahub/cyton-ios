@@ -136,6 +136,7 @@ private extension SendTransactionViewController {
                     // TODO: send back txHash?
                     let successPageItem = SuccessPageItem.create(title: "交易已发送")
                     successPageItem.actionHandler = { item in
+                        self.track()
                         item.manager?.dismissBulletin(animated: true)
                         self.navigationController?.popViewController(animated: true)
                     }
@@ -231,6 +232,17 @@ private extension SendTransactionViewController {
         }))
         present(alert, animated: true, completion: nil)
         return false
+    }
+
+    func track() {
+        SensorsAnalytics.Track.transaction(
+            chainType: paramBuilder.chainId,
+            currencyType: paramBuilder.symbol,
+            currencyNumber: Double(amountTextField.text ?? "0")!,
+            receiveAddress: addressTextField.text ?? "",
+            outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+            transactionType: .normal
+        )
     }
 }
 
