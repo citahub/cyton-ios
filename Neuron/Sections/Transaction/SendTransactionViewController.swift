@@ -13,7 +13,73 @@ import AppChain
 import Web3swift
 import EthereumAddress
 
-class SendTransactionViewController: UITableViewController {
+protocol TransactonSender {
+    var paramBuilder: TransactionParamBuilder! { get set }
+    func sendEthereumTransaction(password: String) throws -> TxHash
+    func sendAppChainTransaction(password: String) throws -> TxHash
+}
+
+extension TransactonSender {
+    func sendEthereumTransaction(password: String) throws -> TxHash {
+        let keystore = WalletManager.default.keystore(for: paramBuilder.from)
+        let web3 = EthereumNetwork().getWeb3()
+        web3.addKeystoreManager(KeystoreManager([keystore]))
+
+        if paramBuilder.tokenType == .ether {
+            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
+            return try sender.sendETH(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                gasLimit: paramBuilder.gasLimit,
+                gasPrice: BigUInt(paramBuilder.gasPrice),
+                data: paramBuilder.data,
+                password: password
+            )
+        } else {
+            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
+            // TODO: estimate gas
+            return try sender.sendToken(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                gasLimit: paramBuilder.gasLimit,
+                gasPrice: BigUInt(paramBuilder.gasPrice),
+                contractAddress: paramBuilder.contractAddress,
+                password: password
+            )
+        }
+    }
+
+    func sendAppChainTransaction(password: String) throws -> TxHash {
+        let appChain: AppChain
+        if paramBuilder.rpcNode.isEmpty {
+            appChain = AppChainNetwork.appChain()
+        } else {
+            guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
+                throw SendTransactionError.invalidAppChainNode
+            }
+            appChain = AppChainNetwork.appChain(url: appChainUrl)
+        }
+        if paramBuilder.tokenType == .appChain {
+            let sender = try AppChainTxSender(
+                appChain: appChain,
+                walletManager: WalletManager.default,
+                from: paramBuilder.from
+            )
+            return try sender.send(
+                to: paramBuilder.to,
+                value: paramBuilder.value,
+                quota: paramBuilder.gasLimit,
+                data: paramBuilder.data,
+                chainId: BigUInt(paramBuilder.chainId)!,
+                password: password
+            )
+        } else {
+            return "" // TODO: AppChainErc20 not implemented yet.
+        }
+    }
+}
+
+class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBOutlet private weak var walletIconView: UIImageView!
     @IBOutlet private weak var walletNameLabel: UILabel!
     @IBOutlet private weak var walletAddressLabel: UILabel!
@@ -22,7 +88,7 @@ class SendTransactionViewController: UITableViewController {
     @IBOutlet private weak var gasCostLabel: UILabel!
     @IBOutlet private weak var addressTextField: UITextField!
 
-    private var paramBuilder: TransactionParamBuilder!
+    var paramBuilder: TransactionParamBuilder!
     private var observers = [NSKeyValueObservation]()
 
     private lazy var summaryPageItem: TxSummaryPageItem = {
@@ -159,64 +225,6 @@ private extension SendTransactionViewController {
                     passwordPageItem.errorMessage = error.localizedDescription
                 }
             }
-        }
-    }
-
-    func sendEthereumTransaction(password: String) throws -> TxHash {
-        let keystore = WalletManager.default.keystore(for: paramBuilder.from)
-        let web3 = EthereumNetwork().getWeb3()
-        web3.addKeystoreManager(KeystoreManager([keystore]))
-
-        if paramBuilder.tokenType == .ether {
-            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
-            return try sender.sendETH(
-                to: paramBuilder.to,
-                value: paramBuilder.value,
-                gasLimit: paramBuilder.gasLimit,
-                gasPrice: BigUInt(paramBuilder.gasPrice),
-                data: paramBuilder.data,
-                password: password
-            )
-        } else {
-            let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
-            // TODO: estimate gas
-            return try sender.sendToken(
-                to: paramBuilder.to,
-                value: paramBuilder.value,
-                gasLimit: paramBuilder.gasLimit,
-                gasPrice: BigUInt(paramBuilder.gasPrice),
-                contractAddress: paramBuilder.contractAddress,
-                password: password
-            )
-        }
-    }
-
-    func sendAppChainTransaction(password: String) throws -> TxHash {
-        let appChain: AppChain
-        if paramBuilder.rpcNode.isEmpty {
-            appChain = AppChainNetwork.appChain()
-        } else {
-            guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
-                throw SendTransactionError.invalidAppChainNode
-            }
-            appChain = AppChainNetwork.appChain(url: appChainUrl)
-        }
-        if paramBuilder.tokenType == .appChain {
-            let sender = try AppChainTxSender(
-                appChain: appChain,
-                walletManager: WalletManager.default,
-                from: paramBuilder.from
-            )
-            return try sender.send(
-                to: paramBuilder.to,
-                value: paramBuilder.value,
-                quota: paramBuilder.gasLimit,
-                data: paramBuilder.data,
-                chainId: BigUInt(paramBuilder.chainId)!,
-                password: password
-            )
-        } else {
-            return "" // TODO: AppChainErc20 not implemented yet.
         }
     }
 

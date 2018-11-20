@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BLTNBoard
 import AppChain
 import BigInt
 import Web3swift
@@ -21,12 +22,17 @@ protocol ContractControllerDelegate: class {
     func callBackWebView(id: Int, value: String, error: DAppError?)
 }
 
-class ContractController: UITableViewController {
+class ContractController: UITableViewController, TransactonSender {
     var requestAddress: String = ""
     var dappName: String = ""
     var dappCommonModel: DAppCommonModel!
+    var paramBuilder: TransactionParamBuilder!
     private var chainType: ChainType = .appChain
-    private var tokenModel = TokenModel()
+    private var tokenModel = TokenModel() {
+        didSet {
+            paramBuilder = TransactionParamBuilder(token: tokenModel)
+        }
+    }
     var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
 
@@ -42,6 +48,19 @@ class ContractController: UITableViewController {
     private var gasLimit = BigUInt()
     private var ethereumGas: String?
     private var value: String! // both appChain'amount and Ethereum'amount
+
+    private lazy var summaryPageItem: TxSummaryPageItem = {
+        return TxSummaryPageItem.create()
+    }()
+    private lazy var bulletinManager: BLTNItemManager = {
+        let passwordPageItem = createPasswordPageItem()
+        summaryPageItem.next = passwordPageItem
+        summaryPageItem.actionHandler = { item in
+            item.manager?.displayNextItem()
+        }
+
+        return BLTNItemManager(rootItem: summaryPageItem)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,9 +124,23 @@ class ContractController: UITableViewController {
         formatValueLabel(value: value)
     }
 
+    private func createPasswordPageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create()
+
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
+            }
+            self.sendTransaction(password: passwordPageItem.passwordField.text!)
+        }
+
+        return passwordPageItem
+    }
+
     func formatValueLabel(value: String) {
-        let range = NSMakeRange(valueLabel.text!.lengthOfBytes(using: .utf8), tokenModel.symbol.lengthOfBytes(using: .utf8))
-        valueLabel.text! += tokenModel.symbol
+        let range = NSRange(location: valueLabel.text!.lengthOfBytes(using: .utf8), length: tokenModel.symbol.lengthOfBytes(using: .utf8) + 1)
+        valueLabel.text! += " " + tokenModel.symbol
         let attributedText = NSMutableAttributedString(attributedString: valueLabel.attributedText!)
         attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
         valueLabel.attributedText = attributedText
@@ -197,50 +230,77 @@ class ContractController: UITableViewController {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        let paramBuilder = TransactionParamBuilder(token: tokenModel)
         paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        // TODO: set input amount
-        // paramBuilder.amount = Double(value) ?? 0.0
+        paramBuilder.value = Double(value)!.toAmount(tokenModel.decimals)
 
         switch chainType {
         case .appChain:
             paramBuilder.gasLimit = 10000000
+            paramBuilder.gasPrice = BigUInt(dappCommonModel.appChain?.quota.trailingZerosTrimmed ?? "") ?? 1000000
             paramBuilder.to = dappCommonModel.appChain?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
-            // TODO: set gas price
-            // paramBuilder.gasPrice = BigUInt(dappCommonModel.appChain?.quota.clean ?? "")?.words.first ?? 1000000
         case .eth:
-            paramBuilder.gasLimit = UInt64(gasLimit.words.first!)
+            paramBuilder.gasLimit = UInt64(gasLimit)
+            paramBuilder.gasPrice = gasPrice
             paramBuilder.to = dappCommonModel.eth?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
-            // TODO: set gas price
-            // paramBuilder.gasPrice = gasPrice.words.first!
         }
-        // TODO: password and confirm
+
+        summaryPageItem.update(paramBuilder)
+        bulletinManager.showBulletin(above: self)
     }
 }
 
-// TODO: tx sent
-extension ContractController {
-    /*
-    func transactionCompletion(_ transactionService: TransactionParamBuilder, result: TransactionParamBuilder.Result) {
-        switch result {
-        case .error:
-            delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
-        case .succee(let txhash):
-            SensorsAnalytics.Track.transaction(
-                chainType: tokenModel.chainId,
-                currencyType: tokenModel.symbol,
-                currencyNumber: Double(value) ?? 0.0,
-                receiveAddress: dappCommonModel.appChain?.to ?? "",
-                outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
-                transactionType: .normal
-            )
-            delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
+private extension ContractController {
+    func sendTransaction(password: String) {
+        DispatchQueue.global().async {
+            do {
+                let txHash: TxHash
+                if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
+                    txHash = try self.sendEthereumTransaction(password: password)
+                } else {
+                    txHash = try self.sendAppChainTransaction(password: password)
+                }
+
+                DispatchQueue.main.async {
+                    let successPageItem = SuccessPageItem.create(title: "交易已发送")
+                    successPageItem.actionHandler = { item in
+                        self.transactionDidSend(txhash: txHash)
+                    }
+                    self.bulletinManager.push(item: successPageItem)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    self.bulletinManager.hideActivityIndicator()
+                    let passwordPageItem = self.createPasswordPageItem()
+                    self.bulletinManager.push(item: passwordPageItem)
+                    passwordPageItem.errorMessage = error.localizedDescription
+                }
+            }
         }
-        confirmViewController?.dismiss()
-        navigationController?.popViewController(animated: true)
-    }*/
+    }
+
+    func transactionDidSend(txhash: TxHash?) {
+        if let txhash = txhash {
+            delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
+            track()
+            bulletinManager.dismissBulletin()
+            navigationController?.popViewController(animated: true)
+        } else {
+            delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
+        }
+    }
+
+    func track() {
+        SensorsAnalytics.Track.transaction(
+            chainType: tokenModel.chainId,
+            currencyType: tokenModel.symbol,
+            currencyNumber: Double(value) ?? 0.0,
+            receiveAddress: dappCommonModel.appChain?.to ?? "",
+            outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+            transactionType: .normal
+        )
+    }
 }
 
 extension ContractController: AdvancedViewControllerDelegate {
