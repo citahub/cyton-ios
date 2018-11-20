@@ -84,7 +84,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
                                 <rect key="frame" x="0.0" y="553" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-qH-Iod">
@@ -94,6 +94,9 @@
                                         </constraints>
                                         <state key="normal" image="webview_back_off"/>
                                         <state key="selected" image="webview_back_on"/>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="CZ7-s6-Al6"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-In-vMa">
                                         <rect key="frame" x="220" y="0.0" width="35" height="50"/>
@@ -102,6 +105,9 @@
                                         </constraints>
                                         <state key="normal" image="webview_ahead_off"/>
                                         <state key="selected" image="webview_ahead_on"/>
+                                        <connections>
+                                            <action selector="forwardButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="e2S-rM-CbC"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -114,6 +120,14 @@
                                     <constraint firstAttribute="trailing" secondItem="BfV-In-vMa" secondAttribute="trailing" constant="120" id="lHX-xq-uy7"/>
                                     <constraint firstItem="wRj-qH-Iod" firstAttribute="leading" secondItem="VgY-uG-z9h" secondAttribute="leading" constant="120" id="lqX-gL-zlZ"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9137254901960784" green="0.9137254901960784" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -125,52 +139,17 @@
                         <viewLayoutGuide key="safeArea" id="gER-XQ-gWH"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Qm-bc-XTa">
-                        <leftBarButtonItems>
-                            <barButtonItem style="plain" id="ePV-U3-Zan">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OKc-Dt-8LT">
-                                    <rect key="frame" x="16" y="11" width="20" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="nav_darkback"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="didClickBackButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="CX7-1k-G1i"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem id="Bga-GI-kg8"/>
-                            <barButtonItem style="plain" id="xrC-yM-uP4">
-                                <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yMa-Me-R5K">
-                                    <rect key="frame" x="52" y="4" width="36" height="36"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="close"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="dudCkucjCloseButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="XzD-wh-2cb"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Vep-gW-6d4">
-                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Omb-kN-Iy0">
-                                <rect key="frame" x="339" y="11" width="20" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="dappCollection"/>
-                                <connections>
-                                    <action selector="didClickCollectionButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="lXN-BQ-rzE"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="close" id="R07-4H-L5J">
+                            <color key="tintColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didClickCloseButton:" destination="nmb-oI-LyV" id="uhr-a7-n0I"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="closeButton" destination="yMa-Me-R5K" id="X2v-ie-vr8"/>
+                        <outlet property="backButton" destination="wRj-qH-Iod" id="uGS-eB-COI"/>
+                        <outlet property="directionView" destination="VgY-uG-z9h" id="ejC-U5-hhO"/>
+                        <outlet property="forwardButton" destination="BfV-In-vMa" id="7PR-dA-sCs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPQ-Pb-tqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -752,7 +731,6 @@
     </scenes>
     <resources>
         <image name="close" width="36" height="36"/>
-        <image name="dappCollection" width="20" height="17"/>
         <image name="nav_darkback" width="14" height="22"/>
         <image name="webview_ahead_off" width="10" height="18"/>
         <image name="webview_ahead_on" width="10" height="18"/>

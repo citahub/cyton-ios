@@ -10,10 +10,19 @@ import UIKit
 import WebKit
 
 class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var directionView: UIView!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var forwardButton: UIButton!
     var requestUrlStr = ""
     var mainUrl: URL?
     var webViewProgressObservation: NSKeyValueObservation!
+    var viewFrameCGRect: CGRect {
+        if #available(iOS 11.0, *) {
+            return self.view.safeAreaLayoutGuide.layoutFrame
+        } else {
+            return self.view.frame
+        }
+    }
     lazy var webView: WKWebView = {
         let webView = WKWebView(
             frame: .zero,
@@ -47,7 +56,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     }()
 
     override func viewDidLayoutSubviews() {
-        self.webView.frame = self.view.bounds
+        self.webView.frame = viewFrameCGRect
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -60,6 +69,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         super.viewDidLoad()
         view.addSubview(webView)
         view.addSubview(progressView)
+        view.bringSubviewToFront(directionView)
         requestUrlStr = requestUrlStr.trimmingCharacters(in: .whitespaces)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
@@ -101,15 +111,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         }
     }
 
-    @IBAction func didClickBackButton(_ sender: UIButton) {
-        if webView.canGoBack {
-            webView.goBack()
-        } else {
-            navigationController?.popViewController(animated: true)
-        }
-    }
-
-    @IBAction func dudCkucjCloseButton(_ sender: UIButton) {
+    @IBAction func didClickCloseButton(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
 
@@ -124,6 +126,31 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
             script = "onSignError(\(id), \"\(error!)\")"
         }
         webView.evaluateJavaScript(script, completionHandler: nil)
+    }
+
+    func adjustmentDirectionButton() {
+        if webView.canGoBack {
+            if directionView.isHidden == true {
+                directionView.isHidden = false
+                webView.frame = CGRect(x: viewFrameCGRect.origin.x, y: viewFrameCGRect.origin.y, width: viewFrameCGRect.size.width, height: viewFrameCGRect.size.height - 50)
+            }
+            backButton.isSelected = true
+        } else {
+            backButton.isSelected = false
+        }
+        if webView.canGoForward {
+            forwardButton.isSelected = true
+        } else {
+            forwardButton.isSelected = false
+        }
+    }
+
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        webView.goBack()
+    }
+
+    @IBAction func forwardButtonAction(_ sender: UIButton) {
+        webView.goForward()
     }
 
     deinit {
@@ -223,11 +250,7 @@ extension BrowserViewController {
 extension BrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
-        if webView.canGoBack {
-            closeButton.isHidden = false
-        } else {
-            closeButton.isHidden = true
-        }
+        adjustmentDirectionButton()
         let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
         let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
         webView.evaluateJavaScript(relJs) { (manifest, _) in
