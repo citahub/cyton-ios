@@ -12,7 +12,7 @@ import Web3swift
 import BigInt
 import PullToRefresh
 
-class WalletViewController: UITableViewController, SelectWalletControllerDelegate, QRCodeViewControllerDelegate {
+class WalletViewController: UITableViewController, SelectWalletControllerDelegate {
     @IBOutlet var titleView: UIView!
     @IBOutlet var tabHeader: UIView!
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
@@ -123,12 +123,10 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
 
     private func updateNavigationBar() {
         if isHeaderViewHidden {
-//            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [switchWalletButtonItem]
             navigationItem.title = WalletRealmTool.getCurrentAppModel().currentWallet?.name
             navigationItem.titleView = nil
         } else {
-//            navigationItem.leftBarButtonItems = [scanBarButtonItem]
             navigationItem.rightBarButtonItems = [requestPaymentButtonItem]
             navigationItem.titleView = titleView
         }
@@ -190,21 +188,20 @@ class WalletViewController: UITableViewController, SelectWalletControllerDelegat
         return tabHeader.frame.height
     }
 
-    // MARK: - QRCodeControllerDelegate
-    func didBackQRCodeMessage(codeResult: String) {
-        guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.filter({ (model) -> Bool in
-            return model.symbol == "ETH"
-        }).first else {
-            return
-        }
-        let controller: TransactionViewController = UIStoryboard(name: .transaction).instantiateViewController()
-        controller.token = token
-        controller.didBackQRCodeMessage(codeResult: codeResult)
-        navigationController?.pushViewController(controller, animated: true)
-    }
-
     deinit {
         tableView.removePullToRefresh(at: .top)
+    }
+}
+
+extension WalletViewController: QRCodeViewControllerDelegate {
+    func didBackQRCodeMessage(codeResult: String) {
+        guard let token = WalletRealmTool.getCurrentAppModel().nativeTokenList.first(where: { $0.symbol == "ETH" }) else {
+            return
+        }
+        let controller: SendTransactionViewController = UIStoryboard(name: .sendTransaction).instantiateViewController()
+        controller.token = token
+        controller.recipientAddress = codeResult // TODO: At least do address validation here?
+        navigationController?.pushViewController(controller, animated: true)
     }
 }
 

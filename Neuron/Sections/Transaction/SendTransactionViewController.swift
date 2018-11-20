@@ -39,6 +39,7 @@ class SendTransactionViewController: UITableViewController {
     }()
 
     var token: TokenModel!
+    var recipientAddress: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +49,9 @@ class SendTransactionViewController: UITableViewController {
             self.updateGasCost()
         })
         paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        if recipientAddress != nil {
+            paramBuilder.to = recipientAddress
+        }
 
         setupUI()
     }
@@ -97,6 +101,8 @@ class SendTransactionViewController: UITableViewController {
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
         tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
+        addressTextField.text = paramBuilder.to
+
         updateGasCost()
     }
 
@@ -272,6 +278,8 @@ extension SendTransactionViewController: UITextFieldDelegate {
 
 extension SendTransactionViewController: QRCodeViewControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
+        // TODO: validate qr code (address or other protocol)
+        paramBuilder.to = codeResult
         addressTextField.text = codeResult
     }
 }
