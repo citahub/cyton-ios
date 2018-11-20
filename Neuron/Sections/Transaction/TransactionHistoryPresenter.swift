@@ -32,7 +32,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     func reloadData(completion: CallbackBlock? = nil) {
         guard !loading else {
-            return 
+            return
         }
         page = 1
         hasMoreData = true
@@ -112,17 +112,17 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private var pageSize: UInt = 10
     private let walletAddress: String
     private let tokenAddress: String
-    private let tokenType: TokenModel.TokenType
+    private let tokenType: TokenType
 
     private func loadData() throws -> [TransactionDetails] {
         switch tokenType {
-        case .nervos:
+        case .appChain:
             return try AppChainNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
-        case .ethereum:
+        case .ether:
             return try EthereumNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
         case .erc20:
             return try EthereumNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
-        case .nervosErc20:
+        case .appChainErc20:
             return try AppChainNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
         }
     }
@@ -137,15 +137,13 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
             self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
         }
     }
+
     func sentTransactionStatusChanged(transaction: TransactionDetails) {
-        DispatchQueue.main.async {
-            for (idx, trans) in self.transactions.enumerated() {
-                if trans.hash == transaction.hash {
-                    self.transactions.remove(at: idx)
-                    self.transactions.insert(transaction, at: idx)
-                    self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
-                    return
-                }
+        if let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) {
+            DispatchQueue.main.async {
+                self.transactions.remove(at: idx)
+                self.transactions.insert(transaction, at: idx)
+                self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
             }
         }
     }

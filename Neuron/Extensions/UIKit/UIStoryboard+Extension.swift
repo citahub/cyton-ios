@@ -30,7 +30,8 @@ extension UIStoryboard {
         case addWallet
         case main
         case overlay
-        case transaction
+        case transactionHistory
+        case sendTransaction
         case walletManagement
         case dAppBrowser
 

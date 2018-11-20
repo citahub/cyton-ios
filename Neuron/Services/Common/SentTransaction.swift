@@ -56,12 +56,12 @@ extension ThreadSafeObject where Self: Object {
 }
 
 class SentTransaction: Object, ThreadSafeObject {
-    var tokenType: TokenModel.TokenType {
+    var tokenType: TokenType {
         set {
             privateTokenType = newValue.rawValue
         }
         get {
-            return TokenModel.TokenType(rawValue: privateTokenType) ?? .nervos
+            return TokenType(rawValue: privateTokenType) ?? .appChain
         }
     }
     @objc dynamic var contractAddress: String = ""
@@ -123,26 +123,27 @@ class SentTransaction: Object, ThreadSafeObject {
     }
 
     // Ethereum
-    required convenience init(tokenType: TokenModel.TokenType, from: String, sendingResult: Web3swift.TransactionSendingResult) {
-        self.init(contractAddress: "", tokenType: tokenType, from: from, sendingResult: sendingResult)
+    required convenience init(tokenType: TokenType, from: String, to: String = "", value: BigUInt = 0, txFee: BigUInt = 0, txHash: TxHash) {
+        self.init(contractAddress: "", tokenType: tokenType, from: from, to: to, value: value, txFee: txFee, txHash: txHash)
     }
+
     // Erc20
-    required convenience init(contractAddress: String, tokenType: TokenModel.TokenType, from: String, sendingResult: Web3swift.TransactionSendingResult) {
+    required convenience init(contractAddress: String, tokenType: TokenType, from: String, to: String = "", value: BigUInt = 0, txFee: BigUInt = 0, txHash: TxHash) {
         self.init()
         self.tokenType = tokenType
-        txHash = sendingResult.hash
-        blockNumber = (try? EthereumNetwork().getWeb3().eth.getTransactionDetails(sendingResult.hash))?.blockNumber ?? 0
+        self.txHash = txHash
+        blockNumber = (try? EthereumNetwork().getWeb3().eth.getTransactionDetails(txHash))?.blockNumber ?? 0
         self.from = from
-        to = sendingResult.transaction.to.address
-        amount = sendingResult.transaction.value
-        txFee = sendingResult.transaction.gasPrice * sendingResult.transaction.gasLimit
+        self.to = to
+        amount = value
+        self.txFee = txFee
         self.contractAddress = contractAddress
         status = .pending
         ethereumNetwork = EthereumNetwork().host().absoluteString
     }
 
     // AppChain
-    required convenience init(tokenType: TokenModel.TokenType, from: String, hash: String, transaction: Transaction) {
+    required convenience init(tokenType: TokenType, from: String, hash: String, transaction: Transaction) {
         self.init()
         txHash = hash
         blockNumber = BigUInt(transaction.validUntilBlock)
@@ -174,14 +175,14 @@ class SentTransaction: Object, ThreadSafeObject {
 
     func transactionDetails() -> TransactionDetails {
         let details: TransactionDetails
-        if tokenType == .ethereum {
+        if tokenType == .ether {
             let ethereum = EthereumTransactionDetails()
             details = ethereum
         } else if tokenType == .erc20 {
             let erc20 = Erc20TransactionDetails()
             erc20.contractAddress = contractAddress
             details = erc20
-        } else if tokenType == .nervos {
+        } else if tokenType == .appChain {
             let appChain = AppChainTransactionDetails()
             details = appChain
         } else {

@@ -36,12 +36,12 @@ struct TokenProfile: Decodable {
 extension TokenModel {
     func getProfile(complection: @escaping (TokenProfile?) -> Void) {
         switch type {
+        case .ether:
+            getEthereumProfile(complection: complection)
         case .erc20:
             getErc20Profile(complection: complection)
-        case .nervos, .nervosErc20:
+        case .appChain, .appChainErc20:
             complection(nil)
-        case .ethereum:
-            getEthereumProfile(complection: complection)
         }
     }
 
