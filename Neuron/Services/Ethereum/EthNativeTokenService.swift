@@ -38,6 +38,6 @@ struct EthNativeTokenService {
     private static func formatBalanceValue(value: BigUInt) -> String {
         let format = Web3.Utils.formatToPrecision(value, formattingDecimals: 8, fallbackToScientific: false)!
         let finalValue = Double(format)!
-        return finalValue.clean
+        return finalValue.trailingZerosTrimmed
     }
 }

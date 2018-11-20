@@ -1,5 +1,5 @@
 //
-//  TransactionViewController.swift
+//  TransactionHistoryViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/9/6.
@@ -23,7 +23,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
-    var tokenType: TokenType = .erc20Token
+    var tokenType: TokenType = .erc20
     var tokenModel: TokenModel! {
         didSet {
             guard tokenModel != nil else { return }
@@ -64,8 +64,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
             let requestPaymentViewController = segue.destination as! RequestPaymentViewController
             let appModel = WalletRealmTool.getCurrentAppModel()
             requestPaymentViewController.appModel = appModel
-        } else if segue.identifier == "transaction" {
-            let controller = segue.destination as! TransactionViewController
+        } else if segue.identifier == "sendTransaction" {
+            let controller = segue.destination as! SendTransactionViewController
             controller.token = presenter?.token
         }
     }
@@ -215,12 +215,6 @@ extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate 
 
         Toast.hideHUD()
     }
-}
-
-enum TokenType {
-    case ethereumToken
-    case nervosToken
-    case erc20Token
 }
 
 class TransactionHistoryTableViewCell: UITableViewCell {

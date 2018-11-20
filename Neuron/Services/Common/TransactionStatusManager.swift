@@ -66,7 +66,7 @@ class TransactionStatusManager: NSObject {
     }
 
     // MARK: -
-    func getTransactions(walletAddress: String, tokenType: TokenModel.TokenType, tokenAddress: String) -> [TransactionDetails] {
+    func getTransactions(walletAddress: String, tokenType: TokenType, tokenAddress: String) -> [TransactionDetails] {
         let ethereumNetwork = EthereumNetwork().host().absoluteString
         return self.realm.objects(SentTransaction.self).filter({
             $0.from == walletAddress &&
@@ -94,11 +94,11 @@ class TransactionStatusManager: NSObject {
         for sentTransaction in transactions {
             let result: TransactionStateResult
             switch sentTransaction.tokenType {
-            case .ethereum:
+            case .ether:
                 result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
             case .erc20:
                 result = EthereumNetwork().getTransactionStatus(sentTransaction: sentTransaction)
-            case .nervos:
+            case .appChain:
                 result = AppChainNetwork().getTransactionStatus(sentTransaction: sentTransaction)
             default:
                 fatalError()

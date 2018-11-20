@@ -17,25 +17,25 @@ class GasCalculatorTests: XCTestCase {
         // Default gas limit is 21000
         XCTAssertEqual(
             Double("0.000084")!,
-            GasCalculator.txFee(gasPrice: 4_000_000_000),
+            GasCalculator.txFeeNatural(gasPrice: 4_000_000_000),
             accuracy: doubleAccuracy
         )
 
         XCTAssertEqual(
             Double("0.002")!,
-            GasCalculator.txFee(gasPrice: 20_000_000_000, gasLimit: 100_000),
+            GasCalculator.txFeeNatural(gasPrice: 20_000_000_000, gasLimit: 100_000),
             accuracy: doubleAccuracy
         )
 
         XCTAssertEqual(
             Double("0.1005")!,
-            GasCalculator.txFee(gasPrice: 100_000_000_000, gasLimit: 1_005_000),
+            GasCalculator.txFeeNatural(gasPrice: 100_000_000_000, gasLimit: 1_005_000),
             accuracy: doubleAccuracy
         )
 
         XCTAssertEqual(
             Double("6.0")!,
-            GasCalculator.txFee(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000),
+            GasCalculator.txFeeNatural(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000),
             accuracy: doubleAccuracy
         )
     }
@@ -43,7 +43,7 @@ class GasCalculatorTests: XCTestCase {
     func testGetPrice() {
         let expect = expectation(description: "Async get current gas price")
         var gasPrice = BigUInt(0)
-        GasCalculator.getGasPrice { price in
+        GasPriceFetcher().fetchGasPrice { price in
             gasPrice = price
             expect.fulfill()
         }
@@ -54,7 +54,7 @@ class GasCalculatorTests: XCTestCase {
     func testInstance() {
         XCTAssertEqual(
             Double("6.0")!,
-            GasCalculator(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000).txFee,
+            GasCalculator(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000).txFeeNatural,
             accuracy: doubleAccuracy
         )
     }
@@ -63,7 +63,7 @@ class GasCalculatorTests: XCTestCase {
         measure {
             XCTAssertEqual(
                 Double("6.0")!,
-                GasCalculator.txFee(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000),
+                GasCalculator.txFeeNatural(gasPrice: 1_000_000_000_000, gasLimit: 6_000_000),
                 accuracy: doubleAccuracy
             )
         }

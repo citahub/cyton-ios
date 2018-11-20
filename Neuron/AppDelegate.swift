@@ -27,8 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
-        UINavigationBar.fixSpace
-        UINavigationItem.fixSpace
         _ = TransactionStatusManager.manager
         return true
     }
