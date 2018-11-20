@@ -29,7 +29,6 @@ class ContractController: UITableViewController {
     private var tokenModel = TokenModel()
     var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
-    var confirmViewController: TransactionConfirmViewController?
 
     @IBOutlet weak var valueLabel: UILabel!
     @IBOutlet weak var gasLabel: UILabel!
@@ -217,11 +216,7 @@ class ContractController: UITableViewController {
             // TODO: set gas price
             // paramBuilder.gasPrice = gasPrice.words.first!
         }
-        let controller: TransactionConfirmViewController = UIStoryboard(name: .transactionHistory).instantiateViewController()
-        controller.modalPresentationStyle = .overCurrentContext
-        controller.paramBuilder = paramBuilder
-        present(controller, animated: false, completion: nil)
-        confirmViewController = controller
+        // TODO: password and confirm
     }
 }
 

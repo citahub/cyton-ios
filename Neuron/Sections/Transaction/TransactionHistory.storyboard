@@ -10,100 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Transaction Confirm View Controller-->
-        <scene sceneID="9pW-lL-Qqb">
-            <objects>
-                <viewController storyboardIdentifier="TransactionConfirmViewController" id="BzD-Dc-haF" customClass="TransactionConfirmViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Pgt-iT-iqL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7MV-Kr-GAh">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" white="0.5" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ig7-ok-zt3">
-                                <rect key="frame" x="0.0" y="307" width="375" height="360"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u3p-Re-2Xw">
-                                        <rect key="frame" x="15" y="18" width="14" height="14"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="14" id="HoP-Zt-RL0"/>
-                                            <constraint firstAttribute="width" constant="14" id="ghU-7H-JHr"/>
-                                        </constraints>
-                                        <state key="normal" image="close"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
-                                                <real key="value" value="10"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="dismiss" destination="BzD-Dc-haF" eventType="touchUpInside" id="dgG-YN-tjL"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请输入钱包密码" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VTv-Ek-kEV">
-                                        <rect key="frame" x="40" y="10" width="295" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="5dy-gc-dz8"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="taJ-ce-ZBa">
-                                        <rect key="frame" x="0.0" y="49" width="375" height="1"/>
-                                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="71X-cQ-MM0"/>
-                                        </constraints>
-                                    </view>
-                                    <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pBM-lQ-NIq">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="310"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </containerView>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="VTv-Ek-kEV" firstAttribute="leading" secondItem="Ig7-ok-zt3" secondAttribute="leading" constant="40" id="4eB-tc-tyV"/>
-                                    <constraint firstItem="u3p-Re-2Xw" firstAttribute="leading" secondItem="Ig7-ok-zt3" secondAttribute="leading" constant="15" id="6T8-Rf-4zp"/>
-                                    <constraint firstItem="u3p-Re-2Xw" firstAttribute="top" secondItem="Ig7-ok-zt3" secondAttribute="top" constant="18" id="IAc-o3-2K9"/>
-                                    <constraint firstItem="pBM-lQ-NIq" firstAttribute="top" secondItem="taJ-ce-ZBa" secondAttribute="bottom" id="NAf-aD-3a2"/>
-                                    <constraint firstAttribute="trailing" secondItem="VTv-Ek-kEV" secondAttribute="trailing" constant="40" id="Nge-sv-ggf"/>
-                                    <constraint firstAttribute="height" constant="360" id="PGc-Rd-TJp"/>
-                                    <constraint firstAttribute="trailing" secondItem="pBM-lQ-NIq" secondAttribute="trailing" id="QIA-Hn-Fzt"/>
-                                    <constraint firstItem="pBM-lQ-NIq" firstAttribute="leading" secondItem="Ig7-ok-zt3" secondAttribute="leading" id="S2o-3N-v9f"/>
-                                    <constraint firstItem="taJ-ce-ZBa" firstAttribute="leading" secondItem="Ig7-ok-zt3" secondAttribute="leading" id="Tyv-sZ-Iws"/>
-                                    <constraint firstAttribute="bottom" secondItem="pBM-lQ-NIq" secondAttribute="bottom" id="aY9-X0-biw"/>
-                                    <constraint firstItem="VTv-Ek-kEV" firstAttribute="top" secondItem="Ig7-ok-zt3" secondAttribute="top" constant="10" id="b2l-MK-Ggs"/>
-                                    <constraint firstItem="pBM-lQ-NIq" firstAttribute="top" secondItem="Ig7-ok-zt3" secondAttribute="top" constant="50" id="j1G-tc-AAc"/>
-                                    <constraint firstAttribute="trailing" secondItem="taJ-ce-ZBa" secondAttribute="trailing" id="sbt-Fw-wpq"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="7MV-Kr-GAh" firstAttribute="top" secondItem="Pgt-iT-iqL" secondAttribute="top" id="8H7-fo-unH"/>
-                            <constraint firstItem="YyO-I6-SeF" firstAttribute="bottom" secondItem="7MV-Kr-GAh" secondAttribute="bottom" id="9Cc-oU-8K8"/>
-                            <constraint firstItem="7MV-Kr-GAh" firstAttribute="leading" secondItem="YyO-I6-SeF" secondAttribute="leading" id="SBU-pN-qCf"/>
-                            <constraint firstItem="Ig7-ok-zt3" firstAttribute="leading" secondItem="YyO-I6-SeF" secondAttribute="leading" id="SSs-N8-8MR"/>
-                            <constraint firstItem="7MV-Kr-GAh" firstAttribute="trailing" secondItem="YyO-I6-SeF" secondAttribute="trailing" id="Ws4-2k-LKm"/>
-                            <constraint firstItem="YyO-I6-SeF" firstAttribute="trailing" secondItem="Ig7-ok-zt3" secondAttribute="trailing" id="byk-gJ-VqR"/>
-                            <constraint firstItem="YyO-I6-SeF" firstAttribute="bottom" secondItem="Ig7-ok-zt3" secondAttribute="bottom" id="g2G-QX-LgH"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="YyO-I6-SeF"/>
-                    </view>
-                    <connections>
-                        <outlet property="backgroundView" destination="7MV-Kr-GAh" id="U2h-Ld-jLG"/>
-                        <outlet property="containTopConstraint" destination="j1G-tc-AAc" id="fzT-MY-FWr"/>
-                        <outlet property="containView" destination="pBM-lQ-NIq" id="m90-4M-LMt"/>
-                        <outlet property="contentView" destination="Ig7-ok-zt3" id="ziX-Du-X2c"/>
-                        <outlet property="titleLabel" destination="VTv-Ek-kEV" id="iym-bK-fVy"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="buN-g6-5jp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-426" y="1090"/>
-        </scene>
         <!--Transaction History View Controller-->
         <scene sceneID="LYw-Ut-HWd">
             <objects>
@@ -378,7 +284,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="close" width="36" height="36"/>
         <image name="eth_logo" width="62" height="62"/>
         <image name="warn" width="14" height="14"/>
     </resources>
