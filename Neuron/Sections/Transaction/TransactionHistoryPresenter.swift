@@ -32,7 +32,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     func reloadData(completion: CallbackBlock? = nil) {
         guard !loading else {
-            return 
+            return
         }
         page = 1
         hasMoreData = true
@@ -137,15 +137,13 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
             self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
         }
     }
+
     func sentTransactionStatusChanged(transaction: TransactionDetails) {
-        DispatchQueue.main.async {
-            for (idx, trans) in self.transactions.enumerated() {
-                if trans.hash == transaction.hash {
-                    self.transactions.remove(at: idx)
-                    self.transactions.insert(transaction, at: idx)
-                    self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
-                    return
-                }
+        if let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) {
+            DispatchQueue.main.async {
+                self.transactions.remove(at: idx)
+                self.transactions.insert(transaction, at: idx)
+                self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
             }
         }
     }
