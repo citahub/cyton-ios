@@ -642,14 +642,6 @@
             </objects>
             <point key="canvasLocation" x="6420" y="152.47376311844079"/>
         </scene>
-        <!--TransactionConfirmViewController-->
-        <scene sceneID="k0a-VR-Jha">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Transaction" referencedIdentifier="TransactionConfirmViewController" id="r9J-EJ-gjp" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="foV-mV-0px" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="6557" y="1548"/>
-        </scene>
         <!--Message Sign Controller-->
         <scene sceneID="DHH-7d-Ep9">
             <objects>
@@ -660,85 +652,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="etf-Cd-c0m"/>
                     </view>
-                    <connections>
-                        <segue destination="r9J-EJ-gjp" kind="presentation" identifier="TransactionConfirmViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="xxE-lz-bFe"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1io-gq-OLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6559" y="1145"/>
-        </scene>
-        <!--DApp签名信息确认-->
-        <scene sceneID="LsS-sx-xeA">
-            <objects>
-                <viewController storyboardIdentifier="messageSignShowViewController" title="DApp签名信息确认" id="Esw-75-qtS" customClass="MessageSignShowViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Krj-DL-raa">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7f-9h-J5k">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="310"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wz3-qU-RBp">
-                                        <rect key="frame" x="15" y="246" width="341" height="44"/>
-                                        <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="EYZ-oE-gO1"/>
-                                            <constraint firstAttribute="width" constant="341" id="dlJ-6C-ZMd"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <state key="normal" title="确认"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <integer key="value" value="5"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                        <connections>
-                                            <action selector="agreeAction:" destination="Esw-75-qtS" eventType="touchUpInside" id="CTm-0j-lKb"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="BFe-Af-8g2">
-                                        <rect key="frame" x="40" y="60" width="295" height="0.0"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                        <color key="textColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <accessibility key="accessibilityConfiguration">
-                                    <bool key="isElement" value="YES"/>
-                                </accessibility>
-                                <constraints>
-                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="top" secondItem="U7f-9h-J5k" secondAttribute="top" constant="60" id="3wl-3J-SOF"/>
-                                    <constraint firstAttribute="trailing" secondItem="BFe-Af-8g2" secondAttribute="trailing" constant="40" id="ArV-5m-Zd1"/>
-                                    <constraint firstAttribute="trailing" secondItem="Wz3-qU-RBp" secondAttribute="trailing" constant="19" id="L68-yc-FlL"/>
-                                    <constraint firstItem="Wz3-qU-RBp" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="15" id="f2h-6z-Odm"/>
-                                    <constraint firstItem="BFe-Af-8g2" firstAttribute="leading" secondItem="U7f-9h-J5k" secondAttribute="leading" constant="40" id="ljj-0z-UjZ"/>
-                                    <constraint firstAttribute="bottom" secondItem="Wz3-qU-RBp" secondAttribute="bottom" constant="20" id="zmD-5b-FZy"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <accessibility key="accessibilityConfiguration">
-                            <bool key="isElement" value="YES"/>
-                        </accessibility>
-                        <constraints>
-                            <constraint firstItem="4h2-4Y-Lkq" firstAttribute="bottom" secondItem="U7f-9h-J5k" secondAttribute="bottom" id="9YA-Bi-nDE"/>
-                            <constraint firstItem="U7f-9h-J5k" firstAttribute="leading" secondItem="4h2-4Y-Lkq" secondAttribute="leading" id="FLr-Te-ABO"/>
-                            <constraint firstItem="4h2-4Y-Lkq" firstAttribute="trailing" secondItem="U7f-9h-J5k" secondAttribute="trailing" id="USG-7H-EhZ"/>
-                            <constraint firstItem="U7f-9h-J5k" firstAttribute="top" secondItem="4h2-4Y-Lkq" secondAttribute="top" id="toU-OF-LpC"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="4h2-4Y-Lkq"/>
-                    </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="375" height="310"/>
-                    <size key="freeformSize" width="375" height="310"/>
-                    <connections>
-                        <outlet property="dataLabel" destination="BFe-Af-8g2" id="9sZ-Lv-79k"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8bi-lO-lDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="7271" y="1247"/>
+            <point key="canvasLocation" x="7215" y="152"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EWm-qr-9S2">

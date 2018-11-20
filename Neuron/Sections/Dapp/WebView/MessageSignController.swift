@@ -7,34 +7,94 @@
 //
 
 import UIKit
+import BLTNBoard
 
 protocol MessageSignControllerDelegate: class {
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?)
 }
 
-class MessageSignController: UIViewController, TransactionConfirmViewControllerDelegate {
+class MessageSignController: UIViewController {
     var dappCommonModel: DAppCommonModel!
     weak var delegate: MessageSignControllerDelegate?
     private var chainType: ChainType = .appChain
-    private var tokenModel = TokenModel()
-    private var messageSignShowViewController: MessageSignShowViewController!
-    private var confirmController: TransactionConfirmViewController!
+
+    private lazy var messagePageItem: SignMessagePageItem = {
+        return SignMessagePageItem.create()
+    }()
+    private lazy var bulletinManager: BLTNItemManager = {
+        let passwordPageItem = createPasswordPageItem()
+        messagePageItem.next = passwordPageItem
+        messagePageItem.actionHandler = { item in
+            item.manager?.displayNextItem()
+        }
+        messagePageItem.dismissalHandler = { [weak self] item in
+            self?.cancel()
+        }
+
+        return BLTNItemManager(rootItem: messagePageItem)
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        messageSignShowViewController = storyboard!.instantiateViewController(withIdentifier: "messageSignShowViewController") as? MessageSignShowViewController
-        messageSignShowViewController.delegate = self
 
-        let confirmController: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
-        confirmController.delegate = self
-        confirmController.contentViewController = messageSignShowViewController
-        self.confirmController = confirmController
-        present(confirmController, animated: false, completion: nil)
-
-        setUIData()
+        let dataText: String
+        if dappCommonModel.chainType == "AppChain" {
+            chainType = .appChain
+            dataText = dappCommonModel.appChain?.data ?? ""
+        } else {
+            chainType = .eth
+            dataText = dappCommonModel.eth?.data ?? ""
+        }
+        messagePageItem.descriptionText = String(decoding: Data.fromHex(dataText)!, as: UTF8.self)
     }
 
-    func transactionConfirmWalletPassword(_ controller: TransactionConfirmViewController, password: String) {
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        bulletinManager.showBulletin(above: self)
+    }
+
+    private func createPasswordPageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create()
+
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
+            }
+            self.signMessage(password: passwordPageItem.passwordField.text!)
+        }
+
+        passwordPageItem.dismissalHandler = { [weak self] item in
+            self?.cancel()
+        }
+
+        return passwordPageItem
+    }
+
+    private func finish(signed: String) {
+        delegate?.messageSignCallBackWebView(id: dappCommonModel!.id, value: signed, error: nil)
+        bulletinManager.dismissBulletin()
+        dismiss(animated: false)
+    }
+
+    private func cancel() {
+        delegate?.messageSignCallBackWebView(id: dappCommonModel!.id, value: "", error: DAppError.userCanceled)
+        dismiss(animated: false)
+    }
+
+    private func showSignError(_ error: String) {
+        bulletinManager.hideActivityIndicator()
+        let passwordPageItem = createPasswordPageItem()
+        bulletinManager.push(item: passwordPageItem)
+        passwordPageItem.errorMessage = error
+    }
+}
+
+// MARK: - Sign
+
+private extension MessageSignController {
+    func signMessage(password: String) {
         switch chainType {
         case .appChain:
             appChainSign(password: password)
@@ -43,53 +103,6 @@ class MessageSignController: UIViewController, TransactionConfirmViewControllerD
         }
     }
 
-    func transactionCanceled(_ controller: TransactionConfirmViewController) {
-        delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: "", error: DAppError.userCanceled)
-        dismiss(animated: false, completion: nil)
-    }
-
-    func setUIData() {
-        if dappCommonModel.chainType == "AppChain" {
-            chainType = .appChain
-            messageSignShowViewController.dataText = dappCommonModel.appChain?.data ?? ""
-        } else {
-            chainType = .eth
-            messageSignShowViewController.dataText = dappCommonModel.eth?.data ?? ""
-        }
-        getTokenModel()
-    }
-
-    func getTokenModel() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
-        switch chainType {
-        case .appChain:
-            let result = appModel.nativeTokenList.filter { return Int($0.chainId) == self.dappCommonModel.appChain!.chainId}
-            guard let model = result.first else {
-                return
-            }
-            self.tokenModel = model
-        case .eth:
-            let result = appModel.nativeTokenList.filter { return Int($0.chainId) == self.dappCommonModel.eth!.chainId}
-            guard let model = result.first else {
-                return
-            }
-            self.tokenModel = model
-        }
-    }
-}
-
-extension MessageSignController: MessageSignShowViewControllerDelegate {
-    func clickAgreeButton() {
-        confirmController.confirmTransactionInfo()
-    }
-
-    func clickRejectButton() {
-        confirmController.dismiss()
-    }
-}
-
-// MARK: - Sign
-extension MessageSignController {
     func ethSign(password: String) {
         switch dappCommonModel.name {
         case .signMessage:
@@ -113,38 +126,34 @@ extension MessageSignController {
     }
 
     func ethSignPersonalMessage(password: String) {
-        Toast.showHUD()
         ETHSignMessageService.signPersonal(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
             Toast.hideHUD()
             switch result {
             case .success(let signed):
-                self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: signed, error: nil)
-                self.view.removeFromSuperview()
-                self.confirmController.dismiss()
+                self.finish(signed: signed)
             case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+                self.showSignError(error.localizedDescription)
             }
         }
     }
 
     func ethSignMessage(password: String) {
-        Toast.showHUD()
         ETHSignMessageService.sign(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
             Toast.hideHUD()
             switch result {
             case .success(let signed):
-                self.delegate?.messageSignCallBackWebView(id: self.dappCommonModel!.id, value: signed, error: nil)
-                self.view.removeFromSuperview()
-                self.confirmController.dismiss()
+                self.finish(signed: signed)
             case .error(let error):
-                Toast.showToast(text: error.localizedDescription)
+                self.showSignError(error.localizedDescription)
             }
         }
     }
 
     func appChainSignMessage(password: String) {
+        // TODO: connect this
     }
 
     func appChainSignPersonalMessage(password: String) {
+        // TODO: connect this
     }
 }

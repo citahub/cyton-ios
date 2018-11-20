@@ -23,7 +23,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     @IBOutlet weak var containView: UIView!
     var paramBuilder: TransactionParamBuilder! {
         didSet {
-            let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transaction).instantiateViewController()
+            let controller: TransactionConfirmInfoViewController = UIStoryboard(name: .transactionHistory).instantiateViewController()
             controller.paramBuilder = paramBuilder
             controller.delegate = self
             contentViewController = controller
@@ -97,7 +97,7 @@ class TransactionConfirmViewController: UIViewController, TransactionConfirmSend
     }
 
     func confirmTransactionInfo() {
-        let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        let controller: TransactionConfirmSendViewController = UIStoryboard(name: .transactionHistory).instantiateViewController()
         controller.delegate = self
         contentViewController = controller
     }

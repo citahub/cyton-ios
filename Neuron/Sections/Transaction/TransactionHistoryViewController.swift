@@ -1,5 +1,5 @@
 //
-//  TransactionViewController.swift
+//  TransactionHistoryViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/9/6.

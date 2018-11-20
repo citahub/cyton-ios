@@ -9,7 +9,6 @@
 import UIKit
 import AppChain
 import BigInt
-import struct BigInt.BigUInt
 import Web3swift
 import EthereumAddress
 
@@ -218,7 +217,7 @@ class ContractController: UITableViewController {
             // TODO: set gas price
             // paramBuilder.gasPrice = gasPrice.words.first!
         }
-        let controller: TransactionConfirmViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        let controller: TransactionConfirmViewController = UIStoryboard(name: .transactionHistory).instantiateViewController()
         controller.modalPresentationStyle = .overCurrentContext
         controller.paramBuilder = paramBuilder
         present(controller, animated: false, completion: nil)

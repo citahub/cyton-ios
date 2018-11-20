@@ -212,7 +212,7 @@ extension BrowserViewController {
         controller.modalPresentationStyle = .overCurrentContext
         controller.delegate = self
         controller.dappCommonModel = dappCommonModel
-        present(controller, animated: false, completion: nil)
+        present(controller, animated: false)
     }
 }
 

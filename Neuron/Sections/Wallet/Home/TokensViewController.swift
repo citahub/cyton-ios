@@ -184,7 +184,7 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let controller: TransactionHistoryViewController = UIStoryboard(name: .transaction).instantiateViewController()
+        let controller: TransactionHistoryViewController = UIStoryboard(name: .transactionHistory).instantiateViewController()
         let model = tokenArray[indexPath.row]
         controller.tokenModel = model
         if model.isNativeToken {
