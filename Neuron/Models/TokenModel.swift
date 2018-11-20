@@ -17,8 +17,6 @@ enum TokenType: String {
 }
 
 class TokenModel: Object, Decodable {
-    @objc dynamic var tokenBalance = ""
-    @objc dynamic var currencyAmount = ""
     @objc dynamic var name = ""
     @objc dynamic var iconUrl: String? = ""
     @objc dynamic var address = ""
@@ -31,6 +29,9 @@ class TokenModel: Object, Decodable {
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
+
+    var tokenBalance = "0"
+    var currencyAmount = "0"
 
     override class func primaryKey() -> String? {
         return "identifier"
