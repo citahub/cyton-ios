@@ -83,7 +83,45 @@
                     <view key="view" contentMode="scaleToFill" id="DcO-5o-QAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
+                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-qH-Iod">
+                                        <rect key="frame" x="120" y="0.0" width="35" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="1cX-6s-L75"/>
+                                        </constraints>
+                                        <state key="normal" image="webview_back_off"/>
+                                        <state key="selected" image="webview_back_on"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-In-vMa">
+                                        <rect key="frame" x="220" y="0.0" width="35" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="fi2-J8-XxZ"/>
+                                        </constraints>
+                                        <state key="normal" image="webview_ahead_off"/>
+                                        <state key="selected" image="webview_ahead_on"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="BfV-In-vMa" firstAttribute="top" secondItem="VgY-uG-z9h" secondAttribute="top" id="0ph-VN-eDv"/>
+                                    <constraint firstItem="wRj-qH-Iod" firstAttribute="top" secondItem="VgY-uG-z9h" secondAttribute="top" id="Jzc-c8-1cG"/>
+                                    <constraint firstAttribute="bottom" secondItem="wRj-qH-Iod" secondAttribute="bottom" id="Kzv-6B-YQw"/>
+                                    <constraint firstAttribute="bottom" secondItem="BfV-In-vMa" secondAttribute="bottom" id="Nu2-L0-2dN"/>
+                                    <constraint firstAttribute="height" constant="50" id="S7y-H6-Mag"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfV-In-vMa" secondAttribute="trailing" constant="120" id="lHX-xq-uy7"/>
+                                    <constraint firstItem="wRj-qH-Iod" firstAttribute="leading" secondItem="VgY-uG-z9h" secondAttribute="leading" constant="120" id="lqX-gL-zlZ"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VgY-uG-z9h" firstAttribute="leading" secondItem="gER-XQ-gWH" secondAttribute="leading" id="VTh-AW-diY"/>
+                            <constraint firstItem="VgY-uG-z9h" firstAttribute="bottom" secondItem="gER-XQ-gWH" secondAttribute="bottom" id="hIV-eB-iey"/>
+                            <constraint firstItem="gER-XQ-gWH" firstAttribute="trailing" secondItem="VgY-uG-z9h" secondAttribute="trailing" id="uRW-aK-aol"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gER-XQ-gWH"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Qm-bc-XTa">
@@ -799,6 +837,10 @@
         <image name="close" width="36" height="36"/>
         <image name="dappCollection" width="20" height="17"/>
         <image name="nav_darkback" width="14" height="22"/>
+        <image name="webview_ahead_off" width="10" height="18"/>
+        <image name="webview_ahead_on" width="10" height="18"/>
+        <image name="webview_back_off" width="10" height="18"/>
+        <image name="webview_back_on" width="10" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Cdg-uK-JQ9"/>
