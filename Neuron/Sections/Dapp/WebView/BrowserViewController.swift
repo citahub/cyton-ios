@@ -16,13 +16,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     var requestUrlStr = ""
     var mainUrl: URL?
     var webViewProgressObservation: NSKeyValueObservation!
-    var viewFrameCGRect: CGRect {
-        if #available(iOS 11.0, *) {
-            return self.view.safeAreaLayoutGuide.layoutFrame
-        } else {
-            return self.view.frame
-        }
-    }
     lazy var webView: WKWebView = {
         let webView = WKWebView(
             frame: .zero,
@@ -56,7 +49,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     }()
 
     override func viewDidLayoutSubviews() {
-        self.webView.frame = viewFrameCGRect
+        self.webView.frame = safeAreaFrame
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -132,7 +125,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         if webView.canGoBack {
             if directionView.isHidden == true {
                 directionView.isHidden = false
-                webView.frame = CGRect(x: viewFrameCGRect.origin.x, y: viewFrameCGRect.origin.y, width: viewFrameCGRect.size.width, height: viewFrameCGRect.size.height - 50)
+                webView.frame = CGRect(x: safeAreaFrame.origin.x, y: safeAreaFrame.origin.y, width: safeAreaFrame.size.width, height: safeAreaFrame.size.height - 50)
             }
             backButton.isSelected = true
         } else {

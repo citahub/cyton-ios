@@ -70,7 +70,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     override func viewDidLayoutSubviews() {
-        self.webView.frame = self.view.bounds
+        self.webView.frame = safeAreaFrame
     }
 
     //scrollView代理
