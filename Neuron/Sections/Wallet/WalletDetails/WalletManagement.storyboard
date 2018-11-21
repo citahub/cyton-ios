@@ -176,7 +176,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ex3-FA-wk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ETH_test" id="eht-yj-nmo">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eth_test" id="eht-yj-nmo">
                     <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <userDefinedRuntimeAttributes>
@@ -564,8 +564,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ETH_test" width="22" height="31"/>
-        <image name="close" width="20" height="20"/>
+        <image name="close" width="36" height="36"/>
+        <image name="eth_test" width="22" height="31"/>
         <image name="icon_changepassword_info" width="28" height="28"/>
     </resources>
 </document>
