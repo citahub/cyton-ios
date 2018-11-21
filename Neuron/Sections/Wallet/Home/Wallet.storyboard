@@ -664,7 +664,7 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="transaction:" destination="FK5-Ys-aof" eventType="touchUpInside" id="4Ys-LP-9Dj"/>
+                                                                <segue destination="QWM-y2-HaL" kind="show" identifier="transaction" id="Kp2-Tz-6aU"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -1060,7 +1060,7 @@
                         <outlet property="tableHeadView" destination="lHJ-34-u6v" id="Pqj-Dh-P5g"/>
                         <outlet property="tableView" destination="H6S-k1-sPQ" id="mCD-p5-v6F"/>
                         <outlet property="totalAmountLabel" destination="oxy-Pr-ZPZ" id="8XF-WX-c5K"/>
-                        <segue destination="QHQ-B4-0WA" kind="show" identifier="transaction" id="ujt-pt-uhS"/>
+                        <segue destination="QHQ-B4-0WA" kind="show" identifier="transactionHistory" id="ujt-pt-uhS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYG-En-ouj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1143,7 +1143,7 @@
                 <viewControllerPlaceholder storyboardName="Assets" id="oiQ-1z-nMq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbO-6n-zsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1855" y="-167"/>
+            <point key="canvasLocation" x="-1855" y="-187"/>
         </scene>
         <!--AddWallet-->
         <scene sceneID="KDG-6N-jZM">
@@ -1151,7 +1151,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="AddWallet" storyboardName="AddWallet" referencedIdentifier="AddWallet" id="BlH-KW-GMN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fc1-k2-gAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1837" y="-121"/>
+            <point key="canvasLocation" x="-1838" y="-146"/>
         </scene>
         <!--SwitchWallet-->
         <scene sceneID="j2U-yR-TFi">
@@ -1159,7 +1159,7 @@
                 <viewControllerPlaceholder storyboardName="SwitchWallet" id="dVz-h4-OWp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tt3-Ul-AKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1825" y="-79"/>
+            <point key="canvasLocation" x="-1825" y="-101"/>
         </scene>
         <!--TransactionHistoryViewController-->
         <scene sceneID="MvS-d4-PAt">
@@ -1167,7 +1167,15 @@
                 <viewControllerPlaceholder storyboardName="TransactionHistory" referencedIdentifier="TransactionHistoryViewController" id="QHQ-B4-0WA" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1q-ds-eec" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1723" y="-32"/>
+            <point key="canvasLocation" x="-1723" y="-53"/>
+        </scene>
+        <!--SendTransaction-->
+        <scene sceneID="Hha-IA-bYa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SendTransaction" id="QWM-y2-HaL" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gcj-t2-pUO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1806" y="-11"/>
         </scene>
         <!--收款-->
         <scene sceneID="SFn-o6-Kln">

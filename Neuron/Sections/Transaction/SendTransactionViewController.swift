@@ -87,8 +87,10 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBOutlet private weak var amountTextField: UITextField!
     @IBOutlet private weak var gasCostLabel: UILabel!
     @IBOutlet private weak var addressTextField: UITextField!
+    @IBOutlet weak var tokenLabel: UILabel!
 
     var paramBuilder: TransactionParamBuilder!
+    var enableSwitchToken = false
     private var observers = [NSKeyValueObservation]()
 
     private lazy var summaryPageItem: TxSummaryPageItem = {
@@ -109,6 +111,9 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if enableSwitchToken && token == nil {
+            token = WalletRealmTool.getCurrentAppModel().nativeTokenList.first
+        }
 
         paramBuilder = TransactionParamBuilder(token: token)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
@@ -118,7 +123,6 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         if recipientAddress != nil {
             paramBuilder.to = recipientAddress
         }
-
         setupUI()
     }
 
@@ -126,6 +130,10 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         if segue.identifier == "TransactionGasPriceViewController" {
             let controller = segue.destination as! TransactionGasPriceViewController
             controller.param = paramBuilder
+        } else if segue.identifier == "switchToken" {
+            let controller = segue.destination as! TransactionSwitchTokenViewController
+            controller.currentToken = token
+            controller.delegate = self
         }
     }
 
@@ -168,6 +176,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         walletAddressLabel.text = wallet.address
         tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
         addressTextField.text = paramBuilder.to
+        tokenLabel.text = token.symbol
 
         updateGasCost()
     }
@@ -295,5 +304,51 @@ extension SendTransactionViewController: QRCodeViewControllerDelegate {
         // TODO: validate qr code (address or other protocol)
         paramBuilder.to = codeResult
         addressTextField.text = codeResult
+    }
+}
+
+// MARK: - Switch transaction token
+extension SendTransactionViewController: TransactionSwitchTokenViewControllerDelegate {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            if !enableSwitchToken {
+                return 0.0
+            } else {
+                return super.tableView(tableView, heightForRowAt: indexPath)
+            }
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            if enableSwitchToken {
+                cell.isHidden = false
+            } else {
+                cell.isHidden = true
+            }
+        } else {
+            cell.isHidden = false
+        }
+    }
+
+    func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken token: TokenModel) {
+        self.token = token
+
+        observers.forEach { (observe) in
+            observe.invalidate()
+        }
+        observers.removeAll()
+
+        paramBuilder = TransactionParamBuilder(token: token)
+        observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
+            self.updateGasCost()
+        })
+        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        if recipientAddress != nil {
+            paramBuilder.to = recipientAddress
+        }
+        setupUI()
     }
 }
