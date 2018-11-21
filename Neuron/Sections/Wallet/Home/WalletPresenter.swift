@@ -104,9 +104,7 @@ class WalletPresenter {
             tokens.forEach { (token) in
                 guard timestamp == self.timestamp else { return }
                 do {
-                    let balance = try self.getBalance(token: token)
-                    let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
-                    token.balance = Double(balanceText)
+                    try token.refreshBalance()
                     token.price = self.getPrice(token: token)
 
                     if let price = token.price, let balance = token.balance {
@@ -153,21 +151,6 @@ class WalletPresenter {
     }
 
     // MARK: - Utils
-    func getBalance(token: Token) throws -> BigUInt {
-        switch token.type {
-        case .ether:
-            return try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(token.walletAddress)!)
-        case .appChain, .appChainErc20:
-            return try AppChainNetwork.appChain().rpc.getBalance(address: token.walletAddress)
-        case .erc20:
-            let contractAddress = EthereumAddress(token.address)!
-            let walletAddress = EthereumAddress(token.walletAddress)!
-            let contract = EthereumNetwork().getWeb3().contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)!
-            let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
-            return result?["0"] as! BigUInt
-        }
-    }
-
     func getPrice(token: Token) -> Double? {
         let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
         guard let tokenId = currencyToken?.id else {

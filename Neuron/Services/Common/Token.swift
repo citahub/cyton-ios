@@ -13,12 +13,9 @@ import BigInt
 import EthereumAddress
 
 class Token {
-//    var tokenBalance = ""
-//    var currencyAmount = ""
     var name = ""
     var iconUrl: String? = ""
     var address = ""
-//    var decimals = 18
     var symbol = ""
     var chainName: String? = ""
     var chainId = ""
@@ -41,6 +38,35 @@ class Token {
         chainName = token.chainName
         chainHosts = token.chainHosts
         isNativeToken = token.isNativeToken
+    }
+
+    // MARK: - balance
+    private var refreshBalanceSignal: DispatchGroup?
+
+    @discardableResult func refreshBalance() throws -> Double? {
+        if let signal = refreshBalanceSignal {
+            signal.wait()
+            return self.balance
+        }
+        refreshBalanceSignal = DispatchGroup()
+        refreshBalanceSignal?.enter()
+        let balance: BigUInt
+        switch type {
+        case .ether:
+            balance = try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(walletAddress)!)
+        case .appChain, .appChainErc20:
+            balance = try AppChainNetwork.appChain().rpc.getBalance(address: walletAddress)
+        case .erc20:
+            let contractAddress = EthereumAddress(address)!
+            let walletAddress = EthereumAddress(self.walletAddress)!
+            let contract = EthereumNetwork().getWeb3().contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)!
+            let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
+            balance = result?["0"] as! BigUInt
+        }
+        let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
+        self.balance = Double(balanceText)
+        refreshBalanceSignal?.leave()
+        return self.balance
     }
 }
 

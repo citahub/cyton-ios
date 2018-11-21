@@ -127,13 +127,9 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
         return tableHeadView
     }
 
-    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        performSegue(withIdentifier: "transaction", sender: presenter.tokens[indexPath.row].tokenModel)
+        performSegue(withIdentifier: "transaction", sender: presenter.tokens[indexPath.row].tokenModel)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
