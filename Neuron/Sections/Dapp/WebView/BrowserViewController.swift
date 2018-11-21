@@ -10,17 +10,16 @@ import UIKit
 import WebKit
 
 class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
-    @IBOutlet weak var directionView: UIView!
-    @IBOutlet weak var backButton: UIButton!
-    @IBOutlet weak var forwardButton: UIButton!
+    @IBOutlet private weak var directionView: UIView!
+    @IBOutlet private weak var backButton: UIButton!
+    @IBOutlet private weak var forwardButton: UIButton!
+    @IBOutlet private weak var directionViewHeightConstraint: NSLayoutConstraint!
+
     var requestUrlStr = ""
     var mainUrl: URL?
-    var webViewProgressObservation: NSKeyValueObservation!
+    private var observations: [NSKeyValueObservation] = []
     lazy var webView: WKWebView = {
-        let webView = WKWebView(
-            frame: .zero,
-            configuration: self.config
-        )
+        let webView = WKWebView(frame: .zero, configuration: self.config)
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]
         let customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
@@ -39,7 +38,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     lazy private var progressView: UIProgressView = {
         let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
         progressView.tintColor = AppColor.themeColor
-        progressView.trackTintColor = UIColor.white
+        progressView.trackTintColor = .white
         return progressView
     }()
 
@@ -49,21 +48,20 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         return config
     }()
 
-    override func viewDidLayoutSubviews() {
-        self.webView.frame = safeAreaFrame
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: true)
         navigationController?.navigationBar.isTranslucent = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         view.addSubview(webView)
+        layoutWebView()
         view.addSubview(progressView)
         view.bringSubviewToFront(directionView)
+        directionViewHeightConstraint.constant = 0
+
         requestUrlStr = requestUrlStr.trimmingCharacters(in: .whitespaces)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
@@ -83,8 +81,10 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         let gestureRecognizer = fixSwipeBack()
         webView.addGestureRecognizer(gestureRecognizer)
 
-        webViewProgressObservation = webView.observe(\.estimatedProgress) { [weak self](webView, _) in
-            guard let self = self else { return }
+        observations.append(webView.observe(\.estimatedProgress) { [weak self] (webView, _) in
+            guard let self = self else {
+                return
+            }
             self.progressView.alpha = 1.0
             self.progressView.setProgress(Float(webView.estimatedProgress), animated: true)
             if webView.estimatedProgress >= 1.0 {
@@ -94,7 +94,10 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
                     self.progressView.setProgress(0.0, animated: false)
                 })
             }
-        }
+        })
+        observations.append(webView.observe(\.canGoBack) { [weak self] (_, _) in
+            self?.updateNavigationButtons()
+        })
     }
 
     func getRequestStr(requestStr: String) -> String {
@@ -122,17 +125,18 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         webView.evaluateJavaScript(script, completionHandler: nil)
     }
 
-    func adjustmentDirectionButton() {
-        if webView.canGoBack {
-            if directionView.isHidden {
-                directionView.isHidden = false
-                webView.frame = CGRect(x: safeAreaFrame.origin.x, y: safeAreaFrame.origin.y, width: safeAreaFrame.size.width, height: safeAreaFrame.size.height - 50)
-            }
-            backButton.isSelected = true
-        } else {
-            backButton.isSelected = false
-        }
-        forwardButton.isSelected = webView.canGoForward
+    private func updateNavigationButtons() {
+        directionViewHeightConstraint.constant = webView.canGoBack ? 50 : 0
+        backButton.isEnabled = webView.canGoBack
+        forwardButton.isEnabled = webView.canGoForward
+    }
+
+    private func layoutWebView() {
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: directionView.topAnchor).isActive = true
     }
 
     @IBAction func backButtonAction(_ sender: UIButton) {
@@ -144,7 +148,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     }
 
     deinit {
-        webViewProgressObservation.invalidate()
+        observations.forEach { $0.invalidate() }
     }
 }
 
@@ -250,15 +254,16 @@ extension BrowserViewController {
 extension BrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
-        adjustmentDirectionButton()
+        updateNavigationButtons()
+
         let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
-        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
         webView.evaluateJavaScript(relJs) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
             DAppAction().dealWithManifestJson(with: link as! String)
         }
+        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
         webView.evaluateJavaScript(refJs) { (manifest, _) in
             guard let link = manifest else {
                 return

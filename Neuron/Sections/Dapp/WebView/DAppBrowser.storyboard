@@ -84,27 +84,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
                                 <rect key="frame" x="0.0" y="553" width="375" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-qH-Iod">
-                                        <rect key="frame" x="120" y="0.0" width="35" height="50"/>
+                                        <rect key="frame" x="120" y="0.0" width="44" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="1cX-6s-L75"/>
+                                            <constraint firstAttribute="width" constant="44" id="1cX-6s-L75"/>
                                         </constraints>
-                                        <state key="normal" image="webview_back_off"/>
-                                        <state key="selected" image="webview_back_on"/>
+                                        <state key="normal" image="webview_back_on"/>
+                                        <state key="disabled" image="webview_back_off"/>
                                         <connections>
                                             <action selector="backButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="CZ7-s6-Al6"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-In-vMa">
-                                        <rect key="frame" x="220" y="0.0" width="35" height="50"/>
+                                        <rect key="frame" x="211" y="0.0" width="44" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="fi2-J8-XxZ"/>
+                                            <constraint firstAttribute="width" constant="44" id="fi2-J8-XxZ"/>
                                         </constraints>
-                                        <state key="normal" image="webview_ahead_off"/>
-                                        <state key="selected" image="webview_ahead_on"/>
+                                        <state key="normal" image="webview_ahead_on"/>
+                                        <state key="disabled" image="webview_ahead_off"/>
                                         <connections>
                                             <action selector="forwardButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="e2S-rM-CbC"/>
                                         </connections>
@@ -149,6 +149,7 @@
                     <connections>
                         <outlet property="backButton" destination="wRj-qH-Iod" id="uGS-eB-COI"/>
                         <outlet property="directionView" destination="VgY-uG-z9h" id="ejC-U5-hhO"/>
+                        <outlet property="directionViewHeightConstraint" destination="S7y-H6-Mag" id="ok5-gW-770"/>
                         <outlet property="forwardButton" destination="BfV-In-vMa" id="7PR-dA-sCs"/>
                     </connections>
                 </viewController>
