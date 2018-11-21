@@ -50,7 +50,7 @@ class WalletViewController: UIViewController {
     // MARK: - Actions
     @IBAction func refresh() {
         guard !presenter.refreshing else { return }
-        presenter.refresh()
+        presenter.refreshAmount()
     }
     @IBAction func walletQRCode(_ sender: Any) {
     }
@@ -61,7 +61,9 @@ class WalletViewController: UIViewController {
 extension WalletViewController: WalletPresenterDelegate {
     func walletPresenter(presenter: WalletPresenter, didRefreshTokenAmount token: Token) {
         guard let index = presenter.tokens.lastIndex(where: { $0 == token }) else { return }
+        tableView.beginUpdates()
         tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .none)
+        tableView.endUpdates()
     }
 
     func walletPresenter(presenter: WalletPresenter, didRefreshToken tokens: [Token]) {
@@ -72,31 +74,33 @@ extension WalletViewController: WalletPresenterDelegate {
         currencyLabel.text = "总资产(\(currency.name))"
     }
 
+    func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
+        totalAmountLabel.text = "- - -"
+        title = wallet.name
+    }
+
     func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
         if amount == 0.0 {
             totalAmountLabel.text = "暂无资产"
         } else {
-            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + String(format: "%.8lf", amount)
+            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + String(format: "%.4lf", amount)
         }
     }
 
     func walletPresenterBeganRefresh(presenter: WalletPresenter) {
-        if !tableView.refreshControl!.isRefreshing {
-            UIView.beginAnimations("refresh", context: nil)
-            UIView.setAnimationDuration(0.4)
-            UIView.setAnimationRepeatCount(Float(Int.max))
-            UIView.setAnimationCurve(.linear)
-            refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
-            UIView.commitAnimations()
-        }
+        UIView.beginAnimations("refresh", context: nil)
+        UIView.setAnimationDuration(0.4)
+        UIView.setAnimationRepeatCount(Float(Int.max))
+        UIView.setAnimationCurve(.linear)
+        refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
+        UIView.commitAnimations()
     }
 
     func walletPresenterEndedRefresh(presenter: WalletPresenter) {
         if tableView.refreshControl!.isRefreshing {
             tableView.refreshControl?.endRefreshing()
-        } else {
-            refreshButton.layer.removeAllAnimations()
         }
+        refreshButton.layer.removeAllAnimations()
     }
 }
 
@@ -127,12 +131,16 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
         return false
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+    }
+
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        refreshButton.alpha = 1 - scrollView.contentOffset.y / -60
+        refreshButton.alpha = 1 - scrollView.contentOffset.y / -125
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print(#function)
         self.refreshButton.alpha = 1.0
         self.tableView.refreshControl?.endRefreshing()
     }

@@ -1112,6 +1112,9 @@
                             <state key="normal" title="添加资产" image="wallet_switch_arrow">
                                 <color key="titleColor" red="0.40784313725490196" green="0.42352941176470588" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
+                            <connections>
+                                <segue destination="oiQ-1z-nMq" kind="show" id="2aS-6V-N6b"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1128,13 +1131,21 @@
             </objects>
             <point key="canvasLocation" x="-2423.1999999999998" y="-100.29985007496252"/>
         </scene>
+        <!--Assets-->
+        <scene sceneID="SWU-bp-5hy">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Assets" id="oiQ-1z-nMq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KbO-6n-zsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1881" y="-146"/>
+        </scene>
         <!--AddWallet-->
         <scene sceneID="KDG-6N-jZM">
             <objects>
                 <viewControllerPlaceholder storyboardIdentifier="AddWallet" storyboardName="AddWallet" referencedIdentifier="AddWallet" id="BlH-KW-GMN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fc1-k2-gAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1835" y="-193"/>
+            <point key="canvasLocation" x="-1864" y="-101"/>
         </scene>
         <!--SwitchWallet-->
         <scene sceneID="j2U-yR-TFi">
@@ -1142,7 +1153,7 @@
                 <viewControllerPlaceholder storyboardName="SwitchWallet" id="dVz-h4-OWp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tt3-Ul-AKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1839" y="-78"/>
+            <point key="canvasLocation" x="-1850" y="-56"/>
         </scene>
         <!--收款-->
         <scene sceneID="SFn-o6-Kln">

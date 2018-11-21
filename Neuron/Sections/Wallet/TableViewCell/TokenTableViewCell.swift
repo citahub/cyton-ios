@@ -26,21 +26,9 @@ class TokenTableViewCell: UITableViewCell {
                 if let price = token.price {
                     let amount = price * balance
                     let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-                    amountLabel.text = "≈\(currency.symbol)" + String(format: "%.8lf", amount)
+                    amountLabel.text = "≈\(currency.symbol)" + String(format: "%.4lf", amount)
                 }
             }
         }
     }
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
