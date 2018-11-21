@@ -203,13 +203,13 @@
                         <action selector="scanQRCode:" destination="NFk-Vr-nsf" id="ujs-Pd-r3n"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem image="switchWallet" id="C0H-hr-lhb">
+                <barButtonItem image="nav_switch_wallet" id="C0H-hr-lhb">
                     <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <segue destination="ZGv-cZ-bkz" kind="push" identifier="switchWallet" id="uOJ-eb-Ope"/>
                     </connections>
                 </barButtonItem>
-                <barButtonItem title="Item" image="walletQRCode" id="26M-ch-g5f">
+                <barButtonItem title="Item" image="wallet_qr_code" id="26M-ch-g5f">
                     <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                     <connections>
                         <segue destination="7a9-kY-o3s" kind="show" identifier="requestPayment" id="Ayf-xQ-gJ4"/>
@@ -356,7 +356,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="7dH-r2-K0B">
-                            <rect key="frame" x="0.0" y="666" width="375" height="1"/>
+                            <rect key="frame" x="0.0" y="98" width="375" height="1"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -435,7 +435,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="YKM-Jx-bg8">
-                            <rect key="frame" x="0.0" y="621" width="375" height="46"/>
+                            <rect key="frame" x="0.0" y="98" width="375" height="46"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mba-4c-xcQ">
@@ -567,12 +567,12 @@
         <image name="add_asset" width="93" height="23"/>
         <image name="copy_address" width="14" height="14"/>
         <image name="nav_scan" width="44" height="44"/>
-        <image name="switchWallet" width="24" height="24"/>
+        <image name="nav_switch_wallet" width="24" height="24"/>
         <image name="switch_wallet_icon" width="24" height="20"/>
-        <image name="walletQRCode" width="22" height="22"/>
         <image name="wallet_detail" width="22" height="4"/>
+        <image name="wallet_qr_code" width="22" height="22"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="c3u-Wj-7bo"/>
+        <segue reference="uOJ-eb-Ope"/>
     </inferredMetricsTieBreakers>
 </document>

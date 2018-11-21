@@ -54,7 +54,7 @@ class AddAssetTableViewCell: UITableViewCell, UITextFieldDelegate {
                 rightTextField.tag = 3000 // 根据tag来跟别的textfield区分
             } else if selectRow == 1 {
                 rightTextField.rightViewMode = .always
-                secBtn.setImage(UIImage.init(named: "qrCode"), for: .normal)
+                secBtn.setImage(UIImage.init(named: "qr_code"), for: .normal)
                 secBtn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: -15)
                 secBtn.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
                 rightTextField.tag = 3002 // 根据tag来跟别的textfield区分

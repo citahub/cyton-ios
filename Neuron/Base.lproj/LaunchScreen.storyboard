@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,15 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dJl-55-Bkc">
-                                <rect key="frame" x="124" y="210" width="126" height="101"/>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launch_icon" translatesAutoresizingMaskIntoConstraints="NO" id="dJl-55-Bkc">
+                                <rect key="frame" x="124.5" y="210" width="126" height="101"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="101" id="Vpe-1c-SlH"/>
                                     <constraint firstAttribute="width" constant="126" id="hW1-SG-3nL"/>
                                 </constraints>
                             </imageView>
                             <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nervos_launch" translatesAutoresizingMaskIntoConstraints="NO" id="Cx1-07-dWq">
-                                <rect key="frame" x="147" y="593" width="80" height="32"/>
+                                <rect key="frame" x="147.5" y="593" width="80" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="GTg-Gf-pwA"/>
                                     <constraint firstAttribute="height" constant="32" id="Qfq-Xj-NZ6"/>
@@ -58,7 +58,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="launchIcon" width="126" height="101"/>
+        <image name="launch_icon" width="126" height="101"/>
         <image name="nervos_launch" width="80" height="32"/>
         <image name="peckshield" width="120" height="12"/>
     </resources>

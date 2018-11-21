@@ -32,7 +32,7 @@ class SearchAppController: UITableViewController, ErrorOverlayPresentable {
 
         let qrButton = UIButton(type: .custom)
         qrButton.frame = CGRect(x: 0, y: 0, width: 40, height: 30)
-        qrButton.setImage(UIImage(named: "qrCode"), for: .normal)
+        qrButton.setImage(UIImage(named: "qr_code"), for: .normal)
         qrButton.addTarget(self, action: #selector(didClickQRButton), for: .touchUpInside)
         textField.rightViewMode = .always
         textField.rightView = qrButton

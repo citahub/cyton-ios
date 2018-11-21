@@ -33,7 +33,7 @@ class AssetTableViewCell: UITableViewCell {
 
     var iconUrlStr: String? {
         didSet {
-            iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage.init(named: "ETH_test"), options: .retryFailed, completed: nil)
+            iconImage.sd_setImage(with: URL(string: iconUrlStr!), placeholderImage: UIImage(named: "eth_test"), options: .retryFailed, completed: nil)
         }
     }
 

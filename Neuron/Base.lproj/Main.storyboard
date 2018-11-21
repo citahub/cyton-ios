@@ -49,7 +49,7 @@
         <scene sceneID="LwR-br-IZa">
             <objects>
                 <viewControllerPlaceholder storyboardName="Settings" id="Ycr-tU-11D" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" image="setting_off" selectedImage="setting_on" id="Cn2-zO-P7f"/>
+                    <tabBarItem key="tabBarItem" title="我" image="Main_off" selectedImage="Main_on" id="Cn2-zO-P7f"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xGO-bN-eUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -129,11 +129,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Main_off" width="21" height="21"/>
+        <image name="Main_on" width="20" height="19"/>
         <image name="dapp_off" width="22" height="23"/>
         <image name="dapp_on" width="20" height="23"/>
         <image name="search_dapp" width="20" height="20"/>
-        <image name="setting_off" width="24" height="24"/>
-        <image name="setting_on" width="22" height="22"/>
         <image name="wallet_off" width="22" height="24"/>
         <image name="wallet_on" width="20" height="22"/>
     </resources>
