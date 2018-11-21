@@ -24,21 +24,27 @@ protocol WalletPresenterDelegate: NSObjectProtocol {
 }
 
 class WalletPresenter {
-    var currentWallet: WalletModel?
-    var currency: LocalCurrency!
-    private (set) var tokens = [Token]() {
+    private (set) var currentWallet: WalletModel? {
         didSet {
-            timestamp = Date().timeIntervalSince1970
-            delegate?.walletPresenter(presenter: self, didRefreshToken: self.tokens)
-            refreshAmount()
+            delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
         }
     }
+    private (set) var currency: LocalCurrency! {
+        didSet {
+            delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
+        }
+    }
+    private (set) var tokens = [Token]() {
+        didSet {
+            delegate?.walletPresenter(presenter: self, didRefreshToken: tokens)
+        }
+    }
+    private(set) var refreshing = false
     weak var delegate: WalletPresenterDelegate?
 
     private var walletObserver: NotificationToken?
     private var tokenObserver: NotificationToken?
-    private(set) var refreshing = false
-    private var timestamp: TimeInterval = 0.0
+    private var tokenListTimestamp: TimeInterval = 0.0
 
     init() {
         walletObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
@@ -51,15 +57,14 @@ class WalletPresenter {
                 break
             }
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshBalance), name: .switchEthNetwork, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPrice), name: .changeLocalCurrency, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshAmount), name: .switchEthNetwork, object: nil)
     }
 
     func refresh() {
-        guard let appModel = WalletRealmTool.realm.objects(AppModel.self).first(where: { _ in true }) else { return }
+        guard let appModel = WalletRealmTool.realm.objects(AppModel.self).first else { return }
         guard let wallet = appModel.currentWallet else { return }
         currentWallet = wallet
-        delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
 
         tokenObserver?.invalidate()
         tokenObserver = wallet.selectTokenList.observe({ [weak self](change) in
@@ -89,20 +94,22 @@ class WalletPresenter {
             default:
                 break
             }
+            self.tokenListTimestamp = Date().timeIntervalSince1970
+            self.refreshBalance()
         })
     }
 
-    @objc func refreshAmount() {
+    @objc func refreshBalance() {
         refreshing = true
         delegate?.walletPresenterBeganRefresh(presenter: self)
         currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
-        let timestamp = self.timestamp
+        let timestamp = self.tokenListTimestamp
         let tokens = self.tokens
         DispatchQueue.global().async {
             var amount = 0.0
             tokens.forEach { (token) in
-                guard timestamp == self.timestamp else { return }
+                guard timestamp == self.tokenListTimestamp else { return }
                 do {
                     try token.refreshBalance()
                     token.price = self.getPrice(token: token)
@@ -116,7 +123,7 @@ class WalletPresenter {
                 } catch {
                 }
             }
-            guard timestamp == self.timestamp else { return }
+            guard timestamp == self.tokenListTimestamp else { return }
             DispatchQueue.main.async {
                 self.refreshing = false
                 self.delegate?.walletPresenterEndedRefresh(presenter: self)
@@ -126,12 +133,11 @@ class WalletPresenter {
     }
 
     @objc func refreshPrice() {
-        refreshing = true
-        currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
+        self.currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         delegate?.walletPresenterBeganRefresh(presenter: self)
         let tokens = self.tokens
         var amount = 0.0
+        let currency = self.currency
         DispatchQueue.global().async {
             tokens.forEach { (token) in
                 token.price = self.getPrice(token: token)
@@ -142,6 +148,7 @@ class WalletPresenter {
                     self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
                 }
             }
+            guard currency?.short == self.currency.short else { return }
             DispatchQueue.main.async {
                 self.refreshing = false
                 self.delegate?.walletPresenterEndedRefresh(presenter: self)

@@ -20,7 +20,6 @@ class WalletViewController: UIViewController {
 
     private var presenter = WalletPresenter()
     private var walletCountObserve: NotificationToken?
-//    private var observers = [NSKeyValueObservation]()
     override func viewDidLoad() {
         super.viewDidLoad()
         let refresh = UIRefreshControl()
@@ -37,8 +36,6 @@ class WalletViewController: UIViewController {
                 self?.navigationItem.rightBarButtonItem = self?.addWalletBarButton
             }
         }
-//        observers.append(presenter.observe(\.currency, options: [.initial]) { (_, _) in
-//        })
     }
 
     // MARK: - Navigation
@@ -52,7 +49,7 @@ class WalletViewController: UIViewController {
     // MARK: - Actions
     @IBAction func refresh() {
         guard !presenter.refreshing else { return }
-        presenter.refreshAmount()
+        presenter.refreshBalance()
     }
     @IBAction func transaction(_ sender: Any) {
     }

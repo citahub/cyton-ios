@@ -683,10 +683,10 @@
                                                             <point key="value" x="1" y="0.5"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="color1">
-                                                            <color key="value" red="0.12156862745098039" green="0.88627450980392153" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" red="0.21568627450980393" green="0.80000000000000004" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="color2">
-                                                            <color key="value" red="0.21568627450980393" green="0.80000000000000004" blue="0.5725490196078431" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <color key="value" red="0.12156862745098039" green="0.88627450980392153" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="20"/>
@@ -1065,11 +1065,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYG-En-ouj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <barButtonItem title="Item" image="icon_wallet_switch" id="jki-Qp-DGd">
+                    <color key="tintColor" red="0.40784313725490196" green="0.42352941176470588" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <segue destination="dVz-h4-OWp" kind="show" id="ivk-BX-VaZ"/>
                     </connections>
                 </barButtonItem>
                 <barButtonItem title="Item" image="icon_wallet_add" id="OEr-Qf-lOF">
+                    <color key="tintColor" red="0.40784313725490196" green="0.42352941176470588" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <segue destination="BlH-KW-GMN" kind="show" id="eVs-Xa-L9c"/>
                     </connections>
