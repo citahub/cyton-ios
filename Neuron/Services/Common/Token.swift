@@ -23,15 +23,17 @@ class Token {
     var isNativeToken = false
     var walletAddress = ""
 
-    var balance: Double? {
+    private(set) var balance: Double? {
         didSet {
+            guard let realm = tokenModel.realm else { return }
             DispatchQueue.main.async {
-                self.tokenModel.tokenBalance = self.balance ?? 0.0
+                try? realm.write {
+                    self.tokenModel.tokenBalance = self.balance ?? 0.0
+                }
             }
         }
     }
     var price: Double?
-
     let tokenModel: TokenModel
 
     init(_ token: TokenModel) {
@@ -72,6 +74,7 @@ class Token {
         let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
         self.balance = Double(balanceText)
         refreshBalanceSignal?.leave()
+        refreshBalanceSignal = nil
         return self.balance
     }
 }

@@ -30,7 +30,7 @@ class TokenModel: Object, Decodable {
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
 
-    var tokenBalance = 0.0  // TODO: Should persist balance, or store them globally.
+    @objc dynamic var tokenBalance = 0.0  // TODO: Should persist balance, or store them globally.
     var currencyAmount = "0"
 
     override class func primaryKey() -> String? {
@@ -38,7 +38,7 @@ class TokenModel: Object, Decodable {
     }
 
     override static func ignoredProperties() -> [String] {
-        return ["tokenBalance", "currencyAmount"]
+        return ["currencyAmount"]
     }
 
     struct Logo: Decodable {

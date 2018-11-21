@@ -38,6 +38,13 @@ class WalletViewController: UIViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if presenter.refreshing {
+            beganRefreshButtonAnimation()
+        }
+    }
+
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionHistory" {
@@ -74,7 +81,7 @@ extension WalletViewController: WalletPresenterDelegate {
 
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
         totalAmountLabel.text = "- - -"
-        title = wallet.name
+        navigationItem.title = wallet.name
     }
 
     func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
@@ -86,19 +93,14 @@ extension WalletViewController: WalletPresenterDelegate {
     }
 
     func walletPresenterBeganRefresh(presenter: WalletPresenter) {
-        UIView.beginAnimations("refresh", context: nil)
-        UIView.setAnimationDuration(0.4)
-        UIView.setAnimationRepeatCount(Float(Int.max))
-        UIView.setAnimationCurve(.linear)
-        refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
-        UIView.commitAnimations()
+        beganRefreshButtonAnimation()
     }
 
     func walletPresenterEndedRefresh(presenter: WalletPresenter) {
         if tableView.refreshControl!.isRefreshing {
             tableView.refreshControl?.endRefreshing()
         }
-        refreshButton.layer.removeAllAnimations()
+        endRefreshButtonAnimation()
     }
 }
 
@@ -141,4 +143,15 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension WalletViewController {
+    func beganRefreshButtonAnimation() {
+        UIView.beginAnimations("refresh", context: nil)
+        UIView.setAnimationDuration(0.4)
+        UIView.setAnimationRepeatCount(Float(Int.max))
+        UIView.setAnimationCurve(.linear)
+        refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
+        UIView.commitAnimations()
+    }
+    func endRefreshButtonAnimation() {
+        refreshButton.layer.removeAllAnimations()
+    }
 }

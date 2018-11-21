@@ -174,7 +174,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        tokenBalanceButton.setTitle("\(token.tokenBalance)\(token.symbol)", for: .normal)
+        tokenBalanceButton.setTitle("\(token.tokenBalance) \(token.symbol)", for: .normal)
         addressTextField.text = paramBuilder.to
         tokenLabel.text = token.symbol
 
