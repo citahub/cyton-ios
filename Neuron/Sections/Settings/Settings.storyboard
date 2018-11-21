@@ -233,7 +233,7 @@
                                                     <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="Forums" id="dm8-VT-lb6">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="forums" id="dm8-VT-lb6">
                                                     <rect key="frame" x="16" y="14" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -293,7 +293,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3o-fN-N9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="668" y="-84"/>
+            <point key="canvasLocation" x="766" y="154"/>
         </scene>
         <!--Currency View Controller-->
         <scene sceneID="bJ8-uh-m9J">
@@ -594,7 +594,7 @@
                                                     <color key="textColor" red="0.14117647059999999" green="0.16862745100000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="openSea" id="g7H-LJ-2YN">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="open_sea" id="g7H-LJ-2YN">
                                                     <rect key="frame" x="16" y="11" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -629,7 +629,7 @@
                                                     <color key="textColor" red="0.59607843137254901" green="0.61176470588235299" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="PeckShield" id="FZd-lB-soh">
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="peck_shield" id="FZd-lB-soh">
                                                     <rect key="frame" x="16" y="1" width="33" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
@@ -644,14 +644,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="CITA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sEC-GN-Tjb" userLabel="CITA">
-                                                    <rect key="frame" x="51" y="13" width="32.5" height="18"/>
+                                                    <rect key="frame" x="71" y="13" width="32.5" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.14117647059999999" green="0.16862745100000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="openSea" id="6fs-eo-4c1">
-                                                    <rect key="frame" x="16" y="11" width="20" height="20"/>
+                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="cita" id="6fs-eo-4c1">
+                                                    <rect key="frame" x="16" y="1" width="40" height="40"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="区块链内核" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zxX-Y6-UFJ">
@@ -703,20 +703,21 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Forums" width="20" height="20"/>
         <image name="Main_off" width="21" height="21"/>
         <image name="Main_on" width="20" height="19"/>
-        <image name="PeckShield" width="33" height="40"/>
         <image name="aboutus" width="20" height="20"/>
+        <image name="cita" width="40" height="40"/>
         <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
         <image name="currency_selected" width="21" height="15"/>
         <image name="ethereum_network" width="20" height="20"/>
         <image name="fingerprint_setup" width="20" height="20"/>
+        <image name="forums" width="20" height="20"/>
         <image name="infua" width="20" height="20"/>
         <image name="nervos_network" width="20" height="20"/>
         <image name="neuron_logo" width="60" height="60"/>
-        <image name="openSea" width="20" height="20"/>
+        <image name="open_sea" width="20" height="20"/>
+        <image name="peck_shield" width="33" height="40"/>
         <image name="service_terms" width="20" height="20"/>
         <image name="source_code" width="20" height="20"/>
     </resources>

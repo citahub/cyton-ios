@@ -123,7 +123,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="6rS-hc-f3A">
-                        <barButtonItem key="rightBarButtonItem" image="nav_addAsset" id="6GC-d4-Dob">
+                        <barButtonItem key="rightBarButtonItem" image="nav_add_asset" id="6GC-d4-Dob">
                             <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
                                 <segue destination="z2O-E2-HJL" kind="show" identifier="AddAssetController" id="0Qy-Qk-tlj"/>
@@ -223,6 +223,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="nav_addAsset" width="24" height="23"/>
+        <image name="nav_add_asset" width="24" height="23"/>
     </resources>
 </document>

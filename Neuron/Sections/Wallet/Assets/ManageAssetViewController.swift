@@ -17,11 +17,13 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         didGetDataForList()
+        print(CACurrentMediaTime())
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "ERC20列表"
+        print(CACurrentMediaTime())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

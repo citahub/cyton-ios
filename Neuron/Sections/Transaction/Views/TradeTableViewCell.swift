@@ -24,14 +24,14 @@ class TradeTableViewCell: UITableViewCell {
         didSet {
             if ethOrNervos == "ETH" {
                 if selectIndex?.row == 1 || selectIndex?.row == 2 || selectIndex?.row == 5 {
-                    subButton.setImage(UIImage.init(named: "复制"), for: .normal)
+                    subButton.setImage(UIImage(named: "copy"), for: .normal)
                     subButton.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
                 } else {
                     subButton.isEnabled = false
                 }
             } else if ethOrNervos == "Nervos" {
                 if selectIndex?.row == 1 || selectIndex?.row == 2 || selectIndex?.row == 4 {
-                    subButton.setImage(UIImage.init(named: "复制"), for: .normal)
+                    subButton.setImage(UIImage(named: "copy"), for: .normal)
                     subButton.setTitleColor(ColorFromString(hex: "#2e4af2"), for: .normal)
                 } else {
                     subButton.isEnabled = false
