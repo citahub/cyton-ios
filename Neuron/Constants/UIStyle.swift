@@ -24,11 +24,3 @@ struct StatusBar {
     static let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
     static let navigationBarHeight: CGFloat = 44.0
 }
-
-//is bangs screen
-func isBangsScreen() -> Bool {
-    guard #available(iOS 11.0, *) else {
-        return false
-    }
-    return UIApplication.shared.windows[0].safeAreaInsets.bottom > 0.0
-}
