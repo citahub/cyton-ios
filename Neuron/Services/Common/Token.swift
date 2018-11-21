@@ -23,7 +23,13 @@ class Token {
     var isNativeToken = false
     var walletAddress = ""
 
-    var balance: Double?
+    var balance: Double? {
+        didSet {
+            DispatchQueue.main.async {
+                self.tokenModel.tokenBalance = self.balance ?? 0.0
+            }
+        }
+    }
     var price: Double?
 
     let tokenModel: TokenModel

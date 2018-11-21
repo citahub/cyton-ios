@@ -66,7 +66,7 @@ class TransactionParamBuilder: NSObject {
         contractAddress = token.address
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
-        tokenBalance = Double(token.tokenBalance)!.toAmount(token.decimals)
+        tokenBalance = token.tokenBalance.toAmount(token.decimals)
 
         super.init()
 

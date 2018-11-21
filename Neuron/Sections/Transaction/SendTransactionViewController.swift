@@ -159,7 +159,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     @IBAction func transactionAvailableBalance() {
         // TODO: FIXME: erc20 token requires ETH balance for tx fee
-        let amount = Double(token.tokenBalance)! - paramBuilder.txFeeNatural
+        let amount = token.tokenBalance - paramBuilder.txFeeNatural
         amountTextField.text = "\(amount)"
         paramBuilder.value = amount.toAmount(token.decimals)
         guard paramBuilder.hasSufficientBalance else {

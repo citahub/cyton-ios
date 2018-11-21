@@ -84,9 +84,7 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
             currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyModel.short) { (result) in
                 switch result {
                 case .success(let price):
-                    guard let balance = Double(model.tokenBalance) else {
-                        return
-                    }
+                    let balance = Double(model.tokenBalance)
                     guard balance != 0 else {
                         if currencyTotle == 0 {
                             model.currencyAmount = ""
@@ -120,35 +118,35 @@ class TokensViewController: UITableViewController, ErrorOverlayPresentable {
             if tm.chainId == NativeChainId.ethMainnetChainId {
                 group.enter()
                 EthNativeTokenService.getEthNativeTokenBalance(walletAddress: walletModel.address) {(result) in
-                    switch result {
-                    case .success(let balance):
-                        tm.tokenBalance = balance
-                    case .error:
-                        Toast.showToast(text: "网络错误，请稍后再试.")
-                    }
+//                    switch result {
+//                    case .success(let balance):
+//                        tm.tokenBalance = balance
+//                    case .error:
+//                        Toast.showToast(text: "网络错误，请稍后再试.")
+//                    }
                     group.leave()
                 }
             } else if tm.chainId != "" && tm.chainId != NativeChainId.ethMainnetChainId {
                 group.enter()
                 NervosNativeTokenService.getNervosNativeTokenBalance(walletAddress: walletModel.address) {(result) in
-                    switch result {
-                    case .success(let balance):
-                        tm.tokenBalance = balance
-                    case .error:
-                        Toast.showToast(text: "网络错误，请稍后再试.")
-                    }
+//                    switch result {
+//                    case .success(let balance):
+//                        tm.tokenBalance = balance
+//                    case .error:
+//                        Toast.showToast(text: "网络错误，请稍后再试.")
+//                    }
                     group.leave()
                 }
             } else if tm.address.count != 0 {
                 group.enter()
                 ERC20TokenService.getERC20TokenBalance(walletAddress: walletModel.address, contractAddress: tm.address) { (result) in
-                    switch result {
-                    case .success(let erc20Balance):
-                        let balance = Web3.Utils.formatToPrecision(erc20Balance, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
-                        tm.tokenBalance = balance!
-                    case .error:
-                        Toast.showToast(text: "网络错误，请稍后再试.")
-                    }
+//                    switch result {
+//                    case .success(let erc20Balance):
+//                        let balance = Web3.Utils.formatToPrecision(erc20Balance, numberDecimals: tm.decimals, formattingDecimals: 6, fallbackToScientific: false)
+//                        tm.tokenBalance = balance!
+//                    case .error:
+//                        Toast.showToast(text: "网络错误，请稍后再试.")
+//                    }
                     group.leave()
                 }
             }
