@@ -1,30 +1,28 @@
 //
-//  PasswordPageItem.swift
+//  ModifyWalletNamePageItem.swift
 //  Neuron
 //
-//  Created by James Chen on 2018/11/19.
+//  Created by XiaoLu on 2018/11/21.
 //  Copyright © 2018 Cryptape. All rights reserved.
 //
 
 import UIKit
 import BLTNBoard
 
-class PasswordPageItem: BLTNPageItem {
-    var passwordField: UITextField!
+class ModifyWalletNamePageItem: BLTNPageItem {
+    var walletNameField: UITextField!
 
     var errorMessage: String? {
         didSet {
             if let message = errorMessage {
                 descriptionLabel?.textColor = .red
                 descriptionLabel?.text = message
-            } else {
-                // How to revert to default style?
             }
         }
     }
 
-    static func create(title: String = "请输入钱包密码", actionButtonTitle: String = "确认发送") -> PasswordPageItem {
-        let item = PasswordPageItem(title: title)
+    static func create(title: String = "请输入钱包名称", actionButtonTitle: String = "确认修改") -> ModifyWalletNamePageItem {
+        let item = ModifyWalletNamePageItem(title: title)
         item.appearance = PageItemAppearance.default
         item.descriptionText = ""
         item.actionButtonTitle = actionButtonTitle
@@ -32,47 +30,45 @@ class PasswordPageItem: BLTNPageItem {
     }
 
     override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
-        if passwordField == nil {
-            passwordField = interfaceBuilder.makeTextField(placeholder: "请输入钱包密码", returnKey: .done, delegate: self)
-            passwordField.isSecureTextEntry = true
+        if walletNameField == nil {
+            walletNameField = interfaceBuilder.makeTextField(placeholder: "请输入钱包名称", returnKey: .done, delegate: self)
+            walletNameField.isSecureTextEntry = false
         }
-        return [passwordField]
+        return [walletNameField]
     }
 
     override func tearDown() {
         super.tearDown()
-        passwordField?.delegate = nil
+        walletNameField?.delegate = nil
     }
 
     override func actionButtonTapped(sender: UIButton) {
-        passwordField.resignFirstResponder()
+        walletNameField.resignFirstResponder()
 
         if validateInput() {
-//            super.actionButtonTapped(sender: sender)
-            actionHandler?(self)
+            super.actionButtonTapped(sender: sender)
+        } else {
+            walletNameField.text = ""
         }
-    }
-
-    private func isInputValid(text: String?) -> Bool {
-        if text == nil || text!.isEmpty {
-            return false
-        }
-
-        return true
     }
 
     @discardableResult
     private func validateInput() -> Bool {
-        if isInputValid(text: passwordField.text) {
-            return true
+        if let walletName = walletNameField.text {
+            if case .invalid(let reason) = WalletNameValidator.validate(walletName: walletName) {
+                errorMessage = reason
+                return false
+            } else {
+                return true
+            }
         } else {
-            errorMessage = "请输入密码"
+            errorMessage = "请输入钱包名称"
             return false
         }
     }
 }
 
-extension PasswordPageItem: UITextFieldDelegate {
+extension ModifyWalletNamePageItem: UITextFieldDelegate {
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         return true
     }
