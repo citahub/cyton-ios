@@ -37,6 +37,10 @@ class TransactionGasPriceViewController: UIViewController {
         }
     }
 
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss()
+    }
+
     @IBAction func dismiss() {
         UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             self.backgroundView.alpha = 0.0
