@@ -602,7 +602,6 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                             <connections>
-                                                                <action selector="walletQRCode:" destination="FK5-Ys-aof" eventType="touchUpInside" id="8B7-at-hYw"/>
                                                                 <segue destination="xNb-kk-FtN" kind="show" id="A0N-Ka-jF1"/>
                                                             </connections>
                                                         </button>
@@ -837,6 +836,7 @@
                                         <connections>
                                             <outlet property="amountLabel" destination="JbC-OG-Bal" id="RpS-gx-L9j"/>
                                             <outlet property="balanceLabel" destination="nsB-Mo-eyQ" id="yqu-LD-ac8"/>
+                                            <outlet property="ctxView" destination="SUn-Cv-dDc" id="7yt-An-MZy"/>
                                             <outlet property="iconView" destination="bgg-yh-e1q" id="m70-mb-MUj"/>
                                             <outlet property="symbolLabel" destination="lgp-j4-6Q2" id="Jar-xK-8oy"/>
                                             <outlet property="symbolWidthConstraint" destination="PZl-mr-0RU" id="yXa-Uf-tkT"/>
@@ -934,6 +934,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="balanceLabel" destination="an4-af-QfW" id="4Sf-VT-Fl4"/>
+                                            <outlet property="ctxView" destination="JG0-kb-azs" id="Ry2-jA-Aqr"/>
                                             <outlet property="iconView" destination="drn-aD-ulr" id="cxv-Lt-fWa"/>
                                             <outlet property="symbolLabel" destination="SE9-HL-aLh" id="BCM-pF-HKu"/>
                                             <outlet property="symbolWidthConstraint" destination="Q4O-Ok-cCv" id="Sl3-6H-LaH"/>
@@ -1029,6 +1030,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
+                                            <outlet property="ctxView" destination="KTo-Tx-mve" id="7me-2H-f6R"/>
                                             <outlet property="iconView" destination="qrJ-eA-y0F" id="eAc-ea-VTA"/>
                                             <outlet property="symbolLabel" destination="OWn-1G-TBE" id="yHK-uY-hXq"/>
                                             <outlet property="symbolWidthConstraint" destination="qrP-5P-yM0" id="hjN-zq-tmc"/>
@@ -1058,6 +1060,7 @@
                         <outlet property="tableHeadView" destination="lHJ-34-u6v" id="Pqj-Dh-P5g"/>
                         <outlet property="tableView" destination="H6S-k1-sPQ" id="mCD-p5-v6F"/>
                         <outlet property="totalAmountLabel" destination="oxy-Pr-ZPZ" id="8XF-WX-c5K"/>
+                        <segue destination="QHQ-B4-0WA" kind="show" identifier="transaction" id="ujt-pt-uhS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IYG-En-ouj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1138,7 +1141,7 @@
                 <viewControllerPlaceholder storyboardName="Assets" id="oiQ-1z-nMq" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KbO-6n-zsN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1881" y="-166"/>
+            <point key="canvasLocation" x="-1855" y="-167"/>
         </scene>
         <!--AddWallet-->
         <scene sceneID="KDG-6N-jZM">
@@ -1146,7 +1149,7 @@
                 <viewControllerPlaceholder storyboardIdentifier="AddWallet" storyboardName="AddWallet" referencedIdentifier="AddWallet" id="BlH-KW-GMN" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fc1-k2-gAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1864" y="-80"/>
+            <point key="canvasLocation" x="-1837" y="-121"/>
         </scene>
         <!--SwitchWallet-->
         <scene sceneID="j2U-yR-TFi">
@@ -1154,7 +1157,15 @@
                 <viewControllerPlaceholder storyboardName="SwitchWallet" id="dVz-h4-OWp" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tt3-Ul-AKO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1850" y="-34"/>
+            <point key="canvasLocation" x="-1825" y="-79"/>
+        </scene>
+        <!--TransactionHistoryViewController-->
+        <scene sceneID="MvS-d4-PAt">
+            <objects>
+                <viewControllerPlaceholder storyboardName="TransactionHistory" referencedIdentifier="TransactionHistoryViewController" id="QHQ-B4-0WA" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1q-ds-eec" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1723" y="-32"/>
         </scene>
         <!--收款-->
         <scene sceneID="SFn-o6-Kln">
@@ -1287,7 +1298,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVJ-K6-5p3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1394" y="-124"/>
+            <point key="canvasLocation" x="-2423" y="654"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="82x-J8-bup">

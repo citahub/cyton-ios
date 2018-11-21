@@ -31,4 +31,22 @@ class TokenTableViewCell: UITableViewCell {
             }
         }
     }
+
+    @IBOutlet weak var ctxView: UIView!
+    private var overlayView: UIView?
+
+    override func setSelected(_ selected: Bool, animated: Bool) {
+    }
+
+    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        if highlighted {
+            overlayView = UIView(frame: ctxView.bounds)
+            overlayView?.backgroundColor = UIColor.black
+            overlayView?.alpha = 0.4
+            ctxView.addSubview(overlayView!)
+        } else {
+            overlayView?.removeFromSuperview()
+        }
+    }
+
 }

@@ -29,7 +29,10 @@ class Token {
     var balance: Double?
     var price: Double?
 
+    let tokenModel: TokenModel
+
     init(_ token: TokenModel) {
+        tokenModel = token
         name = token.name
         iconUrl = token.iconUrl
         address = token.address

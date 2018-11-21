@@ -23,7 +23,6 @@ class WalletViewController: UIViewController {
 //    private var observers = [NSKeyValueObservation]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refresh
@@ -38,21 +37,22 @@ class WalletViewController: UIViewController {
                 self?.navigationItem.rightBarButtonItem = self?.addWalletBarButton
             }
         }
-
 //        observers.append(presenter.observe(\.currency, options: [.initial]) { (_, _) in
 //        })
     }
 
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "transaction" {
+            let controller = segue.destination as! TransactionHistoryViewController
+            controller.tokenModel = sender as? TokenModel
+        }
     }
 
     // MARK: - Actions
     @IBAction func refresh() {
         guard !presenter.refreshing else { return }
         presenter.refreshAmount()
-    }
-    @IBAction func walletQRCode(_ sender: Any) {
     }
     @IBAction func transaction(_ sender: Any) {
     }
@@ -128,12 +128,12 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+        return true
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
+//        performSegue(withIdentifier: "transaction", sender: presenter.tokens[indexPath.row].tokenModel)
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
