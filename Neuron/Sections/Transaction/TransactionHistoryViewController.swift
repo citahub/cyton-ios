@@ -60,11 +60,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "requestPayment" {
-            let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppModel()
-            requestPaymentViewController.appModel = appModel
-        } else if segue.identifier == "sendTransaction" {
+        if segue.identifier == "sendTransaction" {
             let controller = segue.destination as! SendTransactionViewController
             controller.token = presenter?.token
         }

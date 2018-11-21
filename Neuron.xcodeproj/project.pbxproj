@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A09224221357F3D00CAED5D /* TokensViewController.swift */; };
 		1A092245213580C900CAED5D /* NFTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A092244213580C900CAED5D /* NFTViewController.swift */; };
 		1A1E1B8B21A3CF3A00C24D10 /* SignMessagePageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E1B8A21A3CF3A00C24D10 /* SignMessagePageItem.swift */; };
 		1A1E841821717EBD00B15E88 /* PasswordValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1E841721717EBD00B15E88 /* PasswordValidatorTests.swift */; };
@@ -220,7 +219,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A09224221357F3D00CAED5D /* TokensViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokensViewController.swift; sourceTree = "<group>"; };
 		1A092244213580C900CAED5D /* NFTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTViewController.swift; sourceTree = "<group>"; };
 		1A1E1B8A21A3CF3A00C24D10 /* SignMessagePageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignMessagePageItem.swift; sourceTree = "<group>"; };
 		1A1E841721717EBD00B15E88 /* PasswordValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidatorTests.swift; sourceTree = "<group>"; };
@@ -932,7 +930,6 @@
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
 				8928C27820B2A61900C3103E /* WalletViewController.swift */,
 				6E9B947E21A4086400D67357 /* WalletPresenter.swift */,
-				1A09224221357F3D00CAED5D /* TokensViewController.swift */,
 				1A092244213580C900CAED5D /* NFTViewController.swift */,
 				89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */,
 				89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */,
@@ -1403,7 +1400,6 @@
 				89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */,
 				6E3B2B6B219D938F0095257D /* SentTransaction.swift in Sources */,
 				1A5515E521898A1000D34791 /* WalletKeystoreManager.swift in Sources */,
-				1A09224321357F3D00CAED5D /* TokensViewController.swift in Sources */,
 				6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */,
 				6EF8F40C2175CAD9004B7587 /* UIControl+Extension.swift in Sources */,
 				898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */,
