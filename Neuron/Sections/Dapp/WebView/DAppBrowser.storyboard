@@ -74,7 +74,7 @@
                     </connections>
                 </textField>
             </objects>
-            <point key="canvasLocation" x="1543.2" y="165.96701649175412"/>
+            <point key="canvasLocation" x="2479" y="165"/>
         </scene>
         <!--Browser View Controller-->
         <scene sceneID="hLm-OP-54c">
@@ -83,56 +83,74 @@
                     <view key="view" contentMode="scaleToFill" id="DcO-5o-QAo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VgY-uG-z9h">
+                                <rect key="frame" x="0.0" y="553" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wRj-qH-Iod">
+                                        <rect key="frame" x="120" y="0.0" width="44" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="1cX-6s-L75"/>
+                                        </constraints>
+                                        <state key="normal" image="webview_back_on"/>
+                                        <state key="disabled" image="webview_back_off"/>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="CZ7-s6-Al6"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BfV-In-vMa">
+                                        <rect key="frame" x="211" y="0.0" width="44" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="fi2-J8-XxZ"/>
+                                        </constraints>
+                                        <state key="normal" image="webview_ahead_on"/>
+                                        <state key="disabled" image="webview_ahead_off"/>
+                                        <connections>
+                                            <action selector="forwardButtonAction:" destination="nmb-oI-LyV" eventType="touchUpInside" id="e2S-rM-CbC"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="BfV-In-vMa" firstAttribute="top" secondItem="VgY-uG-z9h" secondAttribute="top" id="0ph-VN-eDv"/>
+                                    <constraint firstItem="wRj-qH-Iod" firstAttribute="top" secondItem="VgY-uG-z9h" secondAttribute="top" id="Jzc-c8-1cG"/>
+                                    <constraint firstAttribute="bottom" secondItem="wRj-qH-Iod" secondAttribute="bottom" id="Kzv-6B-YQw"/>
+                                    <constraint firstAttribute="bottom" secondItem="BfV-In-vMa" secondAttribute="bottom" id="Nu2-L0-2dN"/>
+                                    <constraint firstAttribute="height" constant="50" id="S7y-H6-Mag"/>
+                                    <constraint firstAttribute="trailing" secondItem="BfV-In-vMa" secondAttribute="trailing" constant="120" id="lHX-xq-uy7"/>
+                                    <constraint firstItem="wRj-qH-Iod" firstAttribute="leading" secondItem="VgY-uG-z9h" secondAttribute="leading" constant="120" id="lqX-gL-zlZ"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.9137254901960784" green="0.9137254901960784" blue="0.92156862745098034" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="VgY-uG-z9h" firstAttribute="leading" secondItem="gER-XQ-gWH" secondAttribute="leading" id="VTh-AW-diY"/>
+                            <constraint firstItem="VgY-uG-z9h" firstAttribute="bottom" secondItem="gER-XQ-gWH" secondAttribute="bottom" id="hIV-eB-iey"/>
+                            <constraint firstItem="gER-XQ-gWH" firstAttribute="trailing" secondItem="VgY-uG-z9h" secondAttribute="trailing" id="uRW-aK-aol"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gER-XQ-gWH"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Qm-bc-XTa">
-                        <leftBarButtonItems>
-                            <barButtonItem style="plain" id="ePV-U3-Zan">
-                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="OKc-Dt-8LT">
-                                    <rect key="frame" x="16" y="11" width="20" height="22"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="nav_darkback"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="didClickBackButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="CX7-1k-G1i"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                            <barButtonItem id="Bga-GI-kg8"/>
-                            <barButtonItem style="plain" id="xrC-yM-uP4">
-                                <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yMa-Me-R5K">
-                                    <rect key="frame" x="52" y="4" width="36" height="36"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <state key="normal" image="close"/>
-                                    <userDefinedRuntimeAttributes>
-                                        <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
-                                            <real key="value" value="10"/>
-                                        </userDefinedRuntimeAttribute>
-                                    </userDefinedRuntimeAttributes>
-                                    <connections>
-                                        <action selector="dudCkucjCloseButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="XzD-wh-2cb"/>
-                                    </connections>
-                                </button>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Vep-gW-6d4">
-                            <button key="customView" hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Omb-kN-Iy0">
-                                <rect key="frame" x="339" y="11" width="20" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="dappCollection"/>
-                                <connections>
-                                    <action selector="didClickCollectionButton:" destination="nmb-oI-LyV" eventType="touchUpInside" id="lXN-BQ-rzE"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="close" id="R07-4H-L5J">
+                            <color key="tintColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didClickCloseButton:" destination="nmb-oI-LyV" id="uhr-a7-n0I"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="closeButton" destination="yMa-Me-R5K" id="X2v-ie-vr8"/>
+                        <outlet property="backButton" destination="wRj-qH-Iod" id="uGS-eB-COI"/>
+                        <outlet property="directionView" destination="VgY-uG-z9h" id="ejC-U5-hhO"/>
+                        <outlet property="directionViewHeightConstraint" destination="S7y-H6-Mag" id="ok5-gW-770"/>
+                        <outlet property="forwardButton" destination="BfV-In-vMa" id="7PR-dA-sCs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BPQ-Pb-tqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1rU-Wo-dMt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6420" y="152.47376311844079"/>
+            <point key="canvasLocation" x="6118" y="164"/>
         </scene>
         <!--Message Sign Controller-->
         <scene sceneID="DHH-7d-Ep9">
@@ -655,7 +673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1io-gq-OLf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7215" y="152"/>
+            <point key="canvasLocation" x="6943" y="163"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EWm-qr-9S2">
@@ -673,7 +691,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HYL-Wx-GJx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="604" y="165.96701649175412"/>
+            <point key="canvasLocation" x="1594" y="186"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="i1Q-7b-EJs">
@@ -691,7 +709,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SNO-kE-YCt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3612" y="-779"/>
+            <point key="canvasLocation" x="3612" y="-620"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s1b-AZ-yC8">
@@ -709,13 +727,16 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9pj-y0-thh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5199" y="-779"/>
+            <point key="canvasLocation" x="5198" y="-609"/>
         </scene>
     </scenes>
     <resources>
         <image name="close" width="36" height="36"/>
-        <image name="dappCollection" width="20" height="17"/>
         <image name="nav_darkback" width="14" height="22"/>
+        <image name="webview_ahead_off" width="10" height="18"/>
+        <image name="webview_ahead_on" width="10" height="18"/>
+        <image name="webview_back_off" width="10" height="18"/>
+        <image name="webview_back_on" width="10" height="18"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Cdg-uK-JQ9"/>
