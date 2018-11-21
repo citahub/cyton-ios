@@ -10,17 +10,13 @@ import UIKit
 import WebKit
 import JavaScriptCore
 import Toast_Swift
-class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, WKScriptMessageHandler, UIScrollViewDelegate, ErrorOverlayPresentable {
+
+class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate, ErrorOverlayPresentable {
     private var webView = WKWebView()
     private var mainUrl: URL?
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        super.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
     override func viewDidLoad() {
@@ -62,7 +58,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         } else {
             // Fallback on earlier versions
         }
-        webView.scrollView.bounces = false
         webView.scrollView.delegate = self
         webView.navigationDelegate = self
         webView.uiDelegate = self
@@ -73,12 +68,10 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         self.webView.frame = safeAreaFrame
     }
 
-    //scrollView代理
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return nil
     }
 
-    //wkwebview
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
@@ -101,8 +94,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         showOverlay()
     }
+}
 
-    //WKScriptMessageHandler
+extension DappViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case "pushSearchView":
