@@ -9,35 +9,35 @@
 import UIKit
 import WebKit
 import JavaScriptCore
-import Toast_Swift
 
+/// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
-    private var webView = WKWebView()
-    private var mainUrl: URL?
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .default
+    private let webView = WKWebView(frame: .zero)
+    private var mainUrl = URL(string: "https://dapp.cryptape.com")!
+    private var customUserAgent: String {
+        let infoDictionary = Bundle.main.infoDictionary!
+        let majorVersion = infoDictionary["CFBundleShortVersionString"]!
+        return "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        didAddSubLayout()
+
+        addWebView()
+        layoutWebView()
 
         errorOverlayRefreshBlock = { [weak self] () in
-            self?.removeOverlay()
-            guard let url = self?.mainUrl else { return }
-            self?.webView.load(URLRequest(url: url))
+            guard let self = self else {
+                return
+            }
+            self.removeOverlay()
+            self.webView.load(URLRequest(url: self.mainUrl))
         }
 
-        let url = URL(string: "https://dapp.cryptape.com")!
-        let request = URLRequest(url: url)
-        webView.load(request)
-        mainUrl = url
+        webView.load(URLRequest(url: mainUrl))
     }
 
-    func didAddSubLayout() {
-        webView = WKWebView(frame: .zero)
-
+    private func addWebView() {
         var js = ""
         if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
             do {
@@ -45,27 +45,26 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             } catch { }
         }
         let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
-        let infoDictionary = Bundle.main.infoDictionary!
-        let majorVersion = infoDictionary["CFBundleShortVersionString"]
-        webView.customUserAgent = "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion!))"
+        webView.customUserAgent = customUserAgent
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
-        if #available(iOS 11.0, *) {
-            webView.scrollView.contentInsetAdjustmentBehavior = .never
-        } else {
-            // Fallback on earlier versions
-        }
+
         webView.scrollView.delegate = self
         webView.navigationDelegate = self
         webView.uiDelegate = self
+
         view.addSubview(webView)
     }
 
-    override func viewDidLayoutSubviews() {
-        self.webView.frame = safeAreaFrame
+    private func layoutWebView() {
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
