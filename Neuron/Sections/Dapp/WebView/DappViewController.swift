@@ -11,7 +11,7 @@ import WebKit
 import JavaScriptCore
 import Toast_Swift
 
-class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, UIScrollViewDelegate, ErrorOverlayPresentable {
+class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
     private var webView = WKWebView()
     private var mainUrl: URL?
 
@@ -68,10 +68,6 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         self.webView.frame = safeAreaFrame
     }
 
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return nil
-    }
-
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
@@ -105,5 +101,15 @@ extension DappViewController: WKScriptMessageHandler {
         default:
             break
         }
+    }
+}
+
+extension DappViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return nil
+    }
+
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
     }
 }

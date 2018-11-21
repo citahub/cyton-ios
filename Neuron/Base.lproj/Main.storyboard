@@ -106,7 +106,7 @@
                 <viewControllerPlaceholder storyboardName="DAppBrowser" id="vLC-ng-WwE" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w1j-Op-kot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-590" y="1160"/>
+            <point key="canvasLocation" x="-698" y="1205"/>
         </scene>
         <!--应用-->
         <scene sceneID="Xcy-xf-LxQ">

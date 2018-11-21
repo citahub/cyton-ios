@@ -31,6 +31,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         })
         webView.navigationDelegate = self
         webView.uiDelegate = self
+        webView.scrollView.delegate = self
         webView.addAllNativeFunctionHandler()
         return webView
     }()
@@ -214,6 +215,16 @@ extension BrowserViewController: WKUIDelegate {
         }))
 
         present(alertController, animated: true, completion: nil)
+    }
+}
+
+extension BrowserViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return nil
+    }
+
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+        scrollView.pinchGestureRecognizer?.isEnabled = false
     }
 }
 
