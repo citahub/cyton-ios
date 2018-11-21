@@ -48,8 +48,7 @@ class PasswordPageItem: BLTNPageItem {
         passwordField.resignFirstResponder()
 
         if validateInput() {
-//            super.actionButtonTapped(sender: sender)
-            actionHandler?(self)
+            super.actionButtonTapped(sender: sender)
         }
     }
 

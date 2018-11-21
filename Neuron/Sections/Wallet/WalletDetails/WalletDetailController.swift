@@ -16,17 +16,11 @@ class WalletDetailController: UITableViewController {
     var appModel = AppModel()
     var walletModel = WalletModel()
 
-    private lazy var deleteBulletinManager: BLTNItemManager = {
-        let passwordPageItem = creatDeleteWalletPageItem()
-        return BLTNItemManager(rootItem: passwordPageItem)
-    }()
+    private var deleteBulletinManager: BLTNItemManager?
 
-    private var exportBulletinManager: BLTNItemManager!
+    private var exportBulletinManager: BLTNItemManager?
 
-    private lazy var modifyWalletNameBulletinManager: BLTNItemManager = {
-        let modifyWalletNamePageItem = creatModifyWalletNamePageItem()
-        return BLTNItemManager(rootItem: modifyWalletNamePageItem)
-    }()
+    private var modifyWalletNameBulletinManager: BLTNItemManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +40,7 @@ class WalletDetailController: UITableViewController {
             guard let self = self else {
                 return
             }
-            self.deleteWallet(password: passwordPageItem.passwordField.text!)
+            self.deleteWallet(password: passwordPageItem.passwordField.text!, item: item as! PasswordPageItem)
         }
         return passwordPageItem
     }
@@ -70,42 +64,41 @@ class WalletDetailController: UITableViewController {
             guard let self = self else {
                 return
             }
-            self.modifyWalletName(walletName: modifyWalletNamePageItem.walletNameField.text!)
+            self.modifyWalletName(walletName: modifyWalletNamePageItem.walletNameField.text!, item: item as! ModifyWalletNamePageItem)
         }
         return modifyWalletNamePageItem
     }
 
     @IBAction func didDeleteWallet(_ sender: UIButton) {
-        deleteBulletinManager.showBulletin(above: self)
+        deleteBulletinManager = BLTNItemManager(rootItem: creatDeleteWalletPageItem())
+        deleteBulletinManager?.showBulletin(above: self)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                modifyWalletNameBulletinManager.showBulletin(above: self)
+                modifyWalletNameBulletinManager = BLTNItemManager(rootItem: creatModifyWalletNamePageItem())
+                modifyWalletNameBulletinManager?.showBulletin(above: self)
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 1 {
-                let passwordPageItem = creatExportKeystorePageItem()
-                exportBulletinManager = BLTNItemManager(rootItem: passwordPageItem)
+                exportBulletinManager = BLTNItemManager(rootItem: creatExportKeystorePageItem())
                 exportBulletinManager?.showBulletin(above: self)
             }
         }
     }
 
-    func modifyWalletName(walletName: String) {
+    func modifyWalletName(walletName: String, item: ModifyWalletNamePageItem) {
         do {
             try WalletRealmTool.realm.write {
                 self.walletModel.name = walletName
             }
             self.walletNameLabel.text = walletName
-            modifyWalletNameBulletinManager.dismissBulletin()
+            modifyWalletNameBulletinManager?.dismissBulletin()
         } catch let error {
-            modifyWalletNameBulletinManager.hideActivityIndicator()
-            let passwordPageItem = self.creatModifyWalletNamePageItem()
-            self.modifyWalletNameBulletinManager.push(item: passwordPageItem)
-            passwordPageItem.errorMessage = error.localizedDescription
+            item.errorMessage = error.localizedDescription
+            modifyWalletNameBulletinManager?.hideActivityIndicator()
         }
     }
 
@@ -116,21 +109,15 @@ class WalletDetailController: UITableViewController {
 
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
             exportController.keystoreString = keystore
-            exportBulletinManager.dismissBulletin()
+            exportBulletinManager?.dismissBulletin()
             self.navigationController?.pushViewController(exportController, animated: true)
         } catch let error {
-            exportBulletinManager.hideActivityIndicator()
             item.errorMessage = error.localizedDescription
-//            let value = exportBulletinManager.value(forKey: "currentItem")
-//            print(value)
-
-//            let passwordPageItem = self.creatExportKeystorePageItem()
-//            self.exportBulletinManager.push(item: passwordPageItem)
-//            passwordPageItem.errorMessage = error.localizedDescription
+            exportBulletinManager?.hideActivityIndicator()
         }
     }
 
-    func deleteWallet(password: String) {
+    func deleteWallet(password: String, item: PasswordPageItem) {
         let appItem = WalletRealmTool.getCurrentAppModel()
         let walletItem = appItem.currentWallet!
         let wallet = walletItem.wallet!
@@ -145,13 +132,11 @@ class WalletDetailController: UITableViewController {
                 appItem.currentWallet = appItem.wallets.first!
             }
             Toast.showToast(text: "删除成功")
-            deleteBulletinManager.dismissBulletin()
+            deleteBulletinManager?.dismissBulletin()
             self.navigationController?.popViewController(animated: true)
         } catch let error {
-            deleteBulletinManager.hideActivityIndicator()
-            let passwordPageItem = self.creatDeleteWalletPageItem()
-            self.deleteBulletinManager.push(item: passwordPageItem)
-            passwordPageItem.errorMessage = error.localizedDescription
+            item.errorMessage = error.localizedDescription
+            deleteBulletinManager?.hideActivityIndicator()
         }
     }
 }
