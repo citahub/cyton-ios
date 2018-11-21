@@ -123,7 +123,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
 
     func adjustmentDirectionButton() {
         if webView.canGoBack {
-            if directionView.isHidden == true {
+            if directionView.isHidden {
                 directionView.isHidden = false
                 webView.frame = CGRect(x: safeAreaFrame.origin.x, y: safeAreaFrame.origin.y, width: safeAreaFrame.size.width, height: safeAreaFrame.size.height - 50)
             }
@@ -131,11 +131,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         } else {
             backButton.isSelected = false
         }
-        if webView.canGoForward {
-            forwardButton.isSelected = true
-        } else {
-            forwardButton.isSelected = false
-        }
+        forwardButton.isSelected = webView.canGoForward
     }
 
     @IBAction func backButtonAction(_ sender: UIButton) {
