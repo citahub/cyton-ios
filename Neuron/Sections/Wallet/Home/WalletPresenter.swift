@@ -26,16 +26,19 @@ protocol WalletPresenterDelegate: NSObjectProtocol {
 class WalletPresenter {
     private (set) var currentWallet: WalletModel? {
         didSet {
+            guard oldValue?.address != currentWallet?.address else { return }
             delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
         }
     }
     private (set) var currency: LocalCurrency! {
         didSet {
+            guard oldValue?.name != currency?.name else { return }
             delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
         }
     }
     private (set) var tokens = [Token]() {
         didSet {
+            self.tokenListTimestamp = Date().timeIntervalSince1970
             delegate?.walletPresenter(presenter: self, didRefreshToken: tokens)
         }
     }
@@ -74,36 +77,9 @@ class WalletPresenter {
     }
 
     @objc func refreshBalance() {
-        refreshing = true
-        delegate?.walletPresenterBeganRefresh(presenter: self)
         currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
-        let timestamp = self.tokenListTimestamp
-        let tokens = self.tokens
-        DispatchQueue.global().async {
-            var amount = 0.0
-            tokens.forEach { (token) in
-                guard timestamp == self.tokenListTimestamp else { return }
-                do {
-                    try token.refreshBalance()
-                    token.price = self.getPrice(token: token)
-
-                    if let price = token.price, let balance = token.balance {
-                        amount += price * balance
-                    }
-                    DispatchQueue.main.async {
-                        self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
-                    }
-                } catch {
-                }
-            }
-            guard timestamp == self.tokenListTimestamp else { return }
-            DispatchQueue.main.async {
-                self.refreshing = false
-                self.delegate?.walletPresenterEndedRefresh(presenter: self)
-                self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
-            }
-        }
+        refreshTokenListBalance(tokens: self.tokens)
     }
 
     @objc func refreshPrice() {
@@ -132,7 +108,7 @@ class WalletPresenter {
     }
 
     // MARK: - Utils
-    func getPrice(token: Token) -> Double? {
+    private func getPrice(token: Token) -> Double? {
         let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
         guard let tokenId = currencyToken?.id else {
             return nil
@@ -151,7 +127,7 @@ class WalletPresenter {
 }
 
 extension WalletPresenter {
-    func observeCurrentWallet() {
+    private func observeCurrentWallet() {
         walletObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
             switch change {
             case .change(let propertys):
@@ -164,57 +140,79 @@ extension WalletPresenter {
         }
     }
 
-    func observeWalletSelectTokenList() {
+    private func observeWalletSelectTokenList() {
         guard let wallet = currentWallet else { return }
         selectTokenListObserver?.invalidate()
         selectTokenListObserver = wallet.selectTokenList.observe({ [weak self](change) in
             guard let self = self else { return }
-            switch change {
-            case .update(let tokenList, let deletions, let insertions, modifications: _):
-                guard deletions.count > 0 || insertions.count > 0 else { return }
-                var tokens = self.tokens
-                let selectTokenFirstIndex = tokens.count - tokenList.count - deletions.count
-                deletions.enumerated().forEach({ (offset, element) in
-                    let index = selectTokenFirstIndex + element - offset
-                    tokens.remove(at: index)
-                })
-                insertions.forEach({ (idx) in
-                    let token = Token(tokenList[idx])
-                    token.walletAddress = self.currentWallet!.address
-                    tokens.append(token)
-                })
-                self.tokens = tokens
-                self.tokenListTimestamp = Date().timeIntervalSince1970
-                self.refreshBalance()
-            default:
-                break
-            }
+            self.tokenListChangeHandler(change: change)
         })
     }
 
-    func observeNativeTokenList() {
+    private func observeNativeTokenList() {
         nativeTokenListObserver?.invalidate()
         nativeTokenListObserver = WalletRealmTool.getCurrentAppModel().nativeTokenList.observe { [weak self](change) in
             guard let self = self else { return }
-            switch change {
-            case .update(let tokenList, let deletions, let insertions, modifications: _):
-                guard deletions.count > 0 || insertions.count > 0 else { return }
-                var tokens = self.tokens
+            self.tokenListChangeHandler(change: change)
+        }
+    }
+}
+
+extension WalletPresenter {
+    private func tokenListChangeHandler(change: RealmCollectionChange<List<TokenModel>>) {
+        switch change {
+        case .update(let tokenList, let deletions, let insertions, modifications: _):
+            guard deletions.count > 0 || insertions.count > 0 else { return }
+            if deletions.count > 0 {
+                var newTokens = tokens
                 deletions.enumerated().forEach({ (offset, element) in
                     let index = element - offset
-                    tokens.remove(at: index)
+                    newTokens.remove(at: index)
                 })
-                insertions.forEach({ (idx) in
+                tokens = newTokens
+            }
+            if insertions.count > 0 {
+                let newTokens = insertions.map({ (idx) -> Token in
                     let token = Token(tokenList[idx])
-                    token.walletAddress = self.currentWallet!.address
-                    tokens.append(token)
+                    token.walletAddress = currentWallet!.address
+                    return token
                 })
+                tokens += tokens
+                refreshTokenListBalance(tokens: newTokens)
+            }
+        default:
+            break
+        }
+    }
 
-                self.tokens = tokens
-                self.tokenListTimestamp = Date().timeIntervalSince1970
-                self.refreshBalance()
-            default:
-                break
+    private func refreshTokenListBalance(tokens: [Token]) {
+        guard tokens.count > 0 else { return }
+        refreshing = true
+        delegate?.walletPresenterBeganRefresh(presenter: self)
+        let timestamp = self.tokenListTimestamp
+        DispatchQueue.global().async {
+            tokens.forEach { (token) in
+                guard self.tokens.contains(where: { $0 == token }) else { return }
+                do {
+                    try token.refreshBalance()
+                    token.price = self.getPrice(token: token)
+                    DispatchQueue.main.async {
+                        self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
+                    }
+                } catch {
+                }
+            }
+            guard timestamp == self.tokenListTimestamp else { return }
+            var amount = 0.0
+            self.tokens.forEach({ (token) in
+                if let price = token.price, let balance = token.balance {
+                    amount += price * balance
+                }
+            })
+            DispatchQueue.main.async {
+                self.refreshing = false
+                self.delegate?.walletPresenterEndedRefresh(presenter: self)
+                self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
             }
         }
     }
