@@ -74,7 +74,7 @@
             </objects>
             <point key="canvasLocation" x="169" y="-76"/>
         </scene>
-        <!--DApp-->
+        <!--应用-->
         <scene sceneID="YEu-uN-pfd">
             <objects>
                 <viewController id="p8c-h3-jt8" customClass="DappViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
@@ -87,7 +87,7 @@
                         </accessibility>
                         <viewLayoutGuide key="safeArea" id="lbZ-aR-khA"/>
                     </view>
-                    <navigationItem key="navigationItem" title="DApp" id="VbH-aR-7SH">
+                    <navigationItem key="navigationItem" title="应用" id="VbH-aR-7SH">
                         <barButtonItem key="rightBarButtonItem" image="search_dapp" id="DVd-sy-6YQ">
                             <color key="tintColor" red="0.40784313729999999" green="0.42352941179999998" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
