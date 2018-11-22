@@ -18,13 +18,15 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
 
-    private var presenter = WalletPresenter()
+    private var presenter: WalletPresenter!
     private var walletCountObserve: NotificationToken?
     override func viewDidLoad() {
         super.viewDidLoad()
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refresh
+
+        presenter = WalletPresenter()
         presenter.delegate = self
         presenter.refresh()
 
