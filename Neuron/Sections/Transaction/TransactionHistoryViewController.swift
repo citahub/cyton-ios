@@ -221,19 +221,19 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     var transaction: TransactionDetails? {
         didSet {
             guard let transaction = transaction else { return }
-
+            
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
             dateLabel.text = dateformatter.string(from: transaction.date)
 
             let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
             let amount = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
-            if transaction.to.lowercased() == walletAddress.lowercased() {
+            if transaction.from.lowercased() == walletAddress.lowercased() {
                 addressLabel.text = transaction.from
-                numberLabel.text = "+\(amount)"
+                numberLabel.text = "-\(amount)"
             } else {
                 addressLabel.text = transaction.to
-                numberLabel.text = "-\(amount)"
+                numberLabel.text = "+\(amount)"
             }
 
             switch transaction.status {
