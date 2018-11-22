@@ -221,7 +221,6 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     var transaction: TransactionDetails? {
         didSet {
             guard let transaction = transaction else { return }
-            
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
             dateLabel.text = dateformatter.string(from: transaction.date)
