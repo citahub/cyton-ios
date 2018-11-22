@@ -188,6 +188,7 @@
 		89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D935242139363A002FAEEC /* TokenTableViewCell.swift */; };
 		89D9418721A6576700F1B853 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D9418621A6576700F1B853 /* CollectionViewController.swift */; };
 		89D9418A21A65B6D00F1B853 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D9418921A65B6D00F1B853 /* CollectionTableViewCell.swift */; };
+		89D9418C21A6A88800F1B853 /* DAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D9418B21A6A88800F1B853 /* DAppModel.swift */; };
 		89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F7966C213A6B680064808A /* ERC721TableViewCell.swift */; };
 		89F7966F213BD5680064808A /* Assets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F7966E213BD5680064808A /* Assets.storyboard */; };
 		89F79671213BD8C40064808A /* TransactionHistory.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F79670213BD8C40064808A /* TransactionHistory.storyboard */; };
@@ -412,6 +413,7 @@
 		89D935242139363A002FAEEC /* TokenTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenTableViewCell.swift; sourceTree = "<group>"; };
 		89D9418621A6576700F1B853 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		89D9418921A65B6D00F1B853 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		89D9418B21A6A88800F1B853 /* DAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppModel.swift; sourceTree = "<group>"; };
 		89F7966C213A6B680064808A /* ERC721TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC721TableViewCell.swift; sourceTree = "<group>"; };
 		89F7966E213BD5680064808A /* Assets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assets.storyboard; sourceTree = "<group>"; };
 		89F79670213BD8C40064808A /* TransactionHistory.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TransactionHistory.storyboard; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
+				89D9418B21A6A88800F1B853 /* DAppModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1378,6 +1381,7 @@
 				892A1985215A55F400B2293D /* Double+Extension.swift in Sources */,
 				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */,
+				89D9418C21A6A88800F1B853 /* DAppModel.swift in Sources */,
 				89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */,
 				1A69465C21916BE5000093A2 /* EthereumTxSender.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,

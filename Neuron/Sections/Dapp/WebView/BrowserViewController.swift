@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
 class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
     @IBOutlet private weak var directionView: UIView!
@@ -112,7 +113,23 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func didClickCollectionButton(_ sender: UIButton) {
+    @IBAction func didClickCollectionButton(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "收藏", style: .default, handler: { (alertAction) in
+            let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+            self.webView.evaluateJavaScript(relJs) { (manifest, _) in
+                if let dappLink = self.webView.url?.absoluteString, let title = self.webView.title {
+                    DAppAction().collectDApp(manifestLink: manifest as? String, dappLink: dappLink, title: title)
+                } else {
+                    Toast.showToast(text: "收藏失败")
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "刷新", style: .default, handler: { (_) in
+            self.webView.reload()
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
@@ -258,13 +275,6 @@ extension BrowserViewController: WKNavigationDelegate {
 
         let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
         webView.evaluateJavaScript(relJs) { (manifest, _) in
-            guard let link = manifest else {
-                return
-            }
-            DAppAction().dealWithManifestJson(with: link as! String)
-        }
-        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
-        webView.evaluateJavaScript(refJs) { (manifest, _) in
             guard let link = manifest else {
                 return
             }

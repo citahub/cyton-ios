@@ -222,6 +222,12 @@
                                 <action selector="didClickCloseButton:" destination="nmb-oI-LyV" id="uhr-a7-n0I"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Item" image="dapp_collection" id="7bO-4L-Ia0">
+                            <color key="tintColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="didClickCollectionButton:" destination="nmb-oI-LyV" id="14M-yZ-bDM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backButton" destination="wRj-qH-Iod" id="uGS-eB-COI"/>
@@ -827,6 +833,7 @@
     </scenes>
     <resources>
         <image name="close" width="36" height="36"/>
+        <image name="dapp_collection" width="20" height="5"/>
         <image name="nav_darkback" width="14" height="22"/>
         <image name="webview_ahead_off" width="10" height="18"/>
         <image name="webview_ahead_on" width="10" height="18"/>
