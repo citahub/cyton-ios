@@ -36,8 +36,6 @@ class TokenTableViewCell: UITableViewCell {
     private var overlayView: UIView?
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        super.setHighlighted(highlighted, animated: animated)
-
         if highlighted {
             overlayView = UIView(frame: ctxView.bounds)
             overlayView?.backgroundColor = UIColor.black
