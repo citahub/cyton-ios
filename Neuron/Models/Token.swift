@@ -80,13 +80,7 @@ class Token {
 }
 
 extension Token {
-    enum `Type`: String {
-        case ether
-        case erc20
-        case appChain
-        case appChainErc20
-    }
-    var type: Type {
+    var type: TokenType {
         if isNativeToken {
             if chainId == NativeChainId.ethMainnetChainId {
                 return .ether

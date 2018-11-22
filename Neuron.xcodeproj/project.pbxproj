@@ -579,6 +579,16 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		1A91E1E321A63561000EFD40 /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				8905660620D0AC120041D4B4 /* AppModel.swift */,
+				8913437020C78F1000A17AEF /* WalletModel.swift */,
+				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
+			);
+			path = Realm;
+			sourceTree = "<group>";
+		};
 		1AB28771217964F500DCC14D /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -685,10 +695,9 @@
 		8913436F20C78D9600A17AEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1A91E1E321A63561000EFD40 /* Realm */,
 				89B296EA20F4CB6B008558A7 /* TransactionModel.swift */,
-				8913437020C78F1000A17AEF /* WalletModel.swift */,
-				8905660620D0AC120041D4B4 /* AppModel.swift */,
-				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
+				6E9B948021A408B400D67357 /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1030,7 +1039,6 @@
 				6E7D3837219C173D0031177B /* TransactionDetails.swift */,
 				6E3B2B6A219D938F0095257D /* SentTransaction.swift */,
 				6E3B2B74219EDE200095257D /* TransactionStatusManager.swift */,
-				6E9B948021A408B400D67357 /* Token.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
