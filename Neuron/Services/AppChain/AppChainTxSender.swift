@@ -36,7 +36,6 @@ class AppChainTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        let appChain = AppChainNetwork.appChain() // TODO: get rpc node for current AppChain
         guard let meta = try? appChain.rpc.getMetaData() else {
             throw SendTransactionError.createTransactionIssue
         }
