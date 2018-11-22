@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BLTNBoard
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -14,6 +15,12 @@ class WalletDetailController: UITableViewController {
     @IBOutlet var walletIconImageView: UIImageView!
     var appModel = AppModel()
     var walletModel = WalletModel()
+
+    private var deleteBulletinManager: BLTNItemManager?
+
+    private var exportBulletinManager: BLTNItemManager?
+
+    private var modifyWalletNameBulletinManager: BLTNItemManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,80 +32,111 @@ class WalletDetailController: UITableViewController {
         walletIconImageView.image = UIImage(data: walletModel.iconData)
     }
 
-    @IBAction func didDeleteWallet(_ sender: UIButton) {
-        InputTextViewController.viewController(title: "删除钱包", placeholder: "请输入钱包密码", isSecureTextEntry: true, confirmHandler: { (controller, text) in
-            let wallet = self.walletModel.wallet!
-            Toast.showHUD()
-            do {
-                try WalletManager.default.deleteWallet(wallet: wallet, password: text)
-                try WalletRealmTool.realm.write {
-                    if self.appModel.wallets.count == 1 {
-                        WalletRealmTool.realm.delete(self.walletModel)
-                        NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
-                    } else {
-                        self.appModel.currentWallet = self.appModel.wallets.filter({ (model) -> Bool in
-                            return model.address.removeHexPrefix().lowercased() != wallet.address.removeHexPrefix().lowercased()
-                        }).first!
-                        WalletRealmTool.realm.delete(self.walletModel)
-                    }
-                }
-                Toast.hideHUD()
-                Toast.showToast(text: "删除成功")
-                controller.dismiss()
-                self.navigationController?.popToRootViewController(animated: true)
-            } catch let error {
-                Toast.hideHUD()
-                return Toast.showToast(text: error.localizedDescription)
+    func creatDeleteWalletPageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create(title: "删除钱包", actionButtonTitle: "确认删除")
+
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
             }
-        }, cancelHandler: { (controller) in
-            controller.dismiss()
-        }).show(in: self)
+            self.deleteWallet(password: passwordPageItem.passwordField.text!, item: item as! PasswordPageItem)
+        }
+        return passwordPageItem
     }
 
-    private func exportKeystore() {
-        InputTextViewController.viewController(title: "导出keystore", placeholder: "请输入钱包密码", isSecureTextEntry: true, confirmHandler: { (controller, text) in
-            do {
-                let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
-                let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: text)
-                controller.dismiss()
-                let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
-                exportController.keystoreString = keystore
-                controller.dismiss()
-                self.navigationController?.pushViewController(exportController, animated: true)
-            } catch let error {
-                Toast.showToast(text: error.localizedDescription)
+    func creatExportKeystorePageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create(title: "导出Keystore", actionButtonTitle: "确认")
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
             }
-        }, cancelHandler: { (controller) in
-            controller.dismiss()
-        }).show(in: self)
+            self.exportKeystore(password: passwordPageItem.passwordField.text!, item: item as! PasswordPageItem)
+        }
+        return passwordPageItem
+    }
+
+    func creatModifyWalletNamePageItem() -> ModifyWalletNamePageItem {
+        let modifyWalletNamePageItem = ModifyWalletNamePageItem.create()
+        modifyWalletNamePageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
+            }
+            self.modifyWalletName(walletName: modifyWalletNamePageItem.walletNameField.text!, item: item as! ModifyWalletNamePageItem)
+        }
+        return modifyWalletNamePageItem
+    }
+
+    @IBAction func didDeleteWallet(_ sender: UIButton) {
+        deleteBulletinManager = BLTNItemManager(rootItem: creatDeleteWalletPageItem())
+        deleteBulletinManager?.showBulletin(above: self)
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                didChangeWalletName()
+                modifyWalletNameBulletinManager = BLTNItemManager(rootItem: creatModifyWalletNamePageItem())
+                modifyWalletNameBulletinManager?.showBulletin(above: self)
             }
         } else if indexPath.section == 1 {
             if indexPath.row == 1 {
-                exportKeystore()
+                exportBulletinManager = BLTNItemManager(rootItem: creatExportKeystorePageItem())
+                exportBulletinManager?.showBulletin(above: self)
             }
         }
     }
 
-    func didChangeWalletName() {
-        InputTextViewController.viewController(title: "修改钱包名称", placeholder: "请输入钱包名称", isSecureTextEntry: false, confirmHandler: { (controller, text) in
-            if case .invalid(let reason) = WalletNameValidator.validate(walletName: text) {
-                Toast.showToast(text: reason)
-                return
+    func modifyWalletName(walletName: String, item: ModifyWalletNamePageItem) {
+        do {
+            try WalletRealmTool.realm.write {
+                self.walletModel.name = walletName
             }
-            try! WalletRealmTool.realm.write {
-                self.walletModel.name = text
+            self.walletNameLabel.text = walletName
+            modifyWalletNameBulletinManager?.dismissBulletin()
+        } catch let error {
+            item.errorMessage = error.localizedDescription
+            modifyWalletNameBulletinManager?.hideActivityIndicator()
+        }
+    }
+
+    func exportKeystore(password: String, item: PasswordPageItem) {
+        do {
+            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+            let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: password)
+
+            let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
+            exportController.keystoreString = keystore
+            exportBulletinManager?.dismissBulletin()
+            self.navigationController?.pushViewController(exportController, animated: true)
+        } catch let error {
+            item.errorMessage = error.localizedDescription
+            exportBulletinManager?.hideActivityIndicator()
+        }
+    }
+
+    func deleteWallet(password: String, item: PasswordPageItem) {
+        let appItem = WalletRealmTool.getCurrentAppModel()
+        let walletItem = appItem.currentWallet!
+        let wallet = walletItem.wallet!
+        do {
+            try WalletManager.default.deleteWallet(wallet: wallet, password: password)
+            try WalletRealmTool.realm.write {
+                WalletRealmTool.realm.delete(self.walletModel)
             }
-            self.walletNameLabel.text = text
-            controller.dismiss()
-        }, cancelHandler: { (controller) in
-            controller.dismiss()
-        }).show(in: self)
+            if !WalletRealmTool.hasWallet() {
+                NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
+            } else {
+                appItem.currentWallet = appItem.wallets.first!
+            }
+            Toast.showToast(text: "删除成功")
+            deleteBulletinManager?.dismissBulletin()
+            self.navigationController?.popViewController(animated: true)
+        } catch let error {
+            item.errorMessage = error.localizedDescription
+            deleteBulletinManager?.hideActivityIndicator()
+        }
     }
 }
