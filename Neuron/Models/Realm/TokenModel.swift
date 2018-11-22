@@ -9,13 +9,6 @@
 import Foundation
 import RealmSwift
 
-enum TokenType: String {
-    case ether
-    case erc20
-    case appChain
-    case appChainErc20
-}
-
 class TokenModel: Object, Decodable {
     @objc dynamic var name = ""
     @objc dynamic var iconUrl: String? = ""
@@ -25,12 +18,12 @@ class TokenModel: Object, Decodable {
     @objc dynamic var chainName: String? = ""
     @objc dynamic var chainId = ""
     @objc dynamic var chainHosts = "" // manifest.json chainSet.values.first
-    @objc dynamic var identifier = UUID().uuidString // primary key == UUID
+    @objc dynamic var identifier = UUID().uuidString
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
 
-    @objc dynamic var tokenBalance = 0.0  // TODO: Should persist balance, or store them globally.
+    @objc dynamic var tokenBalance = 0.0
     var currencyAmount = "0"
 
     override class func primaryKey() -> String? {

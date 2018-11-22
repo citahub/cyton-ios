@@ -8,20 +8,27 @@
 
 import UIKit
 import Web3swift
-import PromiseKit
 import BigInt
 import EthereumAddress
 
+enum TokenType: String {
+    case ether
+    case erc20
+    case appChain
+    case appChainErc20
+}
+
 class Token {
-    var name = ""
+    var name: String
     var iconUrl: String? = ""
-    var address = ""
-    var symbol = ""
+    var address: String
+    var symbol: String
     var chainName: String? = ""
-    var chainId = ""
-    var chainHosts = ""
-    var isNativeToken = false
+    var chainId: String
+    var chainHosts: String
+    var isNativeToken: Bool
     var walletAddress = ""
+    var type: TokenType
 
     private(set) var balance: Double? {
         didSet {
@@ -46,6 +53,7 @@ class Token {
         chainName = token.chainName
         chainHosts = token.chainHosts
         isNativeToken = token.isNativeToken
+        type = token.type
     }
 
     // MARK: - balance
@@ -79,26 +87,12 @@ class Token {
     }
 }
 
-extension Token {
-    var type: TokenType {
-        if isNativeToken {
-            if chainId == NativeChainId.ethMainnetChainId {
-                return .ether
-            } else {
-                if address != "" {
-                    return .appChainErc20
-                } else {
-                    return .appChain
-                }
-            }
-        } else {
-            return .erc20
-        }
-    }
-}
-
 extension Token: Equatable {
     static func == (lhs: Token, rhs: Token) -> Bool {
-        return lhs.address == rhs.address && lhs.walletAddress == rhs.walletAddress && rhs.type == lhs.type
+        return
+            lhs.type == rhs.type &&
+            lhs.address == rhs.address &&
+            lhs.symbol == rhs.symbol &&
+            lhs.walletAddress == rhs.walletAddress
     }
 }
