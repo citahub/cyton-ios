@@ -18,13 +18,15 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
 
-    private var presenter = WalletPresenter()
+    private var presenter: WalletPresenter!
     private var walletCountObserve: NotificationToken?
     override func viewDidLoad() {
         super.viewDidLoad()
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refresh
+
+        presenter = WalletPresenter()
         presenter.delegate = self
         presenter.refresh()
 
@@ -49,7 +51,7 @@ class WalletViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionHistory" {
             let controller = segue.destination as! TransactionHistoryViewController
-            controller.tokenModel = sender as? TokenModel
+            controller.token = sender as? Token
         } else if segue.identifier == "transaction" {
             let controller = segue.destination as! SendTransactionViewController
             controller.enableSwitchToken = true
@@ -129,7 +131,7 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "transactionHistory", sender: presenter.tokens[indexPath.row].tokenModel)
+        performSegue(withIdentifier: "transactionHistory", sender: presenter.tokens[indexPath.row])
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

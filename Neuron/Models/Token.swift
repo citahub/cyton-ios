@@ -73,7 +73,7 @@ class Token {
         case .ether:
             balance = try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(walletAddress)!)
         case .appChain, .appChainErc20:
-            balance = try AppChainNetwork.appChain().rpc.getBalance(address: walletAddress)
+            balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
         case .erc20:
             let contractAddress = EthereumAddress(address)!
             let walletAddress = EthereumAddress(self.walletAddress)!
