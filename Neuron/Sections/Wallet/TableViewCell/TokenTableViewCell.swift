@@ -35,10 +35,9 @@ class TokenTableViewCell: UITableViewCell {
     @IBOutlet weak var ctxView: UIView!
     private var overlayView: UIView?
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-    }
-
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
+        super.setHighlighted(highlighted, animated: animated)
+
         if highlighted {
             overlayView = UIView(frame: ctxView.bounds)
             overlayView?.backgroundColor = UIColor.black
@@ -48,5 +47,4 @@ class TokenTableViewCell: UITableViewCell {
             overlayView?.removeFromSuperview()
         }
     }
-
 }
