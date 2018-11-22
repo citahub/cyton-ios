@@ -50,7 +50,6 @@
 		6E7D3838219C173D0031177B /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3837219C173D0031177B /* TransactionDetails.swift */; };
 		6E7D3842219C47940031177B /* TransactionHistoryPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3841219C47940031177B /* TransactionHistoryPresenter.swift */; };
 		6E8168F921887A31007641BA /* TransactionGasPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */; };
-		6E8173B3218D55A10078A2CF /* InputTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8173B2218D55A10078A2CF /* InputTextViewController.swift */; };
 		6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB88216F573100029324 /* ProductAgreementViewController.swift */; };
 		6E83CB8E216F573100029324 /* GuideService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB89216F573100029324 /* GuideService.swift */; };
 		6E83CB8F216F573100029324 /* Guide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB8A216F573100029324 /* Guide.storyboard */; };
@@ -265,7 +264,6 @@
 		6E7D3837219C173D0031177B /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		6E7D3841219C47940031177B /* TransactionHistoryPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryPresenter.swift; sourceTree = "<group>"; };
 		6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGasPriceViewController.swift; sourceTree = "<group>"; };
-		6E8173B2218D55A10078A2CF /* InputTextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InputTextViewController.swift; sourceTree = "<group>"; };
 		6E83CB88216F573100029324 /* ProductAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductAgreementViewController.swift; sourceTree = "<group>"; };
 		6E83CB89216F573100029324 /* GuideService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideService.swift; sourceTree = "<group>"; };
 		6E83CB8A216F573100029324 /* Guide.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Guide.storyboard; sourceTree = "<group>"; };
@@ -978,7 +976,6 @@
 				898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */,
 				89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */,
 				89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */,
-				6E8173B2218D55A10078A2CF /* InputTextViewController.swift */,
 			);
 			path = WalletDetails;
 			sourceTree = "<group>";
@@ -1499,7 +1496,6 @@
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
 				8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */,
-				6E8173B3218D55A10078A2CF /* InputTextViewController.swift in Sources */,
 				89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */,
 				8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */,
 				89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */,
