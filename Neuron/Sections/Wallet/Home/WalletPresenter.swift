@@ -81,51 +81,9 @@ class WalletPresenter {
         delegate?.walletPresenter(presenter: self, didRefreshCurrency: currency)
         refreshTokenListBalance(tokens: self.tokens)
     }
-
-    @objc func refreshPrice() {
-        self.currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        delegate?.walletPresenterBeganRefresh(presenter: self)
-        let tokens = self.tokens
-        var amount = 0.0
-        let currency = self.currency
-        DispatchQueue.global().async {
-            tokens.forEach { (token) in
-                token.price = self.getPrice(token: token)
-                if let price = token.price, let balance = token.balance {
-                    amount += price * balance
-                }
-                DispatchQueue.main.async {
-                    self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
-                }
-            }
-            guard currency?.short == self.currency.short else { return }
-            DispatchQueue.main.async {
-                self.refreshing = false
-                self.delegate?.walletPresenterEndedRefresh(presenter: self)
-                self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
-            }
-        }
-    }
-
-    // MARK: - Utils
-    private func getPrice(token: Token) -> Double? {
-        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
-        guard let tokenId = currencyToken?.id else {
-            return nil
-        }
-        return try? Promise<Double>.init { (resolver) in
-            CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
-                switch result {
-                case .success(let price):
-                    resolver.fulfill(price)
-                case .error(let error):
-                    resolver.reject(error)
-                }
-            })
-        }.wait()
-    }
 }
 
+// MARK: - Observer
 extension WalletPresenter {
     private func observeCurrentWallet() {
         walletObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
@@ -177,7 +135,7 @@ extension WalletPresenter {
                     token.walletAddress = currentWallet!.address
                     return token
                 })
-                tokens += tokens
+                tokens += newTokens
                 refreshTokenListBalance(tokens: newTokens)
             }
         default:
@@ -195,14 +153,13 @@ extension WalletPresenter {
                 guard self.tokens.contains(where: { $0 == token }) else { return }
                 do {
                     try token.refreshBalance()
-                    token.price = self.getPrice(token: token)
+                    token.price = self.getTokenPrice(token: token)
                     DispatchQueue.main.async {
                         self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
                     }
                 } catch {
                 }
             }
-            guard timestamp == self.tokenListTimestamp else { return }
             var amount = 0.0
             self.tokens.forEach({ (token) in
                 if let price = token.price, let balance = token.balance {
@@ -210,10 +167,58 @@ extension WalletPresenter {
                 }
             })
             DispatchQueue.main.async {
+                guard timestamp == self.tokenListTimestamp else { return }
                 self.refreshing = false
                 self.delegate?.walletPresenterEndedRefresh(presenter: self)
                 self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
             }
         }
+    }
+
+    @objc func refreshPrice() {
+        self.currency = LocalCurrencyService.shared.getLocalCurrencySelect()
+        delegate?.walletPresenterBeganRefresh(presenter: self)
+        let tokens = self.tokens
+        let currency = self.currency
+        let timestamp = self.tokenListTimestamp
+        DispatchQueue.global().async {
+            var amount = 0.0
+            tokens.forEach { (token) in
+                token.price = self.getTokenPrice(token: token)
+                if let price = token.price, let balance = token.balance {
+                    amount += price * balance
+                }
+                DispatchQueue.main.async {
+                    self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)
+                }
+            }
+            DispatchQueue.main.async {
+                guard currency?.short == self.currency.short else { return }
+                guard timestamp == self.tokenListTimestamp else { return }
+                self.refreshing = false
+                self.delegate?.walletPresenterEndedRefresh(presenter: self)
+                self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
+            }
+        }
+    }
+}
+
+// MARK: - Utils
+extension WalletPresenter {
+    private func getTokenPrice(token: Token) -> Double? {
+        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
+        guard let tokenId = currencyToken?.id else {
+            return nil
+        }
+        return try? Promise<Double>.init { (resolver) in
+            CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
+                switch result {
+                case .success(let price):
+                    resolver.fulfill(price)
+                case .error(let error):
+                    resolver.reject(error)
+                }
+            })
+        }.wait()
     }
 }
