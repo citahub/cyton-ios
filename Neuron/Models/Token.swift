@@ -29,22 +29,23 @@ class Token {
     var isNativeToken: Bool
     var walletAddress = ""
     var type: TokenType
+    let identifier: String
+
+    var tokenModel: TokenModel {
+        let realm = RealmHelper().realm
+        return realm.object(ofType: TokenModel.self, forPrimaryKey: identifier)!
+    }
 
     private(set) var balance: Double? {
         didSet {
-            guard let realm = tokenModel.realm else { return }
-            DispatchQueue.main.async {
-                try? realm.write {
-                    self.tokenModel.tokenBalance = self.balance ?? 0.0
-                }
+            try? tokenModel.realm!.write {
+                tokenModel.tokenBalance = balance ?? 0.0
             }
         }
     }
     var price: Double?
-    let tokenModel: TokenModel
 
     init(_ token: TokenModel) {
-        tokenModel = token
         name = token.name
         iconUrl = token.iconUrl
         address = token.address
@@ -54,6 +55,7 @@ class Token {
         chainHosts = token.chainHosts
         isNativeToken = token.isNativeToken
         type = token.type
+        identifier = token.identifier
     }
 
     // MARK: - balance
