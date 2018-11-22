@@ -51,7 +51,7 @@ class WalletViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "transactionHistory" {
             let controller = segue.destination as! TransactionHistoryViewController
-            controller.tokenModel = sender as? TokenModel
+            controller.token = sender as? Token
         } else if segue.identifier == "transaction" {
             let controller = segue.destination as! SendTransactionViewController
             controller.enableSwitchToken = true
@@ -131,7 +131,7 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "transactionHistory", sender: presenter.tokens[indexPath.row].tokenModel)
+        performSegue(withIdentifier: "transactionHistory", sender: presenter.tokens[indexPath.row])
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
