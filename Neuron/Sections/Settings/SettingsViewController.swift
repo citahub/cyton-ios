@@ -16,19 +16,20 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var currencyLabel: UILabel!
     @IBOutlet weak var ethereumNetworkLabel: UILabel!
     @IBOutlet var authenticationSwitch: UISwitch!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
     func getDataForUI() {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
-        nameLabel.text = walletModel.name
-        addressLabel.text = walletModel.address
-        iconImageView.image = UIImage(data: walletModel.iconData)
-        currencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
-        ethereumNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
-        authenticationSwitch.isOn = AuthenticationService.shared.isEnable
+        if let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet {
+            nameLabel.text = walletModel.name
+            addressLabel.text = walletModel.address
+            iconImageView.image = UIImage(data: walletModel.iconData)
+            currencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
+            ethereumNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
+            authenticationSwitch.isOn = AuthenticationService.shared.isEnable
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

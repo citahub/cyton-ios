@@ -285,10 +285,10 @@
             </objects>
             <point key="canvasLocation" x="1326" y="1637"/>
         </scene>
-        <!--SwitchWallet-->
+        <!--WalletManagement-->
         <scene sceneID="jYc-cW-gQc">
             <objects>
-                <viewControllerPlaceholder storyboardName="SwitchWallet" id="pHq-W2-gbm" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="WalletManagement" id="pHq-W2-gbm" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="0lP-Qh-LUN"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3o-fN-N9M" userLabel="First Responder" sceneMemberID="firstResponder"/>
