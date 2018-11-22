@@ -49,6 +49,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "pushSearchView")
+        webView.configuration.userContentController.add(self, name: "pushMyDAppView")
+        webView.configuration.userContentController.add(self, name: "pushCollectionView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
 
@@ -97,6 +99,10 @@ extension DappViewController: WKScriptMessageHandler {
         case "pushSearchView":
             let sCtrl = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
             self.navigationController?.pushViewController(sCtrl, animated: true)
+        case "pushMyDAppView":
+            Toast.showToast(text: "敬请期待")
+        case "pushCollectionView":
+            Toast.showToast(text: "敬请期待")
         default:
             break
         }
