@@ -111,19 +111,12 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         if enableSwitchToken && token == nil {
             token = WalletRealmTool.getCurrentAppModel().nativeTokenList.first
         }
 
-        paramBuilder = TransactionParamBuilder(token: token)
-        observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
-            self.updateGasCost()
-        })
-        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        if recipientAddress != nil {
-            paramBuilder.to = recipientAddress
-        }
-        setupUI()
+        createParamBuilder()
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -308,6 +301,7 @@ extension SendTransactionViewController: QRCodeViewControllerDelegate {
 }
 
 // MARK: - Switch transaction token
+
 extension SendTransactionViewController: TransactionSwitchTokenViewControllerDelegate {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
@@ -341,6 +335,10 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         }
         observers.removeAll()
 
+        createParamBuilder()
+    }
+
+    private func createParamBuilder() {
         paramBuilder = TransactionParamBuilder(token: token)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
             self.updateGasCost()
