@@ -44,7 +44,7 @@
                         <sections>
                             <tableViewSection headerTitle="" id="gBk-TB-DFL">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="KWd-4n-PBJ" style="IBUITableViewCellStyleDefault" id="mWE-sa-SZB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="KWd-4n-PBJ" style="IBUITableViewCellStyleDefault" id="mWE-sa-SZB">
                                         <rect key="frame" x="0.0" y="35" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mWE-sa-SZB" id="HK8-cG-U6P">
@@ -88,7 +88,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="Wzy-xD-n1q" detailTextLabel="Leb-Jq-yHG" style="IBUITableViewCellStyleValue1" id="yQf-Bj-mg0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="Wzy-xD-n1q" detailTextLabel="Leb-Jq-yHG" style="IBUITableViewCellStyleValue1" id="yQf-Bj-mg0">
                                         <rect key="frame" x="0.0" y="135" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yQf-Bj-mg0" id="3LA-pv-fnS">
