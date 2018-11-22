@@ -15,17 +15,14 @@ protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
 
 class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private(set) var transactions = [TransactionDetails]()
-    let token: TokenModel
+    let token: Token
     typealias CallbackBlock = ([Int], Error?) -> Void
     weak var delegate: TransactionHistoryPresenterDelegate?
     private var hasMoreData = true
     private var sentTransactions = [TransactionDetails]()
 
-    init(token: TokenModel) {
+    init(token: Token) {
         self.token = token
-        walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        tokenAddress = token.address
-        tokenType = token.type
         super.init()
         TransactionStatusManager.manager.addDelegate(delegate: self)
     }
@@ -52,7 +49,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(walletAddress: self.walletAddress, tokenType: self.tokenType, tokenAddress: self.tokenAddress)
+                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(walletAddress: self.token.walletAddress, tokenType: self.token.type, tokenAddress: self.token.address)
                 }
                 self.page += 1
 
@@ -110,26 +107,27 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     private var loading = false
     private var page: UInt = 1
     private var pageSize: UInt = 10
-    private let walletAddress: String
-    private let tokenAddress: String
-    private let tokenType: TokenType
 
     private func loadData() throws -> [TransactionDetails] {
-        switch tokenType {
+        switch token.type {
         case .appChain:
-            return try AppChainNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
+            if token.symbol == "NATT" {
+                return try AppChainNetwork().getTransactionHistory(walletAddress: token.walletAddress, page: page, pageSize: pageSize)
+            } else {
+                return []
+            }
         case .ether:
-            return try EthereumNetwork().getTransactionHistory(walletAddress: walletAddress, page: page, pageSize: pageSize)
+            return try EthereumNetwork().getTransactionHistory(walletAddress: token.walletAddress, page: page, pageSize: pageSize)
         case .erc20:
-            return try EthereumNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
+            return try EthereumNetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
         case .appChainErc20:
-            return try AppChainNetwork().getErc20TransactionHistory(walletAddress: walletAddress, tokenAddress: tokenAddress, page: page, pageSize: pageSize)
+            return try AppChainNetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
         }
     }
 
     // MARK: - TransactionStatusManagerDelegate
     func sentTransactionInserted(transaction: TransactionDetails) {
-        guard transaction.from == walletAddress else {
+        guard transaction.from == token.walletAddress else {
             return
         }
         DispatchQueue.main.async {

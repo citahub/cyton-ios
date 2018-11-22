@@ -36,26 +36,31 @@ class AppChainTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        let nonce = UUID().uuidString
-        let appChain = AppChainNetwork.appChain()
+        guard let meta = try? appChain.rpc.getMetaData() else {
+            throw SendTransactionError.createTransactionIssue
+        }
         guard let blockNumber = try? appChain.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
+        if chainId.description != meta.chainId {
+            throw SendTransactionError.invalidChainId
+        }
+
         let transaction = Transaction(
             to: destinationEthAddress,
-            nonce: nonce,
+            nonce: UUID().uuidString,
             quota: quota,
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
             value: value,
-            chainId: chainId.description,
-            version: UInt32(0)
+            chainId: meta.chainId,
+            version: meta.version
         )
         let signed = try sign(transaction: transaction, password: password)
-          let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
-          let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction)
-          TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
-          return txHash
+        let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
+        let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction)
+        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+        return txHash
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {
