@@ -45,7 +45,7 @@ class WalletPresenter {
     private(set) var refreshing = false
     weak var delegate: WalletPresenterDelegate?
 
-    private var walletObserver: NotificationToken?
+    private var appModelObserver: NotificationToken?
     private var selectTokenListObserver: NotificationToken?
     private var nativeTokenListObserver: NotificationToken?
 
@@ -54,7 +54,7 @@ class WalletPresenter {
     init() {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshBalance), name: .switchEthNetwork, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPrice), name: .changeLocalCurrency, object: nil)
-        observeCurrentWallet()
+        observeAppModel()
         observeNativeTokenList()
     }
 
@@ -85,8 +85,8 @@ class WalletPresenter {
 
 // MARK: - Observer
 extension WalletPresenter {
-    private func observeCurrentWallet() {
-        walletObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
+    private func observeAppModel() {
+        appModelObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
             switch change {
             case .change(let propertys):
                 guard let wallet = propertys.first(where: { $0.name == "currentWallet" })?.newValue as? WalletModel else { return }

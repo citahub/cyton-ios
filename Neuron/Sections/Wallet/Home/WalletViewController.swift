@@ -20,6 +20,8 @@ class WalletViewController: UIViewController {
 
     private var presenter: WalletPresenter!
     private var walletCountObserve: NotificationToken?
+    private var walletObserver: NotificationToken?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if #available(iOS 11.0, *) {
@@ -90,6 +92,16 @@ extension WalletViewController: WalletPresenterDelegate {
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
         totalAmountLabel.text = "- - -"
         navigationItem.title = wallet.name
+        walletObserver?.invalidate()
+        walletObserver = wallet.observe({ [weak self](change) in
+            switch change {
+            case .change(let propertys):
+                guard let name = propertys.first(where: { $0.name == "name" })?.newValue as? String else { return }
+                self?.navigationItem.title = name
+            default:
+                break
+            }
+        })
     }
 
     func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
