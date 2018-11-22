@@ -22,6 +22,12 @@ class WalletViewController: UIViewController {
     private var walletCountObserve: NotificationToken?
     override func viewDidLoad() {
         super.viewDidLoad()
+        if #available(iOS 11.0, *) {
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
         tableView.refreshControl = refresh
@@ -125,6 +131,10 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 46
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return tableHeadView
     }
@@ -139,8 +149,8 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        self.refreshButton.alpha = 1.0
-        self.tableView.refreshControl?.endRefreshing()
+        refreshButton.alpha = 1.0
+        tableView.refreshControl?.endRefreshing()
     }
 }
 
