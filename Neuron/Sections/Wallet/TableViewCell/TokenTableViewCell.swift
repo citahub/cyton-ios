@@ -39,7 +39,7 @@ class TokenTableViewCell: UITableViewCell {
         if highlighted {
             overlayView = UIView(frame: ctxView.bounds)
             overlayView?.backgroundColor = UIColor.black
-            overlayView?.alpha = 0.4
+            overlayView?.alpha = 0.2
             ctxView.addSubview(overlayView!)
         } else {
             overlayView?.removeFromSuperview()

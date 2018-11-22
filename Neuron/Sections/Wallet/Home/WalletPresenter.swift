@@ -27,7 +27,6 @@ class WalletPresenter {
     private (set) var currentWallet: WalletModel? {
         didSet {
             guard oldValue?.address != currentWallet?.address else { return }
-            observeWallet()
             delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
         }
     }
