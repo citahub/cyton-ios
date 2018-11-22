@@ -43,6 +43,7 @@ enum SendTransactionError: Error {
     case createTransactionIssue
     case invalidPassword
     case invalidAppChainNode
+    case invalidChainId
     case signTXFailed
 }
 
