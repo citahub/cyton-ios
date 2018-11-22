@@ -128,13 +128,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFT-j7-CsS" customClass="DesignableGradientView" customModule="Neuron" customModuleProvider="target">
                                                     <rect key="frame" x="55" y="98" width="120" height="40"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-9I-06f" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-9I-06f" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
                                                             <rect key="frame" x="28.5" y="10" width="63" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="63" id="4F5-d1-Lsi"/>
                                                                 <constraint firstAttribute="height" constant="20" id="Lwx-CT-c7H"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="收款" image="icon_wallet_qrcode">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
@@ -190,13 +190,13 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omU-t3-B9C" customClass="DesignableGradientView" customModule="Neuron" customModuleProvider="target">
                                                     <rect key="frame" x="200" y="98" width="120" height="40"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-vX-xxw" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-vX-xxw" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
                                                             <rect key="frame" x="28.5" y="10" width="63" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="63" id="aMt-BK-sBl"/>
                                                                 <constraint firstAttribute="height" constant="20" id="zw6-EZ-Ixi"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="转账" image="icon_wallet_trans">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
