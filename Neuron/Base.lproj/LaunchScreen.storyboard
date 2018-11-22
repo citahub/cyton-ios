@@ -32,7 +32,7 @@
                                     <constraint firstAttribute="height" constant="32" id="Qfq-Xj-NZ6"/>
                                 </constraints>
                             </imageView>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peckshield" translatesAutoresizingMaskIntoConstraints="NO" id="3xp-ae-RTf">
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="peckshield_launch" translatesAutoresizingMaskIntoConstraints="NO" id="3xp-ae-RTf">
                                 <rect key="frame" x="135" y="633" width="105" height="12"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="105" id="hVS-Xt-P15"/>
@@ -60,6 +60,6 @@
     <resources>
         <image name="launch_icon" width="126" height="101"/>
         <image name="nervos_launch" width="80" height="32"/>
-        <image name="peckshield" width="120" height="12"/>
+        <image name="peckshield_launch" width="120" height="12"/>
     </resources>
 </document>
