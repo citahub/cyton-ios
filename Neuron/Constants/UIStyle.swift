@@ -8,11 +8,6 @@
 
 import UIKit
 
-struct ScreenSize {
-    static let height = UIScreen.main.bounds.height
-    static let width = UIScreen.main.bounds.width
-}
-
 struct StatusBar {
     static let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
     static let navigationBarHeight: CGFloat = 44.0
