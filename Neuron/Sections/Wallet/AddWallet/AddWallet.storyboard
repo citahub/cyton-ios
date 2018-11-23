@@ -29,7 +29,7 @@
         <!--Add Wallet View Controller-->
         <scene sceneID="qlA-0N-b4Q">
             <objects>
-                <viewController storyboardIdentifier="AddWallet" id="yZ5-nt-WqJ" userLabel="Add Wallet View Controller" customClass="AddWalletController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddWallet" id="yZ5-nt-WqJ" userLabel="Add Wallet View Controller" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4sQ-qG-YHE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
