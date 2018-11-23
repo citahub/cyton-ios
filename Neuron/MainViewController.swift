@@ -16,11 +16,6 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
 
         applyStyle()
-
-        determineWalletViewController()
-        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .allWalletsDeleted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .firstWalletCreated, object: nil)
-
         addNativeTokenMsgToRealm()
     }
 
@@ -83,16 +78,5 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         UINavigationBar.fixSpace
         UINavigationItem.fixSpace
-    }
-
-    @objc
-    private func determineWalletViewController() {
-        let walletViewController: UIViewController
-        if WalletRealmTool.hasWallet() {
-            walletViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateInitialViewController()!
-        } else {
-            walletViewController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "AddWallet")
-        }
-        (viewControllers![1] as! BaseNavigationController).viewControllers = [walletViewController]
     }
 }

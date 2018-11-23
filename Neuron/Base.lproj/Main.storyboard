@@ -29,21 +29,15 @@
             </objects>
             <point key="canvasLocation" x="82" y="-1135"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="5of-gq-mpS">
+        <!--Wallet-->
+        <scene sceneID="Z8o-Y3-ZbA">
             <objects>
-                <viewController id="GU4-hP-9ZW" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mWX-jE-RRc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="YeZ-F2-6He"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="MHr-p6-GHk"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DNr-ax-3YK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Wallet" id="t9r-OI-ov4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KIa-St-Wro"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="loa-Wp-6gH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="169" y="761"/>
+            <point key="canvasLocation" x="80" y="473"/>
         </scene>
         <!--Settings-->
         <scene sceneID="LwR-br-IZa">
@@ -67,12 +61,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="GU4-hP-9ZW" kind="relationship" relationship="rootViewController" id="BeB-n8-5DF"/>
+                        <segue destination="t9r-OI-ov4" kind="relationship" relationship="rootViewController" id="3f2-l2-iCy"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wuo-3j-svN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="169" y="-76"/>
+            <point key="canvasLocation" x="81" y="-76"/>
         </scene>
         <!--应用-->
         <scene sceneID="YEu-uN-pfd">
