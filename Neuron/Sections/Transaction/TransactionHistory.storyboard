@@ -209,7 +209,7 @@
                                 <color key="backgroundColor" red="0.21176470588235294" green="0.37254901960784315" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="收款"/>
                                 <connections>
-                                    <segue destination="esu-jN-jR6" kind="show" identifier="requestPayment" id="e78-my-1U7"/>
+                                    <segue destination="i50-NR-lCG" kind="show" id="KQh-UW-tEO"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XPZ-mD-qY7">
@@ -266,13 +266,13 @@
             </objects>
             <point key="canvasLocation" x="-226.40000000000001" y="210.94452773613196"/>
         </scene>
-        <!--RequestPayment-->
-        <scene sceneID="ACa-9w-a7L">
+        <!--WalletQRCodeViewController-->
+        <scene sceneID="Kdn-ho-gHQ">
             <objects>
-                <viewControllerPlaceholder storyboardName="RequestPayment" id="esu-jN-jR6" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eaK-iK-kCh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Wallet" referencedIdentifier="WalletQRCodeViewController" id="i50-NR-lCG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j6U-6E-oUQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-628" y="653"/>
+            <point key="canvasLocation" x="-431" y="666"/>
         </scene>
         <!--SendTransaction-->
         <scene sceneID="ftS-br-EtV">
@@ -280,7 +280,7 @@
                 <viewControllerPlaceholder storyboardName="SendTransaction" id="a1J-d8-eO4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3lF-bJ-ISa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="150" y="653"/>
+            <point key="canvasLocation" x="0.0" y="666"/>
         </scene>
     </scenes>
     <resources>

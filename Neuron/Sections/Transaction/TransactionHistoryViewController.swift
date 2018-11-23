@@ -24,14 +24,14 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
     var tokenType: TokenType = .erc20
-    var tokenModel: TokenModel! {
+    var token: Token! {
         didSet {
-            guard tokenModel != nil else { return }
-            presenter = TransactionHistoryPresenter(token: tokenModel)
+            guard token != nil else { return }
+            presenter = TransactionHistoryPresenter(token: token)
             presenter?.delegate = self
             Toast.showHUD()
             _ = view // load view
-            tokenModel.getProfile { (tokenProfile) in
+            token.tokenModel.getProfile { (tokenProfile) in
                 self.setupTokenProfile(tokenProfile)
                 self.presenter?.reloadData()
             }
@@ -49,8 +49,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         }
         setupTokenProfile(nil)
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
-        if tokenModel.symbol == "MBA" ||
-            tokenModel.symbol == "NATT" {
+        if token.symbol == "MBA" ||
+            token.symbol == "NATT" {
             warningView.isHidden = false
             warningHeight.constant = 30.0
         } else {
@@ -60,13 +60,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "requestPayment" {
-            let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppModel()
-            requestPaymentViewController.appModel = appModel
-        } else if segue.identifier == "sendTransaction" {
+        if segue.identifier == "sendTransaction" {
             let controller = segue.destination as! SendTransactionViewController
-            controller.token = presenter?.token
+            controller.token = presenter?.token.tokenModel
         }
     }
 
@@ -225,19 +221,18 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     var transaction: TransactionDetails? {
         didSet {
             guard let transaction = transaction else { return }
-
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
             dateLabel.text = dateformatter.string(from: transaction.date)
 
             let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
             let amount = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
-            if transaction.to.lowercased() == walletAddress.lowercased() {
+            if transaction.from.lowercased() == walletAddress.lowercased() {
                 addressLabel.text = transaction.from
-                numberLabel.text = "+\(amount)"
+                numberLabel.text = "-\(amount)"
             } else {
                 addressLabel.text = transaction.to
-                numberLabel.text = "-\(amount)"
+                numberLabel.text = "+\(amount)"
             }
 
             switch transaction.status {

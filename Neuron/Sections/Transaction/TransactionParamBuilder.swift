@@ -61,12 +61,13 @@ class TransactionParamBuilder: NSObject {
 
     init(token: TokenModel) {
         tokenType = token.type
+        rpcNode = token.chainHosts
         decimals = token.decimals
         chainId = token.chainId
         contractAddress = token.address
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
-        tokenBalance = Double(token.tokenBalance)!.toAmount(token.decimals)
+        tokenBalance = token.tokenBalance.toAmount(token.decimals)
 
         super.init()
 

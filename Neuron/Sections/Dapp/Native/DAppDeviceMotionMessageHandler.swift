@@ -70,9 +70,9 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
 
     func motionDidUpdate(motion: CMDeviceMotion) {
         let result: [String: Any] = [
-            "alpha": motion.attitude.roll,
-            "beta": motion.attitude.pitch,
-            "gamma": motion.attitude.yaw
+            "alpha": motion.attitude.roll / Double.pi * 180,    //  -180 ~ 180
+            "gamma": -motion.attitude.pitch / Double.pi * 180,   // -90 ~ 90
+            "beta": motion.attitude.yaw / Double.pi * 180      // -180 ~ 180
         ]
         callback(funcName: "onDeviceMotionChange", result: ["res": result])
     }
