@@ -59,7 +59,8 @@ class WalletPresenter {
     }
 
     func refresh() {
-        guard let appModel = WalletRealmTool.realm.objects(AppModel.self).first else { return }
+        let realm = try! Realm()
+        guard let appModel = realm.objects(AppModel.self).first else { return }
         guard let wallet = appModel.currentWallet else { return }
         currentWallet = wallet
 

@@ -58,7 +58,8 @@ class AuthenticationService {
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
 
-        notificationToken = WalletRealmTool.realm.objects(WalletModel.self).observe { (change) in
+        let realm = try! Realm()
+        notificationToken = realm.objects(WalletModel.self).observe { (change) in
             switch change {
             case .update(let values, deletions: _, let insertions, modifications: _):
                 guard !AuthenticationService.shared.isEnable else { return }

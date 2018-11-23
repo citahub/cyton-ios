@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
     let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
@@ -47,7 +48,8 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         let appModel = WalletRealmTool.getCurrentAppModel()
         tokenModel.address = tokenModel.address.addHexPrefix()
         tokenModel.isNativeToken = false
-        try? WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try? realm.write {
             WalletRealmTool.addTokenModel(tokenModel: tokenModel)
             appModel.extraTokenList.append(tokenModel)
             appModel.currentWallet?.selectTokenList.append(tokenModel)

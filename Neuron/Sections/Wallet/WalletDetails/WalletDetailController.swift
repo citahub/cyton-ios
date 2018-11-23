@@ -8,6 +8,7 @@
 
 import UIKit
 import BLTNBoard
+import RealmSwift
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -91,7 +92,8 @@ class WalletDetailController: UITableViewController {
 
     func modifyWalletName(walletName: String, item: ModifyWalletNamePageItem) {
         do {
-            try WalletRealmTool.realm.write {
+            let realm = try! Realm()
+            try realm.write {
                 self.walletModel.name = walletName
             }
             self.walletNameLabel.text = walletName
@@ -123,8 +125,9 @@ class WalletDetailController: UITableViewController {
         let wallet = walletItem.wallet!
         do {
             try WalletManager.default.deleteWallet(wallet: wallet, password: password)
-            try WalletRealmTool.realm.write {
-                WalletRealmTool.realm.delete(self.walletModel)
+            let realm = try! Realm()
+            try realm.write {
+                realm.delete(self.walletModel)
             }
             if !WalletRealmTool.hasWallet() {
                 NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)

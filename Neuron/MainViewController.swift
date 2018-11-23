@@ -36,7 +36,8 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"
         ethModel.symbol = "ETH"
-        try? WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try? realm.write {
             WalletRealmTool.addTokenModel(tokenModel: ethModel)
             if !appModel.nativeTokenList.contains(ethModel) {
                 appModel.nativeTokenList.append(ethModel)

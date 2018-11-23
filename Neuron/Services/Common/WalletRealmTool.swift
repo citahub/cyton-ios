@@ -10,40 +10,20 @@ import UIKit
 import RealmSwift
 
 struct WalletRealmTool {
-    static let realm = RealmHelper().realm
-    /// according to wallet address to get WalletModel
-    ///
-    /// - Parameter walletName: walletName
-    /// - Returns: WalletModel
-    static func getCreatWallet(walletAddress: String) -> WalletModel {
-        var walletModel = WalletModel()
-        walletModel = realm.object(ofType: WalletModel.self, forPrimaryKey: walletAddress)!
-        return walletModel
-    }
-
     /// get everything for AppModel
     ///
     /// - Returns: appmodel
     static func getCurrentAppModel() -> AppModel {
+        let realm = try! Realm()
         let result = realm.objects(AppModel.self)
         return result.first ?? AppModel()
-    }
-
-    /// update currentWallet
-    ///
-    /// - Parameter walletName: wallet name
-    static func updateAppCurrentWallet(walletAddress: String) {
-        let result = realm.objects(AppModel.self)
-        let appModel: AppModel = result[0]
-        try! realm.write {
-            appModel.currentWallet = getCreatWallet(walletAddress: walletAddress)
-        }
     }
 
     /// Check if there is a wallet in the current app
     ///
     /// - Returns: true or false
     static func hasWallet() -> Bool {
+        let realm = try! Realm()
         let result = realm.objects(AppModel.self)
         guard let appModel = result.first else {
             return false
@@ -56,6 +36,7 @@ struct WalletRealmTool {
     ///
     /// - Parameter appModel: appmodel instance
     static func addObject(appModel: AppModel) {
+        let realm = try! Realm()
         realm.add(appModel)
     }
 
@@ -63,6 +44,7 @@ struct WalletRealmTool {
     ///
     /// - Parameter tokenModel: tokenModel instance
     static func addTokenModel(tokenModel: TokenModel) {
+        let realm = try! Realm()
         let result = realm.objects(AppModel.self).first
         if let appModel = result {
             var totalTokenList: [TokenModel] = []

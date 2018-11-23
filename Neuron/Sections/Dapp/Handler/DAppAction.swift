@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AppChain
+import RealmSwift
 
 struct DAppAction {
     enum Error: Swift.Error {
@@ -61,7 +62,8 @@ struct DAppAction {
     private func saveToken(model: TokenModel) {
         let appModel = WalletRealmTool.getCurrentAppModel()
         let alreadyContain = appModel.nativeTokenList.contains(where: {$0 == model})
-        try? WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try? realm.write {
             WalletRealmTool.addTokenModel(tokenModel: model)
             if !alreadyContain {
                 appModel.nativeTokenList.append(model)
