@@ -102,7 +102,7 @@ extension DappViewController: WKScriptMessageHandler {
             let searchAppController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
             self.navigationController?.pushViewController(searchAppController, animated: true)
         case "pushMyDAppView":
-            let myDAppViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "MyDAppViewController")
+            let myDAppViewController: MyDAppViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
             self.navigationController?.pushViewController(myDAppViewController, animated: true)
         case "pushCollectionView":
             Toast.showToast(text: "敬请期待")

@@ -119,7 +119,13 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
             let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
             self.webView.evaluateJavaScript(relJs) { (manifest, _) in
                 if let dappLink = self.webView.url?.absoluteString, let title = self.webView.title {
-                    DAppAction().collectDApp(manifestLink: manifest as? String, dappLink: dappLink, title: title)
+                    DAppAction().collectDApp(manifestLink: manifest as? String, dappLink: dappLink, title: title, completion: { (result) in
+                        if result {
+                            Toast.showToast(text: "收藏成功")
+                        } else {
+                            Toast.showToast(text: "收藏失败")
+                        }
+                    })
                 } else {
                     Toast.showToast(text: "收藏失败")
                 }

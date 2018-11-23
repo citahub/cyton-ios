@@ -18,7 +18,7 @@ struct DAppAction {
         case emptyTX
     }
 
-    func collectDApp(manifestLink: String?, dappLink: String, title: String) {
+    func collectDApp(manifestLink: String?, dappLink: String, title: String, completion: @escaping (Bool) -> Void) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let convertedDate = dateFormatter.string(from: Date())
@@ -31,7 +31,7 @@ struct DAppAction {
             dappModel.date = convertedDate
             try! realm.write {
                 realm.add(dappModel, update: true)
-                Toast.showToast(text: "收藏成功")
+                completion(true)
             }
         } else {
             Alamofire.request(manifestLink!, method: .get).responseJSON { (response) in
@@ -53,10 +53,10 @@ struct DAppAction {
                     }
                     try? realm.write {
                         realm.add(dappModel, update: true)
-                        Toast.showToast(text: "收藏成功")
+                        completion(true)
                     }
                 } catch {
-                    Toast.showToast(text: "收藏失败")
+                    completion(false)
                 }
             }
         }
