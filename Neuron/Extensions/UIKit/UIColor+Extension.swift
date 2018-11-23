@@ -9,18 +9,19 @@
 import UIKit
 
 extension UIColor {
-    convenience init(hex: String) {
-        var cString: String = hex.trimmingCharacters(in: NSCharacterSet.whitespacesAndNewlines)
-        if cString.hasPrefix("#") {
-        cString = (cString as NSString).substring(from: 1)
+    convenience init(hex: String, alpha: CGFloat = 1.0) {
+        let trimmed = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int = UInt32()
+        Scanner(string: trimmed).scanHexInt32(&int)
+        let r, g, b: UInt32
+        switch trimmed.count {
+        case 3:
+            (r, g, b) = ((int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
+        case 6:
+            (r, g, b) = (int >> 16, int >> 8 & 0xFF, int & 0xFF)
+        default:
+            (r, g, b) = (1, 1, 0)
         }
-        let rString = (cString as NSString).substring(to: 2)
-        let gString = ((cString as NSString).substring(from: 2) as NSString).substring(to: 2)
-        let bString = ((cString as NSString).substring(from: 4) as NSString).substring(to: 2)
-        var r: CUnsignedInt = 0, g: CUnsignedInt = 0, b: CUnsignedInt = 0
-        Scanner(string: rString).scanHexInt32(&r)
-        Scanner(string: gString).scanHexInt32(&g)
-        Scanner(string: bString).scanHexInt32(&b)
-        self.init(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
+        self.init(red: CGFloat(r) / 255, green: CGFloat(g) / 255, blue: CGFloat(b) / 255, alpha: alpha)
     }
 }
