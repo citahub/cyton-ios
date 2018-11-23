@@ -60,7 +60,7 @@ struct DAppAction {
     }
 
     private func saveToken(model: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let alreadyContain = appModel.nativeTokenList.contains(where: {$0 == model})
         let realm = try! Realm()
         try? realm.write {

@@ -29,7 +29,7 @@ class WalletNameValidatorTests: XCTestCase {
     }
 
     func testWalletNameExistence() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let walletModel = WalletModel()
         walletModel.name = "ETH Wallet"
         walletModel.address = "0x6782CdeF6A4A056d412775EE6081d32B2bf90287"

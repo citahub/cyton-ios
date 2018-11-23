@@ -85,7 +85,7 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     func getTokenModel() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         appModel.nativeTokenList.forEach { (tokenModel) in
             if dappCommonModel.chainType == "AppChain" {
                 if dappCommonModel.appChain!.chainId == Int(tokenModel.chainId) {
@@ -101,7 +101,7 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     func setUIData() {
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let walletModel = AppModel.current.currentWallet!
         fromLabel.text = walletModel.address
         requestStringLabel.text = requestAddress
         dappNameLabel.text = dappName
@@ -230,7 +230,7 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        paramBuilder.from = AppModel.current.currentWallet!.address
         paramBuilder.value = Double(value)!.toAmount(tokenModel.decimals)
 
         switch chainType {
@@ -297,7 +297,7 @@ private extension ContractController {
             currencyType: tokenModel.symbol,
             currencyNumber: Double(value) ?? 0.0,
             receiveAddress: dappCommonModel.appChain?.to ?? "",
-            outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+            outcomeAddress: AppModel.current.currentWallet!.address,
             transactionType: .normal
         )
     }

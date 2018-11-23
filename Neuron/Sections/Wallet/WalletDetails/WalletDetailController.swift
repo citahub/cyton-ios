@@ -26,7 +26,7 @@ class WalletDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包管理"
-        appModel = WalletRealmTool.getCurrentAppModel()
+        appModel = AppModel.current
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
@@ -106,7 +106,7 @@ class WalletDetailController: UITableViewController {
 
     func exportKeystore(password: String, item: PasswordPageItem) {
         do {
-            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+            let wallet = AppModel.current.currentWallet!.wallet!
             let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: password)
 
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
@@ -120,7 +120,7 @@ class WalletDetailController: UITableViewController {
     }
 
     func deleteWallet(password: String, item: PasswordPageItem) {
-        let appItem = WalletRealmTool.getCurrentAppModel()
+        let appItem = AppModel.current
         let walletItem = appItem.currentWallet!
         let wallet = walletItem.wallet!
         do {

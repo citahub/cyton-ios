@@ -27,7 +27,7 @@ class SelectWalletController: UITableViewController {
     }
 
     func didGetWalletData() {
-        appModel = WalletRealmTool.getCurrentAppModel()
+        appModel = AppModel.current
         tableView.reloadData()
     }
 

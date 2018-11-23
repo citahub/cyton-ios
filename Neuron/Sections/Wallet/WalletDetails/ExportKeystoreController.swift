@@ -17,7 +17,7 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "导出Keystore"
-        walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        walletModel = AppModel.current.currentWallet!
         kestoreTextView.text = keystoreString
         setupEnterBackOverlay()
     }

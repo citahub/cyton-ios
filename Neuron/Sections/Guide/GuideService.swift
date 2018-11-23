@@ -36,7 +36,7 @@ class GuideService {
     }
 
     func register() {
-        guard WalletRealmTool.getCurrentAppModel().wallets.count == 0 else { return }
+        guard AppModel.current.wallets.count == 0 else { return }
         showGuide()
     }
 

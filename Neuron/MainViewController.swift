@@ -26,7 +26,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     // get native token for nervos  'just temporary'
     func addNativeTokenMsgToRealm() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let ethModel = TokenModel()
         ethModel.address = ""
         ethModel.chainId = NativeChainId.ethMainnetChainId

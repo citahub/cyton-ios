@@ -104,7 +104,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
     }
 
     private func saveWalletToRealm(with walletModel: WalletModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let result: [WalletModel] = appModel.wallets.filter { (wallet) -> Bool in
             return wallet.address == walletModel.address
         }

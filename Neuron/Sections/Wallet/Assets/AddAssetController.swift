@@ -45,7 +45,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "不可重复添加")
             return
         }
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         tokenModel.address = tokenModel.address.addHexPrefix()
         tokenModel.isNativeToken = false
         let realm = try! Realm()
@@ -140,7 +140,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didGetERC20Token(token: String) {
-        let appmodel = WalletRealmTool.getCurrentAppModel()
+        let appmodel = AppModel.current
         Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
             Toast.hideHUD()

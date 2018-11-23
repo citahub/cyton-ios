@@ -65,7 +65,7 @@ class WalletPresenter {
         currentWallet = wallet
 
         var tokens = [Token]()
-        tokens += WalletRealmTool.getCurrentAppModel().nativeTokenList.map({ Token($0) })
+        tokens += AppModel.current.nativeTokenList.map({ Token($0) })
         tokens += wallet.selectTokenList.map({ Token($0) })
         tokens.forEach { (token) in
             token.walletAddress = self.currentWallet!.address
@@ -87,7 +87,7 @@ class WalletPresenter {
 // MARK: - Observer
 extension WalletPresenter {
     private func observeAppModel() {
-        appModelObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
+        appModelObserver = AppModel.current.observe { [weak self](change) in
             switch change {
             case .change(let propertys):
                 guard let wallet = propertys.first(where: { $0.name == "currentWallet" })?.newValue as? WalletModel else { return }
@@ -110,7 +110,7 @@ extension WalletPresenter {
 
     private func observeNativeTokenList() {
         nativeTokenListObserver?.invalidate()
-        nativeTokenListObserver = WalletRealmTool.getCurrentAppModel().nativeTokenList.observe { [weak self](change) in
+        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self](change) in
             guard let self = self else { return }
             self.tokenListChangeHandler(change: change)
         }

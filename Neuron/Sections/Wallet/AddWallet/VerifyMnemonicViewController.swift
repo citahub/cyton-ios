@@ -131,7 +131,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
     }
 
     private func saveWalletToRealm() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()

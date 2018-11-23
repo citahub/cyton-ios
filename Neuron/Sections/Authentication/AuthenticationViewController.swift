@@ -29,7 +29,7 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
         automaticallyAdjustsScrollViewInsets = true
         switchImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(switchAuthenticationMode)))
         switchAuthenticationMode()
-        if WalletRealmTool.getCurrentAppModel().wallets.count == 0 {
+        if AppModel.current.wallets.count == 0 {
             otherTitleLabel.isHidden = true
             switchImageView.isHidden = true
         }
