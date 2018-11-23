@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         hookSensorsDebugWarning()
 
         skipBackupFiles()
-        RealmHelper.configureRealm()
+        RealmConfigurator.configure()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: .main).instantiateInitialViewController()

@@ -44,10 +44,11 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     func getAssetListFromJSON() -> [TokenModel] {
         var tokenArray: [TokenModel] = []
 
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
+        let realm = try! Realm()
         for tModel in appModel.extraTokenList {
-            try? WalletRealmTool.realm.write {
-                WalletRealmTool.realm.add(tModel, update: true)
+            try? realm.write {
+                realm.add(tModel, update: true)
             }
             tokenArray.append(tModel)
         }
@@ -64,7 +65,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     }
 
     func getSelectAsset() -> List<TokenModel>? {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         return appModel.currentWallet?.selectTokenList
     }
 
@@ -105,10 +106,11 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     }
 
     func deleteSelectedToken(tokenM: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
-        try? WalletRealmTool.realm.write {
-            WalletRealmTool.realm.add(tokenM, update: true)
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(tokenM, update: true)
             filterResult?.forEach({ (tm) in
                 if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
                     appModel.currentWallet?.selectTokenList.remove(at: index)
@@ -118,9 +120,10 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     }
 
     func addSelectToken(tokenM: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
-        try? WalletRealmTool.realm.write {
-            WalletRealmTool.realm.add(tokenM, update: true)
+        let appModel = AppModel.current
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(tokenM, update: true)
             appModel.currentWallet?.selectTokenList.append(tokenM)
         }
     }

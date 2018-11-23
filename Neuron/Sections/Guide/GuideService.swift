@@ -15,7 +15,8 @@ class GuideService {
     private var notificationToken: NotificationToken?
 
     private init() {
-        notificationToken = WalletRealmTool.realm.objects(AppModel.self).observe { [weak self](change) in
+        let realm = try! Realm()
+        notificationToken = realm.objects(AppModel.self).observe { [weak self](change) in
             guard let self = self else { return }
             switch change {
             case .update(let values, deletions: _, insertions: _, modifications: _):
@@ -35,7 +36,7 @@ class GuideService {
     }
 
     func register() {
-        guard WalletRealmTool.getCurrentAppModel().wallets.count == 0 else { return }
+        guard AppModel.current.wallets.count == 0 else { return }
         showGuide()
     }
 

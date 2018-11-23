@@ -18,7 +18,7 @@ class TransactionTableviewCell: UITableViewCell {
     @IBOutlet weak var statusImageView: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
+        let walletModel = AppModel.current.currentWallet
         iconImageV.image = UIImage(data: (walletModel?.iconData)!)
     }
 

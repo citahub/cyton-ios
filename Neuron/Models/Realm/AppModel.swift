@@ -20,4 +20,9 @@ class AppModel: Object {
 
     /// storage of native tokens
     var nativeTokenList = List<TokenModel>()
+
+    static var current: AppModel {
+        let realm = try! Realm()
+        return realm.objects(AppModel.self).first ?? AppModel()
+    }
 }

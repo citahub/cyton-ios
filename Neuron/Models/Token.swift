@@ -10,6 +10,7 @@ import UIKit
 import Web3swift
 import BigInt
 import EthereumAddress
+import RealmSwift
 
 enum TokenType: String {
     case ether
@@ -32,7 +33,7 @@ class Token {
     let identifier: String
 
     var tokenModel: TokenModel {
-        let realm = RealmHelper().realm
+        let realm = try! Realm()
         return realm.object(ofType: TokenModel.self, forPrimaryKey: identifier)!
     }
 

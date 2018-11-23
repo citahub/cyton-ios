@@ -23,7 +23,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        currentWallet = WalletRealmTool.getCurrentAppModel().currentWallet
+        currentWallet = AppModel.current.currentWallet
     }
 
     @IBAction func selectWallet(_ sender: Any) {

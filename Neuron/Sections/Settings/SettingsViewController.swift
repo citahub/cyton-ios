@@ -22,7 +22,7 @@ class SettingsViewController: UITableViewController {
     }
 
     func getDataForUI() {
-        if let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet {
+        if let walletModel = AppModel.current.currentWallet {
             nameLabel.text = walletModel.name
             addressLabel.text = walletModel.address
             iconImageView.image = UIImage(data: walletModel.iconData)
