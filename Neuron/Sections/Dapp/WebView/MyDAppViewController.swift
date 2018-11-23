@@ -38,7 +38,7 @@ class MyDAppViewController: UITableViewController, ErrorOverlayPresentable {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "collectionTableViewCell", for: indexPath) as! CollectionTableViewCell
         let model = collections[indexPath.row]
-        cell.dappIconImageView.sd_setImage(with: URL(string: model.iconUrl ?? ""), placeholderImage: UIImage(named: "eth_logo"))
+        cell.dappIconImageView.sd_setImage(with: URL(string: model.iconUrl ?? ""), placeholderImage: UIImage(named: "dapp_default"))
         cell.dappNameLabel.text = model.name
         cell.timeLabel.text = model.date
         return cell
