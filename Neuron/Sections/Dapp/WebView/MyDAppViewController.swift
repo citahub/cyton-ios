@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class CollectionViewController: UITableViewController, ErrorOverlayPresentable {
+class MyDAppViewController: UITableViewController, ErrorOverlayPresentable {
     @IBOutlet weak var dappIconImageView: UIImageView!
     @IBOutlet weak var dappNameLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
