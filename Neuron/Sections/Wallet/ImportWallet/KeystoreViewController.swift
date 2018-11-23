@@ -48,10 +48,10 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
     func judgeImportButtonEnabled() {
         let nameClean = name?.trimmingCharacters(in: .whitespaces)
         if nameClean!.isEmpty || password!.isEmpty || keystore!.isEmpty {
-            importButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
+            importButton.backgroundColor = UIColor(hex: "#E9EBF0")
             importButton.isEnabled = false
         } else {
-            importButton.backgroundColor = ColorFromString(hex: "#456CFF")
+            importButton.backgroundColor = UIColor(hex: "#456CFF")
             importButton.isEnabled = true
         }
     }

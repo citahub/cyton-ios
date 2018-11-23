@@ -37,8 +37,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     }()
 
     lazy private var progressView: UIProgressView = {
-        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: ScreenSize.width, height: 2))
-        progressView.tintColor = AppColor.themeColor
+        let progressView = UIProgressView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2))
+        progressView.tintColor = UIColor(named: "tint_color")
         progressView.trackTintColor = .white
         return progressView
     }()

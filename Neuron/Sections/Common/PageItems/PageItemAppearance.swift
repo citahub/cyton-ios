@@ -13,7 +13,7 @@ struct PageItemAppearance {
     static var `default`: BLTNItemAppearance = {
         let appearance = BLTNItemAppearance()
         appearance.titleFontSize = 18
-        appearance.titleTextColor = ColorFromString(hex: "2E313E")
+        appearance.titleTextColor = UIColor(hex: "2E313E")
         return appearance
     }()
 }

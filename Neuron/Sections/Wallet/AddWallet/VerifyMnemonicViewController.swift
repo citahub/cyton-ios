@@ -39,19 +39,20 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
     }
 
     func didDrawSubViews() {
-        selectView = ButtonTagUpView(frame: CGRect(x: 15, y: 15 + 35, width: ScreenSize.width - 30, height: 150))
+        let screenSize = UIScreen.main.bounds
+        selectView = ButtonTagUpView(frame: CGRect(x: 15, y: 15 + 35, width: screenSize.width - 30, height: 150))
         selectView.delegate = self
         view.addSubview(selectView)
 
-        showView = ButtonTagView(frame: CGRect(x: 15, y: 15 + 35 + 15 + 150, width: ScreenSize.width - 30, height: 150))
+        showView = ButtonTagView(frame: CGRect(x: 15, y: 15 + 35 + 15 + 150, width: screenSize.width - 30, height: 150))
         showView.delegate = self
         showView.titleArray = titleArr.shuffled()
         showView.backgroundColor = .white
         view.addSubview(showView)
 
-        sureButton.frame = CGRect(x: 15, y: showView.frame.origin.y + showView.frame.size.height + 20, width: ScreenSize.width - 30, height: 44)
-        sureButton.backgroundColor = ColorFromString(hex: "#f2f2f2")
-        sureButton.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
+        sureButton.frame = CGRect(x: 15, y: showView.frame.origin.y + showView.frame.size.height + 20, width: screenSize.width - 30, height: 44)
+        sureButton.backgroundColor = UIColor(named: "control_disabled_bg_color") // TODO: should use isEnabled property
+        sureButton.setTitleColor(UIColor(named: "control_disabled_title_color"), for: .normal)
         sureButton.setTitle("完成备份", for: .normal)
         sureButton.addTarget(self, action: #selector(didCompletBackupMnemonic), for: .touchUpInside)
         sureButton.layer.cornerRadius = 5
@@ -67,12 +68,12 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         }
         if selectArray.count == 12 {
             sureButton.isEnabled = true
-            sureButton.backgroundColor = AppColor.themeColor
+            sureButton.backgroundColor = UIColor(named: "tint_color")
             sureButton.setTitleColor(.white, for: .normal)
         } else {
             sureButton.isEnabled = false
-            sureButton.backgroundColor = ColorFromString(hex: "#f2f2f2")
-            sureButton.setTitleColor(ColorFromString(hex: "#999999"), for: .normal)
+            sureButton.backgroundColor = UIColor(named: "control_disabled_bg_color")
+            sureButton.setTitleColor(UIColor(named: "control_disabled_title_color"), for: .normal)
         }
     }
 

@@ -23,6 +23,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.title = "应用"
+
         addWebView()
         layoutWebView()
 

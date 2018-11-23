@@ -94,8 +94,8 @@ private extension TabbedButtonsView {
         buttonTitles.forEach { title in
             let button = UIButton(type: .custom)
             button.setTitle(title, for: .normal)
-            button.setTitleColor(ColorFromString(hex: "#8A8D9F"), for: .normal)
-            button.setTitleColor(ColorFromString(hex: "#242B43"), for: .selected)
+            button.setTitleColor(UIColor(hex: "#8A8D9F"), for: .normal)
+            button.setTitleColor(UIColor(hex: "#242B43"), for: .selected)
             button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
             button.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
 
@@ -112,6 +112,9 @@ private extension TabbedButtonsView {
     }
 
     func updateState() {
+        if buttonTitles.isEmpty {
+            return
+        }
         for (index, button) in buttons.enumerated() {
             button.isSelected = index == selectedIndex
         }
