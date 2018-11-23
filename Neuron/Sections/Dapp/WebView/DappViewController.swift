@@ -13,7 +13,7 @@ import JavaScriptCore
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
-    private var mainUrl = URL(string: "https://dapp.cryptape.com")!
+    private var mainUrl = URL(string: "https://dapp.staging.cryptape.com")!
     private var customUserAgent: String {
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]!
@@ -51,6 +51,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.configuration.userContentController.addUserScript(userScript)
         webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "pushSearchView")
+        webView.configuration.userContentController.add(self, name: "pushMyDAppView")
+        webView.configuration.userContentController.add(self, name: "pushCollectionView")
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.scrollView.showsVerticalScrollIndicator = false
 
@@ -97,8 +99,13 @@ extension DappViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case "pushSearchView":
-            let sCtrl = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
-            self.navigationController?.pushViewController(sCtrl, animated: true)
+            let searchAppController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
+            self.navigationController?.pushViewController(searchAppController, animated: true)
+        case "pushMyDAppView":
+            let myDAppViewController: MyDAppViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
+            self.navigationController?.pushViewController(myDAppViewController, animated: true)
+        case "pushCollectionView":
+            Toast.showToast(text: "敬请期待")
         default:
             break
         }

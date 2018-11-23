@@ -18,11 +18,55 @@ struct DAppAction {
         case emptyTX
     }
 
+    func collectDApp(manifestLink: String?, dappLink: String, title: String, completion: @escaping (Bool) -> Void) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let convertedDate = dateFormatter.string(from: Date())
+        if manifestLink == nil {
+            let realm = try! Realm()
+            let dappModel = DAppModel()
+            dappModel.name = title
+            dappModel.entry = dappLink
+            dappModel.iconUrl = dappLink + "/favicon.ico"
+            dappModel.date = convertedDate
+            try! realm.write {
+                realm.add(dappModel, update: true)
+                completion(true)
+            }
+        } else {
+            Alamofire.request(manifestLink!, method: .get).responseJSON { (response) in
+                do {
+                    guard let responseData = response.data else { throw Error.manifestRequestFailed }
+                    let manifest = try? JSONDecoder().decode(Manifest.self, from: responseData)
+                    let realm = try! Realm()
+                    let dappModel = DAppModel()
+                    if let model = manifest {
+                        dappModel.name = model.name
+                        dappModel.entry = dappLink
+                        dappModel.iconUrl = model.icon
+                        dappModel.date = convertedDate
+                    } else {
+                        dappModel.name = title
+                        dappModel.entry = dappLink
+                        dappModel.iconUrl = dappLink + "/favicon.ico"
+                        dappModel.date = convertedDate
+                    }
+                    try? realm.write {
+                        realm.add(dappModel, update: true)
+                        completion(true)
+                    }
+                } catch {
+                    completion(false)
+                }
+            }
+        }
+    }
+
     func dealWithManifestJson(with link: String) {
         Alamofire.request(link, method: .get).responseJSON { (response) in
             do {
                 guard let responseData = response.data else { throw Error.manifestRequestFailed }
-                let manifest = try? JSONDecoder().decode(ManifestModel.self, from: responseData)
+                let manifest = try? JSONDecoder().decode(Manifest.self, from: responseData)
                 guard let model = manifest else {
                     return
                 }
@@ -33,8 +77,8 @@ struct DAppAction {
         }
     }
 
-    func getMetaDataForDAppChain(with manifestModel: ManifestModel) throws {
-        guard let chainNode = manifestModel.chainSet?.values.first, let url = URL(string: chainNode) else {
+    func getMetaDataForDAppChain(with manifest: Manifest) throws {
+        guard let chainNode = manifest.chainSet?.values.first, let url = URL(string: chainNode) else {
             throw Error.emptyChainHosts
         }
         let appChain = AppChainNetwork.appChain(url: url)
@@ -75,8 +119,7 @@ struct DAppAction {
     }
 }
 
-// TODO: Remove Model suffix. Only add this suffix for Realm object.
-struct ManifestModel: Decodable {
+struct Manifest: Decodable {
     var shortName: String?
     var name: String?
     var startUrl: String?
@@ -86,6 +129,7 @@ struct ManifestModel: Decodable {
     var blockViewer: String?
     var chainSet: [String: String]?
     var entry: String?
+    var icon: String?
 
     enum CodingKeys: String, CodingKey {
         case shortName = "short_name"
@@ -111,14 +155,4 @@ struct ManifestModel: Decodable {
         chainSet = try? values.decode([String: String].self, forKey: .chainSet)
         entry = try? values.decode(String.self, forKey: .entry)
     }
-}
-
-struct TitleBarModel: Decodable {
-    var right: RightBarModel?
-}
-
-struct RightBarModel: Decodable {
-    var isShow: Bool?
-    var action: String?
-    var type: String?
 }
