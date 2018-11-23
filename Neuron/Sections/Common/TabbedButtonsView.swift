@@ -112,6 +112,9 @@ private extension TabbedButtonsView {
     }
 
     func updateState() {
+        if buttonTitles.isEmpty {
+            return
+        }
         for (index, button) in buttons.enumerated() {
             button.isSelected = index == selectedIndex
         }
