@@ -77,6 +77,19 @@ class TokenModel: Object, Decodable {
 }
 
 extension TokenModel {
+    static func identifier(for tokenModel: TokenModel) -> String? {
+        let appModel = AppModel.current
+        var tokenList: [TokenModel] = []
+        tokenList += appModel.nativeTokenList
+        tokenList += appModel.extraTokenList
+        if let model = tokenList.first(where: { $0 == tokenModel }) {
+            return model.identifier
+        }
+        return nil
+    }
+}
+
+extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
         return lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
