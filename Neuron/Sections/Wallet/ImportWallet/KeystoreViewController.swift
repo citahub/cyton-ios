@@ -121,7 +121,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             try realm.write {
                 appModel.currentWallet = walletModel
                 appModel.wallets.append(walletModel)
-                WalletRealmTool.addObject(appModel: appModel)
+                realm.add(appModel)
             }
             Toast.showToast(text: "导入成功")
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)

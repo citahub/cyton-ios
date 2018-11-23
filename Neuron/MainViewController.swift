@@ -46,7 +46,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
             realm.add(ethModel, update: true)
             if !appModel.nativeTokenList.contains(ethModel) {
                 appModel.nativeTokenList.append(ethModel)
-                WalletRealmTool.addObject(appModel: appModel)
+                realm.add(appModel)
             }
         }
 

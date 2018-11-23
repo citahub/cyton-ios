@@ -139,7 +139,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         try! realm.write {
             appModel.currentWallet = walletModel
             appModel.wallets.append(walletModel)
-            WalletRealmTool.addObject(appModel: appModel)
+            realm.add(appModel)
         }
         navigationController?.popToRootViewController(animated: true)
         if isFirstWallet {
