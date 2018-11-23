@@ -10,6 +10,7 @@ import UIKit
 import Web3swift
 import EthereumAddress
 import IGIdenticon
+import RealmSwift
 
 class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, NoScreenshot, EnterBackOverlayPresentable {
     private var showView: ButtonTagView! = nil
@@ -130,14 +131,15 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
     }
 
     private func saveWalletToRealm() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()
-        try! WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try! realm.write {
             appModel.currentWallet = walletModel
             appModel.wallets.append(walletModel)
-            WalletRealmTool.addObject(appModel: appModel)
+            realm.add(appModel)
         }
         navigationController?.popToRootViewController(animated: true)
         if isFirstWallet {

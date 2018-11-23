@@ -203,6 +203,6 @@ class TransactionStatusManager: NSObject {
     }
 
     private var realm: Realm! {
-        return RealmHelper().realm
+        return try! Realm()
     }
 }

@@ -30,7 +30,7 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
 
     func getListData() {
         dataArray.removeAll()
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let address = appModel.currentWallet!.address
         let nftService = NFTService()
         nftService.getErc721Data(with: address) { (result) in

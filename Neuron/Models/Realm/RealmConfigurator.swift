@@ -1,5 +1,5 @@
 //
-//  RealmHelpers.swift
+//  RealmConfigurator.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/6/8.
@@ -9,15 +9,10 @@
 import Foundation
 import RealmSwift
 
-class RealmHelper {
-    var realm: Realm {
-        let realm = try! Realm()
-        realm.autorefresh = true
-        return realm
-    }
+class RealmConfigurator {
     private static var schemaVersion: UInt64 = 5
 
-    static func configureRealm() {
+    static func configure() {
         var config = Realm.Configuration()
         config.schemaVersion = schemaVersion
         config.migrationBlock = migrationBlock
@@ -26,7 +21,7 @@ class RealmHelper {
     }
 }
 
-private extension RealmHelper {
+private extension RealmConfigurator {
     static var migrationBlock: MigrationBlock {
         return { migration, oldSchemaVersion in
             if oldSchemaVersion < schemaVersion {

@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import AppChain
+import RealmSwift
 
 struct DAppAction {
     enum Error: Swift.Error {
@@ -59,17 +60,22 @@ struct DAppAction {
     }
 
     private func saveToken(model: TokenModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
-        let alreadyContain = appModel.nativeTokenList.contains(where: {$0 == model})
-        try? WalletRealmTool.realm.write {
-            WalletRealmTool.addTokenModel(tokenModel: model)
-            if !alreadyContain {
+        let appModel = AppModel.current
+        let exist = appModel.nativeTokenList.contains(where: {$0 == model})
+        if let id = TokenModel.identifier(for: model) {
+            model.identifier = id
+        }
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(model, update: true)
+            if !exist {
                 appModel.nativeTokenList.append(model)
             }
         }
     }
 }
 
+// TODO: Remove Model suffix. Only add this suffix for Realm object.
 struct ManifestModel: Decodable {
     var shortName: String?
     var name: String?

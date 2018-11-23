@@ -93,7 +93,7 @@
 		8905660720D0AC120041D4B4 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905660620D0AC120041D4B4 /* AppModel.swift */; };
 		8913437120C78F1000A17AEF /* WalletModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437020C78F1000A17AEF /* WalletModel.swift */; };
 		8913437520C7D3A400A17AEF /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437420C7D3A400A17AEF /* Toast.swift */; };
-		8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437720CA56CA00A17AEF /* RealmHelper.swift */; };
+		8913437820CA56CA00A17AEF /* RealmConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8913437720CA56CA00A17AEF /* RealmConfigurator.swift */; };
 		891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */; };
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
@@ -177,7 +177,6 @@
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
 		89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsViewController.swift */; };
 		89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2520D59F270097E02B /* WalletManager.swift */; };
-		89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */; };
 		89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3720D8DB610097E02B /* NotificationName.swift */; };
 		89D84CE121475755006B0287 /* NFTService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D84CE021475755006B0287 /* NFTService.swift */; };
 		89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89D84CE2214790B5006B0287 /* NFTDetail.storyboard */; };
@@ -307,7 +306,7 @@
 		8905660620D0AC120041D4B4 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		8913437020C78F1000A17AEF /* WalletModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletModel.swift; sourceTree = "<group>"; };
 		8913437420C7D3A400A17AEF /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
-		8913437720CA56CA00A17AEF /* RealmHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmHelper.swift; sourceTree = "<group>"; };
+		8913437720CA56CA00A17AEF /* RealmConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmConfigurator.swift; sourceTree = "<group>"; };
 		891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WalletManagement.storyboard; sourceTree = "<group>"; };
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -399,7 +398,6 @@
 		89CFA12521424CAB00635A54 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
 		89D4AC2520D59F270097E02B /* WalletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
-		89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletRealmTool.swift; sourceTree = "<group>"; };
 		89D4AC3720D8DB610097E02B /* NotificationName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationName.swift; sourceTree = "<group>"; };
 		89D84CE021475755006B0287 /* NFTService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NFTService.swift; sourceTree = "<group>"; };
 		89D84CE2214790B5006B0287 /* NFTDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NFTDetail.storyboard; sourceTree = "<group>"; };
@@ -577,6 +575,7 @@
 		1A91E1E321A63561000EFD40 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
+				8913437720CA56CA00A17AEF /* RealmConfigurator.swift */,
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
@@ -806,7 +805,6 @@
 				89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */,
 				1A9204E321634212004B54DC /* ToastActivityView.xib */,
 				8913437420C7D3A400A17AEF /* Toast.swift */,
-				8913437720CA56CA00A17AEF /* RealmHelper.swift */,
 				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
 				6E867E08216C862900BD6FE5 /* NoScreenshot.swift */,
 				1A60B6FB2186DB1C00FEFB3A /* Web3Utils.swift */,
@@ -1023,7 +1021,6 @@
 			isa = PBXGroup;
 			children = (
 				89FE21DD20EDB70000A09302 /* ServiceErrors.swift */,
-				89D4AC3520D8AFC50097E02B /* WalletRealmTool.swift */,
 				6E876842218023520032EBCE /* CoinMarketCap.swift */,
 				89CA1FAD213F832800669B2C /* CurrencyService.swift */,
 				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
@@ -1447,14 +1444,13 @@
 				6E9F9D5A219AAF99009ED8B2 /* UINavigationItem+FixSpace.swift in Sources */,
 				1A60079E21A28C1400C7B712 /* PasswordPageItem.swift in Sources */,
 				89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */,
-				8913437820CA56CA00A17AEF /* RealmHelper.swift in Sources */,
+				8913437820CA56CA00A17AEF /* RealmConfigurator.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
 				6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				892F79B921A547340035B08B /* ModifyWalletNamePageItem.swift in Sources */,
 				1A2B226921A7907500556744 /* UIColor+Extension.swift in Sources */,
-				89D4AC3620D8AFC50097E02B /* WalletRealmTool.swift in Sources */,
 				6E876845218031670032EBCE /* UInt+Extension.swift in Sources */,
 				6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,

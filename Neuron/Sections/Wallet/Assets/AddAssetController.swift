@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
     let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
@@ -44,11 +45,15 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "不可重复添加")
             return
         }
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         tokenModel.address = tokenModel.address.addHexPrefix()
         tokenModel.isNativeToken = false
-        try? WalletRealmTool.realm.write {
-            WalletRealmTool.addTokenModel(tokenModel: tokenModel)
+        if let id = TokenModel.identifier(for: tokenModel) {
+            tokenModel.identifier = id
+        }
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(tokenModel, update: true)
             appModel.extraTokenList.append(tokenModel)
             appModel.currentWallet?.selectTokenList.append(tokenModel)
         }
@@ -138,7 +143,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didGetERC20Token(token: String) {
-        let appmodel = WalletRealmTool.getCurrentAppModel()
+        let appmodel = AppModel.current
         Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
             Toast.hideHUD()

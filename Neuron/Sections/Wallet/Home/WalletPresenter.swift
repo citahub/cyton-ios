@@ -26,7 +26,6 @@ protocol WalletPresenterDelegate: NSObjectProtocol {
 class WalletPresenter {
     private (set) var currentWallet: WalletModel? {
         didSet {
-            guard oldValue?.address != currentWallet?.address else { return }
             delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
         }
     }
@@ -59,12 +58,12 @@ class WalletPresenter {
     }
 
     func refresh() {
-        guard let appModel = WalletRealmTool.realm.objects(AppModel.self).first else { return }
+        let appModel = AppModel.current
         guard let wallet = appModel.currentWallet else { return }
         currentWallet = wallet
 
         var tokens = [Token]()
-        tokens += WalletRealmTool.getCurrentAppModel().nativeTokenList.map({ Token($0) })
+        tokens += AppModel.current.nativeTokenList.map({ Token($0) })
         tokens += wallet.selectTokenList.map({ Token($0) })
         tokens.forEach { (token) in
             token.walletAddress = self.currentWallet!.address
@@ -86,11 +85,10 @@ class WalletPresenter {
 // MARK: - Observer
 extension WalletPresenter {
     private func observeAppModel() {
-        appModelObserver = WalletRealmTool.getCurrentAppModel().observe { [weak self](change) in
+        appModelObserver = AppModel.current.observe { [weak self] (change) in
             switch change {
             case .change(let propertys):
-                guard let wallet = propertys.first(where: { $0.name == "currentWallet" })?.newValue as? WalletModel else { return }
-                guard wallet.address != self?.currentWallet?.address else { return }
+                guard propertys.contains(where: { $0.name == "currentWallet" }) else { return }
                 self?.refresh()
             default:
                 break
@@ -101,7 +99,7 @@ extension WalletPresenter {
     private func observeWalletSelectTokenList() {
         guard let wallet = currentWallet else { return }
         selectTokenListObserver?.invalidate()
-        selectTokenListObserver = wallet.selectTokenList.observe({ [weak self](change) in
+        selectTokenListObserver = wallet.selectTokenList.observe({ [weak self] (change) in
             guard let self = self else { return }
             self.tokenListChangeHandler(change: change)
         })
@@ -109,7 +107,7 @@ extension WalletPresenter {
 
     private func observeNativeTokenList() {
         nativeTokenListObserver?.invalidate()
-        nativeTokenListObserver = WalletRealmTool.getCurrentAppModel().nativeTokenList.observe { [weak self](change) in
+        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
             guard let self = self else { return }
             self.tokenListChangeHandler(change: change)
         }

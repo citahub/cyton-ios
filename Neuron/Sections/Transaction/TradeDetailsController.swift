@@ -64,7 +64,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
         didSetUIDetail()
         tTable.delegate = self
         tTable.dataSource = self
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet
+        let walletModel = AppModel.current.currentWallet
         iconImage.image = UIImage(data: (walletModel?.iconData)!)
         tTable.register(UINib.init(nibName: "TradeTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
         amountLabel.text = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!

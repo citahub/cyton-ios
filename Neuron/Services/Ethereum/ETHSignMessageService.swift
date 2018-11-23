@@ -18,7 +18,7 @@ struct ETHSignMessageService {
 
     public static func sign(message: String, password: String, completion: @escaping (SignMessageResult<String>) -> Void) {
         let messageData = Data.fromHex(message) ?? Data()
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let walletModel = AppModel.current.currentWallet!
         guard let wallet = walletModel.wallet else {
             completion(SignMessageResult.error(Error.walletIsNull))
             return
@@ -42,7 +42,7 @@ struct ETHSignMessageService {
 
     public static func signPersonal(message: String, password: String, completion: @escaping (SignMessageResult<String>) -> Void) {
         let messageData = Data.fromHex(message) ?? Data()
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let walletModel = AppModel.current.currentWallet!
         guard let wallet = walletModel.wallet else {
             completion(SignMessageResult.error(Error.walletIsNull))
             return

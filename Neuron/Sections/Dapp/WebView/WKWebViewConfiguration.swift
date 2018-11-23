@@ -13,7 +13,7 @@ extension WKWebViewConfiguration {
 
     static func make(for server: DAppServer, in messageHandler: WKScriptMessageHandler) -> WKWebViewConfiguration {
         let config = WKWebViewConfiguration()
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let walletModel = appModel.currentWallet!
         var accounts: [String] = []
         appModel.wallets.forEach { (model) in

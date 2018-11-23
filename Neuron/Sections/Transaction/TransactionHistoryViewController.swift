@@ -225,7 +225,7 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
             dateLabel.text = dateformatter.string(from: transaction.date)
 
-            let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+            let walletAddress = AppModel.current.currentWallet!.address
             let amount = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
             if transaction.from.lowercased() == walletAddress.lowercased() {
                 addressLabel.text = transaction.from

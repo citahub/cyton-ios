@@ -39,8 +39,9 @@ class WalletViewController: UIViewController {
         presenter.refresh()
 
         // observe wallet count
-        walletCountObserve = WalletRealmTool.realm.objects(WalletModel.self).observe { [weak self](_) in
-            if WalletRealmTool.realm.objects(WalletModel.self).count > 1 {
+        let realm = try! Realm()
+        walletCountObserve = realm.objects(WalletModel.self).observe { [weak self](_) in
+            if realm.objects(WalletModel.self).count > 1 {
                 self?.navigationItem.rightBarButtonItem = self?.switchWalletBarButton
             } else {
                 self?.navigationItem.rightBarButtonItem = self?.addWalletBarButton

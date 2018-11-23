@@ -22,8 +22,8 @@ class TransactionSwitchTokenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tokens += WalletRealmTool.getCurrentAppModel().nativeTokenList
-        tokens += WalletRealmTool.getCurrentAppModel().currentWallet!.selectTokenList
+        tokens += AppModel.current.nativeTokenList
+        tokens += AppModel.current.currentWallet!.selectTokenList
     }
 
     override func viewWillAppear(_ animated: Bool) {

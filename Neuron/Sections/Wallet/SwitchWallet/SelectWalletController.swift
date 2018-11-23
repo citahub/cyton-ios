@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol SelectWalletControllerDelegate: class {
     func selectWalletController(_ controller: SelectWalletController, didSelectWallet model: WalletModel)
@@ -26,7 +27,7 @@ class SelectWalletController: UITableViewController {
     }
 
     func didGetWalletData() {
-        appModel = WalletRealmTool.getCurrentAppModel()
+        appModel = AppModel.current
         tableView.reloadData()
     }
 
@@ -59,7 +60,8 @@ class SelectWalletController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let walletModel = appModel.wallets[indexPath.section]
-        try! WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try! realm.write {
             appModel.currentWallet = walletModel
         }
         delegate?.selectWalletController(self, didSelectWallet: walletModel)
