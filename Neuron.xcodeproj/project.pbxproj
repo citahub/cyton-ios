@@ -96,7 +96,6 @@
 		891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891B663C213EAA1900B0FCB0 /* WalletManagement.storyboard */; };
 		891C2483211165AC007C639D /* TokenMacro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891C2482211165AC007C639D /* TokenMacro.swift */; };
 		8928C23320AE84E600C3103E /* ColorUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23220AE84E600C3103E /* ColorUtils.swift */; };
-		8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C23420AE8F7C00C3103E /* UIStyle.swift */; };
 		8928C24320AE908300C3103E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24220AE908300C3103E /* MainViewController.swift */; };
 		8928C24520AE90C000C3103E /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24420AE90C000C3103E /* BaseNavigationController.swift */; };
 		8928C24920AE91E600C3103E /* DappViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C24820AE91E600C3103E /* DappViewController.swift */; };
@@ -312,7 +311,6 @@
 		891C2482211165AC007C639D /* TokenMacro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenMacro.swift; sourceTree = "<group>"; };
 		8928C22020AE779B00C3103E /* Neuron-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Neuron-Bridging-Header.h"; sourceTree = "<group>"; };
 		8928C23220AE84E600C3103E /* ColorUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorUtils.swift; sourceTree = "<group>"; };
-		8928C23420AE8F7C00C3103E /* UIStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStyle.swift; sourceTree = "<group>"; };
 		8928C24220AE908300C3103E /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		8928C24420AE90C000C3103E /* BaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		8928C24820AE91E600C3103E /* DappViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DappViewController.swift; sourceTree = "<group>"; };
@@ -739,7 +737,6 @@
 			isa = PBXGroup;
 			children = (
 				89B296EC20F4CBA7008558A7 /* ServerAPI.swift */,
-				8928C23420AE8F7C00C3103E /* UIStyle.swift */,
 				8928C25820AEB18100C3103E /* NibLoadable.swift */,
 				89D4AC3720D8DB610097E02B /* NotificationName.swift */,
 				891C2482211165AC007C639D /* TokenMacro.swift */,
@@ -1497,7 +1494,6 @@
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
 				8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */,
 				89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */,
-				8928C23520AE8F7C00C3103E /* UIStyle.swift in Sources */,
 				89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */,
 				6E3B2B71219EDA230095257D /* AppChain+TransactionDetails.swift in Sources */,
 				1A69465E21916C3D000093A2 /* AppChainTxSender.swift in Sources */,
