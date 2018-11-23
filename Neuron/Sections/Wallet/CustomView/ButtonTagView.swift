@@ -36,8 +36,8 @@ class ButtonTagView: UIView {
     }
 
     //有关按钮的属性
-    private var buttonBackColor: UIColor = ColorFromString(hex: "#f7f7f7")
-    private var buttonTitleColor: UIColor = ColorFromString(hex: "#333333")
+    private var buttonBackColor: UIColor = UIColor(hex: "#f7f7f7")
+    private var buttonTitleColor: UIColor = UIColor(hex: "#333333")
 
     private var hmargin: CGFloat = 10//按钮横向之间的距离
     private var vmargin: CGFloat = 10//按钮垂直之间的距离
@@ -108,7 +108,7 @@ class ButtonTagView: UIView {
         for button in self.buttonArray {
             let btn = button as! UIButton
             if selectArr.contains(btn) {
-                btn.backgroundColor = ColorFromString(hex: "#2e4af2")
+                btn.backgroundColor = UIColor(hex: "#2e4af2")
                 btn.setTitleColor(.white, for: .normal)
             } else {
                 btn.backgroundColor = buttonBackColor

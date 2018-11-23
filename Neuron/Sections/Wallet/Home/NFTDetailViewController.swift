@@ -25,7 +25,7 @@ class NFTDetailViewController: UICollectionViewController {
                 reusableview.headerImageView.sd_setImage(with: URL(string: assetsModel.image_preview_url!))
             }
             if assetsModel.background_color != nil {
-                reusableview.headerImageView.backgroundColor = ColorFromString(hex: "#" + assetsModel.background_color!)
+                reusableview.headerImageView.backgroundColor = UIColor(hex: "#" + assetsModel.background_color!)
             }
             reusableview.nameLabel.text = assetsModel.name
             reusableview.idLabel.text = "ID:" + assetsModel.token_id

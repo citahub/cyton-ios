@@ -21,7 +21,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "添加资产"
-        view.backgroundColor = ColorFromString(hex: "f5f5f5")
+        view.backgroundColor = UIColor(hex: "f5f5f5")
         aTable.delegate = self
         aTable.dataSource = self
         aTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")

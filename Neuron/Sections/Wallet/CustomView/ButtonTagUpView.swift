@@ -31,8 +31,8 @@ class ButtonTagUpView: UIView {
     var selectArr = NSMutableArray()//存储所有按钮的数组
 
     //有关按钮的属性
-    private var buttonBackColor: UIColor = ColorFromString(hex: "#ffffff")
-    private var buttonTitleColor: UIColor = ColorFromString(hex: "#333333")
+    private var buttonBackColor: UIColor = UIColor(hex: "#ffffff")
+    private var buttonTitleColor: UIColor = UIColor(hex: "#333333")
     private var hmargin: CGFloat = 10//按钮横向之间的距离
     private var vmargin: CGFloat = 10//按钮垂直之间的距离
     private var buttonHeight: CGFloat = 30//按钮的高度
@@ -47,7 +47,7 @@ class ButtonTagUpView: UIView {
         backgroundColor = .white
         layer.cornerRadius = 5
         layer.borderWidth = 1
-        layer.borderColor = ColorFromString(hex: "#E9EBF0").cgColor
+        layer.borderColor = UIColor(hex: "#E9EBF0").cgColor
     }
 
     func didSetMainViews() {

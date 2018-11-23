@@ -16,15 +16,15 @@ class WalletTableViewCell: UITableViewCell {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                shadowsView.backgroundColor = ColorFromString(hex: "#6080ff")
-                shadowsView.shadowColor = ColorFromString(hex: "#C8D4FF")
+                shadowsView.backgroundColor = UIColor(hex: "#6080ff")
+                shadowsView.shadowColor = UIColor(hex: "#C8D4FF")
                 nameLabel.textColor = .white
                 addressLabel.textColor = .white
             } else {
                 shadowsView.backgroundColor = .white
-                shadowsView.shadowColor = ColorFromString(hex: "#E5E5E5")
-                nameLabel.textColor = ColorFromString(hex: "#2E313E")
-                addressLabel.textColor = ColorFromString(hex: "#6C7184")
+                shadowsView.shadowColor = UIColor(hex: "#E5E5E5")
+                nameLabel.textColor = UIColor(hex: "#2E313E")
+                addressLabel.textColor = UIColor(hex: "#6C7184")
             }
         }
     }

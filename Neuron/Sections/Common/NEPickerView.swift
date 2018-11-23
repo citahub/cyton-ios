@@ -39,19 +39,19 @@ class NEPickerView: UIView, UIPickerViewDelegate, UIPickerViewDataSource {
         sureBtn.frame = CGRect(x: screenSize.width-(15 + 48), y: 0, width: 48, height: 40)
         sureBtn.setTitle("确定", for: .normal)
         sureBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        sureBtn.setTitleColor(ColorFromString(hex: "#4eb9f8"), for: .normal)
+        sureBtn.setTitleColor(UIColor(hex: "#4eb9f8"), for: .normal)
         sureBtn.addTarget(self, action: #selector(didClickSureBtn(sender:)), for: .touchUpInside)
         bottomView.addSubview(sureBtn)
 
         cancleBtn.frame = CGRect(x: 15, y: 0, width: 48, height: 40)
         cancleBtn.setTitle("取消", for: .normal)
         cancleBtn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        cancleBtn.setTitleColor(ColorFromString(hex: "#4eb9f8"), for: .normal)
+        cancleBtn.setTitleColor(UIColor(hex: "#4eb9f8"), for: .normal)
         cancleBtn.addTarget(self, action: #selector(didClickCancleButton(sender:)), for: .touchUpInside)
         bottomView.addSubview(cancleBtn)
 
         pickerV.frame = CGRect(x: 0, y: 40, width: screenSize.width, height: 160)
-        pickerV.backgroundColor = ColorFromString(hex: "#ededed")
+        pickerV.backgroundColor = UIColor(hex: "#ededed")
         pickerV.delegate = self
         pickerV.dataSource = self
         bottomView.addSubview(pickerV)

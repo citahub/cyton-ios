@@ -74,13 +74,13 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func didSetUIDetail() {
-        headView.layer.shadowColor = ColorFromString(hex: "#ededed").cgColor
+        headView.layer.shadowColor = UIColor(hex: "#ededed").cgColor
         headView.layer.shadowOffset = CGSize(width: 0, height: 1)
         headView.layer.shadowOpacity = 0.3
         headView.layer.shadowRadius = 2.75
         headView.layer.cornerRadius = 5
         headView.layer.borderWidth = 1
-        headView.layer.borderColor = ColorFromString(hex: "#ededed").cgColor
+        headView.layer.borderColor = UIColor(hex: "#ededed").cgColor
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
