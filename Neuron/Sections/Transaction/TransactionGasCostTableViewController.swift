@@ -15,87 +15,38 @@ class TransactionGasCostTableViewController: UITableViewController {
     @IBOutlet weak var dataTextView: UITextView!
     @IBOutlet weak var dataTextPlaceholderLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
+    var param: (TransactionParamBuilder, TokenModel)!
+    private var paramBuilder: TransactionParamBuilder!
+    private var observers = [NSKeyValueObservation]()
+    private let minGasPrice = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        paramBuilder = TransactionParamBuilder(token: param.1)
+        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        paramBuilder.to = param.0.to
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        gasPriceTextField.text = paramBuilder.fetchedGasPrice.weiToGwei().trailingZerosTrimmed
+        gasLimitTextField.text = paramBuilder.gasLimit.description
+        observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { [weak self](_, _) in
+            self?.updateGasCost()
+        })
     }
 
     @IBAction func confirm() {
+        let gasPrice = Double(gasPriceTextField.text!)!
+        if gasPrice < minGasPrice {
+            Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
+            return
+        }
+        param.0.gasPrice = paramBuilder.gasPrice
+        param.0.gasLimit = paramBuilder.gasLimit
+        navigationController?.popViewController(animated: true)
     }
 
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+    private func updateGasCost() {
+        gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
-    }
-
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension TransactionGasCostTableViewController: UITextFieldDelegate {
@@ -108,6 +59,14 @@ extension TransactionGasCostTableViewController: UITextFieldDelegate {
             return false
         }
         return true
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == gasPriceTextField {
+            paramBuilder.gasPrice = Double(gasPriceTextField.text!)!.gweiToWei()
+        } else if textField == gasLimitTextField {
+            paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+        }
     }
 }
 

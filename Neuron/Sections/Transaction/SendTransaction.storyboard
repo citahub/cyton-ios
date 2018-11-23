@@ -204,7 +204,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="pEK-Jz-H40">
-                            <rect key="frame" x="0.0" y="160" width="375" height="278"/>
+                            <rect key="frame" x="0.0" y="160" width="375" height="236"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="包含数据" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YXc-0M-Q6N">
@@ -316,8 +316,8 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kWc-fe-1Yl">
-                                                    <rect key="frame" x="105" y="4" width="255" height="41.5"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="105" y="4" width="219" height="41.5"/>
+                                                    <color key="textColor" name="headline_color"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                     <connections>
@@ -325,11 +325,23 @@
                                                         <outlet property="pasteDelegate" destination="nhM-23-DIY" id="tuE-zA-g0A"/>
                                                     </connections>
                                                 </textField>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gwei" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byT-GI-8zq">
+                                                    <rect key="frame" x="326" y="16" width="34" height="18"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="ELD-3S-oCu"/>
+                                                        <constraint firstAttribute="width" constant="34" id="eUW-Wm-DNz"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" name="headline_color"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="kWc-fe-1Yl" secondAttribute="trailing" constant="15" id="14b-gJ-wCg"/>
                                                 <constraint firstItem="No4-9F-PMI" firstAttribute="leading" secondItem="Ykb-r5-fie" secondAttribute="leading" constant="15" id="CFx-rJ-aJb"/>
+                                                <constraint firstItem="byT-GI-8zq" firstAttribute="leading" secondItem="kWc-fe-1Yl" secondAttribute="trailing" constant="2" id="GVJ-Lc-qNQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="kWc-fe-1Yl" secondAttribute="bottom" constant="4" id="IQ1-Ej-MxJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="byT-GI-8zq" secondAttribute="trailing" constant="15" id="LB3-sj-DwC"/>
+                                                <constraint firstItem="byT-GI-8zq" firstAttribute="centerY" secondItem="Ykb-r5-fie" secondAttribute="centerY" id="hmS-Nx-cqn"/>
                                                 <constraint firstItem="kWc-fe-1Yl" firstAttribute="top" secondItem="Ykb-r5-fie" secondAttribute="top" constant="4" id="pUY-1e-jkE"/>
                                                 <constraint firstItem="kWc-fe-1Yl" firstAttribute="leading" secondItem="No4-9F-PMI" secondAttribute="trailing" constant="20" id="s2d-Am-ztf"/>
                                                 <constraint firstItem="No4-9F-PMI" firstAttribute="centerY" secondItem="Ykb-r5-fie" secondAttribute="centerY" id="ybU-db-15F"/>
@@ -731,7 +743,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="nhM-23-DIY" kind="show" id="zxx-G8-FMB"/>
+                                            <segue destination="nhM-23-DIY" kind="show" identifier="TransactionGasCostTableViewController" id="zxx-G8-FMB"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
