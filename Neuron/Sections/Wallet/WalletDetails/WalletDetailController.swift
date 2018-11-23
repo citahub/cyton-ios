@@ -128,11 +128,10 @@ class WalletDetailController: UITableViewController {
             let realm = try! Realm()
             try realm.write {
                 realm.delete(self.walletModel)
+                appItem.currentWallet = appItem.wallets.first
             }
-            if !WalletRealmTool.hasWallet() {
+            if AppModel.current.wallets.isEmpty {
                 NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
-            } else {
-                appItem.currentWallet = appItem.wallets.first!
             }
             Toast.showToast(text: "删除成功")
             deleteBulletinManager?.dismissBulletin()

@@ -89,10 +89,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
     @objc
     private func determineWalletViewController() {
         let walletViewController: UIViewController
-        if WalletRealmTool.hasWallet() {
-            walletViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateInitialViewController()!
-        } else {
+        if AppModel.current.wallets.isEmpty {
             walletViewController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "AddWallet")
+        } else {
+            walletViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateInitialViewController()!
         }
         (viewControllers![1] as! BaseNavigationController).viewControllers = [walletViewController]
     }

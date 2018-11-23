@@ -59,8 +59,7 @@ class WalletPresenter {
     }
 
     func refresh() {
-        let realm = try! Realm()
-        guard let appModel = realm.objects(AppModel.self).first else { return }
+        let appModel = AppModel.current
         guard let wallet = appModel.currentWallet else { return }
         currentWallet = wallet
 
@@ -87,10 +86,11 @@ class WalletPresenter {
 // MARK: - Observer
 extension WalletPresenter {
     private func observeAppModel() {
-        appModelObserver = AppModel.current.observe { [weak self](change) in
+        appModelObserver = AppModel.current.observe { [weak self] (change) in
             switch change {
             case .change(let propertys):
                 guard let wallet = propertys.first(where: { $0.name == "currentWallet" })?.newValue as? WalletModel else { return }
+                // TODO: When current wallet gets deleted accessing it would throw a realm invalid object exception
                 guard wallet.address != self?.currentWallet?.address else { return }
                 self?.refresh()
             default:
@@ -102,7 +102,7 @@ extension WalletPresenter {
     private func observeWalletSelectTokenList() {
         guard let wallet = currentWallet else { return }
         selectTokenListObserver?.invalidate()
-        selectTokenListObserver = wallet.selectTokenList.observe({ [weak self](change) in
+        selectTokenListObserver = wallet.selectTokenList.observe({ [weak self] (change) in
             guard let self = self else { return }
             self.tokenListChangeHandler(change: change)
         })
@@ -110,7 +110,7 @@ extension WalletPresenter {
 
     private func observeNativeTokenList() {
         nativeTokenListObserver?.invalidate()
-        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self](change) in
+        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
             guard let self = self else { return }
             self.tokenListChangeHandler(change: change)
         }

@@ -10,19 +10,6 @@ import UIKit
 import RealmSwift
 
 struct WalletRealmTool {
-    /// Check if there is a wallet in the current app
-    ///
-    /// - Returns: true or false
-    static func hasWallet() -> Bool {
-        let realm = try! Realm()
-        let result = realm.objects(AppModel.self)
-        guard let appModel = result.first else {
-            return false
-        }
-
-        return appModel.wallets.count > 0
-    }
-
     /// addAppModel
     ///
     /// - Parameter appModel: appmodel instance
