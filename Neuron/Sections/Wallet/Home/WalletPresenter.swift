@@ -26,7 +26,6 @@ protocol WalletPresenterDelegate: NSObjectProtocol {
 class WalletPresenter {
     private (set) var currentWallet: WalletModel? {
         didSet {
-            guard oldValue?.address != currentWallet?.address else { return }
             delegate?.walletPresenter(presenter: self, didSwitchWallet: currentWallet!)
         }
     }
@@ -89,9 +88,7 @@ extension WalletPresenter {
         appModelObserver = AppModel.current.observe { [weak self] (change) in
             switch change {
             case .change(let propertys):
-                guard let wallet = propertys.first(where: { $0.name == "currentWallet" })?.newValue as? WalletModel else { return }
-                // TODO: When current wallet gets deleted accessing it would throw a realm invalid object exception
-                guard wallet.address != self?.currentWallet?.address else { return }
+                guard propertys.contains(where: { $0.name == "currentWallet" }) else { return }
                 self?.refresh()
             default:
                 break
