@@ -19,7 +19,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "修改密码"
-        view.backgroundColor = ColorFromString(hex: "#f5f5f9")
+        view.backgroundColor = UIColor(hex: "#f5f5f9")
 
         let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
         walletNameLabel.text = walletModel.name

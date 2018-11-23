@@ -46,10 +46,10 @@ class CreateWalletController: UITableViewController {
     func jugeNextButtonEnabled() {
         let nameClean = name?.trimmingCharacters(in: .whitespaces)
         if nameClean?.count != 0 && password?.count != 0 && confirmPassword?.count != 0 {
-            nextButton.backgroundColor = ColorFromString(hex: "#2e4af2")
+            nextButton.backgroundColor = UIColor(hex: "#2e4af2")
             nextButton.isEnabled = true
         } else {
-            nextButton.backgroundColor = ColorFromString(hex: "#E9EBF0")
+            nextButton.backgroundColor = UIColor(hex: "#E9EBF0")
             nextButton.isEnabled = false
         }
     }

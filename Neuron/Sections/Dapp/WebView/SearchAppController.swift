@@ -75,7 +75,7 @@ class SearchAppController: UITableViewController, ErrorOverlayPresentable {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .value1, reuseIdentifier: "ID")
-        cell.textLabel?.textColor = ColorFromString(hex: "#666666")
+        cell.textLabel?.textColor = UIColor(hex: "#666666")
         cell.textLabel?.font = UIFont.systemFont(ofSize: 14)
         cell.textLabel?.text = searchHistorys[indexPath.row]
         return cell

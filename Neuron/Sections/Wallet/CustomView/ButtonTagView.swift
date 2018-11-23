@@ -36,8 +36,8 @@ class ButtonTagView: UIView {
     }
 
     //有关按钮的属性
-    private var buttonBackColor: UIColor = ColorFromString(hex: "#f7f7f7")
-    private var buttonTitleColor: UIColor = ColorFromString(hex: "#333333")
+    private var buttonBackColor: UIColor = UIColor(hex: "#f7f7f7")
+    private var buttonTitleColor: UIColor = UIColor(hex: "#333333")
 
     private var hmargin: CGFloat = 10//按钮横向之间的距离
     private var vmargin: CGFloat = 10//按钮垂直之间的距离
@@ -61,10 +61,12 @@ class ButtonTagView: UIView {
             button.addTarget(self, action: #selector(didClickButton(sender:)), for: .touchUpInside)
             button.tag = 2000+i
             buttonArray.append(button)
+
             //计算每个标题文本的宽度
-            let itemWidth = returnTextWidth(text: titleArray[i], font: UIFont.systemFont(ofSize: 15), viewWidth: ScreenSize.width - 30).width+20
+            let screenSize = UIScreen.main.bounds
+            let itemWidth = returnTextWidth(text: titleArray[i], font: UIFont.systemFont(ofSize: 15), viewWidth: screenSize.width - 30).width+20
             totalWidth = totalWidth+CGFloat(itemWidth)+hmargin
-            if totalWidth - hmargin > ScreenSize.width - 30 {//代表着要换行了 row+1 并且计算总宽度
+            if totalWidth - hmargin > screenSize.width - 30 {//代表着要换行了 row+1 并且计算总宽度
                 totalWidth = CGFloat(itemWidth)+hmargin
                 row = row+1
                 button.frame = CGRect(x: 10, y: vmargin+CGFloat(row)*(buttonHeight+vmargin), width: CGFloat(itemWidth), height: buttonHeight)
@@ -106,7 +108,7 @@ class ButtonTagView: UIView {
         for button in self.buttonArray {
             let btn = button as! UIButton
             if selectArr.contains(btn) {
-                btn.backgroundColor = ColorFromString(hex: "#2e4af2")
+                btn.backgroundColor = UIColor(hex: "#2e4af2")
                 btn.setTitleColor(.white, for: .normal)
             } else {
                 btn.backgroundColor = buttonBackColor
