@@ -13,7 +13,7 @@ import JavaScriptCore
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
-    private var mainUrl = URL(string: "https://dapp.cryptape.com")!
+    private var mainUrl = URL(string: "https://dapp.staging.cryptape.com")!
     private var customUserAgent: String {
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]!
@@ -97,12 +97,13 @@ extension DappViewController: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         switch message.name {
         case "pushSearchView":
-            let sCtrl = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
-            self.navigationController?.pushViewController(sCtrl, animated: true)
+            let searchAppController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "searchAppController")
+            self.navigationController?.pushViewController(searchAppController, animated: true)
         case "pushMyDAppView":
             Toast.showToast(text: "敬请期待")
         case "pushCollectionView":
-            Toast.showToast(text: "敬请期待")
+            let collectionViewController = UIStoryboard(name: "DAppBrowser", bundle: nil).instantiateViewController(withIdentifier: "CollectionViewController")
+            self.navigationController?.pushViewController(collectionViewController, animated: true)
         default:
             break
         }

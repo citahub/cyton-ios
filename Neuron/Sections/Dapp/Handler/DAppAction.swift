@@ -20,7 +20,7 @@ struct DAppAction {
 
     func collectDApp(manifestLink: String?, dappLink: String, title: String) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let convertedDate = dateFormatter.string(from: Date())
         if manifestLink == nil {
             let realm = try! Realm()

@@ -114,8 +114,8 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
     }
 
     @IBAction func didClickCollectionButton(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "收藏", style: .default, handler: { (alertAction) in
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "收藏", style: .default, handler: { (_) in
             let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
             self.webView.evaluateJavaScript(relJs) { (manifest, _) in
                 if let dappLink = self.webView.url?.absoluteString, let title = self.webView.title {
