@@ -8,6 +8,7 @@
 
 import UIKit
 import BLTNBoard
+import RealmSwift
 
 class WalletDetailController: UITableViewController {
     @IBOutlet weak var walletNameLabel: UILabel!
@@ -25,7 +26,7 @@ class WalletDetailController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "钱包管理"
-        appModel = WalletRealmTool.getCurrentAppModel()
+        appModel = AppModel.current
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
@@ -91,7 +92,8 @@ class WalletDetailController: UITableViewController {
 
     func modifyWalletName(walletName: String, item: ModifyWalletNamePageItem) {
         do {
-            try WalletRealmTool.realm.write {
+            let realm = try! Realm()
+            try realm.write {
                 self.walletModel.name = walletName
             }
             self.walletNameLabel.text = walletName
@@ -104,7 +106,7 @@ class WalletDetailController: UITableViewController {
 
     func exportKeystore(password: String, item: PasswordPageItem) {
         do {
-            let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!.wallet!
+            let wallet = AppModel.current.currentWallet!.wallet!
             let keystore = try WalletManager.default.exportKeystore(wallet: wallet, password: password)
 
             let exportController = ExportKeystoreController(nibName: "ExportKeystoreController", bundle: nil)
@@ -118,18 +120,18 @@ class WalletDetailController: UITableViewController {
     }
 
     func deleteWallet(password: String, item: PasswordPageItem) {
-        let appItem = WalletRealmTool.getCurrentAppModel()
+        let appItem = AppModel.current
         let walletItem = appItem.currentWallet!
         let wallet = walletItem.wallet!
         do {
             try WalletManager.default.deleteWallet(wallet: wallet, password: password)
-            try WalletRealmTool.realm.write {
-                WalletRealmTool.realm.delete(self.walletModel)
+            let realm = try! Realm()
+            try realm.write {
+                realm.delete(self.walletModel)
+                appItem.currentWallet = appItem.wallets.first
             }
-            if !WalletRealmTool.hasWallet() {
+            if AppModel.current.wallets.isEmpty {
                 NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
-            } else {
-                appItem.currentWallet = appItem.wallets.first!
             }
             Toast.showToast(text: "删除成功")
             deleteBulletinManager?.dismissBulletin()

@@ -10,6 +10,7 @@ import UIKit
 import RSKPlaceholderTextView
 import EthereumAddress
 import IGIdenticon
+import RealmSwift
 
 class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegate {
     @IBOutlet weak var importButton: UIButton!
@@ -117,7 +118,7 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
     }
 
     private func saveWalletToRealm(with walletModel: WalletModel) {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let result: [WalletModel] = appModel.wallets.filter { (wallet) -> Bool in
             return wallet.address == walletModel.address
         }
@@ -130,10 +131,11 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()!
         do {
-            try WalletRealmTool.realm.write {
+            let realm = try! Realm()
+            try realm.write {
                 appModel.currentWallet = walletModel
                 appModel.wallets.append(walletModel)
-                WalletRealmTool.addObject(appModel: appModel)
+                realm.add(appModel)
             }
             Toast.showToast(text: "导入成功")
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)

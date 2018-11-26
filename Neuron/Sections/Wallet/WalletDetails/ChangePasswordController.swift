@@ -21,7 +21,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
         title = "修改密码"
         view.backgroundColor = UIColor(hex: "#f5f5f9")
 
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let walletModel = AppModel.current.currentWallet!
         walletNameLabel.text = walletModel.name
         walletIconView.image = UIImage(data: walletModel.iconData)
     }
@@ -60,7 +60,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
         Toast.showHUD(text: "修改密码中...")
         let oldPassword = oldPasswordTextField.text!
         let newPassword = newPasswordTextField.text!
-        let walletModel = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let walletModel = AppModel.current.currentWallet!
         let wallet = WalletManager.default.wallet(for: walletModel.address)!
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else { return }

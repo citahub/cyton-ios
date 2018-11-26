@@ -8,8 +8,9 @@
 
 import UIKit
 import WebKit
+import RealmSwift
 
-class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipeBackable {
+class BrowserViewController: UIViewController, ErrorOverlayPresentable {
     @IBOutlet private weak var directionView: UIView!
     @IBOutlet private weak var backButton: UIButton!
     @IBOutlet private weak var forwardButton: UIButton!
@@ -32,6 +33,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         webView.uiDelegate = self
         webView.scrollView.delegate = self
         webView.addAllNativeFunctionHandler()
+        webView.allowsBackForwardNavigationGestures = true
         return webView
     }()
 
@@ -55,7 +57,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
         view.addSubview(webView)
         layoutWebView()
         view.addSubview(progressView)
@@ -77,9 +79,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
             self?.webView.load(URLRequest(url: url))
         }
         navigationItem.fixSpace()
-        // fix swipe back
-        let gestureRecognizer = fixSwipeBack()
-        webView.addGestureRecognizer(gestureRecognizer)
 
         observations.append(webView.observe(\.estimatedProgress) { [weak self] (webView, _) in
             guard let self = self else {
@@ -92,6 +91,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
                     self.progressView.alpha = 0
                 }, completion: { (_) in
                     self.progressView.setProgress(0.0, animated: false)
+                    self.title = webView.title
                 })
             }
         })
@@ -112,7 +112,29 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable, FixSwipe
         navigationController?.popViewController(animated: true)
     }
 
-    @IBAction func didClickCollectionButton(_ sender: UIButton) {
+    @IBAction func didClickCollectionButton(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: "收藏", style: .default, handler: { (_) in
+            let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
+            self.webView.evaluateJavaScript(relJs) { (manifest, _) in
+                if let dappLink = self.webView.url?.absoluteString, let title = self.webView.title {
+                    DAppAction().collectDApp(manifestLink: manifest as? String, dappLink: dappLink, title: title, completion: { (result) in
+                        if result {
+                            Toast.showToast(text: "收藏成功")
+                        } else {
+                            Toast.showToast(text: "收藏失败")
+                        }
+                    })
+                } else {
+                    Toast.showToast(text: "收藏失败")
+                }
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "刷新", style: .default, handler: { (_) in
+            self.webView.reload()
+        }))
+        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 
     func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
@@ -253,18 +275,10 @@ extension BrowserViewController {
 
 extension BrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        title = webView.title
         updateNavigationButtons()
 
         let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
         webView.evaluateJavaScript(relJs) { (manifest, _) in
-            guard let link = manifest else {
-                return
-            }
-            DAppAction().dealWithManifestJson(with: link as! String)
-        }
-        let refJs = "document.querySelector('head').querySelector('link[ref=manifest]').href;"
-        webView.evaluateJavaScript(refJs) { (manifest, _) in
             guard let link = manifest else {
                 return
             }
@@ -323,5 +337,11 @@ extension BrowserViewController: ContractControllerDelegate, MessageSignControll
         if let error = error {
             error != .userCanceled ? Toast.showToast(text: "支付失败") : nil
         }
+    }
+}
+
+extension BrowserViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return navigationController!.viewControllers.count > 1
     }
 }

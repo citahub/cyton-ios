@@ -21,7 +21,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     // get native token for nervos  'just temporary'
     func addNativeTokenMsgToRealm() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let ethModel = TokenModel()
         ethModel.address = ""
         ethModel.chainId = NativeChainId.ethMainnetChainId
@@ -31,11 +31,17 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         ethModel.isNativeToken = true
         ethModel.name = "ethereum"
         ethModel.symbol = "ETH"
-        try? WalletRealmTool.realm.write {
-            WalletRealmTool.addTokenModel(tokenModel: ethModel)
+
+        if let id = TokenModel.identifier(for: ethModel) {
+            ethModel.identifier = id
+        }
+
+        let realm = try! Realm()
+        try? realm.write {
+            realm.add(ethModel, update: true)
             if !appModel.nativeTokenList.contains(ethModel) {
                 appModel.nativeTokenList.append(ethModel)
-                WalletRealmTool.addObject(appModel: appModel)
+                realm.add(appModel)
             }
         }
 

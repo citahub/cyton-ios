@@ -18,7 +18,7 @@ class WalletQRCodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         iconView.image = UIImage(data: appModel.currentWallet!.iconData!)
         nameLabel.text = appModel.currentWallet!.name
         addressLabel.text = appModel.currentWallet!.address
@@ -33,7 +33,7 @@ class WalletQRCodeViewController: UIViewController {
     }
 
     @IBAction func copyAddress(_ sender: Any) {
-        UIPasteboard.general.string = WalletRealmTool.getCurrentAppModel().currentWallet?.address
+        UIPasteboard.general.string = AppModel.current.currentWallet?.address
         Toast.showToast(text: "地址已经复制到粘贴板")
     }
 }

@@ -174,7 +174,7 @@ extension WalletManager {
     }
 
     func walletExists(name: String) -> Bool {
-        return WalletRealmTool.getCurrentAppModel().wallets.map { $0.name }.contains(name)
+        return AppModel.current.wallets.map { $0.name }.contains(name)
     }
 
     func verifyPassword(wallet: Wallet, password: String) -> Bool {

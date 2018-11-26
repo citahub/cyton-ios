@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import RealmSwift
 @testable import Neuron
 
 class WalletNameValidatorTests: XCTestCase {
@@ -29,17 +30,18 @@ class WalletNameValidatorTests: XCTestCase {
     }
 
     func testWalletNameExistence() {
-        let appModel = WalletRealmTool.getCurrentAppModel()
+        let appModel = AppModel.current
         let walletModel = WalletModel()
         walletModel.name = "ETH Wallet"
         walletModel.address = "0x6782CdeF6A4A056d412775EE6081d32B2bf90287"
         walletModel.iconData = Data()
         let existence = appModel.wallets.contains(where: {$0.address == walletModel.address})
-        try! WalletRealmTool.realm.write {
+        let realm = try! Realm()
+        try! realm.write {
             if !existence {
                 appModel.wallets.append(walletModel)
             }
-            WalletRealmTool.realm.add(appModel)
+            realm.add(appModel)
         }
         guard case .invalid(_) = WalletNameValidator.validate(walletName: "ETH Wallet") else {
             return XCTFail("Wallet name existence not checked")

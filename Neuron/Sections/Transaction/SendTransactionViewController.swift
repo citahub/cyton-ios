@@ -113,7 +113,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         super.viewDidLoad()
 
         if enableSwitchToken && token == nil {
-            token = WalletRealmTool.getCurrentAppModel().nativeTokenList.first
+            token = AppModel.current.nativeTokenList.first
         }
 
         createParamBuilder()
@@ -165,7 +165,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     func setupUI() {
-        let wallet = WalletRealmTool.getCurrentAppModel().currentWallet!
+        let wallet = AppModel.current.currentWallet!
         title = "\(token.symbol)转账"
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
@@ -265,7 +265,7 @@ private extension SendTransactionViewController {
             currencyType: paramBuilder.symbol,
             currencyNumber: Double(amountTextField.text ?? "0")!,
             receiveAddress: addressTextField.text ?? "",
-            outcomeAddress: WalletRealmTool.getCurrentAppModel().currentWallet!.address,
+            outcomeAddress: AppModel.current.currentWallet!.address,
             transactionType: .normal
         )
     }
@@ -346,7 +346,7 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
             self.updateGasCost()
         })
-        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
+        paramBuilder.from = AppModel.current.currentWallet!.address
         if recipientAddress != nil {
             paramBuilder.to = recipientAddress
         }
