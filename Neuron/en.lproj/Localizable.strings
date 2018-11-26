@@ -6,6 +6,15 @@
   Copyright © 2018 Cryptape. All rights reserved.
 */
 
+// Common
+// ---------------------------------------------------------
+"Common.Connection.ConnectionLost" = "The connection to the Internet is broken";
+"Common.Connection.FailToLoadPage" = "Failed to load the page";
+
+// DApp
+// ---------------------------------------------------------
+"DApp.Home" = "DApps";
+
 // Wallet Manager Errors
 // ---------------------------------------------------------
 "WalletManager.Error.invalidPassword" = "Invalid password";

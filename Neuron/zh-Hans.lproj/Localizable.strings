@@ -6,6 +6,15 @@
   Copyright © 2018 Cryptape. All rights reserved.
 */
 
+// Common
+// ---------------------------------------------------------
+"Common.Connection.ConnectionLost" = "似乎已断开与互联网的连接";
+"Common.Connection.FailToLoadPage" = "页面加载失败";
+
+// DApp
+// ---------------------------------------------------------
+"DApp.Home" = "应用";
+
 // Wallet Manager Errors
 // ---------------------------------------------------------
 "WalletManager.Error.invalidPassword" = "密码不正确";
