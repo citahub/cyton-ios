@@ -23,4 +23,8 @@ extension String {
         }
         return "0x" + self
     }
+
+    func localized(_ comment: String = "") -> String {
+        return NSLocalizedString(self, comment: comment)
+    }
 }

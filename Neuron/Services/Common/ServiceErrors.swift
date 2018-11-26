@@ -27,7 +27,7 @@ enum CustomTokenError: String, LocalizedError {
     case undefinedError
 
     var errorDescription: String? {
-        return NSLocalizedString("CustomTokenError.\(rawValue)", comment: "")
+        return "CustomTokenError.\(rawValue)".localized()
     }
 }
 
@@ -48,6 +48,6 @@ enum SendTransactionError: String, LocalizedError {
     case signTXFailed
 
     var errorDescription: String? {
-        return NSLocalizedString("SendTransactionError.\(rawValue)", comment: "")
+        return "SendTransactionError.\(rawValue)".localized()
     }
 }
