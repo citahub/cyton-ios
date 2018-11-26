@@ -30,23 +30,17 @@ enum SignMessageResult<T> {
     case error(Error)
 }
 
-enum SendTransactionError: Error {
+enum SendTransactionError: String, LocalizedError {
     case invalidSourceAddress
     case invalidDestinationAddress
     case invalidContractAddress
-    case invalidAmountFormat
-    case contractLoadingError
-    case retrievingGasPriceError
-    case retrievingEstimatedGasError
-    case emptyResult
     case noAvailableKeys
     case createTransactionIssue
-    case invalidPassword
     case invalidAppChainNode
     case invalidChainId
     case signTXFailed
-}
 
-enum TransactionError: Error {
-    case requestfailed
+    var errorDescription: String? {
+        return NSLocalizedString("SendTransactionError.\(rawValue)", comment: "")
+    }
 }

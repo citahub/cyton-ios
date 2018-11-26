@@ -18,3 +18,13 @@
 "WalletManager.Error.failedToUpdatePassword" = "修改密码失败";
 "WalletManager.Error.failedToSaveKeystore" = "保存keystore失败";
 "WalletManager.Error.unknown" = "未知错误";
+
+// Send Transactoin Error
+
+"SendTransactionError.invalidSourceAddress" = "发送地址不正确";
+"SendTransactionError.invalidDestinationAddress" = "接收地址不正确";
+"SendTransactionError.invalidContractAddress" = "合约地址不正确";
+"SendTransactionError.noAvailableKeys" = "未找到该钱包";
+"SendTransactionError.createTransactionIssue" = "创建交易失败";
+"SendTransactionError.invalidChainId" = "Chain ID不正确";
+"SendTransactionError.signTXFailed" = "交易签名失败";

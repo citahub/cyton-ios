@@ -18,3 +18,13 @@
 "WalletManager.Error.failedToUpdatePassword" = "Failed to update wallet password";
 "WalletManager.Error.failedToSaveKeystore" = "Failed to save the keystore";
 "WalletManager.Error.unknown" = "Unknow error";
+
+// Send Transactoin Error
+
+"SendTransactionError.invalidSourceAddress" = "Invalid source address";
+"SendTransactionError.invalidDestinationAddress" = "Invalid destination address";
+"SendTransactionError.invalidContractAddress" = "Invalid contract ADdress";
+"SendTransactionError.noAvailableKeys" = "Wallet not found";
+"SendTransactionError.createTransactionIssue" = "Failed to create transaction";
+"SendTransactionError.invalidChainId" = "Invalid chain ID";
+"SendTransactionError.signTXFailed" = "Failed to sign the transaction";
