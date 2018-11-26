@@ -175,7 +175,6 @@
 		89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */; };
 		89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */; };
 		89C614602141421400DC3DF4 /* TransactionHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */; };
-		89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6E09820E07F8E00C94026 /* ShareItem.swift */; };
 		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CA1FAE213F832800669B2C /* CurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CA1FAD213F832800669B2C /* CurrencyService.swift */; };
 		89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsViewController.swift */; };
@@ -398,7 +397,6 @@
 		89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCurrencyService.swift; sourceTree = "<group>"; };
 		89C6145F2141421400DC3DF4 /* TransactionHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryViewController.swift; sourceTree = "<group>"; };
-		89C6E09820E07F8E00C94026 /* ShareItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareItem.swift; sourceTree = "<group>"; };
 		89CA1FAB213F822B00669B2C /* tokens-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-list.json"; sourceTree = "<group>"; };
 		89CA1FAD213F832800669B2C /* CurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyService.swift; sourceTree = "<group>"; };
 		89CFA12521424CAB00635A54 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
@@ -456,6 +454,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A14CF3D21ABEF1600AE6227 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */,
+				6E859CB72176DC3100637E1C /* Overlay.storyboard */,
+				6E9F9D5E219ABDE7009ED8B2 /* FixSwipeBackable.swift */,
+				1A9204E321634212004B54DC /* ToastActivityView.xib */,
+				8913437420C7D3A400A17AEF /* Toast.swift */,
+				6E867E08216C862900BD6FE5 /* NoScreenshot.swift */,
+			);
+			path = UIKit;
+			sourceTree = "<group>";
+		};
 		1A1E8414217178A800B15E88 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -815,17 +826,11 @@
 		8928C23120AE84AB00C3103E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				1A14CF3D21ABEF1600AE6227 /* UIKit */,
 				1A1E8414217178A800B15E88 /* Validators */,
 				89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */,
-				1A9204E321634212004B54DC /* ToastActivityView.xib */,
-				8913437420C7D3A400A17AEF /* Toast.swift */,
-				89C6E09820E07F8E00C94026 /* ShareItem.swift */,
-				6E867E08216C862900BD6FE5 /* NoScreenshot.swift */,
 				1A60B6FB2186DB1C00FEFB3A /* Web3Utils.swift */,
 				1A69465F2192A0B0000093A2 /* GasCalculator.swift */,
-				6E867E0C216C92A900BD6FE5 /* OverlayPresentable.swift */,
-				6E859CB72176DC3100637E1C /* Overlay.storyboard */,
-				6E9F9D5E219ABDE7009ED8B2 /* FixSwipeBackable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1505,7 +1510,6 @@
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				898CA98820EA23940059ECA3 /* EthNativeTokenService.swift in Sources */,
 				1A6007A021A29C2C00C7B712 /* SuccessPageItem.swift in Sources */,
-				89C6E09920E07F8E00C94026 /* ShareItem.swift in Sources */,
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
 				8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */,
