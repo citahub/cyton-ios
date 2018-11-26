@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yOW-6d-luO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="1045"/>
+            <point key="canvasLocation" x="834" y="830"/>
         </scene>
         <!--高级设置-->
         <scene sceneID="NAt-zZ-lq0">
@@ -259,13 +259,13 @@
                                     <color key="textColor" name="info_color"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THD-tt-uG8">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THD-tt-uG8">
                                     <rect key="frame" x="15" y="192" width="345" height="44"/>
-                                    <color key="backgroundColor" name="weak_2_color"/>
+                                    <color key="backgroundColor" name="branding_color"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="56r-VR-ZhE"/>
                                     </constraints>
-                                    <state key="normal" title="确认">
+                                    <state key="normal" title="确定">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -446,6 +446,7 @@
                         <outlet property="confirmButton" destination="THD-tt-uG8" id="cEb-bU-G5x"/>
                         <outlet property="dataTextPlaceholderLabel" destination="fvp-Or-GyJ" id="vbf-GF-B69"/>
                         <outlet property="dataTextView" destination="9Wq-T8-1zW" id="f2K-jM-PZU"/>
+                        <outlet property="gasCostDescLabel" destination="YwG-lr-0nF" id="xfe-ay-C5T"/>
                         <outlet property="gasCostLabel" destination="vX9-5A-Y0H" id="FJt-SE-syc"/>
                         <outlet property="gasLimitTextField" destination="8i9-2x-Vrj" id="QwO-zA-AQ0"/>
                         <outlet property="gasPriceTextField" destination="kWc-fe-1Yl" id="RTb-tX-yZh"/>
@@ -453,7 +454,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzz-Pb-SGB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1135.2" y="1044.8275862068967"/>
+            <point key="canvasLocation" x="833" y="1499"/>
         </scene>
         <!--Send Transaction View Controller-->
         <scene sceneID="fTm-pa-XUQ">
@@ -743,7 +744,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="nhM-23-DIY" kind="show" identifier="TransactionGasCostTableViewController" id="zxx-G8-FMB"/>
+                                            <segue destination="nhM-23-DIY" kind="show" identifier="TransactionGasCostTableViewController" id="dMX-i8-2Ie"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
@@ -897,13 +898,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3F-y3-928" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-226.40000000000001" y="1800.4497751124438"/>
+            <point key="canvasLocation" x="-226" y="1811"/>
         </scene>
     </scenes>
     <resources>
         <image name="close" width="36" height="36"/>
         <image name="icon_down" width="11" height="7"/>
         <image name="nav_scan" width="44" height="44"/>
+        <namedColor name="branding_color">
+            <color red="0.27099999785423279" green="0.42399999499320984" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <namedColor name="headline_color">
             <color red="0.18000000715255737" green="0.19200000166893005" blue="0.24300000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

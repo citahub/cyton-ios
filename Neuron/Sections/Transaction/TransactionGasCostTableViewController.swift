@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Web3swift
+import EthereumAddress
+import BigInt
 
 class TransactionGasCostTableViewController: UITableViewController {
     @IBOutlet weak var gasPriceTextField: UITextField!
     @IBOutlet weak var gasLimitTextField: UITextField!
     @IBOutlet weak var gasCostLabel: UILabel!
+    @IBOutlet weak var gasCostDescLabel: UILabel!
     @IBOutlet weak var dataTextView: UITextView!
     @IBOutlet weak var dataTextPlaceholderLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
@@ -34,15 +38,38 @@ class TransactionGasCostTableViewController: UITableViewController {
             Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
             return
         }
+
+        if paramBuilder.tokenType == .ether {
+            if paramBuilder.data.count > 0 {
+                let estimateGasLimit = paramBuilder.estimateGasLimit()
+                if paramBuilder.gasLimit < UInt(estimateGasLimit) {
+                    Toast.showToast(text: "请确保输入的gaslimit大于等于”\(estimateGasLimit)(估算值)*4”")
+                    return
+                }
+            } else {
+                if paramBuilder.gasLimit < GasCalculator.defaultGasLimit {
+                    Toast.showToast(text: "请确保输入的gaslimit大于等于\(GasCalculator.defaultGasLimit)")
+                    return
+                }
+            }
+        } else if paramBuilder.tokenType == .erc20 {
+            let estimateGasLimit = paramBuilder.estimateGasLimit()
+            if paramBuilder.gasLimit < estimateGasLimit {
+                Toast.showToast(text: "请确保输入的gaslimit大于等于”\(estimateGasLimit)(估算值)*4”")
+            }
+        }
+
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
+        param.data = dataTextView.text.data(using: .utf8) ?? Data()
         navigationController?.popViewController(animated: true)
     }
 
     private func updateGasCost() {
-        gasPriceTextField.text = paramBuilder.fetchedGasPrice.weiToGwei().trailingZerosTrimmed
+        gasPriceTextField.text = paramBuilder.gasPrice.weiToGwei().trailingZerosTrimmed
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
+        gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
@@ -72,7 +99,6 @@ extension TransactionGasCostTableViewController: UITextFieldDelegate {
 }
 
 extension TransactionGasCostTableViewController: UITextPasteDelegate {
-
 }
 
 extension TransactionGasCostTableViewController: UITextViewDelegate {

@@ -8,6 +8,8 @@
 
 import Foundation
 import BigInt
+import Web3swift
+import EthereumAddress
 
 /// Prepare tx params.
 class TransactionParamBuilder: NSObject {
@@ -87,6 +89,25 @@ class TransactionParamBuilder: NSObject {
         super.init()
         gasPrice = builder.gasPrice
         gasLimit = builder.gasLimit
+        from = builder.from
+        to = builder.to
+        rebuildGasCalculator()
+    }
+
+    func estimateGasLimit() -> UInt64 {
+        switch tokenType {
+        case .erc20, .ether:
+            var options = TransactionOptions.defaultOptions
+            options.gasLimit = .limited(BigUInt(gasLimit))
+            options.value = value
+            options.from = EthereumAddress(from)!
+            let contract = EthereumNetwork().getWeb3().contract(Web3Utils.erc20ABI, at: EthereumAddress(from)!)
+            let trans = contract!.method(transactionOptions: options)!
+            let estimateGasLimit = (try? trans.estimateGas(transactionOptions: options)) ?? BigUInt(GasCalculator.defaultGasLimit)
+            return UInt64(estimateGasLimit)
+        default:
+            return GasCalculator.defaultGasLimit
+        }
     }
 
     private func fetchGasPrice() {
