@@ -129,7 +129,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             controller.delegate = self
         } else if segue.identifier == String(describing: TransactionGasCostTableViewController.self) {
             let controller = segue.destination as! TransactionGasCostTableViewController
-            controller.param = (paramBuilder, token)
+            controller.param = paramBuilder
         }
     }
 

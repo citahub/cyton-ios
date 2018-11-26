@@ -15,19 +15,14 @@ class TransactionGasCostTableViewController: UITableViewController {
     @IBOutlet weak var dataTextView: UITextView!
     @IBOutlet weak var dataTextPlaceholderLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
-    var param: (TransactionParamBuilder, TokenModel)!
+    var param: TransactionParamBuilder!
     private var paramBuilder: TransactionParamBuilder!
     private var observers = [NSKeyValueObservation]()
     private let minGasPrice = 1.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        paramBuilder = TransactionParamBuilder(token: param.1)
-        paramBuilder.from = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-        paramBuilder.to = param.0.to
-
-        gasPriceTextField.text = paramBuilder.fetchedGasPrice.weiToGwei().trailingZerosTrimmed
-        gasLimitTextField.text = paramBuilder.gasLimit.description
+        paramBuilder = TransactionParamBuilder(builder: param)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
@@ -39,13 +34,19 @@ class TransactionGasCostTableViewController: UITableViewController {
             Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
             return
         }
-        param.0.gasPrice = paramBuilder.gasPrice
-        param.0.gasLimit = paramBuilder.gasLimit
+        param.gasPrice = paramBuilder.gasPrice
+        param.gasLimit = paramBuilder.gasLimit
         navigationController?.popViewController(animated: true)
     }
 
     private func updateGasCost() {
+        gasPriceTextField.text = paramBuilder.fetchedGasPrice.weiToGwei().trailingZerosTrimmed
+        gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
+    }
+
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }
 

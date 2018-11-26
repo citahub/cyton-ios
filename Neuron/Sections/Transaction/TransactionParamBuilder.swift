@@ -75,6 +75,20 @@ class TransactionParamBuilder: NSObject {
         fetchGasLimit()
     }
 
+    init(builder: TransactionParamBuilder) {
+        tokenType = builder.tokenType
+        rpcNode = builder.rpcNode
+        decimals = builder.decimals
+        chainId = builder.chainId
+        contractAddress = builder.contractAddress
+        symbol = builder.symbol
+        nativeCoinSymbol = builder.nativeCoinSymbol
+        tokenBalance = builder.tokenBalance
+        super.init()
+        gasPrice = builder.gasPrice
+        gasLimit = builder.gasLimit
+    }
+
     private func fetchGasPrice() {
         func fetched(price: BigUInt) {
             self.fetchedGasPrice = price

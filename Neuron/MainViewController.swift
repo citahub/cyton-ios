@@ -67,7 +67,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
     }
 
     private func applyStyle() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "tint_color")], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "tint_color")!], for: .selected)
 
         let navigationBarBackImage = UIImage(named: "nav_darkback")!.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = navigationBarBackImage
