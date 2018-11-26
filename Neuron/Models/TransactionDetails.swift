@@ -27,6 +27,7 @@ class TransactionDetails: Codable {
     var date = Date()
     var blockNumber: BigUInt = 0
     var status: TransactionState = .success
+    var token: Token!
 
     enum CodingKeys: String, CodingKey {
         case hash
