@@ -24,7 +24,7 @@ class MyDAppViewController: UITableViewController, ErrorOverlayPresentable {
         let realm = try! Realm()
         let result = realm.objects(DAppModel.self)
         if result.count == 0 {
-            showOverlay()
+            showBlankOverlay()
         } else {
             collections.append(contentsOf: result)
             tableView.reloadData()
