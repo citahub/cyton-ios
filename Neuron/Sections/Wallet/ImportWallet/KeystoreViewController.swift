@@ -113,7 +113,6 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             return
         }
 
-        let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()!
         do {
@@ -125,10 +124,6 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             }
             Toast.showToast(text: "导入成功")
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
-            if isFirstWallet {
-                NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
-            }
-            NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
             navigationController?.popToRootViewController(animated: true)
         } catch {
             Toast.showToast(text: error.localizedDescription)

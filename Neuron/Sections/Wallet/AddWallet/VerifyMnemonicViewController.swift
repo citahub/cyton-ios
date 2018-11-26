@@ -132,7 +132,6 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
 
     private func saveWalletToRealm() {
         let appModel = AppModel.current
-        let isFirstWallet = appModel.wallets.count == 0
         let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
         walletModel.iconData = iconImage!.pngData()
         let realm = try! Realm()
@@ -142,10 +141,6 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
             realm.add(appModel)
         }
         navigationController?.popToRootViewController(animated: true)
-        if isFirstWallet {
-            NotificationCenter.default.post(name: .firstWalletCreated, object: nil)
-        }
-        NotificationCenter.default.post(name: .createWalletSuccess, object: nil, userInfo: ["address": walletModel.address])
         Toast.showToast(text: "创建成功")
     }
 }

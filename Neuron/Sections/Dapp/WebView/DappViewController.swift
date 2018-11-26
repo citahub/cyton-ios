@@ -23,7 +23,7 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.title = "应用"
+        self.title = "DApp.Home".localized()
 
         addWebView()
         layoutWebView()
@@ -87,9 +87,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         let error = error as NSError
         errorOverlaycontroller.style = .networkFail
         if error.code == -1009 {
-            errorOverlaycontroller.messageLabel.text = "似乎已断开与互联网的连接"
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.ConnectionLost".localized()
         } else {
-            errorOverlaycontroller.messageLabel.text = "页面加载失败"
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.FailToLoadPage".localized()
         }
         showOverlay()
     }
@@ -105,7 +105,8 @@ extension DappViewController: WKScriptMessageHandler {
             let myDAppViewController: MyDAppViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
             self.navigationController?.pushViewController(myDAppViewController, animated: true)
         case "pushCollectionView":
-            Toast.showToast(text: "敬请期待")
+            let nftViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateViewController(withIdentifier: "nftViewController")
+            self.navigationController?.pushViewController(nftViewController, animated: true)
         default:
             break
         }

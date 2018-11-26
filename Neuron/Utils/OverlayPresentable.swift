@@ -28,6 +28,17 @@ extension OverlayPresentable where Self: UIViewController {
     }
 }
 
+extension OverlayPresentable where Self: UITableViewController {
+    func showOverlay() {
+        overlay.frame = tableView.frame
+        tableView.addSubview(overlay)
+    }
+
+    func removeOverlay() {
+        overlay.removeFromSuperview()
+    }
+}
+
 // MARK: - Error
 
 class ErrorOverlayViewController: UIViewController {

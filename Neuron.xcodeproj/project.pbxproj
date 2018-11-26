@@ -659,11 +659,12 @@
 		6EABFB0921991AF900305ED5 /* Native */ = {
 			isa = PBXGroup;
 			children = (
-				6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */,
-				6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */,
-				6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */,
-				6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */,
-				6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */,
+				89422FE721A7F97300DD8744 /* MyDAppViewController.swift */,
+				1A092244213580C900CAED5D /* NFTViewController.swift */,
+				89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */,
+				89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */,
+				89D84CE82147D926006B0287 /* NFTDetailViewController.swift */,
+				89D84CE2214790B5006B0287 /* NFTDetail.storyboard */,
 			);
 			path = Native;
 			sourceTree = "<group>";
@@ -675,7 +676,6 @@
 				8928C24820AE91E600C3103E /* DappViewController.swift */,
 				8928C26920AED5C100C3103E /* SearchAppController.swift */,
 				89B895B020F8B0CD00B9468B /* BrowserViewController.swift */,
-				89422FE721A7F97300DD8744 /* MyDAppViewController.swift */,
 				8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */,
 				89C25C6B20BD421E00007EC1 /* ContractController.swift */,
 				8972FD0E218B54A100C27147 /* AdvancedViewController.swift */,
@@ -692,6 +692,11 @@
 				8951A84B2170A5CC00043228 /* DAppAction.swift */,
 				89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */,
 				89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */,
+				6EABFB0C21991CB300305ED5 /* DAppNativeMessageHandler.swift */,
+				6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */,
+				6EABFB0A21991BC200305ED5 /* DAppQRCodeMessageHandler.swift */,
+				6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */,
+				6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */,
 			);
 			path = Handler;
 			sourceTree = "<group>";
@@ -953,11 +958,6 @@
 				1A2BFA19213513D60065496B /* Wallet.storyboard */,
 				8928C27820B2A61900C3103E /* WalletViewController.swift */,
 				6E9B947E21A4086400D67357 /* WalletPresenter.swift */,
-				1A092244213580C900CAED5D /* NFTViewController.swift */,
-				89D84CEA2148C03B006B0287 /* NFTHeaderReusableView.swift */,
-				89D84CEC2148C056006B0287 /* NFTFooterReusableView.swift */,
-				89D84CE82147D926006B0287 /* NFTDetailViewController.swift */,
-				89D84CE2214790B5006B0287 /* NFTDetail.storyboard */,
 				6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */,
 			);
 			path = Home;
