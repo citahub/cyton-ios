@@ -105,7 +105,8 @@ extension DappViewController: WKScriptMessageHandler {
             let myDAppViewController: MyDAppViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
             self.navigationController?.pushViewController(myDAppViewController, animated: true)
         case "pushCollectionView":
-            Toast.showToast(text: "敬请期待")
+            let nftViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateViewController(withIdentifier: "nftViewController")
+            self.navigationController?.pushViewController(nftViewController, animated: true)
         default:
             break
         }
