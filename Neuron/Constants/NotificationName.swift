@@ -11,5 +11,4 @@ import Foundation
 extension Notification.Name {
     static let changeLocalCurrency = Notification.Name("changeLocalCurrency")
     static let switchEthNetwork = Notification.Name("switchEthNetwork")
-    static let switchWallet = Notification.Name("switchWallet")
 }
