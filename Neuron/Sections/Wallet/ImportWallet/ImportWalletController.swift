@@ -9,6 +9,7 @@
 
 import UIKit
 import RSKPlaceholderTextView
+import IQKeyboardManagerSwift
 
 class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPresentable {
     @IBOutlet weak var tabbedButtonView: TabbedButtonsView!
@@ -45,6 +46,12 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        IQKeyboardManager.shared.enable = false
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        IQKeyboardManager.shared.enable = true
     }
 
     override func viewDidAppear(_ animated: Bool) {
