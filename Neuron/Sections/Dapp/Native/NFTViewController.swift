@@ -14,17 +14,11 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "我的藏品"
         getListData()
-        addNotify()
     }
 
-    func addNotify() {
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .beginRefresh, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshData), name: .switchWallet, object: nil)
-    }
-
-    @objc
-    func refreshData() {
+    @IBAction func refresh(_ sender: UIRefreshControl) {
         getListData()
     }
 
@@ -47,6 +41,7 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
                 self.showNetworkFailOverlay()
             }
             self.tableView.reloadData()
+            self.tableView.refreshControl?.endRefreshing()
         }
     }
 
@@ -70,16 +65,5 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
         let nftDetailViewController = UIStoryboard(name: "NFTDetail", bundle: nil).instantiateViewController(withIdentifier: "nftDetailViewController") as! NFTDetailViewController
         nftDetailViewController.assetsModel = model
         navigationController?.pushViewController(nftDetailViewController, animated: true)
-    }
-
-    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        var offset = scrollView.contentOffset.y
-        if #available(iOS 11.0, *) {
-            offset += scrollView.adjustedContentInset.top
-        } else {
-            offset += scrollView.contentInset.top
-        }
-
-        tableView.isScrollEnabled = offset > 0
     }
 }
