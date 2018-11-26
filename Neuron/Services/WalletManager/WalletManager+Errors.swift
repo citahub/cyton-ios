@@ -22,7 +22,7 @@ extension WalletManager {
         case unknown
 
         var errorDescription: String? {
-            return NSLocalizedString("WalletManager.\(rawValue)", comment: "")
+            return "WalletManager.Error.\(rawValue)".localized()
         }
     }
 }

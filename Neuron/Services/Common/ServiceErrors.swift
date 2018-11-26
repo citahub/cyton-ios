@@ -8,45 +8,46 @@
 
 import Foundation
 
+// TODO: Remove result type
 enum EthServiceResult<T> {
     case success(T)
     case error(Error)
 }
 
+// TODO: Remove result type
 enum AppChainServiceResult<T> {
     case success(T)
     case error(Error)
 }
 
-enum CustomTokenError: Error {
+enum CustomTokenError: String, LocalizedError {
     case wrongBalanceError
     case badNameError
     case badSymbolError
     case undefinedError
+
+    var errorDescription: String? {
+        return "CustomTokenError.\(rawValue)".localized()
+    }
 }
 
+// TODO: Remove result type
 enum SignMessageResult<T> {
     case success(T)
     case error(Error)
 }
 
-enum SendTransactionError: Error {
+enum SendTransactionError: String, LocalizedError {
     case invalidSourceAddress
     case invalidDestinationAddress
     case invalidContractAddress
-    case invalidAmountFormat
-    case contractLoadingError
-    case retrievingGasPriceError
-    case retrievingEstimatedGasError
-    case emptyResult
     case noAvailableKeys
     case createTransactionIssue
-    case invalidPassword
     case invalidAppChainNode
     case invalidChainId
     case signTXFailed
-}
 
-enum TransactionError: Error {
-    case requestfailed
+    var errorDescription: String? {
+        return "SendTransactionError.\(rawValue)".localized()
+    }
 }
