@@ -8,13 +8,13 @@
 
 // Wallet Manager Errors
 
-"WalletManager.invalidPassword" = "Invalid password";
-"WalletManager.invalidPrivateKey" = "Invalid Private Key";
-"WalletManager.invalidKeystore" = "Invalid Keystore";
-"WalletManager.invalidMnemonic" = "Invalid Mnemonic";
-"WalletManager.accountAlreadyExists" = "You already have this wallet";
-"WalletManager.accountNotFound" = "Wallet not found";
-"WalletManager.failedToDeleteAccount" = "Failed to delete wallet";
-"WalletManager.failedToUpdatePassword" = "Failed to update wallet password";
-"WalletManager.failedToSaveKeystore" = "Failed to save the keystore";
-"WalletManager.unknown" = "Unknow error";
+"WalletManager.Error.invalidPassword" = "Invalid password";
+"WalletManager.Error.invalidPrivateKey" = "Invalid Private Key";
+"WalletManager.Error.invalidKeystore" = "Invalid Keystore";
+"WalletManager.Error.invalidMnemonic" = "Invalid Mnemonic";
+"WalletManager.Error.accountAlreadyExists" = "You already have this wallet";
+"WalletManager.Error.accountNotFound" = "Wallet not found";
+"WalletManager.Error.failedToDeleteAccount" = "Failed to delete wallet";
+"WalletManager.Error.failedToUpdatePassword" = "Failed to update wallet password";
+"WalletManager.Error.failedToSaveKeystore" = "Failed to save the keystore";
+"WalletManager.Error.unknown" = "Unknow error";
