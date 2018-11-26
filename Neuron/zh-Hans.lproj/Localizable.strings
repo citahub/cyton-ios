@@ -6,15 +6,41 @@
   Copyright © 2018 Cryptape. All rights reserved.
 */
 
-// Wallet Manager Errors
+// Common
+// ---------------------------------------------------------
+"Common.Connection.ConnectionLost" = "似乎已断开与互联网的连接";
+"Common.Connection.FailToLoadPage" = "页面加载失败";
 
-"WalletManager.invalidPassword" = "密码不正确";
-"WalletManager.invalidPrivateKey" = "私钥不正确";
-"WalletManager.invalidKeystore" = "Keystore不正确";
-"WalletManager.invalidMnemonic" = "助记词不正确";
-"WalletManager.accountAlreadyExists" = "该钱包已存在";
-"WalletManager.accountNotFound" = "未找到该钱包";
-"WalletManager.failedToDeleteAccount" = "删除钱包失败";
-"WalletManager.failedToUpdatePassword" = "修改密码失败";
-"WalletManager.failedToSaveKeystore" = "保存keystore失败";
-"WalletManager.unknown" = "未知错误";
+// DApp
+// ---------------------------------------------------------
+"DApp.Home" = "应用";
+
+// Wallet Manager Errors
+// ---------------------------------------------------------
+"WalletManager.Error.invalidPassword" = "密码不正确";
+"WalletManager.Error.invalidPrivateKey" = "私钥不正确";
+"WalletManager.Error.invalidKeystore" = "Keystore不正确";
+"WalletManager.Error.invalidMnemonic" = "助记词不正确";
+"WalletManager.Error.accountAlreadyExists" = "该钱包已存在";
+"WalletManager.Error.accountNotFound" = "未找到该钱包";
+"WalletManager.Error.failedToDeleteAccount" = "删除钱包失败";
+"WalletManager.Error.failedToUpdatePassword" = "修改密码失败";
+"WalletManager.Error.failedToSaveKeystore" = "保存keystore失败";
+"WalletManager.Error.unknown" = "未知错误";
+
+// Send Transactoin Error
+// ---------------------------------------------------------
+"SendTransactionError.invalidSourceAddress" = "发送地址不正确";
+"SendTransactionError.invalidDestinationAddress" = "接收地址不正确";
+"SendTransactionError.invalidContractAddress" = "合约地址不正确";
+"SendTransactionError.noAvailableKeys" = "未找到该钱包";
+"SendTransactionError.createTransactionIssue" = "创建交易失败";
+"SendTransactionError.invalidChainId" = "Chain ID不正确";
+"SendTransactionError.signTXFailed" = "交易签名失败";
+
+// Custom Token Error
+// ---------------------------------------------------------
+"CustomTokenError.wrongBalanceError" = "余额不正确";
+"CustomTokenError.badNameError" = "Token名称不正确";
+"CustomTokenError.badSymbolError" = "Token symbol不正确";
+"CustomTokenError.undefinedError" = "未知错误";
