@@ -30,6 +30,7 @@ class Token {
     var isNativeToken: Bool
     var walletAddress = ""
     var type: TokenType
+    var decimals = 18
     let identifier: String
 
     var tokenModel: TokenModel {
@@ -56,6 +57,7 @@ class Token {
         chainHosts = token.chainHosts
         isNativeToken = token.isNativeToken
         type = token.type
+        decimals = token.decimals
         identifier = token.identifier
     }
 
@@ -82,7 +84,8 @@ class Token {
             let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
             balance = result?["0"] as! BigUInt
         }
-        let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
+//        let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
+        let balanceText = Web3Utils.formatToPrecision(balance, numberDecimals: decimals, formattingDecimals: 6) ?? "0"
         self.balance = Double(balanceText)
         refreshBalanceSignal?.leave()
         refreshBalanceSignal = nil
