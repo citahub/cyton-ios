@@ -130,9 +130,6 @@ class WalletDetailController: UITableViewController {
                 realm.delete(self.walletModel)
                 appItem.currentWallet = appItem.wallets.first
             }
-            if AppModel.current.wallets.isEmpty {
-                NotificationCenter.default.post(name: .allWalletsDeleted, object: nil)
-            }
             Toast.showToast(text: "删除成功")
             deleteBulletinManager?.dismissBulletin()
             self.navigationController?.popViewController(animated: true)
