@@ -8,23 +8,30 @@
 
 import Foundation
 
+// TODO: Remove result type
 enum EthServiceResult<T> {
     case success(T)
     case error(Error)
 }
 
+// TODO: Remove result type
 enum AppChainServiceResult<T> {
     case success(T)
     case error(Error)
 }
 
-enum CustomTokenError: Error {
+enum CustomTokenError: String, LocalizedError {
     case wrongBalanceError
     case badNameError
     case badSymbolError
     case undefinedError
+
+    var errorDescription: String? {
+        return NSLocalizedString("CustomTokenError.\(rawValue)", comment: "")
+    }
 }
 
+// TODO: Remove result type
 enum SignMessageResult<T> {
     case success(T)
     case error(Error)
