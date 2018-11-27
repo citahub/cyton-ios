@@ -81,8 +81,5 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
-
-        UINavigationBar.fixSpace
-        UINavigationItem.fixSpace
     }
 }
