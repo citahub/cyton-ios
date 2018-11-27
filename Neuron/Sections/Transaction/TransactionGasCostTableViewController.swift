@@ -116,9 +116,7 @@ extension TransactionGasCostTableViewController: UITextViewDelegate {
         guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: text)) else {
             return false
         }
-        let count = textView.text.count + (text.count - range.length)
-        print(count)
-        dataTextPlaceholderLabel.isHidden = count > 0
+        dataTextPlaceholderLabel.isHidden = textView.text.count + (text.count - range.length) > 0
         return true
     }
 }
