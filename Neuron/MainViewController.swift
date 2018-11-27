@@ -16,11 +16,6 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
         delegate = self
 
         applyStyle()
-
-        determineWalletViewController()
-        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .allWalletsDeleted, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(determineWalletViewController), name: .firstWalletCreated, object: nil)
-
         addNativeTokenMsgToRealm()
     }
 
@@ -78,7 +73,7 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
     }
 
     private func applyStyle() {
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "tint_color")], for: .selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "tint_color")!], for: .selected)
 
         let navigationBarBackImage = UIImage(named: "nav_darkback")!.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = navigationBarBackImage
@@ -89,16 +84,5 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         UINavigationBar.fixSpace
         UINavigationItem.fixSpace
-    }
-
-    @objc
-    private func determineWalletViewController() {
-        let walletViewController: UIViewController
-        if AppModel.current.wallets.isEmpty {
-            walletViewController = UIStoryboard(name: "AddWallet", bundle: nil).instantiateViewController(withIdentifier: "AddWallet")
-        } else {
-            walletViewController = UIStoryboard(name: "Wallet", bundle: nil).instantiateInitialViewController()!
-        }
-        (viewControllers![1] as! BaseNavigationController).viewControllers = [walletViewController]
     }
 }
