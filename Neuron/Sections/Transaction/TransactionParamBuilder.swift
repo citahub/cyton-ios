@@ -42,6 +42,11 @@ class TransactionParamBuilder: NSObject {
 
     var tokenBalance: BigUInt = 0
 
+    @objc dynamic
+    private(set) var tokenPrice: Double = 0
+
+    private(set) var currencySymbol = ""
+
     /// Note: this returns true even when native token (ETH) is not enough for tx fee
     ///   when sending ERC20. UI layer should check that.
     var hasSufficientBalance: Bool {
@@ -75,6 +80,7 @@ class TransactionParamBuilder: NSObject {
 
         fetchGasPrice()
         fetchGasLimit()
+        fetchTokenPrice(token: token)
     }
 
     init(builder: TransactionParamBuilder) {
@@ -91,6 +97,8 @@ class TransactionParamBuilder: NSObject {
         gasLimit = builder.gasLimit
         from = builder.from
         to = builder.to
+        tokenPrice = builder.tokenPrice
+        currencySymbol = builder.currencySymbol
         rebuildGasCalculator()
     }
 
@@ -132,6 +140,23 @@ class TransactionParamBuilder: NSObject {
         case .erc20, .appChainErc20:
             gasLimit = 100_000
         }
+    }
+
+    private func fetchTokenPrice(token: TokenModel) {
+        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
+        guard let tokenId = currencyToken?.id else {
+            return
+        }
+        let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
+        currencySymbol = currency.symbol
+        CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
+            switch result {
+            case .success(let price):
+                self.tokenPrice = price
+            case .error:
+                break
+            }
+        })
     }
 
     private func rebuildGasCalculator() {

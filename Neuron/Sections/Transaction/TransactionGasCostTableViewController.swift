@@ -30,6 +30,12 @@ class TransactionGasCostTableViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
+        observers.append(param.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+            self?.updateGasCost()
+        })
+        if paramBuilder.tokenType == .erc20 {
+            dataTextView.isEditable = false
+        }
     }
 
     @IBAction func confirm() {
@@ -70,6 +76,9 @@ class TransactionGasCostTableViewController: UITableViewController {
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
+        if paramBuilder.tokenPrice > 0 {
+            gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + String(format: "%.4lf", paramBuilder.tokenPrice * paramBuilder.txFeeNatural)
+        }
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
@@ -107,6 +116,9 @@ extension TransactionGasCostTableViewController: UITextViewDelegate {
         guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: text)) else {
             return false
         }
+        let count = textView.text.count + (text.count - range.length)
+        print(count)
+        dataTextPlaceholderLabel.isHidden = count > 0
         return true
     }
 }
