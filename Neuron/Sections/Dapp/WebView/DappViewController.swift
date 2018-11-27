@@ -11,14 +11,9 @@ import WebKit
 import JavaScriptCore
 
 /// DApp Home
-class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
+class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
     private var mainUrl = URL(string: "https://dapp.staging.cryptape.com")!
-    private var customUserAgent: String {
-        let infoDictionary = Bundle.main.infoDictionary!
-        let majorVersion = infoDictionary["CFBundleShortVersionString"]!
-        return "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +35,8 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
     }
 
     private func addWebView() {
-        var js = ""
-        if let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") {
-            do {
-                js += try String(contentsOfFile: path)
-            } catch { }
-        }
-        let userScript = WKUserScript(source: js, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         webView.customUserAgent = customUserAgent
-        webView.configuration.userContentController.addUserScript(userScript)
+        webView.configuration.userContentController.addUserScript(WKUserScript(source: injectedJavaScript, injectionTime: .atDocumentStart, forMainFrameOnly: true))
         webView.configuration.preferences.javaScriptEnabled = true
         webView.configuration.userContentController.add(self, name: "pushSearchView")
         webView.configuration.userContentController.add(self, name: "pushMyDAppView")
@@ -70,7 +58,35 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+}
 
+// MARK: - User agent, JS, CSS style, etc.
+
+private extension DappViewController {
+    var injectedJavaScript: String {
+        guard let path = Bundle.main.path(forResource: "dappOpration", ofType: "js") else {
+            return ""
+        }
+
+        return (try? String(contentsOfFile: path)) ?? ""
+    }
+
+    var customUserAgent: String {
+        let infoDictionary = Bundle.main.infoDictionary!
+        let majorVersion = infoDictionary["CFBundleShortVersionString"]!
+        return "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
+    }
+
+    var customStyle: String {
+        let borderWidth = (100.0 / UIScreen.main.scale).rounded() / 100.0
+        let borderColor = UITableView().separatorColor ?? UIColor(hex: "#CCCCCC")
+        return """
+        #id-page-home #id-container-dappblocks .dapp { border-bottom: \(borderWidth)px solid \(borderColor.hex); }
+        """
+    }
+}
+
+extension DappViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
@@ -93,6 +109,11 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         }
         showOverlay()
     }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        /// Inject custom CSS style
+        webView.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '\(customStyle)'; document.head.appendChild(style);")
+    }
 }
 
 extension DappViewController: WKScriptMessageHandler {
@@ -112,6 +133,8 @@ extension DappViewController: WKScriptMessageHandler {
         }
     }
 }
+
+// MARK: - Disable zooming
 
 extension DappViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
