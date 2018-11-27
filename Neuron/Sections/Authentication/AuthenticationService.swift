@@ -96,16 +96,11 @@ class AuthenticationService {
                 } else {
                     complection(false)
                     guard let error = error else { return }
-                    if #available(iOS 11.0, *) {
-                        if error.code == LAError.biometryNotEnrolled ||
-                            error.code == LAError.biometryNotAvailable ||
-                            error.code == LAError.biometryLockout {
-                            Toast.showToast(text: error.stringValue)
-                            return
-                        }
-                    }
                     switch error {
-                    case LAError.passcodeNotSet, LAError.touchIDLockout:
+                    case LAError.passcodeNotSet,
+                         LAError.biometryLockout,
+                         LAError.biometryNotAvailable,
+                         LAError.biometryNotEnrolled:
                         Toast.showToast(text: error.stringValue)
                     default:
                         break
@@ -186,19 +181,14 @@ class AuthenticationService {
 
 extension LAError {
     var stringValue: String {
-        if #available(iOS 11.0, *) {
-            if code == LAError.biometryNotEnrolled {
-                return "未设置 Face ID"
-            } else if code == LAError.biometryNotAvailable {
-                return "您的Face ID未开启，请输入密码登陆"
-            } else if code == LAError.biometryLockout {
-                return "多次验证失败被锁定"
-            }
-        }
         switch self {
+        case LAError.biometryNotEnrolled:
+            return "未设置 Face ID"
+        case LAError.biometryNotAvailable:
+            return "您的Face ID未开启，请输入密码登陆"
         case LAError.passcodeNotSet:
             return "未设置 Touch ID"
-        case LAError.touchIDLockout:
+        case LAError.biometryLockout:
             return "多次验证失败被锁定"
         default:
             return "验证失败，请重新验证"
