@@ -78,8 +78,10 @@ private extension DappViewController {
     }
 
     var customStyle: String {
+        let borderWidth = (100.0 / UIScreen.main.scale).rounded() / 100.0
+        let borderColor = UITableView().separatorColor ?? UIColor(hex: "#CCCCCC")
         return """
-        #id-page-home #id-container-dappblocks .block { ; }
+        #id-page-home #id-container-dappblocks .dapp { border-bottom: \(borderWidth)px solid \(borderColor.hex); }
         """
     }
 }
