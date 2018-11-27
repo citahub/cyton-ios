@@ -214,7 +214,7 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             dateLabel.text = dateformatter.string(from: transaction.date)
 
             let walletAddress = AppModel.current.currentWallet!.address
-            let amount = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
+            let amount = Web3Utils.formatToPrecision(transaction.value, numberDecimals: transaction.token.decimals)!
             if transaction.from.lowercased() == walletAddress.lowercased() {
                 addressLabel.text = transaction.from
                 numberLabel.text = "-\(amount)"

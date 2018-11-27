@@ -55,6 +55,9 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
                 // merge
                 list = self.mergeSentTransactions(from: list)
+                list.forEach({ (trans) in
+                    trans.token = self.token
+                })
 
                 var insertions = [Int]()
                 for idx in list.indices {

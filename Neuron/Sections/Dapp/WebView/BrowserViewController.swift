@@ -78,7 +78,6 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
             guard let url = self?.mainUrl else { return }
             self?.webView.load(URLRequest(url: url))
         }
-        navigationItem.fixSpace()
 
         observations.append(webView.observe(\.estimatedProgress) { [weak self] (webView, _) in
             guard let self = self else {
