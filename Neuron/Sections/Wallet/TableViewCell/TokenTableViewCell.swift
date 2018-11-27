@@ -22,7 +22,7 @@ class TokenTableViewCell: UITableViewCell {
             symbolLabel.text = token.symbol
             symbolWidthConstraint.constant = symbolLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 150, height: 20), limitedToNumberOfLines: 1).size.width
             if let balance = token.balance {
-                balanceLabel.text = balance == Double(Int(balance)) ? String(Int(balance)) : String(balance)
+                balanceLabel.text = balance.toAmountText()
                 if balance > 0 {
                     if let price = token.price {
                         let amount = price * balance
