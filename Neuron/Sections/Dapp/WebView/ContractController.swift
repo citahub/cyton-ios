@@ -26,7 +26,7 @@ class ContractController: UITableViewController, TransactonSender {
     var requestAddress: String = ""
     var dappName: String = ""
     var dappCommonModel: DAppCommonModel!
-    var paramBuilder: TransactionParamBuilder?
+    var paramBuilder: TransactionParamBuilder!
     private var chainType: ChainType = .appChain
     private var tokenModel = TokenModel() {
         didSet {
@@ -230,7 +230,7 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
-        guard let paramBuilder = self.paramBuilder  else {
+        guard let paramBuilder = paramBuilder else {
             return
         }
         paramBuilder.from = AppModel.current.currentWallet!.address
@@ -256,7 +256,7 @@ class ContractController: UITableViewController, TransactonSender {
 
 private extension ContractController {
     func sendTransaction(password: String) {
-        guard let paramBuilder = self.paramBuilder  else {
+        guard let paramBuilder = paramBuilder else {
             return
         }
         DispatchQueue.global().async {
