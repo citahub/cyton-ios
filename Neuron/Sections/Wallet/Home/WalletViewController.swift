@@ -10,13 +10,17 @@ import UIKit
 import RealmSwift
 
 class WalletViewController: UIViewController {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet var tableHeadView: UIView!
-    @IBOutlet weak var refreshButton: UIButton!
-    @IBOutlet var addWalletBarButton: UIBarButtonItem!
-    @IBOutlet var switchWalletBarButton: UIBarButtonItem!
-    @IBOutlet weak var currencyLabel: UILabel!
-    @IBOutlet weak var totalAmountLabel: UILabel!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private var tableHeadView: UIView!
+    @IBOutlet private weak var tokenTitleLabel: UILabel!
+    @IBOutlet private weak var refreshButton: UIButton!
+    @IBOutlet private weak var addTokenButton: UIButton!
+    @IBOutlet private var addWalletBarButton: UIBarButtonItem!
+    @IBOutlet private var switchWalletBarButton: UIBarButtonItem!
+    @IBOutlet private weak var currencyLabel: UILabel!
+    @IBOutlet private weak var totalAmountLabel: UILabel!
+    @IBOutlet weak var receiptButton: DesignableButton!
+    @IBOutlet weak var transactionButton: DesignableButton!
 
     private var presenter: WalletPresenter!
     private var walletCountObserve: NotificationToken?
@@ -24,11 +28,8 @@ class WalletViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if #available(iOS 11.0, *) {
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            automaticallyAdjustsScrollViewInsets = false
-        }
+        localization()
+        tableView.contentInsetAdjustmentBehavior = .never
 
         let refresh = UIRefreshControl()
         refresh.addTarget(self, action: #selector(WalletViewController.refresh), for: .valueChanged)
@@ -72,6 +73,14 @@ class WalletViewController: UIViewController {
         guard !presenter.refreshing else { return }
         presenter.refreshBalance()
     }
+
+    func localization() {
+        title = "Wallet".localized()
+        tokenTitleLabel.text = "Wallet.token".localized()
+        addTokenButton.setTitle("Wallet.addToken".localized(), for: .normal)
+        receiptButton.setTitle("Wallet.receipt".localized(), for: .normal)
+        transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
+    }
 }
 
 extension WalletViewController: WalletPresenterDelegate {
@@ -87,7 +96,7 @@ extension WalletViewController: WalletPresenterDelegate {
     }
 
     func walletPresenter(presenter: WalletPresenter, didRefreshCurrency currency: LocalCurrency) {
-        currencyLabel.text = "总资产(\(currency.name))"
+        currencyLabel.text = "Wallet.totalAmount".localized() + "(\(currency.name))"
     }
 
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
@@ -107,7 +116,7 @@ extension WalletViewController: WalletPresenterDelegate {
 
     func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
         if amount == 0.0 {
-            totalAmountLabel.text = "暂无资产"
+            totalAmountLabel.text = "Wallet.noAmount".localized()
         } else {
             totalAmountLabel.text = "≈\(presenter.currency.symbol)" + String(format: "%.4lf", amount)
         }

@@ -64,4 +64,3 @@ import UIKit
         return colors
     }
 }
-

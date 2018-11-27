@@ -204,7 +204,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
@@ -219,6 +219,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="eVj-LR-bk2" id="KvQ-FW-3FE"/>
                         <outlet property="passwordTextField" destination="LAB-bx-qlg" id="90l-AT-VaT"/>
+                        <outlet property="selectWalletButton" destination="7SY-0b-tQd" id="cxY-wR-SD5"/>
                         <outlet property="walletNameLabel" destination="fln-Ir-GBG" id="iwh-Ws-PIe"/>
                     </connections>
                 </viewController>

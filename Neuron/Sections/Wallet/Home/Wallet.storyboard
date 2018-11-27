@@ -85,6 +85,7 @@
                         </connections>
                     </tableView>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Ywg-3X-nd3">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refresh:" destination="ZqU-lY-lyh" eventType="valueChanged" id="XGb-H0-A1p"/>
@@ -607,13 +608,17 @@
                         <viewLayoutGuide key="safeArea" id="Cn5-oL-tkx"/>
                     </view>
                     <connections>
+                        <outlet property="addTokenButton" destination="h13-sD-Sm0" id="bN1-by-9Tj"/>
                         <outlet property="addWalletBarButton" destination="OEr-Qf-lOF" id="ihC-ha-i70"/>
                         <outlet property="currencyLabel" destination="Foi-vr-WZl" id="p1v-Ax-dHW"/>
+                        <outlet property="receiptButton" destination="QU2-9I-06f" id="nMc-9t-JXB"/>
                         <outlet property="refreshButton" destination="E8M-Uv-wN9" id="nUj-UQ-BwT"/>
                         <outlet property="switchWalletBarButton" destination="jki-Qp-DGd" id="fqL-NY-KhZ"/>
                         <outlet property="tableHeadView" destination="lHJ-34-u6v" id="Pqj-Dh-P5g"/>
                         <outlet property="tableView" destination="H6S-k1-sPQ" id="mCD-p5-v6F"/>
+                        <outlet property="tokenTitleLabel" destination="WDt-Rp-fHX" id="kk2-Xl-eC5"/>
                         <outlet property="totalAmountLabel" destination="oxy-Pr-ZPZ" id="8XF-WX-c5K"/>
+                        <outlet property="transactionButton" destination="7Xn-vX-xxw" id="l8C-Mv-ZQg"/>
                         <segue destination="QHQ-B4-0WA" kind="show" identifier="transactionHistory" id="ujt-pt-uhS"/>
                     </connections>
                 </viewController>
@@ -855,9 +860,11 @@
                     </view>
                     <connections>
                         <outlet property="addressLabel" destination="ist-sh-hoq" id="DHS-ij-Kyr"/>
+                        <outlet property="copyButton" destination="hj4-9b-ulb" id="gkF-W2-dmc"/>
                         <outlet property="iconView" destination="zDQ-Iw-I8R" id="Pt0-c3-RSu"/>
                         <outlet property="nameLabel" destination="L0d-NE-ylO" id="8Ml-mW-Xme"/>
                         <outlet property="qrCodeView" destination="TfH-4X-9fG" id="EEw-jE-7d1"/>
+                        <outlet property="walletQRCodeDescLabel" destination="tio-rL-kSe" id="kAs-pA-b1f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVJ-K6-5p3" userLabel="First Responder" sceneMemberID="firstResponder"/>

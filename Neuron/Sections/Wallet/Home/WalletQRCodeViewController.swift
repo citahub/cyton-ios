@@ -10,10 +10,12 @@ import UIKit
 import EFQRCode
 
 class WalletQRCodeViewController: UIViewController {
-    @IBOutlet weak var iconView: UIImageView!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var qrCodeView: UIImageView!
-    @IBOutlet weak var addressLabel: UILabel!
+    @IBOutlet private weak var iconView: UIImageView!
+    @IBOutlet private weak var nameLabel: UILabel!
+    @IBOutlet private weak var qrCodeView: UIImageView!
+    @IBOutlet private weak var addressLabel: UILabel!
+    @IBOutlet private weak var copyButton: UIButton!
+    @IBOutlet private weak var walletQRCodeDescLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +32,17 @@ class WalletQRCodeViewController: UIViewController {
                 self.qrCodeView.image = UIImage(cgImage: imagea!)
             }
         }
+        localization()
     }
 
     @IBAction func copyAddress(_ sender: Any) {
         UIPasteboard.general.string = AppModel.current.currentWallet?.address
-        Toast.showToast(text: "地址已经复制到粘贴板")
+        Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
+    }
+
+    func localization() {
+        title = "Wallet.receipt".localized()
+        copyButton.setTitle("Wallet.QRCode.copy".localized(), for: .normal)
+        walletQRCodeDescLabel.text = "Wallet.QRCode.desc".localized()
     }
 }

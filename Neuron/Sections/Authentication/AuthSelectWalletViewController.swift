@@ -19,7 +19,7 @@ class AuthSelectWalletViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "选择钱包"
+        title = "Authentication.selectWallet".localized()
         wallets = AppModel.current.wallets
     }
 
