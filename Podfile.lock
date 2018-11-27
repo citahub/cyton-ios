@@ -28,7 +28,6 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.5.2):
     - PromiseKit/CorePromise
-  - PullToRefresher (3.1)
   - QRCodeReader.swift (9.0.1)
   - Realm (3.11.0):
     - Realm/Headers (= 3.11.0)
@@ -67,7 +66,6 @@ DEPENDENCIES:
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
-  - PullToRefresher (~> 3.1)
   - QRCodeReader.swift
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
@@ -87,7 +85,6 @@ SPEC REPOS:
     - IGIdenticon
     - IQKeyboardManagerSwift
     - PromiseKit
-    - PullToRefresher
     - QRCodeReader.swift
     - Realm
     - RealmSwift
@@ -135,7 +132,6 @@ SPEC CHECKSUMS:
   IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
-  PullToRefresher: ec8c1942bd61bb512ff520c49f9f00903cfa86c7
   QRCodeReader.swift: 96292a5612fbc2fd9a0b26f93fa5164c8d02f59d
   Realm: 92f09a102692b96a9a10e9617f214f15c5ab85fc
   RealmSwift: 5f0481cd658bb751c509314b964a35eaa264d2cf
@@ -150,6 +146,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: e680dcdbb2f97b7762ab1683272319074be9445d
+PODFILE CHECKSUM: ba3c171e6bb54015e1b0de1d7316d9a495ae8673
 
 COCOAPODS: 1.5.3
