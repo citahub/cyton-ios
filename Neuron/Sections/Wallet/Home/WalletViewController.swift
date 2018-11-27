@@ -144,7 +144,7 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
         let cell: TokenTableViewCell
         if token.balance == nil {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_Loading") as! TokenTableViewCell
-        } else if token.price == nil {
+        } else if token.price == nil || token.balance == 0.0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_NoPrice") as! TokenTableViewCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell") as! TokenTableViewCell

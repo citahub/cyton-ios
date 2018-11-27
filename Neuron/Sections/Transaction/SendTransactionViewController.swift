@@ -170,7 +170,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        tokenBalanceButton.setTitle("\(token.tokenBalance) \(token.symbol)", for: .normal)
+        tokenBalanceButton.setTitle("\(token.tokenBalance.toAmountText()) \(token.symbol)", for: .normal)
         addressTextField.text = paramBuilder.to
         tokenLabel.text = token.symbol
 
@@ -315,6 +315,10 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
+    }
+
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return !(indexPath.row == 3 && paramBuilder.tokenType == .appChain)
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

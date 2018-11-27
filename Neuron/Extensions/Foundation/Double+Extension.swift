@@ -43,4 +43,8 @@ extension Double {
             return 0
         }
     }
+
+    func toAmountText() -> String {
+        return self == Double(Int(self)) ? String(Int(self)) : String(self)
+    }
 }
