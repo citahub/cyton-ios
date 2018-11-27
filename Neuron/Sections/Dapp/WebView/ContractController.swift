@@ -230,6 +230,9 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     @IBAction func didClickConfirmButton(_ sender: UIButton) {
+        guard let paramBuilder = paramBuilder else {
+            return
+        }
         paramBuilder.from = AppModel.current.currentWallet!.address
         paramBuilder.value = Double(value)!.toAmount(tokenModel.decimals)
 
@@ -253,10 +256,13 @@ class ContractController: UITableViewController, TransactonSender {
 
 private extension ContractController {
     func sendTransaction(password: String) {
+        guard let paramBuilder = paramBuilder else {
+            return
+        }
         DispatchQueue.global().async {
             do {
                 let txHash: TxHash
-                if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
+                if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
                     txHash = try self.sendEthereumTransaction(password: password)
                 } else {
                     txHash = try self.sendAppChainTransaction(password: password)

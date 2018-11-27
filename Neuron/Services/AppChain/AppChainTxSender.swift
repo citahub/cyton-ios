@@ -32,7 +32,8 @@ class AppChainTxSender {
         chainId: BigUInt,
         password: String
     ) throws -> TxHash {
-        guard let destinationEthAddress = Address(to) else {
+        let destinationEthAddress = Address(to)
+        if !to.isEmpty && destinationEthAddress == nil {
             throw SendTransactionError.invalidDestinationAddress
         }
 
