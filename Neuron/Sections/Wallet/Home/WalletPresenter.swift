@@ -106,23 +106,14 @@ extension WalletPresenter {
                 guard deletions.count > 0 || insertions.count > 0 else { return }
                 if deletions.count > 0 {
                     var newTokens = self.tokens
-                    let selectTokenCount = tokenList.count + deletions.count
-                    let startIndex = self.tokens.count - selectTokenCount
+                    let startIndex = self.tokens.count - (tokenList.count + deletions.count)
                     deletions.enumerated().forEach({ (offset, element) in
                         let index = startIndex + element - offset
                         newTokens.remove(at: index)
                     })
                     self.tokens = newTokens
                 }
-                if insertions.count > 0 {
-                    let newTokens = insertions.map({ (idx) -> Token in
-                        let token = Token(tokenList[idx])
-                        token.walletAddress = self.currentWallet!.address
-                        return token
-                    })
-                    self.tokens += newTokens
-                    self.refreshTokenListBalance(tokens: newTokens)
-                }
+                self.insertTokens(tokenList: tokenList, insertions: insertions)
             default:
                 break
             }
@@ -144,19 +135,22 @@ extension WalletPresenter {
                     })
                     self.tokens = newTokens
                 }
-                if insertions.count > 0 {
-                    let newTokens = insertions.map({ (idx) -> Token in
-                        let token = Token(tokenList[idx])
-                        token.walletAddress = self.currentWallet!.address
-                        return token
-                    })
-                    self.tokens += newTokens
-                    self.refreshTokenListBalance(tokens: newTokens)
-                }
+                self.insertTokens(tokenList: tokenList, insertions: insertions)
             default:
                 break
             }
         }
+    }
+
+    private func insertTokens(tokenList: List<TokenModel>, insertions: [Int]) {
+        guard insertions.count > 0 else { return }
+        let newTokens = insertions.map({ (idx) -> Token in
+            let token = Token(tokenList[idx])
+            token.walletAddress = self.currentWallet!.address
+            return token
+        })
+        self.tokens += newTokens
+        self.refreshTokenListBalance(tokens: newTokens)
     }
 }
 
