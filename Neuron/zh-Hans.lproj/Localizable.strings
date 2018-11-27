@@ -63,7 +63,8 @@
 
 // Authentication
 // ---------------------------------------------------------
-"Authentication.clickToAuthentication" = "点击进行验证";
+"Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
+"Authentication.clickTouchIdAuth" = "点击进行验证 Touch Id";
 "Authentication.authFaceIdTitle" = "请验证 Face ID";
 "Authentication.authTouchIdTitle" = "请验证 Touch ID";
 
