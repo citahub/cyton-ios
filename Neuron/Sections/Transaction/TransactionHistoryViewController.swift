@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import PullToRefresh
 import WebKit
 import Web3swift
 
@@ -24,29 +23,17 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
     var tokenType: TokenType = .erc20
-    var token: Token! {
-        didSet {
-            guard token != nil else { return }
-            presenter = TransactionHistoryPresenter(token: token)
-            presenter?.delegate = self
-            Toast.showHUD()
-            _ = view // load view
-            token.tokenModel.getProfile { (tokenProfile) in
-                self.setupTokenProfile(tokenProfile)
-                self.presenter?.reloadData()
-            }
-        }
-    }
-    let refresher = PullToRefresh()
+    var token: Token!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "交易列表"
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.addPullToRefresh(refresher) {
-            self.presenter?.reloadData()
-        }
+
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+
         setupTokenProfile(nil)
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
         if token.symbol == "MBA" ||
@@ -56,6 +43,15 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         } else {
             warningView.isHidden = true
             warningHeight.constant = 0.0
+        }
+
+        presenter = TransactionHistoryPresenter(token: token)
+        presenter?.delegate = self
+        Toast.showHUD()
+        _ = view // load view
+        token.tokenModel.getProfile { (tokenProfile) in
+            self.setupTokenProfile(tokenProfile)
+            self.presenter?.reloadData()
         }
     }
 
@@ -81,9 +77,9 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    private func loadData() {
+    @objc private func loadData() {
         presenter?.reloadData(completion: { (_, _) in
-            self.tableView.endRefreshing(at: .top)
+            self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
             if self.presenter?.transactions.count == 0 {
                 self.errorOverlaycontroller.style = .blank
@@ -159,7 +155,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row > presenter!.transactions.count - 2 {
-            tableView.startRefreshing(at: .bottom)
             presenter?.loadMoreData()
         }
     }
@@ -167,13 +162,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
-//        controller.tModel = presenter!.transactions[indexPath.row]
         controller.transaction = presenter?.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
-    }
-
-    deinit {
-        tableView.removeAllPullToRefresh()
     }
 }
 
@@ -187,8 +177,7 @@ extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate 
     }
 
     func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?) {
-        self.tableView.endRefreshing(at: .top)
-        self.tableView.endRefreshing(at: .bottom)
+        self.tableView.refreshControl?.endRefreshing()
 
         if self.presenter?.transactions.count == 0 {
             self.errorOverlaycontroller.style = .blank
