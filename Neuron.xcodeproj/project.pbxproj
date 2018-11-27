@@ -105,7 +105,6 @@
 		892F79B921A547340035B08B /* ModifyWalletNamePageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892F79B821A547340035B08B /* ModifyWalletNamePageItem.swift */; };
 		8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */; };
 		8935BA57216EEDEC00C37263 /* WKWebViewConfigConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */; };
-		8935BA59216EFCE700C37263 /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA58216EFCE700C37263 /* neuron.js */; };
 		8935BA5B216EFCF000C37263 /* init.js in Resources */ = {isa = PBXBuildFile; fileRef = 8935BA5A216EFCF000C37263 /* init.js */; };
 		8935BA5D216F48A800C37263 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA5C216F48A800C37263 /* Method.swift */; };
 		8935BA5F216F631A00C37263 /* ScriptMessageProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */; };
@@ -130,6 +129,7 @@
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
 		8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972FD0E218B54A100C27147 /* AdvancedViewController.swift */; };
 		89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89733043217ED041001B8D93 /* ETHSignMessageService.swift */; };
+		8978846321AD26690034AF4F /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8978846221AD26690034AF4F /* neuron.js */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
 		8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89812129218D3161000813C8 /* QRCodeViewController.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
@@ -319,7 +319,6 @@
 		892F79B821A547340035B08B /* ModifyWalletNamePageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWalletNamePageItem.swift; sourceTree = "<group>"; };
 		8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfigConstants.swift; sourceTree = "<group>"; };
-		8935BA58216EFCE700C37263 /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
 		8935BA5A216EFCF000C37263 /* init.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = init.js; sourceTree = "<group>"; };
 		8935BA5C216F48A800C37263 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
 		8935BA5E216F631A00C37263 /* ScriptMessageProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptMessageProxy.swift; sourceTree = "<group>"; };
@@ -350,6 +349,7 @@
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8972FD0E218B54A100C27147 /* AdvancedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
 		89733043217ED041001B8D93 /* ETHSignMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHSignMessageService.swift; sourceTree = "<group>"; };
+		8978846221AD26690034AF4F /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		89812129218D3161000813C8 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
@@ -766,8 +766,8 @@
 			isa = PBXGroup;
 			children = (
 				8935BA5A216EFCF000C37263 /* init.js */,
-				8935BA58216EFCE700C37263 /* neuron.js */,
 				896812CA20F726D000731C8C /* dappOpration.js */,
+				8978846221AD26690034AF4F /* neuron.js */,
 				6E83CB92216F581800029324 /* ProductAgreement.txt */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				89CA1FAB213F822B00669B2C /* tokens-list.json */,
@@ -1199,6 +1199,7 @@
 				1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */,
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
+				8978846321AD26690034AF4F /* neuron.js in Resources */,
 				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
 				1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
@@ -1215,7 +1216,6 @@
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
 				89F79671213BD8C40064808A /* TransactionHistory.storyboard in Resources */,
 				89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */,
-				8935BA59216EFCE700C37263 /* neuron.js in Resources */,
 				1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				89C614572140D4C500DC3DF4 /* currency.plist in Resources */,
