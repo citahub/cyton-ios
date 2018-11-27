@@ -101,7 +101,31 @@ extension WalletPresenter {
         selectTokenListObserver?.invalidate()
         selectTokenListObserver = wallet.selectTokenList.observe({ [weak self] (change) in
             guard let self = self else { return }
-            self.tokenListChangeHandler(change: change)
+            switch change {
+            case .update(let tokenList, let deletions, let insertions, modifications: _):
+                guard deletions.count > 0 || insertions.count > 0 else { return }
+                if deletions.count > 0 {
+                    var newTokens = self.tokens
+                    let selectTokenCount = tokenList.count + deletions.count
+                    let startIndex = self.tokens.count - selectTokenCount
+                    deletions.enumerated().forEach({ (offset, element) in
+                        let index = startIndex + element - offset
+                        newTokens.remove(at: index)
+                    })
+                    self.tokens = newTokens
+                }
+                if insertions.count > 0 {
+                    let newTokens = insertions.map({ (idx) -> Token in
+                        let token = Token(tokenList[idx])
+                        token.walletAddress = self.currentWallet!.address
+                        return token
+                    })
+                    self.tokens += newTokens
+                    self.refreshTokenListBalance(tokens: newTokens)
+                }
+            default:
+                break
+            }
         })
     }
 
@@ -109,38 +133,34 @@ extension WalletPresenter {
         nativeTokenListObserver?.invalidate()
         nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
             guard let self = self else { return }
-            self.tokenListChangeHandler(change: change)
+            switch change {
+            case .update(let tokenList, let deletions, let insertions, modifications: _):
+                guard deletions.count > 0 || insertions.count > 0 else { return }
+                if deletions.count > 0 {
+                    var newTokens = self.tokens
+                    deletions.enumerated().forEach({ (offset, element) in
+                        let index = element - offset
+                        newTokens.remove(at: index)
+                    })
+                    self.tokens = newTokens
+                }
+                if insertions.count > 0 {
+                    let newTokens = insertions.map({ (idx) -> Token in
+                        let token = Token(tokenList[idx])
+                        token.walletAddress = self.currentWallet!.address
+                        return token
+                    })
+                    self.tokens += newTokens
+                    self.refreshTokenListBalance(tokens: newTokens)
+                }
+            default:
+                break
+            }
         }
     }
 }
 
 extension WalletPresenter {
-    private func tokenListChangeHandler(change: RealmCollectionChange<List<TokenModel>>) {
-        switch change {
-        case .update(let tokenList, let deletions, let insertions, modifications: _):
-            guard deletions.count > 0 || insertions.count > 0 else { return }
-            if deletions.count > 0 {
-                var newTokens = tokens
-                deletions.enumerated().forEach({ (offset, element) in
-                    let index = element - offset
-                    newTokens.remove(at: index)
-                })
-                tokens = newTokens
-            }
-            if insertions.count > 0 {
-                let newTokens = insertions.map({ (idx) -> Token in
-                    let token = Token(tokenList[idx])
-                    token.walletAddress = currentWallet!.address
-                    return token
-                })
-                tokens += newTokens
-                refreshTokenListBalance(tokens: newTokens)
-            }
-        default:
-            break
-        }
-    }
-
     private func refreshTokenListBalance(tokens: [Token]) {
         guard tokens.count > 0 else { return }
         refreshing = true
