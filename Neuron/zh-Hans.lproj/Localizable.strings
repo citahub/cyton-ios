@@ -44,3 +44,19 @@
 "CustomTokenError.badNameError" = "Token名称不正确";
 "CustomTokenError.badSymbolError" = "Token symbol不正确";
 "CustomTokenError.undefinedError" = "未知错误";
+
+// Wallet
+// ---------------------------------------------------------
+"Wallet" = "钱包";
+"Wallet.token" = "代币";
+"Wallet.addToken" = "添加资产";
+"Wallet.transaction" = "转账";
+"Wallet.receipt" = "收款";
+"Wallet.totalAmount" = "总资产";
+"Wallet.noAmount" = "暂无资产";
+
+// Wallet QRCode
+// ---------------------------------------------------------
+"Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
+"Wallet.QRCode.copy" = "复制";
+"Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
