@@ -60,7 +60,7 @@ extension TokenModel {
         currency.getCurrencyPrice(tokenid: tokenId, currencyType: currencyType) { (result) in
             switch result {
             case .success(let value):
-                let balance = Double(self.tokenBalance) ?? 0.0
+                let balance = self.tokenBalance
                 let amount = balance * value
                 let possess = String(format: "%@ %.2f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, amount)
                 profile.possess = possess
@@ -99,7 +99,7 @@ extension TokenModel {
         group.notify(queue: .main) {
             profile?.detailUrl = URL(string: "https://ntp.staging.cryptape.com?token=\(address)")
             if var profile = profile, let price = price {
-                let balance = Double(self.tokenBalance) ?? 0.0
+                let balance = self.tokenBalance
                 let amount = balance * price
                 let possess = String(format: "%@ %.2f", currency.symbol, amount)
                 profile.possess = possess
