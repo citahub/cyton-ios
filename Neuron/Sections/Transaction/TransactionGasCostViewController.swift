@@ -1,5 +1,5 @@
 //
-//  TransactionGasCostTableViewController.swift
+//  TransactionGasCostViewController.swift
 //  Neuron
 //
 //  Created by 晨风 on 2018/11/23.
@@ -8,10 +8,10 @@
 
 import UIKit
 import Web3swift
-import EthereumAddress
+//import EthereumAddress
 import BigInt
 
-class TransactionGasCostTableViewController: UITableViewController {
+class TransactionGasCostViewController: UITableViewController {
     @IBOutlet weak var gasPriceTextField: UITextField!
     @IBOutlet weak var gasLimitTextField: UITextField!
     @IBOutlet weak var gasCostLabel: UILabel!
@@ -86,10 +86,10 @@ class TransactionGasCostTableViewController: UITableViewController {
     }
 }
 
-extension TransactionGasCostTableViewController: UITextFieldDelegate {
+extension TransactionGasCostViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         var character = "0123456789"
-        if !(textField.text?.contains(".") ?? false) {
+        if textField.text!.contains(".") {
             character += "."
         }
         guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: string)) else {
@@ -107,10 +107,10 @@ extension TransactionGasCostTableViewController: UITextFieldDelegate {
     }
 }
 
-extension TransactionGasCostTableViewController: UITextPasteDelegate {
+extension TransactionGasCostViewController: UITextPasteDelegate {
 }
 
-extension TransactionGasCostTableViewController: UITextViewDelegate {
+extension TransactionGasCostViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let character = "0123456789abcdefABCDEF"
         guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: text)) else {

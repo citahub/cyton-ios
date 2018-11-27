@@ -198,12 +198,12 @@
         <!--高级设置-->
         <scene sceneID="NAt-zZ-lq0">
             <objects>
-                <tableViewController storyboardIdentifier="TransactionGasCostTableViewController" title="高级设置" id="nhM-23-DIY" customClass="TransactionGasCostTableViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TransactionGasCostViewController" title="高级设置" id="nhM-23-DIY" customClass="TransactionGasCostViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8SA-u6-xiL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="pEK-Jz-H40">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="pEK-Jz-H40">
                             <rect key="frame" x="0.0" y="160" width="375" height="236"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -464,15 +464,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="tRa-J0-z8j">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="tRa-J0-z8j">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kly-7H-z5H">
-                                    <rect key="frame" x="15" y="15" width="345" height="80"/>
+                                    <rect key="frame" x="15" y="15" width="345" height="147"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M6M-Zr-d47">
-                                            <rect key="frame" x="20" y="20" width="40" height="40"/>
+                                            <rect key="frame" x="20" y="53.5" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="DyY-Tw-Bx1"/>
                                                 <constraint firstAttribute="width" constant="40" id="efE-cw-K0k"/>
@@ -523,12 +523,12 @@
                                 <constraint firstAttribute="trailing" secondItem="Kly-7H-z5H" secondAttribute="trailing" constant="15" id="REe-Kz-SM4"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="htQ-4e-AzQ">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="htQ-4e-AzQ">
                             <rect key="frame" x="0.0" y="422" width="375" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6N-0z-9ZM">
-                                    <rect key="frame" x="15" y="10" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="77" width="345" height="44"/>
                                     <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="M39-1P-81N"/>

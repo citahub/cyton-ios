@@ -68,7 +68,7 @@
 		6E876843218023520032EBCE /* CoinMarketCap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876842218023520032EBCE /* CoinMarketCap.swift */; };
 		6E876845218031670032EBCE /* UInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E876844218031670032EBCE /* UInt+Extension.swift */; };
 		6E8962032194575B00D2C0AD /* DoubleExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8962022194575B00D2C0AD /* DoubleExtensionTests.swift */; };
-		6E8AFB0D21A7E7B800F81DC6 /* TransactionGasCostTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostTableViewController.swift */; };
+		6E8AFB0D21A7E7B800F81DC6 /* TransactionGasCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostViewController.swift */; };
 		6E8D77F021A5264F00EA7674 /* WalletQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */; };
 		6E8D77F221A54B8100EA7674 /* TransactionSwitchTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D77F121A54B8100EA7674 /* TransactionSwitchTokenViewController.swift */; };
 		6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */; };
@@ -283,7 +283,7 @@
 		6E876842218023520032EBCE /* CoinMarketCap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketCap.swift; sourceTree = "<group>"; };
 		6E876844218031670032EBCE /* UInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt+Extension.swift"; sourceTree = "<group>"; };
 		6E8962022194575B00D2C0AD /* DoubleExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtensionTests.swift; sourceTree = "<group>"; };
-		6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGasCostTableViewController.swift; sourceTree = "<group>"; };
+		6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionGasCostViewController.swift; sourceTree = "<group>"; };
 		6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletQRCodeViewController.swift; sourceTree = "<group>"; };
 		6E8D77F121A54B8100EA7674 /* TransactionSwitchTokenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionSwitchTokenViewController.swift; sourceTree = "<group>"; };
 		6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensorsAnalytics.swift; sourceTree = "<group>"; };
@@ -1019,7 +1019,7 @@
 				1A75EBFC21A1948F008D484B /* SendTransaction.storyboard */,
 				1A75EBFE21A194B1008D484B /* SendTransactionViewController.swift */,
 				1AE3145021A2F5A300F92B2A /* TransactionParamBuilder.swift */,
-				6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostTableViewController.swift */,
+				6E8AFB0C21A7E7B800F81DC6 /* TransactionGasCostViewController.swift */,
 				6E8168F821887A31007641BA /* TransactionGasPriceViewController.swift */,
 				6E8D77F121A54B8100EA7674 /* TransactionSwitchTokenViewController.swift */,
 				89F79670213BD8C40064808A /* TransactionHistory.storyboard */,
@@ -1522,7 +1522,7 @@
 				1A69465E21916C3D000093A2 /* AppChainTxSender.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
 				8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */,
-				6E8AFB0D21A7E7B800F81DC6 /* TransactionGasCostTableViewController.swift in Sources */,
+				6E8AFB0D21A7E7B800F81DC6 /* TransactionGasCostViewController.swift in Sources */,
 				8964A18D20C0E4BE0086848F /* GenerateMnemonicController.swift in Sources */,
 				6EABFB0B21991BC200305ED5 /* DAppQRCodeMessageHandler.swift in Sources */,
 				1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */,
