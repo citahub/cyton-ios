@@ -11,13 +11,19 @@ import WebKit
 import JavaScriptCore
 
 /// DApp Home
-class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, ErrorOverlayPresentable {
+class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
     private var mainUrl = URL(string: "https://dapp.staging.cryptape.com")!
     private var customUserAgent: String {
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]!
         return "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
+    }
+
+    private var customStyle: String {
+        return """
+        #id-page-home #id-container-dappblocks .block { ; }
+        """
     }
 
     override func viewDidLoad() {
@@ -70,7 +76,9 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
         webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
+}
 
+extension DappViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             decisionHandler(.cancel)
@@ -92,6 +100,11 @@ class DappViewController: UIViewController, WKUIDelegate, WKNavigationDelegate, 
             errorOverlaycontroller.messageLabel.text = "Common.Connection.FailToLoadPage".localized()
         }
         showOverlay()
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        /// Inject custom CSS style
+        webView.evaluateJavaScript("var style = document.createElement('style'); style.innerHTML = '\(customStyle)'; document.head.appendChild(style);")
     }
 }
 
