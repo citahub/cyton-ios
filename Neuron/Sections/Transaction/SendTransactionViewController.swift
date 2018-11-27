@@ -318,6 +318,10 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         }
     }
 
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return !(indexPath.row == 3 && paramBuilder.tokenType == .appChain)
+    }
+
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             if enableSwitchToken {

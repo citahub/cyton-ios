@@ -134,6 +134,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
             return
         }
         DispatchQueue.main.async {
+            transaction.token = self.token
             self.transactions.insert(transaction, at: 0)
             self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
         }
