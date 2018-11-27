@@ -13,6 +13,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
     @IBOutlet weak var walletNameLabel: UILabel!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var selectWalletButton: UIButton!
 
     var currentWallet: WalletModel? {
         didSet {
@@ -24,6 +25,8 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
     override func viewDidLoad() {
         super.viewDidLoad()
         currentWallet = AppModel.current.currentWallet
+        passwordTextField.placeholder = "Authentication.walletPassword".localized()
+        confirmButton.setTitle("Authentication.confirmPassword".localized(), for: .normal)
     }
 
     @IBAction func selectWallet(_ sender: Any) {
@@ -47,7 +50,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
                 if isPasswordCorrect {
                     self?.delegate?.authenticationSuccessful()
                 } else {
-                    Toast.showToast(text: "密码不正确请重新输入")
+                    Toast.showToast(text: "Authentication.walletPasswordError".localized())
                 }
             }
         }

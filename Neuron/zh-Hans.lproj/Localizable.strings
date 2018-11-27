@@ -60,3 +60,25 @@
 "Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
 "Wallet.QRCode.copy" = "复制";
 "Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
+
+// Authentication
+// ---------------------------------------------------------
+"Authentication.clickToAuthentication" = "点击进行验证";
+"Authentication.authFaceIdTitle" = "请验证 Face ID";
+"Authentication.authTouchIdTitle" = "请验证 Touch ID";
+
+"Authentication.selectWallet" = "选择钱包";
+"Authentication.walletPassword" = "钱包密码";
+"Authentication.confirmPassword" = "确定";
+"Authentication.walletPasswordError" = "密码不正确请重新输入";
+
+"Authentication.openFaceIdAuthDesc" = "请开启刷脸验证，确保您的资产安全";
+"Authentication.openFaceIdAuth" = "开启刷脸验证";
+"Authentication.openTouchIdAuthDesc" = "请开启指纹验证，确保您的资产安全";
+"Authentication.openTouchIdAuth" = "开启指纹验证";
+
+"Authentication.Error.touchIDNotEnrolled" = "未设置 Touch ID";
+"Authentication.Error.faceIDNotEnrolled" = "未设置 Face ID";
+"Authentication.Error.faceIDNotAvailable" = "您的Face ID未开启，请输入密码登陆";
+"Authentication.Error.biometryLockout" = "多次验证失败被锁定";
+"Authentication.Error.authFailed" = "验证失败，请重新验证";

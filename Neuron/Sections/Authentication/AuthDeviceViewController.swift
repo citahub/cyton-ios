@@ -19,10 +19,10 @@ class AuthDeviceViewController: UIViewController, AuthenticationMode {
         super.viewDidLoad()
         if AuthenticationService.shared.biometryType == .faceID {
             authenticationButton.setImage(UIImage(named: "faceId_icon"), for: .normal)
-            authenticationTitleLabel.text = "点击进行验证 Face ID"
+            authenticationTitleLabel.text = "Authentication.clickToAuthentication".localized() + " Face ID"
         } else {
             authenticationButton.setImage(UIImage(named: "touchId_icon"), for: .normal)
-            authenticationTitleLabel.text = "点击进行验证 Touch ID"
+            authenticationTitleLabel.text = "Authentication.clickToAuthentication".localized() + " Touch ID"
         }
         deviceOwnerAuthentication()
     }

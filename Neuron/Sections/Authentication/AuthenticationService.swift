@@ -140,9 +140,9 @@ class AuthenticationService {
         recognitionFlag = true
         let localizedReason: String
         if biometryType == .faceID {
-            localizedReason = "请验证 Face ID"
+            localizedReason = "Authentication.authFaceIdTitle".localized()
         } else if biometryType == .touchID {
-            localizedReason = "请验证 Touch ID"
+            localizedReason = "Authentication.authTouchIdTitle".localized()
         } else {
             return
         }
@@ -183,15 +183,15 @@ extension LAError {
     var stringValue: String {
         switch self {
         case LAError.biometryNotEnrolled:
-            return "未设置 Face ID"
+            return "Authentication.Error.faceIDNotEnrolled".localized()
         case LAError.biometryNotAvailable:
-            return "您的Face ID未开启，请输入密码登陆"
+            return "Authentication.Error.faceIDNotAvailable".localized()
         case LAError.passcodeNotSet:
-            return "未设置 Touch ID"
+            return "Authentication.Error.touchIDNotEnrolled".localized()
         case LAError.biometryLockout:
-            return "多次验证失败被锁定"
+            return "Authentication.Error.biometryLockout".localized()
         default:
-            return "验证失败，请重新验证"
+            return "Authentication.Error.authFailed".localized()
         }
     }
 }
