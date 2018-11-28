@@ -163,6 +163,7 @@
 		89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */; };
 		89B296ED20F4CBA7008558A7 /* ServerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B296EC20F4CBA7008558A7 /* ServerAPI.swift */; };
 		89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserViewController.swift */; };
+		89BA4B5621AE333E0084439B /* MnemonicValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA4B5521AE333E0084439B /* MnemonicValidator.swift */; };
 		89BEBE6B20EF82B6007D2705 /* EthereumNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
@@ -383,6 +384,7 @@
 		89B01A23216DAC5A00BFAAF4 /* DAppBrowser.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DAppBrowser.storyboard; sourceTree = "<group>"; };
 		89B296EC20F4CBA7008558A7 /* ServerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerAPI.swift; sourceTree = "<group>"; };
 		89B895B020F8B0CD00B9468B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		89BA4B5521AE333E0084439B /* MnemonicValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicValidator.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumNetwork.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -467,6 +469,7 @@
 			children = (
 				8955580420DCA7F700FC92D8 /* PasswordValidator.swift */,
 				89A87C882173097000588674 /* WalletNameValidator.swift */,
+				89BA4B5521AE333E0084439B /* MnemonicValidator.swift */,
 			);
 			path = Validators;
 			sourceTree = "<group>";
@@ -1504,6 +1507,7 @@
 				8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */,
 				89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */,
 				89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */,
+				89BA4B5621AE333E0084439B /* MnemonicValidator.swift in Sources */,
 				6E3B2B71219EDA230095257D /* AppChain+TransactionDetails.swift in Sources */,
 				1A69465E21916C3D000093A2 /* AppChainTxSender.swift in Sources */,
 				8928C26B20AED5C100C3103E /* SearchAppController.swift in Sources */,
