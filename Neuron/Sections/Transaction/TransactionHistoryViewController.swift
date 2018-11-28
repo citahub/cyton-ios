@@ -215,11 +215,12 @@ class TransactionHistoryTableViewCell: UITableViewCell {
 
             let walletAddress = AppModel.current.currentWallet!.address
             let amount = Web3Utils.formatToPrecision(transaction.value, numberDecimals: transaction.token.decimals)!
-            if transaction.from.lowercased() == walletAddress.lowercased() {
-                addressLabel.text = transaction.from
+            if transaction.from.lowercased() == walletAddress.lowercased() ||
+                transaction.from == transaction.to {
+                addressLabel.text = transaction.to
                 numberLabel.text = "-\(amount)"
             } else {
-                addressLabel.text = transaction.to
+                addressLabel.text = transaction.from
                 numberLabel.text = "+\(amount)"
             }
 
