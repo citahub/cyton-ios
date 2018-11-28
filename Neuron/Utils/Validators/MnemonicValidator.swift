@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Note: Only length is validated. Checksum and actual word dictionary lookup is skipped.
 struct MnemonicValidator {
     enum Result {
         case valid
@@ -16,12 +17,12 @@ struct MnemonicValidator {
 
     static func validate(mnemonic: String) -> Result {
         if mnemonic.isEmpty {
-            return .invalid("WalletManager.Error.emptyMnemonic".localized())
+            return .invalid("MnemonicValidator.emptyMnemonic".localized())
         }
 
         let wordList = mnemonic.components(separatedBy: " ")
-        guard wordList.count >= 12 && wordList.count % 4 == 0 else {
-            return .invalid("WalletManager.Error.invalidMnemonic".localized())
+        guard [12, 15, 18, 21, 24].contains(wordList.count) else {
+            return .invalid("MnemonicValidator.invalidMnemonic".localized())
         }
 
         return .valid

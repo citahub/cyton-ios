@@ -15,6 +15,11 @@
 // ---------------------------------------------------------
 "DApp.Home" = "DApps";
 
+// Mnemonic Validator
+// ---------------------------------------------------------
+"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic"
+"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic"
+
 // Wallet Manager Errors
 // ---------------------------------------------------------
 "WalletManager.Error.invalidPassword" = "Invalid password";
