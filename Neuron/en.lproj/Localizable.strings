@@ -15,12 +15,18 @@
 // ---------------------------------------------------------
 "DApp.Home" = "DApps";
 
+// Mnemonic Validator
+// ---------------------------------------------------------
+"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";
+"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic";
+
 // Wallet Manager Errors
 // ---------------------------------------------------------
 "WalletManager.Error.invalidPassword" = "Invalid password";
 "WalletManager.Error.invalidPrivateKey" = "Invalid Private Key";
 "WalletManager.Error.invalidKeystore" = "Invalid Keystore";
 "WalletManager.Error.invalidMnemonic" = "Invalid Mnemonic";
+"WalletManager.Error.emptyMnemonic" = "Empty Mnemonic";
 "WalletManager.Error.accountAlreadyExists" = "You already have this wallet";
 "WalletManager.Error.accountNotFound" = "Wallet not found";
 "WalletManager.Error.failedToDeleteAccount" = "Failed to delete wallet";

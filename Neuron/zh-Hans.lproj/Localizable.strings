@@ -15,12 +15,18 @@
 // ---------------------------------------------------------
 "DApp.Home" = "应用";
 
+// Mnemonic Validator
+// ---------------------------------------------------------
+"MnemonicValidator.emptyMnemonic" = "助记词不能为空";
+"MnemonicValidator.invalidMnemonic" = "助记词不正确";
+
 // Wallet Manager Errors
 // ---------------------------------------------------------
 "WalletManager.Error.invalidPassword" = "密码不正确";
 "WalletManager.Error.invalidPrivateKey" = "私钥不正确";
 "WalletManager.Error.invalidKeystore" = "Keystore不正确";
 "WalletManager.Error.invalidMnemonic" = "助记词不正确";
+"WalletManager.Error.emptyMnemonic" = "助记词不能为空";
 "WalletManager.Error.accountAlreadyExists" = "该钱包已存在";
 "WalletManager.Error.accountNotFound" = "未找到该钱包";
 "WalletManager.Error.failedToDeleteAccount" = "删除钱包失败";

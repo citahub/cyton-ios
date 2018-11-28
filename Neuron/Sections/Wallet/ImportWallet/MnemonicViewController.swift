@@ -77,8 +77,8 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
     }
 
     func importWalletWithMnemonic(mnemonic: String, password: String, confirmPassword: String, devirationPath: String = "m/44'/60'/0'/0/0", name: String) {
-        if mnemonic.isEmpty {
-            Toast.showToast(text: "请输入助记词")
+        if case .invalid(let reason) = MnemonicValidator.validate(mnemonic: mnemonic) {
+            Toast.showToast(text: reason)
             return
         }
 
