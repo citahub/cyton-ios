@@ -203,7 +203,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="pEK-Jz-H40">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="pEK-Jz-H40">
                             <rect key="frame" x="0.0" y="160" width="375" height="236"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -464,15 +464,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="tRa-J0-z8j">
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="tRa-J0-z8j">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="110"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kly-7H-z5H">
-                                    <rect key="frame" x="15" y="15" width="345" height="147"/>
+                                    <rect key="frame" x="15" y="15" width="345" height="80"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="M6M-Zr-d47">
-                                            <rect key="frame" x="20" y="53.5" width="40" height="40"/>
+                                            <rect key="frame" x="20" y="20" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="DyY-Tw-Bx1"/>
                                                 <constraint firstAttribute="width" constant="40" id="efE-cw-K0k"/>
@@ -523,12 +523,12 @@
                                 <constraint firstAttribute="trailing" secondItem="Kly-7H-z5H" secondAttribute="trailing" constant="15" id="REe-Kz-SM4"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="htQ-4e-AzQ">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="htQ-4e-AzQ">
                             <rect key="frame" x="0.0" y="422" width="375" height="54"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g6N-0z-9ZM">
-                                    <rect key="frame" x="15" y="77" width="345" height="44"/>
+                                    <rect key="frame" x="15" y="10" width="345" height="44"/>
                                     <color key="backgroundColor" red="0.28235294117647058" green="0.42745098039215684" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="44" id="M39-1P-81N"/>
@@ -816,7 +816,7 @@
                                             <action selector="confirm" destination="Xde-fs-u5a" eventType="touchUpInside" id="G62-De-IMY"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-72-MbY">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-72-MbY">
                                         <rect key="frame" x="0.0" y="46" width="375" height="254"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="xaM-X2-DX0">
@@ -868,7 +868,6 @@
                                     <constraint firstAttribute="height" constant="300" id="Uw5-T1-cmp"/>
                                     <constraint firstItem="QYg-72-MbY" firstAttribute="top" secondItem="9yM-Hx-41O" secondAttribute="bottom" constant="1" id="WoF-3Z-fR9"/>
                                     <constraint firstItem="4R2-B3-Z84" firstAttribute="top" secondItem="kdc-L9-JJe" secondAttribute="top" id="YMs-oH-Xen"/>
-                                    <constraint firstAttribute="bottom" secondItem="QYg-72-MbY" secondAttribute="bottom" id="YsX-TM-NAu"/>
                                     <constraint firstAttribute="trailing" secondItem="QYg-72-MbY" secondAttribute="trailing" id="ckU-BX-2EL"/>
                                     <constraint firstAttribute="trailing" secondItem="4R2-B3-Z84" secondAttribute="trailing" id="fE8-Jc-c7S"/>
                                     <constraint firstItem="9yM-Hx-41O" firstAttribute="top" secondItem="gYD-xS-nkj" secondAttribute="bottom" id="gNp-pb-4eN"/>
@@ -882,8 +881,8 @@
                         <constraints>
                             <constraint firstItem="doE-RD-yO0" firstAttribute="trailing" secondItem="cYt-Ct-AiK" secondAttribute="trailing" id="Cw9-cz-H7a"/>
                             <constraint firstItem="doE-RD-yO0" firstAttribute="trailing" secondItem="kdc-L9-JJe" secondAttribute="trailing" id="EkM-bL-Gwt"/>
+                            <constraint firstAttribute="bottom" secondItem="kdc-L9-JJe" secondAttribute="bottom" id="EsS-nI-aic"/>
                             <constraint firstItem="kdc-L9-JJe" firstAttribute="leading" secondItem="doE-RD-yO0" secondAttribute="leading" id="Mqo-8G-j7E"/>
-                            <constraint firstItem="doE-RD-yO0" firstAttribute="bottom" secondItem="kdc-L9-JJe" secondAttribute="bottom" id="NPt-eR-6X3"/>
                             <constraint firstAttribute="bottom" secondItem="cYt-Ct-AiK" secondAttribute="bottom" id="P3v-HZ-dsP"/>
                             <constraint firstItem="cYt-Ct-AiK" firstAttribute="top" secondItem="3nI-mk-hA8" secondAttribute="top" id="Qjf-xW-J1j"/>
                             <constraint firstItem="cYt-Ct-AiK" firstAttribute="leading" secondItem="doE-RD-yO0" secondAttribute="leading" id="oB6-aB-JHt"/>
