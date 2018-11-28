@@ -17,8 +17,8 @@
 
 // Mnemonic Validator
 // ---------------------------------------------------------
-"MnemonicValidator.emptyMnemonic" = "助记词不能为空"
-"MnemonicValidator.invalidMnemonic" = "助记词不正确"
+"MnemonicValidator.emptyMnemonic" = "助记词不能为空";
+"MnemonicValidator.invalidMnemonic" = "助记词不正确";
 
 // Wallet Manager Errors
 // ---------------------------------------------------------

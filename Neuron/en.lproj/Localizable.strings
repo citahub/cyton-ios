@@ -17,8 +17,8 @@
 
 // Mnemonic Validator
 // ---------------------------------------------------------
-"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic"
-"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic"
+"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";
+"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic";
 
 // Wallet Manager Errors
 // ---------------------------------------------------------
