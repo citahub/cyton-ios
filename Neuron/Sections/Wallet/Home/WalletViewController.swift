@@ -101,7 +101,6 @@ extension WalletViewController: WalletPresenterDelegate {
 
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
         totalAmountLabel.text = "- - -"
-        navigationItem.title = wallet.name
         walletObserver?.invalidate()
         walletObserver = wallet.observe({ [weak self](change) in
             switch change {
