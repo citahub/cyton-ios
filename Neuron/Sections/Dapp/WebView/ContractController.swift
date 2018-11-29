@@ -195,7 +195,7 @@ class ContractController: UITableViewController, TransactonSender {
             DispatchQueue.main.async {
                 let gas = self.gasPrice * self.gasLimit
                 self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
-                self.gasLabel.text = Double(self.ethereumGas!)!.decimal + self.tokenModel.symbol
+                self.gasLabel.text = Double(self.ethereumGas!)!.trailingZerosTrimmed + self.tokenModel.symbol
                 let bigUIntValue = Web3Utils.parseToBigUInt(self.value, units: .eth)!
                 self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.fromQuota(), gas: gas) + self.tokenModel.symbol
                 Toast.hideHUD()
@@ -313,6 +313,6 @@ extension ContractController: AdvancedViewControllerDelegate {
         let bigUIntValue = Web3Utils.parseToBigUInt(value, units: .eth)!
         let totlePay = getTotleValue(value: bigUIntValue, gas: gas)
         totlePayLabel.text = totlePay + tokenModel.symbol
-        gasLabel.text = Double(ethereumGas ?? "")!.decimal + tokenModel.symbol
+        gasLabel.text = Double(ethereumGas ?? "")!.trailingZerosTrimmed + tokenModel.symbol
     }
 }
