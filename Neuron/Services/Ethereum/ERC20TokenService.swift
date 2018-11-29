@@ -12,32 +12,6 @@ import EthereumAddress
 import struct BigInt.BigUInt
 
 struct ERC20TokenService {
-    /// getBalance
-    ///
-    /// - Parameters:
-    ///   - walletAddress: wallet public key
-    ///   - contractAddress: token address
-    ///   - completion: balance result
-    static func getERC20TokenBalance(walletAddress: String, contractAddress: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
-        let web3 = EthereumNetwork().getWeb3()
-        let contractETHAddress = EthereumAddress(contractAddress)!
-        let coldWalletAddress = EthereumAddress(walletAddress)
-        let contract = web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)!
-
-        DispatchQueue.global().async {
-            do {
-                let result = try contract.method("balanceOf", parameters: [coldWalletAddress as AnyObject])!.call(transactionOptions: nil)
-                DispatchQueue.main.async {
-                    completion(EthServiceResult.success(result["0"] as! BigUInt))
-                }
-            } catch let error {
-                DispatchQueue.main.async {
-                    completion(EthServiceResult.error(error))
-                }
-            }
-        }
-    }
-
     /// search ETC20Token data for contractaddress
     ///
     /// - Parameters:

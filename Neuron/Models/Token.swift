@@ -78,25 +78,19 @@ class Token {
         }
 
         let balance: BigUInt
-        do {
-            switch type {
-            case .ether:
-                balance = try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(walletAddress)!)
-            case .appChain, .appChainErc20:
-                balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
-            case .erc20:
-                let contractAddress = EthereumAddress(address)!
-                let walletAddress = EthereumAddress(self.walletAddress)!
-                let contract = EthereumNetwork().getWeb3().contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)!
-                let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
-                balance = result?["0"] as! BigUInt
-            }
-            let balanceText = Web3Utils.formatToPrecision(balance, numberDecimals: decimals, formattingDecimals: 6) ?? "0"
-            self.balance = Double(balanceText)
-            return self.balance
-        } catch {
-            throw error
+
+        switch type {
+        case .appChain, .appChainErc20:
+            balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
+        case .ether:
+            balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getBalance()
+        case .erc20:
+            balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getTokenBalance(address: address)
         }
+        self.balance = Double.fromAmount(balance, decimals: decimals)
+        refreshBalanceSignal?.leave()
+        refreshBalanceSignal = nil
+        return self.balance
     }
 }
 
