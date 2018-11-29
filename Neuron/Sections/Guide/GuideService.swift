@@ -11,7 +11,7 @@ import RealmSwift
 
 class GuideService {
     static let shared = GuideService()
-    var controller: UIViewController?
+    private var window: UIWindow?
     private var notificationToken: NotificationToken?
 
     private init() {
@@ -41,20 +41,28 @@ class GuideService {
     }
 
     private func showGuide() {
-        guard controller == nil else { return }
+        guard window == nil else { return }
         let guideController: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
-        controller = BaseNavigationController(rootViewController: guideController)
-        controller?.modalPresentationStyle = .overCurrentContext
-        UIApplication.shared.keyWindow?.rootViewController?.present(controller!, animated: true, completion: nil)
+        let controller = BaseNavigationController(rootViewController: guideController)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+
+        let height = window?.bounds.size.height ?? 0.0
+        window?.transform = CGAffineTransform(translationX: 0, y: height)
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
+            self.window?.transform = CGAffineTransform.identity
+        }
     }
 
     private func hideGuide() {
         UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
-            let height = self.controller?.view.bounds.size.height ?? 0.0
-            self.controller?.view.transform = CGAffineTransform(translationX: 0, y: height)
+            let height = self.window?.bounds.size.height ?? 0.0
+            self.window?.transform = CGAffineTransform(translationX: 0, y: height)
         }, completion: { (_) in
-            self.controller?.dismiss(animated: false, completion: nil)
-            self.controller = nil
+            self.window?.rootViewController = nil
+            self.window?.resignKey()
+            self.window = nil
         })
     }
 }
