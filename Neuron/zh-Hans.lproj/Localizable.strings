@@ -20,6 +20,13 @@
 // ---------------------------------------------------------
 "Settings.About.AboutUs" = "关于我们";
 
+// DApp Transaction
+// ---------------------------------------------------------
+"DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
+"DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
+"DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
+"DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
+
 // Mnemonic Validator
 // ---------------------------------------------------------
 "MnemonicValidator.emptyMnemonic" = "助记词不能为空";
