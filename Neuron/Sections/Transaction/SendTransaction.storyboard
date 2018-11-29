@@ -816,7 +816,7 @@
                                             <action selector="confirm" destination="Xde-fs-u5a" eventType="touchUpInside" id="G62-De-IMY"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-72-MbY">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QYg-72-MbY">
                                         <rect key="frame" x="0.0" y="46" width="375" height="254"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <view key="tableFooterView" contentMode="scaleToFill" id="xaM-X2-DX0">
@@ -872,6 +872,7 @@
                                     <constraint firstAttribute="trailing" secondItem="4R2-B3-Z84" secondAttribute="trailing" id="fE8-Jc-c7S"/>
                                     <constraint firstItem="9yM-Hx-41O" firstAttribute="top" secondItem="gYD-xS-nkj" secondAttribute="bottom" id="gNp-pb-4eN"/>
                                     <constraint firstItem="QYg-72-MbY" firstAttribute="leading" secondItem="kdc-L9-JJe" secondAttribute="leading" id="jjB-sI-b89"/>
+                                    <constraint firstAttribute="bottom" secondItem="QYg-72-MbY" secondAttribute="bottom" id="o2V-1o-jMv"/>
                                     <constraint firstItem="gYD-xS-nkj" firstAttribute="top" secondItem="kdc-L9-JJe" secondAttribute="top" id="sDw-hY-uIl"/>
                                     <constraint firstItem="9yM-Hx-41O" firstAttribute="top" secondItem="4R2-B3-Z84" secondAttribute="bottom" id="uxJ-lp-I3e"/>
                                 </constraints>
