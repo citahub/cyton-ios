@@ -15,6 +15,10 @@
 // ---------------------------------------------------------
 "DApp.Home" = "DApps";
 
+// Settings
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "About us";
+
 // Mnemonic Validator
 // ---------------------------------------------------------
 "MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";
