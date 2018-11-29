@@ -37,12 +37,6 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        UIApplication.shared.keyWindow?.windowLevel = .alert
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.keyWindow?.windowLevel = .normal
     }
 
     @objc func showProductAgreementView() {

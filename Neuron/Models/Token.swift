@@ -71,7 +71,14 @@ class Token {
         }
         refreshBalanceSignal = DispatchGroup()
         refreshBalanceSignal?.enter()
+
+        defer {
+            refreshBalanceSignal?.leave()
+            refreshBalanceSignal = nil
+        }
+
         let balance: BigUInt
+
         switch type {
         case .appChain, .appChainErc20:
             balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
