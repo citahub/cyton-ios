@@ -16,6 +16,10 @@
 "DApp.Home" = "DApps";
 "DApp.NFT.EmptyData" = "Empty Data";
 
+// Settings
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "About us";
+
 // Mnemonic Validator
 // ---------------------------------------------------------
 "MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";

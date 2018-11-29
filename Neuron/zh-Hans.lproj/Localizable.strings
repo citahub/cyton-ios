@@ -16,6 +16,10 @@
 "DApp.Home" = "应用";
 "DApp.NFT.EmptyData" = "您还没有藏品数据";
 
+// Settings
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "关于我们";
+
 // Mnemonic Validator
 // ---------------------------------------------------------
 "MnemonicValidator.emptyMnemonic" = "助记词不能为空";
