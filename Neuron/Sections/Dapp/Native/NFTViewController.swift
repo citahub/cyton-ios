@@ -33,6 +33,7 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
                 self.dataArray = nftModel.assets ?? []
                 if self.dataArray.count == 0 {
                     self.showBlankOverlay()
+                    self.errorOverlaycontroller.messageLabel.text = "DApp.NFT.EmptyData".localized()
                 } else {
                     self.removeOverlay()
                 }
