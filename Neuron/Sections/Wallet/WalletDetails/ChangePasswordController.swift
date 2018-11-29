@@ -34,7 +34,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
 
         if oldPassword.lengthOfBytes(using: .utf8) >= 8 &&
             newPassword.lengthOfBytes(using: .utf8) >= 8 &&
-            reNewPassword == newPassword {
+            reNewPassword.lengthOfBytes(using: .utf8) >= 8 {
             confirmButton.backgroundColor = UIColor(red: 80/255.0, green: 114/255.0, blue: 251/255.0, alpha: 1.0)
             confirmButton.isEnabled = true
         } else {
@@ -45,16 +45,16 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
     }
 
     @IBAction func confirm(_ sender: Any) {
-        if case .invalid(let reason) = PasswordValidator.validate(password: newPasswordTextField.text!) {
-            Toast.showToast(text: reason)
-            return
-        }
         if oldPasswordTextField.text == newPasswordTextField.text {
             Toast.showToast(text: "您输入的密码和原密码一致，请重新输入")
             return
         }
         if newPasswordTextField.text! != reNewPasswordTextField.text! {
             Toast.showToast(text: "两次新密码输入不一致")
+            return
+        }
+        if case .invalid(let reason) = PasswordValidator.validate(password: newPasswordTextField.text!) {
+            Toast.showToast(text: reason)
             return
         }
         Toast.showHUD(text: "修改密码中...")

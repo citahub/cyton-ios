@@ -31,4 +31,12 @@ class DoubleExtensionTests: XCTestCase {
             20.5.gweiToWei()
         )
     }
+
+    func testDecimalFormat() {
+        XCTAssertEqual(1.12345678.decimal, "1.12345678")
+        XCTAssertEqual(1.1234567899.decimal, "1.12345678")
+        XCTAssertEqual(1.123456784.decimal, "1.12345678")
+        XCTAssertEqual(1.1234.decimal, "1.1234")
+        XCTAssertEqual(4.decimal, "4")
+    }
 }
