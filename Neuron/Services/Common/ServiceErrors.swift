@@ -14,12 +14,6 @@ enum EthServiceResult<T> {
     case error(Error)
 }
 
-// TODO: Remove result type
-enum AppChainServiceResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum CustomTokenError: String, LocalizedError {
     case wrongBalanceError
     case badNameError
