@@ -107,17 +107,17 @@ class ContractController: UITableViewController, TransactonSender {
         dappNameLabel.text = dappName
 
         if dappCommonModel.chainType == "AppChain" {
-            let appChainQuota = dappCommonModel.appChain?.quota!.formatBigUInt() ?? 0
+            let appChainQuota = dappCommonModel.appChain?.quota!.toBigUInt() ?? 0
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
-            value = formatScientValue(value: dappCommonModel.appChain?.value?.formatBigUInt() ?? 0)
+            value = formatScientValue(value: dappCommonModel.appChain?.value?.toBigUInt() ?? 0)
             valueLabel.text = value
             gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
-            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value?.formatBigUInt() ?? 0, gas: appChainQuota) + tokenModel.symbol
+            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value?.toBigUInt() ?? 0, gas: appChainQuota) + tokenModel.symbol
         } else {
             chainType = .eth
             toLabel.text = dappCommonModel.eth?.to
-            value = formatScientValue(value: dappCommonModel.eth?.value?.formatBigUInt() ?? "0")
+            value = formatScientValue(value: dappCommonModel.eth?.value?.toBigUInt() ?? "0")
             valueLabel.text = value
             getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice, ethGasLimit: dappCommonModel.eth?.gasLimit)
         }
@@ -168,7 +168,7 @@ class ContractController: UITableViewController, TransactonSender {
         DispatchQueue.global().async {
             let web3 = EthereumNetwork().getWeb3()
             if ethGasPirce != nil {
-                self.gasPrice = ethGasLimit!.formatBigUInt()!
+                self.gasPrice = ethGasLimit!.toBigUInt()!
             } else {
                 do {
                     let gasPrice = try web3.eth.getGasPrice()
@@ -179,12 +179,12 @@ class ContractController: UITableViewController, TransactonSender {
             }
 
             if ethGasLimit != nil {
-                self.gasLimit = ethGasLimit!.formatBigUInt()!
+                self.gasLimit = ethGasLimit!.toBigUInt()!
             } else {
                 var options = TransactionOptions()
                 options.gasLimit = .limited(self.gasLimit)
                 options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
-                options.value = self.dappCommonModel.eth?.value?.formatBigUInt()
+                options.value = self.dappCommonModel.eth?.value?.toBigUInt()
                 let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
                 if let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) {
                     self.gasLimit = estimatedGas
@@ -236,7 +236,7 @@ class ContractController: UITableViewController, TransactonSender {
         switch chainType {
         case .appChain:
             paramBuilder.gasLimit = 10000000
-            paramBuilder.gasPrice = dappCommonModel.appChain?.quota?.formatBigUInt() ?? 1000000
+            paramBuilder.gasPrice = dappCommonModel.appChain?.quota?.toBigUInt() ?? 1000000
             paramBuilder.to = dappCommonModel.appChain?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
         case .eth:

@@ -11,14 +11,14 @@ import BigInt
 
 extension String {
     func removeHexPrefix() -> String {
-        if self.hasPrefix("0x") {
-            return String(self.dropFirst(2))
+        if hasPrefix("0x") {
+            return String(dropFirst(2))
         }
         return self
     }
 
     func addHexPrefix() -> String {
-        if self.hasPrefix("0x") {
+        if hasPrefix("0x") {
             return self
         }
         return "0x" + self
@@ -28,9 +28,9 @@ extension String {
         return NSLocalizedString(self, comment: comment)
     }
 
-    func formatBigUInt() -> BigUInt? {
-        if self.hasPrefix("0x") {
-            return BigUInt(self.removeHexPrefix(), radix: 16)
+    func toBigUInt() -> BigUInt? {
+        if hasPrefix("0x") {
+            return BigUInt(removeHexPrefix(), radix: 16)
         } else {
             return BigUInt(self)
         }
