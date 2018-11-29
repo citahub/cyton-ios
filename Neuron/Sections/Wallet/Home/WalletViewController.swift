@@ -101,7 +101,6 @@ extension WalletViewController: WalletPresenterDelegate {
 
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {
         totalAmountLabel.text = "- - -"
-        navigationItem.title = wallet.name
         walletObserver?.invalidate()
         walletObserver = wallet.observe({ [weak self](change) in
             switch change {
@@ -143,7 +142,12 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
         let token = presenter.tokens[indexPath.row]
         let cell: TokenTableViewCell
         if token.balance == nil {
-            cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_Loading") as! TokenTableViewCell
+            if presenter.refreshing {
+                cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_Loading") as! TokenTableViewCell
+            } else {
+                cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_LoadFail") as! TokenTableViewCell
+            }
+
         } else if token.price == nil || token.balance == 0.0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_NoPrice") as! TokenTableViewCell
         } else {
@@ -178,14 +182,17 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension WalletViewController {
     func beganRefreshButtonAnimation() {
+        guard (refreshButton.layer.animationKeys()?.count ?? 0) <= 0 else { return }
         UIView.beginAnimations("refresh", context: nil)
         UIView.setAnimationDuration(0.4)
         UIView.setAnimationRepeatCount(Float(Int.max))
         UIView.setAnimationCurve(.linear)
         refreshButton.transform = refreshButton.transform.rotated(by: CGFloat(Double.pi))
         UIView.commitAnimations()
+        tableView.reloadData()
     }
     func endRefreshButtonAnimation() {
         refreshButton.layer.removeAllAnimations()
+        tableView.reloadData()
     }
 }

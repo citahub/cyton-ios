@@ -71,25 +71,32 @@ class Token {
         }
         refreshBalanceSignal = DispatchGroup()
         refreshBalanceSignal?.enter()
-        let balance: BigUInt
-        switch type {
-        case .ether:
-            balance = try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(walletAddress)!)
-        case .appChain, .appChainErc20:
-            balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
-        case .erc20:
-            let contractAddress = EthereumAddress(address)!
-            let walletAddress = EthereumAddress(self.walletAddress)!
-            let contract = EthereumNetwork().getWeb3().contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)!
-            let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
-            balance = result?["0"] as! BigUInt
+
+        defer {
+            refreshBalanceSignal?.leave()
+            refreshBalanceSignal = nil
         }
-//        let balanceText = Web3Utils.formatToEthereumUnits(balance, toUnits: .eth, decimals: 8) ?? "0"
-        let balanceText = Web3Utils.formatToPrecision(balance, numberDecimals: decimals, formattingDecimals: 6) ?? "0"
-        self.balance = Double(balanceText)
-        refreshBalanceSignal?.leave()
-        refreshBalanceSignal = nil
-        return self.balance
+
+        let balance: BigUInt
+        do {
+            switch type {
+            case .ether:
+                balance = try EthereumNetwork().getWeb3().eth.getBalance(address: EthereumAddress(walletAddress)!)
+            case .appChain, .appChainErc20:
+                balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
+            case .erc20:
+                let contractAddress = EthereumAddress(address)!
+                let walletAddress = EthereumAddress(self.walletAddress)!
+                let contract = EthereumNetwork().getWeb3().contract(Web3.Utils.erc20ABI, at: contractAddress, abiVersion: 2)!
+                let result = try contract.method("balanceOf", parameters: [walletAddress as AnyObject])?.call()
+                balance = result?["0"] as! BigUInt
+            }
+            let balanceText = Web3Utils.formatToPrecision(balance, numberDecimals: decimals, formattingDecimals: 6) ?? "0"
+            self.balance = Double(balanceText)
+            return self.balance
+        } catch {
+            throw error
+        }
     }
 }
 
