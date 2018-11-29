@@ -107,19 +107,19 @@ class ContractController: UITableViewController, TransactonSender {
         dappNameLabel.text = dappName
 
         if dappCommonModel.chainType == "AppChain" {
-            let appChainQuota = BigUInt(dappCommonModel.appChain?.quota.trailingZerosTrimmed ?? "1000000")!
+            let appChainQuota = dappCommonModel.appChain?.quota!.formatBigUInt() ?? 0
             chainType = .appChain
             toLabel.text = dappCommonModel.appChain?.to
-            value = formatScientValue(value: dappCommonModel.appChain?.value ?? "0")
+            value = formatScientValue(value: dappCommonModel.appChain?.value?.formatBigUInt() ?? 0)
             valueLabel.text = value
             gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
-            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value ?? "0", gas: appChainQuota) + tokenModel.symbol
+            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value?.formatBigUInt() ?? 0, gas: appChainQuota) + tokenModel.symbol
         } else {
             chainType = .eth
             toLabel.text = dappCommonModel.eth?.to
-            value = formatScientValue(value: dappCommonModel.eth?.value ?? "0")
+            value = formatScientValue(value: dappCommonModel.eth?.value?.formatBigUInt() ?? "0")
             valueLabel.text = value
-            getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice?.trailingZerosTrimmed, ethGasLimit: dappCommonModel.eth?.gasLimit?.trailingZerosTrimmed)
+            getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice, ethGasLimit: dappCommonModel.eth?.gasLimit)
         }
         formatValueLabel(value: value)
     }
@@ -150,20 +150,17 @@ class ContractController: UITableViewController, TransactonSender {
         return Web3Utils.formatToEthereumUnits(quotaInput, toUnits: .eth, decimals: 1, fallbackToScientific: true)!
     }
 
-    func formatScientValue(value: String) -> String {
-        let biguInt = BigUInt(atof(value))
-        let format = Web3Utils.formatToEthereumUnits(biguInt, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
+    func formatScientValue(value: BigUInt) -> String {
+        let format = Web3Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
         let finalValue = Double(format)!
         return finalValue.trailingZerosTrimmed
     }
 
     // gas is equal to appChain's quota
-    func getTotleValue(value: String, gas: BigUInt) -> String {
-        let biguInt = BigUInt(atof(value))
-        let finalValue = biguInt + gas
+    func getTotleValue(value: BigUInt, gas: BigUInt) -> String {
+        let finalValue = value + gas
         let formatValue = Web3Utils.formatToEthereumUnits(finalValue, toUnits: .eth, decimals: 8, fallbackToScientific: true)!
-        let finalCost = Double(formatValue)!
-        return finalCost.trailingZerosTrimmed
+        return Double(formatValue)!.trailingZerosTrimmed
     }
 
     func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
@@ -171,36 +168,36 @@ class ContractController: UITableViewController, TransactonSender {
         DispatchQueue.global().async {
             let web3 = EthereumNetwork().getWeb3()
             if ethGasPirce != nil {
-                self.gasPrice = BigUInt(ethGasPirce!)!
+                self.gasPrice = ethGasLimit!.formatBigUInt()!
             } else {
                 do {
                     let gasPrice = try web3.eth.getGasPrice()
                     self.gasPrice = gasPrice
                 } catch {
-                    self.gasPrice = BigUInt(8)
+                    self.gasPrice = BigUInt(0)
                 }
             }
 
             if ethGasLimit != nil {
-                self.gasLimit = BigUInt(ethGasLimit!) ?? BigUInt(1000000)
+                self.gasLimit = ethGasLimit!.formatBigUInt()!
             } else {
                 var options = TransactionOptions()
                 options.gasLimit = .limited(self.gasLimit)
                 options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
-                options.value = BigUInt(self.dappCommonModel.eth?.value ?? "0")
+                options.value = self.dappCommonModel.eth?.value?.formatBigUInt()
                 let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
                 if let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) {
                     self.gasLimit = estimatedGas
                 } else {
-                    self.gasLimit = BigUInt(1000000)
+                    self.gasLimit = BigUInt(0)
                 }
             }
             DispatchQueue.main.async {
                 let gas = self.gasPrice * self.gasLimit
                 self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
-                self.gasLabel.text = Double(self.ethereumGas!)!.trailingZerosTrimmed + self.tokenModel.symbol
+                self.gasLabel.text = Double(self.ethereumGas!)!.decimal + self.tokenModel.symbol
                 let bigUIntValue = Web3Utils.parseToBigUInt(self.value, units: .eth)!
-                self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.description, gas: gas) + self.tokenModel.symbol
+                self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.fromQuota(), gas: gas) + self.tokenModel.symbol
                 Toast.hideHUD()
             }
         }
@@ -239,7 +236,7 @@ class ContractController: UITableViewController, TransactonSender {
         switch chainType {
         case .appChain:
             paramBuilder.gasLimit = 10000000
-            paramBuilder.gasPrice = BigUInt(dappCommonModel.appChain?.quota.trailingZerosTrimmed ?? "") ?? 1000000
+            paramBuilder.gasPrice = dappCommonModel.appChain?.quota?.formatBigUInt() ?? 1000000
             paramBuilder.to = dappCommonModel.appChain?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
         case .eth:
@@ -312,10 +309,10 @@ private extension ContractController {
 extension ContractController: AdvancedViewControllerDelegate {
     func getCustomGas(gasPrice: BigUInt, gas: BigUInt) {
         self.gasPrice = gasPrice
-        ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: true) ?? "0"
+        ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: true)
         let bigUIntValue = Web3Utils.parseToBigUInt(value, units: .eth)!
-        let totlePay = getTotleValue(value: bigUIntValue.description, gas: gas)
+        let totlePay = getTotleValue(value: bigUIntValue, gas: gas)
         totlePayLabel.text = totlePay + tokenModel.symbol
-        gasLabel.text = Double(ethereumGas ?? "")!.trailingZerosTrimmed + tokenModel.symbol
+        gasLabel.text = Double(ethereumGas ?? "")!.decimal + tokenModel.symbol
     }
 }

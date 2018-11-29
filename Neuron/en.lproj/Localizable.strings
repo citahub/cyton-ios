@@ -15,6 +15,14 @@
 // ---------------------------------------------------------
 "DApp.Home" = "DApps";
 
+// DApp Transaction
+// ---------------------------------------------------------
+"DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
+"DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
+"DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
+"DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
+
+
 // Mnemonic Validator
 // ---------------------------------------------------------
 "MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";

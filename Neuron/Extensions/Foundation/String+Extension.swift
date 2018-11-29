@@ -27,4 +27,12 @@ extension String {
     func localized(_ comment: String = "") -> String {
         return NSLocalizedString(self, comment: comment)
     }
+
+    func formatBigUInt() -> BigUInt? {
+        if self.hasPrefix("0x") {
+            return BigUInt(self.removeHexPrefix(), radix: 16)
+        } else {
+            return BigUInt(self)
+        }
+    }
 }
