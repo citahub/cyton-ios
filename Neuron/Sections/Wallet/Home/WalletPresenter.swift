@@ -47,7 +47,6 @@ class WalletPresenter {
     private var appModelObserver: NotificationToken?
     private var selectTokenListObserver: NotificationToken?
     private var nativeTokenListObserver: NotificationToken?
-
     private var tokenListTimestamp: TimeInterval = 0.0
 
     init() {
@@ -179,8 +178,8 @@ extension WalletPresenter {
                 }
             })
             DispatchQueue.main.async {
-                guard timestamp == self.tokenListTimestamp else { return }
                 self.refreshing = false
+                guard timestamp == self.tokenListTimestamp else { return }
                 self.delegate?.walletPresenterEndedRefresh(presenter: self)
                 self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
             }
@@ -189,6 +188,7 @@ extension WalletPresenter {
 
     @objc func refreshPrice() {
         self.currency = LocalCurrencyService.shared.getLocalCurrencySelect()
+        refreshing = true
         delegate?.walletPresenterBeganRefresh(presenter: self)
         let tokens = self.tokens
         let currency = self.currency
@@ -205,9 +205,9 @@ extension WalletPresenter {
                 }
             }
             DispatchQueue.main.async {
+                self.refreshing = false
                 guard currency?.short == self.currency.short else { return }
                 guard timestamp == self.tokenListTimestamp else { return }
-                self.refreshing = false
                 self.delegate?.walletPresenterEndedRefresh(presenter: self)
                 self.delegate?.walletPresenter(presenter: self, didRefreshTotalAmount: amount)
             }

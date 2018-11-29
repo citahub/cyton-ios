@@ -19,8 +19,8 @@ extension Double {
         let formatter = NumberFormatter()
         formatter.minimumIntegerDigits = 1
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 6
-        formatter.roundingMode = .halfUp
+        formatter.maximumFractionDigits = 8
+        formatter.roundingMode = .floor
         return formatter
     }()
 
@@ -42,9 +42,5 @@ extension Double {
         } else {
             return 0
         }
-    }
-
-    func toAmountText() -> String {
-        return self == Double(Int(self)) ? String(Int(self)) : String(self)
     }
 }
