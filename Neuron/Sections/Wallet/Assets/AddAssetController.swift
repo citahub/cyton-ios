@@ -41,7 +41,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
             return
         }
-        if tokenArray.contains(where: { $0.address == tokenModel.address }) {
+        if tokenArray.contains(where: { $0.address.lowercased() == tokenModel.address.lowercased() }) {
             Toast.showToast(text: "不可重复添加")
             return
         }
@@ -93,7 +93,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             cell.rightTextField.text = tokenModel.symbol
         case 4:
             cell.isEdit = false
-            cell.rightTextField.text = tokenModel.decimals == 0 ? "" : String(tokenModel.decimals)
+            cell.rightTextField.text = tokenModel.decimals == 0 ? "0" : String(tokenModel.decimals)
         default:
             break
         }
@@ -143,6 +143,9 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func didGetERC20Token(token: String) {
+        tokenModel.name = ""
+        tokenModel.symbol = ""
+        tokenModel.decimals = 0
         let appmodel = AppModel.current
         Toast.showHUD()
         ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
