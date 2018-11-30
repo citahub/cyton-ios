@@ -78,10 +78,15 @@ extension WalletManager {
 
         do {
             try keystore.regenerate(oldPassword: password, newPassword: password)
-        } catch {
-            throw Error.invalidPassword
+        } catch let error {
+            guard let error = error as? AbstractKeystoreError else { throw Error.unknown }
+            switch error {
+            case .invalidPasswordError:
+                throw Error.invalidPassword
+            default:
+                throw Error.invalidKeystore
+            }
         }
-
         return try add(keystore, address)
     }
 

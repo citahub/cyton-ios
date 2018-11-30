@@ -10,11 +10,11 @@ import UIKit
 import SafariServices
 
 class AboutUsViewController: UITableViewController {
-    @IBOutlet weak var versionLabel: UILabel!
+    @IBOutlet private weak var versionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "关于我们"
+        title = "Settings.About.AboutUs".localized()
         setVersionLabel()
     }
 
@@ -31,25 +31,10 @@ class AboutUsViewController: UITableViewController {
         "https://github.com/cryptape/cita"
     ]
 
-    func setVersionLabel() {
-        let infoDictionary = Bundle.main.infoDictionary!
-        let appDisplayName = infoDictionary["CFBundleDisplayName"]
-        let majorVersion = infoDictionary["CFBundleShortVersionString"]
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyMMdd"
-        let convertedDate = dateFormatter.string(from: compileDate)
-        versionLabel.text = appDisplayName as? String
-        versionLabel.text = "V \(String(describing: majorVersion!))" + ".\(convertedDate)"
-    }
-
-    var compileDate: Date {
-        let bundleName = Bundle.main.infoDictionary!["CFBundleName"] as? String ?? "Info.plist"
-        if let infoPath = Bundle.main.path(forResource: bundleName, ofType: nil),
-            let infoAttr = try? FileManager.default.attributesOfItem(atPath: infoPath),
-            let infoDate = infoAttr[FileAttributeKey.creationDate] as? Date {
-            return infoDate
-        }
-        return Date()
+    private func setVersionLabel() {
+        let majorVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
+        let build = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
+        versionLabel.text = "Version \(majorVersion) (\(build))"
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

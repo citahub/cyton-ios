@@ -14,6 +14,19 @@
 // DApp
 // ---------------------------------------------------------
 "DApp.Home" = "DApps";
+"DApp.NFT.EmptyData" = "Empty Data";
+
+// Settings
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "About us";
+
+// DApp Transaction
+// ---------------------------------------------------------
+"DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
+"DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
+"DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
+"DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
+
 
 // Mnemonic Validator
 // ---------------------------------------------------------

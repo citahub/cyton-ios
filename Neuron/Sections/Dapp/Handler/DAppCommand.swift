@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import BigInt
 
 struct DAppCommonModel: Decodable {
     let name: Method
@@ -44,13 +45,50 @@ struct DAppCommonModel: Decodable {
 
 struct AppChainObject: Decodable {
     let chainId: Int
-    let data: String
-    let nonce: Double
-    let quota: Double
+    let data: String?
+    let nonce: String?
+    var quota: String?
     let to: String
-    let validUntilBlock: Double
-    let value: String
+    let validUntilBlock: UInt64
+    var value: String?
     let version: Int
+
+    enum CodingKeys: String, CodingKey {
+        case chainId
+        case data
+        case value
+        case nonce
+        case quota
+        case to
+        case validUntilBlock
+        case version
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        chainId = try! values.decode(Int.self, forKey: .chainId)
+        data = try? values.decode(String.self, forKey: .data)
+        to = try! values.decode(String.self, forKey: .to)
+        version = try! values.decode(Int.self, forKey: .version)
+        validUntilBlock = try! values.decode(UInt64.self, forKey: .validUntilBlock)
+        nonce = try? values.decode(String.self, forKey: .nonce)
+        if let quota = try? values.decode(String.self, forKey: .quota) {
+            self.quota = quota
+        }
+        if let value = try? values.decode(String.self, forKey: .value) {
+            self.value = value
+        }
+    }
+
+    static func formatValue(value: String) -> BigUInt? {
+        let finalValue: BigUInt?
+        if value.hasPrefix("0x") {
+            finalValue = BigUInt(value.removeHexPrefix(), radix: 16)
+        } else {
+            finalValue = BigUInt(value, radix: 10)
+        }
+        return finalValue
+    }
 }
 
 struct ETHObject: Decodable {
@@ -59,8 +97,8 @@ struct ETHObject: Decodable {
     var data: String?
     var from: String?
     var to: String?
-    var gasLimit: Double?
-    var gasPrice: Double?
+    var gasLimit: String?
+    var gasPrice: String?
 
     enum CodingKeys: String, CodingKey {
         case chainId
@@ -75,15 +113,17 @@ struct ETHObject: Decodable {
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         chainId = try? values.decode(Int.self, forKey: .chainId)
-        value = try? values.decode(String.self, forKey: .value)
         data = try? values.decode(String.self, forKey: .data)
         from = try? values.decode(String.self, forKey: .from)
         to = try? values.decode(String.self, forKey: .to)
-        gasPrice = try? values.decode(Double.self, forKey: .gasPrice)
-        if let gasLimit = try? values.decode(Double.self, forKey: .gasLimit) {
+        if let value = try? values.decode(String.self, forKey: .value) {
+            self.value = value
+        }
+        if let gasPrice = try? values.decode(String.self, forKey: .gasPrice) {
+            self.gasPrice = gasPrice
+        }
+        if let gasLimit = try? values.decode(String.self, forKey: .gasLimit) {
             self.gasLimit = gasLimit
-        } else if let gasLimitString = try? values.decode(String.self, forKey: .gasLimit) {
-            self.gasLimit = Double(gasLimitString)
         }
     }
 }

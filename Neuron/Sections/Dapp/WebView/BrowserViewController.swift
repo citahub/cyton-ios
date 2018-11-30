@@ -255,6 +255,9 @@ extension BrowserViewController: UIScrollViewDelegate {
 
 extension BrowserViewController {
     private func pushTransaction(dappCommonModel: DAppCommonModel) {
+        if !identificateValueAndGas(dappModel: dappCommonModel) {
+            return
+        }
         let contractController = storyboard!.instantiateViewController(withIdentifier: "contractController") as! ContractController
         contractController.delegate = self
         contractController.requestAddress = webView.url!.absoluteString
@@ -269,6 +272,34 @@ extension BrowserViewController {
         controller.delegate = self
         controller.dappCommonModel = dappCommonModel
         present(controller, animated: false)
+    }
+
+    func identificateValueAndGas(dappModel: DAppCommonModel) -> Bool {
+        if dappModel.chainType == "AppChain" {
+            if dappModel.appChain?.value?.toBigUInt() == nil {
+                Toast.showToast(text: "DApp.SendTransactionError.emptyValue".localized())
+                return false
+            }
+            if dappModel.appChain?.quota == nil || dappModel.appChain?.quota?.count == 0 {
+                Toast.showToast(text: "DApp.SendTransactionError.emptyQuota".localized())
+                return false
+            }
+            return true
+        } else {
+            if dappModel.eth?.value?.toBigUInt() == nil {
+                Toast.showToast(text: "DApp.SendTransactionError.emptyValue".localized())
+                return false
+            }
+            if dappModel.eth?.gasLimit?.toBigUInt() == nil {
+                Toast.showToast(text: "DApp.SendTransactionError.emptyGasLimit".localized())
+                return false
+            }
+            if dappModel.eth?.gasPrice?.toBigUInt() == nil {
+                Toast.showToast(text: "DApp.SendTransactionError.emptyGasPrice".localized())
+                return false
+            }
+            return true
+        }
     }
 }
 
