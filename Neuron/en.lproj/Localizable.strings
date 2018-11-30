@@ -66,8 +66,8 @@
 
 // Ethereum Sign Message Error
 // ---------------------------------------------------------
-"ETHSignMessageService.walletNotFound" = "Wallet not found";
-"ETHSignMessageService.signMessageFailed" = "Failed to sign the message";
+"ETHSignMessageService.Error.walletNotFound" = "Wallet not found";
+"ETHSignMessageService.Error.signMessageFailed" = "Failed to sign the message";
 
 // Wallet
 // ---------------------------------------------------------

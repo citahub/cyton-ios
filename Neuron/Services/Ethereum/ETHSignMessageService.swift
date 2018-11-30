@@ -15,7 +15,7 @@ struct ETHSignMessageService {
         case signMessageFailed
 
         var errorDescription: String? {
-            return "ETHSignMessageService.\(rawValue)".localized()
+            return "ETHSignMessageService.Error.\(rawValue)".localized()
         }
     }
 
