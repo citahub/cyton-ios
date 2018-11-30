@@ -63,6 +63,11 @@
 "CustomTokenError.badSymbolError" = "Token symbol不正确";
 "CustomTokenError.undefinedError" = "未知错误";
 
+// Ethereum Sign Message Error
+// ---------------------------------------------------------
+"ETHSignMessageService.walletNotFound" = "未找到该钱包";
+"ETHSignMessageService.signMessageFailed" = "签名失败";
+
 // Wallet
 // ---------------------------------------------------------
 "Wallet" = "钱包";

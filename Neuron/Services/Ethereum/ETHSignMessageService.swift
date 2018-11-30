@@ -10,17 +10,20 @@ import Foundation
 import AppChain
 
 struct ETHSignMessageService {
-    enum Error: Swift.Error {
-        case walletIsNull
-        case privateKeyIsNull
+    enum Error: String, LocalizedError {
+        case walletNotFound
         case signMessageFailed
+
+        var errorDescription: String? {
+            return "ETHSignMessageService.\(rawValue)".localized()
+        }
     }
 
     public static func sign(message: String, password: String) throws -> String {
         let messageData = Data.fromHex(message) ?? Data()
         let walletModel = AppModel.current.currentWallet!
         guard let wallet = walletModel.wallet else {
-            throw Error.walletIsNull
+            throw Error.walletNotFound
         }
 
         let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
@@ -34,7 +37,7 @@ struct ETHSignMessageService {
         let messageData = Data.fromHex(message) ?? Data()
         let walletModel = AppModel.current.currentWallet!
         guard let wallet = walletModel.wallet else {
-            throw Error.walletIsNull
+            throw Error.walletNotFound
         }
 
         let privateKey = try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
