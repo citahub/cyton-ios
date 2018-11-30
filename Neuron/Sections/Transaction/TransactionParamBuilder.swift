@@ -143,20 +143,13 @@ class TransactionParamBuilder: NSObject {
     }
 
     private func fetchTokenPrice(token: TokenModel) {
-        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
-        guard let tokenId = currencyToken?.id else {
-            return
-        }
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        currencySymbol = currency.symbol
-        CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
-            switch result {
-            case .success(let price):
+        let symbol = token.symbol
+        DispatchQueue.global().async {
+            if let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currency.short) {
                 self.tokenPrice = price
-            case .error:
-                break
             }
-        })
+        }
     }
 
     private func rebuildGasCalculator() {
