@@ -126,25 +126,35 @@ private extension MessageSignController {
     }
 
     func ethSignPersonalMessage(password: String) {
-        ETHSignMessageService.signPersonal(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .success(let signed):
-                self.finish(signed: signed)
-            case .error(let error):
-                self.showSignError(error.localizedDescription)
+        DispatchQueue.global().async {
+            do {
+                let signed = try ETHSignMessageService.signPersonal(message: self.dappCommonModel.eth?.data ?? "", password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.finish(signed: signed)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.showSignError(error.localizedDescription)
+                }
             }
         }
     }
 
     func ethSignMessage(password: String) {
-        ETHSignMessageService.sign(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .success(let signed):
-                self.finish(signed: signed)
-            case .error(let error):
-                self.showSignError(error.localizedDescription)
+        DispatchQueue.global().async {
+            do {
+                let signed = try ETHSignMessageService.sign(message: self.dappCommonModel.eth?.data ?? "", password: password)
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.finish(signed: signed)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.showSignError(error.localizedDescription)
+                }
             }
         }
     }

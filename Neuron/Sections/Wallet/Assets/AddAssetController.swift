@@ -146,18 +146,21 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         tokenModel.name = ""
         tokenModel.symbol = ""
         tokenModel.decimals = 0
-        let appmodel = AppModel.current
+
+        let walletAddress = AppModel.current.currentWallet!.address
         Toast.showHUD()
-        ERC20TokenService.addERC20TokenToApp(contractAddress: token, walletAddress: (appmodel.currentWallet?.address)!) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .success(let tokenM):
-                self.tokenModel = tokenM
-                self.tokenModel.address = token
-            case .error:
-                Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
+        DispatchQueue.global().async {
+            let result = try? CustomERC20TokenService.searchTokenData(contractAddress: token, walletAddress: walletAddress)
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+                if let tokenModel = result {
+                    self.tokenModel = tokenModel
+                    self.tokenModel.address = token
+                } else {
+                    Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
+                }
+                self.aTable.reloadData()
             }
-            self.aTable.reloadData()
         }
     }
 }

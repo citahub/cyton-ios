@@ -8,18 +8,21 @@
 
 import UIKit
 import Alamofire
+import PromiseKit
 
 struct NFTService {
-    func getErc721Data(with address: String, completion: @escaping (EthServiceResult<NFTModel>) -> Void) {
+    func getErc721Data(with address: String) throws -> NFTModel {
         let url = ServerApi.openseaURL + address
-        Alamofire.request(url, method: .get).responseJSON { (response) in
-            if response.error == nil {
-                let nftModel = try! JSONDecoder().decode(NFTModel.self, from: response.data!)
-                completion(EthServiceResult.success(nftModel))
-            } else {
-                completion(EthServiceResult.error(response.error!))
+        return try Promise<NFTModel>.init { (resolver) in
+            Alamofire.request(url, method: .get).responseJSON { (response) in
+                if response.error == nil {
+                    let nftModel = try! JSONDecoder().decode(NFTModel.self, from: response.data!)
+                    resolver.fulfill(nftModel)
+                } else {
+                    resolver.reject(response.error!)
+                }
             }
-        }
+        }.wait()
     }
 }
 
