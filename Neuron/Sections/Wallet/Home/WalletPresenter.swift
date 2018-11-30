@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import BigInt
-import PromiseKit
 import Web3swift
 import EthereumAddress
 
