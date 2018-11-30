@@ -19,12 +19,6 @@ enum CustomTokenError: String, LocalizedError {
     }
 }
 
-// TODO: Remove result type
-enum SignMessageResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum SendTransactionError: String, LocalizedError {
     case invalidSourceAddress
     case invalidDestinationAddress
