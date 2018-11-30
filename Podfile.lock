@@ -1,6 +1,6 @@
 PODS:
   - Alamofire (4.7.3)
-  - AppChainSwift (0.20.3):
+  - AppChainSwift (0.20.5):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - PromiseKit (~> 6.5)
@@ -61,7 +61,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.3`)
+  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.5`)
   - BulletinBoard (from `https://github.com/alexaubry/BulletinBoard`, commit `7086607d3476cea29cd77a65d13df5c8ed0da52e`)
   - EFQRCode
   - IGIdenticon (~> 0.6)
@@ -101,7 +101,7 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.3
+    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
@@ -112,7 +112,7 @@ EXTERNAL SOURCES:
 CHECKOUT OPTIONS:
   AppChainSwift:
     :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.3
+    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
@@ -122,7 +122,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppChainSwift: cce29f74b3ef4cd73a694f4b30a6d02860573dea
+  AppChainSwift: 0957a762aa81d31cee3276834096e0f6d4fca1fd
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BulletinBoard: 927f4f9fd22503ceecd71bfc830fd65d5996593a
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
@@ -146,6 +146,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: ba3c171e6bb54015e1b0de1d7316d9a495ae8673
+PODFILE CHECKSUM: beb75d52d4fb090be32eb898fb3ca2ea9a3e4566
 
 COCOAPODS: 1.5.3

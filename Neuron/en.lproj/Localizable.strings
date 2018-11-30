@@ -64,10 +64,10 @@
 "CustomTokenError.badSymbolError" = "Bad token symbol";
 "CustomTokenError.undefinedError" = "Undefined error";
 
-// Ethereum Sign Message Error
+// Sign Message Error
 // ---------------------------------------------------------
-"ETHSignMessageService.walletNotFound" = "Wallet not found";
-"ETHSignMessageService.signMessageFailed" = "Failed to sign the message";
+"MessageSign.Error.walletNotFound" = "Wallet not found";
+"MessageSign.Error.signMessageFailed" = "Failed to sign the message";
 
 // Wallet
 // ---------------------------------------------------------
