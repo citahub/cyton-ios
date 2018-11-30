@@ -130,7 +130,6 @@
 		896D044220AE69C5002CFF6A /* NeuronTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044120AE69C5002CFF6A /* NeuronTests.swift */; };
 		896D044D20AE69C5002CFF6A /* NeuronUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D044C20AE69C5002CFF6A /* NeuronUITests.swift */; };
 		8972FD0F218B54A100C27147 /* AdvancedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8972FD0E218B54A100C27147 /* AdvancedViewController.swift */; };
-		89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89733043217ED041001B8D93 /* ETHSignMessageService.swift */; };
 		8978846321AD26690034AF4F /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8978846221AD26690034AF4F /* neuron.js */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
 		8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89812129218D3161000813C8 /* QRCodeViewController.swift */; };
@@ -351,7 +350,6 @@
 		896D044C20AE69C5002CFF6A /* NeuronUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeuronUITests.swift; sourceTree = "<group>"; };
 		896D044E20AE69C5002CFF6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8972FD0E218B54A100C27147 /* AdvancedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedViewController.swift; sourceTree = "<group>"; };
-		89733043217ED041001B8D93 /* ETHSignMessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ETHSignMessageService.swift; sourceTree = "<group>"; };
 		8978846221AD26690034AF4F /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		89812129218D3161000813C8 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
@@ -524,7 +522,6 @@
 				6E8BFC3021AFDBB5004752CC /* EthereumBalanceLoader.swift */,
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				1A19C2DD21B12DE800C289D0 /* EthereumMessageSigner.swift */,
-				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
 				89D84CE021475755006B0287 /* NFTService.swift */,
 				6E876840218022F30032EBCE /* TokenProfile.swift */,
 				6E3B2B6C219ED9230095257D /* Ethereum+TransactionDetails.swift */,
@@ -1387,7 +1384,6 @@
 				892A1985215A55F400B2293D /* Double+Extension.swift in Sources */,
 				8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */,
 				1A3C652C212EAC4800F1A0AA /* String+Extension.swift in Sources */,
-				89733044217ED041001B8D93 /* ETHSignMessageService.swift in Sources */,
 				1A69465C21916BE5000093A2 /* EthereumTxSender.swift in Sources */,
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,
 				1A1E1B8B21A3CF3A00C24D10 /* SignMessagePageItem.swift in Sources */,
