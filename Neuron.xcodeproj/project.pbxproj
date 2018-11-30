@@ -192,7 +192,6 @@
 		89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */; };
 		89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */; };
 		89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */; };
-		89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */; };
 		89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */; };
 		89FE21DE20EDB70000A09302 /* ServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21DD20EDB70000A09302 /* ServiceErrors.swift */; };
 		E2E67496168FEDCBC828A891 /* Pods_NeuronUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */; };
@@ -414,7 +413,6 @@
 		89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeystoreController.swift; sourceTree = "<group>"; };
 		89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeystoreController.xib; sourceTree = "<group>"; };
 		89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFiles.swift; sourceTree = "<group>"; };
-		89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21DD20EDB70000A09302 /* ServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceErrors.swift; sourceTree = "<group>"; };
 		8CC6FD685582D038A3767657 /* Pods_Neuron.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Neuron.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -522,7 +520,6 @@
 				89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */,
 				1A69465B21916BE5000093A2 /* EthereumTxSender.swift */,
 				6E8BFC3021AFDBB5004752CC /* EthereumBalanceLoader.swift */,
-				89FE21D720EC7E1800A09302 /* ERC20TokenService.swift */,
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				89733043217ED041001B8D93 /* ETHSignMessageService.swift */,
 				89D84CE021475755006B0287 /* NFTService.swift */,
@@ -1411,7 +1408,6 @@
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				6E9B947B21A4080300D67357 /* DesignableButton.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
-				89FE21D820EC7E1800A09302 /* ERC20TokenService.swift in Sources */,
 				6E3B2B6B219D938F0095257D /* SentTransaction.swift in Sources */,
 				1A5515E521898A1000D34791 /* WalletKeystoreManager.swift in Sources */,
 				6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */,
