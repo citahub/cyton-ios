@@ -1,5 +1,5 @@
 //
-//  ServiceErrors.swift
+//  SendTransactionError.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/7/5.
@@ -7,17 +7,6 @@
 //
 
 import Foundation
-
-enum CustomTokenError: String, LocalizedError {
-    case wrongBalanceError
-    case badNameError
-    case badSymbolError
-    case undefinedError
-
-    var errorDescription: String? {
-        return "CustomTokenError.\(rawValue)".localized()
-    }
-}
 
 enum SendTransactionError: String, LocalizedError {
     case invalidSourceAddress

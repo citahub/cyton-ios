@@ -9,7 +9,18 @@
 import Foundation
 import Web3swift
 import EthereumAddress
-import struct BigInt.BigUInt
+import BigInt
+
+enum CustomTokenError: String, LocalizedError {
+    case wrongBalanceError
+    case badNameError
+    case badSymbolError
+    case undefinedError
+
+    var errorDescription: String? {
+        return "CustomTokenError.\(rawValue)".localized()
+    }
+}
 
 struct CustomERC20TokenService {
     static func searchTokenData(contractAddress: String, walletAddress: String) throws -> TokenModel {
