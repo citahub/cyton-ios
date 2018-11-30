@@ -26,22 +26,23 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
         dataArray.removeAll()
         let appModel = AppModel.current
         let address = appModel.currentWallet!.address
-        let nftService = NFTService()
-        nftService.getErc721Data(with: address) { (result) in
-            switch result {
-            case .success(let nftModel):
-                self.dataArray = nftModel.assets ?? []
-                if self.dataArray.count == 0 {
-                    self.showBlankOverlay()
+        DispatchQueue.global().async {
+            let result = try? NFTService().getErc721Data(with: address)
+            DispatchQueue.main.async {
+                if let nftModel = result {
+                    self.dataArray = nftModel.assets ?? []
+                    if self.dataArray.count == 0 {
+                        self.showBlankOverlay()
+                    } else {
+                        self.removeOverlay()
+                    }
                 } else {
-                    self.removeOverlay()
+                    Toast.showToast(text: "网络错误，请稍后再试.")
+                    self.showNetworkFailOverlay()
                 }
-            case .error:
-                Toast.showToast(text: "网络错误，请稍后再试.")
-                self.showNetworkFailOverlay()
+                self.tableView.reloadData()
+                self.tableView.refreshControl?.endRefreshing()
             }
-            self.tableView.reloadData()
-            self.tableView.refreshControl?.endRefreshing()
         }
     }
 

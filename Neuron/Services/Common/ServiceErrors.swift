@@ -8,12 +8,6 @@
 
 import Foundation
 
-// TODO: Remove result type
-enum EthServiceResult<T> {
-    case success(T)
-    case error(Error)
-}
-
 enum CustomTokenError: String, LocalizedError {
     case wrongBalanceError
     case badNameError
