@@ -60,7 +60,7 @@ extension WalletManager {
 
         var privateKey = try bip32Keystore.UNSAFE_getPrivateKeyData(password: password, account: address)
         defer { Data.zero(&privateKey) }
-        guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password) else {
+        guard let keystore = try EthereumKeystoreV3(privateKey: privateKey, password: password, aesMode: "aes-128-ctr") else {
             throw Error.invalidMnemonic
         }
 
@@ -92,7 +92,7 @@ extension WalletManager {
 
     func importPrivateKey(privateKey: String, password: String) throws -> Wallet {
         guard let data = Data.fromHex(privateKey.trimmingCharacters(in: .whitespacesAndNewlines)),
-            let keystore = try EthereumKeystoreV3(privateKey: data, password: password),
+            let keystore = try EthereumKeystoreV3(privateKey: data, password: password, aesMode: "aes-128-ctr"),
             let address = keystore.getAddress()?.address else {
             throw Error.invalidPrivateKey
         }
