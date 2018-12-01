@@ -286,15 +286,15 @@ extension BrowserViewController {
             }
             return true
         } else {
-            if dappModel.eth?.value?.toBigUInt() == nil {
+            if dappModel.eth?.value?.toBigUInt() == nil && dappModel.eth?.value != nil {
                 Toast.showToast(text: "DApp.SendTransactionError.emptyValue".localized())
                 return false
             }
-            if dappModel.eth?.gasLimit?.toBigUInt() == nil {
+            if dappModel.eth?.gasLimit?.toBigUInt() == nil && dappModel.eth?.gasLimit != nil {
                 Toast.showToast(text: "DApp.SendTransactionError.emptyGasLimit".localized())
                 return false
             }
-            if dappModel.eth?.gasPrice?.toBigUInt() == nil {
+            if dappModel.eth?.gasPrice?.toBigUInt() == nil && dappModel.eth?.gasPrice != nil {
                 Toast.showToast(text: "DApp.SendTransactionError.emptyGasPrice".localized())
                 return false
             }
