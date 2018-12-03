@@ -32,7 +32,7 @@ class EthereumTxSender {
         data: Data,
         password: String
     ) throws -> TxHash {
-        guard let toAddress = EthereumAddress(to) else {
+        guard let toAddress = EthereumAddress(to.addHexPrefix()) else {
             throw SendTransactionError.invalidDestinationAddress
         }
 
