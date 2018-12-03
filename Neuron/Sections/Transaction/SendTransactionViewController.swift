@@ -138,7 +138,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         view.endEditing(true)
 
         let amount = Double(amountTextField.text!) ?? 0.0
-        paramBuilder.value = amount.toAmount(token.decimals)
+        paramBuilder.value = amount.toAmount()
         paramBuilder.to = addressTextField.text!
         paramBuilder.amount = amount
 
@@ -170,13 +170,13 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         case .ether, .appChain:
             let balance = NSDecimalNumber(string: String(token.tokenBalance))
             let txFee = NSDecimalNumber(string: String(paramBuilder.txFeeNatural))
-            let amount = balance.subtracting(txFee).doubleValue
-            if amount < 0 {
+            let amount = balance.subtracting(txFee)
+            if amount.doubleValue < 0 {
                 Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
                 return
             }
-            amountTextField.text = "\(amount)"
-            paramBuilder.value = amount.toAmount(token.decimals)
+            amountTextField.text = amount.stringValue
+            paramBuilder.value = amount.doubleValue.toAmount(token.decimals)
         case .erc20:
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
@@ -284,7 +284,6 @@ private extension SendTransactionViewController {
             self.transactionAvailableBalance()
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
-            self.amountTextField.text = ""
         }))
         present(alert, animated: true, completion: nil)
         return false

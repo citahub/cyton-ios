@@ -24,7 +24,7 @@ class TxSummaryPageItem: BLTNPageItem {
         if param.amount >= 0.00000001 {
             summaryView.amountLabel.text = Double.fromAmount(param.value, decimals: param.decimals).decimal + " "
         } else {
-            summaryView.amountLabel.text = String(param.amount) + " "
+            summaryView.amountLabel.text = NSDecimalNumber(value: param.amount).stringValue + " "
         }
 
         let range = NSRange(location: summaryView.amountLabel.text!.lengthOfBytes(using: .utf8), length: param.symbol.lengthOfBytes(using: .utf8))
