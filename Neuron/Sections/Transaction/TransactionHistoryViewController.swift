@@ -127,7 +127,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         } else if let image = profile.image {
             self.tokenIconView.image = image
         }
-        self.tokenAmountLabel.text = profile.possess
+        self.tokenAmountLabel.text = profile.priceText
     }
 
     private func loadMoreData() {
