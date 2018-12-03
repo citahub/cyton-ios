@@ -13,7 +13,7 @@ import JavaScriptCore
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
-    private var mainUrl = URL(string: "https://dapp.staging.cryptape.com")!
+    private var mainUrl = URL(string: "https://dapp.cryptape.com")!
 
     override func viewDidLoad() {
         super.viewDidLoad()
