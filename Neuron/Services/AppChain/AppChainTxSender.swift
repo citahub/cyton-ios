@@ -32,7 +32,7 @@ class AppChainTxSender {
         chainId: BigUInt,
         password: String
     ) throws -> TxHash {
-        let destinationEthAddress = Address(to)
+        let destinationEthAddress = Address(to.addHexPrefix())
         if !to.isEmpty && destinationEthAddress == nil {
             throw SendTransactionError.invalidDestinationAddress
         }
@@ -59,7 +59,7 @@ class AppChainTxSender {
         )
         let signed = try sign(transaction: transaction, password: password)
         let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
-        let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction)
+        let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction, chainHosts: appChain.provider.url.absoluteString)
         TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
         return txHash
     }

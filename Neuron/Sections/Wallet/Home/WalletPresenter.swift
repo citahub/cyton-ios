@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import BigInt
-import PromiseKit
 import Web3swift
 import EthereumAddress
 
@@ -218,19 +217,6 @@ extension WalletPresenter {
 // MARK: - Utils
 extension WalletPresenter {
     private func getTokenPrice(token: Token) -> Double? {
-        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
-        guard let tokenId = currencyToken?.id else {
-            return nil
-        }
-        return try? Promise<Double>.init { (resolver) in
-            CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
-                switch result {
-                case .success(let price):
-                    resolver.fulfill(price)
-                case .error(let error):
-                    resolver.reject(error)
-                }
-            })
-        }.wait()
+        return TokenPriceLoader().getPrice(symbol: token.symbol, currency: currency.short)
     }
 }

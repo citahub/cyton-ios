@@ -9,72 +9,63 @@
 import Foundation
 import Web3swift
 import EthereumAddress
-import struct BigInt.BigUInt
+import BigInt
+
+enum CustomTokenError: String, LocalizedError {
+    case wrongBalanceError
+    case badNameError
+    case badSymbolError
+    case undefinedError
+
+    var errorDescription: String? {
+        return "CustomTokenError.\(rawValue)".localized()
+    }
+}
 
 struct CustomERC20TokenService {
-    static func decimals(walletAddress: String, token: String, completion: @escaping (EthServiceResult<BigUInt>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(ERC20Token: token)!
-            var options = TransactionOptions()
-            options.from = EthereumAddress(walletAddress)
-            let transaction = contract.method("decimals", parameters: [AnyObject]())!
-            do {
-                let decimals = try transaction.call(transactionOptions: options)
-                if let decimals = decimals["0"] as? BigUInt {
-                    DispatchQueue.main.async {
-                        completion(EthServiceResult.success(decimals))
-                    }
-                } else {
-                    throw CustomTokenError.wrongBalanceError
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(EthServiceResult.error(CustomTokenError.wrongBalanceError))
-                }
-            }
+    static func searchTokenData(contractAddress: String, walletAddress: String) throws -> TokenModel {
+        let contractAddress = contractAddress.addHexPrefix()
+        guard EthereumAddress(contractAddress) != nil else {
+            throw CustomTokenError.undefinedError
         }
+
+        let tokenModel = TokenModel()
+        if let name = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "name") as? String {
+            tokenModel.name = name
+        } else {
+            throw CustomTokenError.badNameError
+        }
+
+        if let symbol = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "symbol") as? String {
+            tokenModel.symbol = symbol
+        } else {
+            throw CustomTokenError.badSymbolError
+        }
+
+        if let decimals = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "decimals") as? BigUInt {
+            tokenModel.decimals = Int(decimals)
+        } else {
+            throw CustomTokenError.wrongBalanceError
+        }
+
+        guard !tokenModel.name.isEmpty, !tokenModel.symbol.isEmpty else {
+            throw CustomTokenError.undefinedError
+        }
+        return tokenModel
     }
 
-    static func name(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
-        let contract = self.contract(ERC20Token: token)!
-        if let transaction = contract.method("name", parameters: [AnyObject]()) {
+    private static func callTransaction(contractAddress: String, walletAddress: String, method: String) -> Any? {
+        let contract = self.contract(ERC20Token: contractAddress)!
+        if let transaction = contract.method(method, parameters: [AnyObject]()) {
             var options = TransactionOptions()
             options.from = EthereumAddress(walletAddress)
-            do {
-                let name = try transaction.call(transactionOptions: options)
-                if let names = name["0"] as? String, !names.isEmpty {
-                    completion(EthServiceResult.success(names))
-                } else {
-                    throw CustomTokenError.badNameError
-                }
-            } catch {
-                completion(EthServiceResult.error(CustomTokenError.badNameError))
+            if let result = try? transaction.call(transactionOptions: options) {
+                return result["0"]
+            } else {
+                return nil
             }
         } else {
-            completion(EthServiceResult.error(CustomTokenError.badNameError))
-        }
-    }
-
-    static func symbol(walletAddress: String, token: String, completion: @escaping (EthServiceResult<String>) -> Void) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            let contract = self.contract(ERC20Token: token)!
-            let transaction = contract.method("symbol", parameters: [AnyObject]())!
-            var options = TransactionOptions()
-            options.from = EthereumAddress(walletAddress)
-            do {
-                let symbol = try transaction.call(transactionOptions: options)
-                if let symbol = symbol["0"] as? String, !symbol.isEmpty {
-                    DispatchQueue.main.async {
-                        completion(EthServiceResult.success(symbol))
-                    }
-                } else {
-                    throw CustomTokenError.badSymbolError
-                }
-            } catch {
-                DispatchQueue.main.async {
-                    completion(EthServiceResult.error(CustomTokenError.badSymbolError))
-                }
-            }
+            return nil
         }
     }
 
@@ -91,5 +82,4 @@ struct CustomERC20TokenService {
         options.from = EthereumAddress(wAddress)
         return options
     }
-
 }

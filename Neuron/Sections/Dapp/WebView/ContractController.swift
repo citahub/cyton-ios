@@ -186,8 +186,8 @@ class ContractController: UITableViewController, TransactonSender {
                 options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
                 options.value = self.dappCommonModel.eth?.value?.toBigUInt()
                 let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
-                if let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: nil) {
-                    self.gasLimit = estimatedGas
+                if let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: options) {
+                    self.gasLimit = estimatedGas * 4
                 } else {
                     self.gasLimit = BigUInt(0)
                 }
@@ -196,8 +196,7 @@ class ContractController: UITableViewController, TransactonSender {
                 let gas = self.gasPrice * self.gasLimit
                 self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
                 self.gasLabel.text = Double(self.ethereumGas!)!.trailingZerosTrimmed + self.tokenModel.symbol
-                let bigUIntValue = Web3Utils.parseToBigUInt(self.value, units: .eth)!
-                self.totlePayLabel.text =  self.getTotleValue(value: bigUIntValue.fromQuota(), gas: gas) + self.tokenModel.symbol
+                self.totlePayLabel.text =  self.getTotleValue(value: self.dappCommonModel.eth?.value?.toBigUInt() ?? 0, gas: gas) + self.tokenModel.symbol
                 Toast.hideHUD()
             }
         }
@@ -232,6 +231,7 @@ class ContractController: UITableViewController, TransactonSender {
         }
         paramBuilder.from = AppModel.current.currentWallet!.address
         paramBuilder.value = Double(value)!.toAmount(tokenModel.decimals)
+        paramBuilder.amount = NSDecimalNumber(string: value).doubleValue
 
         switch chainType {
         case .appChain:

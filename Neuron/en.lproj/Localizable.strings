@@ -13,7 +13,7 @@
 
 // DApp
 // ---------------------------------------------------------
-"DApp.Home" = "DApps";
+"DApp.Home" = "DApp";
 "DApp.NFT.EmptyData" = "Empty Data";
 
 // Settings
@@ -63,6 +63,11 @@
 "CustomTokenError.badNameError" = "Bad token name";
 "CustomTokenError.badSymbolError" = "Bad token symbol";
 "CustomTokenError.undefinedError" = "Undefined error";
+
+// Sign Message Error
+// ---------------------------------------------------------
+"MessageSign.Error.walletNotFound" = "Wallet not found";
+"MessageSign.Error.signMessageFailed" = "Failed to sign the message";
 
 // Wallet
 // ---------------------------------------------------------

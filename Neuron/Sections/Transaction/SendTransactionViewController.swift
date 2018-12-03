@@ -12,6 +12,7 @@ import BigInt
 import AppChain
 import Web3swift
 import EthereumAddress
+import RealmSwift
 
 protocol TransactonSender {
     var paramBuilder: TransactionParamBuilder! { get set }
@@ -137,8 +138,18 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         view.endEditing(true)
 
         let amount = Double(amountTextField.text!) ?? 0.0
-        paramBuilder.value = amount.toAmount(token.decimals)
+        paramBuilder.value = amount.toAmount()
         paramBuilder.to = addressTextField.text!
+        paramBuilder.amount = amount
+
+        if token.type == .erc20 {
+            let realm = try! Realm()
+            let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
+            if ether.tokenBalance < paramBuilder.txFeeNatural {
+                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                return
+            }
+        }
 
         if isEffectiveTransferInfo {
             summaryPageItem.update(paramBuilder)
@@ -155,12 +166,29 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     @IBAction func transactionAvailableBalance() {
         // TODO: FIXME: erc20 token requires ETH balance for tx fee
-        let amount = token.tokenBalance - paramBuilder.txFeeNatural
-        amountTextField.text = "\(amount)"
-        paramBuilder.value = amount.toAmount(token.decimals)
-        guard paramBuilder.hasSufficientBalance else {
-            Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
-            return
+        switch token.type {
+        case .ether, .appChain:
+            let balance = NSDecimalNumber(string: String(token.tokenBalance))
+            let txFee = NSDecimalNumber(string: String(paramBuilder.txFeeNatural))
+            let amount = balance.subtracting(txFee)
+            if amount.doubleValue < 0 {
+                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                return
+            }
+            amountTextField.text = amount.stringValue
+            paramBuilder.value = amount.doubleValue.toAmount(token.decimals)
+        case .erc20:
+            let realm = try! Realm()
+            let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
+            if ether.tokenBalance < paramBuilder.txFeeNatural {
+                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                return
+            }
+            let amount = token.tokenBalance
+            amountTextField.text = "\(amount)"
+            paramBuilder.value = amount.toAmount(token.decimals)
+        default:
+            break
         }
     }
 
@@ -179,6 +207,10 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
+        if paramBuilder.tokenPrice > 0 {
+            let amount = paramBuilder.txFeeNatural * paramBuilder.tokenPrice
+            gasCostLabel.text! += "≈ \(paramBuilder.currencySymbol) " + String(format: "%.2lf", amount)
+        }
     }
 
     private func createPasswordPageItem() -> PasswordPageItem {
@@ -252,7 +284,6 @@ private extension SendTransactionViewController {
             self.transactionAvailableBalance()
         }))
         alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
-            self.amountTextField.text = ""
         }))
         present(alert, animated: true, completion: nil)
         return false
@@ -331,10 +362,19 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         } else {
             cell.isHidden = false
         }
+
+        if indexPath.row == 3 {
+            if paramBuilder.tokenType == .appChain {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .disclosureIndicator
+            }
+        }
     }
 
     func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken token: TokenModel) {
         self.token = token
+        tableView.reloadData()
 
         observers.forEach { (observe) in
             observe.invalidate()
@@ -348,6 +388,9 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         paramBuilder = TransactionParamBuilder(token: token)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
             self.updateGasCost()
+        })
+        observers.append(paramBuilder.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+            self?.updateGasCost()
         })
         paramBuilder.from = AppModel.current.currentWallet!.address
         if recipientAddress != nil {

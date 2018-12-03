@@ -19,6 +19,7 @@ class TransactionParamBuilder: NSObject {
     var data = Data()
     var contractAddress = ""
     var chainId = ""
+    var amount = 0.0
 
     var fetchedGasPrice: BigUInt = 1  // Fetched from node as recommended gas price
     var gasPrice: BigUInt = 1 {
@@ -41,6 +42,7 @@ class TransactionParamBuilder: NSObject {
     private(set) var txFeeNatural: Double = 0
 
     var tokenBalance: BigUInt = 0
+    var balance: Double = 0
 
     @objc dynamic
     private(set) var tokenPrice: Double = 0
@@ -52,7 +54,9 @@ class TransactionParamBuilder: NSObject {
     var hasSufficientBalance: Bool {
         switch tokenType {
         case .ether, .appChain:
-            return tokenBalance >= txFee + value
+            let amount = NSDecimalNumber(string: self.amount.description).adding(NSDecimalNumber(string: txFeeNatural.description))
+            let balance = NSDecimalNumber(string: self.balance.description)
+            return balance.doubleValue >= amount.doubleValue
         case .erc20, .appChainErc20:
             return tokenBalance >= value
         }
@@ -75,6 +79,7 @@ class TransactionParamBuilder: NSObject {
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
         tokenBalance = token.tokenBalance.toAmount(token.decimals)
+        balance = token.tokenBalance
 
         super.init()
 
@@ -92,6 +97,7 @@ class TransactionParamBuilder: NSObject {
         symbol = builder.symbol
         nativeCoinSymbol = builder.nativeCoinSymbol
         tokenBalance = builder.tokenBalance
+        balance = builder.balance
         super.init()
         gasPrice = builder.gasPrice
         gasLimit = builder.gasLimit
@@ -143,20 +149,16 @@ class TransactionParamBuilder: NSObject {
     }
 
     private func fetchTokenPrice(token: TokenModel) {
-        let currencyToken = CurrencyService().searchCurrencyId(for: token.symbol)
-        guard let tokenId = currencyToken?.id else {
-            return
-        }
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
+        let symbol = token.symbol
         currencySymbol = currency.symbol
-        CurrencyService().getCurrencyPrice(tokenid: tokenId, currencyType: currency.short, completion: { (result) in
-            switch result {
-            case .success(let price):
-                self.tokenPrice = price
-            case .error:
-                break
+        DispatchQueue.global().async {
+            if let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currency.short) {
+                DispatchQueue.main.async {
+                    self.tokenPrice = price
+                }
             }
-        })
+        }
     }
 
     private func rebuildGasCalculator() {

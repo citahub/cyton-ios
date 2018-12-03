@@ -63,6 +63,11 @@
 "CustomTokenError.badSymbolError" = "Token symbol不正确";
 "CustomTokenError.undefinedError" = "未知错误";
 
+// Sign Message Error
+// ---------------------------------------------------------
+"MessageSign.Error.walletNotFound" = "未找到该钱包";
+"MessageSign.Error.signMessageFailed" = "签名失败";
+
 // Wallet
 // ---------------------------------------------------------
 "Wallet" = "钱包";

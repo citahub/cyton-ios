@@ -50,8 +50,9 @@ class DAppNativeMessageHandler: NSObject, WKScriptMessageHandler {
 
     func callback(funcName: String, result: [String: Any]) {
         guard let data = try? JSONSerialization.data(withJSONObject: result, options: .prettyPrinted) else { return }
-        let string = String(bytes: data.bytes, encoding: .utf8) ?? ""
-        let js = "\(funcName)(\'\(string)\')"
+        var string = String(bytes: data.bytes, encoding: .utf8) ?? ""
+        string = string.replacingOccurrences(of: "\n", with: "")
+        let js = "\(funcName)('\(string)')"
         webView?.evaluateJavaScript(js, completionHandler: nil)
     }
 }
@@ -67,6 +68,7 @@ extension WKWebView {
         addNativeFunctionHandler(handler: DAppQRCodeMessageHandler())
         addNativeFunctionHandler(handler: DAppDeviceMotionMessageHandler())
         addNativeFunctionHandler(handler: DAppGyroscopeMessageHandler())
+        addNativeFunctionHandler(handler: DAppPermissionsMessageHandler())
     }
 }
 

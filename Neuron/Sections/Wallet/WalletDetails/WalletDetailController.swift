@@ -33,7 +33,7 @@ class WalletDetailController: UITableViewController {
         walletIconImageView.image = UIImage(data: walletModel.iconData)
     }
 
-    func creatDeleteWalletPageItem() -> PasswordPageItem {
+    func createDeleteWalletPageItem() -> PasswordPageItem {
         let passwordPageItem = PasswordPageItem.create(title: "删除钱包", actionButtonTitle: "确认删除")
 
         passwordPageItem.actionHandler = { [weak self] item in
@@ -71,7 +71,7 @@ class WalletDetailController: UITableViewController {
     }
 
     @IBAction func didDeleteWallet(_ sender: UIButton) {
-        deleteBulletinManager = BLTNItemManager(rootItem: creatDeleteWalletPageItem())
+        deleteBulletinManager = BLTNItemManager(rootItem: createDeleteWalletPageItem())
         deleteBulletinManager?.showBulletin(above: self)
     }
 

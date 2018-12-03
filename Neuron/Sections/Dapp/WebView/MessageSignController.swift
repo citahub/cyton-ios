@@ -8,6 +8,7 @@
 
 import UIKit
 import BLTNBoard
+import AppChain
 
 protocol MessageSignControllerDelegate: class {
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?)
@@ -118,42 +119,90 @@ private extension MessageSignController {
         switch dappCommonModel.name {
         case .signMessage:
             appChainSignMessage(password: password)
-        case .signPersonalMessage:
-            appChainSignPersonalMessage(password: password)
         default:
             break
         }
     }
 
     func ethSignPersonalMessage(password: String) {
-        ETHSignMessageService.signPersonal(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .success(let signed):
-                self.finish(signed: signed)
-            case .error(let error):
-                self.showSignError(error.localizedDescription)
+        DispatchQueue.global().async {
+            do {
+                let messageData = Data.fromHex(self.dappCommonModel.eth?.data ?? "") ?? Data()
+                let privateKey = try self.getPrivateKey(password: password)
+                guard let signed = try EthereumMessageSigner().signPersonalMessage(message: messageData, privateKey: privateKey) else {
+                    throw Error.signMessageFailed
+                }
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.finish(signed: signed)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.showSignError(error.localizedDescription)
+                }
             }
         }
     }
 
     func ethSignMessage(password: String) {
-        ETHSignMessageService.sign(message: dappCommonModel.eth?.data ?? "", password: password) { (result) in
-            Toast.hideHUD()
-            switch result {
-            case .success(let signed):
-                self.finish(signed: signed)
-            case .error(let error):
-                self.showSignError(error.localizedDescription)
+        DispatchQueue.global().async {
+            do {
+                let messageData = Data.fromHex(self.dappCommonModel.eth?.data ?? "") ?? Data()
+                let privateKey = try self.getPrivateKey(password: password)
+                guard let signed = try EthereumMessageSigner().sign(message: messageData, privateKey: privateKey) else {
+                    throw Error.signMessageFailed
+                }
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.finish(signed: signed)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.showSignError(error.localizedDescription)
+                }
             }
         }
     }
 
     func appChainSignMessage(password: String) {
-        // TODO: connect this
+        DispatchQueue.global().async {
+            do {
+                let messageData = Data.fromHex(self.dappCommonModel.eth?.data ?? "") ?? Data()
+                let privateKey = try self.getPrivateKey(password: password)
+                guard let signed = try MessageSigner().sign(message: messageData, privateKey: privateKey) else {
+                    throw Error.signMessageFailed
+                }
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.finish(signed: signed)
+                }
+            } catch let error {
+                DispatchQueue.main.async {
+                    Toast.hideHUD()
+                    self.showSignError(error.localizedDescription)
+                }
+            }
+        }
+    }
+}
+
+extension MessageSignController {
+    enum Error: String, LocalizedError {
+        case walletNotFound
+        case signMessageFailed
+
+        var errorDescription: String? {
+            return "MessageSign.Error.\(rawValue)".localized()
+        }
     }
 
-    func appChainSignPersonalMessage(password: String) {
-        // TODO: connect this
+    private func getPrivateKey(password: String) throws -> String {
+        guard let wallet = AppModel.current.currentWallet!.wallet else {
+            throw Error.walletNotFound
+        }
+
+        return try WalletManager.default.exportPrivateKey(wallet: wallet, password: password)
     }
 }
