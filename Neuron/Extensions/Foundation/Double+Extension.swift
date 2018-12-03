@@ -29,7 +29,7 @@ extension Double {
     }
 
     func toAmount(_ decimals: Int = 18) -> BigUInt {
-        return Web3Utils.parseToBigUInt(description, decimals: decimals) ?? 0
+        return Web3Utils.parseToBigUInt(self.decimal, decimals: decimals) ?? 0
     }
 
     func gweiToWei() -> BigUInt {
