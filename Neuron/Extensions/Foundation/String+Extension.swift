@@ -29,10 +29,6 @@ extension String {
     }
 
     func toBigUInt() -> BigUInt? {
-        if hasPrefix("0x") {
-            return BigUInt(removeHexPrefix(), radix: 16)
-        } else {
-            return BigUInt(self)
-        }
+        return BigUInt(string: self)
     }
 }
