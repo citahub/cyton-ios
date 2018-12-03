@@ -139,6 +139,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         let amount = Double(amountTextField.text!) ?? 0.0
         paramBuilder.value = amount.toAmount(token.decimals)
         paramBuilder.to = addressTextField.text!
+        paramBuilder.amount = amount
 
         if isEffectiveTransferInfo {
             summaryPageItem.update(paramBuilder)
@@ -179,6 +180,10 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
+        if paramBuilder.tokenPrice > 0 {
+            let amount = paramBuilder.txFeeNatural * paramBuilder.tokenPrice
+            gasCostLabel.text! += "≈ \(paramBuilder.currencySymbol) " + String(format: "%.2lf", amount)
+        }
     }
 
     private func createPasswordPageItem() -> PasswordPageItem {
@@ -331,10 +336,19 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         } else {
             cell.isHidden = false
         }
+
+        if indexPath.row == 3 {
+            if paramBuilder.tokenType == .appChain {
+                cell.accessoryType = .none
+            } else {
+                cell.accessoryType = .disclosureIndicator
+            }
+        }
     }
 
     func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken token: TokenModel) {
         self.token = token
+        tableView.reloadData()
 
         observers.forEach { (observe) in
             observe.invalidate()
@@ -348,6 +362,9 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         paramBuilder = TransactionParamBuilder(token: token)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { (_, _) in
             self.updateGasCost()
+        })
+        observers.append(paramBuilder.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+            self?.updateGasCost()
         })
         paramBuilder.from = AppModel.current.currentWallet!.address
         if recipientAddress != nil {

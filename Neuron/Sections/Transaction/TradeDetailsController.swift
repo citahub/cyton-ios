@@ -33,7 +33,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 ]
             } else if let appChain = transaction as? AppChainTransactionDetails {
                 transactionType = "AppChain"
-                let gasUsed = String(Double.fromAmount(appChain.gasUsed, decimals: appChain.token.decimals))
+                let gasUsed = String(Double.fromAmount(appChain.gasUsed, decimals: 9))
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
                     appChain.chainName,

@@ -80,18 +80,26 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     // MARK: - Merge
     private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
+        //
+        var newList = [TransactionDetails]()
+        list.forEach { (trans) in
+            if !newList.contains(where: { $0.hash == trans.hash }) {
+                newList.append(trans)
+            }
+        }
+
         // Date range
         let maxDate: Date = self.transactions.first?.date ?? Date.distantFuture
         let minDate: Date
         if self.hasMoreData {
-            minDate = list.last?.date ?? Date.distantPast
+            minDate = newList.last?.date ?? Date.distantPast
         } else {
             minDate = Date.distantPast
         }
         let sentTransactions = self.sentTransactions
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
             // merge status
-            if let transaction = list.first(where: { $0.hash == sentTransaction.hash }) {
+            if let transaction = newList.first(where: { $0.hash == sentTransaction.hash }) {
                 self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
                 transaction.status = sentTransaction.status
                 return false
@@ -103,7 +111,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 return false
             }
         })
-        return (list + sentList).sorted(by: { $0.date > $1.date })
+        return (newList + sentList).sorted(by: { $0.date > $1.date })
     }
 
     // MARK: - Load transactions
@@ -143,6 +151,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     func sentTransactionStatusChanged(transaction: TransactionDetails) {
         if let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) {
             DispatchQueue.main.async {
+                transaction.token = self.token
                 self.transactions.remove(at: idx)
                 self.transactions.insert(transaction, at: idx)
                 self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
