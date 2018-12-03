@@ -21,7 +21,12 @@ class TxSummaryPageItem: BLTNPageItem {
     }
 
     func update(_ param: TransactionParamBuilder) {
-        summaryView.amountLabel.text = Double.fromAmount(param.value, decimals: param.decimals).decimal + " "
+        if param.amount >= 0.00000001 {
+            summaryView.amountLabel.text = Double.fromAmount(param.value, decimals: param.decimals).decimal + " "
+        } else {
+            summaryView.amountLabel.text = String(param.amount) + " "
+        }
+
         let range = NSRange(location: summaryView.amountLabel.text!.lengthOfBytes(using: .utf8), length: param.symbol.lengthOfBytes(using: .utf8))
         summaryView.amountLabel.text! += param.symbol
         let attributedText = NSMutableAttributedString(attributedString: summaryView.amountLabel.attributedText!)

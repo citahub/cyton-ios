@@ -19,6 +19,7 @@ class TransactionParamBuilder: NSObject {
     var data = Data()
     var contractAddress = ""
     var chainId = ""
+    var amount = 0.0
 
     var fetchedGasPrice: BigUInt = 1  // Fetched from node as recommended gas price
     var gasPrice: BigUInt = 1 {
@@ -145,9 +146,12 @@ class TransactionParamBuilder: NSObject {
     private func fetchTokenPrice(token: TokenModel) {
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
         let symbol = token.symbol
+        currencySymbol = currency.symbol
         DispatchQueue.global().async {
             if let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currency.short) {
-                self.tokenPrice = price
+                DispatchQueue.main.async {
+                    self.tokenPrice = price
+                }
             }
         }
     }
