@@ -102,13 +102,14 @@ class SentTransaction: Object, ThreadSafeObject {
     }
     @objc dynamic var date: Date = Date()
     @objc dynamic var ethereumNetwork: String = ""
+    @objc dynamic var chainHosts: String!
 
     @objc dynamic private var privateBlockNumber: String = ""
     @objc dynamic private var privateStatus: Int = 0
     @objc dynamic private var privateAmount: String = ""
     @objc dynamic private var privateTxFee: String = ""
     @objc dynamic private var privateTokenType: String = ""
-    @objc dynamic private var chainHosts: String!
+
 
     @objc override class func primaryKey() -> String? { return "txHash" }
 
