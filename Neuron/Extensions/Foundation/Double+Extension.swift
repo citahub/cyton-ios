@@ -29,7 +29,7 @@ extension Double {
     }
 
     func toAmount(_ decimals: Int = 18) -> BigUInt {
-        let stringValue = NSDecimalNumber(value: self).stringValue
+        let stringValue = NSDecimalNumber(string: self.description).stringValue
         return Web3Utils.parseToBigUInt(stringValue, decimals: decimals) ?? 0
     }
 
