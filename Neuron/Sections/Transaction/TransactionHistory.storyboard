@@ -107,11 +107,11 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x46a23e25df9a0f6c18729dda9ad1af3b6a131160" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7D5-34-WeC">
-                                                    <rect key="frame" x="15" y="19" width="124" height="19"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contract Created" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7D5-34-WeC">
+                                                    <rect key="frame" x="15" y="19" width="130" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="BWE-82-7ri"/>
-                                                        <constraint firstAttribute="width" constant="124" id="GTT-Q7-fsA"/>
+                                                        <constraint firstAttribute="width" constant="130" id="GTT-Q7-fsA"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -143,7 +143,7 @@
                                                     <color key="backgroundColor" white="0.90000000000000002" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZP-Cw-dl4">
-                                                    <rect key="frame" x="149" y="18" width="211" height="19"/>
+                                                    <rect key="frame" x="155" y="18" width="205" height="19"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="19" id="bEB-H5-7Mg"/>
                                                     </constraints>
