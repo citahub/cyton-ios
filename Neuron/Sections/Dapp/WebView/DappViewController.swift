@@ -19,6 +19,7 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         super.viewDidLoad()
 
         self.title = "DApp.Home".localized()
+        self.navigationItem.title = "ÐApp"
 
         addWebView()
         layoutWebView()
