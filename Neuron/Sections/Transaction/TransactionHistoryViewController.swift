@@ -69,8 +69,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
-            let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-            let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
+            let price = self?.tokenProfile?.priceText ?? ""
             message.webView?.evaluateJavaScript("handlePrice('\(price)')", completionHandler: nil)
         }
         navigationController?.pushViewController(controller, animated: true)
