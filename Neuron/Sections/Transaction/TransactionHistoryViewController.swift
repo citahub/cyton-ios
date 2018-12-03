@@ -217,7 +217,7 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             let amount = Double.fromAmount(transaction.value, decimals: transaction.token.decimals).decimal
             if transaction.from.lowercased() == walletAddress.lowercased() ||
                 transaction.from == transaction.to {
-                addressLabel.text = transaction.to
+                addressLabel.text = transaction.to.count > 0 ? transaction.to : "Contract Created"
                 numberLabel.text = "-\(amount)"
             } else {
                 addressLabel.text = transaction.from
