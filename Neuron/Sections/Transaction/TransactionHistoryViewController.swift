@@ -27,7 +27,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "交易列表"
+        title = token.symbol
         tableView.delegate = self
         tableView.dataSource = self
 
