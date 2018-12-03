@@ -73,6 +73,10 @@ class CreateWalletController: UITableViewController {
     }
 
     func canProceedNextStep() -> Bool {
+        if password != confirmPassword {
+            Toast.showToast(text: "两次密码不一致")
+            return false
+        }
         if case .invalid(let reason) = WalletNameValidator.validate(walletName: name ?? "") {
             Toast.showToast(text: reason)
             return false
@@ -81,11 +85,6 @@ class CreateWalletController: UITableViewController {
             Toast.showToast(text: reason)
             return false
         }
-        if password != confirmPassword {
-            Toast.showToast(text: "两次密码不一致")
-            return false
-        }
-
         return true
     }
 
