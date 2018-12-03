@@ -39,7 +39,6 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
         guard let data = try? JSONSerialization.data(withJSONObject: message.body, options: .prettyPrinted) else { return }
         if message.name == MessageName.startGyroscope.rawValue {
             guard motionManager == nil else {
-                self.callback(result: .success([:]))
                 return
             }
             let interval: Interval = (try? JSONDecoder().decode(Parameters.self, from: data))?.interval ?? .normal
@@ -60,7 +59,6 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
                 self?.motionDidUpdate(motion: motion)
             })
             motionManager = manager
-            callback(result: .success([:]))
         } else if message.name == MessageName.stopGyroscope.rawValue {
             motionManager?.stopDeviceMotionUpdates()
             motionManager = nil
@@ -74,6 +72,6 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
             "y": motion.rotationRate.y,
             "z": motion.rotationRate.z
         ]
-        callback(funcName: "onGyroscopeChange", result: ["res": result])
+        callback(result: .success(["res": result]))
     }
 }

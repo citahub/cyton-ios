@@ -39,7 +39,6 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
         guard let data = try? JSONSerialization.data(withJSONObject: message.body, options: .prettyPrinted) else { return }
         if message.name == MessageName.startDeviceMotionListening.rawValue {
             guard motionManager == nil else {
-                self.callback(result: .success([:]))
                 return
             }
             let interval: Interval = (try? JSONDecoder().decode(Parameters.self, from: data))?.interval ?? .normal
@@ -60,11 +59,9 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
                 self?.motionDidUpdate(motion: motion)
             })
             motionManager = manager
-            callback(result: .success([:]))
         } else if message.name == MessageName.stopDeviceMotionListening.rawValue {
             motionManager?.stopDeviceMotionUpdates()
             motionManager = nil
-            callback(result: .success([:]))
         }
     }
 
@@ -74,6 +71,6 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
             "gamma": -motion.attitude.pitch / Double.pi * 180,   // -90 ~ 90
             "beta": motion.attitude.yaw / Double.pi * 180      // -180 ~ 180
         ]
-        callback(funcName: "onDeviceMotionChange", result: ["res": result])
+        callback(result: .success(["res": result]))
     }
 }
