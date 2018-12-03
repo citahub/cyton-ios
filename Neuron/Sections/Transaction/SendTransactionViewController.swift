@@ -145,7 +145,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         if token.type == .erc20 {
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
-            if ether.tokenBalance >= paramBuilder.txFeeNatural {
+            if ether.tokenBalance < paramBuilder.txFeeNatural {
                 Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
                 return
             }
@@ -168,7 +168,9 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         // TODO: FIXME: erc20 token requires ETH balance for tx fee
         switch token.type {
         case .ether, .appChain:
-            let amount = token.tokenBalance - paramBuilder.txFeeNatural
+            let balance = NSDecimalNumber(string: String(token.tokenBalance))
+            let txFee = NSDecimalNumber(string: String(paramBuilder.txFeeNatural))
+            let amount = balance.subtracting(txFee).doubleValue
             if amount < 0 {
                 Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
                 return
