@@ -80,7 +80,6 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
 
     // MARK: - Merge
     private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
-        //
         var newList = [TransactionDetails]()
         list.forEach { (trans) in
             if !newList.contains(where: { $0.hash == trans.hash }) {
