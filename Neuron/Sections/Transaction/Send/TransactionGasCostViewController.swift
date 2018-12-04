@@ -31,7 +31,7 @@ class TransactionGasCostViewController: UITableViewController {
         gasCostTitleLabel.text = "Transaction.Send.gasCost".localized()
         extenDataTitleLabel.text = "Transaction.Send.extenData".localized()
         descLabel.text = "Transaction.Send.gasCostSettingDesc".localized()
-        confirmButton.setTitle("Transaction.Send.confirm".localized(), for: .normal)
+        confirmButton.setTitle("Common.confirm".localized(), for: .normal)
         gasPriceTextField.placeholder = "Transaction.Send.input".localized()
         gasLimitTextField.placeholder = "Transaction.Send.input".localized()
         dataTextPlaceholderLabel.text = "Transaction.Send.inputHexData".localized()

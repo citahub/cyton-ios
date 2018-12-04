@@ -55,7 +55,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         addressTitleLabel.text = "Transaction.Send.receiptAddress".localized()
         addressTextField.placeholder = "Transaction.Send.receiptAddress".localized()
         gasCostTitleLabel.text = "Transaction.Send.gasFee".localized()
-        nextButton.setTitle("Transaction.Send.next".localized(), for: .normal)
+        nextButton.setTitle("Common.next".localized(), for: .normal)
 
         if enableSwitchToken && token == nil {
             token = AppModel.current.nativeTokenList.first
@@ -221,10 +221,10 @@ private extension SendTransactionViewController {
             return false
         }
         let alert = UIAlertController(title: "Transaction.Send.transactionAvailableBalance".localized(), message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Transaction.Send.confirm".localized(), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .default, handler: { (_) in
             self.transactionAvailableBalance()
         }))
-        alert.addAction(UIAlertAction(title: "Transaction.Send.cancel".localized(), style: .destructive, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.cancel".localized(), style: .destructive, handler: { (_) in
         }))
         present(alert, animated: true, completion: nil)
         return false
