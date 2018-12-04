@@ -668,13 +668,13 @@
 		6E8A837921B62E0A0051B3EB /* Send */ = {
 			isa = PBXGroup;
 			children = (
-				6E8A837A21B62E0A0051B3EB /* SendTransactionViewController.swift */,
 				6E8A837B21B62E0A0051B3EB /* SendTransaction.storyboard */,
-				6E8A837C21B62E0A0051B3EB /* TransactionGasCostViewController.swift */,
+				6E8A838021B62E0A0051B3EB /* TransactonSender.swift */,
 				6E8A837D21B62E0A0051B3EB /* TransactionParamBuilder.swift */,
+				6E8A837A21B62E0A0051B3EB /* SendTransactionViewController.swift */,
+				6E8A837C21B62E0A0051B3EB /* TransactionGasCostViewController.swift */,
 				6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */,
 				6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */,
-				6E8A838021B62E0A0051B3EB /* TransactonSender.swift */,
 			);
 			path = Send;
 			sourceTree = "<group>";
@@ -1737,7 +1737,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1770,7 +1770,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = PBL67DWM43;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;

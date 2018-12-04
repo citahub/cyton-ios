@@ -55,10 +55,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TransactionGasPriceViewController" {
-            let controller = segue.destination as! TransactionGasPriceViewController
-            controller.param = paramBuilder
-        } else if segue.identifier == "switchToken" {
+        if segue.identifier == "switchToken" {
             let controller = segue.destination as! TransactionSwitchTokenViewController
             controller.currentToken = token
             controller.delegate = self
@@ -99,7 +96,6 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     @IBAction func transactionAvailableBalance() {
-        // TODO: FIXME: erc20 token requires ETH balance for tx fee
         switch token.type {
         case .ether, .appChain:
             let balance = NSDecimalNumber(string: String(token.tokenBalance))

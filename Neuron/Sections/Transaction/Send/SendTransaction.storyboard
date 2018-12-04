@@ -744,7 +744,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="j4R-qD-vT9" kind="presentation" identifier="TransactionGasPriceViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="AfS-75-7sO"/>
+                                            <segue destination="nhM-23-DIY" kind="show" identifier="TransactionGasCostViewController" id="fFt-dg-A99"/>
                                         </connections>
                                     </tableViewCell>
                                 </cells>
