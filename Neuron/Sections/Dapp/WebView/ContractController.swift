@@ -266,7 +266,7 @@ private extension ContractController {
                 }
 
                 DispatchQueue.main.async {
-                    let successPageItem = SuccessPageItem.create(title: "交易已发送")
+                    let successPageItem = SuccessPageItem.create(title: "DApp.Contract.TransactionSend".localized())
                     successPageItem.actionHandler = { item in
                         self.transactionDidSend(txhash: txHash)
                     }
