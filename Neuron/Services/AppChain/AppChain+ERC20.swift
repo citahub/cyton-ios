@@ -14,7 +14,7 @@ class AppChainERC20 {
     private let appChain: AppChain
     private let contractAddress: String
 
-    init(_ method: String, appChain: AppChain, contractAddress: String) {
+    init(appChain: AppChain, contractAddress: String) {
         self.appChain = appChain
         self.contractAddress = contractAddress
     }
