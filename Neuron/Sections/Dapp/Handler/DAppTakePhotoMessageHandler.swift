@@ -43,14 +43,14 @@ class DAppTakePhotoMessageHandler: DAppNativeMessageHandler, UIImagePickerContro
                     self.webView?.viewController?.present(controller, animated: true, completion: nil)
                 }
             } else {
-                let alert = UIAlertController(title: "", message: "拍照需要相机访问权限", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "开启", style: .default, handler: { (_) in
+                let alert = UIAlertController(title: "", message: "DApp.DAppTakePhoto.CameraPermissions".localized(), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "DApp.DAppTakePhoto.Open".localized(), style: .default, handler: { (_) in
                     let url = URL(string: UIApplication.openSettingsURLString)!
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "取消", style: .default, handler: { (_) in
+                alert.addAction(UIAlertAction(title: "Common.Connection.Cancel".localized(), style: .default, handler: { (_) in
                     alert.dismiss(animated: true, completion: nil)
-                    self.callback(result: .fail(-1, "无相机访问权限"))
+                    self.callback(result: .fail(-1, "DApp.DAppTakePhoto.NoAccess".localized()))
                 }))
                 DispatchQueue.main.async {
                     self.webView?.viewController?.present(alert, animated: true, completion: nil)
@@ -78,6 +78,6 @@ class DAppTakePhotoMessageHandler: DAppNativeMessageHandler, UIImagePickerContro
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
-        callback(result: .fail(-1, "用户取消"))
+        callback(result: .fail(-1, "Common.Connection.UserCancel".localized()))
     }
 }

@@ -14,7 +14,7 @@ class NFTViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "我的藏品"
+        title = "DApp.NFT.Title".localized()
         getListData()
     }
 

@@ -14,7 +14,7 @@ class NFTDetailViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "藏品详情"
+        title = "DApp.NFT.DetailTitle".localized()
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
