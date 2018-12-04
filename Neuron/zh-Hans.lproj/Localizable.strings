@@ -84,6 +84,17 @@
 "Wallet.QRCode.copy" = "复制";
 "Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
 
+// Transaction History
+// ---------------------------------------------------------
+"Transaction.History.title" = "交易列表";
+
+// Transaction Status
+// ---------------------------------------------------------
+"TransactionStatus.success" = "交易成功";
+"TransactionStatus.pending" = "交易进行中";
+"TransactionStatus.failure" = "交易失败";
+
+
 // Authentication
 // ---------------------------------------------------------
 "Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";

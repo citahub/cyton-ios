@@ -19,6 +19,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenAmountLabel: UILabel!
     @IBOutlet var warningView: UIView!
     @IBOutlet weak var warningHeight: NSLayoutConstraint!
+    @IBOutlet weak var walletQRCodeButton: UIButton!
+    @IBOutlet weak var transactionButton: UIButton!
 
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
@@ -27,7 +29,10 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "交易列表"
+        title = "Transaction.History.title".localized()
+        walletQRCodeButton.setTitle("Wallet.receipt".localized(), for: .normal)
+        transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
+
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -226,13 +231,13 @@ class TransactionHistoryTableViewCell: UITableViewCell {
 
             switch transaction.status {
             case .success:
-                statusLabel.text = "交易成功"
+                statusLabel.text = "TransactionStatus.success".localized()
                 statusLabel.textColor = UIColor(red: 56/255.0, green: 193/255.0, blue: 137/255.0, alpha: 1)
             case .pending:
-                statusLabel.text = "交易进行中"
+                statusLabel.text = "TransactionStatus.pending".localized()
                 statusLabel.textColor = UIColor(red: 108/255.0, green: 113/255.0, blue: 132/255.0, alpha: 1)
             case .failure:
-                statusLabel.text = "交易失败"
+                statusLabel.text = "TransactionStatus.failure".localized()
                 statusLabel.textColor = UIColor(red: 255/255.0, green: 69/255.0, blue: 69/255.0, alpha: 1)
             }
         }
