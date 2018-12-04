@@ -136,7 +136,7 @@ extension SearchAppController: QRCodeViewControllerDelegate, UITextFieldDelegate
         if codeResult.count != 0 {
             dealWithUrl(urlString: codeResult)
         } else {
-            Toast.showToast(text: "DApp.Search.ScanEmpty".localized())
+            Toast.showToast(text: "Common.Connection.ScanEmpty".localized())
         }
     }
 

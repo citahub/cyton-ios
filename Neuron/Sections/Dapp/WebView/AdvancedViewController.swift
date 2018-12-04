@@ -104,7 +104,7 @@ class AdvancedViewController: UIViewController {
         let finalGasPrice = Web3Utils.parseToBigUInt(inputGasPrice, units: .Gwei)!
         if finalGasPrice < gasPrice {
             let gasPriceString = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: true) ?? "0"
-            Toast.showToast(text: "DApp.Advanced.MinGasPrice".localized() + "\(gasPriceString) Gwei")
+            Toast.showToast(text: String(format: "DApp.Advanced.MinGasPrice".localized(), gasPriceString))
             return
         }
         delegate?.getCustomGas(gasPrice: finalGasPrice, gas: finalGasPrice * self.gasLimit)

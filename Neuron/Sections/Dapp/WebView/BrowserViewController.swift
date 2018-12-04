@@ -129,7 +129,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "DApp.Browser.Refresh".localized(), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.Connection.Refresh".localized(), style: .default, handler: { (_) in
             self.webView.reload()
         }))
         alert.addAction(UIAlertAction(title: "Common.Connection.Cancel".localized(), style: .cancel, handler: nil))
@@ -320,9 +320,9 @@ extension BrowserViewController: WKNavigationDelegate {
         let error = error as NSError
         errorOverlaycontroller.style = .networkFail
         if error.code == -1009 {
-            errorOverlaycontroller.messageLabel.text = "DApp.Browser.NoNetwork".localized()
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
         } else {
-            errorOverlaycontroller.messageLabel.text = "DApp.Browser.LoadFaild".localized()
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
         }
         showOverlay()
     }
@@ -335,7 +335,7 @@ extension BrowserViewController: WKNavigationDelegate {
         if requestURL.absoluteString.hasPrefix("alipays://") || requestURL.absoluteString.hasPrefix("alipay://") {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
-                let alert = UIAlertController(title: "DApp.Browser.Note".localized(), message: "DApp.Browser.CheckNoAliPay".localized(), preferredStyle: .alert)
+                let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoAliPay".localized(), preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
@@ -343,7 +343,7 @@ extension BrowserViewController: WKNavigationDelegate {
         } else if requestURL.absoluteString.hasPrefix("weixin://") {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
-                let alert = UIAlertController(title: "DApp.Browser.Note".localized(), message: "DApp.Browser.CheckNoWeChat".localized(), preferredStyle: .alert)
+                let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoWeChat".localized(), preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
