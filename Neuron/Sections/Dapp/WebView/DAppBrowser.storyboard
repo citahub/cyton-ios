@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="2479" y="165"/>
         </scene>
-        <!--我的DApp-->
+        <!--我的ÐApp-->
         <scene sceneID="Zcm-iq-tE9">
             <objects>
                 <tableViewController storyboardIdentifier="MyDAppViewController" id="fzg-Js-pFS" customClass="MyDAppViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
@@ -152,7 +152,7 @@
                             <outlet property="delegate" destination="fzg-Js-pFS" id="7NP-rX-Jdc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我的DApp" id="6KJ-6D-8VA"/>
+                    <navigationItem key="navigationItem" title="我的ÐApp" id="6KJ-6D-8VA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLU-Mq-xm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

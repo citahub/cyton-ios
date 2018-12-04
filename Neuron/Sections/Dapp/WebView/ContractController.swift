@@ -231,6 +231,7 @@ class ContractController: UITableViewController, TransactonSender {
         }
         paramBuilder.from = AppModel.current.currentWallet!.address
         paramBuilder.value = Double(value)!.toAmount(tokenModel.decimals)
+        paramBuilder.amount = NSDecimalNumber(string: value).doubleValue
 
         switch chainType {
         case .appChain:

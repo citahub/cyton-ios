@@ -49,7 +49,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(walletAddress: self.token.walletAddress, tokenType: self.token.type, tokenAddress: self.token.address)
+                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(walletAddress: self.token.walletAddress, tokenType: self.token.type, tokenAddress: self.token.address, chainHosts: self.token.chainHosts)
                 }
                 self.page += 1
 

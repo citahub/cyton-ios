@@ -42,6 +42,7 @@ class TransactionParamBuilder: NSObject {
     private(set) var txFeeNatural: Double = 0
 
     var tokenBalance: BigUInt = 0
+    var balance: Double = 0
 
     @objc dynamic
     private(set) var tokenPrice: Double = 0
@@ -53,7 +54,9 @@ class TransactionParamBuilder: NSObject {
     var hasSufficientBalance: Bool {
         switch tokenType {
         case .ether, .appChain:
-            return tokenBalance >= txFee + value
+            let amount = NSDecimalNumber(string: self.amount.description).adding(NSDecimalNumber(string: txFeeNatural.description))
+            let balance = NSDecimalNumber(string: self.balance.description)
+            return balance.doubleValue >= amount.doubleValue
         case .erc20, .appChainErc20:
             return tokenBalance >= value
         }
@@ -76,6 +79,7 @@ class TransactionParamBuilder: NSObject {
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
         tokenBalance = token.tokenBalance.toAmount(token.decimals)
+        balance = token.tokenBalance
 
         super.init()
 
@@ -93,6 +97,7 @@ class TransactionParamBuilder: NSObject {
         symbol = builder.symbol
         nativeCoinSymbol = builder.nativeCoinSymbol
         tokenBalance = builder.tokenBalance
+        balance = builder.balance
         super.init()
         gasPrice = builder.gasPrice
         gasLimit = builder.gasLimit

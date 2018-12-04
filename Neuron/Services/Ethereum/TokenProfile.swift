@@ -11,6 +11,7 @@ import Alamofire
 import Web3swift
 import EthereumAddress
 
+// TODO: Refactor
 struct TokenProfile: Decodable {
     let symbol: String
     let address: String
@@ -20,6 +21,7 @@ struct TokenProfile: Decodable {
     var possess: String?
     var detailUrl: URL?
     var price: Double?
+    var priceText: String?
 
     struct Overview: Decodable {
         var zh: String
@@ -48,7 +50,7 @@ extension TokenModel {
     private func getEthereumProfile(complection: @escaping (TokenProfile?) -> Void) {
         let overview = TokenProfile.Overview(zh: "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。")
         let detailUrl = URL(string: "https://ntp.staging.cryptape.com?coin=ethereum")
-        var profile = TokenProfile(symbol: self.symbol, address: address, overview: overview, imageUrl: nil, image: UIImage(named: "eth_logo"), possess: nil, detailUrl: detailUrl, price: nil)
+        var profile = TokenProfile(symbol: self.symbol, address: address, overview: overview, imageUrl: nil, image: UIImage(named: "eth_logo"), possess: nil, detailUrl: detailUrl, price: nil, priceText: nil)
 
         let currencyType = LocalCurrencyService.shared.getLocalCurrencySelect().short
         let symbol = self.symbol
@@ -57,9 +59,10 @@ extension TokenModel {
             DispatchQueue.main.async {
                 if let price = price {
                     let amount = self.tokenBalance * price
-                    let possess = String(format: "%@ %.2f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, amount)
+                    let possess = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, amount)
                     profile.possess = possess
                     profile.price = price
+                    profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
                 }
                 complection(profile)
             }
@@ -96,9 +99,10 @@ extension TokenModel {
             if var profile = profile, let price = price {
                 let balance = self.tokenBalance
                 let amount = balance * price
-                let possess = String(format: "%@ %.2f", currency.symbol, amount)
+                let possess = String(format: "%@ %.4f", currency.symbol, amount)
                 profile.possess = possess
                 profile.price = price
+                profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
                 complection(profile)
             } else {
                 complection(profile)
