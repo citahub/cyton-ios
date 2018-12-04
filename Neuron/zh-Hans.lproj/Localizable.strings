@@ -87,6 +87,7 @@
 // Transaction History
 // ---------------------------------------------------------
 "Transaction.History.title" = "交易列表";
+"TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
 
 // Transaction Status
 // ---------------------------------------------------------
