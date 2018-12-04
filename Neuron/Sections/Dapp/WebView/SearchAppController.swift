@@ -20,6 +20,7 @@ class SearchAppController: UITableViewController, ErrorOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.placeholder = "DApp.Search.TextFieldPlaceholder".localized()
         setUpNavigationTitleView()
     }
 
@@ -118,7 +119,7 @@ class SearchAppController: UITableViewController, ErrorOverlayPresentable {
     }
 
     override func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
-        return "删除"
+        return "DApp.Search.DeleteHistory".localized()
     }
 }
 
@@ -135,7 +136,7 @@ extension SearchAppController: QRCodeViewControllerDelegate, UITextFieldDelegate
         if codeResult.count != 0 {
             dealWithUrl(urlString: codeResult)
         } else {
-            Toast.showToast(text: "扫描结果为空")
+            Toast.showToast(text: "Common.Connection.ScanEmpty".localized())
         }
     }
 

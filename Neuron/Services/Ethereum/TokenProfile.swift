@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Web3swift
 import EthereumAddress
 
 // TODO: Refactor
@@ -48,9 +47,17 @@ extension TokenModel {
     }
 
     private func getEthereumProfile(complection: @escaping (TokenProfile?) -> Void) {
-        let overview = TokenProfile.Overview(zh: "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。")
+        let overview = TokenProfile.Overview(zh: "TokenProfile.Ether.overview".localized())
         let detailUrl = URL(string: "https://ntp.staging.cryptape.com?coin=ethereum")
-        var profile = TokenProfile(symbol: self.symbol, address: address, overview: overview, imageUrl: nil, image: UIImage(named: "eth_logo"), possess: nil, detailUrl: detailUrl, price: nil, priceText: nil)
+        var profile = TokenProfile(symbol: self.symbol,
+                                   address: address,
+                                   overview: overview,
+                                   imageUrl: nil,
+                                   image: UIImage(named: "eth_logo"),
+                                   possess: nil,
+                                   detailUrl: detailUrl,
+                                   price: nil,
+                                   priceText: nil)
 
         let currencyType = LocalCurrencyService.shared.getLocalCurrencySelect().short
         let symbol = self.symbol

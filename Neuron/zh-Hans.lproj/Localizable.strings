@@ -10,11 +10,58 @@
 // ---------------------------------------------------------
 "Common.Connection.ConnectionLost" = "似乎已断开与互联网的连接";
 "Common.Connection.FailToLoadPage" = "页面加载失败";
+"Common.Connection.Cancel" = "取消";
+"Common.Connection.Confirm" = "确定";
+"Common.Connection.UserCancel" = "用户取消";
+"Common.Connection.ScanEmpty" = "扫描结果为空";
+"Common.Connection.LoseConnect" = "似乎已断开与互联网的连接";
+"Common.Connection.LoadFaild" = "页面加载失败";
+"Common.Connection.Refresh" = "刷新";
 
 // DApp
 // ---------------------------------------------------------
 "DApp.Home" = "应用";
+"DApp.Search.TextFieldPlaceholder" = "请输入应用网址";
+"DApp.Search.DeleteHistory" = "删除";
+
+// DApp Browser
+// ---------------------------------------------------------
+"DApp.Browser.InvalidLink" = "无效的链接地址";
+"DApp.Browser.Collection" = "收藏";
+"DApp.Browser.CollectSuccess" = "收藏成功";
+"DApp.Browser.CollectFaild" = "收藏失败";
+"DApp.Browser.AlertTitle" = "提示";
+"DApp.Browser.CheckNoAliPay" = "未检测到支付宝客户端，请安装后重试。";
+"DApp.Browser.CheckNoWeChat" = "未检测到微信客户端，请安装后重试。";
+"DApp.Browser.SignFaild" = "签名失败";
+"DApp.Browser.PayFaild" = "支付失败";
+
+// DApp Contract
+// ---------------------------------------------------------
+"DApp.Contract.TransactionSend" = "交易已发送";
+
+// DApp Advanced
+// ---------------------------------------------------------
+"DApp.Advanced.ETHRecommend" = "以太坊推荐 ";
+"DApp.Advanced.Gas" = "Gas费用";
+"DApp.Advanced.EmptyGasPrice" = "请输入GasPrice";
+"DApp.Advanced.MinGasPrice" = "请输入的GasPrice不小于%@ GWei";
+
+// DApp DAppTakePhoto
+// ---------------------------------------------------------
+"DApp.DAppTakePhoto.CameraPermissions" = "拍照需要相机访问权限";
+"DApp.DAppTakePhoto.Open" = "开启";
+"DApp.DAppTakePhoto.NoAccess" = "无相机访问权限";
+
+// DApp MyDApp
+// ---------------------------------------------------------
+"DApp.MyDApp.Title" = "我的ÐApp";
+
+// DApp NFT
+// ---------------------------------------------------------
 "DApp.NFT.EmptyData" = "您还没有藏品数据";
+"DApp.NFT.Title" = "我的藏品";
+"DApp.NFT.DetailTitle" = "藏品详情";
 
 // Settings
 // ---------------------------------------------------------
@@ -83,6 +130,18 @@
 "Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
 "Wallet.QRCode.copy" = "复制";
 "Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
+
+// Transaction History
+// ---------------------------------------------------------
+"Transaction.History.title" = "交易列表";
+"TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
+
+// Transaction Status
+// ---------------------------------------------------------
+"TransactionStatus.success" = "交易成功";
+"TransactionStatus.pending" = "交易进行中";
+"TransactionStatus.failure" = "交易失败";
+
 
 // Authentication
 // ---------------------------------------------------------

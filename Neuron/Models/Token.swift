@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import Web3swift
 import BigInt
-import EthereumAddress
 import RealmSwift
 
 enum TokenType: String {

@@ -6,7 +6,7 @@
 //  Copyright © 2018年 Cryptape. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 final class LocalCurrencyService {
     private let localCurrencyKey = "localCurrency"

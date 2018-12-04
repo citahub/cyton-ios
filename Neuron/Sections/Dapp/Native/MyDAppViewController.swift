@@ -17,6 +17,7 @@ class MyDAppViewController: UITableViewController, ErrorOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "DApp.MyDApp.Title".localized()
         getCollectionData()
     }
 

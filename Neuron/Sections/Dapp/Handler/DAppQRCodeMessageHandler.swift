@@ -27,6 +27,6 @@ class DAppQRCodeMessageHandler: DAppNativeMessageHandler, QRCodeViewControllerDe
     }
 
     func qrcodeReaderDidCancel() {
-        callback(result: .fail(-1, "用户取消"))
+        callback(result: .fail(-1, "Common.Connection.UserCancel".localized()))
     }
 }

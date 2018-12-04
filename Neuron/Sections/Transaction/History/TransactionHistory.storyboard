@@ -258,6 +258,8 @@
                         <outlet property="tokenNameLabel" destination="0Vn-x7-Dib" id="5s6-df-87S"/>
                         <outlet property="tokenOverviewLabel" destination="zkM-fD-nwj" id="aBQ-TC-tNx"/>
                         <outlet property="tokenProfleView" destination="aON-I2-toO" id="KdQ-E9-5It"/>
+                        <outlet property="transactionButton" destination="XPZ-mD-qY7" id="sjx-pm-H30"/>
+                        <outlet property="walletQRCodeButton" destination="DQl-uS-hTA" id="H7J-6n-Ijj"/>
                         <outlet property="warningHeight" destination="0dX-Pg-O8d" id="raX-b5-Whr"/>
                         <outlet property="warningView" destination="T2y-fL-Z7k" id="A8D-hr-hk7"/>
                     </connections>
