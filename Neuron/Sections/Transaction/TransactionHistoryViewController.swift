@@ -27,7 +27,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "交易列表"
+        title = token.symbol
         tableView.delegate = self
         tableView.dataSource = self
 
@@ -69,8 +69,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
-            let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-            let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
+            let price = self?.tokenProfile?.priceText ?? ""
             message.webView?.evaluateJavaScript("handlePrice('\(price)')", completionHandler: nil)
         }
         navigationController?.pushViewController(controller, animated: true)
@@ -127,7 +126,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         } else if let image = profile.image {
             self.tokenIconView.image = image
         }
-        self.tokenAmountLabel.text = profile.possess
+        self.tokenAmountLabel.text = profile.priceText
     }
 
     private func loadMoreData() {
@@ -217,7 +216,7 @@ class TransactionHistoryTableViewCell: UITableViewCell {
             let amount = Double.fromAmount(transaction.value, decimals: transaction.token.decimals).decimal
             if transaction.from.lowercased() == walletAddress.lowercased() ||
                 transaction.from == transaction.to {
-                addressLabel.text = transaction.to
+                addressLabel.text = transaction.to.count > 0 ? transaction.to : "Contract Created"
                 numberLabel.text = "-\(amount)"
             } else {
                 addressLabel.text = transaction.from

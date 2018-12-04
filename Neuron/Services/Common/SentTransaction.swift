@@ -102,12 +102,14 @@ class SentTransaction: Object, ThreadSafeObject {
     }
     @objc dynamic var date: Date = Date()
     @objc dynamic var ethereumNetwork: String = ""
+    @objc dynamic var chainHosts: String!
 
     @objc dynamic private var privateBlockNumber: String = ""
     @objc dynamic private var privateStatus: Int = 0
     @objc dynamic private var privateAmount: String = ""
     @objc dynamic private var privateTxFee: String = ""
     @objc dynamic private var privateTokenType: String = ""
+
 
     @objc override class func primaryKey() -> String? { return "txHash" }
 
@@ -143,7 +145,7 @@ class SentTransaction: Object, ThreadSafeObject {
     }
 
     // AppChain
-    required convenience init(tokenType: TokenType, from: String, hash: String, transaction: Transaction) {
+    required convenience init(tokenType: TokenType, from: String, hash: String, transaction: Transaction, chainHosts: String) {
         self.init()
         txHash = hash
         blockNumber = BigUInt(transaction.validUntilBlock)
@@ -152,6 +154,7 @@ class SentTransaction: Object, ThreadSafeObject {
         amount = transaction.value
         txFee = BigUInt(transaction.quota)
         status = .pending
+        self.chainHosts = chainHosts
     }
 
     // AppChainErc20

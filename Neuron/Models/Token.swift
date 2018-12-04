@@ -78,7 +78,7 @@ class Token {
         }
 
         let balance: BigUInt
-
+        self.balance = nil
         switch type {
         case .appChain, .appChainErc20:
             balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)

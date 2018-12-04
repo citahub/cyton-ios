@@ -22,14 +22,14 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
     }
 
     enum MessageName: String {
-        case startGyroscope
-        case stopGyroscope
+        case startGyroscopeListening
+        case stopGyroscopeListening
     }
 
     override var messageNames: [String] {
         return [
-            MessageName.startGyroscope.rawValue,
-            MessageName.stopGyroscope.rawValue
+            MessageName.startGyroscopeListening.rawValue,
+            MessageName.stopGyroscopeListening.rawValue
         ]
     }
     var motionManager: CMMotionManager?
@@ -37,9 +37,8 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
     override func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         super.userContentController(userContentController, didReceive: message)
         guard let data = try? JSONSerialization.data(withJSONObject: message.body, options: .prettyPrinted) else { return }
-        if message.name == MessageName.startGyroscope.rawValue {
+        if message.name == MessageName.startGyroscopeListening.rawValue {
             guard motionManager == nil else {
-                self.callback(result: .success([:]))
                 return
             }
             let interval: Interval = (try? JSONDecoder().decode(Parameters.self, from: data))?.interval ?? .normal
@@ -60,8 +59,7 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
                 self?.motionDidUpdate(motion: motion)
             })
             motionManager = manager
-            callback(result: .success([:]))
-        } else if message.name == MessageName.stopGyroscope.rawValue {
+        } else if message.name == MessageName.stopGyroscopeListening.rawValue {
             motionManager?.stopDeviceMotionUpdates()
             motionManager = nil
             callback(result: .success([:]))
@@ -74,6 +72,6 @@ class DAppGyroscopeMessageHandler: DAppNativeMessageHandler {
             "y": motion.rotationRate.y,
             "z": motion.rotationRate.z
         ]
-        callback(funcName: "onGyroscopeChange", result: ["res": result])
+        callback(result: .success(["res": result]))
     }
 }
