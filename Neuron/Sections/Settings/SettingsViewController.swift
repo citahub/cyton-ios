@@ -26,7 +26,7 @@ class SettingsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Setting.Title".localized()
-        currencyLabel.text = "Setting.CurrencyTitle".localized()
+        currencyTitleLabel.text = "Setting.CurrencyTitle".localized()
         touchIdLabel.text = "Setting.TouchIdTitle".localized()
         switchEthLabel.text = "Setting.SwitchNetwork.Title".localized()
         aboutUsLabel.text = "Settings.About.AboutUs".localized()
