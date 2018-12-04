@@ -23,7 +23,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "GasPrice", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
                     "Ethereum Mainnet",
-                    ethereum.to,
+                    ethereum.to.count > 0 ? ethereum.to : "Contract Created",
                     ethereum.from,
                     gasUsed + "eth",
                     gasPrice + "Gwei",
@@ -37,7 +37,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
                     appChain.chainName,
-                    appChain.to,
+                    appChain.to.count > 0 ? appChain.to : "Contract Created",
                     appChain.from,
                     gasUsed + "NATT",
                     appChain.hash,

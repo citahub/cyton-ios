@@ -65,14 +65,15 @@ class TransactionStatusManager: NSObject {
         }
     }
 
-    // MARK: -
-    func getTransactions(walletAddress: String, tokenType: TokenType, tokenAddress: String) -> [TransactionDetails] {
+    // MARK: - 
+    func getTransactions(walletAddress: String, tokenType: TokenType, tokenAddress: String, chainHosts: String) -> [TransactionDetails] {
         let ethereumNetwork = EthereumNetwork().host().absoluteString
         return self.realm.objects(SentTransaction.self).filter({
+            $0.chainHosts == chainHosts &&
             $0.from == walletAddress &&
-                $0.tokenType == tokenType &&
-                $0.contractAddress == tokenAddress &&
-                ($0.ethereumNetwork == "" || $0.ethereumNetwork == ethereumNetwork)
+            $0.tokenType == tokenType &&
+            $0.contractAddress == tokenAddress &&
+            ($0.ethereumNetwork == "" || $0.ethereumNetwork == ethereumNetwork)
         }).map({ $0.transactionDetails() })
     }
 
