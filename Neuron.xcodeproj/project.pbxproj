@@ -111,6 +111,7 @@
 		8928C27A20B2A61900C3103E /* WalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C27820B2A61900C3103E /* WalletViewController.swift */; };
 		8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8928C2A120B41BCA00C3103E /* SelectWalletController.swift */; };
 		892A1985215A55F400B2293D /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892A1984215A55F400B2293D /* Double+Extension.swift */; };
+		892E5B1821B61F0100298845 /* AppChain+ERC20.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892E5B1721B61F0000298845 /* AppChain+ERC20.swift */; };
 		892F79B921A547340035B08B /* ModifyWalletNamePageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 892F79B821A547340035B08B /* ModifyWalletNamePageItem.swift */; };
 		8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */; };
 		8935BA57216EEDEC00C37263 /* WKWebViewConfigConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */; };
@@ -325,6 +326,7 @@
 		8928C27820B2A61900C3103E /* WalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletViewController.swift; sourceTree = "<group>"; };
 		8928C2A120B41BCA00C3103E /* SelectWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectWalletController.swift; sourceTree = "<group>"; };
 		892A1984215A55F400B2293D /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
+		892E5B1721B61F0000298845 /* AppChain+ERC20.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppChain+ERC20.swift"; sourceTree = "<group>"; };
 		892F79B821A547340035B08B /* ModifyWalletNamePageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifyWalletNamePageItem.swift; sourceTree = "<group>"; };
 		8935BA54216EE65500C37263 /* WKWebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfiguration.swift; sourceTree = "<group>"; };
 		8935BA56216EEDEC00C37263 /* WKWebViewConfigConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKWebViewConfigConstants.swift; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
 				6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */,
 				6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */,
+				892E5B1721B61F0000298845 /* AppChain+ERC20.swift */,
 			);
 			path = AppChain;
 			sourceTree = "<group>";
@@ -1421,6 +1424,7 @@
 				8905660720D0AC120041D4B4 /* AppModel.swift in Sources */,
 				6E8A838121B62E0A0051B3EB /* SendTransactionViewController.swift in Sources */,
 				6E3B2B6D219ED9240095257D /* Ethereum+TransactionDetails.swift in Sources */,
+				892E5B1821B61F0100298845 /* AppChain+ERC20.swift in Sources */,
 				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				6E9B947B21A4080300D67357 /* DesignableButton.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
