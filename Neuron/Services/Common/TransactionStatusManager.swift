@@ -8,9 +8,6 @@
 
 import Foundation
 import RealmSwift
-import BigInt
-import Web3swift
-import AppChain
 
 enum TransactionStateResult {
     case pending

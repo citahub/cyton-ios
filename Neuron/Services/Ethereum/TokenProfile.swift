@@ -8,7 +8,6 @@
 
 import Foundation
 import Alamofire
-import Web3swift
 import EthereumAddress
 
 // TODO: Refactor

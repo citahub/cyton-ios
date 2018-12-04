@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import Web3swift
 
 class TransactionHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
     @IBOutlet weak var tableView: UITableView!
