@@ -18,10 +18,16 @@ class TransactionSwitchTokenViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var tokens = [TokenModel]()
     var currentToken: TokenModel!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var confirmButton: UIButton!
     weak var delegate: TransactionSwitchTokenViewControllerDelegate?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        confirmButton.setTitle("Transaction.Send.confirm".localized(), for: .normal)
+        confirmButton.setTitle("Transaction.Send.cancel".localized(), for: .normal)
+
         tokens += AppModel.current.nativeTokenList
         tokens += AppModel.current.currentWallet!.selectTokenList
     }

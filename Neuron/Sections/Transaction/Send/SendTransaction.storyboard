@@ -446,8 +446,11 @@
                         <outlet property="confirmButton" destination="THD-tt-uG8" id="cEb-bU-G5x"/>
                         <outlet property="dataTextPlaceholderLabel" destination="fvp-Or-GyJ" id="vbf-GF-B69"/>
                         <outlet property="dataTextView" destination="9Wq-T8-1zW" id="f2K-jM-PZU"/>
+                        <outlet property="descLabel" destination="Jy2-ha-YIc" id="Rt9-Wo-0QA"/>
+                        <outlet property="extenDataTitleLabel" destination="YXc-0M-Q6N" id="FRW-V4-FUn"/>
                         <outlet property="gasCostDescLabel" destination="YwG-lr-0nF" id="xfe-ay-C5T"/>
                         <outlet property="gasCostLabel" destination="vX9-5A-Y0H" id="FJt-SE-syc"/>
+                        <outlet property="gasCostTitleLabel" destination="pV6-ib-QwP" id="6wM-uS-aeC"/>
                         <outlet property="gasLimitTextField" destination="8i9-2x-Vrj" id="QwO-zA-AQ0"/>
                         <outlet property="gasPriceTextField" destination="kWc-fe-1Yl" id="RTb-tX-yZh"/>
                     </connections>
@@ -757,10 +760,15 @@
                     </tableView>
                     <connections>
                         <outlet property="addressTextField" destination="Meo-Zd-ui1" id="iNQ-Yn-lGD"/>
+                        <outlet property="addressTitleLabel" destination="26r-ky-B8b" id="G2w-KC-T0u"/>
                         <outlet property="amountTextField" destination="gh1-96-Xfk" id="CZ0-Hw-OX1"/>
+                        <outlet property="amountTitleLabel" destination="mFG-fG-irG" id="9oR-YB-x8t"/>
                         <outlet property="gasCostLabel" destination="HsP-0t-rla" id="8xr-vY-uhN"/>
+                        <outlet property="gasCostTitleLabel" destination="klc-eo-sjp" id="3CJ-Vv-MJw"/>
+                        <outlet property="nextButton" destination="g6N-0z-9ZM" id="Ce4-fz-YCj"/>
                         <outlet property="tokenBalanceButton" destination="Ecb-RA-cMW" id="vhn-TA-Ote"/>
                         <outlet property="tokenLabel" destination="fLe-lM-SnX" id="wiu-nn-67s"/>
+                        <outlet property="tokenTitleLabel" destination="UrY-wj-BNv" id="buF-d2-9RX"/>
                         <outlet property="walletAddressLabel" destination="O7D-md-LKB" id="mA0-Bv-BN4"/>
                         <outlet property="walletIconView" destination="M6M-Zr-d47" id="PIq-Zl-72y"/>
                         <outlet property="walletNameLabel" destination="09g-3m-5Hd" id="Imy-3z-w8V"/>
@@ -892,6 +900,8 @@
                     </view>
                     <connections>
                         <outlet property="backgroundView" destination="cYt-Ct-AiK" id="Wzf-dR-kgm"/>
+                        <outlet property="cancelButton" destination="gYD-xS-nkj" id="LzJ-xM-ozS"/>
+                        <outlet property="confirmButton" destination="4R2-B3-Z84" id="Kai-gQ-rNA"/>
                         <outlet property="contentView" destination="kdc-L9-JJe" id="1un-HH-Ybm"/>
                         <outlet property="tableView" destination="QYg-72-MbY" id="euY-07-RyP"/>
                     </connections>
