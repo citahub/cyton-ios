@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -152,7 +152,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launchIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-Xs-8p0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="launch_icon" translatesAutoresizingMaskIntoConstraints="NO" id="6eX-Xs-8p0">
                                 <rect key="frame" x="135" y="111" width="104" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -204,7 +204,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
@@ -219,6 +219,7 @@
                     <connections>
                         <outlet property="confirmButton" destination="eVj-LR-bk2" id="KvQ-FW-3FE"/>
                         <outlet property="passwordTextField" destination="LAB-bx-qlg" id="90l-AT-VaT"/>
+                        <outlet property="selectWalletButton" destination="7SY-0b-tQd" id="cxY-wR-SD5"/>
                         <outlet property="walletNameLabel" destination="fln-Ir-GBG" id="iwh-Ws-PIe"/>
                     </connections>
                 </viewController>
@@ -309,7 +310,7 @@
     <resources>
         <image name="faceId_icon" width="168" height="168"/>
         <image name="icon_down" width="11" height="7"/>
-        <image name="launchIcon" width="126" height="101"/>
+        <image name="launch_icon" width="126" height="101"/>
         <image name="password_login_icon" width="24" height="33"/>
         <image name="touchId_icon" width="90" height="92"/>
     </resources>

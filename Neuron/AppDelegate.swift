@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         hookSensorsDebugWarning()
 
         skipBackupFiles()
-        RealmHelper.configureRealm()
+        RealmConfigurator.configure()
 
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = UIStoryboard(name: .main).instantiateInitialViewController()
@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GuideService.shared.register()
         AuthenticationService.shared.register()
         SensorsAnalytics.configureSensors()
+        _ = TransactionStatusManager.manager
         return true
     }
 

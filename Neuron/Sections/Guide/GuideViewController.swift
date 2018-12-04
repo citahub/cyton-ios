@@ -24,6 +24,7 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     ]
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +37,6 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        UIApplication.shared.keyWindow?.windowLevel = .alert
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        UIApplication.shared.keyWindow?.windowLevel = .normal
     }
 
     @objc func showProductAgreementView() {
@@ -52,6 +47,7 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     // MARK: - GuideViewControllerProtocol
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        pageControl.numberOfPages = items.count
         return items.count
     }
 
@@ -62,6 +58,10 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
         cell.imageView.image = UIImage(named: items[indexPath.row].imageName)
         cell.backgroundColor = indexPath.row == 3 ? UIColor.clear : UIColor.white
         return cell
+    }
+
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        pageControl.currentPage = indexPath.row
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

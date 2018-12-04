@@ -1,5 +1,5 @@
 //
-//  AppChainTransactionService.swift
+//  AppChainTxSender.swift
 //  Neuron
 //
 //  Created by James Chen on 2018/11/06.
@@ -13,61 +13,64 @@ import BigInt
 class AppChainTxSender {
     private let appChain: AppChain
     private let walletManager: WalletManager
-    private let from: String
+    private let from: Address
 
-    init(appChain: AppChain, walletManager: WalletManager, from: String) {
+    init(appChain: AppChain, walletManager: WalletManager, from: String) throws {
         self.appChain = appChain
         self.walletManager = walletManager
-        self.from = from
+        guard let fromAddress = Address(from) else {
+            throw SendTransactionError.invalidSourceAddress
+        }
+        self.from = fromAddress
     }
 
     func send(
         to: String,
-        quota: BigUInt = BigUInt(21_000),
+        value: BigUInt,
+        quota: UInt64 = GasCalculator.defaultGasLimit,
         data: Data,
-        value: String,
         chainId: BigUInt,
         password: String
     ) throws -> TxHash {
-        guard let destinationEthAddress = Address(to) else {
+        let destinationEthAddress = Address(to.addHexPrefix())
+        if !to.isEmpty && destinationEthAddress == nil {
             throw SendTransactionError.invalidDestinationAddress
         }
-        guard let amount = Web3Utils.parseToBigUInt(value, units: .eth) else {
-            throw SendTransactionError.invalidAmountFormat
-        }
 
-        let nonce = UUID().uuidString
-        let appChain = AppChainNetwork.appChain()
-        guard case .success(let blockNumber) = appChain.rpc.blockNumber() else {
+        guard let meta = try? appChain.rpc.getMetaData() else {
             throw SendTransactionError.createTransactionIssue
         }
+        guard let blockNumber = try? appChain.rpc.blockNumber() else {
+            throw SendTransactionError.createTransactionIssue
+        }
+        if chainId.description != meta.chainId {
+            throw SendTransactionError.invalidChainId
+        }
+
         let transaction = Transaction(
             to: destinationEthAddress,
-            nonce: nonce,
-            quota: UInt64(quota),
+            nonce: UUID().uuidString,
+            quota: quota,
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
-            value: amount,
-            chainId: UInt32(chainId),
-            version: UInt32(0)
+            value: value,
+            chainId: meta.chainId,
+            version: meta.version
         )
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
-            throw SendTransactionError.signTXFailed
-        }
-        return result.hash.toHexString()
+        let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
+        let sentTransaction = SentTransaction(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction, chainHosts: appChain.provider.url.absoluteString)
+        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+        return txHash
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
-        guard case .success(let result) = appChain.rpc.sendRawTransaction(signedTx: signed) else {
-            throw SendTransactionError.signTXFailed
-        }
-        return result.hash.toHexString()
+        return try appChain.rpc.sendRawTransaction(signedTx: signed)
     }
 
     func sign(transaction: Transaction, password: String) throws -> String {
-        guard let wallet = walletManager.wallet(for: from) else {
+        guard let wallet = walletManager.wallet(for: from.address) else {
             throw SendTransactionError.noAvailableKeys
         }
         let privateKey = try walletManager.exportPrivateKey(wallet: wallet, password: password)

@@ -11,11 +11,12 @@ import RealmSwift
 
 class GuideService {
     static let shared = GuideService()
-    var controller: UIViewController?
+    private var window: UIWindow?
     private var notificationToken: NotificationToken?
 
     private init() {
-        notificationToken = WalletRealmTool.realm.objects(AppModel.self).observe { [weak self](change) in
+        let realm = try! Realm()
+        notificationToken = realm.objects(AppModel.self).observe { [weak self](change) in
             guard let self = self else { return }
             switch change {
             case .update(let values, deletions: _, insertions: _, modifications: _):
@@ -35,19 +36,33 @@ class GuideService {
     }
 
     func register() {
-        guard WalletRealmTool.getCurrentAppModel().wallets.count == 0 else { return }
+        guard AppModel.current.wallets.count == 0 else { return }
         showGuide()
     }
 
     private func showGuide() {
-        guard controller == nil else { return }
+        guard window == nil else { return }
         let guideController: GuideViewController = UIStoryboard(name: .guide).instantiateViewController()
-        controller = BaseNavigationController(rootViewController: guideController)
-        UIApplication.shared.keyWindow?.rootViewController?.present(controller!, animated: true, completion: nil)
+        let controller = BaseNavigationController(rootViewController: guideController)
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = controller
+        window?.makeKeyAndVisible()
+
+        let height = window?.bounds.size.height ?? 0.0
+        window?.transform = CGAffineTransform(translationX: 0, y: height)
+        UIView.animate(withDuration: CATransaction.animationDuration()) {
+            self.window?.transform = CGAffineTransform.identity
+        }
     }
 
     private func hideGuide() {
-        controller?.dismiss(animated: true, completion: nil)
-        controller = nil
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
+            let height = self.window?.bounds.size.height ?? 0.0
+            self.window?.transform = CGAffineTransform(translationX: 0, y: height)
+        }, completion: { (_) in
+            self.window?.rootViewController = nil
+            self.window?.resignKey()
+            self.window = nil
+        })
     }
 }

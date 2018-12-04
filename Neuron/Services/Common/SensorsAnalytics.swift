@@ -12,6 +12,7 @@ import SensorsAnalyticsSDK
 class SensorsAnalytics {
     enum UserDefaultsKey: String {
         case userId = "SensorsAnalyticsUserIdUserDefaultsKey"
+        case ipId = "SensorsAnalyticsIpIdUserDefaultsKey"
     }
     fileprivate let sensors: SensorsAnalyticsSDK
     static let service = SensorsAnalytics()
@@ -23,11 +24,7 @@ class SensorsAnalytics {
         sensors = SensorsAnalyticsSDK.sharedInstance(withServerURL: "https://banana.cryptape.com:8106/sa?project=production", andDebugMode: .off)
         #endif
         sensors.enableLog(false)
-        sensors.enableTrackGPSLocation(false)
-        sensors.enableTrackScreenOrientation(false)
-        sensors.login(getUserId())
-        sensors.trackAppCrash()
-        sensors.registerSuperProperties(["platformType": "iOS"])
+        sensors.registerSuperProperties(["platformType": "iOS", "ip_id": getIpId(), "$ip": ""])
         let eventType: SensorsAnalyticsAutoTrackEventType = [
             .eventTypeAppStart,
             .eventTypeAppEnd,
@@ -35,6 +32,15 @@ class SensorsAnalytics {
             .eventTypeAppClick
         ]
         sensors.enableAutoTrack(eventType)
+        sensors.enableTrackGPSLocation(false)
+        sensors.enableTrackScreenOrientation(false)
+        sensors.login(getUserId())
+        sensors.trackAppCrash()
+
+        if var automaticProperties = sensors.value(forKey: "automaticProperties") as? [String: Any] {
+            automaticProperties["$device_id"] = ""
+            sensors.setValue(automaticProperties, forKey: "automaticProperties")
+        }
     }
 
     static func configureSensors() {
@@ -56,6 +62,18 @@ class SensorsAnalytics {
         userId += "\(Int(Date().timeIntervalSince1970 * 1000))"
         UserDefaults.standard.set(userId, forKey: UserDefaultsKey.userId.rawValue)
         return userId
+    }
+
+    private func getIpId() -> String {
+        if let ipId = UserDefaults.standard.string(forKey: UserDefaultsKey.ipId.rawValue) {
+            return ipId
+        }
+        var ipId = ""
+        for _ in 0..<64 {
+            ipId += "\(arc4random_uniform(10))"
+        }
+        UserDefaults.standard.set(ipId, forKey: UserDefaultsKey.ipId.rawValue)
+        return ipId
     }
 }
 

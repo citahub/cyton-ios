@@ -58,7 +58,8 @@ class AuthenticationService {
         NotificationCenter.default.addObserver(self, selector: #selector(didBecomeActiveNotification), name: UIApplication.didBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(willResignActiveNotification), name: UIApplication.willResignActiveNotification, object: nil)
 
-        notificationToken = WalletRealmTool.realm.objects(WalletModel.self).observe { (change) in
+        let realm = try! Realm()
+        notificationToken = realm.objects(WalletModel.self).observe { (change) in
             switch change {
             case .update(let values, deletions: _, let insertions, modifications: _):
                 guard !AuthenticationService.shared.isEnable else { return }
@@ -95,16 +96,11 @@ class AuthenticationService {
                 } else {
                     complection(false)
                     guard let error = error else { return }
-                    if #available(iOS 11.0, *) {
-                        if error.code == LAError.biometryNotEnrolled ||
-                            error.code == LAError.biometryNotAvailable ||
-                            error.code == LAError.biometryLockout {
-                            Toast.showToast(text: error.stringValue)
-                            return
-                        }
-                    }
                     switch error {
-                    case LAError.passcodeNotSet, LAError.touchIDLockout:
+                    case LAError.passcodeNotSet,
+                         LAError.biometryLockout,
+                         LAError.biometryNotAvailable,
+                         LAError.biometryNotEnrolled:
                         Toast.showToast(text: error.stringValue)
                     default:
                         break
@@ -133,7 +129,7 @@ class AuthenticationService {
 
     func closeAuthentication() {
         guard let window = window else { return }
-        UIView.animate(withDuration: 0.4, animations: {
+        UIView.animate(withDuration: CATransaction.animationDuration(), animations: {
             window.transform = CGAffineTransform.init(translationX: 0, y: window.bounds.size.height)
         }, completion: { (_) in
             self.window = nil
@@ -144,9 +140,9 @@ class AuthenticationService {
         recognitionFlag = true
         let localizedReason: String
         if biometryType == .faceID {
-            localizedReason = "请验证 Face ID"
+            localizedReason = "Authentication.authFaceIdTitle".localized()
         } else if biometryType == .touchID {
-            localizedReason = "请验证 Touch ID"
+            localizedReason = "Authentication.authTouchIdTitle".localized()
         } else {
             return
         }
@@ -185,22 +181,17 @@ class AuthenticationService {
 
 extension LAError {
     var stringValue: String {
-        if #available(iOS 11.0, *) {
-            if code == LAError.biometryNotEnrolled {
-                return "未设置 Face ID"
-            } else if code == LAError.biometryNotAvailable {
-                return "您的Face ID未开启，请输入密码登陆"
-            } else if code == LAError.biometryLockout {
-                return "多次验证失败被锁定"
-            }
-        }
         switch self {
+        case LAError.biometryNotEnrolled:
+            return "Authentication.Error.faceIDNotEnrolled".localized()
+        case LAError.biometryNotAvailable:
+            return "Authentication.Error.faceIDNotAvailable".localized()
         case LAError.passcodeNotSet:
-            return "未设置 Touch ID"
-        case LAError.touchIDLockout:
-            return "多次验证失败被锁定"
+            return "Authentication.Error.touchIDNotEnrolled".localized()
+        case LAError.biometryLockout:
+            return "Authentication.Error.biometryLockout".localized()
         default:
-            return "验证失败，请重新验证"
+            return "Authentication.Error.authFailed".localized()
         }
     }
 }

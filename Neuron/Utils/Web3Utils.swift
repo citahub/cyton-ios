@@ -10,3 +10,5 @@ import Foundation
 import Web3swift
 
 typealias Web3Utils = Web3swift.Web3Utils
+
+typealias TxHash = String

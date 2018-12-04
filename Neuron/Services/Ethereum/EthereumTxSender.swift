@@ -13,84 +13,81 @@ import Web3swift
 
 class EthereumTxSender {
     private let web3: web3
-    private let from: String
+    private let from: EthereumAddress
 
-    init(web3: web3, from: String) {
+    init(web3: web3, from: String) throws {
         self.web3 = web3
-        self.from = from
+        guard let fromAddress = EthereumAddress(from) else {
+            throw SendTransactionError.invalidSourceAddress
+        }
+        self.from = fromAddress
     }
 
+    /// All parameters should be final, e.g., value should be 10**18 for 1.0 Ether, gasPrice should be 10**9 for 1Gwei.
     func sendETH(
         to: String,
-        amount: String,
-        gasLimit: UInt = 21000,
+        value: BigUInt,
+        gasLimit: UInt64 = GasCalculator.defaultGasLimit,
         gasPrice: BigUInt,
         data: Data,
         password: String
     ) throws -> TxHash {
-        guard let toAddress = EthereumAddress(to) else {
+        guard let toAddress = EthereumAddress(to.addHexPrefix()) else {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard let value = Web3.Utils.parseToBigUInt(amount, units: .eth) else {
-            throw SendTransactionError.invalidAmountFormat
-        }
+        var options = TransactionOptions()
+        options.gasLimit = .manual(BigUInt(gasLimit))
+        options.gasPrice = .manual(gasPrice)
+        options.from = from
 
-        guard let contract = web3.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2) else {
-            throw SendTransactionError.contractLoadingError
-        }
-
-        guard let transaction = contract.write("fallback") else {
+        guard let transaction = web3.eth.sendETH(
+            to: toAddress,
+            amount: value,
+            extraData: data,
+            transactionOptions: options
+        ) else {
             throw SendTransactionError.createTransactionIssue
         }
-        transaction.transactionOptions.gasLimit = .manual(BigUInt(gasLimit))
-        transaction.transactionOptions.gasPrice = .manual(gasPrice)
-        transaction.transactionOptions.from = EthereumAddress(from)
-        transaction.transaction.value = value
 
-        let result = try transaction.sendPromise(password: password).wait()
-        return result.hash
+        transaction.transaction.value = value  // Web3swift seems to be having bug setting value
+        let txHash = try transaction.sendPromise(password: password).wait().hash
+        let sentTransaction = SentTransaction(tokenType: .ether, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
+        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+        return txHash
     }
 
     func sendToken(
         to: String,
-        amount: String,
-        gasLimit: UInt = 21000,
+        value: BigUInt,
+        gasLimit: UInt64 = GasCalculator.defaultGasLimit,
         gasPrice: BigUInt,
         contractAddress: String,
         password: String
     ) throws -> TxHash {
-        guard let destinationEthAddress = EthereumAddress(to) else {
+        guard let destinationAddress = EthereumAddress(to) else {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard Web3.Utils.parseToBigUInt(amount, units: .eth) != nil else {
-            throw SendTransactionError.invalidAmountFormat
+        guard let tokenAddress = EthereumAddress(contractAddress) else {
+            throw SendTransactionError.invalidContractAddress
         }
 
-        guard let tokenAddress = EthereumAddress(contractAddress), let fromAddress = EthereumAddress(from) else {
+        guard let transaction = web3.eth.sendERC20tokensWithKnownDecimals(
+            tokenAddress: tokenAddress,
+            from: from,
+            to: destinationAddress,
+            amount: value
+        ) else {
             throw SendTransactionError.createTransactionIssue
         }
 
-        var options = Web3Options.defaultOptions()
-        options.gasLimit = BigUInt(gasLimit)
-        options.gasPrice = gasPrice
-        options.from = fromAddress
+        transaction.transactionOptions.gasLimit = .manual(BigUInt(gasLimit))
+        transaction.transactionOptions.gasPrice = .manual(gasPrice)
 
-        do {
-            guard let transaction = try web3.eth.sendERC20tokensWithNaturalUnits(
-                tokenAddress: tokenAddress,
-                from: fromAddress,
-                to: destinationEthAddress,
-                amount: amount
-            ) else {
-                throw SendTransactionError.createTransactionIssue
-            }
-
-            let result = try transaction.sendPromise(password: password, transactionOptions: nil).wait()
-            return result.hash
-        } catch {
-            throw SendTransactionError.createTransactionIssue
-        }
+        let txHash = try transaction.sendPromise(password: password).wait().hash
+        let sentTransaction = SentTransaction(contractAddress: contractAddress, tokenType: .erc20, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
+        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
+        return txHash
     }
 }

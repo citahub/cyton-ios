@@ -6,15 +6,104 @@
   Copyright © 2018 Cryptape. All rights reserved.
 */
 
-// Wallet Manager Errors
+// Common
+// ---------------------------------------------------------
+"Common.Connection.ConnectionLost" = "The connection to the Internet is broken";
+"Common.Connection.FailToLoadPage" = "Failed to load the page";
 
-"WalletManager.invalidPassword" = "Invalid password";
-"WalletManager.invalidPrivateKey" = "Invalid Private Key";
-"WalletManager.invalidKeystore" = "Invalid Keystore";
-"WalletManager.invalidMnemonic" = "Invalid Mnemonic";
-"WalletManager.accountAlreadyExists" = "You already have this wallet";
-"WalletManager.accountNotFound" = "Wallet not found";
-"WalletManager.failedToDeleteAccount" = "Failed to delete wallet";
-"WalletManager.failedToUpdatePassword" = "Failed to update wallet password";
-"WalletManager.failedToSaveKeystore" = "Failed to save the keystore";
-"WalletManager.unknown" = "Unknow error";
+// DApp
+// ---------------------------------------------------------
+"DApp.Home" = "DApp";
+"DApp.NFT.EmptyData" = "Empty Data";
+
+// Settings
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "About us";
+
+// DApp Transaction
+// ---------------------------------------------------------
+"DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
+"DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
+"DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
+"DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
+
+
+// Mnemonic Validator
+// ---------------------------------------------------------
+"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";
+"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic";
+
+// Wallet Manager Errors
+// ---------------------------------------------------------
+"WalletManager.Error.invalidPassword" = "Invalid password";
+"WalletManager.Error.invalidPrivateKey" = "Invalid Private Key";
+"WalletManager.Error.invalidKeystore" = "Invalid Keystore";
+"WalletManager.Error.invalidMnemonic" = "Invalid Mnemonic";
+"WalletManager.Error.emptyMnemonic" = "Empty Mnemonic";
+"WalletManager.Error.accountAlreadyExists" = "You already have this wallet";
+"WalletManager.Error.accountNotFound" = "Wallet not found";
+"WalletManager.Error.failedToDeleteAccount" = "Failed to delete wallet";
+"WalletManager.Error.failedToUpdatePassword" = "Failed to update wallet password";
+"WalletManager.Error.failedToSaveKeystore" = "Failed to save the keystore";
+"WalletManager.Error.unknown" = "Unknow error";
+
+// Send Transactoin Error
+// ---------------------------------------------------------
+"SendTransactionError.invalidSourceAddress" = "Invalid source address";
+"SendTransactionError.invalidDestinationAddress" = "Invalid destination address";
+"SendTransactionError.invalidContractAddress" = "Invalid contract ADdress";
+"SendTransactionError.noAvailableKeys" = "Wallet not found";
+"SendTransactionError.createTransactionIssue" = "Failed to create transaction";
+"SendTransactionError.invalidChainId" = "Invalid chain ID";
+"SendTransactionError.signTXFailed" = "Failed to sign the transaction";
+
+// Custom Token Error
+// ---------------------------------------------------------
+"CustomTokenError.wrongBalanceError" = "Wrong balance";
+"CustomTokenError.badNameError" = "Bad token name";
+"CustomTokenError.badSymbolError" = "Bad token symbol";
+"CustomTokenError.undefinedError" = "Undefined error";
+
+// Sign Message Error
+// ---------------------------------------------------------
+"MessageSign.Error.walletNotFound" = "Wallet not found";
+"MessageSign.Error.signMessageFailed" = "Failed to sign the message";
+
+// Wallet
+// ---------------------------------------------------------
+"Wallet" = "钱包";
+"Wallet.token" = "代币";
+"Wallet.addToken" = "添加资产";
+"Wallet.transaction" = "转账";
+"Wallet.receipt" = "收款";
+"Wallet.totalAmount" = "总资产";
+"Wallet.noAmount" = "暂无资产";
+
+// Wallet QRCode
+// ---------------------------------------------------------
+"Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
+"Wallet.QRCode.copy" = "复制";
+"Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
+
+// Authentication
+// ---------------------------------------------------------
+"Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
+"Authentication.clickTouchIdAuth" = "点击进行验证 Touch Id";
+"Authentication.authFaceIdTitle" = "请验证 Face ID";
+"Authentication.authTouchIdTitle" = "请验证 Touch ID";
+
+"Authentication.selectWallet" = "选择钱包";
+"Authentication.walletPassword" = "钱包密码";
+"Authentication.confirmPassword" = "确定";
+"Authentication.walletPasswordError" = "密码不正确请重新输入";
+
+"Authentication.openFaceIdAuthDesc" = "请开启刷脸验证，确保您的资产安全";
+"Authentication.openFaceIdAuth" = "开启刷脸验证";
+"Authentication.openTouchIdAuthDesc" = "请开启指纹验证，确保您的资产安全";
+"Authentication.openTouchIdAuth" = "开启指纹验证";
+
+"Authentication.Error.touchIDNotEnrolled" = "未设置 Touch ID";
+"Authentication.Error.faceIDNotEnrolled" = "未设置 Face ID";
+"Authentication.Error.faceIDNotAvailable" = "您的Face ID未开启，请输入密码登陆";
+"Authentication.Error.biometryLockout" = "多次验证失败被锁定";
+"Authentication.Error.authFailed" = "验证失败，请重新验证";

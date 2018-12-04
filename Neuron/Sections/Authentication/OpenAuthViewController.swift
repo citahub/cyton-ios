@@ -17,12 +17,12 @@ class OpenAuthViewController: UIViewController {
         super.viewDidLoad()
         if AuthenticationService.shared.biometryType == .faceID {
             iconView.image = UIImage(named: "faceId_icon")
-            messageLabel.text = "请开启刷脸验证，确保您的资产安全"
-            confirmButton.setTitle("开启刷脸验证", for: .normal)
+            messageLabel.text = "Authentication.openFaceIdAuthDesc".localized()
+            confirmButton.setTitle("Authentication.openFaceIdAuth".localized(), for: .normal)
         } else {
             iconView.image = UIImage(named: "touchId_icon")
-            messageLabel.text = "请开启指纹验证，确保您的资产安全"
-            confirmButton.setTitle("开启指纹验证", for: .normal)
+            messageLabel.text = "Authentication.openTouchIdAuthDesc".localized()
+            confirmButton.setTitle("Authentication.openTouchIdAuth".localized(), for: .normal)
         }
     }
 

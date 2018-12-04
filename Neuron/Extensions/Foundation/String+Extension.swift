@@ -11,16 +11,24 @@ import BigInt
 
 extension String {
     func removeHexPrefix() -> String {
-        if self.hasPrefix("0x") {
-            return String(self.dropFirst(2))
+        if hasPrefix("0x") {
+            return String(dropFirst(2))
         }
         return self
     }
 
     func addHexPrefix() -> String {
-        if self.hasPrefix("0x") {
+        if hasPrefix("0x") {
             return self
         }
         return "0x" + self
+    }
+
+    func localized(_ comment: String = "") -> String {
+        return NSLocalizedString(self, comment: comment)
+    }
+
+    func toBigUInt() -> BigUInt? {
+        return BigUInt(string: self)
     }
 }

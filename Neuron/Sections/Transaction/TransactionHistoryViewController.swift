@@ -1,5 +1,5 @@
 //
-//  TransactionViewController.swift
+//  TransactionHistoryViewController.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/9/6.
@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import LYEmptyView
-import PullToRefresh
 import WebKit
+import Web3swift
 
 class TransactionHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
     @IBOutlet weak var tableView: UITableView!
@@ -20,49 +19,45 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var tokenAmountLabel: UILabel!
     @IBOutlet var warningView: UIView!
     @IBOutlet weak var warningHeight: NSLayoutConstraint!
-    
-    var service: TransactionHistoryService?
+
+    var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
-    var tokenType: TokenType = .erc20Token
-    var tokenModel: TokenModel! {
-        didSet {
-            guard tokenModel != nil else { return }
-            service = TransactionHistoryService.service(with: tokenModel)
-            Toast.showHUD()
-            loadData()
-        }
-    }
-    let refresher = PullToRefresh()
+    var tokenType: TokenType = .erc20
+    var token: Token!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "交易列表"
+        title = token.symbol
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.addPullToRefresh(refresher) {
-            self.loadData()
-        }
-        setupTokenProfile(nil)
 
+        tableView.refreshControl = UIRefreshControl()
+        tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
+
+        setupTokenProfile(nil)
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
-        if tokenModel.symbol == "MBA" ||
-            tokenModel.symbol == "NATT" {
+        if token.symbol == "MBA" ||
+            token.symbol == "NATT" {
             warningView.isHidden = false
             warningHeight.constant = 30.0
         } else {
             warningView.isHidden = true
             warningHeight.constant = 0.0
         }
+
+        presenter = TransactionHistoryPresenter(token: token)
+        presenter?.delegate = self
+        Toast.showHUD()
+        token.tokenModel.getProfile { (tokenProfile) in
+            self.setupTokenProfile(tokenProfile)
+            self.presenter?.reloadData()
+        }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "requestPayment" {
-            let requestPaymentViewController = segue.destination as! RequestPaymentViewController
-            let appModel = WalletRealmTool.getCurrentAppModel()
-            requestPaymentViewController.appModel = appModel
-        } else if segue.identifier == "transaction" {
-            let controller = segue.destination as! TransactionViewController
-            controller.token = service?.token
+        if segue.identifier == "sendTransaction" {
+            let controller = segue.destination as! SendTransactionViewController
+            controller.token = presenter?.token.tokenModel
         }
     }
 
@@ -74,40 +69,24 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
             guard message.name == "getTokenPrice" else { return }
-            let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-            let price = String(format: "%@ %.2f", currency.symbol, self?.tokenProfile?.price ?? 0.0)
+            let price = self?.tokenProfile?.priceText ?? ""
             message.webView?.evaluateJavaScript("handlePrice('\(price)')", completionHandler: nil)
         }
         navigationController?.pushViewController(controller, animated: true)
     }
 
-    private func loadData() {
-        let group = DispatchGroup()
-        var profile: TokenProfile?
-
-        group.enter()
-        service?.reloadData { (_) in
-            group.leave()
-        }
-
-        group.enter()
-        tokenModel.getProfile { (tokenProfile) in
-            profile = tokenProfile
-            group.leave()
-        }
-
-        group.notify(queue: .main) {
-            Toast.hideHUD()
-            self.setupTokenProfile(profile)
-            self.tableView.endRefreshing(at: .top)
+    @objc private func loadData() {
+        presenter?.reloadData(completion: { (_, _) in
+            self.tableView.refreshControl?.endRefreshing()
             self.tableView.reloadData()
-            if self.service?.transactions.count == 0 {
+            if self.presenter?.transactions.count == 0 {
                 self.errorOverlaycontroller.style = .blank
                 self.tableView.addSubview(self.overlay)
             } else {
                 self.removeOverlay()
             }
-        }
+            Toast.hideHUD()
+        })
     }
 
     private func setupTokenProfile(_ profile: TokenProfile?) {
@@ -147,51 +126,78 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         } else if let image = profile.image {
             self.tokenIconView.image = image
         }
-        self.tokenAmountLabel.text = profile.possess
+        self.tokenAmountLabel.text = profile.priceText
     }
 
     private func loadMoreData() {
-        service?.loadMoreDate(completion: { [weak self](insertions, _) in
+        presenter?.loadMoreData(completion: { [weak self](insertions, _) in
             var indexPaths = [IndexPath]()
             for index in insertions {
                 indexPaths.append(IndexPath(row: index, section: 0))
             }
+            self?.tableView.beginUpdates()
             self?.tableView.insertRows(at: indexPaths, with: .none)
+            self?.tableView.endUpdates()
         })
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return service?.transactions.count ?? 0
+        return presenter?.transactions.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
-        cell.transaction = service!.transactions[indexPath.row]
+        cell.transaction = presenter!.transactions[indexPath.row]
         return cell
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > service!.transactions.count - 4 {
-            loadMoreData()
+        if indexPath.row > presenter!.transactions.count - 2 {
+            presenter?.loadMoreData()
         }
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
-        controller.tModel = service!.transactions[indexPath.row]
+        controller.transaction = presenter?.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
-    }
-
-    deinit {
-        tableView.removeAllPullToRefresh()
     }
 }
 
-enum TokenType {
-    case ethereumToken
-    case nervosToken
-    case erc20Token
+extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate {
+    func updateTransactions(transaction: [TransactionDetails], updates: [Int], error: Error?) {
+        var indexPaths = [IndexPath]()
+        for index in updates {
+            indexPaths.append(IndexPath(row: index, section: 0))
+        }
+        self.tableView.reloadRows(at: indexPaths, with: .none)
+    }
+
+    func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?) {
+        self.tableView.refreshControl?.endRefreshing()
+
+        if self.presenter?.transactions.count == 0 {
+            self.errorOverlaycontroller.style = .blank
+            self.tableView.addSubview(self.overlay)
+        } else {
+            self.removeOverlay()
+        }
+
+        if insertions.first == 0 {
+            self.tableView.reloadData()
+        } else {
+            var indexPaths = [IndexPath]()
+            for index in insertions {
+                indexPaths.append(IndexPath(row: index, section: 0))
+            }
+            self.tableView.beginUpdates()
+            self.tableView.insertRows(at: indexPaths, with: .none)
+            self.tableView.endUpdates()
+        }
+
+        Toast.hideHUD()
+    }
 }
 
 class TransactionHistoryTableViewCell: UITableViewCell {
@@ -199,17 +205,34 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    var transaction: TransactionModel? {
+    var transaction: TransactionDetails? {
         didSet {
             guard let transaction = transaction else { return }
-            dateLabel.text = transaction.formatTime
-            let walletAddress = WalletRealmTool.getCurrentAppModel().currentWallet!.address
-            if transaction.to.lowercased() == walletAddress.lowercased() {
-                addressLabel.text = transaction.from
-                numberLabel.text = "+\(transaction.value)"
+            let dateformatter = DateFormatter()
+            dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+            dateLabel.text = dateformatter.string(from: transaction.date)
+
+            let walletAddress = AppModel.current.currentWallet!.address
+            let amount = Double.fromAmount(transaction.value, decimals: transaction.token.decimals).decimal
+            if transaction.from.lowercased() == walletAddress.lowercased() ||
+                transaction.from == transaction.to {
+                addressLabel.text = transaction.to.count > 0 ? transaction.to : "Contract Created"
+                numberLabel.text = "-\(amount)"
             } else {
-                addressLabel.text = transaction.to
-                numberLabel.text = "-\(transaction.value)"
+                addressLabel.text = transaction.from
+                numberLabel.text = "+\(amount)"
+            }
+
+            switch transaction.status {
+            case .success:
+                statusLabel.text = "交易成功"
+                statusLabel.textColor = UIColor(red: 56/255.0, green: 193/255.0, blue: 137/255.0, alpha: 1)
+            case .pending:
+                statusLabel.text = "交易进行中"
+                statusLabel.textColor = UIColor(red: 108/255.0, green: 113/255.0, blue: 132/255.0, alpha: 1)
+            case .failure:
+                statusLabel.text = "交易失败"
+                statusLabel.textColor = UIColor(red: 255/255.0, green: 69/255.0, blue: 69/255.0, alpha: 1)
             }
         }
     }

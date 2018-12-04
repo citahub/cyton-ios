@@ -19,8 +19,8 @@ class AuthSelectWalletViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "选择钱包"
-        wallets = WalletRealmTool.getCurrentAppModel().wallets
+        title = "Authentication.selectWallet".localized()
+        wallets = AppModel.current.wallets
     }
 
     override func viewWillAppear(_ animated: Bool) {
