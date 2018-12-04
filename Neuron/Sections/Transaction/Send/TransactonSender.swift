@@ -35,7 +35,6 @@ extension TransactonSender {
             )
         } else {
             let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
-            // TODO: estimate gas
             return try sender.sendToken(
                 to: paramBuilder.to,
                 value: paramBuilder.value,

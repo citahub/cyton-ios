@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Web3swift
 
 class TradeDetailsController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var transaction: TransactionDetails! {
@@ -19,7 +18,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
             if let ethereum = transaction as? EthereumTransactionDetails {
                 transactionType = "ETH"
                 let gasUsed = String(Double.fromAmount(ethereum.gasUsed * ethereum.gasPrice, decimals: ethereum.token.decimals))
-                let gasPrice = Web3.Utils.formatToEthereumUnits(ethereum.gasPrice, toUnits: .Gwei, decimals: 8)!
+                let gasPrice = Web3Utils.formatToEthereumUnits(ethereum.gasPrice, toUnits: .Gwei, decimals: 8)!
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "GasPrice", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
                     "Ethereum Mainnet",
@@ -67,7 +66,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
         let walletModel = AppModel.current.currentWallet
         iconImage.image = UIImage(data: (walletModel?.iconData)!)
         tTable.register(UINib.init(nibName: "TradeTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-        amountLabel.text = Web3.Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
+        amountLabel.text = Web3Utils.formatToEthereumUnits(transaction.value, toUnits: .eth, decimals: 8)!
         addressLabel.text = walletModel?.address
         nameLabel.text = walletModel?.name
         tTable.reloadData()

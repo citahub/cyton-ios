@@ -56,13 +56,13 @@ class AdvancedViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.gasPrice = gasPrice
                     let ethereumGasPrice = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: false) ?? "8"
-                    self.ethereumSuggestLabel.text = "以太坊推荐 " + ethereumGasPrice + "Gwei"
+                    self.ethereumSuggestLabel.text = "DApp.Advanced.ETHRecommend".localized() + ethereumGasPrice + "Gwei"
                     self.formatValue(gasPrice: gasPrice)
                     Toast.hideHUD()
                 }
             } catch {
                 DispatchQueue.main.async {
-                    self.ethereumSuggestLabel.text = "以太坊推荐 8"
+                    self.ethereumSuggestLabel.text = "DApp.Advanced.ETHRecommend".localized() + "8"
                     self.gasPrice = BigUInt(8)
                 }
             }
@@ -72,7 +72,7 @@ class AdvancedViewController: UIViewController {
     func formatValue(gasPrice: BigUInt) {
         let ethereumGasPrice = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: false) ?? "8"
         let gas = Web3Utils.formatToEthereumUnits(gasPrice * self.gasLimit, toUnits: .eth, decimals: 4, fallbackToScientific: true) ?? "0"
-        self.gasLabel.text = "Gas费用：\(gas) ETH = Gaslimit(\(self.gasLimit.description))*Gasprice(\(ethereumGasPrice))"
+        self.gasLabel.text = "DApp.Advanced.Gas".localized() + "：\(gas) ETH = Gaslimit(\(self.gasLimit.description))*Gasprice(\(ethereumGasPrice))"
     }
 
     @IBAction func textFieldValueChanged(_ sender: UITextField) {
@@ -98,13 +98,13 @@ class AdvancedViewController: UIViewController {
 
     @IBAction func sureAdvanceButton(_ sender: UIButton) {
         guard let inputGasPrice = inputGasPrice else {
-            Toast.showToast(text: "请输入GasPrice")
+            Toast.showToast(text: "DApp.Advanced.EmptyGasPrice".localized())
             return
         }
         let finalGasPrice = Web3Utils.parseToBigUInt(inputGasPrice, units: .Gwei)!
         if finalGasPrice < gasPrice {
             let gasPriceString = Web3Utils.formatToEthereumUnits(gasPrice, toUnits: .Gwei, decimals: 4, fallbackToScientific: true) ?? "0"
-            Toast.showToast(text: "请输入的GasPrice不小于\(gasPriceString) Gwei")
+            Toast.showToast(text: String(format: "DApp.Advanced.MinGasPrice".localized(), gasPriceString))
             return
         }
         delegate?.getCustomGas(gasPrice: finalGasPrice, gas: finalGasPrice * self.gasLimit)

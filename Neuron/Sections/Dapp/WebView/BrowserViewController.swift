@@ -70,7 +70,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
             webView.load(URLRequest(url: url))
         } else {
             errorOverlaycontroller.style = .blank
-            errorOverlaycontroller.messageLabel.text = "无效的链接地址"
+            errorOverlaycontroller.messageLabel.text = "DApp.Browser.InvalidLink".localized()
             showOverlay()
         }
         errorOverlayRefreshBlock = { [weak self] () in
@@ -113,26 +113,26 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
 
     @IBAction func didClickCollectionButton(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "收藏", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "DApp.Browser.Collection".localized(), style: .default, handler: { (_) in
             let relJs = "document.querySelector('head').querySelector('link[rel=manifest]').href;"
             self.webView.evaluateJavaScript(relJs) { (manifest, _) in
                 if let dappLink = self.webView.url?.absoluteString, let title = self.webView.title {
                     DAppAction().collectDApp(manifestLink: manifest as? String, dappLink: dappLink, title: title, completion: { (result) in
                         if result {
-                            Toast.showToast(text: "收藏成功")
+                            Toast.showToast(text: "DApp.Browser.CollectSuccess".localized())
                         } else {
-                            Toast.showToast(text: "收藏失败")
+                            Toast.showToast(text: "DApp.Browser.CollectFaild".localized())
                         }
                     })
                 } else {
-                    Toast.showToast(text: "收藏失败")
+                    Toast.showToast(text: "DApp.Browser.CollectFaild".localized())
                 }
             }
         }))
-        alert.addAction(UIAlertAction(title: "刷新", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.Connection.Refresh".localized(), style: .default, handler: { (_) in
             self.webView.reload()
         }))
-        alert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Common.Connection.Cancel".localized(), style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 
@@ -320,9 +320,9 @@ extension BrowserViewController: WKNavigationDelegate {
         let error = error as NSError
         errorOverlaycontroller.style = .networkFail
         if error.code == -1009 {
-            errorOverlaycontroller.messageLabel.text = "似乎已断开与互联网的连接"
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
         } else {
-            errorOverlaycontroller.messageLabel.text = "页面加载失败"
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
         }
         showOverlay()
     }
@@ -335,16 +335,16 @@ extension BrowserViewController: WKNavigationDelegate {
         if requestURL.absoluteString.hasPrefix("alipays://") || requestURL.absoluteString.hasPrefix("alipay://") {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
-                let alert = UIAlertController(title: "提示", message: "未检测到支付宝客户端，请安装后重试。", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
+                let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoAliPay".localized(), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             decisionHandler(.cancel)
         } else if requestURL.absoluteString.hasPrefix("weixin://") {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
-                let alert = UIAlertController(title: "提示", message: "未检测到微信客户端，请安装后重试。", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
+                let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoWeChat".localized(), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             decisionHandler(.cancel)
@@ -358,14 +358,14 @@ extension BrowserViewController: ContractControllerDelegate, MessageSignControll
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?) {
         evaluateJavaScryptWebView(id: id, value: value, error: error)
         if let error = error {
-            error != .userCanceled ? Toast.showToast(text: "签名失败") : nil
+            error != .userCanceled ? Toast.showToast(text: "DApp.Browser.SignFaild".localized()) : nil
         }
     }
 
     func callBackWebView(id: Int, value: String, error: DAppError?) {
         evaluateJavaScryptWebView(id: id, value: value, error: error)
         if let error = error {
-            error != .userCanceled ? Toast.showToast(text: "支付失败") : nil
+            error != .userCanceled ? Toast.showToast(text: "DApp.Browser.PayFaild".localized()) : nil
         }
     }
 }

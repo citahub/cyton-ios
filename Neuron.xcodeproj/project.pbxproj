@@ -585,8 +585,8 @@
 		1A91E1E321A63561000EFD40 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				89422FE521A7F92300DD8744 /* DAppModel.swift */,
 				8913437720CA56CA00A17AEF /* RealmConfigurator.swift */,
+				89422FE521A7F92300DD8744 /* DAppModel.swift */,
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,

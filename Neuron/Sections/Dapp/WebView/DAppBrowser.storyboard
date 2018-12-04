@@ -55,7 +55,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oc2-MG-Z29" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="请输入应用网址" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="5Ne-5Q-1BY">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" id="5Ne-5Q-1BY">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <nil key="textColor"/>
@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="2479" y="165"/>
         </scene>
-        <!--我的ÐApp-->
+        <!--MyD App View Controller-->
         <scene sceneID="Zcm-iq-tE9">
             <objects>
                 <tableViewController storyboardIdentifier="MyDAppViewController" id="fzg-Js-pFS" customClass="MyDAppViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
@@ -152,7 +152,7 @@
                             <outlet property="delegate" destination="fzg-Js-pFS" id="7NP-rX-Jdc"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我的ÐApp" id="6KJ-6D-8VA"/>
+                    <navigationItem key="navigationItem" id="6KJ-6D-8VA"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zLU-Mq-xm9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

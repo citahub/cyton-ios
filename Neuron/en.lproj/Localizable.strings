@@ -10,11 +10,59 @@
 // ---------------------------------------------------------
 "Common.Connection.ConnectionLost" = "The connection to the Internet is broken";
 "Common.Connection.FailToLoadPage" = "Failed to load the page";
+"Common.Connection.Cancel" = "取消";
+"Common.Connection.Confirm" = "确定";
+"Common.Connection.UserCancel" = "用户取消";
+"Common.Connection.ScanEmpty" = "扫描结果为空";
+"Common.Connection.LoseConnect" = "似乎已断开与互联网的连接";
+"Common.Connection.LoadFaild" = "页面加载失败";
+"Common.Connection.Refresh" = "刷新";
 
 // DApp
 // ---------------------------------------------------------
 "DApp.Home" = "DApp";
-"DApp.NFT.EmptyData" = "Empty Data";
+"DApp.Search.TextFieldPlaceholder" = "请输入应用网址";
+"DApp.Search.DeleteHistory" = "Delete";
+
+
+// DApp Browser
+// ---------------------------------------------------------
+"DApp.Browser.InvalidLink" = "无效的链接地址";
+"DApp.Browser.Collection" = "收藏";
+"DApp.Browser.CollectSuccess" = "收藏成功";
+"DApp.Browser.CollectFaild" = "收藏失败";
+"DApp.Browser.AlertTitle" = "提示";
+"DApp.Browser.CheckNoAliPay" = "未检测到支付宝客户端，请安装后重试。";
+"DApp.Browser.CheckNoWeChat" = "未检测到微信客户端，请安装后重试。";
+"DApp.Browser.SignFaild" = "签名失败";
+"DApp.Browser.PayFaild" = "支付失败";
+
+// DApp Contract
+// ---------------------------------------------------------
+"DApp.Contract.TransactionSend" = "交易已发送";
+
+// DApp Advanced
+// ---------------------------------------------------------
+"DApp.Advanced.ETHRecommend" = "以太坊推荐 ";
+"DApp.Advanced.Gas" = "Gas费用";
+"DApp.Advanced.EmptyGasPrice" = "请输入GasPrice";
+"DApp.Advanced.MinGasPrice" = "请输入的GasPrice不小于%@ GWei";
+
+// DApp DAppTakePhoto
+// ---------------------------------------------------------
+"DApp.DAppTakePhoto.CameraPermissions" = "拍照需要相机访问权限";
+"DApp.DAppTakePhoto.Open" = "开启";
+"DApp.DAppTakePhoto.NoAccess" = "无相机访问权限";
+
+// DApp MyDApp
+// ---------------------------------------------------------
+"DApp.MyDApp.Title" = "我的ÐApp";
+
+// DApp NFT
+// ---------------------------------------------------------
+"DApp.NFT.EmptyData" = "您还没有藏品数据";
+"DApp.NFT.Title" = "我的藏品";
+"DApp.NFT.DetailTitle" = "藏品详情";
 
 // Settings
 // ---------------------------------------------------------

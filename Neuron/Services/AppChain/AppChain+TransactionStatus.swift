@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Alamofire
-import PromiseKit
 import AppChain
 
 extension AppChainNetwork {
