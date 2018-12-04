@@ -64,10 +64,6 @@
 "DApp.NFT.Title" = "我的藏品";
 "DApp.NFT.DetailTitle" = "藏品详情";
 
-// Settings
-// ---------------------------------------------------------
-"Settings.About.AboutUs" = "About us";
-
 // DApp Transaction
 // ---------------------------------------------------------
 "DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
@@ -155,3 +151,42 @@
 "Authentication.Error.faceIDNotAvailable" = "您的Face ID未开启，请输入密码登陆";
 "Authentication.Error.biometryLockout" = "多次验证失败被锁定";
 "Authentication.Error.authFailed" = "验证失败，请重新验证";
+
+// Setting
+// ---------------------------------------------------------
+"Setting.Title" = "我";
+"Setting.CurrencyTitle" = "本地货币";
+"Setting.TouchIdTitle" = "指纹设置";
+"Setting.ConnectUs" = "联系我们";
+"Setting.Forum" = "论坛";
+"Setting.ConnectUs.CopyWechat" = "客服微信已复制";
+
+// About Us
+"Settings.About.AboutUs" = "About us";
+"Settings.About.SourceCode" = "源码";
+"Settings.About.ServicePrivacy" = "服务隐私";
+"Settings.About.InfuaDetail" = "提供以太坊访问服务";
+"Settings.About.OpenSea" = "提供721数据服务";
+"Settings.About.PeckShield" = "提供代码安全审计服务";
+"Settings.About.Cita" = "区块链内核";
+
+// Currency
+"Setting.Currency.Title" = "默认货币单位";
+
+// Switch ETH Network
+"Setting.SwitchNetwork.Title" = "切换以太坊网络";
+
+// Assets
+// ---------------------------------------------------------
+"Assets.AddAssets.Title" = "添加资产";
+"Assets.AddAssets.BlockChainNetwork" = "区块链网络";
+"Assets.AddAssets.ContractAddress" = "合约地址";
+"Assets.AddAssets.TokenMessage" = "代币信息";
+"Assets.AddAssets.TokenName" = "代币名称";
+"Assets.AddAssets.TokenSymbol" = "代币缩写";
+"Assets.AddAssets.TokenDecimals" = "小数位数";
+
+// Assets List Setting
+"Assets.AssetSetting.Title" = "列表设置";
+"Assets.AssetSetting.Complete" = "完成";
+"Assets.AssetSetting.Edit" = "编辑";

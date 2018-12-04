@@ -244,12 +244,18 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="我" id="0CW-xZ-GRc"/>
                     <connections>
+                        <outlet property="aboutUsLabel" destination="bvK-ic-X0Z" id="BoD-PW-all"/>
                         <outlet property="addressLabel" destination="Cq0-DK-vo4" id="RNI-YH-BmS"/>
                         <outlet property="authenticationSwitch" destination="f5t-fC-gCl" id="NTC-2X-idW"/>
+                        <outlet property="connectUsLabel" destination="OLa-8a-SKK" id="3bW-V4-6D9"/>
                         <outlet property="currencyLabel" destination="bhI-du-BpJ" id="4wc-eV-Gwm"/>
+                        <outlet property="currencyTitleLabel" destination="eNW-sx-gy6" id="rmM-6o-fQc"/>
                         <outlet property="ethereumNetworkLabel" destination="M0v-A8-YM0" id="dwW-kW-hrx"/>
+                        <outlet property="forumLabel" destination="IGz-fk-1Cf" id="vBc-GB-pzb"/>
                         <outlet property="iconImageView" destination="vM3-Iz-eKV" id="Zwm-jO-FBz"/>
                         <outlet property="nameLabel" destination="4Rs-dx-HPF" id="9PH-3l-6Jc"/>
+                        <outlet property="switchEthLabel" destination="sk2-n2-mFD" id="ucS-lG-SaL"/>
+                        <outlet property="touchIdLabel" destination="0oo-Qx-QDr" id="ald-Nx-e4f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFz-TJ-bUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
