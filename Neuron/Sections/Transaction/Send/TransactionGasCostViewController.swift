@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Web3swift
-//import EthereumAddress
 import BigInt
 
 class TransactionGasCostViewController: UITableViewController {

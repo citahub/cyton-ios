@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import BigInt
-import Web3swift
 import AppChain
 
 protocol ThreadSafeObject {
@@ -55,6 +54,7 @@ extension ThreadSafeObject where Self: Object {
     }
 }
 
+// TODO: this should be in Models/Realm.
 class SentTransaction: Object, ThreadSafeObject {
     var tokenType: TokenType {
         set {
@@ -109,7 +109,6 @@ class SentTransaction: Object, ThreadSafeObject {
     @objc dynamic private var privateAmount: String = ""
     @objc dynamic private var privateTxFee: String = ""
     @objc dynamic private var privateTokenType: String = ""
-
 
     @objc override class func primaryKey() -> String? { return "txHash" }
 

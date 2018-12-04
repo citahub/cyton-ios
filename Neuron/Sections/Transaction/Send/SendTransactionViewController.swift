@@ -10,8 +10,6 @@ import UIKit
 import BLTNBoard
 import BigInt
 import AppChain
-import Web3swift
-import EthereumAddress
 import RealmSwift
 
 class SendTransactionViewController: UITableViewController, TransactonSender {
