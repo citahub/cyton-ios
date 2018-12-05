@@ -13,7 +13,7 @@ class SwitchNetworkViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "切换以太坊网络"
+        title = "Settings.SwitchNetwork.Title".localized()
         tableView.reloadData()
     }
 
