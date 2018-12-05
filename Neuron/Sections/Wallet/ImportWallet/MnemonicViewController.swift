@@ -22,8 +22,22 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
     var confirmPassword: String? = ""
     var mnemonic: String? = ""
 
+    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var walletNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rePasswordTextField: UITextField!
+    @IBOutlet weak var passwordDescLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        warningLabel.text = "请按顺序输入您的助记词，并选择助记词路径。"
+        mnemonicTextView.placeholder = "请按顺序输入您的助记词，按空格分隔"
+        walletNameTextField.placeholder = "输入钱包名称"
+        passwordTextField.placeholder = "设置密码"
+        rePasswordTextField.placeholder = "重复密码"
+        passwordDescLabel.text = "密码包含大写字母、小写字母、数字、特殊符号的至少三类，且长度在8位以上！"
+        importButton.setTitle("开始导入", for: .normal)
+
         mnemonicTextView.delegate = self
     }
 

@@ -21,8 +21,17 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
 
     @IBOutlet weak var titleContentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var walletNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "粘贴以太坊Keystore内容至输入框，或通过扫描二维码输入。"
+        keyStoreTextView.placeholder = "请导入Keystore文本"
+        walletNameTextField.placeholder = "输入钱包名称"
+        passwordTextField.placeholder = "输入密码"
+        importButton.setTitle("开始导入", for: .normal)
+
         keyStoreTextView.delegate = self
 
         let titleHeight = titleLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: titleLabel.bounds.size.width, height: 100), limitedToNumberOfLines: 0).size.height

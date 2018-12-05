@@ -121,6 +121,15 @@
 "Wallet.totalAmount" = "总资产";
 "Wallet.noAmount" = "暂无资产";
 
+// Import Wallet
+// ---------------------------------------------------------
+"Wallet.Import.title" = "导入钱包";
+"Wallet.Import.keyStore" = "Keystore";
+"Wallet.Import.mnemonic" = "助记词";
+"Wallet.Import.privatekey" = "私钥";
+"NoScreenshot.importWalletMessage" = "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！";
+
+
 // Wallet QRCode
 // ---------------------------------------------------------
 "Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
