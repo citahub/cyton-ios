@@ -713,6 +713,7 @@
                         <outlet property="tableHeadView" destination="lHJ-34-u6v" id="Pqj-Dh-P5g"/>
                         <outlet property="tableView" destination="H6S-k1-sPQ" id="mCD-p5-v6F"/>
                         <outlet property="tokenTitleLabel" destination="WDt-Rp-fHX" id="kk2-Xl-eC5"/>
+                        <outlet property="tokenTitleWidthLayout" destination="Hre-xg-ppA" id="Il2-sY-mbw"/>
                         <outlet property="totalAmountLabel" destination="oxy-Pr-ZPZ" id="8XF-WX-c5K"/>
                         <outlet property="transactionButton" destination="7Xn-vX-xxw" id="l8C-Mv-ZQg"/>
                         <segue destination="QHQ-B4-0WA" kind="show" identifier="transactionHistory" id="ujt-pt-uhS"/>
