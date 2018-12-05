@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import BigInt
 
 class TransactionGasPriceViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
@@ -20,8 +21,8 @@ class TransactionGasPriceViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        estimatedGasPriceLabel.text = "以太坊推荐值 \(param.fetchedGasPrice.weiToGwei().trailingZerosTrimmed)Gwei"
-        gasPriceTextField.text = param.gasPrice.weiToGwei().trailingZerosTrimmed
+        estimatedGasPriceLabel.text = "以太坊推荐值 \(param.fetchedGasPrice.toGweiText())Gwei"
+        gasPriceTextField.text = param.gasPrice.toGweiText()
         gasLimitTextField.text = param.gasLimit.description
         gasPriceTextField.isEnabled = true
         gasLimitTextField.isEnabled = true
@@ -56,7 +57,7 @@ class TransactionGasPriceViewController: UIViewController {
             Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
             return
         }
-        param.gasPrice = gasPrice.gweiToWei()
+        param.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
         param.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         dismiss()
     }

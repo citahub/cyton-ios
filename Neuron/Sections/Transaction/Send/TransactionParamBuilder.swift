@@ -10,6 +10,7 @@ import Foundation
 import BigInt
 import Web3swift
 import EthereumAddress
+import RealmSwift
 
 /// Prepare tx params.
 class TransactionParamBuilder: NSObject {
@@ -19,10 +20,9 @@ class TransactionParamBuilder: NSObject {
     var data = Data()
     var contractAddress = ""
     var chainId = ""
-    var amount = 0.0
 
-    var fetchedGasPrice: BigUInt = 1  // Fetched from node as recommended gas price
-    var gasPrice: BigUInt = 1 {
+    var fetchedGasPrice: BigUInt = BigUInt.parseToBigUInt("1", 9)  // Fetched from node as recommended gas price
+    var gasPrice: BigUInt = BigUInt.parseToBigUInt("1", 9) {
         didSet {
             rebuildGasCalculator()
         }
@@ -39,10 +39,9 @@ class TransactionParamBuilder: NSObject {
     }
 
     @objc dynamic
-    private(set) var txFeeNatural: Double = 0
+    private(set) var txFeeText: String = "0"
 
     var tokenBalance: BigUInt = 0
-    var balance: Double = 0
 
     @objc dynamic
     private(set) var tokenPrice: Double = 0
@@ -54,9 +53,7 @@ class TransactionParamBuilder: NSObject {
     var hasSufficientBalance: Bool {
         switch tokenType {
         case .ether, .appChain:
-            let amount = NSDecimalNumber(string: self.amount.description).adding(NSDecimalNumber(string: txFeeNatural.description))
-            let balance = NSDecimalNumber(string: self.balance.description)
-            return balance.doubleValue >= amount.doubleValue
+            return tokenBalance >= value + txFee
         case .erc20, .appChainErc20:
             return tokenBalance >= value
         }
@@ -78,8 +75,7 @@ class TransactionParamBuilder: NSObject {
         contractAddress = token.address
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
-        tokenBalance = token.tokenBalance.toAmount(token.decimals)
-        balance = token.tokenBalance
+        tokenBalance = token.balance
 
         super.init()
 
@@ -97,7 +93,6 @@ class TransactionParamBuilder: NSObject {
         symbol = builder.symbol
         nativeCoinSymbol = builder.nativeCoinSymbol
         tokenBalance = builder.tokenBalance
-        balance = builder.balance
         super.init()
         gasPrice = builder.gasPrice
         gasLimit = builder.gasLimit
@@ -163,6 +158,6 @@ class TransactionParamBuilder: NSObject {
 
     private func rebuildGasCalculator() {
         gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
-        txFeeNatural = gasCalculator.txFeeNatural
+        txFeeText = gasCalculator.txFee.toDecimalNumber(decimals).formatterToString()
     }
 }

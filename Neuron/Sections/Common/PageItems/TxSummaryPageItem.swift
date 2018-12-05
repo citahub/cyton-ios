@@ -21,11 +21,7 @@ class TxSummaryPageItem: BLTNPageItem {
     }
 
     func update(_ param: TransactionParamBuilder) {
-        if param.amount >= 0.00000001 {
-            summaryView.amountLabel.text = Double.fromAmount(param.value, decimals: param.decimals).decimal + " "
-        } else {
-            summaryView.amountLabel.text = param.amount.description + " "
-        }
+        summaryView.amountLabel.text = param.value.toAmountText(param.decimals)
 
         let range = NSRange(location: summaryView.amountLabel.text!.lengthOfBytes(using: .utf8), length: param.symbol.lengthOfBytes(using: .utf8))
         summaryView.amountLabel.text! += param.symbol
@@ -35,7 +31,7 @@ class TxSummaryPageItem: BLTNPageItem {
 
         summaryView.fromLabel.text = param.from
         summaryView.toLabel.text = param.to
-        summaryView.txFeeLabel.text = "\(param.txFeeNatural.decimal) \(param.nativeCoinSymbol)"
+        summaryView.txFeeLabel.text = "\(param.txFeeText) \(param.nativeCoinSymbol)"
     }
 
     override func makeViewsUnderTitle(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
