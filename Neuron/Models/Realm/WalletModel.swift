@@ -14,6 +14,8 @@ class WalletModel: Object {
     @objc dynamic var address = ""
     @objc dynamic var iconData: Data!
     var selectTokenList = List<TokenModel>()
+    var tokenModelList = List<TokenModel>()
+    var chainModelList = List<ChainModel>()
 
     var wallet: Wallet? {
         return WalletManager.default.wallet(for: address)

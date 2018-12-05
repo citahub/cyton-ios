@@ -168,6 +168,7 @@
 		89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserViewController.swift */; };
 		89BA4B5621AE333E0084439B /* MnemonicValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA4B5521AE333E0084439B /* MnemonicValidator.swift */; };
 		89BA4B5821AE410F0084439B /* MnemonicValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA4B5721AE410F0084439B /* MnemonicValidatorTests.swift */; };
+		89BD0ECA21B77FA2002D10BD /* ChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BD0EC921B77FA2002D10BD /* ChainModel.swift */; };
 		89BEBE6B20EF82B6007D2705 /* EthereumNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
@@ -389,6 +390,7 @@
 		89B895B020F8B0CD00B9468B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		89BA4B5521AE333E0084439B /* MnemonicValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicValidator.swift; sourceTree = "<group>"; };
 		89BA4B5721AE410F0084439B /* MnemonicValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicValidatorTests.swift; sourceTree = "<group>"; };
+		89BD0EC921B77FA2002D10BD /* ChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainModel.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumNetwork.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -593,6 +595,7 @@
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
+				89BD0EC921B77FA2002D10BD /* ChainModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -1413,6 +1416,7 @@
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
+				89BD0ECA21B77FA2002D10BD /* ChainModel.swift in Sources */,
 				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				1AEBF3E4219BA1E700653FF5 /* BigUInt+Extension.swift in Sources */,
 				1A6007A221A2AA9A00C7B712 /* PageItemAppearance.swift in Sources */,

@@ -10,27 +10,25 @@ import UIKit
 import RealmSwift
 
 class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
-    let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
-    let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]
+    let titleArray = ["区块链", "合约地址"]
+    let placeholderArray = ["", "合约地址"]
 
     let nView =  NEPickerView.init()
     var tokenArray: [TokenModel] = []
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var aTable: UITableView!
     var tokenModel = TokenModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "添加资产"
-        view.backgroundColor = UIColor(hex: "f5f5f5")
         aTable.delegate = self
         aTable.dataSource = self
-        aTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-
-        aTable.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: CGFloat.leastNormalMagnitude))
-
+        aTable.register(UINib(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
     }
 
+    @IBAction func searchTokenButton(_ sender: UIButton) {
+    }
     @IBAction func didClickAddButton(_ sender: UIButton) {
         Toast.hideHUD()
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
@@ -59,13 +57,9 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         }
         navigationController?.popViewController(animated: true)
     }
-    //tableview代理
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
-    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return titleArray.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,15 +79,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             cell.rightTextField.text = "以太坊"
         case 1:
             cell.rightTextField.text = tokenModel.address
-        case 2:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.name
-        case 3:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.symbol
-        case 4:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.decimals == 0 ? "0" : String(tokenModel.decimals)
         default:
             break
         }

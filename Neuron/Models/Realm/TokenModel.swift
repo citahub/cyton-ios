@@ -21,7 +21,8 @@ class TokenModel: Object, Decodable {
     @objc dynamic var identifier = UUID().uuidString
 
     // defaults false, eth and RPC "getMateData" is true.
-    @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
+    @objc dynamic var isNativeToken = false
+    @objc dynamic var isSelected = false
 
     @objc dynamic var tokenBalance = 0.0
     var currencyAmount = "0"
