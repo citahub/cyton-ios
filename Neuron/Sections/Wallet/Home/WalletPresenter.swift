@@ -17,7 +17,7 @@ protocol WalletPresenterDelegate: NSObjectProtocol {
     func walletPresenterEndedRefresh(presenter: WalletPresenter)
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel)
     func walletPresenter(presenter: WalletPresenter, didRefreshToken tokens: [Token])
-    func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double)
+    func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: NSDecimalNumber)
     func walletPresenter(presenter: WalletPresenter, didRefreshCurrency currency: LocalCurrency)
     func walletPresenter(presenter: WalletPresenter, didRefreshTokenAmount token: Token)
 }
@@ -170,10 +170,11 @@ extension WalletPresenter {
                 } catch {
                 }
             }
-            var amount = 0.0
+            var amount = NSDecimalNumber(value: 0.0)
             self.tokens.forEach({ (token) in
                 if let price = token.price, let balance = token.balance {
-                    amount += price * balance
+                    let tokenAmount = balance.toDecimalNumber(token.decimals).multiplying(by: NSDecimalNumber(value: price))
+                    amount = amount.adding(tokenAmount)
                 }
             })
             DispatchQueue.main.async {
@@ -193,11 +194,12 @@ extension WalletPresenter {
         let currency = self.currency
         let timestamp = self.tokenListTimestamp
         DispatchQueue.global().async {
-            var amount = 0.0
+            var amount = NSDecimalNumber(value: 0.0)
             tokens.forEach { (token) in
                 token.price = self.getTokenPrice(token: token)
                 if let price = token.price, let balance = token.balance {
-                    amount += price * balance
+                    let tokenAmount = balance.toDecimalNumber(token.decimals).multiplying(by: NSDecimalNumber(value: price))
+                    amount = amount.adding(tokenAmount)
                 }
                 DispatchQueue.main.async {
                     self.delegate?.walletPresenter(presenter: self, didRefreshTokenAmount: token)

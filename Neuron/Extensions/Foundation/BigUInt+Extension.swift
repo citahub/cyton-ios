@@ -58,8 +58,8 @@ extension BigUInt {
         return self / BigUInt(10).power(18)
     }
 
-    func weiToGwei() -> Double {
-        return Double.fromAmount(self, decimals: 9)
+    func toGweiText() -> String {
+        return toAmountText(9)
     }
 
     init?(string: String) {
@@ -68,5 +68,29 @@ extension BigUInt {
         } else {
             self.init(string)
         }
+    }
+
+    func toAmountText(_ decimals: Int = 18) -> String {
+        if self > Int(0.00000001 * pow(10, Double(decimals))) {
+            let formattingDecimals = decimals < 8 ? decimals : 8
+            return toDecimalNumber(decimals).formatterToString(formattingDecimals)
+        } else {
+            let numberText = toDecimalNumber(decimals).formatterToString(18)
+            let double = Double(numberText)!
+            return double.description
+        }
+    }
+
+    func toDecimalNumber(_ decimals: Int = 18) -> NSDecimalNumber {
+        let text = Web3Utils.formatToPrecision(self, numberDecimals: decimals, formattingDecimals: decimals)
+        return NSDecimalNumber(string: text)
+    }
+
+    func toDouble(_ decimals: Int = 18) -> Double {
+        return Double(toDecimalNumber(decimals).formatterToString(decimals)) ?? 0
+    }
+
+    static func parseToBigUInt(_ amount: String, _ decimals: Int = 18) -> BigUInt {
+        return Web3Utils.parseToBigUInt(amount, decimals: decimals) ?? 0
     }
 }

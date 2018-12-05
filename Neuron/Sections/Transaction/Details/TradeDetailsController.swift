@@ -17,7 +17,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
 
             if let ethereum = transaction as? EthereumTransactionDetails {
                 transactionType = "ETH"
-                let gasUsed = String(Double.fromAmount(ethereum.gasUsed * ethereum.gasPrice, decimals: ethereum.token.decimals))
+                let gasUsed = (ethereum.gasUsed * ethereum.gasPrice).toAmountText(ethereum.token.decimals)
                 let gasPrice = Web3Utils.formatToEthereumUnits(ethereum.gasPrice, toUnits: .Gwei, decimals: 8)!
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "GasPrice", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
@@ -32,7 +32,7 @@ class TradeDetailsController: UIViewController, UITableViewDataSource, UITableVi
                 ]
             } else if let appChain = transaction as? AppChainTransactionDetails {
                 transactionType = "AppChain"
-                let gasUsed = String(Double.fromAmount(appChain.gasUsed, decimals: 9))
+                let gasUsed = appChain.gasUsed.toGweiText()
                 titleArr = ["区块链网络", "接受方", "发送方", "手续费", "交易流水号", "所在区块", "入块时间"]
                 subBtnArr = [
                     appChain.chainName,
