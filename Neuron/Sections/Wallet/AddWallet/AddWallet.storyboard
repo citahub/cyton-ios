@@ -978,7 +978,12 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="aK1-xw-qVT"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="nameTextField" destination="kMb-xZ-n5I" id="tue-r7-2w6"/>
                         <outlet property="nextButton" destination="U24-p5-MkP" id="wWF-nH-ALP"/>
+                        <outlet property="passwordDescLabel" destination="clU-Mx-05J" id="fqZ-em-WAN"/>
+                        <outlet property="passwordTextField" destination="AQZ-qN-6oX" id="L07-vN-xzX"/>
+                        <outlet property="passwordWarningLabel" destination="gT5-41-7tF" id="3UL-lC-FPq"/>
+                        <outlet property="rePasswordTextField" destination="0qy-Vg-EOF" id="Psz-Qt-COl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qTV-OK-2sd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1118,6 +1123,11 @@
                     <navigationItem key="navigationItem" id="Dw6-jA-k5w"/>
                     <connections>
                         <outlet property="mnemonicTextView" destination="G9D-oT-DhE" id="iSe-D3-lIB"/>
+                        <outlet property="mnemonicWarnLabel1" destination="09P-Z4-vL9" id="E9U-U0-1Wi"/>
+                        <outlet property="mnemonicWarnLabel2" destination="yLk-hR-k4g" id="Nqz-43-yue"/>
+                        <outlet property="mnemonicWarnLabel3" destination="dtE-VT-zAQ" id="NVY-Mj-CWb"/>
+                        <outlet property="mnemonicWarnTitleLabel" destination="8Gn-Sm-UFW" id="8Ll-BB-vZG"/>
+                        <outlet property="nextButton" destination="uif-Ne-6rO" id="zgo-3I-qOY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x4M-Qo-hxF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1170,6 +1180,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="zfR-aH-9IY"/>
                     </view>
+                    <connections>
+                        <outlet property="inputMnemonicTitleLabel" destination="ejK-JV-5WO" id="2yD-zN-bYa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hzP-6d-xeG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

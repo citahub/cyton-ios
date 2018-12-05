@@ -17,6 +17,10 @@
 "Common.Connection.LoseConnect" = "似乎已断开与互联网的连接";
 "Common.Connection.LoadFaild" = "页面加载失败";
 "Common.Connection.Refresh" = "刷新";
+"Common.next" = "下一步";
+"Common.confirm" = "确定";
+"Common.cancel" = "取消";
+"Common.reject" = "拒绝";
 
 // DApp
 // ---------------------------------------------------------
@@ -177,6 +181,26 @@
 "Transaction.Details.gasFee" = "矿工费用"
 "Transaction.Details.blockChainBrowserDesc" = "到区块链浏览器查看更多"
 
+// Send Transaction
+// ---------------------------------------------------------
+"Transaction.Send.balanceNotSufficient" = "请确保账户剩余%s高于矿工费用，以便顺利完成转账～";
+"Transaction.Send.addressError" = "您的地址错误，请重新输入";
+"Transaction.Send.title" = "%s转账";
+"Transaction.Send.transactionAvailableBalance" = "您输入的金额超过您的余额，是否全部转出？";
+"Transaction.Send.gasPriceSettingIsTooLow" = "您的GasPrice设置过低，建议输入推荐值以快速转账";
+"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于”%s(估算值)*4”";
+"Transaction.Send.gasCostSetting" = "高级设置";
+"Transaction.Send.gasCost" = "Gas 费用";
+"Transaction.Send.extenData" = "包含数据";
+"Transaction.Send.gasCostSettingDesc" = "数据将上传至区块链，您的数据安全将得到一百分保障！";
+"Transaction.Send.input" = "请输入";
+"Transaction.Send.inputHexData" = "请输入十六进制数据";
+"Transaction.Send.txToken" = "转账币种";
+"Transaction.Send.txAmount" = "转账金额";
+"Transaction.Send.inputAmount" = "输入金额";
+"Transaction.Send.receiptAddress" = "收款地址";
+"Transaction.Send.gasFee" = "矿工费用";
+
 // Authentication
 // ---------------------------------------------------------
 "Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
@@ -186,7 +210,6 @@
 
 "Authentication.selectWallet" = "选择钱包";
 "Authentication.walletPassword" = "钱包密码";
-"Authentication.confirmPassword" = "确定";
 "Authentication.walletPasswordError" = "密码不正确请重新输入";
 
 "Authentication.openFaceIdAuthDesc" = "请开启刷脸验证，确保您的资产安全";
@@ -200,6 +223,35 @@
 "Authentication.Error.biometryLockout" = "多次验证失败被锁定";
 "Authentication.Error.authFailed" = "验证失败，请重新验证";
 
+// Create Wallet
+// ---------------------------------------------------------
+"Wallet.Create.createWallet" = "创建钱包";
+"Wallet.Create.passwordWarning" = "此密码将被用于保护私钥和交易授权";
+"Wallet.Create.walletName" = "钱包名称";
+"Wallet.Create.setPassword" = "设定密码";
+"Wallet.Create.rePassword" = "重复密码";
+"Wallet.Create.passwordDesc" = "密码包含大写字母、小写字母、数字、特殊符号中的至少三类，且长度在8位以上。";
+"Wallet.Create.passwordInconsistent" = "两次密码不一致";
+
+"Wallet.Create.backupMnemonic" = "备份助记词";
+"Wallet.Create.mnemonicWarnTitle" = "助记词将被用来恢复钱包或重置钱包密码";
+"Wallet.Create.mnemonicWarn1" = "- 如您的助记词被他人获取，您的财产可能受到损失";
+"Wallet.Create.mnemonicWarn2" = "- 不要截图或传送给他人";
+"Wallet.Create.mnemonicWarn3" = "- 推荐抄写并放在安全的地方";
+"Wallet.Create.backCreateWalletAlert" = "距离开启您的安全区块链账户还差最后一步，是否继续";
+
+"Wallet.Create.confirmMnemonic" = "确认助记词";
+"Wallet.Create.confirmMnemonicDesc" = "请按顺序点击助记词，以确认你的备份助记词正确";
+"Wallet.Create.backupCompleted" = "完成备份";
+"Wallet.Create.walletCreation" = "钱包创建中...";
+"Wallet.Create.mnemonicValidationFailed" = "助记词验证失败";
+"Wallet.Create.createSuccess" = "创建成功";
+
+
+// No Screenshot
+// ---------------------------------------------------------
+"NoScreenshot.title" = "禁止截屏！";
+"NoScreenshot.mnemonicMessage" = "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！";
 // Setting
 // ---------------------------------------------------------
 "Settings.Title" = "我";
