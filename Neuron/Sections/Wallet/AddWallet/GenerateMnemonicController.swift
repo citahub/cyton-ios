@@ -13,11 +13,22 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
     var walletModel = WalletModel()
     var mnemonic = ""
     @IBOutlet weak var mnemonicTextView: UITextView!
+    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet weak var mnemonicWarnTitleLabel: UILabel!
+    @IBOutlet weak var mnemonicWarnLabel1: UILabel!
+    @IBOutlet weak var mnemonicWarnLabel2: UILabel!
+    @IBOutlet weak var mnemonicWarnLabel3: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Wallet.Create.backupMnemonic".localized()
+        nextButton.setTitle("Common.next".localized(), for: .normal)
+        mnemonicWarnTitleLabel.text = "Wallet.Create.mnemonicWarnTitle".localized()
+        mnemonicWarnLabel1.text = "Wallet.Create.mnemonicWarn1".localized()
+        mnemonicWarnLabel2.text = "Wallet.Create.mnemonicWarn2".localized()
+        mnemonicWarnLabel3.text = "Wallet.Create.mnemonicWarn3".localized()
+
         mnemonicTextView.text = mnemonic
-        title = "备份助记词"
         setupEnterBackOverlay()
     }
 
@@ -36,7 +47,7 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showNoScreenshotAlert(titile: "禁止截屏！", message: "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！")
+        showNoScreenshotAlert(titile: "NoScreenshotTitle".localized(), message: "NoScreenshot.mnemonicMessage".localized())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,11 +73,11 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
     }
 
     @objc func clickBackBarButton() {
-        let alert = UIAlertController(title: nil, message: "距离开启您的安全区块链账户还差最后一步，是否继续", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
+        let alert = UIAlertController(title: nil, message: "Wallet.Create.backCreateWalletAlert".localized(), preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .default, handler: { (_) in
             alert.dismiss(animated: true, completion: nil)
         }))
-        alert.addAction(UIAlertAction(title: "拒绝", style: .destructive, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.reject".localized(), style: .destructive, handler: { (_) in
             alert.dismiss(animated: false, completion: nil)
             self.navigationController?.popViewController(animated: true)
         }))

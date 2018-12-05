@@ -26,17 +26,20 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
     }
 
     var walletModel = WalletModel()
+    @IBOutlet weak var inputMnemonicTitleLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "确认助记词"
+        title = "Wallet.Create.confirmMnemonic".localized()
+        inputMnemonicTitleLabel.text = "Wallet.Create.confirmMnemonicDesc".localized()
+
         didDrawSubViews()
         setupEnterBackOverlay()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showNoScreenshotAlert(titile: "禁止截屏！", message: "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！")
+        showNoScreenshotAlert(titile: "NoScreenshot.title".localized(), message: "NoScreenshot.mnemonicMessage".localized())
     }
 
     func didDrawSubViews() {
@@ -54,7 +57,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         sureButton.frame = CGRect(x: 15, y: showView.frame.origin.y + showView.frame.size.height + 20, width: screenSize.width - 30, height: 44)
         sureButton.backgroundColor = UIColor(named: "control_disabled_bg_color") // TODO: should use isEnabled property
         sureButton.setTitleColor(UIColor(named: "control_disabled_title_color"), for: .normal)
-        sureButton.setTitle("完成备份", for: .normal)
+        sureButton.setTitle("Wallet.Create.backupCompleted".localized(), for: .normal)
         sureButton.addTarget(self, action: #selector(didCompletBackupMnemonic), for: .touchUpInside)
         sureButton.layer.cornerRadius = 5
         view.addSubview(sureButton)
@@ -88,7 +91,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
 
     @objc func didCompletBackupMnemonic() {
         if selectArray.count != titleArr.count {
-            Toast.showToast(text: "助记词验证失败")
+            Toast.showToast(text: "Wallet.Create.mnemonicValidationFailed".localized())
             return
         }
         let originalMnemonic = titleArr.joined()
@@ -97,7 +100,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         if success {
             importWallet(mnemonic: mnemonic!, password: password)
         } else {
-            Toast.showToast(text: "助记词验证失败")
+            Toast.showToast(text: "Wallet.Create.mnemonicValidationFailed".localized())
         }
     }
 
@@ -111,7 +114,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
     }
 
     func importWallet(mnemonic: String, password: String) {
-        Toast.showHUD(text: "钱包创建中...")
+        Toast.showHUD(text: "Wallet.Create.walletCreation".localized())
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 let wallet = try WalletManager.default.importMnemonic(mnemonic: mnemonic, password: password)
@@ -141,6 +144,6 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
             realm.add(appModel)
         }
         navigationController?.popToRootViewController(animated: true)
-        Toast.showToast(text: "创建成功")
+        Toast.showToast(text: "Wallet.Create.createSuccess".localized())
     }
 }

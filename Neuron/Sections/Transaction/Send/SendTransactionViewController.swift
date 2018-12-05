@@ -21,6 +21,11 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBOutlet private weak var gasCostLabel: UILabel!
     @IBOutlet private weak var addressTextField: UITextField!
     @IBOutlet weak var tokenLabel: UILabel!
+    @IBOutlet weak var tokenTitleLabel: UILabel!
+    @IBOutlet weak var amountTitleLabel: UILabel!
+    @IBOutlet weak var addressTitleLabel: UILabel!
+    @IBOutlet weak var gasCostTitleLabel: UILabel!
+    @IBOutlet weak var nextButton: UIButton!
 
     var paramBuilder: TransactionParamBuilder!
     var enableSwitchToken = false
@@ -44,6 +49,13 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tokenTitleLabel.text = "Transaction.Send.txToken".localized()
+        amountTitleLabel.text = "Transaction.Send.txAmount".localized()
+        amountTextField.placeholder = "Transaction.Send.inputAmount".localized()
+        addressTitleLabel.text = "Transaction.Send.receiptAddress".localized()
+        addressTextField.placeholder = "Transaction.Send.receiptAddress".localized()
+        gasCostTitleLabel.text = "Transaction.Send.gasFee".localized()
+        nextButton.setTitle("Common.next".localized(), for: .normal)
 
         if enableSwitchToken && token == nil {
             token = AppModel.current.nativeTokenList.first
@@ -53,10 +65,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TransactionGasPriceViewController" {
-            let controller = segue.destination as! TransactionGasPriceViewController
-            controller.param = paramBuilder
-        } else if segue.identifier == "switchToken" {
+        if segue.identifier == "switchToken" {
             let controller = segue.destination as! TransactionSwitchTokenViewController
             controller.currentToken = token
             controller.delegate = self
@@ -78,7 +87,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
             if ether.tokenBalance < paramBuilder.txFeeNatural {
-                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                Toast.showToast(text: "Transaction.Send.balanceNotSufficient".localized().replacingOccurrences(of: "[symbol]", with: token.gasSymbol))
                 return
             }
         }
@@ -97,14 +106,13 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     @IBAction func transactionAvailableBalance() {
-        // TODO: FIXME: erc20 token requires ETH balance for tx fee
         switch token.type {
         case .ether, .appChain:
             let balance = NSDecimalNumber(string: String(token.tokenBalance))
             let txFee = NSDecimalNumber(string: String(paramBuilder.txFeeNatural))
             let amount = balance.subtracting(txFee)
             if amount.doubleValue < 0 {
-                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
                 return
             }
             amountTextField.text = amount.stringValue
@@ -113,7 +121,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
             if ether.tokenBalance < paramBuilder.txFeeNatural {
-                Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
                 return
             }
             let amount = token.tokenBalance
@@ -126,7 +134,8 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     func setupUI() {
         let wallet = AppModel.current.currentWallet!
-        title = "\(token.symbol)转账"
+        title = String(format: "Transaction.Send.title".localized(), token.symbol)
+
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
@@ -198,7 +207,7 @@ private extension SendTransactionViewController {
 
     var isEffectiveTransferInfo: Bool {
         guard Address.isValid(paramBuilder.to) && paramBuilder.to != "0x" else {
-            Toast.showToast(text: "您的地址错误，请重新输入")
+            Toast.showToast(text: "Transaction.Send.addressError".localized())
             return false
         }
 
@@ -208,14 +217,14 @@ private extension SendTransactionViewController {
         }
 
         if paramBuilder.tokenBalance <= BigUInt(0) {
-            Toast.showToast(text: "请确保账户剩余\(token.gasSymbol)高于矿工费用，以便顺利完成转账～")
+            Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
             return false
         }
-        let alert = UIAlertController(title: "您输入的金额超过您的余额，是否全部转出？", message: "", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确认", style: .default, handler: { (_) in
+        let alert = UIAlertController(title: "Transaction.Send.transactionAvailableBalance".localized(), message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .default, handler: { (_) in
             self.transactionAvailableBalance()
         }))
-        alert.addAction(UIAlertAction(title: "取消", style: .destructive, handler: { (_) in
+        alert.addAction(UIAlertAction(title: "Common.cancel".localized(), style: .destructive, handler: { (_) in
         }))
         present(alert, animated: true, completion: nil)
         return false
