@@ -163,12 +163,12 @@
 
 // Settings
 // ---------------------------------------------------------
-"Setting.Title" = "我";
-"Setting.CurrencyTitle" = "本地货币";
-"Setting.TouchIdTitle" = "指纹设置";
-"Setting.ConnectUs" = "联系我们";
-"Setting.Forum" = "论坛";
-"Setting.ConnectUs.CopyWechat" = "客服微信已复制";
+"Settings.Title" = "我";
+"Settings.CurrencyTitle" = "本地货币";
+"Settings.TouchIdTitle" = "指纹设置";
+"Settings.ConnectUs" = "联系我们";
+"Settings.Forum" = "论坛";
+"Settings.ConnectUs.CopyWechat" = "客服微信已复制";
 
 // Settings: About U
 // ---------------------------------------------------------
@@ -182,11 +182,11 @@
 
 // Settings: Currency
 // ---------------------------------------------------------
-"Setting.Currency.Title" = "默认货币单位";
+"Settings.Currency.Title" = "默认货币单位";
 
 // Settings: Switch ETH Network
 // ---------------------------------------------------------
-"Setting.SwitchNetwork.Title" = "切换以太坊网络";
+"Settings.SwitchNetwork.Title" = "切换以太坊网络";
 
 // Assets
 // ---------------------------------------------------------

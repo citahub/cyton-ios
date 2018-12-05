@@ -25,13 +25,13 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var forumLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Setting.Title".localized()
-        currencyTitleLabel.text = "Setting.CurrencyTitle".localized()
-        touchIdLabel.text = "Setting.TouchIdTitle".localized()
-        switchEthLabel.text = "Setting.SwitchNetwork.Title".localized()
+        title = "Settings.Title".localized()
+        currencyTitleLabel.text = "Settings.CurrencyTitle".localized()
+        touchIdLabel.text = "Settings.TouchIdTitle".localized()
+        switchEthLabel.text = "Settings.SwitchNetwork.Title".localized()
         aboutUsLabel.text = "Settings.About.AboutUs".localized()
-        connectUsLabel.text = "Setting.ConnectUs".localized()
-        forumLabel.text = "Setting.Forum".localized()
+        connectUsLabel.text = "Settings.ConnectUs".localized()
+        forumLabel.text = "Settings.Forum".localized()
     }
 
     func getDataForUI() {
@@ -76,7 +76,7 @@ class SettingsViewController: UITableViewController {
             switch indexPath.row {
             case 1:
                 UIPasteboard.general.string = "Nervos-Neuron"
-                Toast.showToast(text: "Setting.ConnectUs.CopyWechat".localized())
+                Toast.showToast(text: "Settings.ConnectUs.CopyWechat".localized())
             case 2:
                 let safariController = SFSafariViewController(url: URL(string: "https://forums.nervos.org/")!)
                 self.present(safariController, animated: true, completion: nil)
