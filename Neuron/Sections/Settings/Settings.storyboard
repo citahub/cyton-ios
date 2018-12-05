@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--我-->
+        <!--Settings View Controller-->
         <scene sceneID="K5j-4r-QvA">
             <objects>
                 <tableViewController id="cE0-S4-LPn" customClass="SettingsViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
@@ -242,14 +242,20 @@
                             <outlet property="delegate" destination="cE0-S4-LPn" id="ln5-UJ-YnO"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="我" id="0CW-xZ-GRc"/>
+                    <navigationItem key="navigationItem" id="0CW-xZ-GRc"/>
                     <connections>
+                        <outlet property="aboutUsLabel" destination="bvK-ic-X0Z" id="BoD-PW-all"/>
                         <outlet property="addressLabel" destination="Cq0-DK-vo4" id="RNI-YH-BmS"/>
                         <outlet property="authenticationSwitch" destination="f5t-fC-gCl" id="NTC-2X-idW"/>
+                        <outlet property="connectUsLabel" destination="OLa-8a-SKK" id="3bW-V4-6D9"/>
                         <outlet property="currencyLabel" destination="bhI-du-BpJ" id="4wc-eV-Gwm"/>
+                        <outlet property="currencyTitleLabel" destination="eNW-sx-gy6" id="rmM-6o-fQc"/>
                         <outlet property="ethereumNetworkLabel" destination="M0v-A8-YM0" id="dwW-kW-hrx"/>
+                        <outlet property="forumLabel" destination="IGz-fk-1Cf" id="vBc-GB-pzb"/>
                         <outlet property="iconImageView" destination="vM3-Iz-eKV" id="Zwm-jO-FBz"/>
                         <outlet property="nameLabel" destination="4Rs-dx-HPF" id="9PH-3l-6Jc"/>
+                        <outlet property="switchEthLabel" destination="sk2-n2-mFD" id="ucS-lG-SaL"/>
+                        <outlet property="touchIdLabel" destination="0oo-Qx-QDr" id="ald-Nx-e4f"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DFz-TJ-bUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -414,11 +420,11 @@
             </objects>
             <point key="canvasLocation" x="1423" y="-120"/>
         </scene>
-        <!--我的-->
+        <!--我-->
         <scene sceneID="IY9-Hf-DOL">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cnK-C0-SxL" customClass="BaseNavigationController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="我的" image="Main_off" selectedImage="Main_on" id="Agk-fQ-F3d"/>
+                    <tabBarItem key="tabBarItem" title="我" image="Main_off" selectedImage="Main_on" id="Agk-fQ-F3d"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Y6N-xl-ghu">

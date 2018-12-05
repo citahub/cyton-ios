@@ -199,7 +199,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="PeckShield" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="r99-YF-QHx">
-                                                    <rect key="frame" x="64" y="13" width="76" height="18"/>
+                                                    <rect key="frame" x="51" y="13" width="76" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.14117647059999999" green="0.16862745100000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -213,7 +213,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="peckshield" id="FZd-lB-soh">
-                                                    <rect key="frame" x="16" y="1" width="33" height="40"/>
+                                                    <rect key="frame" x="16" y="11" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                             </subviews>
@@ -227,14 +227,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="CITA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sEC-GN-Tjb" userLabel="CITA">
-                                                    <rect key="frame" x="71" y="13" width="32.5" height="18"/>
+                                                    <rect key="frame" x="51" y="13" width="32.5" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.14117647059999999" green="0.16862745100000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="cita" id="6fs-eo-4c1">
-                                                    <rect key="frame" x="16" y="1" width="40" height="40"/>
+                                                    <rect key="frame" x="16" y="11" width="20" height="20"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="区块链内核" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zxX-Y6-UFJ">
@@ -256,6 +256,12 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="citaDetailLabel" destination="zxX-Y6-UFJ" id="0kb-K4-KvG"/>
+                        <outlet property="infuaDetailLabel" destination="fOl-lc-Nhm" id="ZGj-dF-iuC"/>
+                        <outlet property="openSeaDetailLabel" destination="TqJ-Rt-K74" id="jjY-n8-SiQ"/>
+                        <outlet property="peckShieldDetailLabel" destination="pyU-e3-sIb" id="dWV-Ax-m8J"/>
+                        <outlet property="servicePrivacyLabel" destination="nZS-oK-Mgh" id="Spd-KM-Ya1"/>
+                        <outlet property="sourceCodeLabel" destination="Fb3-L2-ceM" id="sk1-Nw-rYV"/>
                         <outlet property="versionLabel" destination="Osr-Ev-wPl" id="OLo-wF-Gzt"/>
                     </connections>
                 </tableViewController>
@@ -265,12 +271,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="cita" width="40" height="40"/>
+        <image name="cita" width="20" height="20"/>
         <image name="infua" width="20" height="20"/>
         <image name="nervos_network" width="20" height="20"/>
         <image name="neuron_logo" width="60" height="60"/>
         <image name="opensea" width="20" height="20"/>
-        <image name="peckshield" width="33" height="40"/>
+        <image name="peckshield" width="20" height="20"/>
         <image name="service_terms" width="20" height="20"/>
         <image name="source_code" width="20" height="20"/>
     </resources>
