@@ -166,6 +166,17 @@
 "TransactionStatus.pending" = "交易进行中";
 "TransactionStatus.failure" = "交易失败";
 
+// Transaction Details
+// ---------------------------------------------------------
+"Transaction.Details.title" = "交易详情"
+"Transaction.Details.paymentAddress" = "付款地址"
+"Transaction.Details.receiptAddress" = "收款地址"
+"Transaction.Details.hash" = "交易流水号"
+"Transaction.Details.chainNetwork" = "区块链网络"
+"Transaction.Details.block" = "区块"
+"Transaction.Details.gasFee" = "矿工费用"
+"Transaction.Details.blockChainBrowserDesc" = "到区块链浏览器查看更多"
+
 // Authentication
 // ---------------------------------------------------------
 "Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
