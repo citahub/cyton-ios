@@ -434,7 +434,6 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <outlet property="mineTabbarItem" destination="Agk-fQ-F3d" id="Ow0-8s-PVH"/>
                         <segue destination="cE0-S4-LPn" kind="relationship" relationship="rootViewController" id="xUc-i3-zXG"/>
                     </connections>
                 </navigationController>
