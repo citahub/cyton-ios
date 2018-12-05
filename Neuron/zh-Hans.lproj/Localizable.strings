@@ -138,7 +138,6 @@
 "TransactionStatus.pending" = "交易进行中";
 "TransactionStatus.failure" = "交易失败";
 
-
 // Authentication
 // ---------------------------------------------------------
 "Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
@@ -171,7 +170,8 @@
 "Setting.Forum" = "论坛";
 "Setting.ConnectUs.CopyWechat" = "客服微信已复制";
 
-// About Us
+// Settings: About U
+// ---------------------------------------------------------
 "Settings.About.AboutUs" = "About us";
 "Settings.About.SourceCode" = "源码";
 "Settings.About.ServicePrivacy" = "服务隐私";
@@ -180,10 +180,12 @@
 "Settings.About.PeckShield" = "提供代码安全审计服务";
 "Settings.About.Cita" = "区块链内核";
 
-// Currency
+// Settings: Currency
+// ---------------------------------------------------------
 "Setting.Currency.Title" = "默认货币单位";
 
-// Switch ETH Network
+// Settings: Switch ETH Network
+// ---------------------------------------------------------
 "Setting.SwitchNetwork.Title" = "切换以太坊网络";
 
 // Assets

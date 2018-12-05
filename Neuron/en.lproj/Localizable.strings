@@ -24,7 +24,6 @@
 "DApp.Search.TextFieldPlaceholder" = "请输入应用网址";
 "DApp.Search.DeleteHistory" = "Delete";
 
-
 // DApp Browser
 // ---------------------------------------------------------
 "DApp.Browser.InvalidLink" = "无效的链接地址";
@@ -70,7 +69,6 @@
 "DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
 "DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
 "DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
-
 
 // Mnemonic Validator
 // ---------------------------------------------------------
@@ -129,6 +127,17 @@
 "Wallet.QRCode.copy" = "复制";
 "Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
 
+// Transaction History
+// ---------------------------------------------------------
+"Transaction.History.title" = "交易列表";
+"TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
+
+// Transaction Status
+// ---------------------------------------------------------
+"TransactionStatus.success" = "交易成功";
+"TransactionStatus.pending" = "交易进行中";
+"TransactionStatus.failure" = "交易失败";
+
 // Authentication
 // ---------------------------------------------------------
 "Authentication.clickFaceIdAuth" = "点击进行验证 Face Id";
@@ -152,7 +161,7 @@
 "Authentication.Error.biometryLockout" = "多次验证失败被锁定";
 "Authentication.Error.authFailed" = "验证失败，请重新验证";
 
-// Setting
+// Settings
 // ---------------------------------------------------------
 "Setting.Title" = "我";
 "Setting.CurrencyTitle" = "本地货币";
@@ -161,7 +170,8 @@
 "Setting.Forum" = "论坛";
 "Setting.ConnectUs.CopyWechat" = "客服微信已复制";
 
-// About Us
+// Settings: About U
+// ---------------------------------------------------------
 "Settings.About.AboutUs" = "About us";
 "Settings.About.SourceCode" = "源码";
 "Settings.About.ServicePrivacy" = "服务隐私";
@@ -170,10 +180,12 @@
 "Settings.About.PeckShield" = "提供代码安全审计服务";
 "Settings.About.Cita" = "区块链内核";
 
-// Currency
+// Settings: Currency
+// ---------------------------------------------------------
 "Setting.Currency.Title" = "默认货币单位";
 
-// Switch ETH Network
+// Settings: Switch ETH Network
+// ---------------------------------------------------------
 "Setting.SwitchNetwork.Title" = "切换以太坊网络";
 
 // Assets
