@@ -30,13 +30,13 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        warningLabel.text = "请按顺序输入您的助记词，并选择助记词路径。"
-        mnemonicTextView.placeholder = "请按顺序输入您的助记词，按空格分隔"
-        walletNameTextField.placeholder = "输入钱包名称"
-        passwordTextField.placeholder = "设置密码"
-        rePasswordTextField.placeholder = "重复密码"
-        passwordDescLabel.text = "密码包含大写字母、小写字母、数字、特殊符号的至少三类，且长度在8位以上！"
-        importButton.setTitle("开始导入", for: .normal)
+        warningLabel.text = "Wallet.Import.inputMnemonicWarning".localized()
+        mnemonicTextView.placeholder = "Wallet.Import.inputMnemonic".localized() as NSString
+        walletNameTextField.placeholder = "Wallet.Import.inputWalletName".localized()
+        passwordTextField.placeholder = "Wallet.Import.setPassword".localized()
+        rePasswordTextField.placeholder = "Wallet.Import.repeatPassword".localized()
+        passwordDescLabel.text = "Wallet.Import.setPasswordDesc".localized()
+        importButton.setTitle("Wallet.Import.import".localized(), for: .normal)
 
         mnemonicTextView.delegate = self
     }
@@ -106,12 +106,12 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
             return
         }
         if password != confirmPassword {
-            Toast.showToast(text: "两次密码输入不一致")
+            Toast.showToast(text: "Wallet.Import.inconsistentPasswords".localized())
             return
         }
         let walletModel = WalletModel()
         walletModel.name = name
-        Toast.showHUD(text: "导入钱包中")
+        Toast.showHUD(text: "Wallet.Import.loading".localized())
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 let wallet = try WalletManager.default.importMnemonic(mnemonic: mnemonic, password: password)
@@ -137,7 +137,7 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
             return wallet.address == walletModel.address
         }
         if result.count >= 1 {
-            Toast.showToast(text: "已存在该钱包")
+            Toast.showToast(text: "Wallet.Import.walletAlreadyExists".localized())
             return
         }
 
@@ -150,7 +150,7 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
                 appModel.wallets.append(walletModel)
                 realm.add(appModel)
             }
-            Toast.showToast(text: "导入成功")
+            Toast.showToast(text: "Wallet.Import.success".localized().localized())
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)
         } catch {

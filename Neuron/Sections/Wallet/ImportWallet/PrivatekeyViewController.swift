@@ -20,8 +20,21 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
     var confirmPassword: String? = ""
     var privateKey: String? = ""
 
+    @IBOutlet weak var warningLabel: UILabel!
+    @IBOutlet weak var walletNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rePasswordTextField: UITextField!
+    @IBOutlet weak var passwordDescLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        warningLabel.text = "Wallet.Import.inputPrivatekeyWarning".localized()
+        privatekeyTextView.placeholder = "Wallet.Import.inputPrivatekey".localized() as NSString
+        walletNameTextField.text = "Wallet.Import.inputWalletName".localized()
+        passwordTextField.placeholder = "Wallet.Import.setPassword".localized()
+        rePasswordTextField.placeholder = "Wallet.Import.repeatPassword".localized()
+        passwordDescLabel.text = "Wallet.Import.setPasswordDesc".localized()
+        importButton.setTitle("Wallet.Import.import".localized(), for: .normal)
+
         privatekeyTextView.delegate = self
         setupEnterBackOverlay()
     }
@@ -77,7 +90,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
 
     func importPrivateWallet(privateKey: String, password: String, confirmPassword: String, name: String) {
         if privateKey.isEmpty {
-            Toast.showToast(text: "请输入私钥")
+            Toast.showToast(text: "Wallet.Import.inputPrivatekey".localized())
             return
         }
         if case .invalid(let reason) = WalletNameValidator.validate(walletName: name) {
@@ -89,12 +102,12 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
             return
         }
         if password != confirmPassword {
-            Toast.showToast(text: "两次密码输入不一致")
+            Toast.showToast(text: "Wallet.Import.inconsistentPasswords".localized())
             return
         }
         let walletModel = WalletModel()
         walletModel.name = name
-        Toast.showHUD(text: "导入钱包中")
+        Toast.showHUD(text: "Wallet.Import.loading".localized())
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 let wallet = try WalletManager.default.importPrivateKey(privateKey: privateKey, password: password)
@@ -120,7 +133,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
             return wallet.address == walletModel.address
         }
         if result.count >= 1 {
-            Toast.showToast(text: "已存在该钱包")
+            Toast.showToast(text: "Wallet.Import.walletAlreadyExists".localized())
             return
         }
 
@@ -133,7 +146,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
                 appModel.wallets.append(walletModel)
                 realm.add(appModel)
             }
-            Toast.showToast(text: "导入成功")
+            Toast.showToast(text: "Wallet.Import.success".localized())
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)
         } catch {

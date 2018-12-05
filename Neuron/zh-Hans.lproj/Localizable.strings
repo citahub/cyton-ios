@@ -128,7 +128,26 @@
 "Wallet.Import.mnemonic" = "助记词";
 "Wallet.Import.privatekey" = "私钥";
 "NoScreenshot.importWalletMessage" = "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！";
+"Wallet.Import.inputWalletName" = "输入钱包名称";
+"Wallet.Import.import" = "开始导入";
+"Wallet.Import.loading" = "导入钱包中";
+"Wallet.Import.walletAlreadyExists" = "已存在该钱包";
+"Wallet.Import.success" = "导入成功"
+"Wallet.Import.setPassword" = "设置密码";
+"Wallet.Import.repeatPassword" = "重复密码";
+"Wallet.Import.setPasswordDesc" = "密码包含大写字母、小写字母、数字、特殊符号的至少三类，且长度在8位以上！";
+"Wallet.Import.inconsistentPasswords" = "两次密码输入不一致"
 
+"Wallet.Import.inputKeystoreWarning" = "粘贴以太坊Keystore内容至输入框，或通过扫描二维码输入。";
+"Wallet.Import.inputKeystore" = "请导入Keystore文本";
+"Wallet.Import.inputWalletPassword" = "输入密码";
+"Wallet.Import.emptyKeystorePassword" = "解锁密码不能为空"
+
+"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。";
+"Wallet.Import.inputMnemonic" = "请按顺序输入您的助记词，按空格分隔";
+
+"Wallet.Import.inputPrivatekeyWarning" = "请输入您的私钥，或通过二维码扫描输入。";
+"Wallet.Import.inputPrivatekey" = "请输入私钥原文";
 
 // Wallet QRCode
 // ---------------------------------------------------------
