@@ -177,7 +177,6 @@
 		89C614572140D4C500DC3DF4 /* currency.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89C614562140D4C500DC3DF4 /* currency.plist */; };
 		89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */; };
 		89C6145E2141038300DC3DF4 /* LocalCurrencyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */; };
-		89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */ = {isa = PBXBuildFile; fileRef = 89CA1FAB213F822B00669B2C /* tokens-list.json */; };
 		89CFA12621424CAB00635A54 /* AboutUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89CFA12521424CAB00635A54 /* AboutUsViewController.swift */; };
 		89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC2520D59F270097E02B /* WalletManager.swift */; };
 		89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89D4AC3720D8DB610097E02B /* NotificationName.swift */; };
@@ -398,7 +397,6 @@
 		89C614562140D4C500DC3DF4 /* currency.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = currency.plist; sourceTree = "<group>"; };
 		89C614582140FE6600DC3DF4 /* CurrencyTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyTableViewCell.swift; sourceTree = "<group>"; };
 		89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalCurrencyService.swift; sourceTree = "<group>"; };
-		89CA1FAB213F822B00669B2C /* tokens-list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-list.json"; sourceTree = "<group>"; };
 		89CFA12521424CAB00635A54 /* AboutUsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutUsViewController.swift; sourceTree = "<group>"; };
 		89D40EF520DCF1E00062C545 /* Neuron.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Neuron.entitlements; sourceTree = "<group>"; };
 		89D4AC2520D59F270097E02B /* WalletManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletManager.swift; sourceTree = "<group>"; };
@@ -809,7 +807,6 @@
 				8978846221AD26690034AF4F /* neuron.js */,
 				6E83CB92216F581800029324 /* ProductAgreement.txt */,
 				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
-				89CA1FAB213F822B00669B2C /* tokens-list.json */,
 				89C614562140D4C500DC3DF4 /* currency.plist */,
 			);
 			path = Resource;
@@ -1219,7 +1216,6 @@
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
 				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				8978846321AD26690034AF4F /* neuron.js in Resources */,
-				89CA1FAC213F822B00669B2C /* tokens-list.json in Resources */,
 				1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
 				6E8A837021B62DA30051B3EB /* TransactionHistory.storyboard in Resources */,
