@@ -28,7 +28,7 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
         title = "Wallet.Import.title".localized()
         tabbedButtonView.delegate = self
         tabbedButtonView.buttonTitles = [
-            "Wallet.Import.keyStore".localized(),
+            "Wallet.Import.keystore".localized(),
             "Wallet.Import.mnemonic".localized(),
             "Wallet.Import.privatekey".localized()
         ]
