@@ -16,27 +16,4 @@ class DoubleExtensionTests: XCTestCase {
         XCTAssertEqual(2233.001000.trailingZerosTrimmed, "2233.001")
         XCTAssertEqual(2233.0010010.trailingZerosTrimmed, "2233.001001")
     }
-
-    func testToAmount() {
-        XCTAssertEqual(3.1415926.toAmount(18), BigUInt("3141592600000000000")!)
-    }
-
-    func testFromAmount() {
-        XCTAssertEqual(Double.fromAmount(BigUInt("3141592600000000000")!, decimals: 18), 3.1415926)
-    }
-
-    func testGweiToWei() {
-        XCTAssertEqual(
-            20500000000,
-            20.5.gweiToWei()
-        )
-    }
-
-    func testDecimalFormat() {
-        XCTAssertEqual(1.12345678.decimal, "1.12345678")
-        XCTAssertEqual(1.1234567899.decimal, "1.12345678")
-        XCTAssertEqual(1.123456784.decimal, "1.12345678")
-        XCTAssertEqual(1.1234.decimal, "1.1234")
-        XCTAssertEqual(4.decimal, "4")
-    }
 }

@@ -92,15 +92,28 @@ class BigUIntExtensionTests: XCTestCase {
         )
     }
 
-    func testWeiToGwei() {
-        XCTAssertEqual(
-            20.5,
-            BigUInt("20500000000")!.weiToGwei()
-        )
-    }
-
     func testStringToBigUInt() {
         XCTAssertEqual(BigUInt(string: "96016"), 96016)
         XCTAssertEqual(BigUInt(string: "0x96016"), 614422)
+    }
+
+    func testAmountTextToBigUInt() {
+        XCTAssertEqual(BigUInt.parseToBigUInt("1.23", 4), 12_300)
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.00045", 18), 450_000_000_000_000)
+    }
+
+    func testBigUIntToAmountText() {
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.00032", 18).toDecimalNumber(18).formatterToString(18), "0.00032")
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.000000089999", 18).toDecimalNumber(18).formatterToString(18), "0.000000089999")
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.000000089999", 18).toAmountText(18), "0.00000008")
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.00000000000234", 18).toAmountText(18), "2.34e-12")
+        XCTAssertEqual(BigUInt.parseToBigUInt("104.0040023089999", 18).toAmountText(18), "104.0040023")
+    }
+
+    func testBigUIntToDouble() {
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.00032", 18).toDouble(18), 0.00032)
+        XCTAssertEqual(BigUInt.parseToBigUInt("0.000000089999", 18).toDouble(18), 0.000000089999)
+        XCTAssertEqual(BigUInt.parseToBigUInt("2435.000000089999", 18).toDouble(18), 2435.000000089999)
+        XCTAssertEqual(BigUInt.parseToBigUInt("2435.1234", 18).toDouble(18), 2435.1234)
     }
 }
