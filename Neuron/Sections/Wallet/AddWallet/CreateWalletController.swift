@@ -14,11 +14,21 @@ class CreateWalletController: UITableViewController {
     var name: String? = ""
     var password: String? = ""
     var confirmPassword: String? = ""
+    @IBOutlet weak var passwordWarningLabel: UILabel!
+    @IBOutlet weak var passwordDescLabel: UILabel!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rePasswordTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        title = "创建钱包"
+        title = "Wallet.Create.walletName".localized()
+        passwordWarningLabel.text = "Wallet.Create.passwordWarning".localized()
+        nameTextField.placeholder = "Wallet.Create.walletName".localized()
+        passwordTextField.placeholder = "Wallet.Create.setPassword".localized()
+        rePasswordTextField.text = "Wallet.Create.rePassword".localized()
+        nextButton.setTitle("Common.next".localized(), for: .normal)
+        passwordDescLabel.text = "Wallet.Create.passwordDesc".localized()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -74,7 +84,7 @@ class CreateWalletController: UITableViewController {
 
     func canProceedNextStep() -> Bool {
         if password != confirmPassword {
-            Toast.showToast(text: "两次密码不一致")
+            Toast.showToast(text: "Wallet.Create.passwordInconsistent".localized())
             return false
         }
         if case .invalid(let reason) = WalletNameValidator.validate(walletName: name ?? "") {

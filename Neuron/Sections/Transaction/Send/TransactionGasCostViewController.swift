@@ -21,9 +21,21 @@ class TransactionGasCostViewController: UITableViewController {
     private var paramBuilder: TransactionParamBuilder!
     private var observers = [NSKeyValueObservation]()
     private let minGasPrice = 1.0
+    @IBOutlet weak var gasCostTitleLabel: UILabel!
+    @IBOutlet weak var extenDataTitleLabel: UILabel!
+    @IBOutlet weak var descLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Transaction.Send.gasCostSetting".localized()
+        gasCostTitleLabel.text = "Transaction.Send.gasCost".localized()
+        extenDataTitleLabel.text = "Transaction.Send.extenData".localized()
+        descLabel.text = "Transaction.Send.gasCostSettingDesc".localized()
+        confirmButton.setTitle("Common.confirm".localized(), for: .normal)
+        gasPriceTextField.placeholder = "Transaction.Send.input".localized()
+        gasLimitTextField.placeholder = "Transaction.Send.input".localized()
+        dataTextPlaceholderLabel.text = "Transaction.Send.inputHexData".localized()
+
         paramBuilder = TransactionParamBuilder(builder: param)
         observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
@@ -39,7 +51,7 @@ class TransactionGasCostViewController: UITableViewController {
     @IBAction func confirm() {
         let gasPrice = Double(gasPriceTextField.text!)!
         if gasPrice < minGasPrice {
-            Toast.showToast(text: "您的GasPrice设置过低，建议输入推荐值以快速转账")
+            Toast.showToast(text: "Transaction.Send.gasPriceSettingIsTooLow".localized())
             return
         }
 
@@ -47,19 +59,19 @@ class TransactionGasCostViewController: UITableViewController {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
-                    Toast.showToast(text: "请确保输入的gaslimit大于等于”\(estimateGasLimit)(估算值)*4”")
+                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
                     return
                 }
             } else {
                 if paramBuilder.gasLimit < GasCalculator.defaultGasLimit {
-                    Toast.showToast(text: "请确保输入的gaslimit大于等于\(GasCalculator.defaultGasLimit)")
+                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(GasCalculator.defaultGasLimit)"))
                     return
                 }
             }
         } else if paramBuilder.tokenType == .erc20 {
             let estimateGasLimit = paramBuilder.estimateGasLimit()
             if paramBuilder.gasLimit < estimateGasLimit {
-                Toast.showToast(text: "请确保输入的gaslimit大于等于”\(estimateGasLimit)(估算值)*4”")
+                Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
             }
         }
 

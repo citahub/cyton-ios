@@ -22,6 +22,8 @@ class WalletViewController: UIViewController {
     @IBOutlet weak var receiptButton: DesignableButton!
     @IBOutlet weak var transactionButton: DesignableButton!
 
+    @IBOutlet weak var tokenTitleWidthLayout: NSLayoutConstraint!
+
     private var presenter: WalletPresenter!
     private var walletCountObserve: NotificationToken?
     private var walletObserver: NotificationToken?
@@ -80,6 +82,8 @@ class WalletViewController: UIViewController {
         addTokenButton.setTitle("Wallet.addToken".localized(), for: .normal)
         receiptButton.setTitle("Wallet.receipt".localized(), for: .normal)
         transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
+
+        tokenTitleWidthLayout.constant = tokenTitleLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 25), limitedToNumberOfLines: 1).size.width
     }
 }
 
