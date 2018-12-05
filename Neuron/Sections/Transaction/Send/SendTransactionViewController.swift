@@ -112,7 +112,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             let txFee = NSDecimalNumber(string: String(paramBuilder.txFeeNatural))
             let amount = balance.subtracting(txFee)
             if amount.doubleValue < 0 {
-                Toast.showToast(text: "Transaction.Send.balanceNotSufficient".localized().replacingOccurrences(of: "[symbol]", with: token.gasSymbol))
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
                 return
             }
             amountTextField.text = amount.stringValue
@@ -121,7 +121,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
             if ether.tokenBalance < paramBuilder.txFeeNatural {
-                Toast.showToast(text: "Transaction.Send.balanceNotSufficient".localized().replacingOccurrences(of: "[symbol]", with: token.gasSymbol))
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
                 return
             }
             let amount = token.tokenBalance
@@ -134,7 +134,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     func setupUI() {
         let wallet = AppModel.current.currentWallet!
-        title = "Transaction.Send.title".localized().replacingOccurrences(of: "[symbol]", with: token.symbol)
+        title = String(format: "Transaction.Send.title".localized(), token.symbol)
 
         walletIconView.image = UIImage(data: wallet.iconData)
         walletNameLabel.text = wallet.name
@@ -217,7 +217,7 @@ private extension SendTransactionViewController {
         }
 
         if paramBuilder.tokenBalance <= BigUInt(0) {
-            Toast.showToast(text: "Transaction.Send.balanceNotSufficient".localized().replacingOccurrences(of: "[symbol]", with: token.gasSymbol))
+            Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.gasSymbol))
             return false
         }
         let alert = UIAlertController(title: "Transaction.Send.transactionAvailableBalance".localized(), message: "", preferredStyle: .alert)

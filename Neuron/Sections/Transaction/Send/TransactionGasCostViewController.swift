@@ -59,19 +59,19 @@ class TransactionGasCostViewController: UITableViewController {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
-                    Toast.showToast(text: "Transaction.Send.gasLimitSettingIsTooLow".localized().replacingOccurrences(of: "[value]", with: "”\(estimateGasLimit)(估算值)*4”"))
+                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
                     return
                 }
             } else {
                 if paramBuilder.gasLimit < GasCalculator.defaultGasLimit {
-                    Toast.showToast(text: "Transaction.Send.gasLimitSettingIsTooLow".localized().replacingOccurrences(of: "[value]", with: "\(GasCalculator.defaultGasLimit)"))
+                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(GasCalculator.defaultGasLimit)"))
                     return
                 }
             }
         } else if paramBuilder.tokenType == .erc20 {
             let estimateGasLimit = paramBuilder.estimateGasLimit()
             if paramBuilder.gasLimit < estimateGasLimit {
-                Toast.showToast(text: "Transaction.Send.gasLimitSettingIsTooLow".localized().replacingOccurrences(of: "[value]", with: "”\(estimateGasLimit)(估算值)*4”"))
+                Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
             }
         }
 
