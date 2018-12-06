@@ -44,6 +44,18 @@ struct EthereumNetwork {
         case kovan
 
         static let allValues = allCases.map { $0.rawValue }
+        var chainName: String {
+            switch self {
+            case .mainnet:
+                return "Ethereum Mainnet"
+            case .rinkeby:
+                return "Ethereum Rinkebynet"
+            case .ropsten:
+                return "Ethereum Ropstennet"
+            case .kovan:
+                return "Ethereum Kovannet"
+            }
+        }
     }
 
     private let currentNetworkKey = "selectedNetwork"

@@ -34,7 +34,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     func didGetDataForList() {
         selectAddressArray.removeAll()
         dataArray = getAssetListFromJSON()
-        selectArr = getSelectAsset()
+//        selectArr = getSelectAsset()
         for tokenItem in selectArr! {
             selectAddressArray.append(tokenItem.address)
         }
@@ -46,12 +46,12 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
         let appModel = AppModel.current
         let realm = try! Realm()
-        for tModel in appModel.extraTokenList {
-            try? realm.write {
-                realm.add(tModel, update: true)
-            }
-            tokenArray.append(tModel)
-        }
+//        for tModel in appModel.extraTokenList {
+//            try? realm.write {
+//                realm.add(tModel, update: true)
+//            }
+//            tokenArray.append(tModel)
+//        }
 
         let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
         guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)) else { return [] }
@@ -64,10 +64,10 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         return tokenArray
     }
 
-    func getSelectAsset() -> List<TokenModel>? {
-        let appModel = AppModel.current
-        return appModel.currentWallet?.selectTokenList
-    }
+//    func getSelectAsset() -> List<TokenModel>? {
+//        let appModel = AppModel.current
+//        return appModel.currentWallet?.selectTokenList
+//    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataArray.count
@@ -95,7 +95,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func selectedAsset(model: TokenModel) {
         if selectAddressArray.contains(model.address) {
-            deleteSelectedToken(tokenM: model)
+//            deleteSelectedToken(tokenM: model)
             selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
                 return item == model.address
             })
@@ -105,26 +105,26 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         didGetDataForList()
     }
 
-    func deleteSelectedToken(tokenM: TokenModel) {
-        let appModel = AppModel.current
-        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
-        let realm = try! Realm()
-        try? realm.write {
-            realm.add(tokenM, update: true)
-            filterResult?.forEach({ (tm) in
-                if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
-                    appModel.currentWallet?.selectTokenList.remove(at: index)
-                }
-            })
-        }
-    }
+//    func deleteSelectedToken(tokenM: TokenModel) {
+//        let appModel = AppModel.current
+//        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
+//        let realm = try! Realm()
+//        try? realm.write {
+//            realm.add(tokenM, update: true)
+//            filterResult?.forEach({ (tm) in
+//                if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
+//                    appModel.currentWallet?.selectTokenList.remove(at: index)
+//                }
+//            })
+//        }
+//    }
 
     func addSelectToken(tokenM: TokenModel) {
         let appModel = AppModel.current
         let realm = try! Realm()
         try? realm.write {
             realm.add(tokenM, update: true)
-            appModel.currentWallet?.selectTokenList.append(tokenM)
+//            appModel.currentWallet?.selectTokenList.append(tokenM)
         }
     }
 }

@@ -52,7 +52,7 @@ class WalletPresenter {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshBalance), name: .switchEthNetwork, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPrice), name: .changeLocalCurrency, object: nil)
         observeAppModel()
-        observeNativeTokenList()
+//        observeNativeTokenList()
     }
 
     func refresh() {
@@ -61,8 +61,8 @@ class WalletPresenter {
         currentWallet = wallet
 
         var tokens = [Token]()
-        tokens += AppModel.current.nativeTokenList.map({ Token($0) })
-        tokens += wallet.selectTokenList.map({ Token($0) })
+        let selectTokens = wallet.selectedTokenList.map({ Token($0) })
+        tokens += selectTokens
         tokens.forEach { (token) in
             token.walletAddress = self.currentWallet!.address
         }
@@ -97,7 +97,7 @@ extension WalletPresenter {
     private func observeWalletSelectTokenList() {
         guard let wallet = currentWallet else { return }
         selectTokenListObserver?.invalidate()
-        selectTokenListObserver = wallet.selectTokenList.observe({ [weak self] (change) in
+        selectTokenListObserver = wallet.selectedTokenList.observe({ [weak self] (change) in
             guard let self = self else { return }
             switch change {
             case .update(let tokenList, let deletions, let insertions, modifications: _):
@@ -118,27 +118,28 @@ extension WalletPresenter {
         })
     }
 
-    private func observeNativeTokenList() {
-        nativeTokenListObserver?.invalidate()
-        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
-            guard let self = self else { return }
-            switch change {
-            case .update(let tokenList, let deletions, let insertions, modifications: _):
-                guard deletions.count > 0 || insertions.count > 0 else { return }
-                if deletions.count > 0 {
-                    var newTokens = self.tokens
-                    deletions.enumerated().forEach({ (offset, element) in
-                        let index = element - offset
-                        newTokens.remove(at: index)
-                    })
-                    self.tokens = newTokens
-                }
-                self.insertTokens(tokenList: tokenList, insertions: insertions)
-            default:
-                break
-            }
-        }
-    }
+    // TODO: cezres
+//    private func observeNativeTokenList() {
+//        nativeTokenListObserver?.invalidate()
+//        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
+//            guard let self = self else { return }
+//            switch change {
+//            case .update(let tokenList, let deletions, let insertions, modifications: _):
+//                guard deletions.count > 0 || insertions.count > 0 else { return }
+//                if deletions.count > 0 {
+//                    var newTokens = self.tokens
+//                    deletions.enumerated().forEach({ (offset, element) in
+//                        let index = element - offset
+//                        newTokens.remove(at: index)
+//                    })
+//                    self.tokens = newTokens
+//                }
+//                self.insertTokens(tokenList: tokenList, insertions: insertions)
+//            default:
+//                break
+//            }
+//        }
+//    }
 
     private func insertTokens(tokenList: List<TokenModel>, insertions: [Int]) {
         guard insertions.count > 0 else { return }

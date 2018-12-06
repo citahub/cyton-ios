@@ -50,9 +50,9 @@ class Token {
         iconUrl = token.iconUrl
         address = token.address
         symbol = token.symbol
-        chainId = token.chainId
-        chainName = token.chainName
-        chainHosts = token.chainHosts
+        chainId = token.chain?.chainId ?? ""
+        chainName = token.chain?.chainName ?? ""
+        chainHosts = token.chain?.httpProvider ?? ""
         isNativeToken = token.isNativeToken
         type = token.type
         decimals = token.decimals

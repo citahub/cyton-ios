@@ -13,7 +13,7 @@ class WalletModel: Object {
     @objc dynamic var name = ""
     @objc dynamic var address = ""
     @objc dynamic var iconData: Data!
-    var selectTokenList = List<TokenModel>()
+    var selectedTokenList = List<TokenModel>()
     var tokenModelList = List<TokenModel>()
     var chainModelList = List<ChainModel>()
 

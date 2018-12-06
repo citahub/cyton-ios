@@ -15,14 +15,11 @@ class TokenModel: Object, Decodable {
     @objc dynamic var address = ""
     @objc dynamic var decimals = 18
     @objc dynamic var symbol = ""
-    @objc dynamic var chainName: String? = ""
-    @objc dynamic var chainId = ""
-    @objc dynamic var chainHosts = "" // manifest.json chainSet.values.first
     @objc dynamic var identifier = UUID().uuidString
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false
-    @objc dynamic var isSelected = false
+    @objc dynamic var chain: ChainModel?
 
     @objc dynamic var tokenBalance = 0.0
     var currencyAmount = "0"
@@ -42,7 +39,7 @@ class TokenModel: Object, Decodable {
 
     var type: TokenType {
         if isNativeToken {
-            if chainId == NativeChainId.ethMainnetChainId {
+            if chain?.chainId == NativeChainId.ethMainnetChainId {
                 return .ether
             } else {
                 if address != "" {
@@ -79,10 +76,11 @@ class TokenModel: Object, Decodable {
 
 extension TokenModel {
     static func identifier(for tokenModel: TokenModel) -> String? {
-        let appModel = AppModel.current
+        guard let walletModel = AppModel.current.currentWallet else {
+            return nil
+        }
         var tokenList: [TokenModel] = []
-        tokenList += appModel.nativeTokenList
-        tokenList += appModel.extraTokenList
+        tokenList += walletModel.tokenModelList
         if let model = tokenList.first(where: { $0 == tokenModel }) {
             return model.identifier
         }
@@ -92,7 +90,7 @@ extension TokenModel {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        return lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
+        return lhs.chain?.chainId == rhs.chain?.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
 
     override func isEqual(_ object: Any?) -> Bool {

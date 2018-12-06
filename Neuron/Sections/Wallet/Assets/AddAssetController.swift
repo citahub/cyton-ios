@@ -49,12 +49,12 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         if let id = TokenModel.identifier(for: tokenModel) {
             tokenModel.identifier = id
         }
-        let realm = try! Realm()
-        try? realm.write {
-            realm.add(tokenModel, update: true)
-            appModel.extraTokenList.append(tokenModel)
-            appModel.currentWallet?.selectTokenList.append(tokenModel)
-        }
+//        let realm = try! Realm()
+//        try? realm.write {
+//            realm.add(tokenModel, update: true)
+//            appModel.extraTokenList.append(tokenModel)
+//            appModel.currentWallet?.selectTokenList.append(tokenModel)
+//        }
         navigationController?.popViewController(animated: true)
     }
 

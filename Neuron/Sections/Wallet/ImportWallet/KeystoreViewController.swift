@@ -122,6 +122,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
                 appModel.wallets.append(walletModel)
                 realm.add(appModel)
             }
+            DefaultTokenAndChain().addDefaultTokenToWallet(wallet: walletModel)
             Toast.showToast(text: "导入成功")
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)
