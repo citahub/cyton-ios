@@ -29,10 +29,10 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
                 return
             }
             self.removeOverlay()
-            self.webView.load(URLRequest(url: self.mainUrl))
+            self.loadRequest()
         }
 
-        webView.load(URLRequest(url: mainUrl))
+        loadRequest()
     }
 
     private func addWebView() {
@@ -58,6 +58,12 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         webView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         webView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         webView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    }
+
+    private func loadRequest() {
+        var request = URLRequest(url: mainUrl)
+        request.setAcceptLanguage()
+        webView.load(request)
     }
 }
 

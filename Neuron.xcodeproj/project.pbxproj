@@ -32,6 +32,7 @@
 		1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A69465F2192A0B0000093A2 /* GasCalculator.swift */; };
 		1A6946622192BFD9000093A2 /* GasCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6946612192BFD9000093A2 /* GasCalculatorTests.swift */; };
 		1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A9204E321634212004B54DC /* ToastActivityView.xib */; };
+		1A9A025A21B90968002F2108 /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9A025921B90968002F2108 /* URLRequest+Extension.swift */; };
 		1AB0CC492194FC1000A7C0CF /* UIntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0CC482194FC1000A7C0CF /* UIntExtensionTests.swift */; };
 		1AB287742179654300DCC14D /* WalletManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB287732179654300DCC14D /* WalletManagerTests.swift */; };
 		1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */; };
@@ -241,6 +242,7 @@
 		1A69465F2192A0B0000093A2 /* GasCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasCalculator.swift; sourceTree = "<group>"; };
 		1A6946612192BFD9000093A2 /* GasCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasCalculatorTests.swift; sourceTree = "<group>"; };
 		1A9204E321634212004B54DC /* ToastActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastActivityView.xib; sourceTree = "<group>"; };
+		1A9A025921B90968002F2108 /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		1AB0CC482194FC1000A7C0CF /* UIntExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIntExtensionTests.swift; sourceTree = "<group>"; };
 		1AB287732179654300DCC14D /* WalletManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagerTests.swift; sourceTree = "<group>"; };
 		1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
@@ -560,6 +562,7 @@
 				1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */,
 				6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */,
 				1A2B226821A7907500556744 /* UIColor+Extension.swift */,
+				1A9A025921B90968002F2108 /* URLRequest+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1522,6 +1525,7 @@
 				6EABFB0B21991BC200305ED5 /* DAppQRCodeMessageHandler.swift in Sources */,
 				1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */,
 				6E8A838321B62E0A0051B3EB /* TransactionGasCostViewController.swift in Sources */,
+				1A9A025A21B90968002F2108 /* URLRequest+Extension.swift in Sources */,
 				6E8A837121B62DA30051B3EB /* TransactionHistoryPresenter.swift in Sources */,
 				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,

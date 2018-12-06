@@ -67,7 +67,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         requestUrlStr = requestUrlStr.trimmingCharacters(in: .whitespaces)
         mainUrl = URL(string: getRequestStr(requestStr: requestUrlStr))
         if let url = mainUrl {
-            webView.load(URLRequest(url: url))
+            loadRequest(url: url)
         } else {
             errorOverlaycontroller.style = .blank
             errorOverlaycontroller.messageLabel.text = "DApp.Browser.InvalidLink".localized()
@@ -76,7 +76,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         errorOverlayRefreshBlock = { [weak self] () in
             self?.removeOverlay()
             guard let url = self?.mainUrl else { return }
-            self?.webView.load(URLRequest(url: url))
+            self?.loadRequest(url: url)
         }
 
         observations.append(webView.observe(\.estimatedProgress) { [weak self] (webView, _) in
@@ -105,6 +105,12 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         } else {
             return "https://" + requestStr
         }
+    }
+
+    private func loadRequest(url: URL) {
+        var request = URLRequest(url: url)
+        request.setAcceptLanguage()
+        webView.load(request)
     }
 
     @IBAction func didClickCloseButton(_ sender: UIBarButtonItem) {
@@ -332,6 +338,7 @@ extension BrowserViewController: WKNavigationDelegate {
             decisionHandler(.allow)
             return
         }
+        // TODO: should NOT define custom scheme for alipay and weixin, use path or other symbol instead.
         if requestURL.absoluteString.hasPrefix("alipays://") || requestURL.absoluteString.hasPrefix("alipay://") {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
@@ -349,7 +356,15 @@ extension BrowserViewController: WKNavigationDelegate {
             }
             decisionHandler(.cancel)
         } else {
-            decisionHandler(.allow)
+            if navigationAction.request.acceptLanguage == URLRequest.acceptLanguage {
+                decisionHandler(.allow)
+            } else {
+                // Set Accept-Language for following requests
+                var request = navigationAction.request
+                request.setAcceptLanguage()
+                decisionHandler(.cancel)
+                webView.load(request)
+            }
         }
     }
 }
