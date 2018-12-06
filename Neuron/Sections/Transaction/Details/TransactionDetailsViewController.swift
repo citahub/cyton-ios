@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var tokenIconView: UIImageView!
@@ -74,6 +75,7 @@ class TransactionDetailsViewController: UITableViewController {
             chainNetworkLabel.text = "Ethereum Mainnet"
         case .appChain, .appChainErc20:
             chainNetworkLabel.text = "CITA ChainID"
+            hideItems.append((0, 3))    // block chain network
         }
 
         switch transaction.status {
@@ -166,8 +168,9 @@ extension TransactionDetailsViewController {
             UIPasteboard.general.string = transaction.to
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 3 {
-            // TODO: Push to blcok chain network
-            // TODO: Refeature transaction status manager
+            let url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
+            let safariController = SFSafariViewController(url: url)
+            self.present(safariController, animated: true, completion: nil)
         }
     }
 }
