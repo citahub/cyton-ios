@@ -1053,8 +1053,8 @@
 			isa = PBXGroup;
 			children = (
 				6E8A837921B62E0A0051B3EB /* Send */,
-				6E8A836D21B62DA30051B3EB /* Details */,
 				6E8A836921B62DA30051B3EB /* History */,
+				6E8A836D21B62DA30051B3EB /* Details */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
