@@ -183,12 +183,12 @@
 
 // Send Transaction
 // ---------------------------------------------------------
-"Transaction.Send.balanceNotSufficient" = "请确保账户剩余%s高于矿工费用，以便顺利完成转账～";
+"Transaction.Send.balanceNotSufficient" = "请确保账户剩余%@高于矿工费用，以便顺利完成转账～";
 "Transaction.Send.addressError" = "您的地址错误，请重新输入";
-"Transaction.Send.title" = "%s转账";
+"Transaction.Send.title" = "%@转账";
 "Transaction.Send.transactionAvailableBalance" = "您输入的金额超过您的余额，是否全部转出？";
 "Transaction.Send.gasPriceSettingIsTooLow" = "您的GasPrice设置过低，建议输入推荐值以快速转账";
-"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于\"%s(估算值)*4\"";
+"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于\"%@(估算值)*4\"";
 "Transaction.Send.gasCostSetting" = "高级设置";
 "Transaction.Send.gasCost" = "Gas 费用";
 "Transaction.Send.extenData" = "包含数据";
