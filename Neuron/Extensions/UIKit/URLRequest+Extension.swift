@@ -9,8 +9,15 @@
 import Foundation
 
 extension URLRequest {
+    static var acceptLanguage: String {
+        return Locale.preferredLanguages.joined(separator: ",")
+    }
+
     mutating func setAcceptLanguage() {
-        let acceptLanguage = Locale.preferredLanguages.joined(separator: ",")
-        setValue(acceptLanguage, forHTTPHeaderField: "Accept-Language")
+        setValue(URLRequest.acceptLanguage, forHTTPHeaderField: "Accept-Language")
+    }
+
+    var acceptLanguage: String {
+        return value(forHTTPHeaderField: "Accept-Language") ?? ""
     }
 }
