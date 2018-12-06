@@ -61,7 +61,9 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
     }
 
     private func loadRequest() {
-        webView.load(URLRequest(url: mainUrl))
+        var request = URLRequest(url: mainUrl)
+        request.setAcceptLanguage()
+        webView.load(request)
     }
 }
 
