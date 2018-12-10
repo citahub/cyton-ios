@@ -86,21 +86,21 @@ class TransactionDetailsViewController: UITableViewController {
             statusLabel.text = "TransactionStatus.success".localized()
             statusLabel.backgroundColor = UIColor(named: "secondary_color")?.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(named: "secondary_color")
-
             hashLabel.text = transaction.hash
             blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
             statusLabel.text = "TransactionStatus.success".localized()
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
+            hashLabel.text = transaction.hash
 
-            hideItems.append((1, 0))    // hash
             hideItems.append((1, 2))    // block
         case .failure:
             statusLabel.text = "TransactionStatus.success".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
 
+            hideItems.append((0, 3))    // block chain network
             hideItems.append((1, 0))    // hash
             hideItems.append((1, 2))    // block
         }
