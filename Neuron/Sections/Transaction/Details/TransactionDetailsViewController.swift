@@ -45,8 +45,6 @@ class TransactionDetailsViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         title = "Transaction.Details.title".localized()
         paymentAddressTitleLabel.text = "Transaction.Details.paymentAddress".localized() + ":"
         receiptAddressTitleLabel.text = "Transaction.Details.receiptAddress".localized() + ":"
@@ -72,9 +70,9 @@ class TransactionDetailsViewController: UITableViewController {
 
         switch transaction.token.type {
         case .ether, .erc20:
-            chainNetworkLabel.text = "Ethereum Mainnet"
+            chainNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
         case .appChain, .appChainErc20:
-            chainNetworkLabel.text = "CITA ChainID"
+            chainNetworkLabel.text = "CITA \(transaction.token.chainId)"
             hideItems.append((0, 3))    // block chain network
         }
 
@@ -114,9 +112,9 @@ class TransactionDetailsViewController: UITableViewController {
                 gasFeeLabel.text = erc20.gasUsed.toGweiText() + " ETH"
                 gasPriceLabel.text = erc20.gasPrice.toAmountText(transaction.token.decimals) + " Ether " + "(\(erc20.gasPrice.toGweiText()) Gwei)"
             } else if let appChain = transaction as? AppChainTransactionDetails {
-                gasFeeLabel.text = appChain.quotaUsed.toGweiText() + " NATT"
+                gasFeeLabel.text = appChain.quotaUsed.toGweiText() + " \(transaction.token.symbol)"
             } else if let appChainErc20 = transaction as? AppChainErc20TransactionDetails {
-                gasFeeLabel.text = appChainErc20.quotaUsed.toGweiText() + " NATT"
+                gasFeeLabel.text = appChainErc20.quotaUsed.toGweiText() + " \(transaction.token.symbol)"
             }
             // TODO: Gas Limit
         case .failure:
