@@ -276,7 +276,7 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return indexPath.row == 3
+        return indexPath.row == 0 || indexPath.row == 3
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
