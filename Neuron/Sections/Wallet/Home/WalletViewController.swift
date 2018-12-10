@@ -117,11 +117,11 @@ extension WalletViewController: WalletPresenterDelegate {
         })
     }
 
-    func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: Double) {
+    func walletPresenter(presenter: WalletPresenter, didRefreshTotalAmount amount: NSDecimalNumber) {
         if amount == 0.0 {
             totalAmountLabel.text = "Wallet.noAmount".localized()
         } else {
-            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + String(format: "%.4lf", amount)
+            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + amount.formatterToString(4)
         }
     }
 
@@ -152,7 +152,7 @@ extension WalletViewController: UITableViewDataSource, UITableViewDelegate {
                 cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_LoadFail") as! TokenTableViewCell
             }
 
-        } else if token.price == nil || token.balance == 0.0 {
+        } else if token.price == nil || token.balance == 0 {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell_NoPrice") as! TokenTableViewCell
         } else {
             cell = tableView.dequeueReusableCell(withIdentifier: "TokenTableViewCell") as! TokenTableViewCell

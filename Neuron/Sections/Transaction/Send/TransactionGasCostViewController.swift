@@ -8,6 +8,7 @@
 
 import UIKit
 import BigInt
+import Web3swift
 
 class TransactionGasCostViewController: UITableViewController {
     @IBOutlet weak var gasPriceTextField: UITextField!
@@ -37,7 +38,7 @@ class TransactionGasCostViewController: UITableViewController {
         dataTextPlaceholderLabel.text = "Transaction.Send.inputHexData".localized()
 
         paramBuilder = TransactionParamBuilder(builder: param)
-        observers.append(paramBuilder.observe(\.txFeeNatural, options: [.initial]) { [weak self](_, _) in
+        observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         observers.append(param.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
@@ -82,12 +83,13 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     private func updateGasCost() {
-        gasPriceTextField.text = paramBuilder.gasPrice.weiToGwei().trailingZerosTrimmed
+        gasPriceTextField.text = param.gasPrice.toGweiText()
         gasLimitTextField.text = paramBuilder.gasLimit.description
-        gasCostLabel.text = "\(paramBuilder.txFeeNatural.decimal) \(paramBuilder.nativeCoinSymbol)"
+        gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
         if paramBuilder.tokenPrice > 0 {
-            gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + String(format: "%.4lf", paramBuilder.tokenPrice * paramBuilder.txFeeNatural)
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.tokenPrice))
+            gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(4)
         }
     }
 
@@ -110,7 +112,7 @@ extension TransactionGasCostViewController: UITextFieldDelegate {
 
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == gasPriceTextField {
-            paramBuilder.gasPrice = Double(gasPriceTextField.text!)!.gweiToWei()
+            paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
         } else if textField == gasLimitTextField {
             paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         }

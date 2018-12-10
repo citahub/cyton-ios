@@ -65,9 +65,8 @@ extension TokenModel {
             let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currencyType)
             DispatchQueue.main.async {
                 if let price = price {
-                    let amount = self.tokenBalance * price
-                    let possess = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, amount)
-                    profile.possess = possess
+                    let amountText = self.balance.toDecimalNumber(self.decimals).multiplying(by: NSDecimalNumber(value: price)).formatterToString(4)
+                    profile.possess = LocalCurrencyService.shared.getLocalCurrencySelect().symbol + amountText
                     profile.price = price
                     profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
                 }
@@ -104,10 +103,8 @@ extension TokenModel {
         group.notify(queue: .main) {
             profile?.detailUrl = URL(string: "https://ntp.staging.cryptape.com?token=\(address)")
             if var profile = profile, let price = price {
-                let balance = self.tokenBalance
-                let amount = balance * price
-                let possess = String(format: "%@ %.4f", currency.symbol, amount)
-                profile.possess = possess
+                let amountText = self.balance.toDecimalNumber(self.decimals).multiplying(by: NSDecimalNumber(value: price)).formatterToString(4)
+                profile.possess = LocalCurrencyService.shared.getLocalCurrencySelect().symbol + amountText
                 profile.price = price
                 profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
                 complection(profile)

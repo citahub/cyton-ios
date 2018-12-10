@@ -32,6 +32,7 @@
 		1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A69465F2192A0B0000093A2 /* GasCalculator.swift */; };
 		1A6946622192BFD9000093A2 /* GasCalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6946612192BFD9000093A2 /* GasCalculatorTests.swift */; };
 		1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A9204E321634212004B54DC /* ToastActivityView.xib */; };
+		1A9A025A21B90968002F2108 /* URLRequest+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A9A025921B90968002F2108 /* URLRequest+Extension.swift */; };
 		1AB0CC492194FC1000A7C0CF /* UIntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB0CC482194FC1000A7C0CF /* UIntExtensionTests.swift */; };
 		1AB287742179654300DCC14D /* WalletManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB287732179654300DCC14D /* WalletManagerTests.swift */; };
 		1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */; };
@@ -77,6 +78,7 @@
 		6E8A838521B62E0A0051B3EB /* TransactionGasPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */; };
 		6E8A838621B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */; };
 		6E8A838721B62E0A0051B3EB /* TransactonSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A838021B62E0A0051B3EB /* TransactonSender.swift */; };
+		6E8A838921B777A60051B3EB /* NSDecimalNumber+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A838821B777A60051B3EB /* NSDecimalNumber+Extension.swift */; };
 		6E8BFC3121AFDBB5004752CC /* EthereumBalanceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8BFC3021AFDBB5004752CC /* EthereumBalanceLoader.swift */; };
 		6E8BFC3721B00948004752CC /* TokenPriceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8BFC3621B00948004752CC /* TokenPriceLoader.swift */; };
 		6E8D77F021A5264F00EA7674 /* WalletQRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */; };
@@ -243,6 +245,7 @@
 		1A69465F2192A0B0000093A2 /* GasCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasCalculator.swift; sourceTree = "<group>"; };
 		1A6946612192BFD9000093A2 /* GasCalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasCalculatorTests.swift; sourceTree = "<group>"; };
 		1A9204E321634212004B54DC /* ToastActivityView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ToastActivityView.xib; sourceTree = "<group>"; };
+		1A9A025921B90968002F2108 /* URLRequest+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Extension.swift"; sourceTree = "<group>"; };
 		1AB0CC482194FC1000A7C0CF /* UIntExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIntExtensionTests.swift; sourceTree = "<group>"; };
 		1AB287732179654300DCC14D /* WalletManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletManagerTests.swift; sourceTree = "<group>"; };
 		1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
@@ -290,6 +293,7 @@
 		6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionGasPriceViewController.swift; sourceTree = "<group>"; };
 		6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSwitchTokenViewController.swift; sourceTree = "<group>"; };
 		6E8A838021B62E0A0051B3EB /* TransactonSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactonSender.swift; sourceTree = "<group>"; };
+		6E8A838821B777A60051B3EB /* NSDecimalNumber+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+Extension.swift"; sourceTree = "<group>"; };
 		6E8BFC3021AFDBB5004752CC /* EthereumBalanceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumBalanceLoader.swift; sourceTree = "<group>"; };
 		6E8BFC3621B00948004752CC /* TokenPriceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenPriceLoader.swift; sourceTree = "<group>"; };
 		6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletQRCodeViewController.swift; sourceTree = "<group>"; };
@@ -551,6 +555,7 @@
 				6E876844218031670032EBCE /* UInt+Extension.swift */,
 				892A1984215A55F400B2293D /* Double+Extension.swift */,
 				1A3C652B212EAC4800F1A0AA /* String+Extension.swift */,
+				6E8A838821B777A60051B3EB /* NSDecimalNumber+Extension.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -562,6 +567,7 @@
 				1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */,
 				6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */,
 				1A2B226821A7907500556744 /* UIColor+Extension.swift */,
+				1A9A025921B90968002F2108 /* URLRequest+Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -1474,6 +1480,7 @@
 				8913437820CA56CA00A17AEF /* RealmConfigurator.swift in Sources */,
 				8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */,
 				6E867E0F216CA4EB00BD6FE5 /* SettingAuthenticationTableViewCell.swift in Sources */,
+				6E8A838921B777A60051B3EB /* NSDecimalNumber+Extension.swift in Sources */,
 				898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */,
 				8935BA5D216F48A800C37263 /* Method.swift in Sources */,
 				892F79B921A547340035B08B /* ModifyWalletNamePageItem.swift in Sources */,
@@ -1530,6 +1537,7 @@
 				6EABFB0B21991BC200305ED5 /* DAppQRCodeMessageHandler.swift in Sources */,
 				1A6946602192A0B0000093A2 /* GasCalculator.swift in Sources */,
 				6E8A838321B62E0A0051B3EB /* TransactionGasCostViewController.swift in Sources */,
+				1A9A025A21B90968002F2108 /* URLRequest+Extension.swift in Sources */,
 				6E8A837121B62DA30051B3EB /* TransactionHistoryPresenter.swift in Sources */,
 				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,

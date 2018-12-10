@@ -21,8 +21,17 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
 
     @IBOutlet weak var titleContentView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var walletNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = "Wallet.Import.inputKeystoreWarning".localized()
+        keyStoreTextView.placeholder = "Wallet.Import.inputKeystore".localized() as NSString
+        walletNameTextField.placeholder = "Wallet.Import.inputWalletName".localized()
+        passwordTextField.placeholder = "Wallet.Import.inputWalletPassword".localized()
+        importButton.setTitle("Wallet.Import.import".localized(), for: .normal)
+
         keyStoreTextView.delegate = self
 
         let titleHeight = titleLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: titleLabel.bounds.size.width, height: 100), limitedToNumberOfLines: 0).size.height
@@ -69,7 +78,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
 
     func importKeystoreWallet(keystore: String, password: String, name: String) {
         if keystore.isEmpty {
-            Toast.showToast(text: "请输入keystore文本")
+            Toast.showToast(text: "Wallet.Import.inputKeystore".localized())
             return
         }
 
@@ -77,13 +86,14 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             Toast.showToast(text: reason)
             return
         }
+        
         if password.isEmpty {
-            Toast.showToast(text: "解锁密码不能为空")
+            Toast.showToast(text: "Wallet.Import.emptyKeystorePassword".localized())
             return
         }
         let walletModel = WalletModel()
         walletModel.name = name
-        Toast.showHUD(text: "导入钱包中")
+        Toast.showHUD(text: "Wallet.Import.loading".localized())
         DispatchQueue.global(qos: .userInitiated).async {
             do {
                 let wallet = try WalletManager.default.importKeystore(keystore, password: password)
@@ -109,7 +119,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             return wallet.address == walletModel.address
         }
         if result.count >= 1 {
-            Toast.showToast(text: "已存在该钱包")
+            Toast.showToast(text: "Wallet.Import.walletAlreadyExists".localized())
             return
         }
 
@@ -123,7 +133,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
                 realm.add(appModel)
             }
             DefaultTokenAndChain().addDefaultTokenToWallet(wallet: walletModel)
-            Toast.showToast(text: "导入成功")
+            Toast.showToast(text: "Wallet.Import.success".localized())
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)
         } catch {

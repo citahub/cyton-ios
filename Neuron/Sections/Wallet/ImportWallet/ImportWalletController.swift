@@ -25,9 +25,13 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "导入钱包"
+        title = "Wallet.Import.title".localized()
         tabbedButtonView.delegate = self
-        tabbedButtonView.buttonTitles = ["Keystore", "助记词", "私钥"]
+        tabbedButtonView.buttonTitles = [
+            "Wallet.Import.keystore".localized(),
+            "Wallet.Import.mnemonic".localized(),
+            "Wallet.Import.privatekey".localized()
+        ]
 
         importWalletPageViewController.delegate = self
         importWalletPageViewController.dataSource = self
@@ -49,7 +53,7 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showNoScreenshotAlert(titile: "禁止截屏！", message: "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！")
+        showNoScreenshotAlert(titile: "NoScreenshot.title".localized(), message: "NoScreenshot.importWalletMessage".localized())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

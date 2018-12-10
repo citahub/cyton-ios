@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import BigInt
 
 class TokenModel: Object, Decodable {
     @objc dynamic var name = ""
@@ -21,8 +22,17 @@ class TokenModel: Object, Decodable {
     @objc dynamic var isNativeToken = false
     @objc dynamic var chain: ChainModel?
 
-    @objc dynamic var tokenBalance = 0.0
+    @objc dynamic var balanceText = "0"
     var currencyAmount = "0"
+
+    var balance: BigUInt {
+        get {
+            return BigUInt.parseToBigUInt(balanceText, decimals)
+        }
+        set {
+            balanceText = newValue.toDecimalNumber(decimals).formatterToString(decimals)
+        }
+    }
 
     override class func primaryKey() -> String? {
         return "identifier"

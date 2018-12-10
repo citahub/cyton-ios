@@ -36,10 +36,10 @@ class Token {
         return realm.object(ofType: TokenModel.self, forPrimaryKey: identifier)!
     }
 
-    private(set) var balance: Double? {
+    private(set) var balance: BigUInt? {
         didSet {
             try? tokenModel.realm!.write {
-                tokenModel.tokenBalance = balance ?? 0.0
+                tokenModel.balance = balance ?? 0
             }
         }
     }
@@ -62,7 +62,7 @@ class Token {
     // MARK: - balance
     private var refreshBalanceSignal: DispatchGroup?
 
-    @discardableResult func refreshBalance() throws -> Double? {
+    @discardableResult func refreshBalance() throws -> BigUInt? {
         if let signal = refreshBalanceSignal {
             signal.wait()
             return self.balance
@@ -75,7 +75,6 @@ class Token {
             refreshBalanceSignal = nil
         }
 
-        let balance: BigUInt
         self.balance = nil
         switch type {
         case .appChain, .appChainErc20:
@@ -85,7 +84,6 @@ class Token {
         case .erc20:
             balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getTokenBalance(address: address)
         }
-        self.balance = Double.fromAmount(balance, decimals: decimals)
         refreshBalanceSignal?.leave()
         refreshBalanceSignal = nil
         return self.balance
