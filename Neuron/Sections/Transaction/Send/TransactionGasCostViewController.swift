@@ -73,7 +73,16 @@ class TransactionGasCostViewController: UITableViewController {
             let estimateGasLimit = paramBuilder.estimateGasLimit()
             if paramBuilder.gasLimit < estimateGasLimit {
                 Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
+                return
             }
+        } else if paramBuilder.tokenType == .appChain {
+            gasPriceTextField.isEnabled = false
+            if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
+                Toast.showToast(text: "请确保输入的Quota Limit大于等于\(paramBuilder.estimateGasLimit())")
+                return
+            }
+        } else if paramBuilder.tokenType == .appChainErc20 {
+            gasPriceTextField.isEnabled = false
         }
 
         param.gasPrice = paramBuilder.gasPrice
