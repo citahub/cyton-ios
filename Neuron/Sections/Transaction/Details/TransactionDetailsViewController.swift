@@ -18,6 +18,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var paymentAddressLabel: UILabel!
     @IBOutlet private weak var receiptAddressTitleLabel: UILabel!
     @IBOutlet private weak var receiptAddressLabel: UILabel!
+    @IBOutlet private weak var chainIconView: UIImageView!
     @IBOutlet private weak var blockchainBrowserLabel: UILabel!
     @IBOutlet private weak var hashTitleLabel: UILabel!
     @IBOutlet private weak var hashLabel: UILabel!
@@ -71,9 +72,13 @@ class TransactionDetailsViewController: UITableViewController {
         switch transaction.token.type {
         case .ether, .erc20:
             chainNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
+            chainIconView.image = UIImage(named: "icon_tx_details_chain_eth")
         case .appChain, .appChainErc20:
-            chainNetworkLabel.text = "CITA \(transaction.token.chainId)"
-            hideItems.append((0, 3))    // block chain network
+            chainNetworkLabel.text = transaction.token.chainName ?? "CITA"
+            chainIconView.image = UIImage(named: "icon_tx_details_chain_cita")
+            if transaction.token.chainId != "1" {
+                hideItems.append((0, 3))    // block chain network
+            }
         }
 
         switch transaction.status {
@@ -166,7 +171,14 @@ extension TransactionDetailsViewController {
             UIPasteboard.general.string = transaction.to
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 3 {
-            let url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
+            let url: URL
+            if transaction.token.type == .erc20 || transaction.token.type == .ether {
+                url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
+            } else if transaction.token.chainId == "1" {
+                url = URL(string: "http://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
+            } else {
+                fatalError()
+            }
             let safariController = SFSafariViewController(url: url)
             self.present(safariController, animated: true, completion: nil)
         }

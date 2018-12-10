@@ -181,7 +181,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="39.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tx_details_blockchain" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-36-Eb7">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tx_details_chain_eth" translatesAutoresizingMaskIntoConstraints="NO" id="RrP-36-Eb7">
                                                     <rect key="frame" x="15" y="12.5" width="15" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="Gcw-Br-5rl"/>
@@ -486,6 +486,7 @@
                         <outlet property="blockLabel" destination="4er-yE-bdB" id="ehB-Dj-dxN"/>
                         <outlet property="blockTitleLabel" destination="9ff-Ps-xgp" id="1k0-bz-hPJ"/>
                         <outlet property="blockchainBrowserLabel" destination="3aq-wp-8gW" id="bSn-MD-7kn"/>
+                        <outlet property="chainIconView" destination="RrP-36-Eb7" id="4zK-Ol-Cbd"/>
                         <outlet property="chainNetworkLabel" destination="v0S-D8-elq" id="1N5-F2-f1l"/>
                         <outlet property="chainNetworkTitleLable" destination="0EH-Fc-3NH" id="GEi-cD-nhm"/>
                         <outlet property="dateLabel" destination="9pw-d8-g4A" id="mrl-SR-LPt"/>
@@ -512,7 +513,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="icon_tx_details_blockchain" width="15" height="15"/>
+        <image name="icon_tx_details_chain_eth" width="15" height="15"/>
         <image name="icon_tx_details_copy" width="11" height="11"/>
         <image name="wallet_switch_arrow" width="7" height="12"/>
         <namedColor name="branding_color">
