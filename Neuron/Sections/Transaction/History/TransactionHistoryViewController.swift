@@ -163,7 +163,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
+        let controller: TransactionDetailsViewController = UIStoryboard(name: .transactionDetails).instantiateViewController()
         controller.transaction = presenter?.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
