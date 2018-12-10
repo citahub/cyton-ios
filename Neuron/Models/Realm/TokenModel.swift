@@ -90,7 +90,7 @@ extension TokenModel {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        return lhs.chain?.chainId == rhs.chain?.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
+        return lhs.symbol == rhs.symbol && lhs.name == rhs.name && lhs.decimals == rhs.decimals
     }
 
     override func isEqual(_ object: Any?) -> Bool {

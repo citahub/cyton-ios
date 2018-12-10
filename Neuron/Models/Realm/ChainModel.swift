@@ -23,7 +23,9 @@ class ChainModel: Object {
 
 extension ChainModel {
     static func identifier(for chainModel: ChainModel) -> String? {
-        let walletModel = AppModel.current.currentWallet!
+        guard let walletModel = AppModel.current.currentWallet else {
+            return nil
+        }
         var chainList: [ChainModel] = []
         chainList += walletModel.chainModelList
         if let model = chainList.first(where: { $0 == chainModel }) {
