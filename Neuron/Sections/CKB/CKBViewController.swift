@@ -10,4 +10,5 @@ import UIKit
 
 /// CKB Support PoC.
 class CKBViewController: UIViewController {
+    private let rpcClient = CKB.RPCClient(url: URL(string: "http://localhost:8114")!)
 }
