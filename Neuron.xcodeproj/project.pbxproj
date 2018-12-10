@@ -194,6 +194,7 @@
 		89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */; };
 		89FA2E2321BE39DF001EA590 /* SelectChainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */; };
 		89FA2E2521BE39F3001EA590 /* ContractAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */; };
+		89FA2E2721BE83AF001EA590 /* SwitchChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */; };
 		89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */; };
 		89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */; };
 		89FE21DE20EDB70000A09302 /* SendTransactionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21DD20EDB70000A09302 /* SendTransactionError.swift */; };
@@ -418,6 +419,7 @@
 		89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeystoreController.xib; sourceTree = "<group>"; };
 		89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainTableViewCell.swift; sourceTree = "<group>"; };
 		89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractAddressTableViewCell.swift; sourceTree = "<group>"; };
+		89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchChainViewController.swift; sourceTree = "<group>"; };
 		89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFiles.swift; sourceTree = "<group>"; };
 		89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21DD20EDB70000A09302 /* SendTransactionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionError.swift; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 				89F7966E213BD5680064808A /* Assets.storyboard */,
 				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
 				898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */,
+				89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1472,6 +1475,7 @@
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
 				89422FE821A7F97300DD8744 /* MyDAppViewController.swift in Sources */,
 				8964A19320C115A70086848F /* VerifyMnemonicViewController.swift in Sources */,
+				89FA2E2721BE83AF001EA590 /* SwitchChainViewController.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,

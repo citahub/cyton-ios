@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, QRCodeViewControllerDelegate {
+class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var tokenArray: [TokenModel] = []
     @IBOutlet weak var searchButton: UIButton!
@@ -25,7 +25,9 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func listSettings(_ sender: UIBarButtonItem) {
+
     }
+
     @IBAction func searchTokenButton(_ sender: UIButton) {
     }
 
@@ -69,6 +71,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "contractAddressTableViewCell") as! ContractAddressTableViewCell
+            cell.delegate = self
 
             return cell
         }
@@ -82,16 +85,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         let qrCodeViewController = QRCodeViewController()
         qrCodeViewController.delegate = self
         self.navigationController?.pushViewController(qrCodeViewController, animated: true)
-    }
-
-    func didBackQRCodeMessage(codeResult: String) {
-        tokenModel.address = ""
-        let finalText = codeResult.replacingOccurrences(of: " ", with: "")
-        tokenModel.address = finalText
-        if finalText.count == 40 || finalText.count == 42 {
-            didGetERC20Token(token: finalText)
-        }
-        table.reloadData()
     }
 
     func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
@@ -128,3 +121,20 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 }
 
+extension AddAssetController: QRCodeViewControllerDelegate {
+    func didBackQRCodeMessage(codeResult: String) {
+        tokenModel.address = ""
+        let finalText = codeResult.replacingOccurrences(of: " ", with: "")
+        tokenModel.address = finalText
+        if finalText.count == 40 || finalText.count == 42 {
+            didGetERC20Token(token: finalText)
+        }
+        table.reloadData()
+    }
+}
+
+extension AddAssetController: ContractAddressTableViewCellDelegate {
+    func textFieldInput(text: String) {
+
+    }
+}
