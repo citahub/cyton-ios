@@ -276,7 +276,7 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return !(indexPath.row == 3 && paramBuilder.tokenType == .appChain)
+        return indexPath.row == 3
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -288,14 +288,6 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
             }
         } else {
             cell.isHidden = false
-        }
-
-        if indexPath.row == 3 {
-            if paramBuilder.tokenType == .appChain {
-                cell.accessoryType = .none
-            } else {
-                cell.accessoryType = .disclosureIndicator
-            }
         }
     }
 

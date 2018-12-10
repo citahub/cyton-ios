@@ -56,7 +56,7 @@ class TransactionGasCostViewController: UITableViewController {
             return
         }
 
-        if paramBuilder.tokenType == .ether {
+        if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
@@ -69,16 +69,10 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-        } else if paramBuilder.tokenType == .erc20 {
-            let estimateGasLimit = paramBuilder.estimateGasLimit()
-            if paramBuilder.gasLimit < estimateGasLimit {
-                Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
-                return
-            }
         } else if paramBuilder.tokenType == .appChain {
             gasPriceTextField.isEnabled = false
             if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
-                Toast.showToast(text: "请确保输入的Quota Limit大于等于\(paramBuilder.estimateGasLimit())")
+                Toast.showToast(text: String(format: "Transaction.Send.quotaLimitSettingIsTooLow".localized(), "\(paramBuilder.estimateGasLimit())"))
                 return
             }
         } else if paramBuilder.tokenType == .appChainErc20 {

@@ -188,7 +188,8 @@
 "Transaction.Send.title" = "%@转账";
 "Transaction.Send.transactionAvailableBalance" = "您输入的金额超过您的余额，是否全部转出？";
 "Transaction.Send.gasPriceSettingIsTooLow" = "您的GasPrice设置过低，建议输入推荐值以快速转账";
-"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于\"%@(估算值)*4\"";
+"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的Gas Limit大于等于%@";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "请确保输入的Quota Limit大于等于%@";
 "Transaction.Send.gasCostSetting" = "高级设置";
 "Transaction.Send.gasCost" = "Gas 费用";
 "Transaction.Send.extenData" = "包含数据";
