@@ -122,6 +122,20 @@ extension TransactionGasCostViewController: UITextFieldDelegate {
 extension TransactionGasCostViewController: UITextPasteDelegate {
 }
 
+extension TransactionGasCostViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 && (paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20) {
+            return 0.0
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.isHidden = cell.bounds.size.height == 0.0
+    }
+}
+
 extension TransactionGasCostViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let character = "0123456789abcdefABCDEF"
