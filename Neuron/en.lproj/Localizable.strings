@@ -284,7 +284,11 @@
 "Assets.AddAssets.Title" = "添加资产";
 "Assets.AddAssets.BlockChainNetwork" = "区块链网络";
 "Assets.AddAssets.ContractAddress" = "合约地址";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址";
+"Assets.AddAssets.Search" = "查询";
 "Assets.AddAssets.TokenMessage" = "代币信息";
+"Assets.AddAssets.EmptyResult" = "未查询到代币信息，请核对合约地址是否正确";
+"Assets.AddAssets.ListSettings" = "列表设置";
 "Assets.AddAssets.TokenName" = "代币名称";
 "Assets.AddAssets.TokenSymbol" = "代币缩写";
 "Assets.AddAssets.TokenDecimals" = "小数位数";

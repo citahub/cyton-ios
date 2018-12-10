@@ -9,26 +9,26 @@
 import UIKit
 import RealmSwift
 
-class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
-    let titleArray = ["区块链", "合约地址"]
-    let placeholderArray = ["", "合约地址"]
+class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, QRCodeViewControllerDelegate {
 
-    let nView =  NEPickerView.init()
     var tokenArray: [TokenModel] = []
     @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var aTable: UITableView!
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var rightBarButton: UIBarButtonItem!
     var tokenModel = TokenModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "添加资产"
-        aTable.delegate = self
-        aTable.dataSource = self
-        aTable.register(UINib(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
+        title = "Assets.AddAssets.Title".localized()
+        searchButton.setTitle("Assets.AddAssets.Search".localized(), for: .normal)
+        rightBarButton.title = "Assets.AddAssets.ListSettings".localized()
     }
 
+    @IBAction func listSettings(_ sender: UIBarButtonItem) {
+    }
     @IBAction func searchTokenButton(_ sender: UIButton) {
     }
+
     @IBAction func didClickAddButton(_ sender: UIButton) {
         Toast.hideHUD()
         if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
@@ -59,48 +59,26 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return titleArray.count
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! AddAssetTableViewCell
-        cell.delegate = self
-        cell.indexP = indexPath as NSIndexPath
-        cell.headLabel.text = titleArray[indexPath.row]
-        cell.placeHolderStr = placeholderArray[indexPath.row]
-        cell.selectRow = indexPath.row
         if indexPath.row == 0 {
-            cell.rightTextField.text = "以太坊"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "selectChainTableViewCell") as! SelectChainTableViewCell
+
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "contractAddressTableViewCell") as! ContractAddressTableViewCell
+
+            return cell
         }
-        cell.selectionStyle = .none
-
-        switch indexPath.row {
-        case 0:
-            cell.rightTextField.text = "以太坊"
-        case 1:
-            cell.rightTextField.text = tokenModel.address
-        default:
-            break
-        }
-        return cell
     }
 
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+    @IBAction func clickSelectChainButton(_ sender: UIButton) {
+
     }
 
-    func didClickSelectCoinBtn() {
-        nView.frame = CGRect(origin: .zero, size: UIScreen.main.bounds.size)
-        nView.delegate = self
-        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "test-chain", "id": "101"]]
-        nView.selectDict = ["name": "以太坊eth", "id": "100"]
-        UIApplication.shared.keyWindow?.addSubview(nView)
-    }
-
-    func callBackDictionnary(dict: [String: String]) {
-    }
-
-    func didClickQRCodeBtn() {
+    @IBAction func clickQRCodeButton(_ sender: UIButton) {
         let qrCodeViewController = QRCodeViewController()
         qrCodeViewController.delegate = self
         self.navigationController?.pushViewController(qrCodeViewController, animated: true)
@@ -113,7 +91,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         if finalText.count == 40 || finalText.count == 42 {
             didGetERC20Token(token: finalText)
         }
-        aTable.reloadData()
+        table.reloadData()
     }
 
     func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
@@ -142,10 +120,11 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
                     self.tokenModel = tokenModel
                     self.tokenModel.address = token
                 } else {
-                    Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
+                    Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
                 }
-                self.aTable.reloadData()
+                self.table.reloadData()
             }
         }
     }
 }
+

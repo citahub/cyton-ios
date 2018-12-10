@@ -22,7 +22,6 @@ class TransactionSwitchTokenViewController: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     weak var delegate: TransactionSwitchTokenViewControllerDelegate?
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmButton.setTitle("Common.confirm".localized(), for: .normal)
