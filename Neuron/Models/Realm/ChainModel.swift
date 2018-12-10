@@ -23,11 +23,8 @@ class ChainModel: Object {
 
 extension ChainModel {
     static func identifier(for chainModel: ChainModel) -> String? {
-        guard let walletModel = AppModel.current.currentWallet else {
-            return nil
-        }
-        var chainList: [ChainModel] = []
-        chainList += walletModel.chainModelList
+        let realm = try! Realm()
+        let chainList = realm.objects(ChainModel.self)
         if let model = chainList.first(where: { $0 == chainModel }) {
             return model.identifier
         }

@@ -76,11 +76,8 @@ class TokenModel: Object, Decodable {
 
 extension TokenModel {
     static func identifier(for tokenModel: TokenModel) -> String? {
-        guard let walletModel = AppModel.current.currentWallet else {
-            return nil
-        }
-        var tokenList: [TokenModel] = []
-        tokenList += walletModel.tokenModelList
+        let realm = try! Realm()
+        let tokenList = realm.objects(TokenModel.self)
         if let model = tokenList.first(where: { $0 == tokenModel }) {
             return model.identifier
         }
