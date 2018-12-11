@@ -10,12 +10,13 @@ import UIKit
 
 class TaskThread: NSObject {
     typealias Block = () -> Void
+    private(set) var thread: Thread?
 
-    func perform(_ block: @escaping Block, waitUntilDone: Bool = false) {
+    func perform(_ block: @escaping Block) {
         guard let thread = thread else { return }
         let task = Task(block: block)
         let sel = #selector(TaskThread.taskHandler(task:))
-        perform(sel, on: thread, with: task, waitUntilDone: waitUntilDone)
+        perform(sel, on: thread, with: task, waitUntilDone: false)
     }
 
     @objc func run() {
@@ -41,7 +42,6 @@ class TaskThread: NSObject {
         }
     }
 
-    private var thread: Thread?
     private var runLoop: RunLoop?
     private class Task: NSObject {
         let block: Block

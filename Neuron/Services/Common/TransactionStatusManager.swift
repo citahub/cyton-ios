@@ -23,11 +23,23 @@ protocol TransactionStatusManagerDelegate: NSObjectProtocol {
 class TransactionStatusManager: NSObject {
     static let manager = TransactionStatusManager()
     private var transactions = [SentTransaction]()
+    private var taskThread = TaskThread()
+    private var realm: Realm!
 
     private override init() {
         delegates = NSHashTable(options: .weakMemory)
         super.init()
-        perform {
+        configureTxStatusManager()
+    }
+
+    private func configureTxStatusManager() {
+        guard taskThread.thread == nil else { return }
+        realm = try! Realm()
+        taskThread.run()
+        taskThread.perform {
+            self.transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
+                return transaction.status == .pending
+            })
             self.checkSentTransactionStatus()
         }
     }
@@ -45,7 +57,8 @@ class TransactionStatusManager: NSObject {
 
     // MARK: - Add transaction
     func insertTransaction(transaction: SentTransaction) {
-        perform {
+        configureTxStatusManager()
+        taskThread.perform {
             try? self.realm.write {
                 self.realm.add(transaction)
             }
@@ -80,11 +93,11 @@ class TransactionStatusManager: NSObject {
     @objc private func checkSentTransactionStatus() {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.transactions.count > 0 else {
-            deleteTaskThread()
+            taskThread.stop()
             return
         }
-        guard Thread.current == thread else {
-            perform { self.checkSentTransactionStatus() }
+        guard Thread.current == taskThread.thread else {
+            taskThread.perform { self.checkSentTransactionStatus() }
             return
         }
 
@@ -130,77 +143,5 @@ class TransactionStatusManager: NSObject {
                 delegate.sentTransactionStatusChanged(transaction: transaction)
             }
         }
-    }
-
-    // MARK: - Thread
-    private var thread: Thread?
-    private var runLoop: RunLoop?
-    private typealias Block = () -> Void
-    private class Task: NSObject {
-        let block: Block
-        init(block: @escaping Block) {
-            self.block = block
-        }
-    }
-
-    @objc private func perform(_ block: @escaping Block) {
-        let thread = getTaskThread()
-        if Thread.current == thread {
-            block()
-            return
-        }
-        let task = Task(block: block)
-        let sel = #selector(TransactionStatusManager.taskHandler(task:))
-        self.perform(sel, on: thread, with: task, waitUntilDone: false)
-    }
-
-    @objc private func syncPerform(_ block: @escaping Block) {
-        let thread = getTaskThread()
-        if Thread.current == thread {
-            block()
-            return
-        }
-        let task = Task(block: block)
-        let sel = #selector(TransactionStatusManager.taskHandler(task:))
-        self.perform(sel, on: thread, with: task, waitUntilDone: true)
-    }
-
-    @objc private func taskHandler(task: Task) {
-        task.block()
-    }
-
-    private func getTaskThread() -> Thread {
-        if let thread = thread {
-            return thread
-        }
-        let group = DispatchGroup()
-        let queue = DispatchQueue(label: "")
-        group.enter()
-        queue.async {
-            self.thread = Thread.current
-            self.runLoop = RunLoop.current
-            Thread.current.name = String(describing: TransactionStatusManager.self)
-            RunLoop.current.add(NSMachPort(), forMode: .default)
-            group.leave()
-            CFRunLoopRun()
-        }
-        group.wait()
-        perform {
-            self.transactions = self.realm.objects(SentTransaction.self).filter({ (transaction) -> Bool in
-                return transaction.status == .pending
-            })
-        }
-        return thread!
-    }
-
-    private func deleteTaskThread() {
-        self.thread = nil
-        if let runloop = self.runLoop?.getCFRunLoop() {
-            CFRunLoopStop(runloop)
-        }
-    }
-
-    private var realm: Realm! {
-        return try! Realm()
     }
 }
