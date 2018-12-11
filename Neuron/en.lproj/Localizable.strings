@@ -291,6 +291,9 @@
 "Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
 "Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络";
+"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";
+"Assets.AddAssets.StoreFailed" = "代币添加失败";
+"Assets.AddAssets.StoreSuccess" = "代币添加成功";
 "Assets.AddAssets.ListSettings" = "列表设置";
 "Assets.AddAssets.TokenMessage" = "Token info";
 "Assets.AddAssets.TokenName" = "Token Name";
