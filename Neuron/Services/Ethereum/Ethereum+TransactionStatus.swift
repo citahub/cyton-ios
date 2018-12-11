@@ -23,7 +23,6 @@ extension EthereumNetwork {
 
             let blockNumber = try EthereumNetwork().getWeb3().eth.getBlockNumber()
             if blockNumber - BigUInt(localTxDetail.blockNumber) < 12 {
-                print("TxS \(blockNumber) - \(BigUInt(localTxDetail.blockNumber))")
                 return .pending
             }
 

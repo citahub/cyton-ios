@@ -38,7 +38,6 @@ class TxStatusManager: NSObject {
             self.localTxDetailList = self.realm.objects(LocalTxDetailModel.self).filter({ (transaction) -> Bool in
                 return transaction.status == .pending
             })
-            print("TxS 从本地读取交易记录: \(self.localTxDetailList.count)")
         }
     }
 
@@ -47,7 +46,6 @@ class TxStatusManager: NSObject {
         configureTxStatusManager()
         taskThread.perform {
             let localTxDetail = cetateModelBlock()
-            print("TxS 新增检查交易状态: \(localTxDetail.txHash)")
             try? self.realm.write {
                 self.realm.add(localTxDetail)
             }
@@ -83,17 +81,14 @@ class TxStatusManager: NSObject {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkSentTransactionStatus), object: nil)
         guard self.localTxDetailList.count > 0 else {
             taskThread.stop()
-            print("TxS 结束检查交易状态")
             return
         }
         guard Thread.current == taskThread.thread else {
             taskThread.perform { self.checkSentTransactionStatus() }
             return
         }
-        print("TxS 开始检查交易状态: \(self.localTxDetailList.count)")
         let localTxDetailList = self.localTxDetailList
         for localTxDetail in localTxDetailList {
-            print("TxS 开始检查交易状态: \(localTxDetail.txHash)")
             let result: TransactionStateResult
             switch localTxDetail.token.type {
             case .ether:
@@ -112,10 +107,8 @@ class TxStatusManager: NSObject {
                     localTxDetail.status = .failure
                 }
                 NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
-                print("TxS 开始检查交易状态: \(localTxDetail.txHash) 失败")
             case .success(let transaction):
                 self.localTxDetailList.removeAll { $0 == localTxDetail }
-                print("TxS 开始检查交易状态: \(localTxDetail.txHash) 成功")
                 try? self.realm.write {
                     localTxDetail.status = .success
                     localTxDetail.token = nil
@@ -123,7 +116,6 @@ class TxStatusManager: NSObject {
                 }
                 NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: transaction])
             case .pending:
-                print("TxS 开始检查交易状态: \(localTxDetail.txHash) 进行中")
                 break
             }
         }
