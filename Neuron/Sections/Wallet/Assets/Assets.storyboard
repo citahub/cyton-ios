@@ -122,14 +122,7 @@
                             <outlet property="delegate" destination="c5R-kS-yl6" id="rE5-9U-pyo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6rS-hc-f3A">
-                        <barButtonItem key="rightBarButtonItem" image="nav_add_asset" id="6GC-d4-Dob">
-                            <color key="tintColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                        <connections>
-                            <outlet property="rightBarButtonItem" destination="6GC-d4-Dob" id="Aec-6F-bHc"/>
-                        </connections>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="6rS-hc-f3A"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNm-A0-0bj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -252,15 +245,27 @@
                         <viewLayoutGuide key="safeArea" id="fXx-t0-Vyg"/>
                     </view>
                     <navigationItem key="navigationItem" id="W3X-qO-AIo">
-                        <barButtonItem key="rightBarButtonItem" title="列表设置" id="S64-Eh-YAB">
-                            <color key="tintColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="listSettings:" destination="z2O-E2-HJL" id="a5m-Mt-bwy"/>
-                            </connections>
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="cUY-KQ-b5C">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VPr-bh-pDw" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="列表设置">
+                                    <color key="titleColor" red="0.42352941179999998" green="0.4431372549" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="rect" keyPath="titleFrame">
+                                        <rect key="value" x="25" y="5" width="70" height="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="c5R-kS-yl6" kind="show" id="icD-6G-VaX"/>
+                                </connections>
+                            </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="rightBarButton" destination="S64-Eh-YAB" id="UlT-zn-eud"/>
+                        <outlet property="listSettingButton" destination="VPr-bh-pDw" id="BN8-A2-x7v"/>
                         <outlet property="searchButton" destination="ppk-67-UbN" id="xel-I6-8CC"/>
                         <outlet property="table" destination="wFT-YU-KYF" id="FQz-ec-cbo"/>
                     </connections>
@@ -448,7 +453,6 @@
     <resources>
         <image name="close" width="36" height="36"/>
         <image name="currency_selected" width="21" height="15"/>
-        <image name="nav_add_asset" width="24" height="23"/>
         <image name="qr_code" width="22" height="22"/>
         <image name="select_chain" width="6" height="4"/>
     </resources>

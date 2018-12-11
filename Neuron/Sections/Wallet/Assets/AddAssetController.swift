@@ -14,7 +14,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     var tokenArray: [TokenModel] = []
     @IBOutlet weak var searchButton: UIButton!
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var rightBarButton: UIBarButtonItem!
+    @IBOutlet weak var listSettingButton: DesignableButton!
     private lazy var showTokenPageItem: ShowTokenPageItem = {
         return ShowTokenPageItem.create()
     }()
@@ -29,7 +29,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         title = "Assets.AddAssets.Title".localized()
         searchButton.setTitle("Assets.AddAssets.Search".localized(), for: .normal)
-        rightBarButton.title = "Assets.AddAssets.ListSettings".localized()
+        listSettingButton.setTitle("Assets.AddAssets.ListSettings".localized(), for: .normal)
         chain = Chain().defaultChain
     }
 
@@ -39,10 +39,6 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             switchChainViewController.currentChain = chain
             switchChainViewController.delegate = self
         }
-    }
-
-    @IBAction func listSettings(_ sender: UIBarButtonItem) {
-
     }
 
     @IBAction func searchTokenButton(_ sender: UIButton) {

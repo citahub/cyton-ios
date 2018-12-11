@@ -159,7 +159,6 @@
 		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
 		898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */; };
 		898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98220EA0F210059ECA3 /* TokenModel.swift */; };
-		898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */ = {isa = PBXBuildFile; fileRef = 898CA98920EA2E760059ECA3 /* tokens-eth.json */; };
 		899AD19B211011F300A8AC09 /* AppChainNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* AppChainNetwork.swift */; };
 		89A196192175D9C800BD5FA4 /* DAppDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */; };
 		89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */; };
@@ -386,7 +385,6 @@
 		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletController.swift; sourceTree = "<group>"; };
 		898CA98220EA0F210059ECA3 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
-		898CA98920EA2E760059ECA3 /* tokens-eth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-eth.json"; sourceTree = "<group>"; };
 		899AD19A211011F300A8AC09 /* AppChainNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainNetwork.swift; sourceTree = "<group>"; };
 		89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDataHandle.swift; sourceTree = "<group>"; };
 		89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppCommand.swift; sourceTree = "<group>"; };
@@ -823,7 +821,6 @@
 				896812CA20F726D000731C8C /* dappOpration.js */,
 				8978846221AD26690034AF4F /* neuron.js */,
 				6E83CB92216F581800029324 /* ProductAgreement.txt */,
-				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				89C614562140D4C500DC3DF4 /* currency.plist */,
 			);
 			path = Resource;
@@ -1236,7 +1233,6 @@
 				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */,
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
-				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				8978846321AD26690034AF4F /* neuron.js in Resources */,
 				1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
