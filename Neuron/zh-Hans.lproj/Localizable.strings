@@ -284,10 +284,13 @@
 "Assets.AddAssets.Title" = "添加资产";
 "Assets.AddAssets.BlockChainNetwork" = "区块链网络";
 "Assets.AddAssets.ContractAddress" = "合约地址";
+"Assets.AddAssets.NodeAddress" = "节点地址";
 "Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址";
 "Assets.AddAssets.Search" = "查询";
 "Assets.AddAssets.TokenMessage" = "代币信息";
-"Assets.AddAssets.EmptyResult" = "未查询到代币信息，请核对合约地址是否正确";
+"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
+"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络";
 "Assets.AddAssets.ListSettings" = "列表设置";
 "Assets.AddAssets.TokenName" = "代币名称";

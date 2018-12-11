@@ -131,6 +131,7 @@
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
 		896812CB20F726D000731C8C /* dappOpration.js in Resources */ = {isa = PBXBuildFile; fileRef = 896812CA20F726D000731C8C /* dappOpration.js */; };
+		896B32BB21BF865900C4DA7F /* AppChain+AddToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */; };
 		896CEA9A21B91E4500B1A7D4 /* DefaultTokenAndChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */; };
 		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
 		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
@@ -349,6 +350,7 @@
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
 		896812CA20F726D000731C8C /* dappOpration.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dappOpration.js; sourceTree = "<group>"; };
+		896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppChain+AddToken.swift"; sourceTree = "<group>"; };
 		896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenAndChain.swift; sourceTree = "<group>"; };
 		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -546,6 +548,7 @@
 				6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */,
 				6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */,
 				892E5B1721B61F0000298845 /* AppChain+ERC20.swift */,
+				896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */,
 			);
 			path = AppChain;
 			sourceTree = "<group>";
@@ -1468,6 +1471,7 @@
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
+				896B32BB21BF865900C4DA7F /* AppChain+AddToken.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
 				6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */,
 				6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */,
