@@ -138,8 +138,10 @@ class TransactionParamBuilder: NSObject {
         switch tokenType {
         case .ether, .appChain:
             gasLimit = GasCalculator.defaultGasLimit
-        case .erc20, .appChainErc20:
+        case .erc20:
             gasLimit = 100_000
+        case .appChainErc20:
+            gasLimit = 200_000
         }
     }
 
@@ -158,6 +160,6 @@ class TransactionParamBuilder: NSObject {
 
     private func rebuildGasCalculator() {
         gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
-        txFeeText = gasCalculator.txFee.toDecimalNumber(decimals).formatterToString()
+        txFeeText = gasCalculator.txFee.toAmountText(decimals)
     }
 }
