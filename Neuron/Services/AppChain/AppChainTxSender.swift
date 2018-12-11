@@ -31,7 +31,7 @@ class AppChainTxSender {
         data: Data,
         chainId: BigUInt,
         password: String
-    ) throws -> TxHash {
+    ) throws -> (TxHash, BlockNumber) {
         let destinationEthAddress = Address(to.addHexPrefix())
         if !to.isEmpty && destinationEthAddress == nil {
             throw SendTransactionError.invalidDestinationAddress
@@ -58,10 +58,7 @@ class AppChainTxSender {
             version: meta.version
         )
         let signed = try sign(transaction: transaction, password: password)
-        let txHash = try appChain.rpc.sendRawTransaction(signedTx: signed)
-        let sentTransaction = LocationTxDetailsModel(tokenType: .appChain, from: from.address, hash: txHash, transaction: transaction, chainHosts: appChain.provider.url.absoluteString)
-        TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
-        return txHash
+        return (try appChain.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {

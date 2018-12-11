@@ -14,7 +14,8 @@ import RealmSwift
 
 /// Prepare tx params.
 class TransactionParamBuilder: NSObject {
-    var from: String = ""
+    var tokenIdentifier = ""
+    var from = ""
     var to = ""
     var value: BigUInt = 0
     var data = Data()
@@ -68,6 +69,7 @@ class TransactionParamBuilder: NSObject {
     private var gasCalculator = GasCalculator()
 
     init(token: TokenModel) {
+        tokenIdentifier = token.identifier
         tokenType = token.type
         rpcNode = token.chainHosts
         decimals = token.decimals
@@ -85,6 +87,7 @@ class TransactionParamBuilder: NSObject {
     }
 
     init(builder: TransactionParamBuilder) {
+        tokenIdentifier = builder.tokenIdentifier
         tokenType = builder.tokenType
         rpcNode = builder.rpcNode
         decimals = builder.decimals

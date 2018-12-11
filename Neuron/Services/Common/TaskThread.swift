@@ -19,6 +19,13 @@ class TaskThread: NSObject {
         perform(sel, on: thread, with: task, waitUntilDone: false)
     }
 
+    func syncPerform(_ block: @escaping Block) {
+        guard let thread = thread else { return }
+        let task = Task(block: block)
+        let sel = #selector(TaskThread.taskHandler(task:))
+        perform(sel, on: thread, with: task, waitUntilDone: true)
+    }
+
     @objc func run() {
         guard thread == nil else { return }
         let group = DispatchGroup()

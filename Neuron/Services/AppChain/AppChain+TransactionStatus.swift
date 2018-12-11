@@ -10,18 +10,18 @@ import Foundation
 import AppChain
 
 extension AppChainNetwork {
-    func getTransactionStatus(sentTransaction: LocationTxDetailsModel) -> TransactionStateResult {
+    func getTransactionStatus(localTxDetail: LocalTxDetailModel) -> TransactionStateResult {
         do {
             let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
-            if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: sentTransaction.txHash) {
+            if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: localTxDetail.txHash) {
                 if let error = receipt.errorMessage {
                     print(error)
                     return .failure
                 } else {
-                    if let transaction = try? AppChainNetwork().getTransaction(txhash: sentTransaction.txHash, account: sentTransaction.from, from: sentTransaction.from, to: sentTransaction.to) {
+                    if let transaction = try? AppChainNetwork().getTransaction(txhash: localTxDetail.txHash, account: localTxDetail.from, from: localTxDetail.from, to: localTxDetail.to) {
                         return .success(transaction: transaction)
                     } else {
-                        if sentTransaction.blockNumber < currentBlockNumber {
+                        if localTxDetail.blockNumber < currentBlockNumber {
                             return .failure
                         } else {
                             return .pending
@@ -29,7 +29,7 @@ extension AppChainNetwork {
                     }
                 }
             } else {
-                if sentTransaction.blockNumber < currentBlockNumber {
+                if localTxDetail.blockNumber < currentBlockNumber {
                     return .failure
                 } else {
                     return .pending

@@ -28,7 +28,7 @@ class ContractController: UITableViewController, TransactonSender {
     var dappCommonModel: DAppCommonModel!
     var paramBuilder: TransactionParamBuilder!
     private var chainType: ChainType = .appChain
-    private var tokenModel = TokenModel() {
+    var tokenModel: TokenModel! {
         didSet {
             paramBuilder = TransactionParamBuilder(token: tokenModel)
         }

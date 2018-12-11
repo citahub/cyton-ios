@@ -13,7 +13,7 @@ protocol TransactionHistoryPresenterDelegate: NSObjectProtocol {
     func updateTransactions(transaction: [TransactionDetails], updates: [Int], error: Error?)
 }
 
-class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
+class TransactionHistoryPresenter: NSObject {
     private(set) var transactions = [TransactionDetails]()
     let token: Token
     typealias CallbackBlock = ([Int], Error?) -> Void
@@ -24,7 +24,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
     init(token: Token) {
         self.token = token
         super.init()
-        TransactionStatusManager.manager.addDelegate(delegate: self)
+        observeTxStatus()
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
@@ -49,12 +49,7 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.sentTransactions = TransactionStatusManager.manager.getTransactions(
-                        walletAddress: self.token.walletAddress,
-                        tokenType: self.token.type,
-                        tokenAddress: self.token.address,
-                        chainHosts: self.token.chainHosts
-                    )
+                    self.sentTransactions = TxStatusManager.manager.getTransactions(token: self.token)
                 }
                 self.page += 1
 
@@ -139,27 +134,32 @@ class TransactionHistoryPresenter: NSObject, TransactionStatusManagerDelegate {
             return try AppChainNetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
         }
     }
+}
 
-    // MARK: - TransactionStatusManagerDelegate
-    func sentTransactionInserted(transaction: TransactionDetails) {
-        guard transaction.from == token.walletAddress else {
-            return
-        }
+
+extension TransactionHistoryPresenter {
+    private func observeTxStatus() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didAddLocationTxDetails(notification:)), name: TxStatusManager.didAddLocationTxDetails, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateTxStatus(notification:)), name: TxStatusManager.didUpdateTxStatus, object: nil)
+    }
+
+    @objc func didAddLocationTxDetails(notification: Notification) {
+        guard let transaction = notification.userInfo![TxStatusManager.transactionKey] as? TransactionDetails else { return }
+        guard transaction.token == token else { return }
+        transactions.insert(transaction, at: 0)
         DispatchQueue.main.async {
-            transaction.token = self.token
-            self.transactions.insert(transaction, at: 0)
             self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
         }
     }
 
-    func sentTransactionStatusChanged(transaction: TransactionDetails) {
-        if let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) {
-            DispatchQueue.main.async {
-                transaction.token = self.token
-                self.transactions.remove(at: idx)
-                self.transactions.insert(transaction, at: idx)
-                self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
-            }
+    @objc func didUpdateTxStatus(notification: Notification) {
+        guard let transaction = notification.userInfo![TxStatusManager.transactionKey] as? TransactionDetails else { return }
+        guard transaction.token == token else { return }
+        guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }
+        transactions.remove(at: idx)
+        transactions.insert(transaction, at: idx)
+        DispatchQueue.main.async {
+            self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
         }
     }
 }
