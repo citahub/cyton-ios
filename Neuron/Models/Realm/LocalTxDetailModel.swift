@@ -107,6 +107,8 @@ class LocalTxDetailModel: Object {
         transaction.to = to
         transaction.from = from
         transaction.value = BigUInt(valueText)!
+        transaction.gasPrice = BigUInt(gasPriceText) ?? 0
+        transaction.gasLimit = BigUInt(gasLimitText) ?? 0
         transaction.date = date
         transaction.blockNumber = BigUInt(blockNumber)
         transaction.status = status

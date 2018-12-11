@@ -121,13 +121,17 @@ class TransactionDetailsViewController: UITableViewController {
             } else if let appChainErc20 = transaction as? AppChainErc20TransactionDetails {
                 gasFeeLabel.text = appChainErc20.quotaUsed.toGweiText() + " \(transaction.token.symbol)"
             }
-            // TODO: Gas Limit
         case .failure:
             hideItems.append((1, 3)) // gas fee
             hideItems.append((1, 4)) // gas price
             hideItems.append((1, 5))    // gas used
         }
-        hideItems.append((1, 6)) // gas limit
+
+        if transaction.status == .pending {
+            gasLimitLabel.text = "\(transaction.gasLimit)"
+        } else {
+            hideItems.append((1, 6)) // gas limit
+        }
 
         if transaction.status == .success {
             if let ethereum = transaction as? EthereumTransactionDetails {

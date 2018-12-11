@@ -28,6 +28,8 @@ class TransactionDetails: Codable {
     var blockNumber: BigUInt = 0
     var status: TransactionState = .success
     var token: Token!
+    var gasPrice: BigUInt = 0
+    var gasLimit: BigUInt = 0
 
     enum CodingKeys: String, CodingKey {
         case hash
