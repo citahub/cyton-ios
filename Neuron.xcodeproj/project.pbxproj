@@ -1058,7 +1058,6 @@
 			children = (
 				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
 				6E90D06821704C1D00B98363 /* SensorsAnalytics.swift */,
-				6E3B2B6A219D938F0095257D /* LocationTxDetails.swift */,
 				6E3B2B74219EDE200095257D /* TransactionStatusManager.swift */,
 				6E8BFC3621B00948004752CC /* TokenPriceLoader.swift */,
 				89FE21DD20EDB70000A09302 /* SendTransactionError.swift */,
