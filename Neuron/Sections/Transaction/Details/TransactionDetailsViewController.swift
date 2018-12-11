@@ -83,20 +83,20 @@ class TransactionDetailsViewController: UITableViewController {
 
         switch transaction.status {
         case .success:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.success".localized() : "Transaction.Details.contractCreationSuccess".localized()
             statusLabel.backgroundColor = UIColor(named: "secondary_color")?.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(named: "secondary_color")
             hashLabel.text = transaction.hash
             blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.success".localized() : "Transaction.Details.contractCreationPending"
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
             hashLabel.text = transaction.hash
 
             hideItems.append((1, 2))    // block
         case .failure:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.success".localized() :  "Transaction.Details.contractCreationFailure".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
 
