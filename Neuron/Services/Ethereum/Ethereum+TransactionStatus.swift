@@ -11,7 +11,7 @@ import BigInt
 import Web3swift
 
 extension EthereumNetwork {
-    func getTransactionStatus(sentTransaction: LocationTxDetails) -> TransactionStateResult {
+    func getTransactionStatus(sentTransaction: LocationTxDetailsModel) -> TransactionStateResult {
         do {
             let transactionDetails = try EthereumNetwork().getWeb3().eth.getTransactionDetails(sentTransaction.txHash) // TODO: cache
             try? sentTransaction.realm?.write {

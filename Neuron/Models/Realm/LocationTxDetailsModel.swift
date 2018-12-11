@@ -11,51 +11,7 @@ import RealmSwift
 import BigInt
 import AppChain
 
-protocol ThreadSafeObject {
-}
-
-private var threadSafeReferenceAssiciationKey: Int = 0
-private var realmConfigurationAssiciationKey: Int = 0
-private var realmThreadAssiciationKey: Int = 0
-extension ThreadSafeObject where Self: Object {
-    private var threadSafeReference: ThreadSafeReference<Self>? {
-        return objc_getAssociatedObject(self, &threadSafeReferenceAssiciationKey) as? ThreadSafeReference<Self>
-    }
-    private var realmConfiguration: Realm.Configuration? {
-        return objc_getAssociatedObject(self, &realmConfigurationAssiciationKey) as? Realm.Configuration
-    }
-    private var realmThread: Thread? {
-        return objc_getAssociatedObject(self, &realmThreadAssiciationKey) as? Thread
-    }
-    var threadSafe: Self {
-        guard let configuration = realmConfiguration, let threadSafeReference = threadSafeReference else {
-            fatalError("Need to call `setupThreadSafe`")
-        }
-        guard realmThread != Thread.current else {
-            return self
-        }
-        let realm = try! Realm(configuration: configuration)
-        let object = realm.resolve(threadSafeReference)!
-        objc_setAssociatedObject(object, &threadSafeReferenceAssiciationKey, threadSafeReference, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        objc_setAssociatedObject(object, &realmConfigurationAssiciationKey, configuration, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        objc_setAssociatedObject(object, &realmThreadAssiciationKey, Thread.current, .OBJC_ASSOCIATION_ASSIGN)
-        return object
-    }
-
-    func setupThreadSafe() {
-        let threadSafeReference = ThreadSafeReference(to: self)
-        objc_setAssociatedObject(self, &threadSafeReferenceAssiciationKey, threadSafeReference, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        if let realm = self.realm {
-            objc_setAssociatedObject(self, &realmConfigurationAssiciationKey, realm.configuration, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        } else {
-            fatalError("realm is nil")
-        }
-        objc_setAssociatedObject(self, &realmThreadAssiciationKey, Thread.current, .OBJC_ASSOCIATION_ASSIGN)
-    }
-}
-
-// TODO: this should be in Models/Realm.
-class LocationTxDetails: Object, ThreadSafeObject {
+class LocationTxDetailsModel: Object {
     var tokenType: TokenType {
         set {
             privateTokenType = newValue.rawValue
@@ -201,13 +157,13 @@ class LocationTxDetails: Object, ThreadSafeObject {
     }
 }
 
-extension LocationTxDetails {
-    public static func == (lhs: LocationTxDetails, rhs: LocationTxDetails) -> Bool {
+extension LocationTxDetailsModel {
+    public static func == (lhs: LocationTxDetailsModel, rhs: LocationTxDetailsModel) -> Bool {
         return lhs.txHash == rhs.txHash
     }
 
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? LocationTxDetails  else {
+        guard let object = object as? LocationTxDetailsModel  else {
             return false
         }
         return object.txHash == txHash
@@ -215,7 +171,7 @@ extension LocationTxDetails {
 }
 
 extension TransactionDetails {
-    convenience init(sentTransaction: LocationTxDetails) {
+    convenience init(sentTransaction: LocationTxDetailsModel) {
         self.init()
     }
 }

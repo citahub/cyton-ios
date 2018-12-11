@@ -10,7 +10,7 @@ import Foundation
 import AppChain
 
 extension AppChainNetwork {
-    func getTransactionStatus(sentTransaction: LocationTxDetails) -> TransactionStateResult {
+    func getTransactionStatus(sentTransaction: LocationTxDetailsModel) -> TransactionStateResult {
         do {
             let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
             if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: sentTransaction.txHash) {

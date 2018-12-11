@@ -52,7 +52,7 @@ class EthereumTxSender {
 
         transaction.transaction.value = value  // Web3swift seems to be having bug setting value
         let txHash = try transaction.sendPromise(password: password).wait().hash
-        let sentTransaction = LocationTxDetails(tokenType: .ether, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
+        let sentTransaction = LocationTxDetailsModel(tokenType: .ether, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
         TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
         return txHash
     }
@@ -86,7 +86,7 @@ class EthereumTxSender {
         transaction.transactionOptions.gasPrice = .manual(gasPrice)
 
         let txHash = try transaction.sendPromise(password: password).wait().hash
-        let sentTransaction = LocationTxDetails(contractAddress: contractAddress, tokenType: .erc20, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
+        let sentTransaction = LocationTxDetailsModel(contractAddress: contractAddress, tokenType: .erc20, from: from.address, to: to, value: value, txFee: gasPrice * BigUInt(gasLimit), txHash: txHash)
         TransactionStatusManager.manager.insertTransaction(transaction: sentTransaction)
         return txHash
     }

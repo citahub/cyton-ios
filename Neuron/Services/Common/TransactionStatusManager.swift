@@ -22,7 +22,7 @@ protocol TransactionStatusManagerDelegate: NSObjectProtocol {
 
 class TransactionStatusManager: NSObject {
     static let manager = TransactionStatusManager()
-    private var transactions = [LocationTxDetails]()
+    private var transactions = [LocationTxDetailsModel]()
     private var taskThread = TaskThread()
     private var realm: Realm!
 
@@ -37,7 +37,7 @@ class TransactionStatusManager: NSObject {
         realm = try! Realm()
         taskThread.run()
         taskThread.perform {
-            self.transactions = self.realm.objects(LocationTxDetails.self).filter({ (transaction) -> Bool in
+            self.transactions = self.realm.objects(LocationTxDetailsModel.self).filter({ (transaction) -> Bool in
                 return transaction.status == .pending
             })
             self.checkSentTransactionStatus()
@@ -56,7 +56,7 @@ class TransactionStatusManager: NSObject {
     }
 
     // MARK: - Add transaction
-    func insertTransaction(transaction: LocationTxDetails) {
+    func insertTransaction(transaction: LocationTxDetailsModel) {
         configureTxStatusManager()
         taskThread.perform {
             try? self.realm.write {
@@ -78,7 +78,7 @@ class TransactionStatusManager: NSObject {
     // MARK: - 
     func getTransactions(walletAddress: String, tokenType: TokenType, tokenAddress: String, chainHosts: String) -> [TransactionDetails] {
         let ethereumNetwork = EthereumNetwork().host().absoluteString
-        return self.realm.objects(LocationTxDetails.self).filter({
+        return self.realm.objects(LocationTxDetailsModel.self).filter({
             $0.chainHosts == chainHosts &&
             $0.from == walletAddress &&
             $0.tokenType == tokenType &&
