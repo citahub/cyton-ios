@@ -33,7 +33,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasUsedLabel: UILabel!
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
-
+    @IBOutlet weak var statusWidthLayout: NSLayoutConstraint!
     var transaction: TransactionDetails! {
         didSet {
             if oldValue != nil && transaction != nil {
@@ -89,14 +89,14 @@ class TransactionDetailsViewController: UITableViewController {
             hashLabel.text = transaction.hash
             blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
-            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.success".localized() : "Transaction.Details.contractCreationPending"
+            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.pending".localized() : "Transaction.Details.contractCreationPending"
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
             hashLabel.text = transaction.hash
 
             hideItems.append((1, 2))    // block
         case .failure:
-            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.success".localized() :  "Transaction.Details.contractCreationFailure".localized()
+            statusLabel.text = transaction.to.count > 0 ? "TransactionStatus.failure".localized() :  "Transaction.Details.contractCreationFailure".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
 
@@ -104,6 +104,7 @@ class TransactionDetailsViewController: UITableViewController {
             hideItems.append((1, 0))    // hash
             hideItems.append((1, 2))    // block
         }
+        statusWidthLayout.constant = statusLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 20), limitedToNumberOfLines: 1).size.width + 24
         setupGasInfo()
     }
 

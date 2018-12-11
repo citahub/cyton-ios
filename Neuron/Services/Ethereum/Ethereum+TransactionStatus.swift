@@ -14,12 +14,16 @@ extension EthereumNetwork {
     func getTransactionStatus(localTxDetail: LocalTxDetailModel) -> TransactionStateResult {
         do {
             let transactionDetails = try EthereumNetwork().getWeb3().eth.getTransactionDetails(localTxDetail.txHash) // TODO: cache
+            if transactionDetails.blockNumber == 0 || transactionDetails.blockNumber == nil {
+                return .pending
+            }
             try? localTxDetail.realm?.write {
                 localTxDetail.blockNumber = Int(transactionDetails.blockNumber?.words.first ?? 0)
             }
+
             let blockNumber = try EthereumNetwork().getWeb3().eth.getBlockNumber()
             if blockNumber - BigUInt(localTxDetail.blockNumber) < 12 {
-                print("TxS \(blockNumber - BigUInt(localTxDetail.blockNumber))")
+                print("TxS \(blockNumber) - \(BigUInt(localTxDetail.blockNumber))")
                 return .pending
             }
 
