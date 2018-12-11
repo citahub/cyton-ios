@@ -188,7 +188,8 @@
 "Transaction.Send.title" = "%s Transfer";
 "Transaction.Send.transactionAvailableBalance" = "The amount you entered exceeds your account balance, are all transferred out?";
 "Transaction.Send.gasPriceSettingIsTooLow" = "Gas Price too low, Please set above the Recommend Gas Price";
-"Transaction.Send.gasLimitSettingIsTooLow" = "Please ensure that the Gas Limit is greater than \"%s(估算值)*4\"";
+"Transaction.Send.gasLimitSettingIsTooLow" = "Please ensure that the Gas Limit is greater than %s";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "Please ensure that the Quota Limit is greater than %@";
 "Transaction.Send.gasCostSetting" = "Advanced";
 "Transaction.Send.gasCost" = "Gas Price";
 "Transaction.Send.extenData" = "Data";

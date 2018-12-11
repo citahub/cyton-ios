@@ -56,7 +56,7 @@ class TransactionGasCostViewController: UITableViewController {
             return
         }
 
-        if paramBuilder.tokenType == .ether {
+        if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
@@ -69,11 +69,14 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-        } else if paramBuilder.tokenType == .erc20 {
-            let estimateGasLimit = paramBuilder.estimateGasLimit()
-            if paramBuilder.gasLimit < estimateGasLimit {
-                Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
+        } else if paramBuilder.tokenType == .appChain {
+            gasPriceTextField.isEnabled = false
+            if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
+                Toast.showToast(text: String(format: "Transaction.Send.quotaLimitSettingIsTooLow".localized(), "\(paramBuilder.estimateGasLimit())"))
+                return
             }
+        } else if paramBuilder.tokenType == .appChainErc20 {
+            gasPriceTextField.isEnabled = false
         }
 
         param.gasPrice = paramBuilder.gasPrice
@@ -120,6 +123,20 @@ extension TransactionGasCostViewController: UITextFieldDelegate {
 }
 
 extension TransactionGasCostViewController: UITextPasteDelegate {
+}
+
+extension TransactionGasCostViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 && (paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20) {
+            return 0.0
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.isHidden = cell.bounds.size.height == 0.0
+    }
 }
 
 extension TransactionGasCostViewController: UITextViewDelegate {

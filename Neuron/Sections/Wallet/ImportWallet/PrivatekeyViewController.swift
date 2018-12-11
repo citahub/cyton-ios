@@ -29,7 +29,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
         super.viewDidLoad()
         warningLabel.text = "Wallet.Import.inputPrivatekeyWarning".localized()
         privatekeyTextView.placeholder = "Wallet.Import.inputPrivatekey".localized() as NSString
-        walletNameTextField.text = "Wallet.Import.inputWalletName".localized()
+        walletNameTextField.placeholder = "Wallet.Import.inputWalletName".localized()
         passwordTextField.placeholder = "Wallet.Import.setPassword".localized()
         rePasswordTextField.placeholder = "Wallet.Import.repeatPassword".localized()
         passwordDescLabel.text = "Wallet.Import.setPasswordDesc".localized()

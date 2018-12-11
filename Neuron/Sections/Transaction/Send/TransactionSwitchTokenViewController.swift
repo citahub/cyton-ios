@@ -25,7 +25,7 @@ class TransactionSwitchTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmButton.setTitle("Common.confirm".localized(), for: .normal)
-        confirmButton.setTitle("Common.cancel".localized(), for: .normal)
+        cancelButton.setTitle("Common.cancel".localized(), for: .normal)
 
         tokens += AppModel.current.currentWallet!.selectedTokenList
     }
