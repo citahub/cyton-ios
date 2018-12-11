@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import RealmSwift
+
+protocol SwitchChainViewControllerDelegate: class {
+    func callSelectChain(chain: Chain)
+}
 
 class SwitchChainViewController: UIViewController {
     @IBOutlet weak var backgroundView: UIView!
@@ -14,11 +19,17 @@ class SwitchChainViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    let ethereumChainId = "ethereumERC20"// switch chain work only
+    let appChainId = "appChainNative"
+
+    var chains: [Chain] = []
+    var currentChain: Chain!
+    weak var delegate: SwitchChainViewControllerDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = "Assets.AddAssets.SwitchChainNetWorkTitle".localized()
-
+        chainModelList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -43,28 +54,74 @@ class SwitchChainViewController: UIViewController {
             self.dismiss(animated: false, completion: nil)
         })
     }
+
+    func chainModelList() {
+        let ethChain = Chain().defaultChain
+        let testChain = Chain(chainId: appChainId, chainName: "Assets.AddAssets.AppChainNativeCoin".localized(), httpProvider: "")
+        chains += [ethChain, testChain]
+        let realm = try! Realm()
+        let chainResult = realm.objects(ChainModel.self)
+        chainResult.forEach { (model) in
+            let chain = Chain(chainModel: model)
+            chains.append(chain)
+        }
+        tableView.reloadData()
+    }
 }
 
 extension SwitchChainViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return chains.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchChainTableViewCell") as! SwitchChainTableViewCell
-        cell.networkLabel.text = "q以太坊"
-        cell.selectedImageView.isHidden = false
+        cell.networkLabel.text = chains[indexPath.row].chainName
+        if currentChain.chainId == chains[indexPath.row].chainId {
+            cell.selectedImageView.isHidden = false
+        } else {
+            cell.selectedImageView.isHidden = true
+        }
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        currentChain = chains[indexPath.row]
+        delegate?.callSelectChain(chain: currentChain)
+        dismiss()
     }
 
 }
 
-
 class SwitchChainTableViewCell: UITableViewCell {
     @IBOutlet weak var networkLabel: UILabel!
     @IBOutlet weak var selectedImageView: UIImageView!
+}
+
+struct Chain {
+    var chainId = ""
+    var chainName = ""
+    var httpProvider = ""
+
+    // first index chain default ethereum chain
+    var defaultChain: Chain {
+        return Chain(chainId: SwitchChainViewController().ethereumChainId, chainName: EthereumNetwork().currentNetwork.chainName, httpProvider: EthereumNetwork().host().absoluteString)
+    }
+
+    init() {
+    }
+
+    init(chainId: String,
+         chainName: String,
+         httpProvider: String) {
+        self.chainId = chainId
+        self.chainName = chainName
+        self.httpProvider = httpProvider
+    }
+
+    init(chainModel: ChainModel) {
+        chainId = chainModel.chainId
+        chainName = chainModel.chainName
+        httpProvider = chainModel.httpProvider
+    }
 }
