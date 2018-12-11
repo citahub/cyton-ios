@@ -55,7 +55,7 @@ extension ThreadSafeObject where Self: Object {
 }
 
 // TODO: this should be in Models/Realm.
-class SentTransaction: Object, ThreadSafeObject {
+class LocationTxDetails: Object, ThreadSafeObject {
     var tokenType: TokenType {
         set {
             privateTokenType = newValue.rawValue
@@ -201,13 +201,13 @@ class SentTransaction: Object, ThreadSafeObject {
     }
 }
 
-extension SentTransaction {
-    public static func == (lhs: SentTransaction, rhs: SentTransaction) -> Bool {
+extension LocationTxDetails {
+    public static func == (lhs: LocationTxDetails, rhs: LocationTxDetails) -> Bool {
         return lhs.txHash == rhs.txHash
     }
 
     override func isEqual(_ object: Any?) -> Bool {
-        guard let object = object as? SentTransaction  else {
+        guard let object = object as? LocationTxDetails  else {
             return false
         }
         return object.txHash == txHash
@@ -215,7 +215,7 @@ extension SentTransaction {
 }
 
 extension TransactionDetails {
-    convenience init(sentTransaction: SentTransaction) {
+    convenience init(sentTransaction: LocationTxDetails) {
         self.init()
     }
 }
