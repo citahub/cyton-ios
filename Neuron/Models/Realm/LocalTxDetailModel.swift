@@ -58,7 +58,7 @@ class LocalTxDetailModel: Object {
         self.contractAddress = contractAddress
     }
 
-//    // AppChain
+    // AppChain
     required convenience init(tokenIdentifier: String, txHash: TxHash, from: String, to: String, value: BigUInt, gasPrice: BigUInt, gasLimit: BigUInt, blockNumber: BigUInt) {
         self.init()
         self.token = (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)
