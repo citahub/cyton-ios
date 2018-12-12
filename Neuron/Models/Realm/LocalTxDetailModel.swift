@@ -17,9 +17,9 @@ class LocalTxDetailModel: Object {
     @objc dynamic var blockNumber: Int = 0
     @objc dynamic var from = ""
     @objc dynamic var to = ""
-    @objc dynamic var valueText = "0"
-    @objc dynamic var gasPriceText = "0"
-    @objc dynamic var gasLimitText = "0"
+    @objc dynamic var value = "0"
+    @objc dynamic var gasPrice = "0"
+    @objc dynamic var gasLimit = "0"
     @objc dynamic var ethereumHost = ""
     @objc dynamic var contractAddress: String = ""
 
@@ -45,9 +45,9 @@ class LocalTxDetailModel: Object {
         blockNumber = Int((try? EthereumNetwork().getWeb3().eth.getTransactionDetails(txHash))?.blockNumber?.words.first ?? 0)
         self.from = from
         self.to = to
-        valueText = String(value)
-        gasPriceText = String(gasPrice)
-        gasLimitText = String(gasLimit)
+        self.value = String(value)
+        self.gasPrice = String(gasPrice)
+        self.gasLimit = String(gasLimit)
         status = .pending
         ethereumHost = EthereumNetwork().host().absoluteString
     }
@@ -66,9 +66,9 @@ class LocalTxDetailModel: Object {
         self.blockNumber = Int(blockNumber.words.first ?? 0)
         self.from = from
         self.to = to
-        valueText = String(value)
-        gasPriceText = String(gasPrice)
-        gasLimitText = String(gasLimit)
+        self.value = String(value)
+        self.gasPrice = String(gasPrice)
+        self.gasLimit = String(gasLimit)
         status = .pending
     }
 
@@ -82,7 +82,7 @@ class LocalTxDetailModel: Object {
         blockNumber: \(blockNumber)
         from: \(from)
         to: \(to)
-        value: \(valueText)
+        value: \(value)
         """
     }
 
@@ -106,9 +106,9 @@ class LocalTxDetailModel: Object {
         transaction.hash = txHash
         transaction.to = to
         transaction.from = from
-        transaction.value = BigUInt(valueText)!
-        transaction.gasPrice = BigUInt(gasPriceText) ?? 0
-        transaction.gasLimit = BigUInt(gasLimitText) ?? 0
+        transaction.value = BigUInt(value)!
+        transaction.gasPrice = BigUInt(gasPrice) ?? 0
+        transaction.gasLimit = BigUInt(gasLimit) ?? 0
         transaction.date = date
         transaction.blockNumber = BigUInt(blockNumber)
         transaction.status = status
