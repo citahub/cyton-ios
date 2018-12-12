@@ -58,7 +58,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         nextButton.setTitle("Common.next".localized(), for: .normal)
 
         if enableSwitchToken && tokenModel == nil {
-            tokenModel = AppModel.current.nativeTokenList.first
+            tokenModel = AppModel.current.currentWallet?.selectedTokenList.first
         }
 
         createParamBuilder()

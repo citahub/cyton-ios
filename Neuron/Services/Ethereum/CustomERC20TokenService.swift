@@ -47,7 +47,8 @@ struct CustomERC20TokenService {
         } else {
             throw CustomTokenError.wrongBalanceError
         }
-
+        tokenModel.address = contractAddress
+        tokenModel.isNativeToken = false
         guard !tokenModel.name.isEmpty, !tokenModel.symbol.isEmpty else {
             throw CustomTokenError.undefinedError
         }
