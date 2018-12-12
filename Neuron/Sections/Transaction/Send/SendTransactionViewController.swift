@@ -57,7 +57,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         gasCostTitleLabel.text = "Transaction.Send.gasFee".localized()
         nextButton.setTitle("Common.next".localized(), for: .normal)
 
-        if enableSwitchToken && token == nil {
+        if enableSwitchToken && tokenModel == nil {
             tokenModel = AppModel.current.currentWallet?.selectedTokenList.first
         }
 
