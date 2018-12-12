@@ -180,6 +180,10 @@
 "Transaction.Details.block" = "区块";
 "Transaction.Details.gasFee" = "矿工费用";
 "Transaction.Details.blockchainBrowserDesc" = "到区块链浏览器查看更多";
+"Transaction.Details.contractCreationPending" = "合约创建中";
+"Transaction.Details.contractCreationSuccess" = "合约创建成功";
+"Transaction.Details.contractCreationFailure" = "合约创建失败";
+
 
 // Send Transaction
 // ---------------------------------------------------------

@@ -504,6 +504,7 @@
                         <outlet property="receiptAddressLabel" destination="QGz-Zb-fCW" id="f3t-R0-cbo"/>
                         <outlet property="receiptAddressTitleLabel" destination="Sbi-bV-Lcn" id="UMl-Ms-WPS"/>
                         <outlet property="statusLabel" destination="GqG-yu-Pqe" id="hGS-ho-Scn"/>
+                        <outlet property="statusWidthLayout" destination="rIe-b5-8sA" id="n50-54-O6Y"/>
                         <outlet property="tokenIconView" destination="7xs-Xg-S8Q" id="c7Q-bH-unb"/>
                     </connections>
                 </tableViewController>

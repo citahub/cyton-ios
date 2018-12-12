@@ -12,6 +12,7 @@ import AppChain
 import Web3swift
 
 protocol TransactonSender {
+    var tokenModel: TokenModel! { get set }
     var paramBuilder: TransactionParamBuilder! { get set }
     func sendEthereumTransaction(password: String) throws -> TxHash
     func sendAppChainTransaction(password: String) throws -> TxHash
@@ -25,7 +26,7 @@ extension TransactonSender {
 
         if paramBuilder.tokenType == .ether {
             let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
-            return try sender.sendETH(
+            let txhash = try sender.sendETH(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
                 gasLimit: paramBuilder.gasLimit,
@@ -33,9 +34,21 @@ extension TransactonSender {
                 data: paramBuilder.data,
                 password: password
             )
+            TxStatusManager.manager.insertLocalTxDetail {
+                return LocalTxDetailModel(
+                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+                    txHash: txhash,
+                    from: self.paramBuilder.from,
+                    to: self.paramBuilder.to,
+                    value: self.paramBuilder.value,
+                    gasPrice: self.paramBuilder.gasPrice,
+                    gasLimit: BigUInt(self.paramBuilder.gasLimit)
+                )
+            }
+            return txhash
         } else {
             let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
-            return try sender.sendToken(
+            let txhash = try sender.sendToken(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
                 gasLimit: paramBuilder.gasLimit,
@@ -43,6 +56,19 @@ extension TransactonSender {
                 contractAddress: paramBuilder.contractAddress,
                 password: password
             )
+            TxStatusManager.manager.insertLocalTxDetail {
+                return LocalTxDetailModel(
+                    contractAddress: self.paramBuilder.contractAddress,
+                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+                    txHash: txhash,
+                    from: self.paramBuilder.from,
+                    to: self.paramBuilder.to,
+                    value: self.paramBuilder.value,
+                    gasPrice: self.paramBuilder.gasPrice,
+                    gasLimit: BigUInt(self.paramBuilder.gasLimit)
+                )
+            }
+            return txhash
         }
     }
 
@@ -62,7 +88,7 @@ extension TransactonSender {
                 walletManager: WalletManager.default,
                 from: paramBuilder.from
             )
-            return try sender.send(
+            let result = try sender.send(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
                 quota: paramBuilder.gasLimit,
@@ -70,6 +96,19 @@ extension TransactonSender {
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password
             )
+            TxStatusManager.manager.insertLocalTxDetail { () -> LocalTxDetailModel in
+                return LocalTxDetailModel(
+                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+                    txHash: result.0,
+                    from: self.paramBuilder.from,
+                    to: self.paramBuilder.to,
+                    value: self.paramBuilder.value,
+                    gasPrice: self.paramBuilder.gasPrice,
+                    gasLimit: BigUInt(self.paramBuilder.gasLimit),
+                    blockNumber: result.1
+                )
+            }
+            return result.0
         } else {
             return "" // TODO: AppChainErc20 not implemented yet.
         }

@@ -61,7 +61,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendTransaction" {
             let controller = segue.destination as! SendTransactionViewController
-            controller.token = presenter?.token.tokenModel
+            controller.tokenModel = presenter?.token.tokenModel
         }
     }
 

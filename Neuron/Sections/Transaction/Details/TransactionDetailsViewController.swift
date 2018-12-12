@@ -33,7 +33,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasUsedLabel: UILabel!
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
-
+    @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
     var transaction: TransactionDetails! {
         didSet {
             if oldValue != nil && transaction != nil {
@@ -83,20 +83,20 @@ class TransactionDetailsViewController: UITableViewController {
 
         switch transaction.status {
         case .success:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
             statusLabel.backgroundColor = UIColor(named: "secondary_color")?.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(named: "secondary_color")
             hashLabel.text = transaction.hash
             blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationPending".localized() : "TransactionStatus.pending".localized()
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
             hashLabel.text = transaction.hash
 
             hideItems.append((1, 2))    // block
         case .failure:
-            statusLabel.text = "TransactionStatus.success".localized()
+            statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationFailure".localized() : "TransactionStatus.failure".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
 
@@ -104,6 +104,7 @@ class TransactionDetailsViewController: UITableViewController {
             hideItems.append((1, 0))    // hash
             hideItems.append((1, 2))    // block
         }
+        statusWidthLayout.constant = statusLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 20), limitedToNumberOfLines: 1).size.width + 24
         setupGasInfo()
     }
 
@@ -121,13 +122,17 @@ class TransactionDetailsViewController: UITableViewController {
             } else if let appChainErc20 = transaction as? AppChainErc20TransactionDetails {
                 gasFeeLabel.text = appChainErc20.quotaUsed.toGweiText() + " \(transaction.token.symbol)"
             }
-            // TODO: Gas Limit
         case .failure:
             hideItems.append((1, 3)) // gas fee
             hideItems.append((1, 4)) // gas price
             hideItems.append((1, 5))    // gas used
         }
-        hideItems.append((1, 6)) // gas limit
+
+        if transaction.status == .pending {
+            gasLimitLabel.text = "\(transaction.gasLimit)"
+        } else {
+            hideItems.append((1, 6)) // gas limit
+        }
 
         if transaction.status == .success {
             if let ethereum = transaction as? EthereumTransactionDetails {
