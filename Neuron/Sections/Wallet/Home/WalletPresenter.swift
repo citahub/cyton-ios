@@ -60,8 +60,7 @@ class WalletPresenter {
         currentWallet = wallet
 
         var tokens = [Token]()
-        let selectTokens = wallet.selectedTokenList.map({ Token($0) })
-        tokens += selectTokens
+        tokens = wallet.selectedTokenList.map { Token($0) }
         tokens.forEach { (token) in
             token.walletAddress = self.currentWallet!.address
         }

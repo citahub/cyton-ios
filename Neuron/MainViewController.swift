@@ -12,14 +12,13 @@ import RealmSwift
 class MainViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
-
         delegate = self
 
         applyStyle()
-        addDefaultTokenMsgToRealm()
+        addDefaultTokenToRealm()
     }
 
-    func addDefaultTokenMsgToRealm() {
+    func addDefaultTokenToRealm() {
         guard let walletModel = AppModel.current.currentWallet else {
             return
         }

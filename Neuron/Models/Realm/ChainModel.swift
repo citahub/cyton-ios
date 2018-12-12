@@ -34,6 +34,6 @@ extension ChainModel {
 
 extension ChainModel {
     public static func == (lhs: ChainModel, rhs: ChainModel) -> Bool {
-        return lhs.chainId == rhs.chainId && lhs.chainName == rhs.chainName && lhs.httpProvider == rhs.httpProvider
+        return lhs.chainId == rhs.chainId && lhs.chainName == rhs.chainName
     }
 }

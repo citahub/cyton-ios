@@ -22,7 +22,7 @@ class TokenModel: Object, Decodable {
     @objc dynamic var isNativeToken = false
     @objc dynamic var chain: ChainModel?
 
-    @objc dynamic var balanceText = "0"
+    @objc dynamic private var balanceText = "0"
     var currencyAmount = "0"
 
     var balance: BigUInt {
@@ -49,7 +49,7 @@ class TokenModel: Object, Decodable {
 
     var type: TokenType {
         if isNativeToken {
-            if chain?.chainId == NativeChainId.ethMainnetChainId {
+            if chain == nil {
                 return .ether
             } else {
                 if address != "" {
@@ -97,7 +97,7 @@ extension TokenModel {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        return lhs.symbol == rhs.symbol && lhs.name == rhs.name && lhs.decimals == rhs.decimals
+        return lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
 
     override func isEqual(_ object: Any?) -> Bool {

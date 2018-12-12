@@ -49,11 +49,11 @@ struct EthereumNetwork {
             case .mainnet:
                 return "Ethereum Mainnet"
             case .rinkeby:
-                return "Ethereum Rinkebynet"
+                return "Ethereum Rinkeby"
             case .ropsten:
-                return "Ethereum Ropstennet"
+                return "Ethereum Ropsten"
             case .kovan:
-                return "Ethereum Kovannet"
+                return "Ethereum Kovan"
             }
         }
     }

@@ -103,11 +103,11 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         }
     }
 
-    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switchButton: UISwitch) {
+    func assetTableViewCell(_ assetTableViewCell: UITableViewCell, isSelected: Bool) {
         let index = tableView.indexPath(for: assetTableViewCell)!
         let tokenModel = tokenArray[index.row]
         try! realm.write {
-            if switchButton.isOn {
+            if isSelected {
                 if !selectArray.contains(where: { $0 == tokenModel }) {
                     selectArray.append(tokenModel)
                 }

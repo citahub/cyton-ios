@@ -155,8 +155,6 @@
 		898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */; };
 		898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */; };
 		898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0920B64F6000ECB465 /* AddAssetController.swift */; };
-		898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */; };
-		898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */; };
 		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
 		898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */; };
 		898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98220EA0F210059ECA3 /* TokenModel.swift */; };
@@ -382,8 +380,6 @@
 		898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAssetViewController.swift; sourceTree = "<group>"; };
 		898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
 		898A1A0920B64F6000ECB465 /* AddAssetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetController.swift; sourceTree = "<group>"; };
-		898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetTableViewCell.swift; sourceTree = "<group>"; };
-		898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAssetTableViewCell.xib; sourceTree = "<group>"; };
 		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletController.swift; sourceTree = "<group>"; };
 		898CA98220EA0F210059ECA3 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
@@ -1054,8 +1050,6 @@
 				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,
 				89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */,
 				89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */,
-				898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */,
-				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1233,7 +1227,6 @@
 				89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */,
 				891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
-				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */,
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
 				8978846321AD26690034AF4F /* neuron.js in Resources */,
@@ -1441,7 +1434,6 @@
 				6E8A838121B62E0A0051B3EB /* SendTransactionViewController.swift in Sources */,
 				6E3B2B6D219ED9240095257D /* Ethereum+TransactionDetails.swift in Sources */,
 				892E5B1821B61F0100298845 /* AppChain+ERC20.swift in Sources */,
-				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				6E9B947B21A4080300D67357 /* DesignableButton.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
 				6E3B2B6B219D938F0095257D /* LocalTxDetailModel.swift in Sources */,
