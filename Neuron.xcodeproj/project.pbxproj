@@ -131,6 +131,10 @@
 		8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19520C12FB70086848F /* ButtonTagView.swift */; };
 		8964A19820C15EA20086848F /* ButtonTagUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A19720C15EA20086848F /* ButtonTagUpView.swift */; };
 		896812CB20F726D000731C8C /* dappOpration.js in Resources */ = {isa = PBXBuildFile; fileRef = 896812CA20F726D000731C8C /* dappOpration.js */; };
+		896B32BB21BF865900C4DA7F /* AppChain+AddToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */; };
+		896B32BD21BFAD3B00C4DA7F /* ShowTokenPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896B32BC21BFAD3B00C4DA7F /* ShowTokenPageItem.swift */; };
+		896B32BF21BFAEBC00C4DA7F /* TokenMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 896B32BE21BFAEBC00C4DA7F /* TokenMessageView.xib */; };
+		896CEA9A21B91E4500B1A7D4 /* DefaultTokenAndChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */; };
 		896D042D20AE69C1002CFF6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D042C20AE69C1002CFF6A /* AppDelegate.swift */; };
 		896D043220AE69C1002CFF6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 896D043020AE69C1002CFF6A /* Main.storyboard */; };
 		896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 896D043320AE69C5002CFF6A /* Assets.xcassets */; };
@@ -150,13 +154,9 @@
 		898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */; };
 		898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */; };
 		898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0920B64F6000ECB465 /* AddAssetController.swift */; };
-		898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */; };
-		898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */; };
 		898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */; };
 		898A1A1B20B7A6BB00ECB465 /* CreateWalletController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */; };
 		898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898CA98220EA0F210059ECA3 /* TokenModel.swift */; };
-		898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */ = {isa = PBXBuildFile; fileRef = 898CA98920EA2E760059ECA3 /* tokens-eth.json */; };
-		899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */; };
 		899AD19B211011F300A8AC09 /* AppChainNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 899AD19A211011F300A8AC09 /* AppChainNetwork.swift */; };
 		89A196192175D9C800BD5FA4 /* DAppDataHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */; };
 		89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */; };
@@ -168,6 +168,7 @@
 		89B895B120F8B0CD00B9468B /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B895B020F8B0CD00B9468B /* BrowserViewController.swift */; };
 		89BA4B5621AE333E0084439B /* MnemonicValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA4B5521AE333E0084439B /* MnemonicValidator.swift */; };
 		89BA4B5821AE410F0084439B /* MnemonicValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BA4B5721AE410F0084439B /* MnemonicValidatorTests.swift */; };
+		89BD0ECA21B77FA2002D10BD /* ChainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BD0EC921B77FA2002D10BD /* ChainModel.swift */; };
 		89BEBE6B20EF82B6007D2705 /* EthereumNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */; };
 		89BEBE7220F12647007D2705 /* CommonWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BEBE7120F12647007D2705 /* CommonWebViewController.swift */; };
 		89C25C5A20BBA38300007EC1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89C25C5820BBA38300007EC1 /* SettingsViewController.swift */; };
@@ -191,6 +192,9 @@
 		89F7966F213BD5680064808A /* Assets.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 89F7966E213BD5680064808A /* Assets.storyboard */; };
 		89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */; };
 		89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */; };
+		89FA2E2321BE39DF001EA590 /* SelectChainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */; };
+		89FA2E2521BE39F3001EA590 /* ContractAddressTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */; };
+		89FA2E2721BE83AF001EA590 /* SwitchChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */; };
 		89FC542D20D4142D00D5D27C /* SkipBackupFiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */; };
 		89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */; };
 		89FE21DE20EDB70000A09302 /* SendTransactionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89FE21DD20EDB70000A09302 /* SendTransactionError.swift */; };
@@ -345,6 +349,10 @@
 		8964A19520C12FB70086848F /* ButtonTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagView.swift; sourceTree = "<group>"; };
 		8964A19720C15EA20086848F /* ButtonTagUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonTagUpView.swift; sourceTree = "<group>"; };
 		896812CA20F726D000731C8C /* dappOpration.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dappOpration.js; sourceTree = "<group>"; };
+		896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppChain+AddToken.swift"; sourceTree = "<group>"; };
+		896B32BC21BFAD3B00C4DA7F /* ShowTokenPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTokenPageItem.swift; sourceTree = "<group>"; };
+		896B32BE21BFAEBC00C4DA7F /* TokenMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TokenMessageView.xib; sourceTree = "<group>"; };
+		896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTokenAndChain.swift; sourceTree = "<group>"; };
 		896D042920AE69C1002CFF6A /* Neuron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Neuron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		896D042C20AE69C1002CFF6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		896D043120AE69C1002CFF6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -370,13 +378,9 @@
 		898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAssetViewController.swift; sourceTree = "<group>"; };
 		898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetTableViewCell.swift; sourceTree = "<group>"; };
 		898A1A0920B64F6000ECB465 /* AddAssetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetController.swift; sourceTree = "<group>"; };
-		898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAssetTableViewCell.swift; sourceTree = "<group>"; };
-		898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddAssetTableViewCell.xib; sourceTree = "<group>"; };
 		898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordController.swift; sourceTree = "<group>"; };
 		898A1A1920B7A6BB00ECB465 /* CreateWalletController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateWalletController.swift; sourceTree = "<group>"; };
 		898CA98220EA0F210059ECA3 /* TokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenModel.swift; sourceTree = "<group>"; };
-		898CA98920EA2E760059ECA3 /* tokens-eth.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "tokens-eth.json"; sourceTree = "<group>"; };
-		899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NervosNativeTokenService.swift; sourceTree = "<group>"; };
 		899AD19A211011F300A8AC09 /* AppChainNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainNetwork.swift; sourceTree = "<group>"; };
 		89A196182175D9C800BD5FA4 /* DAppDataHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDataHandle.swift; sourceTree = "<group>"; };
 		89A1961A2175E7F300BD5FA4 /* DAppCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppCommand.swift; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 		89B895B020F8B0CD00B9468B /* BrowserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
 		89BA4B5521AE333E0084439B /* MnemonicValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicValidator.swift; sourceTree = "<group>"; };
 		89BA4B5721AE410F0084439B /* MnemonicValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicValidatorTests.swift; sourceTree = "<group>"; };
+		89BD0EC921B77FA2002D10BD /* ChainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainModel.swift; sourceTree = "<group>"; };
 		89BEBE6A20EF82B6007D2705 /* EthereumNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumNetwork.swift; sourceTree = "<group>"; };
 		89BEBE7120F12647007D2705 /* CommonWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonWebViewController.swift; sourceTree = "<group>"; };
 		89C25C5820BBA38300007EC1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
@@ -412,6 +417,9 @@
 		89F7966E213BD5680064808A /* Assets.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Assets.storyboard; sourceTree = "<group>"; };
 		89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportKeystoreController.swift; sourceTree = "<group>"; };
 		89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportKeystoreController.xib; sourceTree = "<group>"; };
+		89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectChainTableViewCell.swift; sourceTree = "<group>"; };
+		89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractAddressTableViewCell.swift; sourceTree = "<group>"; };
+		89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchChainViewController.swift; sourceTree = "<group>"; };
 		89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SkipBackupFiles.swift; sourceTree = "<group>"; };
 		89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomERC20TokenService.swift; sourceTree = "<group>"; };
 		89FE21DD20EDB70000A09302 /* SendTransactionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendTransactionError.swift; sourceTree = "<group>"; };
@@ -505,6 +513,8 @@
 			children = (
 				1A60079621A274D000C7B712 /* SendTransactionSummaryView.xib */,
 				1A60079B21A28B8C00C7B712 /* TxSummaryPageItem.swift */,
+				896B32BE21BFAEBC00C4DA7F /* TokenMessageView.xib */,
+				896B32BC21BFAD3B00C4DA7F /* ShowTokenPageItem.swift */,
 				1A1E1B8A21A3CF3A00C24D10 /* SignMessagePageItem.swift */,
 				1A60079D21A28C1400C7B712 /* PasswordPageItem.swift */,
 				892F79B821A547340035B08B /* ModifyWalletNamePageItem.swift */,
@@ -535,10 +545,10 @@
 			children = (
 				899AD19A211011F300A8AC09 /* AppChainNetwork.swift */,
 				1A69465D21916C3D000093A2 /* AppChainTxSender.swift */,
-				899AD19821100F2B00A8AC09 /* NervosNativeTokenService.swift */,
 				6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */,
 				6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */,
 				892E5B1721B61F0000298845 /* AppChain+ERC20.swift */,
+				896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */,
 			);
 			path = AppChain;
 			sourceTree = "<group>";
@@ -593,6 +603,7 @@
 				8905660620D0AC120041D4B4 /* AppModel.swift */,
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
+				89BD0EC921B77FA2002D10BD /* ChainModel.swift */,
 				6E3B2B6A219D938F0095257D /* LocalTxDetailModel.swift */,
 			);
 			path = Realm;
@@ -806,7 +817,6 @@
 				896812CA20F726D000731C8C /* dappOpration.js */,
 				8978846221AD26690034AF4F /* neuron.js */,
 				6E83CB92216F581800029324 /* ProductAgreement.txt */,
-				898CA98920EA2E760059ECA3 /* tokens-eth.json */,
 				89C614562140D4C500DC3DF4 /* currency.plist */,
 			);
 			path = Resource;
@@ -1010,6 +1020,7 @@
 				89F7966E213BD5680064808A /* Assets.storyboard */,
 				898A1A0920B64F6000ECB465 /* AddAssetController.swift */,
 				898A1A0120B5717A00ECB465 /* ManageAssetViewController.swift */,
+				89FA2E2621BE83AF001EA590 /* SwitchChainViewController.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -1034,8 +1045,8 @@
 				89F7966C213A6B680064808A /* ERC721TableViewCell.swift */,
 				89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */,
 				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,
-				898A1A0D20B6539800ECB465 /* AddAssetTableViewCell.swift */,
-				898A1A0E20B6539800ECB465 /* AddAssetTableViewCell.xib */,
+				89FA2E2221BE39DF001EA590 /* SelectChainTableViewCell.swift */,
+				89FA2E2421BE39F3001EA590 /* ContractAddressTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1058,6 +1069,7 @@
 				6E3B2B74219EDE200095257D /* TxStatusManager.swift */,
 				6E8BFC3621B00948004752CC /* TokenPriceLoader.swift */,
 				89FE21DD20EDB70000A09302 /* SendTransactionError.swift */,
+				896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */,
 				6E878DD121BF944000526B6A /* TaskThread.swift */,
 			);
 			path = Common;
@@ -1212,10 +1224,8 @@
 				89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */,
 				891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */,
 				896D043720AE69C5002CFF6A /* LaunchScreen.storyboard in Resources */,
-				898A1A1020B6539800ECB465 /* AddAssetTableViewCell.xib in Resources */,
 				1A60079721A274D000C7B712 /* SendTransactionSummaryView.xib in Resources */,
 				6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */,
-				898CA98A20EA2E770059ECA3 /* tokens-eth.json in Resources */,
 				8978846321AD26690034AF4F /* neuron.js in Resources */,
 				1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */,
 				6E83CB8F216F573100029324 /* Guide.storyboard in Resources */,
@@ -1231,6 +1241,7 @@
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
 				1A207DD72137D8F5008DC306 /* TabbedButtonsView.xib in Resources */,
 				89B01A24216DAC5A00BFAAF4 /* DAppBrowser.storyboard in Resources */,
+				896B32BF21BFAEBC00C4DA7F /* TokenMessageView.xib in Resources */,
 				1A9204E421634212004B54DC /* ToastActivityView.xib in Resources */,
 				896812CB20F726D000731C8C /* dappOpration.js in Resources */,
 				89C614572140D4C500DC3DF4 /* currency.plist in Resources */,
@@ -1406,6 +1417,7 @@
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,
 				8928C24320AE908300C3103E /* MainViewController.swift in Sources */,
 				8964A19620C12FB70086848F /* ButtonTagView.swift in Sources */,
+				89BD0ECA21B77FA2002D10BD /* ChainModel.swift in Sources */,
 				6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */,
 				1AEBF3E4219BA1E700653FF5 /* BigUInt+Extension.swift in Sources */,
 				1A6007A221A2AA9A00C7B712 /* PageItemAppearance.swift in Sources */,
@@ -1418,7 +1430,6 @@
 				6E8A838121B62E0A0051B3EB /* SendTransactionViewController.swift in Sources */,
 				6E3B2B6D219ED9240095257D /* Ethereum+TransactionDetails.swift in Sources */,
 				892E5B1821B61F0100298845 /* AppChain+ERC20.swift in Sources */,
-				898A1A0F20B6539800ECB465 /* AddAssetTableViewCell.swift in Sources */,
 				6E9B947B21A4080300D67357 /* DesignableButton.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
 				6E3B2B6B219D938F0095257D /* LocalTxDetailModel.swift in Sources */,
@@ -1454,13 +1465,16 @@
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
+				896B32BB21BF865900C4DA7F /* AppChain+AddToken.swift in Sources */,
 				8913437120C78F1000A17AEF /* WalletModel.swift in Sources */,
 				6E9D7CBE216B386F0044176D /* AuthenticationViewController.swift in Sources */,
 				6E878DD221BF944000526B6A /* TaskThread.swift in Sources */,
 				6E9D7CC5216B490D0044176D /* AuthDeviceViewController.swift in Sources */,
+				89FA2E2321BE39DF001EA590 /* SelectChainTableViewCell.swift in Sources */,
 				89F7966D213A6B680064808A /* ERC721TableViewCell.swift in Sources */,
 				89422FE821A7F97300DD8744 /* MyDAppViewController.swift in Sources */,
 				8964A19320C115A70086848F /* VerifyMnemonicViewController.swift in Sources */,
+				89FA2E2721BE83AF001EA590 /* SwitchChainViewController.swift in Sources */,
 				898A1A0B20B64F6000ECB465 /* AddAssetController.swift in Sources */,
 				89F9E73E20DEBDE8009E68D4 /* ExportKeystoreController.swift in Sources */,
 				89D935252139363A002FAEEC /* TokenTableViewCell.swift in Sources */,
@@ -1477,6 +1491,7 @@
 				6E90D06921704C1D00B98363 /* SensorsAnalytics.swift in Sources */,
 				6E8BFC3121AFDBB5004752CC /* EthereumBalanceLoader.swift in Sources */,
 				6E96B3E521B4E38C000F935B /* DAppPermissionsMessageHandler.swift in Sources */,
+				896CEA9A21B91E4500B1A7D4 /* DefaultTokenAndChain.swift in Sources */,
 				6E8A838721B62E0A0051B3EB /* TransactonSender.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
@@ -1496,7 +1511,6 @@
 				8964A18720BFE6860086848F /* ImportWalletController.swift in Sources */,
 				8989E2CF21883400008A1BDE /* SwitchNetworkViewController.swift in Sources */,
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
-				899AD19921100F2B00A8AC09 /* NervosNativeTokenService.swift in Sources */,
 				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
 				6E8A838B21B8C4780051B3EB /* TransactionDetailsViewController.swift in Sources */,
 				6E3B2B6F219ED9340095257D /* Ethereum+TransactionStatus.swift in Sources */,
@@ -1510,6 +1524,7 @@
 				89AB35CA213D113E00A2BF48 /* WalletTableViewCell.swift in Sources */,
 				89422FE621A7F92300DD8744 /* DAppModel.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
+				89FA2E2521BE39F3001EA590 /* ContractAddressTableViewCell.swift in Sources */,
 				1A6007A021A29C2C00C7B712 /* SuccessPageItem.swift in Sources */,
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
@@ -1530,6 +1545,7 @@
 				89D84CED2148C056006B0287 /* NFTFooterReusableView.swift in Sources */,
 				1A092245213580C900CAED5D /* NFTViewController.swift in Sources */,
 				89FE21DE20EDB70000A09302 /* SendTransactionError.swift in Sources */,
+				896B32BD21BFAD3B00C4DA7F /* ShowTokenPageItem.swift in Sources */,
 				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,
 				6E3B2B75219EDE200095257D /* TxStatusManager.swift in Sources */,
 				6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */,

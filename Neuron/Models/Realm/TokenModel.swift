@@ -16,15 +16,13 @@ class TokenModel: Object, Decodable {
     @objc dynamic var address = ""
     @objc dynamic var decimals = 18
     @objc dynamic var symbol = ""
-    @objc dynamic var chainName: String? = ""
-    @objc dynamic var chainId = ""
-    @objc dynamic var chainHosts = "" // manifest.json chainSet.values.first
     @objc dynamic var identifier = UUID().uuidString
 
     // defaults false, eth and RPC "getMateData" is true.
-    @objc dynamic var isNativeToken = false // TODO: AppChain ERC20 should not be marked as native token.
+    @objc dynamic var isNativeToken = false
+    @objc dynamic var chain: ChainModel?
 
-    @objc dynamic var balanceText = "0"
+    @objc dynamic private var balanceText = "0"
     var currencyAmount = "0"
 
     var balance: BigUInt {
@@ -51,7 +49,7 @@ class TokenModel: Object, Decodable {
 
     var type: TokenType {
         if isNativeToken {
-            if chainId == NativeChainId.ethMainnetChainId {
+            if chain == nil {
                 return .ether
             } else {
                 if address != "" {
@@ -88,10 +86,8 @@ class TokenModel: Object, Decodable {
 
 extension TokenModel {
     static func identifier(for tokenModel: TokenModel) -> String? {
-        let appModel = AppModel.current
-        var tokenList: [TokenModel] = []
-        tokenList += appModel.nativeTokenList
-        tokenList += appModel.extraTokenList
+        let realm = try! Realm()
+        let tokenList = realm.objects(TokenModel.self)
         if let model = tokenList.first(where: { $0 == tokenModel }) {
             return model.identifier
         }
@@ -101,7 +97,7 @@ extension TokenModel {
 
 extension TokenModel {
     public static func == (lhs: TokenModel, rhs: TokenModel) -> Bool {
-        return lhs.chainId == rhs.chainId && lhs.symbol == rhs.symbol && lhs.name == rhs.name
+        return lhs.symbol == rhs.symbol && lhs.name == rhs.name
     }
 
     override func isEqual(_ object: Any?) -> Bool {

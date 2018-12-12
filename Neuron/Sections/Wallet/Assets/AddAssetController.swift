@@ -8,159 +8,200 @@
 
 import UIKit
 import RealmSwift
+import BLTNBoard
 
-class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddAssetTableViewCellDelegate, NEPickerViewDelegate, QRCodeViewControllerDelegate {
-    let titleArray = ["区块链", "合约地址", "代币名称", "代币缩写", "小数位数"]
-    let placeholderArray = ["", "合约地址", "代币名称", "代币缩写", "小数位数"]
-
-    let nView =  NEPickerView.init()
+class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tokenArray: [TokenModel] = []
-    @IBOutlet weak var addButton: UIButton!
-    @IBOutlet weak var aTable: UITableView!
-    var tokenModel = TokenModel()
+    @IBOutlet private weak var searchButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var listSettingButton: DesignableButton!
+    private lazy var showTokenPageItem: ShowTokenPageItem = {
+        return ShowTokenPageItem.create()
+    }()
+    private lazy var bulletinManager: BLTNItemManager = {
+        return BLTNItemManager(rootItem: showTokenPageItem)
+    }()
+
+    var chain = Chain()
+    var inputText = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "添加资产"
-        view.backgroundColor = UIColor(hex: "f5f5f5")
-        aTable.delegate = self
-        aTable.dataSource = self
-        aTable.register(UINib.init(nibName: "AddAssetTableViewCell", bundle: nil), forCellReuseIdentifier: "ID")
-
-        aTable.tableHeaderView = UIView.init(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: CGFloat.leastNormalMagnitude))
-
+        title = "Assets.AddAssets.Title".localized()
+        searchButton.setTitle("Assets.AddAssets.Search".localized(), for: .normal)
+        listSettingButton.setTitle("Assets.AddAssets.ListSettings".localized(), for: .normal)
+        chain = Chain().defaultChain
     }
 
-    @IBAction func didClickAddButton(_ sender: UIButton) {
-        Toast.hideHUD()
-        if tokenModel.address.count != 40 && tokenModel.address.count != 42 {
-            Toast.showToast(text: "请输入正确的合约地址")
-            return
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "switchChain" {
+            let switchChainViewController = segue.destination as! SwitchChainViewController
+            switchChainViewController.currentChain = chain
+            switchChainViewController.delegate = self
         }
-        if tokenModel.name.isEmpty || tokenModel.symbol.isEmpty || String(tokenModel.decimals).isEmpty {
-            Toast.showToast(text: "Token信息不全，请核对合约地址是否正确")
-            return
-        }
-        if tokenArray.contains(where: { $0.address.lowercased() == tokenModel.address.lowercased() }) {
-            Toast.showToast(text: "不可重复添加")
-            return
-        }
-        let appModel = AppModel.current
-        tokenModel.address = tokenModel.address.addHexPrefix()
-        tokenModel.isNativeToken = false
-        if let id = TokenModel.identifier(for: tokenModel) {
-            tokenModel.identifier = id
-        }
-        let realm = try! Realm()
-        try? realm.write {
-            realm.add(tokenModel, update: true)
-            appModel.extraTokenList.append(tokenModel)
-            appModel.currentWallet?.selectTokenList.append(tokenModel)
-        }
-        navigationController?.popViewController(animated: true)
     }
-    //tableview代理
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+
+    @IBAction func searchTokenButton(_ sender: UIButton) {
+        if inputText.count == 0 {
+            Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
+            return
+        }
+        if chain.chainId == Chain().defaultChain.chainId {
+            ethereumERC20Token(contractAddress: inputText)
+        } else if chain.chainId == SwitchChainViewController().appChainId {
+            appchainNativeToken(nodeAddress: inputText)
+        } else {
+            appchainERC20Token(chain: chain, contractAddress: inputText)
+        }
+    }
+
+    func showTokenMessage(_ chainModel: ChainModel?, tokenModel: TokenModel) {
+        showTokenPageItem.actionHandler = { item in
+            item.manager?.displayActivityIndicator()
+            self.save(tokenModel: tokenModel, chainModel: chainModel)
+        }
+        showTokenPageItem.update(tokenModel: tokenModel)
+        bulletinManager.showBulletin(above: self)
+    }
+
+    func save(tokenModel: TokenModel, chainModel: ChainModel?) {
+        if TokenModel.identifier(for: tokenModel) != nil {
+            bulletinManager.dismissBulletin()
+            Toast.showToast(text: "Assets.AddAssets.AlreadyExist".localized())
+        }
+        do {
+            let wallet = AppModel.current.currentWallet!
+            let realm = try Realm()
+            try realm.write {
+                realm.add(tokenModel, update: true)
+                if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
+                    wallet.selectedTokenList.append(tokenModel)
+                }
+                if !wallet.tokenModelList.contains(where: { $0 == tokenModel }) {
+                    wallet.tokenModelList.append(tokenModel)
+                }
+                if chainModel != nil {
+                    realm.add(chainModel!, update: true)
+                    if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
+                        wallet.chainModelList.append(chainModel!)
+                    }
+                }
+            }
+            let successPageItem = SuccessPageItem.create(title: "DApp.Contract.TransactionSend".localized())
+            successPageItem.actionHandler = { item in
+                self.bulletinManager.dismissBulletin()
+                Toast.showToast(text: "Assets.AddAssets.StoreSuccess".localized())
+                self.navigationController?.popViewController(animated: true)
+            }
+            bulletinManager.push(item: successPageItem)
+        } catch {
+            bulletinManager.dismissBulletin()
+            Toast.showToast(text: "Assets.AddAssets.StoreFailed".localized())
+        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ID", for: indexPath) as! AddAssetTableViewCell
-        cell.delegate = self
-        cell.indexP = indexPath as NSIndexPath
-        cell.headLabel.text = titleArray[indexPath.row]
-        cell.placeHolderStr = placeholderArray[indexPath.row]
-        cell.selectRow = indexPath.row
         if indexPath.row == 0 {
-            cell.rightTextField.text = "以太坊"
+            let cell = tableView.dequeueReusableCell(withIdentifier: "selectChainTableViewCell") as! SelectChainTableViewCell
+            cell.detailTextLabel?.text = chain.chainName
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "contractAddressTableViewCell") as! ContractAddressTableViewCell
+            cell.delegate = self
+            cell.contractAddressTextField.text = inputText
+            if chain.chainId == SwitchChainViewController().appChainId {
+                cell.contractAddressTextField.placeholder = "Assets.AddAssets.NodeAddressPlaceHolder".localized()
+                cell.contractAddressLabel.text = "Assets.AddAssets.NodeAddress".localized()
+            } else {
+                cell.contractAddressLabel.text = "Assets.AddAssets.ContractAddress".localized()
+                cell.contractAddressTextField.placeholder = "Assets.AddAssets.ContractAddressPlaceHolder".localized()
+            }
+            return cell
         }
-        cell.selectionStyle = .none
-
-        switch indexPath.row {
-        case 0:
-            cell.rightTextField.text = "以太坊"
-        case 1:
-            cell.rightTextField.text = tokenModel.address
-        case 2:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.name
-        case 3:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.symbol
-        case 4:
-            cell.isEdit = false
-            cell.rightTextField.text = tokenModel.decimals == 0 ? "0" : String(tokenModel.decimals)
-        default:
-            break
-        }
-        return cell
     }
 
-    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        return nil
+    @IBAction func clickSelectChainButton(_ sender: UIButton) {
+
     }
 
-    func didClickSelectCoinBtn() {
-        nView.frame = CGRect(origin: .zero, size: UIScreen.main.bounds.size)
-        nView.delegate = self
-        nView.dataArray = [["name": "以太坊eth", "id": "100"], ["name": "test-chain", "id": "101"]]
-        nView.selectDict = ["name": "以太坊eth", "id": "100"]
-        UIApplication.shared.keyWindow?.addSubview(nView)
-    }
-
-    func callBackDictionnary(dict: [String: String]) {
-    }
-
-    func didClickQRCodeBtn() {
+    @IBAction func clickQRCodeButton(_ sender: UIButton) {
         let qrCodeViewController = QRCodeViewController()
         qrCodeViewController.delegate = self
         self.navigationController?.pushViewController(qrCodeViewController, animated: true)
     }
 
-    func didBackQRCodeMessage(codeResult: String) {
-        tokenModel.address = ""
-        let finalText = codeResult.replacingOccurrences(of: " ", with: "")
-        tokenModel.address = finalText
-        if finalText.count == 40 || finalText.count == 42 {
-            didGetERC20Token(token: finalText)
-        }
-        aTable.reloadData()
-    }
-
-    func didGetTextFieldTextWithIndexAndText(text: String, index: NSIndexPath) {
-        let finalText = text.replacingOccurrences(of: " ", with: "")
-        tokenModel.address = finalText
-        if index.row == 1 {
-            if finalText.count == 40 || finalText.count == 42 {
-                didGetERC20Token(token: finalText)
-            } else {
-            }
-        }
-    }
-
-    func didGetERC20Token(token: String) {
-        tokenModel.name = ""
-        tokenModel.symbol = ""
-        tokenModel.decimals = 0
-
+    func ethereumERC20Token(contractAddress: String) {
         let walletAddress = AppModel.current.currentWallet!.address
         Toast.showHUD()
-        DispatchQueue.global().async {
-            let result = try? CustomERC20TokenService.searchTokenData(contractAddress: token, walletAddress: walletAddress)
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            let result = try? CustomERC20TokenService.searchTokenData(contractAddress: contractAddress, walletAddress: walletAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
-                if let tokenModel = result {
-                    self.tokenModel = tokenModel
-                    self.tokenModel.address = token
+                if let result = result {
+                    self.showTokenMessage(nil, tokenModel: result)
                 } else {
-                    Toast.showToast(text: "未查询到代币信息，请核对合约地址是否正确")
+                    Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
                 }
-                self.aTable.reloadData()
+                self.tableView.reloadData()
             }
         }
+    }
+
+    func appchainNativeToken(nodeAddress: String) {
+        Toast.showHUD()
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            let (tokenModel, chainModel) = AddAppChainToken.appChainNativeToken(nodeAddress: nodeAddress)
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+                if tokenModel != nil && chainModel != nil {
+                    self.showTokenMessage(chainModel!, tokenModel: tokenModel!)
+                } else {
+                    Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
+                }
+            }
+        }
+    }
+
+    func appchainERC20Token(chain: Chain, contractAddress: String) {
+        Toast.showHUD()
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
+            let tokenModel = AddAppChainToken.appChainERC20Token(chain: chain, contractAddress: contractAddress)
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+                if tokenModel != nil {
+                    self.showTokenMessage(nil, tokenModel: tokenModel!)
+                } else {
+                    Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
+                }
+            }
+        }
+    }
+}
+
+extension AddAssetController: QRCodeViewControllerDelegate {
+    func didBackQRCodeMessage(codeResult: String) {
+        inputText = codeResult.trimmingCharacters(in: .whitespaces)
+        tableView.reloadData()
+    }
+}
+
+extension AddAssetController: ContractAddressTableViewCellDelegate {
+    func textFieldInput(text: String) {
+        let finalText = text.trimmingCharacters(in: .whitespaces)
+        inputText = finalText
+    }
+}
+
+extension AddAssetController: SwitchChainViewControllerDelegate {
+    func callSelectChain(chain: Chain) {
+        self.chain = chain
+        tableView.reloadData()
     }
 }

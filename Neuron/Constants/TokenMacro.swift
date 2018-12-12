@@ -8,12 +8,6 @@
 
 import Foundation
 
-// TODO: do we really need this?
-struct NativeChainId {
-    /// ETH mainnet chainId defined for Neuron
-    static let ethMainnetChainId = "-1"
-}
-
 struct NativeDecimals {
     /// ETH and AppChain token decimals, default to 18
     static let nativeTokenDecimals = 18

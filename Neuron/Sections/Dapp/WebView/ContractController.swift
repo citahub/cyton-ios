@@ -85,14 +85,14 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     func getTokenModel() {
-        let appModel = AppModel.current
-        appModel.nativeTokenList.forEach { (tokenModel) in
+        let wallet = AppModel.current.currentWallet
+        wallet?.tokenModelList.forEach { (tokenModel) in
             if dappCommonModel.chainType == "AppChain" {
-                if dappCommonModel.appChain!.chainId == Int(tokenModel.chainId) {
+                if dappCommonModel.appChain!.chainId == Int(tokenModel.chain!.chainId) && tokenModel.isNativeToken {
                     self.tokenModel = tokenModel
                 }
             } else {
-                if dappCommonModel.eth!.chainId == Int(tokenModel.chainId) {
+                if dappCommonModel.eth!.chainId == -1 && tokenModel.isNativeToken {
                     self.tokenModel = tokenModel
                 }
             }
@@ -295,7 +295,7 @@ private extension ContractController {
 
     func track() {
         SensorsAnalytics.Track.transaction(
-            chainType: tokenModel.chainId,
+            chainType: tokenModel.chain?.chainId ?? "",
             currencyType: tokenModel.symbol,
             currencyNumber: Double(value) ?? 0.0,
             receiveAddress: dappCommonModel.appChain?.to ?? "",

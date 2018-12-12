@@ -43,6 +43,6 @@ class AppChainERC20 {
         let data = string.data(using: String.Encoding.utf8)!
         let sha3 = data.sha3(.keccak256)
         let hexString = sha3.toHexString()
-        return String(hexString.prefix(7))
+        return String(hexString.prefix(8))
     }
 }
