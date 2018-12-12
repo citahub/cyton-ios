@@ -180,6 +180,9 @@
 "Transaction.Details.block" = "Block";
 "Transaction.Details.gasFee" = "Miner Fee";
 "Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
+"Transaction.Details.contractCreationPending" = "合约创建中";
+"Transaction.Details.contractCreationSuccess" = "合约创建成功";
+"Transaction.Details.contractCreationFailure" = "合约创建失败";
 
 // Send Transaction
 // ---------------------------------------------------------

@@ -28,6 +28,8 @@ class TransactionDetails: Codable {
     var blockNumber: BigUInt = 0
     var status: TransactionState = .success
     var token: Token!
+    var gasPrice: BigUInt = 0
+    var gasLimit: BigUInt = 0
 
     enum CodingKeys: String, CodingKey {
         case hash
@@ -71,5 +73,11 @@ class TransactionDetails: Codable {
         try container.encode("0x\(String(value, radix: 16))", forKey: .value)
         try container.encode(date.timeIntervalSince1970, forKey: .timestamp)
         try container.encode("0x\(String(blockNumber, radix: 16))", forKey: .blockNumber)
+    }
+}
+
+extension TransactionDetails {
+    var isContractCreation: Bool {
+        return to.count == 0
     }
 }

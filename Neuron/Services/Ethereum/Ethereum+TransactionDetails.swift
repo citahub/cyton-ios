@@ -17,7 +17,6 @@ class EthereumTransactionDetails: TransactionDetails {
     var blockHash: String = ""
     var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
-    var gasPrice: BigUInt = 0
     var input: String = ""
     var contractAddress: String = ""
     var cumulativeGasUsed: BigUInt = 0
@@ -104,7 +103,6 @@ class Erc20TransactionDetails: TransactionDetails {
     var tokenDecimal: String = ""
     var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
-    var gasPrice: BigUInt = 0
     var gasUsed: BigUInt = 0
     var cumulativeGasUsed: BigUInt = 0
     var input: String = ""
