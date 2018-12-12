@@ -136,7 +136,6 @@ class TransactionHistoryPresenter: NSObject {
     }
 }
 
-
 extension TransactionHistoryPresenter {
     private func observeTxStatus() {
         NotificationCenter.default.addObserver(self, selector: #selector(didAddLocationTxDetails(notification:)), name: TxStatusManager.didAddLocationTxDetails, object: nil)
@@ -147,9 +146,7 @@ extension TransactionHistoryPresenter {
         guard let transaction = notification.userInfo![TxStatusManager.transactionKey] as? TransactionDetails else { return }
         guard transaction.token == token else { return }
         transactions.insert(transaction, at: 0)
-        DispatchQueue.main.async {
-            self.delegate?.didLoadTransactions(transaction: self.transactions, insertions: [0], error: nil)
-        }
+        delegate?.didLoadTransactions(transaction: transactions, insertions: [0], error: nil)
     }
 
     @objc func didUpdateTxStatus(notification: Notification) {
@@ -158,8 +155,7 @@ extension TransactionHistoryPresenter {
         guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }
         transactions.remove(at: idx)
         transactions.insert(transaction, at: idx)
-        DispatchQueue.main.async {
-            self.delegate?.updateTransactions(transaction: self.transactions, updates: [idx], error: nil)
-        }
+        delegate?.updateTransactions(transaction: transactions, updates: [idx], error: nil)
     }
 }
+

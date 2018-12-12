@@ -50,7 +50,9 @@ class TxStatusManager: NSObject {
                 self.realm.add(localTxDetail)
             }
             self.localTxDetailList.append(localTxDetail)
-            NotificationCenter.default.post(name: TxStatusManager.didAddLocationTxDetails, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: TxStatusManager.didAddLocationTxDetails, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+            }
             if self.localTxDetailList.count == 1 {
                 self.checkSentTransactionStatus()
             }
@@ -106,7 +108,9 @@ class TxStatusManager: NSObject {
                 try? self.realm.write {
                     localTxDetail.status = .failure
                 }
-                NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+                }
             case .success(let transaction):
                 self.localTxDetailList.removeAll { $0 == localTxDetail }
                 try? self.realm.write {
@@ -114,7 +118,9 @@ class TxStatusManager: NSObject {
                     localTxDetail.token = nil
                     realm.delete(localTxDetail)
                 }
-                NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: transaction])
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: transaction])
+                }
             case .pending:
                 break
             }
