@@ -72,7 +72,6 @@
 		6E8A838221B62E0A0051B3EB /* SendTransaction.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E8A837B21B62E0A0051B3EB /* SendTransaction.storyboard */; };
 		6E8A838321B62E0A0051B3EB /* TransactionGasCostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837C21B62E0A0051B3EB /* TransactionGasCostViewController.swift */; };
 		6E8A838421B62E0A0051B3EB /* TransactionParamBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837D21B62E0A0051B3EB /* TransactionParamBuilder.swift */; };
-		6E8A838521B62E0A0051B3EB /* TransactionGasPriceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */; };
 		6E8A838621B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */; };
 		6E8A838721B62E0A0051B3EB /* TransactonSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A838021B62E0A0051B3EB /* TransactonSender.swift */; };
 		6E8A838921B777A60051B3EB /* NSDecimalNumber+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E8A838821B777A60051B3EB /* NSDecimalNumber+Extension.swift */; };
@@ -289,7 +288,6 @@
 		6E8A837B21B62E0A0051B3EB /* SendTransaction.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SendTransaction.storyboard; sourceTree = "<group>"; };
 		6E8A837C21B62E0A0051B3EB /* TransactionGasCostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionGasCostViewController.swift; sourceTree = "<group>"; };
 		6E8A837D21B62E0A0051B3EB /* TransactionParamBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionParamBuilder.swift; sourceTree = "<group>"; };
-		6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionGasPriceViewController.swift; sourceTree = "<group>"; };
 		6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionSwitchTokenViewController.swift; sourceTree = "<group>"; };
 		6E8A838021B62E0A0051B3EB /* TransactonSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactonSender.swift; sourceTree = "<group>"; };
 		6E8A838821B777A60051B3EB /* NSDecimalNumber+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSDecimalNumber+Extension.swift"; sourceTree = "<group>"; };
@@ -688,7 +686,6 @@
 				6E8A837D21B62E0A0051B3EB /* TransactionParamBuilder.swift */,
 				6E8A837A21B62E0A0051B3EB /* SendTransactionViewController.swift */,
 				6E8A837C21B62E0A0051B3EB /* TransactionGasCostViewController.swift */,
-				6E8A837E21B62E0A0051B3EB /* TransactionGasPriceViewController.swift */,
 				6E8A837F21B62E0A0051B3EB /* TransactionSwitchTokenViewController.swift */,
 			);
 			path = Send;
@@ -1415,7 +1412,6 @@
 				898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */,
 				1A1E1B8B21A3CF3A00C24D10 /* SignMessagePageItem.swift in Sources */,
 				8935BA55216EE65500C37263 /* WKWebViewConfiguration.swift in Sources */,
-				6E8A838521B62E0A0051B3EB /* TransactionGasPriceViewController.swift in Sources */,
 				6EABFB122199520F00305ED5 /* DAppTakePhotoMessageHandler.swift in Sources */,
 				6E7D3838219C173D0031177B /* TransactionDetails.swift in Sources */,
 				898A19F020B5176A00ECB465 /* WalletDetailController.swift in Sources */,

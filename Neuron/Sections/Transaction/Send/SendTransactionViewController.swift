@@ -133,8 +133,8 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
-        if paramBuilder.tokenPrice > 0 {
-            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.tokenPrice))
+        if paramBuilder.gasTokenPrice > 0 {
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
             gasCostLabel.text! += "≈ \(paramBuilder.currencySymbol) " + amount.formatterToString(2)
         }
     }
@@ -308,7 +308,7 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { (_, _) in
             self.updateGasCost()
         })
-        observers.append(paramBuilder.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+        observers.append(paramBuilder.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         paramBuilder.from = AppModel.current.currentWallet!.address

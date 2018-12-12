@@ -45,7 +45,7 @@ class TransactionParamBuilder: NSObject {
     var tokenBalance: BigUInt = 0
 
     @objc dynamic
-    private(set) var tokenPrice: Double = 0
+    private(set) var gasTokenPrice: Double = 0
 
     private(set) var currencySymbol = ""
 
@@ -83,7 +83,7 @@ class TransactionParamBuilder: NSObject {
 
         fetchGasPrice()
         fetchGasLimit()
-        fetchTokenPrice(token: token)
+        fetchGasTokenPrice(token: token)
     }
 
     init(builder: TransactionParamBuilder) {
@@ -101,7 +101,7 @@ class TransactionParamBuilder: NSObject {
         gasLimit = builder.gasLimit
         from = builder.from
         to = builder.to
-        tokenPrice = builder.tokenPrice
+        gasTokenPrice = builder.gasTokenPrice
         currencySymbol = builder.currencySymbol
         rebuildGasCalculator()
     }
@@ -148,14 +148,22 @@ class TransactionParamBuilder: NSObject {
         }
     }
 
-    private func fetchTokenPrice(token: TokenModel) {
+    private func fetchGasTokenPrice(token: TokenModel) {
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        let symbol = token.symbol
+        let tokenSymbol: String
+        switch token.type {
+        case .ether, .appChain:
+            tokenSymbol = token.symbol
+        case .appChainErc20:
+            tokenSymbol = (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: token.chain!.tokenIdentifier)!.symbol
+        case .erc20:
+            tokenSymbol = (try! Realm()).objects(TokenModel.self).first(where: { $0.symbol == "ETH" && $0.name == "ethereum" })!.symbol
+        }
         currencySymbol = currency.symbol
         DispatchQueue.global().async {
-            if let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currency.short) {
+            if let price = TokenPriceLoader().getPrice(symbol: tokenSymbol, currency: currency.short) {
                 DispatchQueue.main.async {
-                    self.tokenPrice = price
+                    self.gasTokenPrice = price
                 }
             }
         }
