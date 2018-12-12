@@ -177,7 +177,7 @@ private struct Erc20TransactionsResponse: Decodable {
 // MARK: - Get transaction details
 extension EthereumNetwork {
     func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [EthereumTransactionDetails] {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",
@@ -202,7 +202,7 @@ extension EthereumNetwork {
     }
 
     func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [Erc20TransactionDetails] {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",
@@ -228,7 +228,7 @@ extension EthereumNetwork {
     }
 
     func getTransaction(txhash: String) throws -> EthereumTransactionDetails {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",
