@@ -29,7 +29,7 @@ class SwitchChainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = "Assets.AddAssets.SwitchChainNetWorkTitle".localized()
-        chainModelList()
+        getChainModelList()
     }
 
     override func viewWillAppear(_ animated: Bool) {
