@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 class ManageAssetViewController: UITableViewController, AssetTableViewCellDelegate {
-    @IBOutlet weak var rightBarButton: DesignableButton!
+    @IBOutlet private weak var rightBarButton: DesignableButton!
     var tokenArray: List<TokenModel>!
     var selectArray: List<TokenModel>!
     var realm: Realm!

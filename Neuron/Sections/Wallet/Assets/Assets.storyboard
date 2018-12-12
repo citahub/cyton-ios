@@ -291,7 +291,7 @@
                     <connections>
                         <outlet property="listSettingButton" destination="VPr-bh-pDw" id="BN8-A2-x7v"/>
                         <outlet property="searchButton" destination="ppk-67-UbN" id="xel-I6-8CC"/>
-                        <outlet property="table" destination="wFT-YU-KYF" id="FQz-ec-cbo"/>
+                        <outlet property="tableView" destination="wFT-YU-KYF" id="QFZ-QJ-tgO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIw-dC-Q43" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -12,9 +12,9 @@ import BLTNBoard
 
 class AddAssetController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var tokenArray: [TokenModel] = []
-    @IBOutlet weak var searchButton: UIButton!
-    @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var listSettingButton: DesignableButton!
+    @IBOutlet private weak var searchButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var listSettingButton: DesignableButton!
     private lazy var showTokenPageItem: ShowTokenPageItem = {
         return ShowTokenPageItem.create()
     }()
@@ -137,23 +137,25 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     func ethereumERC20Token(contractAddress: String) {
         let walletAddress = AppModel.current.currentWallet!.address
         Toast.showHUD()
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             let result = try? CustomERC20TokenService.searchTokenData(contractAddress: contractAddress, walletAddress: walletAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
-                if result != nil {
-                    self.showTokenMessage(nil, tokenModel: result!)
+                if let result = result {
+                    self.showTokenMessage(nil, tokenModel: result)
                 } else {
                     Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
                 }
-                self.table.reloadData()
+                self.tableView.reloadData()
             }
         }
     }
 
     func appchainNativeToken(nodeAddress: String) {
         Toast.showHUD()
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             let (tokenModel, chainModel) = AddAppChainToken.appChainNativeToken(nodeAddress: nodeAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
@@ -168,7 +170,8 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
 
     func appchainERC20Token(chain: Chain, contractAddress: String) {
         Toast.showHUD()
-        DispatchQueue.global().async {
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else { return }
             let tokenModel = AddAppChainToken.appChainERC20Token(chain: chain, contractAddress: contractAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
@@ -184,9 +187,8 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
 
 extension AddAssetController: QRCodeViewControllerDelegate {
     func didBackQRCodeMessage(codeResult: String) {
-        let finalText = codeResult.trimmingCharacters(in: .whitespaces)
-        inputText = finalText
-        table.reloadData()
+        inputText = codeResult.trimmingCharacters(in: .whitespaces)
+        tableView.reloadData()
     }
 }
 
@@ -200,6 +202,6 @@ extension AddAssetController: ContractAddressTableViewCellDelegate {
 extension AddAssetController: SwitchChainViewControllerDelegate {
     func callSelectChain(chain: Chain) {
         self.chain = chain
-        table.reloadData()
+        tableView.reloadData()
     }
 }

@@ -14,11 +14,11 @@ protocol SwitchChainViewControllerDelegate: class {
 }
 
 class SwitchChainViewController: UIViewController {
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var closeButton: UIButton!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var closeButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
     let ethereumChainId = "ethereumERC20"// switch chain work only
     let appChainId = "appChainNative"
 
@@ -55,7 +55,7 @@ class SwitchChainViewController: UIViewController {
         })
     }
 
-    func chainModelList() {
+    func getChainModelList() {
         let ethChain = Chain().defaultChain
         let testChain = Chain(chainId: appChainId, chainName: "Assets.AddAssets.AppChainNativeCoin".localized(), httpProvider: "")
         chains += [ethChain, testChain]
