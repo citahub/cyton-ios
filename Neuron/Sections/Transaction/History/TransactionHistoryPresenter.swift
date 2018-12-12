@@ -158,4 +158,3 @@ extension TransactionHistoryPresenter {
         delegate?.updateTransactions(transaction: transactions, updates: [idx], error: nil)
     }
 }
-

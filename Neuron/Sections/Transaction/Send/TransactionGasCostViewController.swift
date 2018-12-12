@@ -41,7 +41,7 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        observers.append(param.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+        observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         if paramBuilder.tokenType == .erc20 {
@@ -90,8 +90,8 @@ class TransactionGasCostViewController: UITableViewController {
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
-        if paramBuilder.tokenPrice > 0 {
-            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.tokenPrice))
+        if paramBuilder.gasTokenPrice > 0 {
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
             gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(4)
         }
     }

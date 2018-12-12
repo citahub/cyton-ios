@@ -42,7 +42,7 @@ class TransactionDetailsViewController: UITableViewController {
         }
     }
 
-    private var hideItems = [(Int, Int)]()
+    private var hideItemIndexs = [(Int, Int)]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,7 +77,7 @@ class TransactionDetailsViewController: UITableViewController {
             chainNetworkLabel.text = transaction.token.chainName ?? "CITA"
             chainIconView.image = UIImage(named: "icon_tx_details_chain_cita")
             if transaction.token.chainId != "1" {
-                hideItems.append((0, 3))    // block chain network
+                hideItemIndexs.append((0, 3))    // block chain network
             }
         }
 
@@ -94,15 +94,15 @@ class TransactionDetailsViewController: UITableViewController {
             statusLabel.textColor = UIColor(named: "warning_color")
             hashLabel.text = transaction.hash
 
-            hideItems.append((1, 2))    // block
+            hideItemIndexs.append((1, 2))    // block
         case .failure:
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationFailure".localized() : "TransactionStatus.failure".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
 
-            hideItems.append((0, 3))    // block chain network
-            hideItems.append((1, 0))    // hash
-            hideItems.append((1, 2))    // block
+            hideItemIndexs.append((0, 3))    // block chain network
+            hideItemIndexs.append((1, 0))    // hash
+            hideItemIndexs.append((1, 2))    // block
         }
         statusWidthLayout.constant = statusLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 20), limitedToNumberOfLines: 1).size.width + 24
         setupGasInfo()
@@ -123,15 +123,15 @@ class TransactionDetailsViewController: UITableViewController {
                 gasFeeLabel.text = appChainErc20.quotaUsed.toGweiText() + " \(transaction.token.symbol)"
             }
         case .failure:
-            hideItems.append((1, 3)) // gas fee
-            hideItems.append((1, 4)) // gas price
-            hideItems.append((1, 5))    // gas used
+            hideItemIndexs.append((1, 3))    // gas fee
+            hideItemIndexs.append((1, 4))    // gas price
+            hideItemIndexs.append((1, 5))    // gas used
         }
 
         if transaction.status == .pending {
             gasLimitLabel.text = "\(transaction.gasLimit)"
         } else {
-            hideItems.append((1, 6)) // gas limit
+            hideItemIndexs.append((1, 6))    // gas limit
         }
 
         if transaction.status == .success {
@@ -145,14 +145,14 @@ class TransactionDetailsViewController: UITableViewController {
                 gasUsedLabel.text = "\(appChainErc20.quotaUsed)"
             }
         } else {
-            hideItems.append((1, 5))    // gas used
+            hideItemIndexs.append((1, 5))    // gas used
         }
     }
 }
 
 extension TransactionDetailsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if hideItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
+        if hideItemIndexs.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
             return 0.0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -160,7 +160,7 @@ extension TransactionDetailsViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.isHidden = hideItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
+        cell.isHidden = hideItemIndexs.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
