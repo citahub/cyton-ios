@@ -92,7 +92,7 @@ class ContractController: UITableViewController, TransactonSender {
                     self.tokenModel = tokenModel
                 }
             } else {
-                if dappCommonModel.eth!.chainId == Int(NativeChainId.ethMainnetChainId) && tokenModel.isNativeToken {
+                if dappCommonModel.eth!.chainId == -1 && tokenModel.isNativeToken {
                     self.tokenModel = tokenModel
                 }
             }
