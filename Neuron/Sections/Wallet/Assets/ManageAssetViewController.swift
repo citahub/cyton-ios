@@ -97,7 +97,9 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         try! realm.write {
-            swap(&tokenArray[sourceIndexPath.row], &tokenArray[destinationIndexPath.row])
+            let object = tokenArray[sourceIndexPath.row]
+            tokenArray.remove(at: sourceIndexPath.row)
+            tokenArray.insert(object, at: destinationIndexPath.row)
         }
     }
 

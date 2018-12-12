@@ -52,7 +52,6 @@ class WalletPresenter {
         NotificationCenter.default.addObserver(self, selector: #selector(refreshBalance), name: .switchEthNetwork, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(refreshPrice), name: .changeLocalCurrency, object: nil)
         observeAppModel()
-//        observeNativeTokenList()
     }
 
     func refresh() {
@@ -104,9 +103,8 @@ extension WalletPresenter {
                 guard deletions.count > 0 || insertions.count > 0 else { return }
                 if deletions.count > 0 {
                     var newTokens = self.tokens
-                    let startIndex = self.tokens.count - (tokenList.count + deletions.count)
                     deletions.enumerated().forEach({ (offset, element) in
-                        let index = startIndex + element - offset
+                        let index = element - offset
                         newTokens.remove(at: index)
                     })
                     self.tokens = newTokens
@@ -117,29 +115,6 @@ extension WalletPresenter {
             }
         })
     }
-
-    // TODO: cezres
-//    private func observeNativeTokenList() {
-//        nativeTokenListObserver?.invalidate()
-//        nativeTokenListObserver = AppModel.current.nativeTokenList.observe { [weak self] (change) in
-//            guard let self = self else { return }
-//            switch change {
-//            case .update(let tokenList, let deletions, let insertions, modifications: _):
-//                guard deletions.count > 0 || insertions.count > 0 else { return }
-//                if deletions.count > 0 {
-//                    var newTokens = self.tokens
-//                    deletions.enumerated().forEach({ (offset, element) in
-//                        let index = element - offset
-//                        newTokens.remove(at: index)
-//                    })
-//                    self.tokens = newTokens
-//                }
-//                self.insertTokens(tokenList: tokenList, insertions: insertions)
-//            default:
-//                break
-//            }
-//        }
-//    }
 
     private func insertTokens(tokenList: List<TokenModel>, insertions: [Int]) {
         guard insertions.count > 0 else { return }
