@@ -64,9 +64,8 @@ class TxStatusManager: NSObject {
     // MARK: - 
     func getTransactions(token: Token) -> [TransactionDetails] {
         return (try! Realm()).objects(LocalTxDetailModel.self).filter({ (localTxDetail) -> Bool in
-            print("TxS search \(localTxDetail.hash)")
             if token.type == .erc20 || token.type == .ether {
-                if localTxDetail.ethereumHost != EthereumNetwork().host().absoluteString {
+                if localTxDetail.ethereumHost != EthereumNetwork().apiHost().absoluteString {
                     return false
                 }
             }

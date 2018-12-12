@@ -49,7 +49,7 @@ class LocalTxDetailModel: Object {
         self.gasPrice = String(gasPrice)
         self.gasLimit = String(gasLimit)
         status = .pending
-        ethereumHost = EthereumNetwork().host().absoluteString
+        ethereumHost = EthereumNetwork().apiHost().absoluteString
     }
 
     // Erc20
