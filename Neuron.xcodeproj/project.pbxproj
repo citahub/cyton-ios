@@ -38,6 +38,7 @@
 		1AB3D1CF21709F6700557E9D /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */; };
 		1AB3D1D221709F9600557E9D /* UIStoryboardExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */; };
 		1AD197D021BE14E800823388 /* RPCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD197CF21BE14E800823388 /* RPCClient.swift */; };
+		1AD197D621BE3A6300823388 /* CKB.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AD197D521BE3A6300823388 /* CKB.storyboard */; };
 		1AEBF3E4219BA1E700653FF5 /* BigUInt+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEBF3E3219BA1E700653FF5 /* BigUInt+Extension.swift */; };
 		1AEBF3E6219BA22600653FF5 /* BigUIntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEBF3E5219BA22600653FF5 /* BigUIntExtensionTests.swift */; };
 		1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEF127B21A677B600202373 /* AboutUs.storyboard */; };
@@ -252,6 +253,7 @@
 		1AB3D1CE21709F6700557E9D /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		1AB3D1D121709F9600557E9D /* UIStoryboardExtensionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIStoryboardExtensionTests.swift; path = NeuronTests/Extensions/UIKit/UIStoryboardExtensionTests.swift; sourceTree = SOURCE_ROOT; };
 		1AD197CF21BE14E800823388 /* RPCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCClient.swift; sourceTree = "<group>"; };
+		1AD197D521BE3A6300823388 /* CKB.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CKB.storyboard; sourceTree = "<group>"; };
 		1AEBF3E3219BA1E700653FF5 /* BigUInt+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BigUInt+Extension.swift"; sourceTree = "<group>"; };
 		1AEBF3E5219BA22600653FF5 /* BigUIntExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BigUIntExtensionTests.swift; sourceTree = "<group>"; };
 		1AEF127B21A677B600202373 /* AboutUs.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AboutUs.storyboard; sourceTree = "<group>"; };
@@ -635,6 +637,7 @@
 			children = (
 				1AD197CF21BE14E800823388 /* RPCClient.swift */,
 				1AF059CB21BA46BE00297FAC /* CKBViewController.swift */,
+				1AD197D521BE3A6300823388 /* CKB.storyboard */,
 			);
 			path = CKB;
 			sourceTree = "<group>";
@@ -1245,6 +1248,7 @@
 				1A2BFA1821338FEB0065496B /* Settings.storyboard in Resources */,
 				89F7966F213BD5680064808A /* Assets.storyboard in Resources */,
 				6E9D7CC1216B3AE40044176D /* Authentication.storyboard in Resources */,
+				1AD197D621BE3A6300823388 /* CKB.storyboard in Resources */,
 				1A2BFA1A213513D60065496B /* Wallet.storyboard in Resources */,
 				896D043420AE69C5002CFF6A /* Assets.xcassets in Resources */,
 				896D043220AE69C1002CFF6A /* Main.storyboard in Resources */,
