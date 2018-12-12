@@ -75,3 +75,9 @@ class TransactionDetails: Codable {
         try container.encode("0x\(String(blockNumber, radix: 16))", forKey: .blockNumber)
     }
 }
+
+extension TransactionDetails {
+    var isContractCreation: Bool {
+        return to.count == 0
+    }
+}
