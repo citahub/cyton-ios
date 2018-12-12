@@ -89,7 +89,7 @@ class TransactionDetailsViewController: UITableViewController {
             hashLabel.text = transaction.hash
             blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
-            statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationPending" : "TransactionStatus.pending".localized()
+            statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationPending".localized() : "TransactionStatus.pending".localized()
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
             hashLabel.text = transaction.hash
