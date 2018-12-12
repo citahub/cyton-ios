@@ -20,15 +20,17 @@ class TxStatusManager: NSObject {
     static let didUpdateTxStatus = Notification.Name("didUpdateTxStatus")
     static let didAddLocationTxDetails = Notification.Name("didAddLocationTxDetails")
     static let transactionKey = "transaction"
+
     private var localTxDetailList = [LocalTxDetailModel]()
     private var taskThread = TaskThread()
     private var realm: Realm!
 
-    private override init() {
-        super.init()
+    private lazy var registerOnce: Void = {
         configureTxStatusManager()
         checkSentTransactionStatus()
-    }
+    }()
+
+    func register() { _ = registerOnce }
 
     private func configureTxStatusManager() {
         guard taskThread.thread == nil else { return }

@@ -33,7 +33,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasUsedLabel: UILabel!
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
-    @IBOutlet weak var statusWidthLayout: NSLayoutConstraint!
+    @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
     var transaction: TransactionDetails! {
         didSet {
             if oldValue != nil && transaction != nil {
