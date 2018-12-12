@@ -52,8 +52,9 @@ class TxStatusManager: NSObject {
                 self.realm.add(localTxDetail)
             }
             self.localTxDetailList.append(localTxDetail)
+            let transaction = localTxDetail.getTransactionDetails()
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: TxStatusManager.didAddLocationTxDetails, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+                NotificationCenter.default.post(name: TxStatusManager.didAddLocationTxDetails, object: nil, userInfo: [TxStatusManager.transactionKey: transaction])
             }
             if self.localTxDetailList.count == 1 {
                 self.checkSentTransactionStatus()
@@ -109,8 +110,9 @@ class TxStatusManager: NSObject {
                 try? self.realm.write {
                     localTxDetail.status = .failure
                 }
+                let transaction = localTxDetail.getTransactionDetails()
                 DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: localTxDetail.getTransactionDetails()])
+                    NotificationCenter.default.post(name: TxStatusManager.didUpdateTxStatus, object: nil, userInfo: [TxStatusManager.transactionKey: transaction])
                 }
             case .success(let transaction):
                 self.localTxDetailList.removeAll { $0 == localTxDetail }
