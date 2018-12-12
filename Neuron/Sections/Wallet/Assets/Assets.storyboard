@@ -54,7 +54,7 @@
                                             </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iIq-bN-mBg">
-                                            <rect key="frame" x="65" y="10" width="187.5" height="21"/>
+                                            <rect key="frame" x="65" y="10" width="223" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="qOn-Oc-fMj"/>
                                             </constraints>
@@ -63,7 +63,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JB1-X6-Zq3">
-                                            <rect key="frame" x="65" y="34" width="187.5" height="15"/>
+                                            <rect key="frame" x="65" y="34" width="223" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="4Kn-Ov-D15"/>
                                             </constraints>
@@ -71,8 +71,8 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-Mf-A7U">
-                                            <rect key="frame" x="65" y="51" width="187.5" height="15"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KT6-Mf-A7U">
+                                            <rect key="frame" x="65" y="51" width="223" height="15"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="q1K-g2-GSI"/>
                                             </constraints>
@@ -81,7 +81,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch contentMode="scaleToFill" semanticContentAttribute="playback" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="F3s-nZ-7iz">
-                                            <rect key="frame" x="309.5" y="25" width="49.5" height="30"/>
+                                            <rect key="frame" x="308" y="25" width="51" height="30"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <color key="onTintColor" red="0.28235294119999998" green="0.42745098040000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <connections>
@@ -96,11 +96,10 @@
                                         <constraint firstItem="iIq-bN-mBg" firstAttribute="top" secondItem="ZA9-Gr-DP4" secondAttribute="top" constant="10" id="D4I-rh-TaK"/>
                                         <constraint firstItem="JB1-X6-Zq3" firstAttribute="leading" secondItem="x3D-dU-ZEr" secondAttribute="trailing" constant="10" id="Dc6-sq-RZC"/>
                                         <constraint firstItem="F3s-nZ-7iz" firstAttribute="trailing" secondItem="ZA9-Gr-DP4" secondAttribute="trailingMargin" constant="-2" id="Jp3-cb-Qaf"/>
-                                        <constraint firstItem="F3s-nZ-7iz" firstAttribute="leading" secondItem="iIq-bN-mBg" secondAttribute="trailing" constant="57" id="Jxx-wh-8I3"/>
+                                        <constraint firstItem="F3s-nZ-7iz" firstAttribute="leading" secondItem="iIq-bN-mBg" secondAttribute="trailing" constant="20" id="Jxx-wh-8I3"/>
                                         <constraint firstItem="JB1-X6-Zq3" firstAttribute="top" secondItem="iIq-bN-mBg" secondAttribute="bottom" constant="3" id="SJh-Io-YIy"/>
                                         <constraint firstItem="x3D-dU-ZEr" firstAttribute="leading" secondItem="ZA9-Gr-DP4" secondAttribute="leading" constant="15" id="SOu-xO-26W"/>
                                         <constraint firstItem="JB1-X6-Zq3" firstAttribute="width" secondItem="iIq-bN-mBg" secondAttribute="width" id="V7Y-XK-maj"/>
-                                        <constraint firstItem="iIq-bN-mBg" firstAttribute="width" secondItem="ZA9-Gr-DP4" secondAttribute="width" multiplier="0.5" id="XWv-YW-nkE"/>
                                         <constraint firstItem="KT6-Mf-A7U" firstAttribute="leading" secondItem="x3D-dU-ZEr" secondAttribute="trailing" constant="10" id="bAn-We-dhm"/>
                                         <constraint firstItem="x3D-dU-ZEr" firstAttribute="top" secondItem="ZA9-Gr-DP4" secondAttribute="top" constant="20" id="bSx-Ts-EB1"/>
                                         <constraint firstItem="iIq-bN-mBg" firstAttribute="leading" secondItem="x3D-dU-ZEr" secondAttribute="trailing" constant="10" id="hxo-XA-y6I"/>
@@ -122,7 +121,32 @@
                             <outlet property="delegate" destination="c5R-kS-yl6" id="rE5-9U-pyo"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="6rS-hc-f3A"/>
+                    <navigationItem key="navigationItem" id="6rS-hc-f3A">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="EEk-Gk-d0x">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="to7-lB-QYc" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="276" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="编辑">
+                                    <color key="titleColor" red="0.42352941176470588" green="0.44313725490196076" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <state key="selected" title="完成">
+                                    <color key="titleColor" red="0.27058823529411763" green="0.42352941176470588" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="rect" keyPath="titleFrame">
+                                        <rect key="value" x="50" y="5" width="50" height="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="clickEditListButton:" destination="c5R-kS-yl6" eventType="touchUpInside" id="Ar9-mn-zzO"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="rightBarButton" destination="to7-lB-QYc" id="rt6-0K-1GN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VNm-A0-0bj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

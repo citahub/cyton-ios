@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 protocol AssetTableViewCellDelegate: class {
-    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch)
+    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switchButton: UISwitch)
 }
 
 class AssetTableViewCell: UITableViewCell {
@@ -20,6 +20,11 @@ class AssetTableViewCell: UITableViewCell {
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet weak var statusBtn: UISwitch!
     weak var delegate: AssetTableViewCellDelegate?
+
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        statusBtn.isHidden = editing
+    }
 
     override var isSelected: Bool {
         didSet {
