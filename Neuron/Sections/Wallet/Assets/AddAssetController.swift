@@ -65,35 +65,41 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     func save(tokenModel: TokenModel, chainModel: ChainModel?) {
-        if TokenModel.identifier(for: tokenModel) != nil {
-            bulletinManager.dismissBulletin()
-            Toast.showToast(text: "Assets.AddAssets.AlreadyExist".localized())
-        }
         do {
-            let wallet = AppModel.current.currentWallet!
             let realm = try Realm()
-            try realm.write {
-                realm.add(tokenModel, update: true)
-                if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
-                    wallet.selectedTokenList.append(tokenModel)
+            let wallet = AppModel.current.currentWallet!
+            var tokenModel = tokenModel
+            if let tokenIdentifier = TokenModel.identifier(for: tokenModel) {
+                tokenModel = (try Realm()).object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)!
+            } else {
+                try realm.write {
+                    realm.add(tokenModel, update: true)
                 }
-                if !wallet.tokenModelList.contains(where: { $0 == tokenModel }) {
+            }
+
+            if !wallet.tokenModelList.contains(where: { $0 == tokenModel }) {
+                try realm.write {
                     wallet.tokenModelList.append(tokenModel)
-                }
-                if chainModel != nil {
-                    realm.add(chainModel!, update: true)
-                    if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
-                        wallet.chainModelList.append(chainModel!)
+                    wallet.selectedTokenList.append(tokenModel)
+
+                    if chainModel != nil {
+                        realm.add(chainModel!, update: true)
+                        if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
+                            wallet.chainModelList.append(chainModel!)
+                        }
                     }
                 }
+
+                let successPageItem = SuccessPageItem.create(title: "Assets.AddAssets.StoreSuccess".localized())
+                successPageItem.actionHandler = { item in
+                    self.bulletinManager.dismissBulletin()
+                    self.navigationController?.popViewController(animated: true)
+                }
+                bulletinManager.push(item: successPageItem)
+            } else {
+                bulletinManager.dismissBulletin()
+                Toast.showToast(text: "Assets.AddAssets.AlreadyExist".localized())
             }
-            let successPageItem = SuccessPageItem.create(title: "DApp.Contract.TransactionSend".localized())
-            successPageItem.actionHandler = { item in
-                self.bulletinManager.dismissBulletin()
-                Toast.showToast(text: "Assets.AddAssets.StoreSuccess".localized())
-                self.navigationController?.popViewController(animated: true)
-            }
-            bulletinManager.push(item: successPageItem)
         } catch {
             bulletinManager.dismissBulletin()
             Toast.showToast(text: "Assets.AddAssets.StoreFailed".localized())
