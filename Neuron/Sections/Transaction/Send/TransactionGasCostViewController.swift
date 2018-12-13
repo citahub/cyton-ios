@@ -41,7 +41,7 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        observers.append(param.observe(\.tokenPrice, options: [.initial]) { [weak self](_, _) in
+        observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         if paramBuilder.tokenType == .erc20 {
@@ -56,7 +56,7 @@ class TransactionGasCostViewController: UITableViewController {
             return
         }
 
-        if paramBuilder.tokenType == .ether {
+        if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
@@ -69,11 +69,14 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-        } else if paramBuilder.tokenType == .erc20 {
-            let estimateGasLimit = paramBuilder.estimateGasLimit()
-            if paramBuilder.gasLimit < estimateGasLimit {
-                Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
+        } else if paramBuilder.tokenType == .appChain {
+            gasPriceTextField.isEnabled = false
+            if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
+                Toast.showToast(text: String(format: "Transaction.Send.quotaLimitSettingIsTooLow".localized(), "\(paramBuilder.estimateGasLimit())"))
+                return
             }
+        } else if paramBuilder.tokenType == .appChainErc20 {
+            gasPriceTextField.isEnabled = false
         }
 
         param.gasPrice = paramBuilder.gasPrice
@@ -87,8 +90,8 @@ class TransactionGasCostViewController: UITableViewController {
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
-        if paramBuilder.tokenPrice > 0 {
-            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.tokenPrice))
+        if paramBuilder.gasTokenPrice > 0 {
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
             gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(4)
         }
     }
@@ -120,6 +123,20 @@ extension TransactionGasCostViewController: UITextFieldDelegate {
 }
 
 extension TransactionGasCostViewController: UITextPasteDelegate {
+}
+
+extension TransactionGasCostViewController {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 3 && (paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20) {
+            return 0.0
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.isHidden = cell.bounds.size.height == 0.0
+    }
 }
 
 extension TransactionGasCostViewController: UITextViewDelegate {

@@ -10,7 +10,7 @@ import Foundation
 import AppChain
 
 struct AppChainNetwork {
-    private static let defaultNode = "http://121.196.200.225:1337"
+    static let defaultNode = "http://121.196.200.225:1337"
 
     static func appChain(url: URL? = URL(string: defaultNode)!) -> AppChain {
         let url = url == nil ? URL(string: defaultNode)! : url!

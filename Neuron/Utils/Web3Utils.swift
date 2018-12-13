@@ -8,7 +8,9 @@
 
 import Foundation
 import Web3swift
+import BigInt
 
 typealias Web3Utils = Web3swift.Web3Utils
 
 typealias TxHash = String
+typealias BlockNumber = BigUInt

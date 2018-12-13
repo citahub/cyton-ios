@@ -180,6 +180,10 @@
 "Transaction.Details.block" = "区块";
 "Transaction.Details.gasFee" = "矿工费用";
 "Transaction.Details.blockchainBrowserDesc" = "到区块链浏览器查看更多";
+"Transaction.Details.contractCreationPending" = "合约创建中";
+"Transaction.Details.contractCreationSuccess" = "合约创建成功";
+"Transaction.Details.contractCreationFailure" = "合约创建失败";
+
 
 // Send Transaction
 // ---------------------------------------------------------
@@ -188,7 +192,8 @@
 "Transaction.Send.title" = "%@转账";
 "Transaction.Send.transactionAvailableBalance" = "您输入的金额超过您的余额，是否全部转出？";
 "Transaction.Send.gasPriceSettingIsTooLow" = "您的GasPrice设置过低，建议输入推荐值以快速转账";
-"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于\"%@(估算值)*4\"";
+"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的Gas Limit大于等于%@";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "请确保输入的Quota Limit大于等于%@";
 "Transaction.Send.gasCostSetting" = "高级设置";
 "Transaction.Send.gasCost" = "Gas 费用";
 "Transaction.Send.extenData" = "包含数据";
@@ -284,7 +289,18 @@
 "Assets.AddAssets.Title" = "添加资产";
 "Assets.AddAssets.BlockChainNetwork" = "区块链网络";
 "Assets.AddAssets.ContractAddress" = "合约地址";
+"Assets.AddAssets.NodeAddress" = "节点地址";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址";
+"Assets.AddAssets.Search" = "查询";
 "Assets.AddAssets.TokenMessage" = "代币信息";
+"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
+"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
+"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";
+"Assets.AddAssets.StoreFailed" = "代币添加失败";
+"Assets.AddAssets.StoreSuccess" = "代币添加成功";
+"Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络";
+"Assets.AddAssets.ListSettings" = "列表设置";
 "Assets.AddAssets.TokenName" = "代币名称";
 "Assets.AddAssets.TokenSymbol" = "代币缩写";
 "Assets.AddAssets.TokenDecimals" = "小数位数";

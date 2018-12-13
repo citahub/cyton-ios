@@ -10,69 +10,69 @@
 // ---------------------------------------------------------
 "Common.Connection.ConnectionLost" = "The connection to the Internet is broken";
 "Common.Connection.FailToLoadPage" = "Failed to load the page";
-"Common.Connection.Cancel" = "取消";
-"Common.Connection.Confirm" = "确定";
-"Common.Connection.UserCancel" = "用户取消";
-"Common.Connection.ScanEmpty" = "扫描结果为空";
-"Common.Connection.LoseConnect" = "似乎已断开与互联网的连接";
-"Common.Connection.LoadFaild" = "页面加载失败";
-"Common.Connection.Refresh" = "刷新";
-"Common.next" = "下一步";
-"Common.confirm" = "确定";
-"Common.cancel" = "取消";
-"Common.reject" = "拒绝";
+"Common.Connection.Cancel" = "Cancel";
+"Common.Connection.Confirm" = "Confirm";
+"Common.Connection.UserCancel" = "Canceled";
+"Common.Connection.ScanEmpty" = "QR Code failed";
+"Common.Connection.LoseConnect" = "The connection to the Internet is broken";
+"Common.Connection.LoadFaild" = "Failed to load the page";
+"Common.Connection.Refresh" = "Refresh";
+"Common.next" = "Continue";
+"Common.confirm" = "Confirm";
+"Common.cancel" = "Cancel";
+"Common.reject" = "Reject";
 
 // DApp
 // ---------------------------------------------------------
-"DApp.Home" = "DApp";
-"DApp.Search.TextFieldPlaceholder" = "请输入应用网址";
+"DApp.Home" = "ÐApp";
+"DApp.Search.TextFieldPlaceholder" = "Explore the decentralized web";
 "DApp.Search.DeleteHistory" = "Delete";
 
 // DApp Browser
 // ---------------------------------------------------------
-"DApp.Browser.InvalidLink" = "无效的链接地址";
-"DApp.Browser.Collection" = "收藏";
-"DApp.Browser.CollectSuccess" = "收藏成功";
-"DApp.Browser.CollectFaild" = "收藏失败";
-"DApp.Browser.AlertTitle" = "提示";
-"DApp.Browser.CheckNoAliPay" = "未检测到支付宝客户端，请安装后重试。";
-"DApp.Browser.CheckNoWeChat" = "未检测到微信客户端，请安装后重试。";
-"DApp.Browser.SignFaild" = "签名失败";
-"DApp.Browser.PayFaild" = "支付失败";
+"DApp.Browser.InvalidLink" = "Invalid Address";
+"DApp.Browser.Collection" = "Add to Bookmark";
+"DApp.Browser.CollectSuccess" = "Added to Bookmark";
+"DApp.Browser.CollectFaild" = "Failed to add bookmark";
+"DApp.Browser.AlertTitle" = "Tips";
+"DApp.Browser.CheckNoAliPay" = "The Alipay client is not detected. Please try again after installation.";
+"DApp.Browser.CheckNoWeChat" = "WeChat client is not detected, please try again after installation.";
+"DApp.Browser.SignFaild" = "Signature failed";
+"DApp.Browser.PayFaild" = "Payment failed";
 
 // DApp Contract
 // ---------------------------------------------------------
-"DApp.Contract.TransactionSend" = "交易已发送";
+"DApp.Contract.TransactionSend" = "Transaction sent";
 
 // DApp Advanced
 // ---------------------------------------------------------
-"DApp.Advanced.ETHRecommend" = "以太坊推荐 ";
-"DApp.Advanced.Gas" = "Gas费用";
-"DApp.Advanced.EmptyGasPrice" = "请输入GasPrice";
-"DApp.Advanced.MinGasPrice" = "请输入的GasPrice不小于%@ GWei";
+"DApp.Advanced.ETHRecommend" = "Ethereum recommended";
+"DApp.Advanced.Gas" = "Gas Price";
+"DApp.Advanced.EmptyGasPrice" = "Please enter Gas Price";
+"DApp.Advanced.MinGasPrice" = "Gas Price too low, Please set above %@ GWei";
 
 // DApp DAppTakePhoto
 // ---------------------------------------------------------
-"DApp.DAppTakePhoto.CameraPermissions" = "拍照需要相机访问权限";
-"DApp.DAppTakePhoto.Open" = "开启";
-"DApp.DAppTakePhoto.NoAccess" = "无相机访问权限";
+"DApp.DAppTakePhoto.CameraPermissions" = "Please authorize camera access";
+"DApp.DAppTakePhoto.Open" = "Authorize";
+"DApp.DAppTakePhoto.NoAccess" = "No camera access，Please go to System Settings > Neuron > Camera，and authorize camera access";
 
 // DApp MyDApp
 // ---------------------------------------------------------
-"DApp.MyDApp.Title" = "我的ÐApp";
+"DApp.MyDApp.Title" = "My ÐApp";
 
 // DApp NFT
 // ---------------------------------------------------------
-"DApp.NFT.EmptyData" = "您还没有藏品数据";
-"DApp.NFT.Title" = "我的藏品";
-"DApp.NFT.DetailTitle" = "藏品详情";
+"DApp.NFT.EmptyData" = "No Collectives Found";
+"DApp.NFT.Title" = "My Collectives";
+"DApp.NFT.DetailTitle" = "Collectibles Detail";
 
 // DApp Transaction
 // ---------------------------------------------------------
-"DApp.SendTransactionError.emptyValue" = "Transaction's value format error";
-"DApp.SendTransactionError.emptyQuota" = "Transaction's quota format error";
-"DApp.SendTransactionError.emptyGasLimit" = "Transaction's gas limit format error";
-"DApp.SendTransactionError.emptyGasPrice" = "Transaction's gas price format error";
+"DApp.SendTransactionError.emptyValue" = "Empty transfer amount";
+"DApp.SendTransactionError.emptyQuota" = "Empty transfer Quota";
+"DApp.SendTransactionError.emptyGasLimit" = "Empty Gas Limit";
+"DApp.SendTransactionError.emptyGasPrice" = "Empty Gas Price";
 
 // Mnemonic Validator
 // ---------------------------------------------------------
@@ -90,14 +90,14 @@
 "WalletManager.Error.accountNotFound" = "Wallet not found";
 "WalletManager.Error.failedToDeleteAccount" = "Failed to delete wallet";
 "WalletManager.Error.failedToUpdatePassword" = "Failed to update wallet password";
-"WalletManager.Error.failedToSaveKeystore" = "Failed to save the keystore";
-"WalletManager.Error.unknown" = "Unknow error";
+"WalletManager.Error.failedToSaveKeystore" = "Failed to save the Keystore";
+"WalletManager.Error.unknown" = "Unknown error";
 
 // Send Transactoin Error
 // ---------------------------------------------------------
 "SendTransactionError.invalidSourceAddress" = "Invalid source address";
 "SendTransactionError.invalidDestinationAddress" = "Invalid destination address";
-"SendTransactionError.invalidContractAddress" = "Invalid contract ADdress";
+"SendTransactionError.invalidContractAddress" = "Invalid contract Address";
 "SendTransactionError.noAvailableKeys" = "Wallet not found";
 "SendTransactionError.createTransactionIssue" = "Failed to create transaction";
 "SendTransactionError.invalidChainId" = "Invalid chain ID";
@@ -117,179 +117,195 @@
 
 // Wallet
 // ---------------------------------------------------------
-"Wallet" = "钱包";
-"Wallet.token" = "代币";
-"Wallet.addToken" = "添加资产";
-"Wallet.transaction" = "转账";
-"Wallet.receipt" = "收款";
-"Wallet.totalAmount" = "总资产";
-"Wallet.noAmount" = "暂无资产";
+"Wallet" = "Wallet";
+"Wallet.token" = "Token";
+"Wallet.addToken" = "Add";
+"Wallet.transaction" = "Send";
+"Wallet.receipt" = "Receive";
+"Wallet.totalAmount" = "Total Assets";
+"Wallet.noAmount" = "No Assets";
 
 // Import Wallet
 // ---------------------------------------------------------
-"Wallet.Import.title" = "导入钱包";
+"Wallet.Import.title" = "Import Wallet";
 "Wallet.Import.keystore" = "Keystore";
-"Wallet.Import.mnemonic" = "助记词";
-"Wallet.Import.privatekey" = "私钥";
-"NoScreenshot.importWalletMessage" = "keystore，助记词，私钥是打开您钱包的关键要素，请妥善保管！";
-"Wallet.Import.inputWalletName" = "输入钱包名称";
-"Wallet.Import.import" = "开始导入";
-"Wallet.Import.loading" = "导入钱包中";
-"Wallet.Import.walletAlreadyExists" = "已存在该钱包";
-"Wallet.Import.success" = "导入成功";
-"Wallet.Import.setPassword" = "设置密码";
-"Wallet.Import.repeatPassword" = "重复密码";
-"Wallet.Import.setPasswordDesc" = "密码包含大写字母、小写字母、数字、特殊符号的至少三类，且长度在8位以上！";
-"Wallet.Import.inconsistentPasswords" = "两次密码输入不一致";
+"Wallet.Import.mnemonic" = "Mnemonic Phrase";
+"Wallet.Import.privatekey" = "Private Key";
+"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic Phrase，Private Key gives full and unlimited access to your wallet.";
+"Wallet.Import.inputWalletName" = "Wallet Name";
+"Wallet.Import.import" = "Import";
+"Wallet.Import.loading" = "Wallet Importing...";
+"Wallet.Import.walletAlreadyExists" = "Wallet Address is existed";
+"Wallet.Import.success" = "Wallet Imported";
+"Wallet.Import.setPassword" = "Set Password";
+"Wallet.Import.repeatPassword" = "Repeat Password";
+"Wallet.Import.setPasswordDesc" = "At least 8 characters, three types of uppercase and lowercase alphabets, numbers, and special symbols！";
+"Wallet.Import.inconsistentPasswords" = "Password don't match";
 
-"Wallet.Import.inputKeystoreWarning" = "粘贴以太坊Keystore内容至输入框，或通过扫描二维码输入。";
-"Wallet.Import.inputKeystore" = "请导入Keystore文本";
-"Wallet.Import.inputWalletPassword" = "输入密码";
-"Wallet.Import.emptyKeystorePassword" = "解锁密码不能为空";
+"Wallet.Import.inputKeystoreWarning" = "Please enter Keystore";
+"Wallet.Import.inputKeystore" = "Please enter Keystore";
+"Wallet.Import.inputWalletPassword" = "Password";
+"Wallet.Import.emptyKeystorePassword" = "Empty Password";
 
-"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。";
-"Wallet.Import.inputMnemonic" = "请按顺序输入您的助记词，按空格分隔";
+"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。（已无）";
+"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic Phrase with a space.";
 
-"Wallet.Import.inputPrivatekeyWarning" = "请输入您的私钥，或通过二维码扫描输入。";
-"Wallet.Import.inputPrivatekey" = "请输入私钥原文";
+"Wallet.Import.inputPrivatekeyWarning" = "Please enter Private Key or scan it by QR code";
+"Wallet.Import.inputPrivatekey" = "Please enter Private Key.";
 
 // Wallet QRCode
 // ---------------------------------------------------------
-"Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
-"Wallet.QRCode.copy" = "复制";
-"Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
+"Wallet.QRCode.desc" = "Please do not deposit any digital assets other than ETH and AppChain to above address";
+"Wallet.QRCode.copy" = "Copy";
+"Wallet.QRCode.copySuccess" = "Address is copied to clipboard";
 
 // Transaction History
 // ---------------------------------------------------------
-"Transaction.History.title" = "交易列表";
-"TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
+"Transaction.History.title" = "Transaction List";
+"TokenProfile.Ether.overview" = "Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.";
 
 // Transaction Status
 // ---------------------------------------------------------
-"TransactionStatus.success" = "交易成功";
-"TransactionStatus.pending" = "交易进行中";
-"TransactionStatus.failure" = "交易失败";
+"TransactionStatus.success" = "Confirmed Transaction";
+"TransactionStatus.pending" = "Pending Transaction";
+"TransactionStatus.failure" = "Failed Transaction";
 
 // Transaction Details
 // ---------------------------------------------------------
-"Transaction.Details.title" = "交易详情";
-"Transaction.Details.paymentAddress" = "付款地址";
-"Transaction.Details.receiptAddress" = "收款地址";
-"Transaction.Details.hash" = "交易流水号";
-"Transaction.Details.chainNetwork" = "区块链网络";
-"Transaction.Details.block" = "区块";
-"Transaction.Details.gasFee" = "矿工费用";
-"Transaction.Details.blockchainBrowserDesc" = "到区块链浏览器查看更多";
+"Transaction.Details.title" = "Transaction Details";
+"Transaction.Details.paymentAddress" = "From";
+"Transaction.Details.receiptAddress" = "To";
+"Transaction.Details.hash" = "TxID";
+"Transaction.Details.chainNetwork" = "Network";
+"Transaction.Details.block" = "Block";
+"Transaction.Details.gasFee" = "Miner Fee";
+"Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
+"Transaction.Details.contractCreationPending" = "合约创建中";
+"Transaction.Details.contractCreationSuccess" = "合约创建成功";
+"Transaction.Details.contractCreationFailure" = "合约创建失败";
 
 // Send Transaction
 // ---------------------------------------------------------
-"Transaction.Send.balanceNotSufficient" = "请确保账户剩余%@高于矿工费用，以便顺利完成转账～";
-"Transaction.Send.addressError" = "您的地址错误，请重新输入";
-"Transaction.Send.title" = "%@转账";
-"Transaction.Send.transactionAvailableBalance" = "您输入的金额超过您的余额，是否全部转出？";
-"Transaction.Send.gasPriceSettingIsTooLow" = "您的GasPrice设置过低，建议输入推荐值以快速转账";
-"Transaction.Send.gasLimitSettingIsTooLow" = "请确保输入的gaslimit大于等于\"%@(估算值)*4\"";
-"Transaction.Send.gasCostSetting" = "高级设置";
-"Transaction.Send.gasCost" = "Gas 费用";
-"Transaction.Send.extenData" = "包含数据";
-"Transaction.Send.gasCostSettingDesc" = "数据将上传至区块链，您的数据安全将得到一百分保障！";
-"Transaction.Send.input" = "请输入";
-"Transaction.Send.inputHexData" = "请输入十六进制数据";
-"Transaction.Send.txToken" = "转账币种";
-"Transaction.Send.txAmount" = "转账金额";
-"Transaction.Send.inputAmount" = "输入金额";
-"Transaction.Send.receiptAddress" = "收款地址";
-"Transaction.Send.gasFee" = "矿工费用";
+"Transaction.Send.balanceNotSufficient" = "Insufficient %s Balance for miner fee";
+"Transaction.Send.addressError" = "Incorrect address：The address is usually a 42-bit character starting with 0x";
+"Transaction.Send.title" = "%s Transfer";
+"Transaction.Send.transactionAvailableBalance" = "The amount you entered exceeds your account balance, are all transferred out?";
+"Transaction.Send.gasPriceSettingIsTooLow" = "Gas Price too low, Please set above the Recommend Gas Price";
+"Transaction.Send.gasLimitSettingIsTooLow" = "Please ensure that the Gas Limit is greater than %s";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "Please ensure that the Quota Limit is greater than %@";
+"Transaction.Send.gasCostSetting" = "Advanced";
+"Transaction.Send.gasCost" = "Gas Price";
+"Transaction.Send.extenData" = "Data";
+"Transaction.Send.gasCostSettingDesc" = "The data will be uploaded to the blockchain and your data security will be guaranteed";
+"Transaction.Send.input" = "Please Enter";
+"Transaction.Send.inputHexData" = "Hexadecimal Data";
+"Transaction.Send.txToken" = "Transfer Token";
+"Transaction.Send.txAmount" = "Amount To Send";
+"Transaction.Send.inputAmount" = "Input Amount";
+"Transaction.Send.receiptAddress" = "To";
+"Transaction.Send.gasFee" = "Miner Fee";
 
 // Authentication
 // ---------------------------------------------------------
-"Authentication.clickFaceIdAuth" = "点击进行验证 Face ID";
-"Authentication.clickTouchIdAuth" = "点击进行验证 Touch ID";
-"Authentication.authFaceIdTitle" = "请验证 Face ID";
-"Authentication.authTouchIdTitle" = "请验证 Touch ID";
+"Authentication.clickFaceIdAuth" = "Click to verify Face ID";
+"Authentication.clickTouchIdAuth" = "Click to verify Touch ID";
+"Authentication.authFaceIdTitle" = "Please authenticate Face ID";
+"Authentication.authTouchIdTitle" = "Please authenticate Touch ID";
 
-"Authentication.selectWallet" = "选择钱包";
-"Authentication.walletPassword" = "钱包密码";
-"Authentication.walletPasswordError" = "密码不正确请重新输入";
+"Authentication.selectWallet" = "Select Wallet";
+"Authentication.walletPassword" = "Wallet Password";
+"Authentication.walletPasswordError" = "Incorrect Password";
 
-"Authentication.openFaceIdAuthDesc" = "请开启刷脸验证，确保您的资产安全";
-"Authentication.openFaceIdAuth" = "开启刷脸验证";
-"Authentication.openTouchIdAuthDesc" = "请开启指纹验证，确保您的资产安全";
-"Authentication.openTouchIdAuth" = "开启指纹验证";
+"Authentication.openFaceIdAuthDesc" = "Please turn on Face ID to keep your assets safe";
+"Authentication.openFaceIdAuth" = "Turn on Face ID";
+"Authentication.openTouchIdAuthDesc" = "Please turn on Touch ID to keep your assets safe";
+"Authentication.openTouchIdAuth" = "Turn on Touch ID";
 
-"Authentication.Error.touchIDNotEnrolled" = "未设置 Touch ID";
-"Authentication.Error.faceIDNotEnrolled" = "未设置 Face ID";
-"Authentication.Error.faceIDNotAvailable" = "您的Face ID未开启，请输入密码登陆";
-"Authentication.Error.biometryLockout" = "多次验证失败被锁定";
-"Authentication.Error.authFailed" = "验证失败，请重新验证";
+"Authentication.Error.touchIDNotEnrolled" = "Touch ID is not set";
+"Authentication.Error.faceIDNotEnrolled" = "Face ID is not set";
+"Authentication.Error.faceIDNotAvailable" = "You have not set up your Touch ID. Please input password.";
+"Authentication.Error.biometryLockout" = "Multiple verification failures, Please try again later";
+"Authentication.Error.authFailed" = "Verification failed, please re-verify";
 
 // Create Wallet
 // ---------------------------------------------------------
-"Wallet.Create.createWallet" = "创建钱包";
-"Wallet.Create.passwordWarning" = "此密码将被用于保护私钥和交易授权";
-"Wallet.Create.walletName" = "钱包名称";
-"Wallet.Create.setPassword" = "设定密码";
-"Wallet.Create.rePassword" = "重复密码";
-"Wallet.Create.passwordDesc" = "密码包含大写字母、小写字母、数字、特殊符号中的至少三类，且长度在8位以上。";
-"Wallet.Create.passwordInconsistent" = "两次密码不一致";
+"Wallet.Create.createWallet" = "Create Wallet";
+"Wallet.Create.passwordWarning" = "Your password will be required when sending digital assets or accessing confidential information.";
+"Wallet.Create.walletName" = "Wallet Name";
+"Wallet.Create.setPassword" = "Password";
+"Wallet.Create.rePassword" = "Repeat Password";
+"Wallet.Create.passwordDesc" = "At least 8 characters three types of uppercase and lowercase alphabets, numbers, and special symbols！";
+"Wallet.Create.passwordInconsistent" = "Password don't match";
 
-"Wallet.Create.backupMnemonic" = "备份助记词";
-"Wallet.Create.mnemonicWarnTitle" = "助记词将被用来恢复钱包或重置钱包密码";
-"Wallet.Create.mnemonicWarn1" = "- 如您的助记词被他人获取，您的财产可能受到损失";
-"Wallet.Create.mnemonicWarn2" = "- 不要截图或传送给他人";
-"Wallet.Create.mnemonicWarn3" = "- 推荐抄写并放在安全的地方";
-"Wallet.Create.backCreateWalletAlert" = "距离开启您的安全区块链账户还差最后一步，是否继续";
+"Wallet.Create.backupMnemonic" = "Your Mnemonic Phrase";
+"Wallet.Create.mnemonicWarnTitle" = "Mnemonic phrase will allow you to recover access to your wallet if your phone is lost or stolen.";
+"Wallet.Create.mnemonicWarn1" = "- Anyone who has the mnemonic phrase can transfer the corresponding digital assets";
+"Wallet.Create.mnemonicWarn2" = "- Don't email them or screenshot them.";
+"Wallet.Create.mnemonicWarn3" = "- Carefully write down these 12 words or save them in your password manager.";
+"Wallet.Create.backCreateWalletAlert" = "The last step to start your blockchain account! Do you want to continue?";
 
-"Wallet.Create.confirmMnemonic" = "确认助记词";
-"Wallet.Create.confirmMnemonicDesc" = "请按顺序点击助记词，以确认你的备份助记词正确";
-"Wallet.Create.backupCompleted" = "完成备份";
-"Wallet.Create.walletCreation" = "钱包创建中...";
-"Wallet.Create.mnemonicValidationFailed" = "助记词验证失败";
-"Wallet.Create.createSuccess" = "创建成功";
+"Wallet.Create.confirmMnemonic" = "Verify Mnemonic Phrase";
+"Wallet.Create.confirmMnemonicDesc" = "Please click on the mnemonic in order to confirm that your backup mnemonic is correct.";
+"Wallet.Create.backupCompleted" = "Confirm";
+"Wallet.Create.walletCreation" = "Wallet creating...";
+"Wallet.Create.mnemonicValidationFailed" = "Import Failed";
+"Wallet.Create.createSuccess" = "Wallet Created";
 
 
 // No Screenshot
 // ---------------------------------------------------------
-"NoScreenshot.title" = "禁止截屏！";
-"NoScreenshot.mnemonicMessage" = "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！";
+"NoScreenshot.title" = "No screenshot!";
+"NoScreenshot.mnemonicMessage" = "Keep your 12-word Mnemonic Phrase safe. Anyone who has it can transfer the corresponding digital assets.";
 // Settings
 // ---------------------------------------------------------
-"Settings.Title" = "我";
-"Settings.CurrencyTitle" = "本地货币";
-"Settings.TouchIdTitle" = "指纹设置";
-"Settings.ConnectUs" = "联系我们";
-"Settings.Forum" = "论坛";
-"Settings.ConnectUs.CopyWechat" = "客服微信已复制";
+"Settings.Title" = "Me";
+"Settings.CurrencyTitle" = "Local Currency";
+"Settings.TouchIdTitle" = "Touch ID";
+"Settings.ConnectUs" = "Contact";
+"Settings.Forum" = "Forum";
+"Settings.ConnectUs.CopyWechat" = "WeChat is copied to clipbord";
 
 // Settings: About U
 // ---------------------------------------------------------
 "Settings.About.AboutUs" = "About us";
-"Settings.About.SourceCode" = "源码";
-"Settings.About.ServicePrivacy" = "服务隐私";
-"Settings.About.InfuaDetail" = "提供以太坊访问服务";
-"Settings.About.OpenSea" = "提供721数据服务";
-"Settings.About.PeckShield" = "提供代码安全审计服务";
-"Settings.About.Cita" = "区块链内核";
+"Settings.About.SourceCode" = "Source Code";
+"Settings.About.ServicePrivacy" = "Terms of Use";
+"Settings.About.InfuaDetail" = "Provide access to Ethereum APIs";
+"Settings.About.OpenSea" = "Provide access to ERC721 assets APIs";
+"Settings.About.PeckShield" = "Provide security audits";
+"Settings.About.Cita" = "Blockchain Core";
 
 // Settings: Currency
 // ---------------------------------------------------------
-"Settings.Currency.Title" = "默认货币单位";
+"Settings.Currency.Title" = "Local Currency";
 
 // Settings: Switch ETH Network
 // ---------------------------------------------------------
-"Settings.SwitchNetwork.Title" = "切换以太坊网络";
+"Settings.SwitchNetwork.Title" = "Network";
 
 // Assets
 // ---------------------------------------------------------
-"Assets.AddAssets.Title" = "添加资产";
-"Assets.AddAssets.BlockChainNetwork" = "区块链网络";
-"Assets.AddAssets.ContractAddress" = "合约地址";
-"Assets.AddAssets.TokenMessage" = "代币信息";
-"Assets.AddAssets.TokenName" = "代币名称";
-"Assets.AddAssets.TokenSymbol" = "代币缩写";
-"Assets.AddAssets.TokenDecimals" = "小数位数";
+"Assets.AddAssets.Title" = "Add";
+"Assets.AddAssets.BlockChainNetwork" = "Network";
+"Assets.AddAssets.ContractAddress" = "Contract Address";
+"Assets.AddAssets.NodeAddress" = "节点地址";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址";
+"Assets.AddAssets.Search" = "查询";
+"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
+"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
+"Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络";
+"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";
+"Assets.AddAssets.StoreFailed" = "代币添加失败";
+"Assets.AddAssets.StoreSuccess" = "代币添加成功";
+"Assets.AddAssets.ListSettings" = "列表设置";
+"Assets.AddAssets.TokenMessage" = "Token info";
+"Assets.AddAssets.TokenName" = "Token Name";
+"Assets.AddAssets.TokenSymbol" = "Token Symbol";
+"Assets.AddAssets.TokenDecimals" = "Decimal";
+
 
 // Assets List Setting
-"Assets.AssetSetting.Title" = "列表设置";
-"Assets.AssetSetting.Complete" = "完成";
-"Assets.AssetSetting.Edit" = "编辑";
+"Assets.AssetSetting.Title" = "Setting";
+"Assets.AssetSetting.Complete" = "Done";
+"Assets.AssetSetting.Edit" = "Edit";

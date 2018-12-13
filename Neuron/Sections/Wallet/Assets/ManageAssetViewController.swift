@@ -10,121 +10,112 @@ import UIKit
 import RealmSwift
 
 class ManageAssetViewController: UITableViewController, AssetTableViewCellDelegate {
-    var dataArray: [TokenModel] = []
-    var selectArr: List<TokenModel>?
-    var selectAddressArray: [String] = []
+    @IBOutlet private weak var rightBarButton: DesignableButton!
+    var tokenArray: List<TokenModel>!
+    var selectArray: List<TokenModel>!
+    var realm: Realm!
+    var edit: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        didGetDataForList()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "ERC20列表"
+        realm = try! Realm()
+        title = "Assets.AddAssets.ListSettings".localized()
+        rightBarButton.setTitle("Assets.AssetSetting.Edit".localized(), for: .normal)
+        rightBarButton.setTitle("Assets.AssetSetting.Complete".localized(), for: .selected)
+        edit = false
+        tokenList()
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AddAssetController" {
-            let controller = segue.destination as! AddAssetController
-            controller.tokenArray = dataArray
-        }
-    }
-
-    func didGetDataForList() {
-        selectAddressArray.removeAll()
-        dataArray = getAssetListFromJSON()
-        selectArr = getSelectAsset()
-        for tokenItem in selectArr! {
-            selectAddressArray.append(tokenItem.address)
-        }
-        tableView.reloadData()
-    }
-
-    func getAssetListFromJSON() -> [TokenModel] {
-        var tokenArray: [TokenModel] = []
-
-        let appModel = AppModel.current
-        let realm = try! Realm()
-        for tModel in appModel.extraTokenList {
-            try? realm.write {
-                realm.add(tModel, update: true)
-            }
-            tokenArray.append(tModel)
-        }
-
-        let path = Bundle.main.path(forResource: "tokens-eth", ofType: "json")!
-        guard let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)) else { return [] }
-        guard let tokens = try? JSONDecoder().decode([TokenModel].self, from: jsonData) else { return [] }
-
-        for token in tokens {
-            token.iconUrl = token.logo?.src ?? ""
-            tokenArray.append(token)
-        }
-        return tokenArray
-    }
-
-    func getSelectAsset() -> List<TokenModel>? {
-        let appModel = AppModel.current
-        return appModel.currentWallet?.selectTokenList
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataArray.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "assetTableviewCell") as! AssetTableViewCell
-        cell.delegate = self
-        let tokenModel = dataArray[indexPath.row]
-        cell.iconUrlStr = tokenModel.iconUrl
-        cell.symbolLabel.text = tokenModel.name
-        cell.addressLabel.text = tokenModel.address
-        cell.nameLabel.text = tokenModel.symbol
-        cell.selectionStyle = .none
-        cell.isSelected = selectAddressArray.contains(tokenModel.address)
-
-        return cell
-    }
-
-    func selectAsset(_ assetTableViewCell: UITableViewCell, didSelectAsset switch: UISwitch) {
-        let index = tableView.indexPath(for: assetTableViewCell)!
-        let model = dataArray[index.row]
-        selectedAsset(model: model)
-    }
-
-    func selectedAsset(model: TokenModel) {
-        if selectAddressArray.contains(model.address) {
-            deleteSelectedToken(tokenM: model)
-            selectAddressArray = selectAddressArray.filter({ (item) -> Bool in
-                return item == model.address
-            })
+    @IBAction func clickEditListButton(_ sender: DesignableButton) {
+        if sender.isSelected {
+            sender.isSelected = false
+            sortSelectTokenArray()
         } else {
-            addSelectToken(tokenM: model)
+            sender.isSelected = true
         }
-        didGetDataForList()
+        tableView.setEditing(sender.isSelected, animated: true)
+        edit = sender.isSelected
     }
 
-    func deleteSelectedToken(tokenM: TokenModel) {
-        let appModel = AppModel.current
-        let filterResult = appModel.currentWallet?.selectTokenList.filter("address = %@", tokenM.address)
-        let realm = try! Realm()
-        try? realm.write {
-            realm.add(tokenM, update: true)
-            filterResult?.forEach({ (tm) in
-                if let index = appModel.currentWallet?.selectTokenList.index(of: tm) {
-                    appModel.currentWallet?.selectTokenList.remove(at: index)
+    func sortSelectTokenArray() {
+        let tempArray = List<TokenModel>()
+        tempArray.append(objectsIn: selectArray)
+        try! realm.write {
+            selectArray.removeAll()
+            tokenArray.forEach({ (model) in
+                if let token = tempArray.first(where: { $0 == model }) {
+                    selectArray.append(token)
                 }
             })
         }
     }
 
-    func addSelectToken(tokenM: TokenModel) {
-        let appModel = AppModel.current
-        let realm = try! Realm()
-        try? realm.write {
-            realm.add(tokenM, update: true)
-            appModel.currentWallet?.selectTokenList.append(tokenM)
+    func tokenList() {
+        let appModel = realm.objects(AppModel.self).first ?? AppModel()
+        tokenArray = appModel.currentWallet?.tokenModelList
+        selectArray = appModel.currentWallet?.selectedTokenList
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tokenArray.count
+    }
+
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "assetTableviewCell") as! AssetTableViewCell
+        cell.delegate = self
+        let tokenModel = tokenArray[indexPath.row]
+        cell.iconUrlStr = tokenModel.iconUrl
+        cell.symbolLabel.text = tokenModel.name
+        cell.addressLabel.text = tokenModel.address
+        cell.nameLabel.text = tokenModel.symbol
+        cell.selectionStyle = .none
+        cell.isSelected = selectArray.contains(where: { $0 == tokenModel })
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! AssetTableViewCell
+        cell.setEditing(true, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
+        let cell = tableView.cellForRow(at: indexPath!) as! AssetTableViewCell
+        cell.setEditing(false, animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    override func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        try! realm.write {
+            let object = tokenArray[sourceIndexPath.row]
+            tokenArray.remove(at: sourceIndexPath.row)
+            tokenArray.insert(object, at: destinationIndexPath.row)
+        }
+    }
+
+    func assetTableViewCell(_ assetTableViewCell: UITableViewCell, isSelected: Bool) {
+        let index = tableView.indexPath(for: assetTableViewCell)!
+        let tokenModel = tokenArray[index.row]
+        try! realm.write {
+            if isSelected {
+                if !selectArray.contains(where: { $0 == tokenModel }) {
+                    selectArray.append(tokenModel)
+                }
+            } else {
+                if selectArray.contains(where: { $0 == tokenModel }) {
+                    selectArray.remove(at: selectArray.index(of: tokenModel)!)
+                }
+            }
         }
     }
 }

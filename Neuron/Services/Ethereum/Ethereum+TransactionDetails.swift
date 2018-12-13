@@ -17,7 +17,6 @@ class EthereumTransactionDetails: TransactionDetails {
     var blockHash: String = ""
     var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
-    var gasPrice: BigUInt = 0
     var input: String = ""
     var contractAddress: String = ""
     var cumulativeGasUsed: BigUInt = 0
@@ -104,7 +103,6 @@ class Erc20TransactionDetails: TransactionDetails {
     var tokenDecimal: String = ""
     var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
-    var gasPrice: BigUInt = 0
     var gasUsed: BigUInt = 0
     var cumulativeGasUsed: BigUInt = 0
     var input: String = ""
@@ -179,7 +177,7 @@ private struct Erc20TransactionsResponse: Decodable {
 // MARK: - Get transaction details
 extension EthereumNetwork {
     func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [EthereumTransactionDetails] {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",
@@ -204,7 +202,7 @@ extension EthereumNetwork {
     }
 
     func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [Erc20TransactionDetails] {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",
@@ -230,7 +228,7 @@ extension EthereumNetwork {
     }
 
     func getTransaction(txhash: String) throws -> EthereumTransactionDetails {
-        let url = EthereumNetwork().host().appendingPathComponent("/api")
+        let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
             "module": "account",

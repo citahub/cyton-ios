@@ -143,6 +143,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
             appModel.wallets.append(walletModel)
             realm.add(appModel)
         }
+        DefaultTokenAndChain().addDefaultTokenToWallet(wallet: walletModel)
         navigationController?.popToRootViewController(animated: true)
         Toast.showToast(text: "Wallet.Create.createSuccess".localized())
     }
