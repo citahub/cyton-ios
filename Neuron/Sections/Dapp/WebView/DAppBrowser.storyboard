@@ -328,7 +328,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="rKo-aQ-G7f" kind="presentation" identifier="AdvancedViewController" animates="NO" modalPresentationStyle="overCurrentContext" id="i1I-Y2-McX"/>
+                                            <segue destination="Shf-qM-6Hw" kind="show" identifier="TransactionGasCostViewController" id="uWJ-W6-vLA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="HcX-eY-HkR" detailTextLabel="6CS-A7-scT" rowHeight="50" style="IBUITableViewCellStyleValue1" id="1pn-gN-HTf">
@@ -339,9 +339,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="总费用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HcX-eY-HkR">
-                                                    <rect key="frame" x="16" y="15" width="52" height="20.5"/>
+                                                    <rect key="frame" x="16" y="17" width="46" height="18"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.59607843137254901" green="0.61176470588235299" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -512,6 +512,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBp-hT-G8k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5197.6000000000004" y="163.26836581709148"/>
+        </scene>
+        <!--TransactionGasCostViewController-->
+        <scene sceneID="VOS-yh-mc0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="SendTransaction" referencedIdentifier="TransactionGasCostViewController" id="Shf-qM-6Hw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CCh-NL-PHH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5198" y="621"/>
         </scene>
         <!--Advanced View Controller-->
         <scene sceneID="9p8-3K-7N8">
