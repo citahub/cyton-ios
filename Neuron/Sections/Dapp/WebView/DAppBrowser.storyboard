@@ -294,7 +294,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="tW2-Uo-d7T" secondAttribute="trailing" constant="15" id="Voz-LD-guK"/>
                                 <constraint firstItem="tW2-Uo-d7T" firstAttribute="leading" secondItem="d8p-sy-ga1" secondAttribute="leading" constant="15" id="rEq-C8-aI0"/>
