@@ -11,25 +11,32 @@ import BigInt
 import Web3swift
 
 class TransactionGasCostViewController: UITableViewController {
-    @IBOutlet weak var gasPriceTextField: UITextField!
-    @IBOutlet weak var gasLimitTextField: UITextField!
-    @IBOutlet weak var gasCostLabel: UILabel!
-    @IBOutlet weak var gasCostDescLabel: UILabel!
-    @IBOutlet weak var dataTextView: UITextView!
-    @IBOutlet weak var dataTextPlaceholderLabel: UILabel!
-    @IBOutlet weak var confirmButton: UIButton!
-    var param: TransactionParamBuilder!
+    @IBOutlet private weak var gasPriceTitleLabel: UILabel!
+    @IBOutlet private weak var gasLimitTitleLabel: UILabel!
+    @IBOutlet private weak var gasPriceTextField: UITextField!
+    @IBOutlet private weak var gasLimitTextField: UITextField!
+    @IBOutlet private weak var gasCostLabel: UILabel!
+    @IBOutlet private weak var gasCostDescLabel: UILabel!
+    @IBOutlet private weak var inputDataTextView: UITextView!
+    @IBOutlet private weak var dataTextPlaceholderLabel: UILabel!
+    @IBOutlet private weak var confirmButton: UIButton!
+    @IBOutlet private weak var gasCostTitleLabel: UILabel!
+    @IBOutlet private weak var extenDataTitleLabel: UILabel!
+    @IBOutlet private weak var descLabel: UILabel!
+    @IBOutlet private weak var hexHighlightView: UIView!
+    @IBOutlet private weak var utf8HighlightView: UIView!
+    @IBOutlet private weak var dataTextView: UITextView!
+    @IBOutlet private weak var gasPriceSymbolLabel: UILabel!
+    @IBOutlet private weak var gasPriceSymbolWidthLayout: NSLayoutConstraint!
     private var paramBuilder: TransactionParamBuilder!
     private var observers = [NSKeyValueObservation]()
     private let minGasPrice = 1.0
-    @IBOutlet weak var gasCostTitleLabel: UILabel!
-    @IBOutlet weak var extenDataTitleLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
+    var dataString: String?
+    var param: TransactionParamBuilder!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Transaction.Send.gasCostSetting".localized()
-        gasCostTitleLabel.text = "Transaction.Send.gasCost".localized()
         extenDataTitleLabel.text = "Transaction.Send.extenData".localized()
         descLabel.text = "Transaction.Send.gasCostSettingDesc".localized()
         confirmButton.setTitle("Common.confirm".localized(), for: .normal)
@@ -41,12 +48,29 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
+        observers.append(param.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
+            guard let self = self else { return }
+            self.paramBuilder.gasPrice = self.param.gasPrice
+            self.paramBuilder.gasLimit = self.param.gasLimit
+        })
         observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        if paramBuilder.tokenType == .erc20 {
-            dataTextView.isEditable = false
-        }
+        dataString != nil ? switchDataToHex() : nil
+    }
+
+    // MARK: Action
+
+    @IBAction func switchDataToHex() {
+        hexHighlightView.backgroundColor = UIColor(named: "tint_color")
+        utf8HighlightView.backgroundColor = UIColor(named: "weak_1_color")
+        dataTextView.text = dataString
+    }
+
+    @IBAction func switchDataToUtf8() {
+        hexHighlightView.backgroundColor = UIColor(named: "weak_1_color")
+        utf8HighlightView.backgroundColor = UIColor(named: "tint_color")
+        dataTextView.text = String(decoding: Data.fromHex(dataString!)!, as: UTF8.self)
     }
 
     @IBAction func confirm() {
@@ -81,15 +105,31 @@ class TransactionGasCostViewController: UITableViewController {
 
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
-        param.data = dataTextView.text.data(using: .utf8) ?? Data()
+        param.data = inputDataTextView.text.data(using: .utf8) ?? Data()
         navigationController?.popViewController(animated: true)
     }
 
     private func updateGasCost() {
-        gasPriceTextField.text = param.gasPrice.toGweiText()
+        switch paramBuilder.tokenType {
+        case .appChain, .appChainErc20:
+            gasPriceTextField.text = paramBuilder.gasPrice.toAmountText(paramBuilder.decimals)
+            gasPriceSymbolLabel.text = "NATT"
+            gasPriceTextField.isEnabled = false
+            gasPriceTitleLabel.text = "Quota Price"
+            gasLimitTitleLabel.text = "Quota Limit"
+            gasCostTitleLabel.text = "Quota 费用"
+        case .ether, .erc20:
+            gasPriceTextField.text = paramBuilder.gasPrice.toGweiText()
+            gasPriceSymbolLabel.text = "Gwei"
+            gasPriceTitleLabel.text = "Gas Price"
+            gasLimitTitleLabel.text = "Gas Limit"
+            gasCostTitleLabel.text = "Transaction.Send.gasCost".localized()
+        }
+        gasPriceSymbolWidthLayout.constant = gasPriceSymbolLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 100, height: 20), limitedToNumberOfLines: 1).size.width
+
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
-        gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
+        gasCostDescLabel.text = "≈\(gasLimitTitleLabel.text!)(\(gasLimitTextField.text!))*\(gasPriceTitleLabel.text!)(\(gasPriceTextField.text!) \(gasPriceSymbolLabel.text!))"
         if paramBuilder.gasTokenPrice > 0 {
             let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
             gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(4)
@@ -127,11 +167,17 @@ extension TransactionGasCostViewController: UITextPasteDelegate {
 
 extension TransactionGasCostViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 3 && (paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20) {
-            return 0.0
-        } else {
-            return super.tableView(tableView, heightForRowAt: indexPath)
+        if indexPath.row == 4 {
+            if dataString == nil {
+                return 0.0
+            }
         }
+        if indexPath.row == 3 {
+            if paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20 || dataString != nil {
+                return 0.0
+            }
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
