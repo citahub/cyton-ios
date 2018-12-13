@@ -1,11 +1,12 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'Neuron' do
   use_frameworks!
   inhibit_all_warnings!
 
   pod 'AppChainSwift', git: "https://github.com/cryptape/appchain-swift", tag: "v0.20.5"
+  pod 'CKB', git: "https://github.com/nervosnetwork/ckb-sdk-swift", branch: "develop"
   pod 'web3swift', "~> 2.0.1"
   pod 'RealmSwift'
 

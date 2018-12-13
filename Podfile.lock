@@ -9,6 +9,7 @@ PODS:
   - BigInt (3.1.0):
     - SipHash (~> 1.2)
   - BulletinBoard (3.0.0)
+  - CKB (0.1.0)
   - CryptoSwift (0.13.0)
   - EFQRCode (4.3.0)
   - EthereumABI (1.1.1):
@@ -63,6 +64,7 @@ DEPENDENCIES:
   - Alamofire
   - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.5`)
   - BulletinBoard (from `https://github.com/alexaubry/BulletinBoard`, commit `7086607d3476cea29cd77a65d13df5c8ed0da52e`)
+  - CKB (from `https://github.com/nervosnetwork/ckb-sdk-swift`, branch `develop`)
   - EFQRCode
   - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
@@ -105,6 +107,9 @@ EXTERNAL SOURCES:
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
+  CKB:
+    :branch: develop
+    :git: https://github.com/nervosnetwork/ckb-sdk-swift
   SensorsAnalyticsSDK:
     :branch: v1.10.15
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -116,6 +121,9 @@ CHECKOUT OPTIONS:
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
+  CKB:
+    :commit: 76537d54f668ce41a15fd1adfd51fdcf8c608e24
+    :git: https://github.com/nervosnetwork/ckb-sdk-swift
   SensorsAnalyticsSDK:
     :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
     :git: https://github.com/sensorsdata/sa-sdk-ios
@@ -125,6 +133,7 @@ SPEC CHECKSUMS:
   AppChainSwift: 0957a762aa81d31cee3276834096e0f6d4fca1fd
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BulletinBoard: 927f4f9fd22503ceecd71bfc830fd65d5996593a
+  CKB: 53048cb4ed5da40730138775fb6a40b9f1d438d5
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
@@ -146,6 +155,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: beb75d52d4fb090be32eb898fb3ca2ea9a3e4566
+PODFILE CHECKSUM: 49d918048d228740ffc9cc2628627ba5232d4537
 
 COCOAPODS: 1.5.3
