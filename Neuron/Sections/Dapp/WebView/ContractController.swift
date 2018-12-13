@@ -28,7 +28,6 @@ class ContractController: UITableViewController, TransactonSender {
     var dappCommonModel: DAppCommonModel!
     var paramBuilder: TransactionParamBuilder!
     var tokenModel: TokenModel!
-    var advancedViewController: AdvancedViewController!
     weak var delegate: ContractControllerDelegate?
 
     @IBOutlet weak var valueLabel: UILabel!
