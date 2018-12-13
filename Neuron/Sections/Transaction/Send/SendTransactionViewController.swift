@@ -40,7 +40,6 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         summaryPageItem.actionHandler = { item in
             item.manager?.displayNextItem()
         }
-
         return BLTNItemManager(rootItem: summaryPageItem)
     }()
 
