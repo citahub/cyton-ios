@@ -24,7 +24,7 @@ struct EthereumNetwork {
         }
     }
 
-    func host() -> URL {
+    func apiHost() -> URL {
         switch currentNetwork {
         case .mainnet:
             return URL(string: "http://api.etherscan.io")!
@@ -37,6 +37,19 @@ struct EthereumNetwork {
         }
     }
 
+    func host() -> URL {
+        switch currentNetwork {
+        case .mainnet:
+            return URL(string: "https://etherscan.io")!
+        case .rinkeby:
+            return URL(string: "https://rinkeby.etherscan.io")!
+        case .ropsten:
+            return URL(string: "https://ropsten.etherscan.io")!
+        case .kovan:
+            return URL(string: "https://kovan.etherscan.io")!
+        }
+    }
+
     enum EthereumNetworkType: String, CaseIterable {
         case mainnet
         case rinkeby
@@ -44,6 +57,18 @@ struct EthereumNetwork {
         case kovan
 
         static let allValues = allCases.map { $0.rawValue }
+        var chainName: String {
+            switch self {
+            case .mainnet:
+                return "Ethereum Mainnet"
+            case .rinkeby:
+                return "Ethereum Rinkeby"
+            case .ropsten:
+                return "Ethereum Ropsten"
+            case .kovan:
+                return "Ethereum Kovan"
+            }
+        }
     }
 
     private let currentNetworkKey = "selectedNetwork"

@@ -18,18 +18,11 @@ class TransactionSwitchTokenViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     private var tokens = [TokenModel]()
     var currentToken: TokenModel!
-    @IBOutlet weak var cancelButton: UIButton!
-    @IBOutlet weak var confirmButton: UIButton!
     weak var delegate: TransactionSwitchTokenViewControllerDelegate?
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        confirmButton.setTitle("Common.confirm".localized(), for: .normal)
-        confirmButton.setTitle("Common.cancel".localized(), for: .normal)
-
-        tokens += AppModel.current.nativeTokenList
-        tokens += AppModel.current.currentWallet!.selectTokenList
+        tokens = AppModel.current.currentWallet!.selectedTokenList.map({ $0 })
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -55,7 +48,7 @@ class TransactionSwitchTokenViewController: UIViewController {
         })
     }
 
-    @IBAction func confirm() {
+    func confirm() {
         delegate?.switchToken(switchToken: self, didSwitchToToken: currentToken)
         dismiss()
     }
@@ -74,11 +67,7 @@ extension TransactionSwitchTokenViewController: UITableViewDataSource, UITableVi
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? TransactionSwitchTokenTableViewCell else { return }
-        if tokens[indexPath.row].symbol == currentToken.symbol {
-            cell.tokenLabel.textColor = UIColor(red: 72/255.0, green: 109/255.0, blue: 255/255.0, alpha: 1.0)
-        } else {
-            cell.tokenLabel.textColor = UIColor(red: 36/255.0, green: 43/255.0, blue: 67/255.0, alpha: 1.0)
-        }
+        cell.selectedView.isHidden = tokens[indexPath.row].symbol != currentToken.symbol
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -90,9 +79,11 @@ extension TransactionSwitchTokenViewController: UITableViewDataSource, UITableVi
             self.tableView(tableView, willDisplay: tableView.cellForRow(at: indexPath)!, forRowAt: indexPath)
         }
         self.tableView(tableView, willDisplay: tableView.cellForRow(at: indexPath)!, forRowAt: indexPath)
+        confirm()
     }
 }
 
 class TransactionSwitchTokenTableViewCell: UITableViewCell {
     @IBOutlet weak var tokenLabel: UILabel!
+    @IBOutlet weak var selectedView: UIImageView!
 }

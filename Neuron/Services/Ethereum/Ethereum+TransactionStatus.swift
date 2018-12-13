@@ -11,21 +11,25 @@ import BigInt
 import Web3swift
 
 extension EthereumNetwork {
-    func getTransactionStatus(sentTransaction: SentTransaction) -> TransactionStateResult {
+    func getTransactionStatus(localTxDetail: LocalTxDetailModel) -> TransactionStateResult {
         do {
-            let transactionDetails = try EthereumNetwork().getWeb3().eth.getTransactionDetails(sentTransaction.txHash) // TODO: cache
-            try? sentTransaction.realm?.write {
-                sentTransaction.blockNumber = transactionDetails.blockNumber ?? 0
+            let transactionDetails = try EthereumNetwork().getWeb3().eth.getTransactionDetails(localTxDetail.txHash) // TODO: cache
+            if transactionDetails.blockNumber == 0 || transactionDetails.blockNumber == nil {
+                return .pending
             }
+            try? localTxDetail.realm?.write {
+                localTxDetail.blockNumber = Int(transactionDetails.blockNumber?.words.first ?? 0)
+            }
+
             let blockNumber = try EthereumNetwork().getWeb3().eth.getBlockNumber()
-            if blockNumber - sentTransaction.blockNumber < 12 {
+            if blockNumber - BigUInt(localTxDetail.blockNumber) < 12 {
                 return .pending
             }
 
-            let receipt = try EthereumNetwork().getWeb3().eth.getTransactionReceipt(sentTransaction.txHash)
+            let receipt = try EthereumNetwork().getWeb3().eth.getTransactionReceipt(localTxDetail.txHash)
             switch receipt.status {
             case .ok:
-                let details: TransactionDetails = sentTransaction.transactionDetails()
+                let details: TransactionDetails = localTxDetail.getTransactionDetails()
                 if let ethereumTransaction = details as? EthereumTransactionDetails {
                     ethereumTransaction.nonce = transactionDetails.transaction.nonce
                     ethereumTransaction.blockHash = "0x" + String(BigUInt(receipt.blockHash), radix: 16)
@@ -46,14 +50,14 @@ extension EthereumNetwork {
             case .failed:
                 return .failure
             case .notYetProcessed:
-                if sentTransaction.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
+                if localTxDetail.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
                     return .failure // timeout
                 } else {
                     return .pending
                 }
             }
         } catch {
-            if sentTransaction.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
+            if localTxDetail.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
                 return .failure // timeout
             } else {
                 return .pending

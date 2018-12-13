@@ -61,7 +61,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "sendTransaction" {
             let controller = segue.destination as! SendTransactionViewController
-            controller.token = presenter?.token.tokenModel
+            controller.tokenModel = presenter?.token.tokenModel
         }
     }
 
@@ -96,12 +96,12 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     private func setupTokenProfile(_ profile: TokenProfile?) {
         tokenProfile = profile
         guard var profile = profile else {
-            self.overlay.frame = CGRect(x: 0, y: 0, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
+            self.overlay.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.tableView.bounds.size.height)
             self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 1)
             self.tokenProfleView.isHidden = true
             return
         }
-        self.overlay.frame = CGRect(x: 0, y: 125, width: self.tableView.bounds.size.width, height: self.tableView.bounds.size.height)
+        self.overlay.frame = CGRect(x: 0, y: 125, width: self.view.bounds.size.width, height: self.tableView.bounds.size.height)
         self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 125)
         self.tokenProfleView.isHidden = false
         self.tokenNameLabel.text = profile.symbol
@@ -163,7 +163,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let controller = TradeDetailsController(nibName: "TradeDetailsController", bundle: nil)
+        let controller: TransactionDetailsViewController = UIStoryboard(name: .transactionDetails).instantiateViewController()
         controller.transaction = presenter?.transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }

@@ -14,7 +14,8 @@ import RealmSwift
 
 /// Prepare tx params.
 class TransactionParamBuilder: NSObject {
-    var from: String = ""
+    var tokenIdentifier = ""
+    var from = ""
     var to = ""
     var value: BigUInt = 0
     var data = Data()
@@ -44,7 +45,7 @@ class TransactionParamBuilder: NSObject {
     var tokenBalance: BigUInt = 0
 
     @objc dynamic
-    private(set) var tokenPrice: Double = 0
+    private(set) var gasTokenPrice: Double = 0
 
     private(set) var currencySymbol = ""
 
@@ -68,10 +69,11 @@ class TransactionParamBuilder: NSObject {
     private var gasCalculator = GasCalculator()
 
     init(token: TokenModel) {
+        tokenIdentifier = token.identifier
         tokenType = token.type
-        rpcNode = token.chainHosts
+        rpcNode = token.chain?.httpProvider ?? ""
         decimals = token.decimals
-        chainId = token.chainId
+        chainId = token.chain?.chainId ?? ""
         contractAddress = token.address
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
@@ -81,10 +83,11 @@ class TransactionParamBuilder: NSObject {
 
         fetchGasPrice()
         fetchGasLimit()
-        fetchTokenPrice(token: token)
+        fetchGasTokenPrice(token: token)
     }
 
     init(builder: TransactionParamBuilder) {
+        tokenIdentifier = builder.tokenIdentifier
         tokenType = builder.tokenType
         rpcNode = builder.rpcNode
         decimals = builder.decimals
@@ -98,7 +101,7 @@ class TransactionParamBuilder: NSObject {
         gasLimit = builder.gasLimit
         from = builder.from
         to = builder.to
-        tokenPrice = builder.tokenPrice
+        gasTokenPrice = builder.gasTokenPrice
         currencySymbol = builder.currencySymbol
         rebuildGasCalculator()
     }
@@ -138,19 +141,29 @@ class TransactionParamBuilder: NSObject {
         switch tokenType {
         case .ether, .appChain:
             gasLimit = GasCalculator.defaultGasLimit
-        case .erc20, .appChainErc20:
+        case .erc20:
             gasLimit = 100_000
+        case .appChainErc20:
+            gasLimit = 200_000
         }
     }
 
-    private func fetchTokenPrice(token: TokenModel) {
+    private func fetchGasTokenPrice(token: TokenModel) {
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        let symbol = token.symbol
+        let tokenSymbol: String
+        switch token.type {
+        case .ether, .appChain:
+            tokenSymbol = token.symbol
+        case .appChainErc20:
+            tokenSymbol = (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: token.chain!.tokenIdentifier)!.symbol
+        case .erc20:
+            tokenSymbol = (try! Realm()).objects(TokenModel.self).first(where: { $0.symbol == "ETH" && $0.name == "ethereum" })!.symbol
+        }
         currencySymbol = currency.symbol
         DispatchQueue.global().async {
-            if let price = TokenPriceLoader().getPrice(symbol: symbol, currency: currency.short) {
+            if let price = TokenPriceLoader().getPrice(symbol: tokenSymbol, currency: currency.short) {
                 DispatchQueue.main.async {
-                    self.tokenPrice = price
+                    self.gasTokenPrice = price
                 }
             }
         }
@@ -158,6 +171,6 @@ class TransactionParamBuilder: NSObject {
 
     private func rebuildGasCalculator() {
         gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
-        txFeeText = gasCalculator.txFee.toDecimalNumber(decimals).formatterToString()
+        txFeeText = gasCalculator.txFee.toAmountText(decimals)
     }
 }

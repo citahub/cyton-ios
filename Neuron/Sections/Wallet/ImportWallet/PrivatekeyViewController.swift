@@ -29,7 +29,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
         super.viewDidLoad()
         warningLabel.text = "Wallet.Import.inputPrivatekeyWarning".localized()
         privatekeyTextView.placeholder = "Wallet.Import.inputPrivatekey".localized() as NSString
-        walletNameTextField.text = "Wallet.Import.inputWalletName".localized()
+        walletNameTextField.placeholder = "Wallet.Import.inputWalletName".localized()
         passwordTextField.placeholder = "Wallet.Import.setPassword".localized()
         rePasswordTextField.placeholder = "Wallet.Import.repeatPassword".localized()
         passwordDescLabel.text = "Wallet.Import.setPasswordDesc".localized()
@@ -146,6 +146,7 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
                 appModel.wallets.append(walletModel)
                 realm.add(appModel)
             }
+            DefaultTokenAndChain().addDefaultTokenToWallet(wallet: walletModel)
             Toast.showToast(text: "Wallet.Import.success".localized())
             SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)

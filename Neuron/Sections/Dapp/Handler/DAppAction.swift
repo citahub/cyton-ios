@@ -86,34 +86,49 @@ struct DAppAction {
             do {
                 let metaData = try appChain.rpc.getMetaData()
                 DispatchQueue.main.async {
+                    let chainModel = ChainModel()
+                    chainModel.chainId = metaData.chainId
+                    chainModel.chainName = metaData.chainName
+                    chainModel.httpProvider = chainNode
+                    if let chainIndentifier = ChainModel.identifier(for: chainModel) {
+                        chainModel.identifier = chainIndentifier
+                    }
+
                     let tokenModel = TokenModel()
                     tokenModel.address = ""
-                    tokenModel.chainId = metaData.chainId.description
-                    tokenModel.chainName = metaData.chainName
                     tokenModel.iconUrl = metaData.tokenAvatar
                     tokenModel.isNativeToken = true
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NativeDecimals.nativeTokenDecimals
-                    tokenModel.chainHosts = chainNode
-                    self.saveToken(model: tokenModel)
+                    tokenModel.chain = chainModel
+                    self.saveToken(tokenModel: tokenModel, chainModel: chainModel)
                 }
             } catch {
             }
         }
     }
 
-    private func saveToken(model: TokenModel) {
-        let appModel = AppModel.current
-        let exist = appModel.nativeTokenList.contains(where: {$0 == model})
-        if let id = TokenModel.identifier(for: model) {
-            model.identifier = id
+    private func saveToken(tokenModel: TokenModel, chainModel: ChainModel) {
+        let wallet = AppModel.current.currentWallet!
+        let selectExist = wallet.selectedTokenList.contains(where: { $0 == tokenModel })
+        let tokenExist = wallet.tokenModelList.contains(where: { $0 == tokenModel })
+        let chainExist = wallet.chainModelList.contains(where: { $0 == chainModel })
+        if let id = TokenModel.identifier(for: tokenModel) {
+            tokenModel.identifier = id
         }
         let realm = try! Realm()
         try? realm.write {
-            realm.add(model, update: true)
-            if !exist {
-                appModel.nativeTokenList.append(model)
+            realm.add(tokenModel, update: true)
+            realm.add(chainModel, update: true)
+            if !selectExist {
+                wallet.selectedTokenList.append(tokenModel)
+            }
+            if !tokenExist {
+                wallet.tokenModelList.append(tokenModel)
+            }
+            if !chainExist {
+                wallet.chainModelList.append(chainModel)
             }
         }
     }

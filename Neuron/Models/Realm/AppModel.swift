@@ -15,12 +15,6 @@ class AppModel: Object {
     /// whole wallet list
     var wallets = List<WalletModel>()
 
-    /// whole wallet extra asset token list not included in tokens-eth.json
-    var extraTokenList = List<TokenModel>()
-
-    /// storage of native tokens
-    var nativeTokenList = List<TokenModel>()
-
     static var current: AppModel {
         let realm = try! Realm()
         return realm.objects(AppModel.self).first ?? AppModel()
