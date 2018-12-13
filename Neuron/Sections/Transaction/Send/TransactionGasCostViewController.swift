@@ -41,12 +41,14 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
+        observers.append(param.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
+            guard let self = self else { return }
+            self.paramBuilder.gasPrice = self.param.gasPrice
+            self.paramBuilder.gasLimit = self.param.gasLimit
+        })
         observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        if paramBuilder.tokenType == .erc20 {
-            dataTextView.isEditable = false
-        }
     }
 
     @IBAction func confirm() {
@@ -86,7 +88,7 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     private func updateGasCost() {
-        gasPriceTextField.text = param.gasPrice.toGweiText()
+        gasPriceTextField.text = paramBuilder.gasPrice.toGweiText()
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈Gas Limit(\(gasLimitTextField.text!))*Gas Price(\(gasPriceTextField.text!) Gwei)"
