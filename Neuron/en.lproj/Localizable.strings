@@ -259,11 +259,23 @@
 // ---------------------------------------------------------
 "Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码(en)";
 "Wallet.Details.ChangeName.inputName" = "请输入钱包名称(en)";
+"Wallet.Details.title" = "钱包管理(en)";
+"Wallet.Details.deleteWallet" = "删除钱包(en)";
+"Wallet.Details.confirmDeleteWallet" = "确认删除(en)";
+"Wallet.Details.importKeystore" = "导出Keystore(en)";
+"Wallet.Details.deleteWalletSuccess" = "删除成功(en)";
+"Wallet.Details.icon" = "钱包头像(en)";
+"Wallet.Details.name" = "钱包名称(en)";
+"Wallet.Details.address" = "钱包地址(en)";
+"Wallet.Details.changePassword" = "修改密码(en)";
+"Wallet.Details.exportKeystore" = "导出Keystore(en)";
+"Wallet.Details.delete" = "删除当前钱包(en)";
 
 // No Screenshot
 // ---------------------------------------------------------
 "NoScreenshot.title" = "No screenshot!";
 "NoScreenshot.mnemonicMessage" = "Keep your 12-word Mnemonic Phrase safe. Anyone who has it can transfer the corresponding digital assets.";
+
 // Settings
 // ---------------------------------------------------------
 "Settings.Title" = "Me";

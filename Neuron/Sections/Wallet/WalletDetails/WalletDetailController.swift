@@ -11,30 +11,42 @@ import BLTNBoard
 import RealmSwift
 
 class WalletDetailController: UITableViewController {
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var walletAddressLabel: UILabel!
-    @IBOutlet var walletIconImageView: UIImageView!
+    @IBOutlet private weak var walletNameLabel: UILabel!
+    @IBOutlet private weak var walletAddressLabel: UILabel!
+    @IBOutlet private var walletIconImageView: UIImageView!
+    @IBOutlet private weak var iconTitleLabel: UILabel!
+    @IBOutlet private weak var nameTItleLabel: UILabel!
+    @IBOutlet private weak var addressTitleLabel: UILabel!
+    @IBOutlet private weak var changePwTitleLabel: UILabel!
+    @IBOutlet private weak var exprotKeystoreTItleLabel: UILabel!
+    @IBOutlet private weak var deleteWalletButton: UIButton!
+
     var appModel = AppModel()
     var walletModel = WalletModel()
 
     private var deleteBulletinManager: BLTNItemManager?
-
     private var exportBulletinManager: BLTNItemManager?
-
     private var modifyWalletNameBulletinManager: BLTNItemManager?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "钱包管理"
+        title = "Wallet.Details.title".localized()
         appModel = AppModel.current
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
         walletIconImageView.image = UIImage(data: walletModel.iconData)
+
+        iconTitleLabel.text = "Wallet.Details.icon".localized()
+        nameTItleLabel.text = "Wallet.Details.name".localized()
+        addressTitleLabel.text = "Wallet.Details.address".localized()
+        changePwTitleLabel.text = "Wallet.Details.changePassword".localized()
+        exprotKeystoreTItleLabel.text = "Wallet.Details.exportKeystore".localized()
+        deleteWalletButton.setTitle("Wallet.Details.delete".localized(), for: .normal)
     }
 
     func createDeleteWalletPageItem() -> PasswordPageItem {
-        let passwordPageItem = PasswordPageItem.create(title: "删除钱包", actionButtonTitle: "确认删除")
+        let passwordPageItem = PasswordPageItem.create(title: "Wallet.Details.deleteWallet".localized(), actionButtonTitle: "Wallet.Details.confirmDeleteWallet".localized())
 
         passwordPageItem.actionHandler = { [weak self] item in
             item.manager?.displayActivityIndicator()
@@ -47,7 +59,7 @@ class WalletDetailController: UITableViewController {
     }
 
     func creatExportKeystorePageItem() -> PasswordPageItem {
-        let passwordPageItem = PasswordPageItem.create(title: "导出Keystore", actionButtonTitle: "确认")
+        let passwordPageItem = PasswordPageItem.create(title: "Wallet.Details.importKeystore".localized(), actionButtonTitle: "Common.confirm".localized())
         passwordPageItem.actionHandler = { [weak self] item in
             item.manager?.displayActivityIndicator()
             guard let self = self else {
@@ -130,7 +142,7 @@ class WalletDetailController: UITableViewController {
                 realm.delete(self.walletModel)
                 appItem.currentWallet = appItem.wallets.first
             }
-            Toast.showToast(text: "删除成功")
+            Toast.showToast(text: "Wallet.Details.deleteWalletSuccess".localized())
             deleteBulletinManager?.dismissBulletin()
             self.navigationController?.popViewController(animated: true)
         } catch let error {

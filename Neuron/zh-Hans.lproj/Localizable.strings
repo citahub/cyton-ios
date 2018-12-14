@@ -259,11 +259,23 @@
 // ---------------------------------------------------------
 "Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码";
 "Wallet.Details.ChangeName.inputName" = "请输入钱包名称";
+"Wallet.Details.title" = "钱包管理";
+"Wallet.Details.deleteWallet" = "删除钱包";
+"Wallet.Details.confirmDeleteWallet" = "确认删除";
+"Wallet.Details.importKeystore" = "导出Keystore";
+"Wallet.Details.deleteWalletSuccess" = "删除成功";
+"Wallet.Details.icon" = "钱包头像";
+"Wallet.Details.name" = "钱包名称";
+"Wallet.Details.address" = "钱包地址";
+"Wallet.Details.changePassword" = "修改密码";
+"Wallet.Details.exportKeystore" = "导出Keystore";
+"Wallet.Details.delete" = "删除当前钱包";
 
 // No Screenshot
 // ---------------------------------------------------------
 "NoScreenshot.title" = "禁止截屏！";
 "NoScreenshot.mnemonicMessage" = "拥有助记词就能完全控制该地址下的资产，建议抄写并放在安全的地方！";
+
 // Setting
 // ---------------------------------------------------------
 "Settings.Title" = "我";
