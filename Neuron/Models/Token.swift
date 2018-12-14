@@ -77,8 +77,10 @@ class Token {
 
         self.balance = nil
         switch type {
-        case .appChain, .appChainErc20:
-            balance = try AppChainNetwork.appChain(url: URL(string: chainHosts)).rpc.getBalance(address: walletAddress)
+        case .appChain :
+            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHosts)), address: walletAddress).getBalance()
+        case .appChainErc20 :
+            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHosts)), address: walletAddress).getERC20Balance(contractAddress: address)
         case .ether:
             balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getBalance()
         case .erc20:

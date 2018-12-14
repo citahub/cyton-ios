@@ -69,7 +69,8 @@ class AddAppChainToken {
             tokenModel.isNativeToken = false
             tokenModel.chain = chainModel
             return tokenModel
-        } catch {
+        } catch let error {
+            print(error.localizedDescription)
             return nil
         }
     }
