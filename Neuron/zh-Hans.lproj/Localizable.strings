@@ -270,6 +270,15 @@
 "Wallet.Details.changePassword" = "修改密码";
 "Wallet.Details.exportKeystore" = "导出Keystore";
 "Wallet.Details.delete" = "删除当前钱包";
+"Wallet.Details.changePassword" = "修改密码";
+"Wallet.Details.ChangePassword.inputPassword" = "输入密码";
+"Wallet.Details.ChangePassword.inputNewPassword" = "输入新密码";
+"Wallet.Details.ChangePassword.repeatNewPassword" = "再次输入新密码";
+"Wallet.Details.ChangePassword.warning" = "钱包密码如丢失将无法找回，请您妥善保管密码";
+"Wallet.Details.ChangePassword.newPasswordIsSameAsOld" = "您输入的密码和原密码一致，请重新输入";
+"Wallet.Details.ChangePassword.inconsistentPasswords" = "两次新密码输入不一致";
+"Wallet.Details.ChangePassword.loading" = "修改密码中...";
+"Wallet.Details.ChangePassword.success" = "密码修改成功，请牢记！";
 
 // No Screenshot
 // ---------------------------------------------------------
