@@ -497,6 +497,7 @@
                         <outlet property="gasPriceLabel" destination="qbs-V2-hsL" id="6ha-WK-TOc"/>
                         <outlet property="gasPriceTitleLabel" destination="85T-xC-LzQ" id="Dem-y1-Xid"/>
                         <outlet property="gasUsedLabel" destination="3Dj-vt-McH" id="gpU-rV-GeJ"/>
+                        <outlet property="gasUsedTitleLabel" destination="Y2X-gh-fXk" id="LjS-Sz-0q4"/>
                         <outlet property="hashLabel" destination="ZiB-Xc-USH" id="TRl-5T-VTV"/>
                         <outlet property="hashTitleLabel" destination="nl6-Hd-xIp" id="kVe-F1-Qif"/>
                         <outlet property="paymentAddressLabel" destination="lZ5-ox-RPE" id="34p-u0-zYK"/>

@@ -68,7 +68,7 @@ class TransactionParamBuilder: NSObject {
 
     private var gasCalculator = GasCalculator()
 
-    init(token: TokenModel) {
+    init(token: TokenModel, gasPrice: BigUInt? = nil, gasLimit: BigUInt? = nil) {
         tokenIdentifier = token.identifier
         tokenType = token.type
         rpcNode = token.chain?.httpProvider ?? ""
@@ -81,8 +81,16 @@ class TransactionParamBuilder: NSObject {
 
         super.init()
 
-        fetchGasPrice()
-        fetchGasLimit()
+        if let gasPrice = gasPrice {
+            self.gasPrice = gasPrice
+        } else {
+            fetchGasPrice()
+        }
+        if let gasLimit = gasLimit?.words.first {
+            self.gasLimit = UInt64(gasLimit)
+        } else {
+            fetchGasLimit()
+        }
         fetchGasTokenPrice(token: token)
     }
 

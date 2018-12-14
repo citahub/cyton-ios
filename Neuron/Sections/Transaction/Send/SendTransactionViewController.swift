@@ -40,7 +40,6 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         summaryPageItem.actionHandler = { item in
             item.manager?.displayNextItem()
         }
-
         return BLTNItemManager(rootItem: summaryPageItem)
     }()
 
@@ -160,11 +159,10 @@ private extension SendTransactionViewController {
     func sendTransaction(password: String) {
         DispatchQueue.global().async {
             do {
-                let txHash: String
                 if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
-                    txHash = try self.sendEthereumTransaction(password: password)
+                    _ = try self.sendEthereumTransaction(password: password)
                 } else {
-                    txHash = try self.sendAppChainTransaction(password: password)
+                    _ = try self.sendAppChainTransaction(password: password)
                 }
                 DispatchQueue.main.async {
                     // TODO: send back txHash?

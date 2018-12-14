@@ -27,13 +27,7 @@ class ContractController: UITableViewController, TransactonSender {
     var dappName: String = ""
     var dappCommonModel: DAppCommonModel!
     var paramBuilder: TransactionParamBuilder!
-    private var chainType: ChainType = .appChain
-    var tokenModel: TokenModel! {
-        didSet {
-            paramBuilder = TransactionParamBuilder(token: tokenModel)
-        }
-    }
-    var advancedViewController: AdvancedViewController!
+    var tokenModel: TokenModel!
     weak var delegate: ContractControllerDelegate?
 
     @IBOutlet weak var valueLabel: UILabel!
@@ -43,11 +37,7 @@ class ContractController: UITableViewController, TransactonSender {
     @IBOutlet weak var requestStringLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var fromLabel: UILabel!
-
-    private var gasPrice = BigUInt()
-    private var gasLimit = BigUInt()
-    private var ethereumGas: String?
-    private var value: String! // both appChain'amount and Ethereum'amount
+    private var observers = [NSKeyValueObservation]()
 
     private lazy var summaryPageItem: TxSummaryPageItem = {
         return TxSummaryPageItem.create()
@@ -58,46 +48,44 @@ class ContractController: UITableViewController, TransactonSender {
         summaryPageItem.actionHandler = { item in
             item.manager?.displayNextItem()
         }
-
         return BLTNItemManager(rootItem: summaryPageItem)
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "支付详情"
-        getTokenModel()
+
+        let wallet = AppModel.current.currentWallet
+        if dappCommonModel.chainType == "AppChain" {
+            self.tokenModel = wallet!.tokenModelList.first(where: { $0.type == .appChain && $0.chain!.chainId == "\(dappCommonModel.appChain!.chainId)" })
+            let gasLimit = dappCommonModel.appChain?.quota?.toBigUInt()
+            paramBuilder = TransactionParamBuilder(token: tokenModel, gasPrice: nil, gasLimit: gasLimit)
+            paramBuilder.value = dappCommonModel.appChain?.value?.toBigUInt() ?? 0
+            paramBuilder.to = dappCommonModel.appChain?.to ?? ""
+            paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
+        } else {
+            self.tokenModel = wallet!.tokenModelList.first(where: { $0.type == .ether })
+            let gasPrcie = dappCommonModel.eth?.gasPrice?.toBigUInt()
+            let gasLimit = dappCommonModel.eth?.gasLimit?.toBigUInt()
+            paramBuilder = TransactionParamBuilder(token: tokenModel, gasPrice: gasPrcie, gasLimit: gasLimit)
+            paramBuilder.value = dappCommonModel.eth?.value?.toBigUInt() ?? 0
+            paramBuilder.to = dappCommonModel.eth?.to ?? ""
+            paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
+        }
+        paramBuilder.from = wallet!.address
+
+        setUIData()
+        observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { (_, _) in
+            self.updateGasCost()
+        })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "AdvancedViewController" {
-            advancedViewController = segue.destination as? AdvancedViewController
-            advancedViewController.delegate = self
-            advancedViewController.dataString = dappCommonModel.eth?.data ?? ""
-            advancedViewController.gasLimit = gasLimit
+        if segue.identifier == String(describing: TransactionGasCostViewController.self) {
+            let controller = segue.destination as! TransactionGasCostViewController
+            controller.param = paramBuilder
+            controller.dataString = dappCommonModel.eth?.data ?? ""
         }
-    }
-
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if identifier == "AdvancedViewController" {
-            return false
-        }
-        return true
-    }
-
-    func getTokenModel() {
-        let wallet = AppModel.current.currentWallet
-        wallet?.tokenModelList.forEach { (tokenModel) in
-            if dappCommonModel.chainType == "AppChain" {
-                if dappCommonModel.appChain!.chainId == Int(tokenModel.chain!.chainId) && tokenModel.isNativeToken {
-                    self.tokenModel = tokenModel
-                }
-            } else {
-                if dappCommonModel.eth!.chainId == -1 && tokenModel.isNativeToken {
-                    self.tokenModel = tokenModel
-                }
-            }
-        }
-        setUIData()
     }
 
     func setUIData() {
@@ -105,118 +93,20 @@ class ContractController: UITableViewController, TransactonSender {
         fromLabel.text = walletModel.address
         requestStringLabel.text = requestAddress
         dappNameLabel.text = dappName
+        toLabel.text = paramBuilder.to
+        valueLabel.text = "\(paramBuilder.value.toAmountText(tokenModel.decimals)) \(tokenModel.symbol)"
+    }
 
-        if dappCommonModel.chainType == "AppChain" {
-            let appChainQuota = dappCommonModel.appChain?.quota!.toBigUInt() ?? 0
-            chainType = .appChain
-            toLabel.text = dappCommonModel.appChain?.to
-            value = formatScientValue(value: dappCommonModel.appChain?.value?.toBigUInt() ?? 0)
-            valueLabel.text = value
-            gasLabel.text = getNervosTransactionCosted(with: appChainQuota) + tokenModel.symbol
-            totlePayLabel.text = getTotleValue(value: dappCommonModel.appChain?.value?.toBigUInt() ?? 0, gas: appChainQuota) + tokenModel.symbol
+    func updateGasCost() {
+        gasLabel.text =  "\(paramBuilder.txFeeText) \(tokenModel.symbol)"
+        totlePayLabel.text = "\((paramBuilder.txFee + paramBuilder.value).toAmountText(tokenModel.decimals)) \(tokenModel.symbol)"
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 && dappCommonModel.chainType == "ETH" {
+            cell.accessoryType = .disclosureIndicator
         } else {
-            chainType = .eth
-            toLabel.text = dappCommonModel.eth?.to
-            value = formatScientValue(value: dappCommonModel.eth?.value?.toBigUInt() ?? "0")
-            valueLabel.text = value
-            getETHGas(ethGasPirce: dappCommonModel.eth?.gasPrice, ethGasLimit: dappCommonModel.eth?.gasLimit)
-        }
-        formatValueLabel(value: value)
-    }
-
-    private func createPasswordPageItem() -> PasswordPageItem {
-        let passwordPageItem = PasswordPageItem.create()
-
-        passwordPageItem.actionHandler = { [weak self] item in
-            item.manager?.displayActivityIndicator()
-            guard let self = self else {
-                return
-            }
-            self.sendTransaction(password: passwordPageItem.passwordField.text!)
-        }
-
-        return passwordPageItem
-    }
-
-    func formatValueLabel(value: String) {
-        let range = NSRange(location: valueLabel.text!.lengthOfBytes(using: .utf8), length: tokenModel.symbol.lengthOfBytes(using: .utf8) + 1)
-        valueLabel.text! += " " + tokenModel.symbol
-        let attributedText = NSMutableAttributedString(attributedString: valueLabel.attributedText!)
-        attributedText.addAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)], range: range)
-        valueLabel.attributedText = attributedText
-    }
-
-    func getNervosTransactionCosted(with quotaInput: BigUInt) -> String {
-        return Web3Utils.formatToEthereumUnits(quotaInput, toUnits: .eth, decimals: 1, fallbackToScientific: true)!
-    }
-
-    func formatScientValue(value: BigUInt) -> String {
-        let format = Web3Utils.formatToEthereumUnits(value, toUnits: .eth, decimals: 8, fallbackToScientific: false)!
-        let finalValue = Double(format)!
-        return finalValue.trailingZerosTrimmed
-    }
-
-    // gas is equal to appChain's quota
-    func getTotleValue(value: BigUInt, gas: BigUInt) -> String {
-        let finalValue = value + gas
-        let formatValue = Web3Utils.formatToEthereumUnits(finalValue, toUnits: .eth, decimals: 8, fallbackToScientific: true)!
-        return Double(formatValue)!.trailingZerosTrimmed
-    }
-
-    func getETHGas(ethGasPirce: String?, ethGasLimit: String?) {
-        Toast.showHUD()
-        DispatchQueue.global().async {
-            let web3 = EthereumNetwork().getWeb3()
-            if ethGasPirce != nil {
-                self.gasPrice = ethGasLimit!.toBigUInt()!
-            } else {
-                do {
-                    let gasPrice = try web3.eth.getGasPrice()
-                    self.gasPrice = gasPrice
-                } catch {
-                    self.gasPrice = BigUInt(0)
-                }
-            }
-
-            if ethGasLimit != nil {
-                self.gasLimit = ethGasLimit!.toBigUInt()!
-            } else {
-                var options = TransactionOptions()
-                options.gasLimit = .limited(self.gasLimit)
-                options.from = EthereumAddress(self.dappCommonModel.eth?.from ?? "")
-                options.value = self.dappCommonModel.eth?.value?.toBigUInt()
-                let contract = web3.contract(Web3.Utils.coldWalletABI, at: EthereumAddress(self.dappCommonModel.eth?.to ?? ""))!
-                if let estimatedGas = try? contract.method(transactionOptions: options)!.estimateGas(transactionOptions: options) {
-                    self.gasLimit = estimatedGas * 4
-                } else {
-                    self.gasLimit = BigUInt(0)
-                }
-            }
-            DispatchQueue.main.async {
-                let gas = self.gasPrice * self.gasLimit
-                self.ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: false)
-                self.gasLabel.text = Double(self.ethereumGas!)!.trailingZerosTrimmed + self.tokenModel.symbol
-                self.totlePayLabel.text =  self.getTotleValue(value: self.dappCommonModel.eth?.value?.toBigUInt() ?? 0, gas: gas) + self.tokenModel.symbol
-                Toast.hideHUD()
-            }
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = super.tableView(tableView, cellForRowAt: indexPath)
-        if indexPath.section == 0 && indexPath.row == 0 {
-            if dappCommonModel.chainType == "ETH" {
-                cell.accessoryType = .disclosureIndicator
-            } else {
-                cell.accessoryType = .none
-            }
-        }
-        return cell
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if dappCommonModel.chainType == "ETH" && indexPath.section == 0 && indexPath.row == 0 {
-            performSegue(withIdentifier: "AdvancedViewController", sender: indexPath.row)
+            cell.accessoryType = .none
         }
     }
 
@@ -229,22 +119,6 @@ class ContractController: UITableViewController, TransactonSender {
         guard let paramBuilder = paramBuilder else {
             return
         }
-        paramBuilder.from = AppModel.current.currentWallet!.address
-        paramBuilder.value = BigUInt.parseToBigUInt(value, tokenModel.decimals)
-
-        switch chainType {
-        case .appChain:
-            paramBuilder.gasLimit = 10000000
-            paramBuilder.gasPrice = dappCommonModel.appChain?.quota?.toBigUInt() ?? 1000000
-            paramBuilder.to = dappCommonModel.appChain?.to ?? ""
-            paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
-        case .eth:
-            paramBuilder.gasLimit = UInt64(gasLimit)
-            paramBuilder.gasPrice = gasPrice
-            paramBuilder.to = dappCommonModel.eth?.to ?? ""
-            paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
-        }
-
         summaryPageItem.update(paramBuilder)
         bulletinManager.showBulletin(above: self)
     }
@@ -297,21 +171,22 @@ private extension ContractController {
         SensorsAnalytics.Track.transaction(
             chainType: tokenModel.chain?.chainId ?? "",
             currencyType: tokenModel.symbol,
-            currencyNumber: Double(value) ?? 0.0,
+            currencyNumber: paramBuilder.value.toDouble(tokenModel.decimals),
             receiveAddress: dappCommonModel.appChain?.to ?? "",
             outcomeAddress: AppModel.current.currentWallet!.address,
             transactionType: .normal
         )
     }
-}
 
-extension ContractController: AdvancedViewControllerDelegate {
-    func getCustomGas(gasPrice: BigUInt, gas: BigUInt) {
-        self.gasPrice = gasPrice
-        ethereumGas = Web3Utils.formatToEthereumUnits(gas, toUnits: .eth, decimals: 8, fallbackToScientific: true)
-        let bigUIntValue = Web3Utils.parseToBigUInt(value, units: .eth)!
-        let totlePay = getTotleValue(value: bigUIntValue, gas: gas)
-        totlePayLabel.text = totlePay + tokenModel.symbol
-        gasLabel.text = Double(ethereumGas ?? "")!.trailingZerosTrimmed + tokenModel.symbol
+    private func createPasswordPageItem() -> PasswordPageItem {
+        let passwordPageItem = PasswordPageItem.create()
+        passwordPageItem.actionHandler = { [weak self] item in
+            item.manager?.displayActivityIndicator()
+            guard let self = self else {
+                return
+            }
+            self.sendTransaction(password: passwordPageItem.passwordField.text!)
+        }
+        return passwordPageItem
     }
 }
