@@ -179,6 +179,6 @@ class TransactionParamBuilder: NSObject {
 
     private func rebuildGasCalculator() {
         gasCalculator = GasCalculator(gasPrice: gasPrice, gasLimit: gasLimit)
-        txFeeText = gasCalculator.txFee.toAmountText(decimals)
+        txFeeText = gasCalculator.txFee.toAmountText()
     }
 }

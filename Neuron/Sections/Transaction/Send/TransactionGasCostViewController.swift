@@ -48,11 +48,6 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        observers.append(param.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
-            guard let self = self else { return }
-            self.paramBuilder.gasPrice = self.param.gasPrice
-            self.paramBuilder.gasLimit = self.param.gasLimit
-        })
         observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
@@ -74,13 +69,13 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     @IBAction func confirm() {
-        let gasPrice = Double(gasPriceTextField.text!)!
-        if gasPrice < minGasPrice {
-            Toast.showToast(text: "Transaction.Send.gasPriceSettingIsTooLow".localized())
-            return
-        }
-
         if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
+            let gasPrice = Double(gasPriceTextField.text!)!
+            if gasPrice < minGasPrice {
+                Toast.showToast(text: "Transaction.Send.gasPriceSettingIsTooLow".localized())
+                return
+            }
+
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {

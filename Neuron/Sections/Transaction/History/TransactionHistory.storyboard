@@ -128,9 +128,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易成功" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1la-NF-tFv">
-                                                    <rect key="frame" x="280" y="43" width="80" height="18"/>
+                                                    <rect key="frame" x="260" y="43" width="100" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="8Oa-pb-TaC"/>
+                                                        <constraint firstAttribute="width" constant="100" id="8Oa-pb-TaC"/>
                                                         <constraint firstAttribute="height" constant="18" id="G5j-Kv-XOR"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
