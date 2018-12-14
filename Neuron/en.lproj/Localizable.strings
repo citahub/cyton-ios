@@ -279,8 +279,8 @@
 "Wallet.Details.ChangePassword.inconsistentPasswords" = "两次新密码输入不一致(en)";
 "Wallet.Details.ChangePassword.loading" = "修改密码中...(en)";
 "Wallet.Details.ChangePassword.success" = "密码修改成功，请牢记！(en)";
-"Wallet.Details.ExportKeystore.copy" = "复制(en)"
-"Wallet.Details.ExportKeystore.copySuccess" = "Keystore已经复制到粘贴板(en)"
+"Wallet.Details.ExportKeystore.copy" = "复制(en)";
+"Wallet.Details.ExportKeystore.copySuccess" = "Keystore已经复制到粘贴板(en)";
 
 // No Screenshot
 // ---------------------------------------------------------
