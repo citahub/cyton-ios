@@ -253,6 +253,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="tKh-tV-Yeh" id="MDF-Qo-W6l"/>
+                        <outlet property="testTokenWarnLabel" destination="lAL-oW-227" id="YZ6-Ic-fr3"/>
                         <outlet property="tokenAmountLabel" destination="TVz-WV-pzU" id="lZX-ma-PID"/>
                         <outlet property="tokenIconView" destination="1Ut-bx-AaC" id="Hkp-yK-Ktl"/>
                         <outlet property="tokenNameLabel" destination="0Vn-x7-Dib" id="5s6-df-87S"/>

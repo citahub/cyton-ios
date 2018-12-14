@@ -39,6 +39,7 @@
 "DApp.Browser.CheckNoWeChat" = "WeChat client is not detected, please try again after installation.";
 "DApp.Browser.SignFaild" = "Signature failed";
 "DApp.Browser.PayFaild" = "Payment failed";
+"DApp.Browser.confirmSign" = "DApp签名信息确认(en)";
 
 // DApp Contract
 // ---------------------------------------------------------
@@ -163,6 +164,7 @@
 // ---------------------------------------------------------
 "Transaction.History.title" = "Transaction List";
 "TokenProfile.Ether.overview" = "Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.";
+"Transaction.History.testTokenWarning" = "该token无任何价值，仅做开发者测试使用(en)";
 
 // Transaction Status
 // ---------------------------------------------------------
@@ -180,18 +182,18 @@
 "Transaction.Details.block" = "Block";
 "Transaction.Details.gasFee" = "Miner Fee";
 "Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
-"Transaction.Details.contractCreationPending" = "合约创建中";
-"Transaction.Details.contractCreationSuccess" = "合约创建成功";
-"Transaction.Details.contractCreationFailure" = "合约创建失败";
+"Transaction.Details.contractCreationPending" = "合约创建中(en)";
+"Transaction.Details.contractCreationSuccess" = "合约创建成功(en)";
+"Transaction.Details.contractCreationFailure" = "合约创建失败(en)";
 
 // Send Transaction
 // ---------------------------------------------------------
-"Transaction.Send.balanceNotSufficient" = "Insufficient %s Balance for miner fee";
+"Transaction.Send.balanceNotSufficient" = "Insufficient %@ Balance for miner fee";
 "Transaction.Send.addressError" = "Incorrect address：The address is usually a 42-bit character starting with 0x";
-"Transaction.Send.title" = "%s Transfer";
+"Transaction.Send.title" = "%@ Transfer";
 "Transaction.Send.transactionAvailableBalance" = "The amount you entered exceeds your account balance, are all transferred out?";
 "Transaction.Send.gasPriceSettingIsTooLow" = "Gas Price too low, Please set above the Recommend Gas Price";
-"Transaction.Send.gasLimitSettingIsTooLow" = "Please ensure that the Gas Limit is greater than %s";
+"Transaction.Send.gasLimitSettingIsTooLow" = "Please ensure that the Gas Limit is greater than %@";
 "Transaction.Send.quotaLimitSettingIsTooLow" = "Please ensure that the Quota Limit is greater than %@";
 "Transaction.Send.gasCostSetting" = "Advanced";
 "Transaction.Send.gasCost" = "Gas Price";
@@ -204,6 +206,8 @@
 "Transaction.Send.inputAmount" = "Input Amount";
 "Transaction.Send.receiptAddress" = "To";
 "Transaction.Send.gasFee" = "Miner Fee";
+"Transaction.Send.txInfo" = "转账信息(en)";
+"Transaction.Send.confirmSendTx" = "确认转账(en)";
 
 // Authentication
 // ---------------------------------------------------------
@@ -251,11 +255,27 @@
 "Wallet.Create.mnemonicValidationFailed" = "Import Failed";
 "Wallet.Create.createSuccess" = "Wallet Created";
 
+// Wallet Details
+// ---------------------------------------------------------
+"Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码(en)";
+"Wallet.Details.ChangeName.inputName" = "请输入钱包名称(en)";
+"Wallet.Details.title" = "钱包管理(en)";
+"Wallet.Details.deleteWallet" = "删除钱包(en)";
+"Wallet.Details.confirmDeleteWallet" = "确认删除(en)";
+"Wallet.Details.importKeystore" = "导出Keystore(en)";
+"Wallet.Details.deleteWalletSuccess" = "删除成功(en)";
+"Wallet.Details.icon" = "钱包头像(en)";
+"Wallet.Details.name" = "钱包名称(en)";
+"Wallet.Details.address" = "钱包地址(en)";
+"Wallet.Details.changePassword" = "修改密码(en)";
+"Wallet.Details.exportKeystore" = "导出Keystore(en)";
+"Wallet.Details.delete" = "删除当前钱包(en)";
 
 // No Screenshot
 // ---------------------------------------------------------
 "NoScreenshot.title" = "No screenshot!";
 "NoScreenshot.mnemonicMessage" = "Keep your 12-word Mnemonic Phrase safe. Anyone who has it can transfer the corresponding digital assets.";
+
 // Settings
 // ---------------------------------------------------------
 "Settings.Title" = "Me";
@@ -288,22 +308,21 @@
 "Assets.AddAssets.Title" = "Add";
 "Assets.AddAssets.BlockChainNetwork" = "Network";
 "Assets.AddAssets.ContractAddress" = "Contract Address";
-"Assets.AddAssets.NodeAddress" = "节点地址";
-"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址";
-"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址";
-"Assets.AddAssets.Search" = "查询";
-"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
-"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
-"Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络";
-"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";
-"Assets.AddAssets.StoreFailed" = "代币添加失败";
-"Assets.AddAssets.StoreSuccess" = "代币添加成功";
-"Assets.AddAssets.ListSettings" = "列表设置";
+"Assets.AddAssets.NodeAddress" = "节点地址(en)";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址(en)";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址(en)";
+"Assets.AddAssets.Search" = "查询(en)";
+"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址(en)";
+"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币(en)";
+"Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络(en)";
+"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币(en)";
+"Assets.AddAssets.StoreFailed" = "代币添加失败(en)";
+"Assets.AddAssets.StoreSuccess" = "代币添加成功(en)";
+"Assets.AddAssets.ListSettings" = "列表设置(en)";
 "Assets.AddAssets.TokenMessage" = "Token info";
 "Assets.AddAssets.TokenName" = "Token Name";
 "Assets.AddAssets.TokenSymbol" = "Token Symbol";
 "Assets.AddAssets.TokenDecimals" = "Decimal";
-
 
 // Assets List Setting
 "Assets.AssetSetting.Title" = "Setting";

@@ -11,9 +11,9 @@ import BLTNBoard
 
 class SignMessagePageItem: BLTNPageItem {
     static func create() -> SignMessagePageItem {
-        let item = SignMessagePageItem(title: "DApp签名信息确认")
+        let item = SignMessagePageItem(title: "DApp.Browser.confirmSign".localized())
         item.appearance = PageItemAppearance.default
-        item.actionButtonTitle = "确认"
+        item.actionButtonTitle = "Common.confirm".localized()
         return item
     }
 }

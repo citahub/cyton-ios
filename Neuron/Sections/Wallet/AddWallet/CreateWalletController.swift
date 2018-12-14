@@ -26,7 +26,7 @@ class CreateWalletController: UITableViewController {
         passwordWarningLabel.text = "Wallet.Create.passwordWarning".localized()
         nameTextField.placeholder = "Wallet.Create.walletName".localized()
         passwordTextField.placeholder = "Wallet.Create.setPassword".localized()
-        rePasswordTextField.text = "Wallet.Create.rePassword".localized()
+        rePasswordTextField.placeholder = "Wallet.Create.rePassword".localized()
         nextButton.setTitle("Common.next".localized(), for: .normal)
         passwordDescLabel.text = "Wallet.Create.passwordDesc".localized()
     }
