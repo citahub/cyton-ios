@@ -126,34 +126,6 @@
 "Wallet.totalAmount" = "Total Assets";
 "Wallet.noAmount" = "No Assets";
 
-// Import Wallet
-// ---------------------------------------------------------
-"Wallet.Import.title" = "Import Wallet";
-"Wallet.Import.keystore" = "Keystore";
-"Wallet.Import.mnemonic" = "Mnemonic Phrase";
-"Wallet.Import.privatekey" = "Private Key";
-"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic Phrase，Private Key gives full and unlimited access to your wallet.";
-"Wallet.Import.inputWalletName" = "Wallet Name";
-"Wallet.Import.import" = "Import";
-"Wallet.Import.loading" = "Wallet Importing...";
-"Wallet.Import.walletAlreadyExists" = "Wallet Address is existed";
-"Wallet.Import.success" = "Wallet Imported";
-"Wallet.Import.setPassword" = "Set Password";
-"Wallet.Import.repeatPassword" = "Repeat Password";
-"Wallet.Import.setPasswordDesc" = "At least 8 characters, three types of uppercase and lowercase alphabets, numbers, and special symbols！";
-"Wallet.Import.inconsistentPasswords" = "Password don't match";
-
-"Wallet.Import.inputKeystoreWarning" = "Please enter Keystore";
-"Wallet.Import.inputKeystore" = "Please enter Keystore";
-"Wallet.Import.inputWalletPassword" = "Password";
-"Wallet.Import.emptyKeystorePassword" = "Empty Password";
-
-"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。（已无）";
-"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic Phrase with a space.";
-
-"Wallet.Import.inputPrivatekeyWarning" = "Please enter Private Key or scan it by QR code";
-"Wallet.Import.inputPrivatekey" = "Please enter Private Key.";
-
 // Wallet QRCode
 // ---------------------------------------------------------
 "Wallet.QRCode.desc" = "Please do not deposit any digital assets other than ETH and AppChain to above address";
@@ -233,6 +205,9 @@
 
 // Create Wallet
 // ---------------------------------------------------------
+"Wallet.Create.warning" = "没有「找回密码」！(en)";
+"Wallet.Create.desc" = "您的钱包不会被保存在云端，无法提供找回服务，请您谨慎保管。(en)";
+
 "Wallet.Create.createWallet" = "Create Wallet";
 "Wallet.Create.passwordWarning" = "Your password will be required when sending digital assets or accessing confidential information.";
 "Wallet.Create.walletName" = "Wallet Name";
@@ -255,6 +230,34 @@
 "Wallet.Create.mnemonicValidationFailed" = "Import Failed";
 "Wallet.Create.createSuccess" = "Wallet Created";
 
+// Import Wallet
+// ---------------------------------------------------------
+"Wallet.Import.title" = "Import Wallet";
+"Wallet.Import.keystore" = "Keystore";
+"Wallet.Import.mnemonic" = "Mnemonic Phrase";
+"Wallet.Import.privatekey" = "Private Key";
+"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic Phrase，Private Key gives full and unlimited access to your wallet.";
+"Wallet.Import.inputWalletName" = "Wallet Name";
+"Wallet.Import.import" = "Import";
+"Wallet.Import.loading" = "Wallet Importing...";
+"Wallet.Import.walletAlreadyExists" = "Wallet Address is existed";
+"Wallet.Import.success" = "Wallet Imported";
+"Wallet.Import.setPassword" = "Set Password";
+"Wallet.Import.repeatPassword" = "Repeat Password";
+"Wallet.Import.setPasswordDesc" = "At least 8 characters, three types of uppercase and lowercase alphabets, numbers, and special symbols！";
+"Wallet.Import.inconsistentPasswords" = "Password don't match";
+
+"Wallet.Import.inputKeystoreWarning" = "Please enter Keystore";
+"Wallet.Import.inputKeystore" = "Please enter Keystore";
+"Wallet.Import.inputWalletPassword" = "Password";
+"Wallet.Import.emptyKeystorePassword" = "Empty Password";
+
+"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。（已无）";
+"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic Phrase with a space.";
+
+"Wallet.Import.inputPrivatekeyWarning" = "Please enter Private Key or scan it by QR code";
+"Wallet.Import.inputPrivatekey" = "Please enter Private Key.";
+
 // Wallet Details
 // ---------------------------------------------------------
 "Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码(en)";
@@ -270,6 +273,17 @@
 "Wallet.Details.changePassword" = "修改密码(en)";
 "Wallet.Details.exportKeystore" = "导出Keystore(en)";
 "Wallet.Details.delete" = "删除当前钱包(en)";
+"Wallet.Details.changePassword" = "修改密码(en)";
+"Wallet.Details.ChangePassword.inputPassword" = "输入密码(en)";
+"Wallet.Details.ChangePassword.inputNewPassword" = "输入新密码(en)";
+"Wallet.Details.ChangePassword.repeatNewPassword" = "再次输入新密码(en)";
+"Wallet.Details.ChangePassword.warning" = "钱包密码如丢失将无法找回，请您妥善保管密码(en)";
+"Wallet.Details.ChangePassword.newPasswordIsSameAsOld" = "您输入的密码和原密码一致，请重新输入(en)";
+"Wallet.Details.ChangePassword.inconsistentPasswords" = "两次新密码输入不一致(en)";
+"Wallet.Details.ChangePassword.loading" = "修改密码中...(en)";
+"Wallet.Details.ChangePassword.success" = "密码修改成功，请牢记！(en)";
+"Wallet.Details.ExportKeystore.copy" = "复制(en)";
+"Wallet.Details.ExportKeystore.copySuccess" = "Keystore已经复制到粘贴板(en)";
 
 // No Screenshot
 // ---------------------------------------------------------
