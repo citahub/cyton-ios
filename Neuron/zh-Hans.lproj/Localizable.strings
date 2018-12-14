@@ -163,6 +163,7 @@
 // ---------------------------------------------------------
 "Transaction.History.title" = "交易列表";
 "TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
+"Transaction.History.testTokenWarning" = "该token无任何价值，仅做开发者测试使用";
 
 // Transaction Status
 // ---------------------------------------------------------
@@ -184,7 +185,6 @@
 "Transaction.Details.contractCreationSuccess" = "合约创建成功";
 "Transaction.Details.contractCreationFailure" = "合约创建失败";
 
-
 // Send Transaction
 // ---------------------------------------------------------
 "Transaction.Send.balanceNotSufficient" = "请确保账户剩余%@高于矿工费用，以便顺利完成转账～";
@@ -205,6 +205,8 @@
 "Transaction.Send.inputAmount" = "输入金额";
 "Transaction.Send.receiptAddress" = "收款地址";
 "Transaction.Send.gasFee" = "矿工费用";
+"Transaction.Send.txInfo" = "转账信息";
+"Transaction.Send.confirmSendTx" = "确认转账";
 
 // Authentication
 // ---------------------------------------------------------

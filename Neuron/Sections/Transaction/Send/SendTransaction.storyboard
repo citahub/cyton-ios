@@ -540,9 +540,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账币种" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UrY-wj-BNv">
-                                                    <rect key="frame" x="16" y="16" width="70" height="18"/>
+                                                    <rect key="frame" x="16" y="16" width="120" height="18"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="atW-8p-s1B"/>
+                                                        <constraint firstAttribute="width" constant="120" id="atW-8p-s1B"/>
                                                         <constraint firstAttribute="height" constant="18" id="dNl-CY-NOS"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -550,7 +550,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLe-lM-SnX">
-                                                    <rect key="frame" x="126" y="17" width="219" height="16"/>
+                                                    <rect key="frame" x="176" y="17" width="169" height="16"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="16" id="hkf-lO-2sF"/>
                                                     </constraints>
@@ -588,9 +588,9 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="转账金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFG-fG-irG">
-                                                    <rect key="frame" x="16" y="21" width="70" height="15"/>
+                                                    <rect key="frame" x="16" y="21" width="120" height="15"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="70" id="0nK-7c-Kgr"/>
+                                                        <constraint firstAttribute="width" constant="120" id="0nK-7c-Kgr"/>
                                                         <constraint firstAttribute="height" constant="15" id="Dyx-0h-kOr"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -610,7 +610,7 @@
                                                     </connections>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecb-RA-cMW">
-                                                    <rect key="frame" x="106" y="21" width="253" height="15"/>
+                                                    <rect key="frame" x="156" y="21" width="203" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="FoG-Io-KpD"/>
                                                     </constraints>

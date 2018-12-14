@@ -14,9 +14,9 @@ class TxSummaryPageItem: BLTNPageItem {
     private let summaryView = SendTransactionSummaryView.loadFromNib()
 
     static func create() -> TxSummaryPageItem {
-        let item = TxSummaryPageItem(title: "转账信息")
+        let item = TxSummaryPageItem(title: "Transaction.Send.txInfo".localized())
         item.appearance = PageItemAppearance.default
-        item.actionButtonTitle = "确认转账"
+        item.actionButtonTitle = "Transaction.Send.confirmSendTx".localized()
         return item
     }
 
