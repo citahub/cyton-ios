@@ -21,7 +21,7 @@ class ModifyWalletNamePageItem: BLTNPageItem {
         }
     }
 
-    static func create(title: String = "请输入钱包名称", actionButtonTitle: String = "确认修改") -> ModifyWalletNamePageItem {
+    static func create(title: String = "Wallet.Details.ChangeName.inputName".localized(), actionButtonTitle: String = "Common.confirm".localized()) -> ModifyWalletNamePageItem {
         let item = ModifyWalletNamePageItem(title: title)
         item.appearance = PageItemAppearance.default
         item.descriptionText = ""
@@ -31,7 +31,7 @@ class ModifyWalletNamePageItem: BLTNPageItem {
 
     override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         if walletNameField == nil {
-            walletNameField = interfaceBuilder.makeTextField(placeholder: "请输入钱包名称", returnKey: .done, delegate: self)
+            walletNameField = interfaceBuilder.makeTextField(placeholder: "Wallet.Details.ChangeName.inputName".localized(), returnKey: .done, delegate: self)
             walletNameField.isSecureTextEntry = false
         }
         return [walletNameField]
@@ -62,7 +62,7 @@ class ModifyWalletNamePageItem: BLTNPageItem {
                 return true
             }
         } else {
-            errorMessage = "请输入钱包名称"
+            errorMessage = "Wallet.Details.ChangeName.inputName".localized()
             return false
         }
     }

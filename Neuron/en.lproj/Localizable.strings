@@ -39,6 +39,7 @@
 "DApp.Browser.CheckNoWeChat" = "WeChat client is not detected, please try again after installation.";
 "DApp.Browser.SignFaild" = "Signature failed";
 "DApp.Browser.PayFaild" = "Payment failed";
+"DApp.Browser.confirmSign" = "DApp签名信息确认(en)";
 
 // DApp Contract
 // ---------------------------------------------------------
@@ -205,8 +206,8 @@
 "Transaction.Send.inputAmount" = "Input Amount";
 "Transaction.Send.receiptAddress" = "To";
 "Transaction.Send.gasFee" = "Miner Fee";
-"Transaction.Send.txInfo" = "转账信息";
-"Transaction.Send.confirmSendTx" = "确认转账";
+"Transaction.Send.txInfo" = "转账信息(en)";
+"Transaction.Send.confirmSendTx" = "确认转账(en)";
 
 // Authentication
 // ---------------------------------------------------------
@@ -254,6 +255,10 @@
 "Wallet.Create.mnemonicValidationFailed" = "Import Failed";
 "Wallet.Create.createSuccess" = "Wallet Created";
 
+// Wallet Details
+// ---------------------------------------------------------
+"Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码(en)";
+"Wallet.Details.ChangeName.inputName" = "请输入钱包名称(en)";
 
 // No Screenshot
 // ---------------------------------------------------------
@@ -306,7 +311,6 @@
 "Assets.AddAssets.TokenName" = "Token Name";
 "Assets.AddAssets.TokenSymbol" = "Token Symbol";
 "Assets.AddAssets.TokenDecimals" = "Decimal";
-
 
 // Assets List Setting
 "Assets.AssetSetting.Title" = "Setting";

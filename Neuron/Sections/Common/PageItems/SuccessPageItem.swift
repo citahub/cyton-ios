@@ -10,12 +10,12 @@ import UIKit
 import BLTNBoard
 
 class SuccessPageItem: BLTNPageItem {
-    static func create(title: String = "操作成功") -> SuccessPageItem {
+    static func create(title: String) -> SuccessPageItem {
         let item = SuccessPageItem(title: title)
 
         item.appearance = PageItemAppearance.default
         item.image = UIImage(named: "success")
-        item.actionButtonTitle = "确定"
+        item.actionButtonTitle = "Common.confirm".localized()
         item.isDismissable = false
 
         return item

@@ -23,7 +23,7 @@ class PasswordPageItem: BLTNPageItem {
         }
     }
 
-    static func create(title: String = "请输入钱包密码", actionButtonTitle: String = "确认发送") -> PasswordPageItem {
+    static func create(title: String = "Wallet.Details.ChangePassword.inputPassword".localized(), actionButtonTitle: String = "Common.confirm".localized()) -> PasswordPageItem {
         let item = PasswordPageItem(title: title)
         item.appearance = PageItemAppearance.default
         item.descriptionText = ""
@@ -33,7 +33,7 @@ class PasswordPageItem: BLTNPageItem {
 
     override func makeViewsUnderDescription(with interfaceBuilder: BLTNInterfaceBuilder) -> [UIView]? {
         if passwordField == nil {
-            passwordField = interfaceBuilder.makeTextField(placeholder: "请输入钱包密码", returnKey: .done, delegate: self)
+            passwordField = interfaceBuilder.makeTextField(placeholder: "Wallet.Details.ChangePassword.inputPassword".localized(), returnKey: .done, delegate: self)
             passwordField.isSecureTextEntry = true
         }
         return [passwordField]
@@ -65,7 +65,7 @@ class PasswordPageItem: BLTNPageItem {
         if isInputValid(text: passwordField.text) {
             return true
         } else {
-            errorMessage = "请输入密码"
+            errorMessage = "Wallet.Details.ChangePassword.inputPassword".localized()
             return false
         }
     }

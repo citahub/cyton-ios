@@ -39,6 +39,7 @@
 "DApp.Browser.CheckNoWeChat" = "未检测到微信客户端，请安装后重试。";
 "DApp.Browser.SignFaild" = "签名失败";
 "DApp.Browser.PayFaild" = "支付失败";
+"DApp.Browser.confirmSign" = "DApp签名信息确认";
 
 // DApp Contract
 // ---------------------------------------------------------
@@ -254,6 +255,10 @@
 "Wallet.Create.mnemonicValidationFailed" = "助记词验证失败";
 "Wallet.Create.createSuccess" = "创建成功";
 
+// Wallet Details
+// ---------------------------------------------------------
+"Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码";
+"Wallet.Details.ChangeName.inputName" = "请输入钱包名称";
 
 // No Screenshot
 // ---------------------------------------------------------
