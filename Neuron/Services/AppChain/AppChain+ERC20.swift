@@ -8,22 +8,27 @@
 
 import Foundation
 import AppChain
+import Web3swift
+import EthereumAddress
 import BigInt
 
 class AppChainERC20 {
     private let appChain: AppChain
     private let contractAddress: String
+    private let contract: EthereumContract
 
     init(appChain: AppChain, contractAddress: String) {
         self.appChain = appChain
         self.contractAddress = contractAddress
+        self.contract = EthereumContract(Web3Utils.erc20ABI)!
     }
 
     func name() throws -> String? {
         let callRequest = CallRequest(from: AppModel.current.currentWallet?.address, to: self.contractAddress, data: getContractString("name()"))
         let nameHex = try appChain.rpc.call(request: callRequest)
         let data = Data(hex: nameHex)
-        return String(data: data, encoding: .utf8)
+        let result = contract.decodeReturnData("name", data: data)
+        return result?.first?.value as? String
     }
 
     func decimals() throws -> BigUInt? {
@@ -36,22 +41,16 @@ class AppChainERC20 {
         let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractString("symbol()"))
         let symbolHex = try appChain.rpc.call(request: callRequest)
         let data = Data(hex: symbolHex)
-        print(String(data: data, encoding: String.Encoding.utf8))
-        return String(data: data, encoding: String.Encoding.utf8)
+        let result = contract.decodeReturnData("symbol", data: data)
+        return result?.first?.value as? String
     }
 
     func balance(walletAddress: String) -> String {
         if !Address.isValid(walletAddress) {
             fatalError()
         }
-        var data = Data()
-        let funcNameData = getContractData("balanceOf()")
-        data.append(funcNameData)
-        let addressData = Data(hex: walletAddress.addHexPrefix())
-        let padding = ((addressData.count + 31) / 32) * 32 - addressData.count
-        data.append(Data(repeating: 0, count: padding))
-        data.append(addressData)
-        return data.toHexString()
+        let data = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])
+        return data?.toHexString() ?? ""
     }
 
     func getContractString(_ string: String) -> String {
@@ -66,4 +65,14 @@ class AppChainERC20 {
         let sha3 = data.sha3(.keccak256)
         return sha3[0..<4]
     }
+
+    func encodeInputs(method: String, parameters: [AnyObject] = [AnyObject]()) -> Data? {
+        let foundMethod = contract.methods.filter { (key, value) -> Bool in
+            return key == method
+        }
+        guard foundMethod.count == 1 else { return Data() }
+        let abiMethod = foundMethod[method]
+        return abiMethod?.encodeParameters(parameters)
+    }
+
 }
