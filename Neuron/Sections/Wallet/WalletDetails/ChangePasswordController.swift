@@ -9,14 +9,14 @@
 import UIKit
 
 class ChangePasswordController: UITableViewController, UITextFieldDelegate {
-    @IBOutlet weak var walletIconView: UIImageView!
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var oldPasswordTextField: UITextField!
-    @IBOutlet weak var newPasswordTextField: UITextField!
-    @IBOutlet weak var reNewPasswordTextField: UITextField!
-    @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var warningLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet private weak var walletIconView: UIImageView!
+    @IBOutlet private weak var walletNameLabel: UILabel!
+    @IBOutlet private weak var oldPasswordTextField: UITextField!
+    @IBOutlet private weak var newPasswordTextField: UITextField!
+    @IBOutlet private weak var reNewPasswordTextField: UITextField!
+    @IBOutlet private weak var confirmButton: UIButton!
+    @IBOutlet private weak var warningLabel: UILabel!
+    @IBOutlet private weak var descLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

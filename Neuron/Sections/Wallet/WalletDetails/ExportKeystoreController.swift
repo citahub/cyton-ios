@@ -9,8 +9,8 @@
 import UIKit
 
 class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
-    @IBOutlet weak var kestoreTextView: UITextView!
-    @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet private weak var kestoreTextView: UITextView!
+    @IBOutlet private weak var copyButton: UIButton!
     var walletModel = WalletModel()
     var keystoreString = ""
 

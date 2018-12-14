@@ -9,16 +9,15 @@
 import UIKit
 
 class CreateWalletController: UITableViewController {
-
-    @IBOutlet weak var nextButton: UIButton!
     var name: String? = ""
     var password: String? = ""
     var confirmPassword: String? = ""
-    @IBOutlet weak var passwordWarningLabel: UILabel!
-    @IBOutlet weak var passwordDescLabel: UILabel!
-    @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var rePasswordTextField: UITextField!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var passwordWarningLabel: UILabel!
+    @IBOutlet private weak var passwordDescLabel: UILabel!
+    @IBOutlet private weak var nameTextField: UITextField!
+    @IBOutlet private weak var passwordTextField: UITextField!
+    @IBOutlet private weak var rePasswordTextField: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
