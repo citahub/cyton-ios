@@ -16,6 +16,10 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
         applyStyle()
         addDefaultTokenToRealm()
+
+        viewControllers?[0].title = "DApp.Home".localized()
+        viewControllers?[1].title = "Wallet".localized()
+        viewControllers?[2].title = "Settings.Title".localized()
     }
 
     func addDefaultTokenToRealm() {

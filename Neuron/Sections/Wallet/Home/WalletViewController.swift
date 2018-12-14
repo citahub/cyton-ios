@@ -80,8 +80,8 @@ class WalletViewController: UIViewController {
         title = "Wallet".localized()
         tokenTitleLabel.text = "Wallet.token".localized()
         addTokenButton.setTitle("Wallet.addToken".localized(), for: .normal)
-        receiptButton.setTitle("Wallet.receipt".localized(), for: .normal)
-        transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
+        receiptButton.setTitle(" " + "Wallet.receipt".localized(), for: .normal)
+        transactionButton.setTitle(" " + "Wallet.transaction".localized(), for: .normal)
 
         tokenTitleWidthLayout.constant = tokenTitleLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 25), limitedToNumberOfLines: 1).size.width
     }

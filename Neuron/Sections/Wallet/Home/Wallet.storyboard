@@ -136,22 +136,16 @@
                                                     <rect key="frame" x="55" y="98" width="120" height="40"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-9I-06f" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
-                                                            <rect key="frame" x="28.5" y="10" width="63" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="63" id="4F5-d1-Lsi"/>
-                                                                <constraint firstAttribute="height" constant="20" id="Lwx-CT-c7H"/>
+                                                                <constraint firstAttribute="width" constant="120" id="4F5-d1-Lsi"/>
+                                                                <constraint firstAttribute="height" constant="40" id="Lwx-CT-c7H"/>
                                                             </constraints>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="收款" image="icon_wallet_qrcode">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="rect" keyPath="imageFrame">
-                                                                    <rect key="value" x="0.0" y="0.0" width="20" height="20"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="rect" keyPath="titleFrame">
-                                                                    <rect key="value" x="30" y="0.0" width="33" height="20"/>
-                                                                </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
                                                                     <real key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
@@ -198,22 +192,16 @@
                                                     <rect key="frame" x="200" y="98" width="120" height="40"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-vX-xxw" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
-                                                            <rect key="frame" x="28.5" y="10" width="63" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="63" id="aMt-BK-sBl"/>
-                                                                <constraint firstAttribute="height" constant="20" id="zw6-EZ-Ixi"/>
+                                                                <constraint firstAttribute="width" constant="120" id="aMt-BK-sBl"/>
+                                                                <constraint firstAttribute="height" constant="40" id="zw6-EZ-Ixi"/>
                                                             </constraints>
                                                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="转账" image="icon_wallet_trans">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="rect" keyPath="imageFrame">
-                                                                    <rect key="value" x="0.0" y="0.0" width="20" height="20"/>
-                                                                </userDefinedRuntimeAttribute>
-                                                                <userDefinedRuntimeAttribute type="rect" keyPath="titleFrame">
-                                                                    <rect key="value" x="30" y="0.0" width="33" height="20"/>
-                                                                </userDefinedRuntimeAttribute>
                                                                 <userDefinedRuntimeAttribute type="number" keyPath="expandArea">
                                                                     <real key="value" value="10"/>
                                                                 </userDefinedRuntimeAttribute>
@@ -871,7 +859,7 @@
                                         <rect key="frame" x="22" y="360" width="301" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0x02dC203Badfe3d41471c88FAA2125Be2F0764a02" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ist-sh-hoq">
-                                                <rect key="frame" x="15" y="7" width="217" height="36"/>
+                                                <rect key="frame" x="15" y="7" width="211" height="36"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="GNV-fp-mc5"/>
                                                 </constraints>
@@ -879,11 +867,11 @@
                                                 <color key="textColor" red="0.56862745098039214" green="0.58823529411764708" blue="0.65098039215686276" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hj4-9b-ulb">
-                                                <rect key="frame" x="256" y="15" width="30" height="20"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hj4-9b-ulb">
+                                                <rect key="frame" x="242" y="15" width="44" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="FnX-aY-XeV"/>
-                                                    <constraint firstAttribute="width" constant="30" id="xFA-hw-S3h"/>
+                                                    <constraint firstAttribute="width" constant="44" id="xFA-hw-S3h"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <state key="normal" title="复制"/>
@@ -895,7 +883,7 @@
                                         <color key="backgroundColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="hj4-9b-ulb" secondAttribute="trailing" constant="15" id="BDw-aM-psE"/>
-                                            <constraint firstItem="hj4-9b-ulb" firstAttribute="leading" secondItem="ist-sh-hoq" secondAttribute="trailing" constant="24" id="Ggb-Cf-E9M"/>
+                                            <constraint firstItem="hj4-9b-ulb" firstAttribute="leading" secondItem="ist-sh-hoq" secondAttribute="trailing" constant="16" id="Ggb-Cf-E9M"/>
                                             <constraint firstItem="ist-sh-hoq" firstAttribute="centerY" secondItem="VVf-V8-sMa" secondAttribute="centerY" id="l5r-S6-bdt"/>
                                             <constraint firstItem="hj4-9b-ulb" firstAttribute="centerY" secondItem="VVf-V8-sMa" secondAttribute="centerY" id="tXP-he-Cyc"/>
                                             <constraint firstAttribute="height" constant="50" id="v5s-N3-6qP"/>

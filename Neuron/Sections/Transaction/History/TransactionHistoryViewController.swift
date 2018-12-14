@@ -10,16 +10,17 @@ import UIKit
 import WebKit
 
 class TransactionHistoryViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ErrorOverlayPresentable {
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var tokenProfleView: UIView!
-    @IBOutlet weak var tokenIconView: UIImageView!
-    @IBOutlet weak var tokenNameLabel: UILabel!
-    @IBOutlet weak var tokenOverviewLabel: UILabel!
-    @IBOutlet weak var tokenAmountLabel: UILabel!
-    @IBOutlet var warningView: UIView!
-    @IBOutlet weak var warningHeight: NSLayoutConstraint!
-    @IBOutlet weak var walletQRCodeButton: UIButton!
-    @IBOutlet weak var transactionButton: UIButton!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var tokenProfleView: UIView!
+    @IBOutlet private weak var tokenIconView: UIImageView!
+    @IBOutlet private weak var tokenNameLabel: UILabel!
+    @IBOutlet private weak var tokenOverviewLabel: UILabel!
+    @IBOutlet private weak var tokenAmountLabel: UILabel!
+    @IBOutlet private var warningView: UIView!
+    @IBOutlet private weak var warningHeight: NSLayoutConstraint!
+    @IBOutlet private weak var walletQRCodeButton: UIButton!
+    @IBOutlet private weak var transactionButton: UIButton!
+    @IBOutlet private weak var testTokenWarnLabel: UILabel!
 
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
@@ -31,6 +32,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         walletQRCodeButton.setTitle("Wallet.receipt".localized(), for: .normal)
         transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
         title = token.symbol
+        testTokenWarnLabel.text = "Transaction.History.testTokenWarning".localized()
 
         tableView.delegate = self
         tableView.dataSource = self
