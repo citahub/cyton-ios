@@ -16,7 +16,8 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "导出Keystore"
+        title = "Wallet.Details.exportKeystore".localized()
+        copyButton.setTitle("Wallet.Details.ExportKeystore.copy".localized(), for: .normal)
         walletModel = AppModel.current.currentWallet!
         kestoreTextView.text = keystoreString
         setupEnterBackOverlay()
@@ -24,6 +25,6 @@ class ExportKeystoreController: UIViewController, EnterBackOverlayPresentable {
 
     @IBAction func didClickCopyButton(_ sender: UIButton) {
         UIPasteboard.general.string = keystoreString
-        Toast.showToast(text: "Keystore已经复制到粘贴板")
+        Toast.showToast(text: "Wallet.Details.ExportKeystore.copySuccess".localized())
     }
 }
