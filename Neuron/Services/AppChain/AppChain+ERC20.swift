@@ -49,8 +49,8 @@ class AppChainERC20 {
         if !Address.isValid(walletAddress) {
             fatalError()
         }
-        let data = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])
-        return data?.toHexString() ?? ""
+        let dataHex = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])!.toHexString()
+        return String(dataHex.prefix(8)).addHexPrefix()
     }
 
     func getContractString(_ string: String) -> String {
@@ -67,7 +67,7 @@ class AppChainERC20 {
     }
 
     func encodeInputs(method: String, parameters: [AnyObject] = [AnyObject]()) -> Data? {
-        let foundMethod = contract.methods.filter { (key, value) -> Bool in
+        let foundMethod = contract.methods.filter { (key, _) -> Bool in
             return key == method
         }
         guard foundMethod.count == 1 else { return Data() }

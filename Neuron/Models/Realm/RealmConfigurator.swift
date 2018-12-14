@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class RealmConfigurator {
-    private static var schemaVersion: UInt64 = 10
+    private static var schemaVersion: UInt64 = 11
 
     static func configure() {
         var config = Realm.Configuration()

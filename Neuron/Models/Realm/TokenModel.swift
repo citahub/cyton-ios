@@ -30,7 +30,6 @@ class TokenModel: Object, Decodable {
         return realm.object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)
     }
 
-
     var balance: BigUInt {
         get {
             return BigUInt.parseToBigUInt(balanceText, decimals)
@@ -55,19 +54,20 @@ class TokenModel: Object, Decodable {
 
     var type: TokenType {
         if isNativeToken {
-            if chain == nil {
+            if chainIdentifier == "" && address == "" {
                 return .ether
             } else {
-                if address != "" {
-                    return .appChainErc20
-                } else {
-                    return .appChain
-                }
+                return .appChain
             }
         } else {
-            return .erc20
+            if chainIdentifier != "" && address != "" {
+                return .appChainErc20
+            } else {
+                return .erc20
+            }
         }
     }
+
     var gasSymbol: String {
         switch type {
         case .ether, .erc20:

@@ -25,7 +25,7 @@ class AppChainBalanceLoader {
 
     func getERC20Balance(contractAddress: String) throws -> BigUInt {
         let appchainERC20 = AppChainERC20(appChain: appChain, contractAddress: contractAddress)
-        let callRequest = CallRequest(from: nil, to: contractAddress, data: appchainERC20.balance(walletAddress: walletAddress))
+        let callRequest = CallRequest(from: walletAddress, to: contractAddress, data: appchainERC20.balance(walletAddress: walletAddress))
         let balanceHex = try appChain.rpc.call(request: callRequest)
         return balanceHex.toBigUInt() ?? 0
     }

@@ -70,7 +70,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             let wallet = AppModel.current.currentWallet!
             var tokenModel = tokenModel
             if let tokenIdentifier = TokenModel.identifier(for: tokenModel) {
-                tokenModel = (try Realm()).object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)!
+                tokenModel = realm.object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)!
             } else {
                 try realm.write {
                     realm.add(tokenModel, update: true)
