@@ -17,13 +17,6 @@ class AppChainERC20 {
     private let contractAddress: String
     private let contract: EthereumContract
 
-    enum error: String, LocalizedError {
-        case emyptContract
-        var errorDescription: String? {
-            return "AppChainERC20Error.\(rawValue)".localized()
-        }
-    }
-
     init(appChain: AppChain, contractAddress: String) {
         self.appChain = appChain
         self.contractAddress = contractAddress
