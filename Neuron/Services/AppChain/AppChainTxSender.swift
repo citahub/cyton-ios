@@ -8,6 +8,7 @@
 
 import Foundation
 import AppChain
+import EthereumAddress
 import BigInt
 
 class AppChainTxSender {
@@ -43,6 +44,47 @@ class AppChainTxSender {
         guard let blockNumber = try? appChain.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
+        if chainId.description != meta.chainId {
+            throw SendTransactionError.invalidChainId
+        }
+
+        let transaction = Transaction(
+            to: destinationEthAddress,
+            nonce: UUID().uuidString,
+            quota: quota,
+            validUntilBlock: blockNumber + UInt64(88),
+            data: data,
+            value: value,
+            chainId: meta.chainId,
+            version: meta.version
+        )
+        let signed = try sign(transaction: transaction, password: password)
+        return (try appChain.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
+    }
+
+    func sendERC20(
+        to: String,
+        contract: String,
+        value: BigUInt,
+        quota: UInt64 = GasCalculator.defaultGasLimit,
+        chainId: BigUInt,
+        password: String
+        ) throws -> (TxHash, BlockNumber) {
+        let destinationEthAddress = Address(to.addHexPrefix())
+        if !to.isEmpty && destinationEthAddress == nil {
+            throw SendTransactionError.invalidDestinationAddress
+        }
+
+        guard let meta = try? appChain.rpc.getMetaData() else {
+            throw SendTransactionError.createTransactionIssue
+        }
+        guard let blockNumber = try? appChain.rpc.blockNumber() else {
+            throw SendTransactionError.createTransactionIssue
+        }
+        guard let data = try AppChainERC20(appChain: appChain, contractAddress: contract).transferData(to: to, amount: value) else {
+            throw SendTransactionError.createTransactionIssue
+        }
+
         if chainId.description != meta.chainId {
             throw SendTransactionError.invalidChainId
         }

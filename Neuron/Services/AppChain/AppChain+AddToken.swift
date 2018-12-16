@@ -70,7 +70,6 @@ class AddAppChainToken {
             tokenModel.chainIdentifier = chainModel!.identifier
             return tokenModel
         } catch let error {
-            print(error.localizedDescription)
             return nil
         }
     }

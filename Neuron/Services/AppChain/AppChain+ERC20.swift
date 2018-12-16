@@ -17,6 +17,13 @@ class AppChainERC20 {
     private let contractAddress: String
     private let contract: EthereumContract
 
+    enum error: String, LocalizedError {
+        case emyptContract
+        var errorDescription: String? {
+            return "AppChainERC20Error.\(rawValue)".localized()
+        }
+    }
+
     init(appChain: AppChain, contractAddress: String) {
         self.appChain = appChain
         self.contractAddress = contractAddress
@@ -54,6 +61,15 @@ class AppChainERC20 {
         return balanceHex.toBigUInt() ?? 0
     }
 
+    func transferData(to: String, amount: BigUInt) throws -> Data? {
+        guard let erc20Contract = EthereumContract(Web3Utils.erc20ABI, at: EthereumAddress(contractAddress)) else {
+            return nil
+        }
+        guard let to = EthereumAddress(to) else { return nil }
+        let data = encodeInputs(ethereumContract: erc20Contract, method: "transfer", parameters: [to, amount] as [AnyObject])
+        return data
+    }
+
     func getContractString(_ string: String) -> String {
         let data = string.data(using: .utf8)!
         let sha3 = data.sha3(.keccak256)
@@ -61,14 +77,8 @@ class AppChainERC20 {
         return String(hexString.prefix(8)).addHexPrefix()
     }
 
-    func getContractData(_ string: String) -> Data {
-        let data = string.data(using: .utf8)!
-        let sha3 = data.sha3(.keccak256)
-        return sha3[0..<4]
-    }
-
-    func encodeInputs(method: String, parameters: [AnyObject] = [AnyObject]()) -> Data? {
-        let foundMethod = contract.methods.filter { (key, _) -> Bool in
+    func encodeInputs(ethereumContract: EthereumContract = EthereumContract(Web3Utils.erc20ABI)!, method: String, parameters: [AnyObject] = [AnyObject]()) -> Data? {
+        let foundMethod = ethereumContract.methods.filter { (key, _) -> Bool in
             return key == method
         }
         guard foundMethod.count == 1 else { return Data() }
