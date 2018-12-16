@@ -394,11 +394,13 @@
                     </tableView>
                     <connections>
                         <outlet property="confirmButton" destination="VjI-gY-M4K" id="wjF-zM-Utp"/>
+                        <outlet property="descLabel" destination="ufS-NO-q2t" id="ICh-TJ-8ZV"/>
                         <outlet property="newPasswordTextField" destination="jtd-sg-QTh" id="ku4-SH-QLb"/>
                         <outlet property="oldPasswordTextField" destination="Cnr-hF-XWY" id="XkP-A0-x3Q"/>
                         <outlet property="reNewPasswordTextField" destination="8RK-RO-OyV" id="Ipw-3L-FDm"/>
                         <outlet property="walletIconView" destination="LYA-rj-et0" id="F7r-Iy-H44"/>
                         <outlet property="walletNameLabel" destination="mcC-dZ-xmR" id="CVL-vK-lv1"/>
+                        <outlet property="warningLabel" destination="uWi-Sd-I7L" id="afS-kS-ys0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjM-KO-qsF" userLabel="First Responder" sceneMemberID="firstResponder"/>

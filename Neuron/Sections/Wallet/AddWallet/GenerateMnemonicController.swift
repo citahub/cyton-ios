@@ -12,12 +12,12 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
     var password = ""
     var walletModel = WalletModel()
     var mnemonic = ""
-    @IBOutlet weak var mnemonicTextView: UITextView!
-    @IBOutlet weak var nextButton: UIButton!
-    @IBOutlet weak var mnemonicWarnTitleLabel: UILabel!
-    @IBOutlet weak var mnemonicWarnLabel1: UILabel!
-    @IBOutlet weak var mnemonicWarnLabel2: UILabel!
-    @IBOutlet weak var mnemonicWarnLabel3: UILabel!
+    @IBOutlet private weak var mnemonicTextView: UITextView!
+    @IBOutlet private weak var nextButton: UIButton!
+    @IBOutlet private weak var mnemonicWarnTitleLabel: UILabel!
+    @IBOutlet private weak var mnemonicWarnLabel1: UILabel!
+    @IBOutlet private weak var mnemonicWarnLabel2: UILabel!
+    @IBOutlet private weak var mnemonicWarnLabel3: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -100,8 +100,9 @@ class TransactionDetailsViewController: UITableViewController {
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationPending".localized() : "TransactionStatus.pending".localized()
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
-            hashLabel.text = transaction.hash
 
+            hiddenItems.append((0, 3))    // block chain network
+            hiddenItems.append((1, 0))    // hash
             hiddenItems.append((1, 2))    // block
         case .failure:
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationFailure".localized() : "TransactionStatus.failure".localized()

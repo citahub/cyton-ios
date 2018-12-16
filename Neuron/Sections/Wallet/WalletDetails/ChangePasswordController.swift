@@ -9,17 +9,25 @@
 import UIKit
 
 class ChangePasswordController: UITableViewController, UITextFieldDelegate {
-    @IBOutlet weak var walletIconView: UIImageView!
-    @IBOutlet weak var walletNameLabel: UILabel!
-    @IBOutlet weak var oldPasswordTextField: UITextField!
-    @IBOutlet weak var newPasswordTextField: UITextField!
-    @IBOutlet weak var reNewPasswordTextField: UITextField!
-    @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet private weak var walletIconView: UIImageView!
+    @IBOutlet private weak var walletNameLabel: UILabel!
+    @IBOutlet private weak var oldPasswordTextField: UITextField!
+    @IBOutlet private weak var newPasswordTextField: UITextField!
+    @IBOutlet private weak var reNewPasswordTextField: UITextField!
+    @IBOutlet private weak var confirmButton: UIButton!
+    @IBOutlet private weak var warningLabel: UILabel!
+    @IBOutlet private weak var descLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "修改密码"
+        title = "Wallet.Details.changePassword".localized()
         view.backgroundColor = UIColor(hex: "#f5f5f9")
+        oldPasswordTextField.placeholder = "Wallet.Details.ChangePassword.inputPassword".localized()
+        newPasswordTextField.placeholder = "Wallet.Details.ChangePassword.inputNewPassword".localized()
+        reNewPasswordTextField.placeholder = "Wallet.Details.ChangePassword.repeatNewPassword".localized()
+        warningLabel.text = "Wallet.Details.ChangePassword.warning".localized()
+        descLabel.text = "Wallet.Import.setPasswordDesc".localized()
+        confirmButton.setTitle("Wallet.Details.changePassword".localized(), for: .normal)
 
         let walletModel = AppModel.current.currentWallet!
         walletNameLabel.text = walletModel.name
@@ -46,18 +54,18 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
 
     @IBAction func confirm(_ sender: Any) {
         if oldPasswordTextField.text == newPasswordTextField.text {
-            Toast.showToast(text: "您输入的密码和原密码一致，请重新输入")
+            Toast.showToast(text: "Wallet.Details.ChangePassword.newPasswordIsSameAsOld".localized())
             return
         }
         if newPasswordTextField.text! != reNewPasswordTextField.text! {
-            Toast.showToast(text: "两次新密码输入不一致")
+            Toast.showToast(text: "Wallet.Details.ChangePassword.inconsistentPasswords".localized())
             return
         }
         if case .invalid(let reason) = PasswordValidator.validate(password: newPasswordTextField.text!) {
             Toast.showToast(text: reason)
             return
         }
-        Toast.showHUD(text: "修改密码中...")
+        Toast.showHUD(text: "Wallet.Details.ChangePassword.loading".localized())
         let oldPassword = oldPasswordTextField.text!
         let newPassword = newPasswordTextField.text!
         let walletModel = AppModel.current.currentWallet!
@@ -68,7 +76,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
                 try WalletManager.default.updatePassword(wallet: wallet, password: oldPassword, newPassword: newPassword)
                 DispatchQueue.main.async {
                     Toast.hideHUD()
-                    Toast.showToast(text: "密码修改成功，请牢记！")
+                    Toast.showToast(text: "Wallet.Details.ChangePassword.success".localized())
                     self.navigationController?.popViewController(animated: true)
                 }
             } catch let error {

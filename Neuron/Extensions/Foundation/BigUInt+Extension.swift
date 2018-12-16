@@ -71,6 +71,7 @@ extension BigUInt {
     }
 
     func toAmountText(_ decimals: Int = 18) -> String {
+        if self == 0 { return "0" }
         if self > Int(0.00000001 * pow(10, Double(decimals))) {
             let formattingDecimals = decimals < 8 ? decimals : 8
             return toDecimalNumber(decimals).formatterToString(formattingDecimals)
