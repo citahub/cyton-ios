@@ -95,7 +95,6 @@ class AppChainTxSender {
             quota: quota,
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
-            value: value,
             chainId: meta.chainId,
             version: meta.version
         )
