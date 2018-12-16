@@ -45,12 +45,13 @@ class AppChainERC20 {
         return result?.first?.value as? String
     }
 
-    func balance(walletAddress: String) -> String {
-        if !Address.isValid(walletAddress) {
-            fatalError()
-        }
-        let dataHex = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])!.toHexString()
-        return String(dataHex.prefix(8)).addHexPrefix()
+    func balance() throws -> BigUInt? {
+        let walletAddress = AppModel.current.currentWallet!.address
+        let data = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])!
+        let dataHex = data.toHexString().prefix(8)
+        let callRequest = CallRequest(from: walletAddress, to: contractAddress, data: String(dataHex).addHexPrefix() + String(repeating: "0", count: 24) + walletAddress.removeHexPrefix())
+        let balanceHex = try appChain.rpc.call(request: callRequest)
+        return balanceHex.toBigUInt() ?? 0
     }
 
     func getContractString(_ string: String) -> String {
