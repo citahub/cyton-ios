@@ -34,7 +34,6 @@ class WalletNameValidatorTests: XCTestCase {
         let walletModel = WalletModel()
         walletModel.name = "ETH Wallet"
         walletModel.address = "0x6782CdeF6A4A056d412775EE6081d32B2bf90287"
-        walletModel.iconData = Data()
         let existence = appModel.wallets.contains(where: {$0.address == walletModel.address})
         let realm = try! Realm()
         try! realm.write {
