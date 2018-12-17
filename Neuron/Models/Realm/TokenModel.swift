@@ -20,10 +20,15 @@ class TokenModel: Object, Decodable {
 
     // defaults false, eth and RPC "getMateData" is true.
     @objc dynamic var isNativeToken = false
-    @objc dynamic var chain: ChainModel?
+    @objc dynamic var chainIdentifier: String = ""
 
     @objc dynamic private var balanceText = "0"
     var currencyAmount = "0"
+
+    var chain: ChainModel? {
+        let realm = try! Realm()
+        return realm.object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)
+    }
 
     var balance: BigUInt {
         get {
@@ -49,19 +54,20 @@ class TokenModel: Object, Decodable {
 
     var type: TokenType {
         if isNativeToken {
-            if chain == nil {
+            if chainIdentifier == "" && address == "" {
                 return .ether
             } else {
-                if address != "" {
-                    return .appChainErc20
-                } else {
-                    return .appChain
-                }
+                return .appChain
             }
         } else {
-            return .erc20
+            if chainIdentifier != "" && address != "" {
+                return .appChainErc20
+            } else {
+                return .erc20
+            }
         }
     }
+
     var gasSymbol: String {
         switch type {
         case .ether, .erc20:

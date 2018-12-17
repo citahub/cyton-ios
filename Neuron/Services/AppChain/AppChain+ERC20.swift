@@ -8,41 +8,75 @@
 
 import Foundation
 import AppChain
+import Web3swift
+import EthereumAddress
 import BigInt
 
 class AppChainERC20 {
     private let appChain: AppChain
     private let contractAddress: String
+    private let contract: EthereumContract
 
     init(appChain: AppChain, contractAddress: String) {
         self.appChain = appChain
         self.contractAddress = contractAddress
+        self.contract = EthereumContract(Web3Utils.erc20ABI)!
     }
 
     func name() throws -> String? {
-        let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractData("name()"))
+        let callRequest = CallRequest(from: AppModel.current.currentWallet?.address, to: self.contractAddress, data: getContractString("name()"))
         let nameHex = try appChain.rpc.call(request: callRequest)
         let data = Data(hex: nameHex)
-        return String(data: data, encoding: String.Encoding.utf8)
+        let result = contract.decodeReturnData("name", data: data)
+        return result?.first?.value as? String
     }
 
     func decimals() throws -> BigUInt? {
-        let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractData("decimals()"))
+        let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractString("decimals()"))
         let decimalsHex = try appChain.rpc.call(request: callRequest)
-        return BigUInt(decimalsHex)
+        return decimalsHex.toBigUInt()
     }
 
     func symbol() throws -> String? {
-        let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractData("symbol()"))
+        let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractString("symbol()"))
         let symbolHex = try appChain.rpc.call(request: callRequest)
         let data = Data(hex: symbolHex)
-        return String(data: data, encoding: String.Encoding.utf8)
+        let result = contract.decodeReturnData("symbol", data: data)
+        return result?.first?.value as? String
     }
 
-    func getContractData(_ string: String) -> String {
-        let data = string.data(using: String.Encoding.utf8)!
+    func balance() throws -> BigUInt? {
+        let walletAddress = AppModel.current.currentWallet!.address
+        let data = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])!
+        let dataHex = data.toHexString().prefix(8)
+        let callRequest = CallRequest(from: walletAddress, to: contractAddress, data: String(dataHex).addHexPrefix() + String(repeating: "0", count: 24) + walletAddress.removeHexPrefix())
+        let balanceHex = try appChain.rpc.call(request: callRequest)
+        return balanceHex.toBigUInt() ?? 0
+    }
+
+    func transferData(to: String, amount: BigUInt) throws -> Data? {
+        guard let erc20Contract = EthereumContract(Web3Utils.erc20ABI, at: EthereumAddress(contractAddress)) else {
+            return nil
+        }
+        guard let to = EthereumAddress(to) else { return nil }
+        let data = encodeInputs(ethereumContract: erc20Contract, method: "transfer", parameters: [to, amount] as [AnyObject])
+        return data
+    }
+
+    func getContractString(_ string: String) -> String {
+        let data = string.data(using: .utf8)!
         let sha3 = data.sha3(.keccak256)
         let hexString = sha3.toHexString()
-        return String(hexString.prefix(8))
+        return String(hexString.prefix(8)).addHexPrefix()
     }
+
+    func encodeInputs(ethereumContract: EthereumContract = EthereumContract(Web3Utils.erc20ABI)!, method: String, parameters: [AnyObject] = [AnyObject]()) -> Data? {
+        let foundMethod = ethereumContract.methods.filter { (key, _) -> Bool in
+            return key == method
+        }
+        guard foundMethod.count == 1 else { return Data() }
+        let abiMethod = foundMethod[method]
+        return abiMethod?.encodeParameters(parameters)
+    }
+
 }
