@@ -69,7 +69,9 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     @IBAction func confirm() {
+        paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
+            paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
             let gasPrice = Double(gasPriceTextField.text!)!
             if gasPrice < minGasPrice {
                 Toast.showToast(text: "Transaction.Send.gasPriceSettingIsTooLow".localized())
@@ -87,7 +89,6 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-            param.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
         } else if paramBuilder.tokenType == .appChain {
             gasPriceTextField.isEnabled = false
             if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
@@ -97,7 +98,8 @@ class TransactionGasCostViewController: UITableViewController {
         } else if paramBuilder.tokenType == .appChainErc20 {
             gasPriceTextField.isEnabled = false
         }
-        param.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+        param.gasPrice = paramBuilder.gasPrice
+        param.gasLimit = paramBuilder.gasLimit
         param.data = inputDataTextView.text.data(using: .utf8) ?? Data()
         navigationController?.popViewController(animated: true)
     }

@@ -98,6 +98,10 @@ class TransactionHistoryPresenter: NSObject {
         let sentTransactions = self.sentTransactions
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
             // merge status
+            if sentTransaction.status == .pending {
+                newList.removeAll(where: { $0.hash == sentTransaction.hash })
+                return true
+            }
             if let transaction = newList.first(where: { $0.hash == sentTransaction.hash }) {
                 self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
                 transaction.status = sentTransaction.status

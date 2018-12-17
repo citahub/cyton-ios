@@ -62,13 +62,16 @@ class TxStatusManager: NSObject {
         }
     }
 
-    // MARK: - 
+    // MARK: -
     func getTransactions(token: Token) -> [TransactionDetails] {
         return (try! Realm()).objects(LocalTxDetailModel.self).filter({ (localTxDetail) -> Bool in
             if token.type == .erc20 || token.type == .ether {
                 if localTxDetail.ethereumHost != EthereumNetwork().apiHost().absoluteString {
                     return false
                 }
+                return localTxDetail.from == token.walletAddress &&
+                    localTxDetail.token.symbol == token.symbol &&
+                    localTxDetail.token.name == token.name
             }
             return localTxDetail.from == token.walletAddress &&
                 localTxDetail.token.chain?.chainId == token.chainId &&
