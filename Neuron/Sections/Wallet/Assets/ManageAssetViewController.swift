@@ -13,8 +13,8 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
     @IBOutlet private weak var rightBarButton: DesignableButton!
     var tokenArray: List<TokenModel>!
     var selectArray: List<TokenModel>!
+    var tempTokenArray: [TokenModel]!
     var realm: Realm!
-    var edit: Bool!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -26,7 +26,6 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         title = "Assets.AddAssets.ListSettings".localized()
         rightBarButton.setTitle("Assets.AssetSetting.Edit".localized(), for: .normal)
         rightBarButton.setTitle("Assets.AssetSetting.Complete".localized(), for: .selected)
-        edit = false
         tokenList()
     }
 
@@ -38,15 +37,14 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
             sender.isSelected = true
         }
         tableView.setEditing(sender.isSelected, animated: true)
-        edit = sender.isSelected
     }
 
     func sortSelectTokenArray() {
         let tempArray = List<TokenModel>()
-        tempArray.append(objectsIn: selectArray)
+        tempArray.append(objectsIn: tempTokenArray)
         try! realm.write {
             selectArray.removeAll()
-            tokenArray.forEach({ (model) in
+            tempTokenArray.forEach({ (model) in
                 if let token = tempArray.first(where: { $0 == model }) {
                     selectArray.append(token)
                 }
@@ -58,20 +56,21 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         let appModel = realm.objects(AppModel.self).first ?? AppModel()
         tokenArray = appModel.currentWallet?.tokenModelList
         selectArray = appModel.currentWallet?.selectedTokenList
+        tempTokenArray = tokenArray.map({ $0 })
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tokenArray.count
+        return tempTokenArray.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "assetTableviewCell") as! AssetTableViewCell
         cell.delegate = self
-        let tokenModel = tokenArray[indexPath.row]
+        let tokenModel = tempTokenArray[indexPath.row]
         cell.iconUrlStr = tokenModel.iconUrl
-        cell.symbolLabel.text = tokenModel.name
+        cell.symbolLabel.text = tokenModel.symbol
         cell.addressLabel.text = tokenModel.address
-        cell.nameLabel.text = tokenModel.symbol
+        cell.nameLabel.text = tokenModel.chain?.chainName
         cell.selectionStyle = .none
         cell.isSelected = selectArray.contains(where: { $0 == tokenModel })
         return cell
@@ -97,9 +96,9 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         try! realm.write {
-            let object = tokenArray[sourceIndexPath.row]
-            tokenArray.remove(at: sourceIndexPath.row)
-            tokenArray.insert(object, at: destinationIndexPath.row)
+            let object = tempTokenArray[sourceIndexPath.row]
+            tempTokenArray.remove(at: sourceIndexPath.row)
+            tempTokenArray.insert(object, at: destinationIndexPath.row)
         }
     }
 

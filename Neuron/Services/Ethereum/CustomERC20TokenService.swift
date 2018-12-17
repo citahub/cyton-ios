@@ -36,11 +36,7 @@ struct CustomERC20TokenService {
             throw CustomTokenError.badNameError
         }
 
-        if let symbol = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "symbol") as? String {
-            tokenModel.symbol = symbol
-        } else {
-            throw CustomTokenError.badSymbolError
-        }
+        tokenModel.symbol = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "symbol") as? String ?? ""
 
         if let decimals = callTransaction(contractAddress: contractAddress, walletAddress: walletAddress, method: "decimals") as? BigUInt {
             tokenModel.decimals = Int(decimals)
@@ -49,7 +45,7 @@ struct CustomERC20TokenService {
         }
         tokenModel.address = contractAddress
         tokenModel.isNativeToken = false
-        guard !tokenModel.name.isEmpty, !tokenModel.symbol.isEmpty else {
+        guard !tokenModel.name.isEmpty else {
             throw CustomTokenError.undefinedError
         }
         return tokenModel

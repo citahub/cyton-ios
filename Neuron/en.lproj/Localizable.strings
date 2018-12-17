@@ -331,6 +331,7 @@
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "Blockchain";
 "Assets.AddAssets.AlreadyExist" = "You have the token in your list.";
 "Assets.AddAssets.StoreFailed" = "Failed to add token";
+"Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!(en)";
 "Assets.AddAssets.StoreSuccess" = "Token Added";
 "Assets.AddAssets.ListSettings" = "Setting";
 "Assets.AddAssets.TokenMessage" = "Token info";
@@ -342,3 +343,6 @@
 "Assets.AssetSetting.Title" = "Setting";
 "Assets.AssetSetting.Complete" = "Done";
 "Assets.AssetSetting.Edit" = "Edit";
+
+// Switch Wallet
+"SwitchWallet.title" = "切换钱包(en)";
