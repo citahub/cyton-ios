@@ -35,7 +35,7 @@ class WalletDetailController: UITableViewController {
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
-        walletIconImageView.image = UIImage(data: walletModel.iconData)
+        walletIconImageView.image = walletModel.icon.image
 
         iconTitleLabel.text = "Wallet.Details.icon".localized()
         nameTItleLabel.text = "Wallet.Details.name".localized()

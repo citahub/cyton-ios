@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -44,24 +45,41 @@
                         <sections>
                             <tableViewSection headerTitle="" id="gBk-TB-DFL">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" textLabel="KWd-4n-PBJ" style="IBUITableViewCellStyleDefault" id="mWE-sa-SZB">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" id="mWE-sa-SZB">
                                         <rect key="frame" x="0.0" y="35" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mWE-sa-SZB" id="HK8-cG-U6P">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="钱包头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="KWd-4n-PBJ">
-                                                    <rect key="frame" x="16" y="0.0" width="343" height="49.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sJ4-49-eHX">
+                                                    <rect key="frame" x="309" y="9" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="6Qe-Ou-Pqf"/>
+                                                        <constraint firstAttribute="height" constant="32" id="FPF-a6-t35"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="钱包头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZmY-Ue-JQL">
+                                                    <rect key="frame" x="16" y="13" width="200" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="7V4-6c-n0y"/>
+                                                        <constraint firstAttribute="width" constant="200" id="oLT-GV-f8c"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" name="headline_color"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="ZmY-Ue-JQL" firstAttribute="leading" secondItem="HK8-cG-U6P" secondAttribute="leadingMargin" id="F4G-Lm-8S3"/>
+                                                <constraint firstAttribute="trailing" secondItem="sJ4-49-eHX" secondAttribute="trailing" id="PRQ-0W-caz"/>
+                                                <constraint firstItem="sJ4-49-eHX" firstAttribute="centerY" secondItem="HK8-cG-U6P" secondAttribute="centerY" id="e5m-P3-GCs"/>
+                                                <constraint firstItem="ZmY-Ue-JQL" firstAttribute="centerY" secondItem="HK8-cG-U6P" secondAttribute="centerY" id="rh6-bY-brl"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="accessoryView" destination="eht-yj-nmo" id="8EC-zG-lOO"/>
+                                            <segue destination="V4U-nX-SN5" kind="show" id="blE-dt-vre"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fA4-Wp-54N" detailTextLabel="3ch-kv-w2c" style="IBUITableViewCellStyleValue1" id="1is-tN-kym">
@@ -167,7 +185,7 @@
                         <outlet property="changePwTitleLabel" destination="wEi-up-hBm" id="J4l-V8-TPL"/>
                         <outlet property="deleteWalletButton" destination="x0h-rV-aq9" id="Qtf-jR-BgH"/>
                         <outlet property="exprotKeystoreTItleLabel" destination="dPE-E3-Muv" id="oA1-vU-Zye"/>
-                        <outlet property="iconTitleLabel" destination="KWd-4n-PBJ" id="Peu-94-HGq"/>
+                        <outlet property="iconTitleLabel" destination="ZmY-Ue-JQL" id="AoM-9B-4Sm"/>
                         <outlet property="nameTItleLabel" destination="fA4-Wp-54N" id="Rg1-eN-0zd"/>
                         <outlet property="walletAddressLabel" destination="Leb-Jq-yHG" id="TIa-Wi-UrO"/>
                         <outlet property="walletIconImageView" destination="eht-yj-nmo" id="0jg-0d-Nam"/>
@@ -423,9 +441,130 @@
             </objects>
             <point key="canvasLocation" x="-422" y="143"/>
         </scene>
+        <!--Wallet Icon Picker View Controller-->
+        <scene sceneID="TY4-lS-0q8">
+            <objects>
+                <collectionViewController storyboardIdentifier="WalletIconPickerViewController" id="V4U-nX-SN5" customClass="WalletIconPickerViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="aad-rC-OqE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" name="control_disabled_bg_color"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="WtE-LY-TNB">
+                            <size key="itemSize" width="80" height="80"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="100"/>
+                            <inset key="sectionInset" minX="15" minY="20" maxX="10" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WalletIconCollectionViewCell" id="r3k-sD-X0g" customClass="WalletIconCollectionViewCell" customModule="Neuron" customModuleProvider="target">
+                                <rect key="frame" x="15" y="20" width="80" height="80"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                    <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="N6z-Lb-6l4">
+                                            <rect key="frame" x="6" y="6" width="68" height="68"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="68" id="FtE-tf-qTQ"/>
+                                                <constraint firstAttribute="width" constant="68" id="HLT-59-eya"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="34"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6JH-TU-acd">
+                                            <rect key="frame" x="3" y="3" width="74" height="74"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="74" id="IUX-Gj-TGG"/>
+                                                <constraint firstAttribute="height" constant="74" id="hFn-Kp-dAJ"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="37"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="3"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" name="tint_color"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                </view>
+                                <constraints>
+                                    <constraint firstItem="N6z-Lb-6l4" firstAttribute="centerX" secondItem="r3k-sD-X0g" secondAttribute="centerX" id="6pj-6q-DS9"/>
+                                    <constraint firstItem="6JH-TU-acd" firstAttribute="centerY" secondItem="r3k-sD-X0g" secondAttribute="centerY" id="N7c-mJ-557"/>
+                                    <constraint firstItem="N6z-Lb-6l4" firstAttribute="centerY" secondItem="r3k-sD-X0g" secondAttribute="centerY" id="jNh-Sm-TKu"/>
+                                    <constraint firstItem="6JH-TU-acd" firstAttribute="centerX" secondItem="r3k-sD-X0g" secondAttribute="centerX" id="q13-rH-3L3"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="iconView" destination="N6z-Lb-6l4" id="jFX-rE-p7f"/>
+                                    <outlet property="selectedView" destination="6JH-TU-acd" id="jQy-dZ-iVi"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="WalletIconPickerFooterView" id="vYz-h8-R0a" customClass="WalletIconPickerFooterView" customModule="Neuron" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="100" width="375" height="100"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="baN-OQ-R6i">
+                                    <rect key="frame" x="23" y="48" width="329" height="44"/>
+                                    <color key="backgroundColor" name="tint_color"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="44" id="fVg-fJ-Doz"/>
+                                    </constraints>
+                                    <state key="normal" title="确认">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="4"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="confirm:" destination="vYz-h8-R0a" eventType="touchUpInside" id="rm5-mO-me8"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailingMargin" secondItem="baN-OQ-R6i" secondAttribute="trailing" constant="15" id="JWj-7T-Unu"/>
+                                <constraint firstItem="baN-OQ-R6i" firstAttribute="leading" secondItem="vYz-h8-R0a" secondAttribute="leadingMargin" constant="15" id="UkZ-dr-VG2"/>
+                                <constraint firstItem="baN-OQ-R6i" firstAttribute="top" secondItem="vYz-h8-R0a" secondAttribute="topMargin" constant="20" id="WhQ-PR-ksR"/>
+                            </constraints>
+                        </collectionReusableView>
+                        <connections>
+                            <outlet property="dataSource" destination="V4U-nX-SN5" id="fPt-0F-JaI"/>
+                            <outlet property="delegate" destination="V4U-nX-SN5" id="X1h-4f-S5B"/>
+                        </connections>
+                    </collectionView>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JC5-6B-eT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="529" y="904"/>
+        </scene>
     </scenes>
     <resources>
         <image name="eth_test" width="22" height="31"/>
         <image name="icon_changepassword_info" width="28" height="28"/>
+        <namedColor name="control_disabled_bg_color">
+            <color red="0.91399997472763062" green="0.92199999094009399" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="headline_color">
+            <color red="0.18000000715255737" green="0.19200000166893005" blue="0.24300000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="tint_color">
+            <color red="0.27099999785423279" green="0.42399999499320984" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

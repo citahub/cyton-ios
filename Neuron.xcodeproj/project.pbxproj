@@ -96,6 +96,7 @@
 		6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */; };
 		6EABFB122199520F00305ED5 /* DAppTakePhotoMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */; };
 		6EABFB1421995AB800305ED5 /* DAppGyroscopeMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */; };
+		6EE37EA121C782FE00F62F2C /* WalletIconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE37EA021C782FE00F62F2C /* WalletIconPickerViewController.swift */; };
 		6EF8F40C2175CAD9004B7587 /* UIControl+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */; };
 		6EF8F4102176029E004B7587 /* OpenAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF8F40F2176029E004B7587 /* OpenAuthViewController.swift */; };
 		8905660720D0AC120041D4B4 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8905660620D0AC120041D4B4 /* AppModel.swift */; };
@@ -312,6 +313,7 @@
 		6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDeviceMotionMessageHandler.swift; sourceTree = "<group>"; };
 		6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppTakePhotoMessageHandler.swift; sourceTree = "<group>"; };
 		6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppGyroscopeMessageHandler.swift; sourceTree = "<group>"; };
+		6EE37EA021C782FE00F62F2C /* WalletIconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletIconPickerViewController.swift; sourceTree = "<group>"; };
 		6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		6EF8F40F2176029E004B7587 /* OpenAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAuthViewController.swift; sourceTree = "<group>"; };
 		71EE3A6382628C3632FE594F /* Pods-NeuronTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeuronTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NeuronTests/Pods-NeuronTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -1033,6 +1035,7 @@
 				898A1A1520B6BE6E00ECB465 /* ChangePasswordController.swift */,
 				89F9E73C20DEBDE8009E68D4 /* ExportKeystoreController.swift */,
 				89F9E73D20DEBDE8009E68D4 /* ExportKeystoreController.xib */,
+				6EE37EA021C782FE00F62F2C /* WalletIconPickerViewController.swift */,
 			);
 			path = WalletDetails;
 			sourceTree = "<group>";
@@ -1518,6 +1521,7 @@
 				6E8BFC3721B00948004752CC /* TokenPriceLoader.swift in Sources */,
 				6E85C12A21C7542900670F8B /* CreateWalletGuideViewController.swift in Sources */,
 				8928C25920AEB18100C3103E /* NibLoadable.swift in Sources */,
+				6EE37EA121C782FE00F62F2C /* WalletIconPickerViewController.swift in Sources */,
 				8951A84C2170A5CC00043228 /* DAppAction.swift in Sources */,
 				89D4AC3820D8DB610097E02B /* NotificationName.swift in Sources */,
 				89A1961B2175E7F300BD5FA4 /* DAppCommand.swift in Sources */,

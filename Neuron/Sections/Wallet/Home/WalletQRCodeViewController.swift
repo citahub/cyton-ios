@@ -21,7 +21,7 @@ class WalletQRCodeViewController: UIViewController {
         super.viewDidLoad()
 
         let appModel = AppModel.current
-        iconView.image = UIImage(data: appModel.currentWallet!.iconData!)
+        iconView.image = appModel.currentWallet!.icon.image
         nameLabel.text = appModel.currentWallet!.name
         addressLabel.text = appModel.currentWallet!.address
         let walletAddress = appModel.currentWallet!.address
