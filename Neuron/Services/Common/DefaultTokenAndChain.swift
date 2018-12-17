@@ -18,7 +18,8 @@ class DefaultTokenAndChain {
                 return
             }
             self.ethereum(wallet: walletModel)
-            self.testChain(wallet: walletModel)
+            self.testChain(chainHost: AppChainNetwork.defaultNode, wallet: walletModel)
+            self.testChain(chainHost: "http://testnet.mba.cmbchina.biz:1337", wallet: walletModel)
         }
     }
 
@@ -46,9 +47,9 @@ class DefaultTokenAndChain {
         }
     }
 
-    func testChain(wallet: WalletModel) {
+    func testChain(chainHost: String, wallet: WalletModel) {
         do {
-            let metaData = try AppChainNetwork.appChain().rpc.getMetaData()
+            let metaData = try AppChainNetwork.appChain(url: URL(string: chainHost)).rpc.getMetaData()
             let tokenModel = TokenModel()
             tokenModel.symbol = metaData.tokenSymbol
             tokenModel.iconUrl = metaData.tokenAvatar
@@ -61,7 +62,7 @@ class DefaultTokenAndChain {
             let chainModel = ChainModel()
             chainModel.chainId = metaData.chainId
             chainModel.chainName = metaData.chainName
-            chainModel.httpProvider = AppChainNetwork.defaultNode
+            chainModel.httpProvider = chainHost
             chainModel.tokenIdentifier = tokenModel.identifier
             if let chainIdentifier = ChainModel.identifier(for: chainModel) {
                 chainModel.identifier = chainIdentifier

@@ -330,6 +330,7 @@
 "Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币(en)";
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络(en)";
 "Assets.AddAssets.AlreadyExist" = "您的列表已有该代币(en)";
+"Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!(en)";
 "Assets.AddAssets.StoreFailed" = "代币添加失败(en)";
 "Assets.AddAssets.StoreSuccess" = "代币添加成功(en)";
 "Assets.AddAssets.ListSettings" = "列表设置(en)";
@@ -342,3 +343,6 @@
 "Assets.AssetSetting.Title" = "Setting";
 "Assets.AssetSetting.Complete" = "Done";
 "Assets.AssetSetting.Edit" = "Edit";
+
+// Switch Wallet
+"SwitchWallet.title" = "切换钱包(en)";

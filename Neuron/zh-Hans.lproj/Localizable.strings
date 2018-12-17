@@ -329,6 +329,7 @@
 "Assets.AddAssets.TokenMessage" = "代币信息";
 "Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
 "Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
+"Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!";
 "Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";
 "Assets.AddAssets.StoreFailed" = "代币添加失败";
 "Assets.AddAssets.StoreSuccess" = "代币添加成功";
@@ -342,3 +343,6 @@
 "Assets.AssetSetting.Title" = "列表设置";
 "Assets.AssetSetting.Complete" = "完成";
 "Assets.AssetSetting.Edit" = "编辑";
+
+// Switch Wallet
+"SwitchWallet.title" = "切换钱包";
