@@ -26,8 +26,17 @@ class TokenModel: Object, Decodable {
     var currencyAmount = "0"
 
     var chain: ChainModel? {
-        let realm = try! Realm()
-        return realm.object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)
+        switch type {
+        case .ether, .erc20:
+            let chainModel = ChainModel()
+            chainModel.chainId = "-1"
+            chainModel.chainName = EthereumNetwork().currentNetwork.chainName
+            chainModel.httpProvider = EthereumNetwork().apiHost().absoluteString
+            return chainModel
+        case .appChain, .appChainErc20:
+            let realm = try! Realm()
+            return realm.object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)
+        }
     }
 
     var balance: BigUInt {
