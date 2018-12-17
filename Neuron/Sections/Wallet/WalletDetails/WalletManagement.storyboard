@@ -78,8 +78,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="accessoryView" destination="eht-yj-nmo" id="8EC-zG-lOO"/>
-                                            <segue destination="V4U-nX-SN5" kind="show" id="blE-dt-vre"/>
+                                            <segue destination="V4U-nX-SN5" kind="show" identifier="WalletIconPickerViewController" id="blE-dt-vre"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="fA4-Wp-54N" detailTextLabel="3ch-kv-w2c" style="IBUITableViewCellStyleValue1" id="1is-tN-kym">
@@ -188,20 +187,11 @@
                         <outlet property="iconTitleLabel" destination="ZmY-Ue-JQL" id="AoM-9B-4Sm"/>
                         <outlet property="nameTItleLabel" destination="fA4-Wp-54N" id="Rg1-eN-0zd"/>
                         <outlet property="walletAddressLabel" destination="Leb-Jq-yHG" id="TIa-Wi-UrO"/>
-                        <outlet property="walletIconImageView" destination="eht-yj-nmo" id="0jg-0d-Nam"/>
+                        <outlet property="walletIconImageView" destination="sJ4-49-eHX" id="Jcg-Oh-dTS"/>
                         <outlet property="walletNameLabel" destination="3ch-kv-w2c" id="OHu-4X-44v"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ex3-FA-wk6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eth_test" id="eht-yj-nmo">
-                    <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <real key="value" value="17.5"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </imageView>
             </objects>
             <point key="canvasLocation" x="528.79999999999995" y="142.57871064467767"/>
         </scene>
@@ -423,7 +413,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sjM-KO-qsF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1254" y="143"/>
+            <point key="canvasLocation" x="1377" y="143"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="62w-Pp-WBm">
@@ -483,22 +473,58 @@
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6JH-TU-acd">
                                             <rect key="frame" x="3" y="3" width="74" height="74"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfY-Ab-Z9Y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="74" height="74"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" name="tint_color"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="37"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tYc-Pn-qmy">
+                                                    <rect key="frame" x="56" y="0.0" width="18" height="18"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_wallet_selected" translatesAutoresizingMaskIntoConstraints="NO" id="7wg-wL-zcu">
+                                                            <rect key="frame" x="4" y="5.5" width="10" height="7"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="10" id="6Lm-vS-NQr"/>
+                                                                <constraint firstAttribute="height" constant="7" id="les-re-dnP"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="tint_color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="18" id="HEL-oI-Rzs"/>
+                                                        <constraint firstAttribute="width" constant="18" id="XdH-Vl-22F"/>
+                                                        <constraint firstItem="7wg-wL-zcu" firstAttribute="centerY" secondItem="tYc-Pn-qmy" secondAttribute="centerY" id="aMe-W6-kQj"/>
+                                                        <constraint firstItem="7wg-wL-zcu" firstAttribute="centerX" secondItem="tYc-Pn-qmy" secondAttribute="centerX" id="tOZ-0e-hIk"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="9"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
+                                                <constraint firstItem="tYc-Pn-qmy" firstAttribute="top" secondItem="6JH-TU-acd" secondAttribute="top" id="8sy-vw-FWW"/>
+                                                <constraint firstAttribute="bottom" secondItem="vfY-Ab-Z9Y" secondAttribute="bottom" id="BQu-vp-sGF"/>
                                                 <constraint firstAttribute="width" constant="74" id="IUX-Gj-TGG"/>
+                                                <constraint firstAttribute="trailing" secondItem="tYc-Pn-qmy" secondAttribute="trailing" id="RQs-97-vXZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="vfY-Ab-Z9Y" secondAttribute="trailing" id="USd-K9-WKx"/>
                                                 <constraint firstAttribute="height" constant="74" id="hFn-Kp-dAJ"/>
+                                                <constraint firstItem="vfY-Ab-Z9Y" firstAttribute="leading" secondItem="6JH-TU-acd" secondAttribute="leading" id="j5T-Nj-5Md"/>
+                                                <constraint firstItem="vfY-Ab-Z9Y" firstAttribute="top" secondItem="6JH-TU-acd" secondAttribute="top" id="xUz-Od-5Sa"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="37"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" name="tint_color"/>
-                                                </userDefinedRuntimeAttribute>
-                                            </userDefinedRuntimeAttributes>
                                         </view>
                                     </subviews>
                                 </view>
@@ -542,6 +568,9 @@
                                 <constraint firstItem="baN-OQ-R6i" firstAttribute="leading" secondItem="vYz-h8-R0a" secondAttribute="leadingMargin" constant="15" id="UkZ-dr-VG2"/>
                                 <constraint firstItem="baN-OQ-R6i" firstAttribute="top" secondItem="vYz-h8-R0a" secondAttribute="topMargin" constant="20" id="WhQ-PR-ksR"/>
                             </constraints>
+                            <connections>
+                                <outlet property="confirmButton" destination="baN-OQ-R6i" id="ggp-fl-rDn"/>
+                            </connections>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="V4U-nX-SN5" id="fPt-0F-JaI"/>
@@ -551,12 +580,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JC5-6B-eT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="529" y="904"/>
+            <point key="canvasLocation" x="528.79999999999995" y="903.59820089955031"/>
         </scene>
     </scenes>
     <resources>
-        <image name="eth_test" width="22" height="31"/>
         <image name="icon_changepassword_info" width="28" height="28"/>
+        <image name="icon_wallet_selected" width="10" height="7"/>
         <namedColor name="control_disabled_bg_color">
             <color red="0.91399997472763062" green="0.92199999094009399" blue="0.94099998474121094" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

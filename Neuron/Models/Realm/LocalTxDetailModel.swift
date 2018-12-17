@@ -28,7 +28,7 @@ class LocalTxDetailModel: Object {
         get { return TransactionState(rawValue: privateStatus)! }
     }
 
-    var date: Date = Date()
+    @objc dynamic var date: Date = Date()
     @objc dynamic private var privateStatus: Int = 0
 
     @objc override class func primaryKey() -> String? { return "txHash" }
@@ -83,6 +83,7 @@ class LocalTxDetailModel: Object {
         from: \(from)
         to: \(to)
         value: \(value)
+        ethereumHost: \(ethereumHost)
         """
     }
 

@@ -7,107 +7,79 @@
 //
 
 import UIKit
+import RealmSwift
 
-//icon_wallet_dog
-//icon_wallet_fish
-//icon_wallet_owl
-//icon_wallet_parrot
-//icon_wallet_rat
-//icon_wallet_squirrel
-//icon_wallet_fox
-//icon_wallet_tiger
-
-class WalletIconPickerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    private var walletIcons: [WalleIconType]!
+class WalletIconPickerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, WalletIconPickerFooterViewDelegate {
     var wallet: WalletModel!
+    private var walletIcons: [WalleIconType]!
+    private var currentIcon: WalleIconType!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "选择头像"
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-//        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-
-        // Do any additional setup after loading the view.
         walletIcons = WalleIconType.allType
+        currentIcon = wallet.icon
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    func confirm() {
+        let realm = try! Realm()
+        try? realm.write {
+            wallet.icon = currentIcon
+        }
+        navigationController?.popViewController(animated: true)
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return walletIcons.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: WalletIconCollectionViewCell.self), for: indexPath) as! WalletIconCollectionViewCell
         cell.iconView.image = walletIcons[indexPath.row].image
+        if walletIcons[indexPath.row] == currentIcon {
+            cell.selectedView.isHidden = false
+            cell.iconView.borderWidth = 1
+        } else {
+            cell.selectedView.isHidden = true
+            cell.iconView.borderWidth = 0
+        }
         return cell
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionFooter {
-            return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: WalletIconPickerFooterView.self), for: indexPath)
+            let identifier = String(describing: WalletIconPickerFooterView.self)
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: identifier, for: indexPath) as! WalletIconPickerFooterView
+            view.confirmButton.setTitle("Common.confirm".localized(), for: .normal)
+            view.delegate = self
+            return view
         }
         return UICollectionReusableView()
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let items = [IndexPath(row: walletIcons.firstIndex(of: currentIcon)!, section: 0), indexPath]
+        currentIcon = walletIcons[indexPath.row]
+        collectionView.reloadItems(at: items)
     }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
-class WalletIconCollectionViewCell: UICollectionViewCell {
+private class WalletIconCollectionViewCell: UICollectionViewCell {
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var selectedView: UIView!
 }
 
-class WalletIconPickerFooterView: UICollectionReusableView {
+private protocol WalletIconPickerFooterViewDelegate: class {
+    func confirm()
+}
+
+private class WalletIconPickerFooterView: UICollectionReusableView {
+    weak var delegate: WalletIconPickerFooterViewDelegate?
+    @IBOutlet weak var confirmButton: UIButton!
+    
     @IBAction func confirm(_ sender: Any) {
+        delegate?.confirm()
     }
 }
