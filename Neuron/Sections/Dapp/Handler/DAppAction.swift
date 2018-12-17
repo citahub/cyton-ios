@@ -101,7 +101,7 @@ struct DAppAction {
                     tokenModel.name = metaData.tokenName
                     tokenModel.symbol = metaData.tokenSymbol
                     tokenModel.decimals = NativeDecimals.nativeTokenDecimals
-                    tokenModel.chain = chainModel
+                    tokenModel.chainIdentifier = chainModel.identifier
                     self.saveToken(tokenModel: tokenModel, chainModel: chainModel)
                 }
             } catch {

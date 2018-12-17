@@ -82,12 +82,12 @@ extension TransactonSender {
             }
             appChain = AppChainNetwork.appChain(url: appChainUrl)
         }
+        let sender = try AppChainTxSender(
+            appChain: appChain,
+            walletManager: WalletManager.default,
+            from: paramBuilder.from
+        )
         if paramBuilder.tokenType == .appChain {
-            let sender = try AppChainTxSender(
-                appChain: appChain,
-                walletManager: WalletManager.default,
-                from: paramBuilder.from
-            )
             let result = try sender.send(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
@@ -110,7 +110,14 @@ extension TransactonSender {
             }
             return result.0
         } else {
-            return "" // TODO: AppChainErc20 not implemented yet.
+            let result = try sender.sendERC20(
+                to: paramBuilder.to,
+                contract: paramBuilder.contractAddress,
+                value: paramBuilder.value,
+                quota: paramBuilder.gasLimit,
+                chainId: BigUInt(paramBuilder.chainId)!,
+                password: password)
+            return result.0
         }
     }
 }

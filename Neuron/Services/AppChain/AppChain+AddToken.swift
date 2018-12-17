@@ -33,7 +33,7 @@ class AddAppChainToken {
         tokenModel.name = metaData.tokenName
         tokenModel.symbol = metaData.tokenSymbol
         tokenModel.decimals = NativeDecimals.nativeTokenDecimals
-        tokenModel.chain = chainModel
+        tokenModel.chainIdentifier = chainModel.identifier
         if let id = TokenModel.identifier(for: tokenModel) {
             tokenModel.identifier = id
         }
@@ -59,7 +59,7 @@ class AddAppChainToken {
 
             let realm = try! Realm()
             let result = realm.objects(ChainModel.self)
-            let chainModel = result.first(where: { $0.chainId == chain.chainId && $0.chainName == chain.chainName && $0.httpProvider == chain.httpProvider })
+            let chainModel = result.first(where: { $0.chainId == chain.chainId && $0.chainName == chain.chainName })
 
             let tokenModel = TokenModel()
             tokenModel.decimals = Int(decimals)
@@ -67,9 +67,9 @@ class AddAppChainToken {
             tokenModel.symbol = symbol
             tokenModel.address = contractAddress
             tokenModel.isNativeToken = false
-            tokenModel.chain = chainModel
+            tokenModel.chainIdentifier = chainModel!.identifier
             return tokenModel
-        } catch {
+        } catch let error {
             return nil
         }
     }

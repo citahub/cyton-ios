@@ -66,7 +66,7 @@ class DefaultTokenAndChain {
             if let chainIdentifier = ChainModel.identifier(for: chainModel) {
                 chainModel.identifier = chainIdentifier
             }
-            tokenModel.chain = chainModel
+            tokenModel.chainIdentifier = chainModel.identifier
 
             let realm = try Realm()
             try realm.write {
