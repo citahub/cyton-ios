@@ -9,7 +9,6 @@
 import UIKit
 import RSKPlaceholderTextView
 import EthereumAddress
-import IGIdenticon
 import RealmSwift
 
 class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegate {
