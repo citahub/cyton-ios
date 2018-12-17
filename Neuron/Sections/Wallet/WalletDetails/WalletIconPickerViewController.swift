@@ -16,7 +16,7 @@ class WalletIconPickerViewController: UICollectionViewController, UICollectionVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "选择头像"
+        title = "Wallet.Details.WalletIconPicker.title".localized()
         walletIcons = WalleIconType.allType
         currentIcon = wallet.icon
     }

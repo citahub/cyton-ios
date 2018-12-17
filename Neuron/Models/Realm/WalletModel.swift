@@ -31,8 +31,6 @@ enum WalleIconType: String {
 class WalletModel: Object {
     @objc dynamic var name = ""
     @objc dynamic var address = ""
-//    @objc dynamic var iconData: Data!
-
     @objc dynamic private var iconName: String!
     var selectedTokenList = List<TokenModel>()
     var tokenModelList = List<TokenModel>()
