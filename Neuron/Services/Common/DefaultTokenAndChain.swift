@@ -39,9 +39,9 @@ class DefaultTokenAndChain {
             realm.add(ethModel, update: true)
             if !wallet.tokenModelList.contains(where: { $0 == ethModel }) {
                 wallet.tokenModelList.append(ethModel)
-            }
-            if !wallet.selectedTokenList.contains(where: { $0 == ethModel }) {
-                wallet.selectedTokenList.append(ethModel)
+                if !wallet.selectedTokenList.contains(where: { $0 == ethModel }) {
+                    wallet.selectedTokenList.append(ethModel)
+                }
             }
         }
     }
@@ -72,14 +72,14 @@ class DefaultTokenAndChain {
             try realm.write {
                 realm.add(tokenModel, update: true)
                 realm.add(chainModel, update: true)
-                if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
-                    wallet.selectedTokenList.append(tokenModel)
+                if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
+                    wallet.chainModelList.append(chainModel)
                 }
                 if !wallet.tokenModelList.contains(where: { $0 == tokenModel }) {
                     wallet.tokenModelList.append(tokenModel)
-                }
-                if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
-                    wallet.chainModelList.append(chainModel)
+                    if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
+                        wallet.selectedTokenList.append(tokenModel)
+                    }
                 }
             }
         } catch {
