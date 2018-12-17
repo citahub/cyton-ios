@@ -17,7 +17,6 @@ PODS:
     - EthereumAddress (~> 1.0.0)
   - EthereumAddress (1.0.0):
     - CryptoSwift (~> 0.13)
-  - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
@@ -64,7 +63,6 @@ DEPENDENCIES:
   - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.5`)
   - BulletinBoard (from `https://github.com/alexaubry/BulletinBoard`, commit `7086607d3476cea29cd77a65d13df5c8ed0da52e`)
   - EFQRCode
-  - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
   - QRCodeReader.swift
   - RealmSwift
@@ -82,7 +80,6 @@ SPEC REPOS:
     - EFQRCode
     - EthereumABI
     - EthereumAddress
-    - IGIdenticon
     - IQKeyboardManagerSwift
     - PromiseKit
     - QRCodeReader.swift
@@ -129,7 +126,6 @@ SPEC CHECKSUMS:
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
   EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
-  IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   QRCodeReader.swift: 96292a5612fbc2fd9a0b26f93fa5164c8d02f59d
@@ -146,6 +142,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: beb75d52d4fb090be32eb898fb3ca2ea9a3e4566
+PODFILE CHECKSUM: cbb58af54bb8975ca6c4d8ef6efd20b686b87a8f
 
 COCOAPODS: 1.5.3

@@ -141,8 +141,6 @@ class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegat
             return
         }
 
-//        let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
-//        walletModel.iconData = iconImage!.pngData()!
         do {
             let realm = try! Realm()
             try realm.write {
