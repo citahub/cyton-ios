@@ -39,7 +39,7 @@
 "DApp.Browser.CheckNoWeChat" = "WeChat client is not detected, please try again after installation.";
 "DApp.Browser.SignFaild" = "Signature failed";
 "DApp.Browser.PayFaild" = "Payment failed";
-"DApp.Browser.confirmSign" = "DApp签名信息确认(en)";
+"DApp.Browser.confirmSign" = "Signature Request";
 
 // DApp Contract
 // ---------------------------------------------------------
@@ -136,7 +136,7 @@
 // ---------------------------------------------------------
 "Transaction.History.title" = "Transaction List";
 "TokenProfile.Ether.overview" = "Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.";
-"Transaction.History.testTokenWarning" = "该token无任何价值，仅做开发者测试使用(en)";
+"Transaction.History.testTokenWarning" = "The token has no value and is only used for developer testing.";
 
 // Transaction Status
 // ---------------------------------------------------------
@@ -154,9 +154,9 @@
 "Transaction.Details.block" = "Block";
 "Transaction.Details.gasFee" = "Miner Fee";
 "Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
-"Transaction.Details.contractCreationPending" = "合约创建中(en)";
-"Transaction.Details.contractCreationSuccess" = "合约创建成功(en)";
-"Transaction.Details.contractCreationFailure" = "合约创建失败(en)";
+"Transaction.Details.contractCreationPending" = "Contract Creating";
+"Transaction.Details.contractCreationSuccess" = "Contract Created";
+"Transaction.Details.contractCreationFailure" = "Conrtact Creation failed";
 
 // Send Transaction
 // ---------------------------------------------------------
@@ -178,8 +178,8 @@
 "Transaction.Send.inputAmount" = "Input Amount";
 "Transaction.Send.receiptAddress" = "To";
 "Transaction.Send.gasFee" = "Miner Fee";
-"Transaction.Send.txInfo" = "转账信息(en)";
-"Transaction.Send.confirmSendTx" = "确认转账(en)";
+"Transaction.Send.txInfo" = "Payment Details";
+"Transaction.Send.confirmSendTx" = "Confirm";
 
 // Authentication
 // ---------------------------------------------------------
@@ -205,8 +205,8 @@
 
 // Create Wallet
 // ---------------------------------------------------------
-"Wallet.Create.warning" = "没有「找回密码」！(en)";
-"Wallet.Create.desc" = "您的钱包不会被保存在云端，无法提供找回服务，请您谨慎保管。(en)";
+"Wallet.Create.warning" = "Backup Password！";
+"Wallet.Create.desc" = "Neuron will not store your password, please backup diligently.";
 
 "Wallet.Create.createWallet" = "Create Wallet";
 "Wallet.Create.passwordWarning" = "Your password will be required when sending digital assets or accessing confidential information.";
@@ -260,30 +260,30 @@
 
 // Wallet Details
 // ---------------------------------------------------------
-"Wallet.Details.ChangePassword.inputPassword" = "请输入钱包密码(en)";
-"Wallet.Details.ChangeName.inputName" = "请输入钱包名称(en)";
-"Wallet.Details.title" = "钱包管理(en)";
-"Wallet.Details.deleteWallet" = "删除钱包(en)";
-"Wallet.Details.confirmDeleteWallet" = "确认删除(en)";
-"Wallet.Details.importKeystore" = "导出Keystore(en)";
-"Wallet.Details.deleteWalletSuccess" = "删除成功(en)";
-"Wallet.Details.icon" = "钱包头像(en)";
-"Wallet.Details.name" = "钱包名称(en)";
-"Wallet.Details.address" = "钱包地址(en)";
-"Wallet.Details.changePassword" = "修改密码(en)";
-"Wallet.Details.exportKeystore" = "导出Keystore(en)";
-"Wallet.Details.delete" = "删除当前钱包(en)";
-"Wallet.Details.changePassword" = "修改密码(en)";
-"Wallet.Details.ChangePassword.inputPassword" = "输入密码(en)";
-"Wallet.Details.ChangePassword.inputNewPassword" = "输入新密码(en)";
-"Wallet.Details.ChangePassword.repeatNewPassword" = "再次输入新密码(en)";
-"Wallet.Details.ChangePassword.warning" = "钱包密码如丢失将无法找回，请您妥善保管密码(en)";
-"Wallet.Details.ChangePassword.newPasswordIsSameAsOld" = "您输入的密码和原密码一致，请重新输入(en)";
-"Wallet.Details.ChangePassword.inconsistentPasswords" = "两次新密码输入不一致(en)";
-"Wallet.Details.ChangePassword.loading" = "修改密码中...(en)";
-"Wallet.Details.ChangePassword.success" = "密码修改成功，请牢记！(en)";
-"Wallet.Details.ExportKeystore.copy" = "复制(en)";
-"Wallet.Details.ExportKeystore.copySuccess" = "Keystore已经复制到粘贴板(en)";
+"Wallet.Details.ChangePassword.inputPassword" = "Password";
+"Wallet.Details.ChangeName.inputName" = "Wallet Name";
+"Wallet.Details.title" = "Manager";
+"Wallet.Details.deleteWallet" = "Delete Wallet";
+"Wallet.Details.confirmDeleteWallet" = "Confirm";
+"Wallet.Details.importKeystore" = "Export keystore";
+"Wallet.Details.deleteWalletSuccess" = "Wallet Deleted";
+"Wallet.Details.icon" = "Wallet Photo";
+"Wallet.Details.name" = "Wallet Name";
+"Wallet.Details.address" = "Wallet Address";
+"Wallet.Details.changePassword" = "Change Password";
+"Wallet.Details.exportKeystore" = "Export keystore";
+"Wallet.Details.delete" = "Delete Wallet";
+"Wallet.Details.changePassword" = "Delete Wallet";
+"Wallet.Details.ChangePassword.inputPassword" = "Password";
+"Wallet.Details.ChangePassword.inputNewPassword" = "New Password";
+"Wallet.Details.ChangePassword.repeatNewPassword" = "Repeat New Password";
+"Wallet.Details.ChangePassword.warning" = "Neuron will not store your password, please backup diligently.";
+"Wallet.Details.ChangePassword.newPasswordIsSameAsOld" = "The password you entered is the same as the current password. Please re-enter";
+"Wallet.Details.ChangePassword.inconsistentPasswords" = "Password don't match";
+"Wallet.Details.ChangePassword.loading" = "Changing Password";
+"Wallet.Details.ChangePassword.success" = "Password Changed";
+"Wallet.Details.ExportKeystore.copy" = "Copy";
+"Wallet.Details.ExportKeystore.copySuccess" = "Keystore is copied to clipbord";
 
 // No Screenshot
 // ---------------------------------------------------------
@@ -320,20 +320,20 @@
 // Assets
 // ---------------------------------------------------------
 "Assets.AddAssets.Title" = "Add";
-"Assets.AddAssets.BlockChainNetwork" = "Network";
+"Assets.AddAssets.BlockChainNetwork" = "Blockchain";
 "Assets.AddAssets.ContractAddress" = "Contract Address";
-"Assets.AddAssets.NodeAddress" = "节点地址(en)";
-"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入代币合约地址(en)";
-"Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址(en)";
-"Assets.AddAssets.Search" = "查询(en)";
-"Assets.AddAssets.EmptyResult" = "请输入正确的合约地址(en)";
-"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币(en)";
-"Assets.AddAssets.SwitchChainNetWorkTitle" = "请选择区块链网络(en)";
-"Assets.AddAssets.AlreadyExist" = "您的列表已有该代币(en)";
+"Assets.AddAssets.NodeAddress" = "Node Address";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "Enter";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "Enter";
+"Assets.AddAssets.Search" = "Search";
+"Assets.AddAssets.EmptyResult" = "Incorrect contract address";
+"Assets.AddAssets.AppChainNativeCoin" = "AppChain Native Token";
+"Assets.AddAssets.SwitchChainNetWorkTitle" = "Blockchain";
+"Assets.AddAssets.AlreadyExist" = "You have the token in your list.";
+"Assets.AddAssets.StoreFailed" = "Failed to add token";
 "Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!(en)";
-"Assets.AddAssets.StoreFailed" = "代币添加失败(en)";
-"Assets.AddAssets.StoreSuccess" = "代币添加成功(en)";
-"Assets.AddAssets.ListSettings" = "列表设置(en)";
+"Assets.AddAssets.StoreSuccess" = "Token Added";
+"Assets.AddAssets.ListSettings" = "Setting";
 "Assets.AddAssets.TokenMessage" = "Token info";
 "Assets.AddAssets.TokenName" = "Token Name";
 "Assets.AddAssets.TokenSymbol" = "Token Symbol";
