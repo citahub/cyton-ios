@@ -69,6 +69,9 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     @IBAction func confirm() {
+        paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
+        paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+
         if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
             let gasPrice = Double(gasPriceTextField.text!)!
             if gasPrice < minGasPrice {
