@@ -323,7 +323,7 @@
 "Assets.AddAssets.BlockChainNetwork" = "Network";
 "Assets.AddAssets.ContractAddress" = "Contract Address";
 "Assets.AddAssets.NodeAddress" = "节点地址(en)";
-"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入合约地址(en)";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "请输入代币合约地址(en)";
 "Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址(en)";
 "Assets.AddAssets.Search" = "查询(en)";
 "Assets.AddAssets.EmptyResult" = "请输入正确的合约地址(en)";

@@ -124,7 +124,6 @@
 		89422FEB21A7F9CA00DD8744 /* CollectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89422FEA21A7F9C900DD8744 /* CollectionTableViewCell.swift */; };
 		8951A84C2170A5CC00043228 /* DAppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8951A84B2170A5CC00043228 /* DAppAction.swift */; };
 		8955580520DCA7F700FC92D8 /* PasswordValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8955580420DCA7F700FC92D8 /* PasswordValidator.swift */; };
-		895F713121C62FD700F41107 /* CreateWalletGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F712F21C62FD600F41107 /* CreateWalletGuideViewController.swift */; };
 		895F713421C630E800F41107 /* VerifyMnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895F713321C630E800F41107 /* VerifyMnemonicViewController.swift */; };
 		8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17B20BE7F750086848F /* MessageSignController.swift */; };
 		8964A18020BE94F70086848F /* NEPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8964A17F20BE94F70086848F /* NEPickerView.swift */; };
@@ -344,7 +343,6 @@
 		89422FEA21A7F9C900DD8744 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
 		8951A84B2170A5CC00043228 /* DAppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppAction.swift; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
-		895F712F21C62FD600F41107 /* CreateWalletGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWalletGuideViewController.swift; sourceTree = "<group>"; };
 		895F713321C630E800F41107 /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
 		8964A17B20BE7F750086848F /* MessageSignController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageSignController.swift; sourceTree = "<group>"; };
 		8964A17F20BE94F70086848F /* NEPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NEPickerView.swift; sourceTree = "<group>"; };
@@ -869,7 +867,6 @@
 		8928C23120AE84AB00C3103E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				89880A1F21C2411200A34A0B /* ERC20ABI */,
 				1A14CF3D21ABEF1600AE6227 /* UIKit */,
 				1A1E8414217178A800B15E88 /* Validators */,
 				89FC542C20D4142D00D5D27C /* SkipBackupFiles.swift */,
@@ -987,13 +984,6 @@
 				896D044E20AE69C5002CFF6A /* Info.plist */,
 			);
 			path = NeuronUITests;
-			sourceTree = "<group>";
-		};
-		89880A1F21C2411200A34A0B /* ERC20ABI */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ERC20ABI;
 			sourceTree = "<group>";
 		};
 		898A170B2199819F00DE89A0 /* ImportWallet */ = {
