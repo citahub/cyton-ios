@@ -18,6 +18,7 @@ class SelectWalletController: UITableViewController {
     weak var delegate: SelectWalletControllerDelegate?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        title = "SwitchWallet.title".localized()
         didGetWalletData()
     }
 

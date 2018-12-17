@@ -18,7 +18,8 @@ class DefaultTokenAndChain {
                 return
             }
             self.ethereum(wallet: walletModel)
-            self.testChain(wallet: walletModel)
+            self.testChain(chainHost: AppChainNetwork.defaultNode, wallet: walletModel)
+            self.testChain(chainHost: "http://testnet.mba.cmbchina.biz:1337", wallet: walletModel)
         }
     }
 
@@ -39,16 +40,16 @@ class DefaultTokenAndChain {
             realm.add(ethModel, update: true)
             if !wallet.tokenModelList.contains(where: { $0 == ethModel }) {
                 wallet.tokenModelList.append(ethModel)
-            }
-            if !wallet.selectedTokenList.contains(where: { $0 == ethModel }) {
-                wallet.selectedTokenList.append(ethModel)
+                if !wallet.selectedTokenList.contains(where: { $0 == ethModel }) {
+                    wallet.selectedTokenList.append(ethModel)
+                }
             }
         }
     }
 
-    func testChain(wallet: WalletModel) {
+    func testChain(chainHost: String, wallet: WalletModel) {
         do {
-            let metaData = try AppChainNetwork.appChain().rpc.getMetaData()
+            let metaData = try AppChainNetwork.appChain(url: URL(string: chainHost)).rpc.getMetaData()
             let tokenModel = TokenModel()
             tokenModel.symbol = metaData.tokenSymbol
             tokenModel.iconUrl = metaData.tokenAvatar
@@ -61,7 +62,7 @@ class DefaultTokenAndChain {
             let chainModel = ChainModel()
             chainModel.chainId = metaData.chainId
             chainModel.chainName = metaData.chainName
-            chainModel.httpProvider = AppChainNetwork.defaultNode
+            chainModel.httpProvider = chainHost
             chainModel.tokenIdentifier = tokenModel.identifier
             if let chainIdentifier = ChainModel.identifier(for: chainModel) {
                 chainModel.identifier = chainIdentifier
@@ -72,14 +73,14 @@ class DefaultTokenAndChain {
             try realm.write {
                 realm.add(tokenModel, update: true)
                 realm.add(chainModel, update: true)
-                if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
-                    wallet.selectedTokenList.append(tokenModel)
+                if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
+                    wallet.chainModelList.append(chainModel)
                 }
                 if !wallet.tokenModelList.contains(where: { $0 == tokenModel }) {
                     wallet.tokenModelList.append(tokenModel)
-                }
-                if !wallet.chainModelList.contains(where: { $0 == chainModel }) {
-                    wallet.chainModelList.append(chainModel)
+                    if !wallet.selectedTokenList.contains(where: { $0 == tokenModel }) {
+                        wallet.selectedTokenList.append(tokenModel)
+                    }
                 }
             }
         } catch {

@@ -50,7 +50,7 @@ class AddAppChainToken {
             }
 
             guard let symbol = try appchainErc20.symbol() else {
-                return nil
+                return TokenModel()
             }
 
             guard let decimals = try appchainErc20.decimals() else {
@@ -69,7 +69,7 @@ class AddAppChainToken {
             tokenModel.isNativeToken = false
             tokenModel.chainIdentifier = chainModel!.identifier
             return tokenModel
-        } catch let error {
+        } catch {
             return nil
         }
     }

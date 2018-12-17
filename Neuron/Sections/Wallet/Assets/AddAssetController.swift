@@ -149,7 +149,11 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if let result = result {
-                    self.showTokenMessage(nil, tokenModel: result)
+                    if !result.symbol.isEmpty {
+                        self.showTokenMessage(nil, tokenModel: result)
+                    } else {
+                        Toast.showToast(text: "Assets.AddAssets.EmptySymbol".localized())
+                    }
                 } else {
                     Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
                 }
@@ -182,7 +186,11 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if tokenModel != nil {
-                    self.showTokenMessage(nil, tokenModel: tokenModel!)
+                    if tokenModel?.symbol.count == 0 {
+                        Toast.showToast(text: "Assets.AddAssets.EmptySymbol".localized())
+                    } else {
+                        self.showTokenMessage(nil, tokenModel: tokenModel!)
+                    }
                 } else {
                     Toast.showToast(text: "Assets.AddAssets.EmptyResult".localized())
                 }
