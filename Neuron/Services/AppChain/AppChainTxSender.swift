@@ -70,8 +70,8 @@ class AppChainTxSender {
         chainId: BigUInt,
         password: String
         ) throws -> (TxHash, BlockNumber) {
-        let destinationEthAddress = Address(to.addHexPrefix())
-        if !to.isEmpty && destinationEthAddress == nil {
+        let destinationEthAddress = Address(contract.addHexPrefix())
+        if !contract.isEmpty && destinationEthAddress == nil {
             throw SendTransactionError.invalidDestinationAddress
         }
 
@@ -95,6 +95,7 @@ class AppChainTxSender {
             quota: quota,
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
+            value: BigUInt(0),
             chainId: meta.chainId,
             version: meta.version
         )
