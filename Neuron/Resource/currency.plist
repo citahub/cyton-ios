@@ -9,6 +9,8 @@
 		<string>CNY</string>
 		<key>symbol</key>
 		<string>¥</string>
+		<key>identifier</key>
+		<string>zh_CN</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -17,6 +19,8 @@
 		<string>USD</string>
 		<key>symbol</key>
 		<string>$</string>
+		<key>identifier</key>
+		<string>zh-Hans_US</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -25,6 +29,8 @@
 		<string>TWD</string>
 		<key>symbol</key>
 		<string>NT$</string>
+		<key>identifier</key>
+		<string>zh-Hans_TW</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -33,6 +39,8 @@
 		<string>HKD</string>
 		<key>symbol</key>
 		<string>HK$</string>
+		<key>identifier</key>
+		<string>zh-Hans_HK</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -41,6 +49,8 @@
 		<string>EUR</string>
 		<key>symbol</key>
 		<string>€</string>
+		<key>identifier</key>
+		<string>zh-Hans_FR</string>
 	</dict>
 	<dict>
 		<key>name</key>
@@ -49,6 +59,8 @@
 		<string>RUB</string>
 		<key>symbol</key>
 		<string>₽</string>
+		<key>identifier</key>
+		<string>zh-Hans_RU</string>
 	</dict>
 </array>
 </plist>

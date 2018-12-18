@@ -121,7 +121,7 @@ extension WalletViewController: WalletPresenterDelegate {
         if amount == 0.0 {
             totalAmountLabel.text = "Wallet.noAmount".localized()
         } else {
-            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + amount.formatterToString(4)
+            totalAmountLabel.text = "≈\(presenter.currency.symbol)" + amount.currencyFormat()
         }
     }
 
