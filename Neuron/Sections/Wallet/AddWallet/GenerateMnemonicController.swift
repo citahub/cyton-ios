@@ -47,7 +47,7 @@ class GenerateMnemonicController: UIViewController, NoScreenshot, EnterBackOverl
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        showNoScreenshotAlert(titile: "NoScreenshotTitle.title".localized(), message: "NoScreenshot.mnemonicMessage".localized())
+        showNoScreenshotAlert(titile: "NoScreenshot.title".localized(), message: "NoScreenshot.mnemonicMessage".localized())
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

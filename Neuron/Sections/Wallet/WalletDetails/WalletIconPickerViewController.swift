@@ -78,7 +78,7 @@ private protocol WalletIconPickerFooterViewDelegate: class {
 private class WalletIconPickerFooterView: UICollectionReusableView {
     weak var delegate: WalletIconPickerFooterViewDelegate?
     @IBOutlet weak var confirmButton: UIButton!
-    
+
     @IBAction func confirm(_ sender: Any) {
         delegate?.confirm()
     }

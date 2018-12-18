@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Social
 
 class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var tokenIconView: UIImageView!
@@ -35,6 +36,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
     @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     var transaction: TransactionDetails! {
         didSet {
             if oldValue != nil && transaction != nil {
@@ -42,6 +44,7 @@ class TransactionDetailsViewController: UITableViewController {
             }
         }
     }
+    private var paramBuilder: TransactionDetailsParamBuilder!
 
     private var hiddenItems = [(Int, Int)]()
 
@@ -57,110 +60,93 @@ class TransactionDetailsViewController: UITableViewController {
         gasFeeTitleLabel.text = "Transaction.Details.gasFee".localized() + ":"
 
         setupUI()
+        setupTxFeeTitle()
     }
 
-    // TODO: Refeature setup function
     func setupUI() {
-        tokenIconView.sd_setImage(with: URL(string: transaction.token.iconUrl ?? ""), placeholderImage: UIImage(named: "eth_logo"))
-        amountLabel.text = transaction.value.toAmountText(transaction.token.decimals) + " " + transaction.token.symbol
-        dateLabel.text = {
-            let dateformatter = DateFormatter()
-            dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-            return dateformatter.string(from: transaction.date)
-        }()
-        paymentAddressLabel.text = transaction.from
-        receiptAddressLabel.text = transaction.to.count > 0 ? transaction.to : "Contract Created"
+        paramBuilder = TransactionDetailsParamBuilder(tx: transaction)
+        setupTxStatus()
+        tokenIconView.sd_setImage(with: URL(string: paramBuilder.tokenIcon), placeholderImage: UIImage(named: "eth_logo"))
+        amountLabel.text = paramBuilder.amount
+        dateLabel.text = paramBuilder.date
+        paymentAddressLabel.text = paramBuilder.from
+        receiptAddressLabel.text = paramBuilder.to
 
-        switch transaction.token.type {
-        case .ether, .erc20:
-            chainNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
-            chainIconView.image = UIImage(named: "icon_tx_details_chain_eth")
-            gasUsedTitleLabel.text = "Gas Used:"
-            gasPriceTitleLabel.text = "Gas Price:"
-            gasLimitTitleLabel.text = "Gas Limit:"
-        case .appChain, .appChainErc20:
-            chainNetworkLabel.text = transaction.token.chainName ?? "CITA"
-            chainIconView.image = UIImage(named: "icon_tx_details_chain_cita")
-            if transaction.token.chainId != "1" {
-                hiddenItems.append((0, 3))    // block chain network
-            }
-            gasUsedTitleLabel.text = "Quota Used:"
-            gasPriceTitleLabel.text = "Quota Price:"
-            gasLimitTitleLabel.text = "Quota Limit:"
+        if paramBuilder.txDetailsUrl == nil {
+            hiddenItems.append((0, 3))    // block chain network
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.rightBarButtonItem = shareBarButtonItem
         }
+        if let hash = paramBuilder.hash {
+            hashLabel.text = hash
+        } else {
+            hiddenItems.append((1, 0))    // hash
+        }
+        if let block = paramBuilder.block {
+            blockLabel.text = block
+        } else {
+            hiddenItems.append((1, 2))    // block
+        }
+        if let txFee = paramBuilder.txFee {
+            gasFeeLabel.text = txFee
+        } else {
+            hiddenItems.append((1, 3))    // gas fee
+        }
+        if let gasPrice = paramBuilder.gasPrice {
+            gasPriceLabel.text = gasPrice
+        } else {
+            hiddenItems.append((1, 4))    // gas price
+        }
+        if let gasUsed = paramBuilder.gasUsed {
+            gasUsedLabel.text = gasUsed
+        } else {
+            hiddenItems.append((1, 5))    // gas used
+        }
+        if let gasLimit = paramBuilder.gasLimit {
+            gasLimitLabel.text = gasLimit
+        } else {
+            hiddenItems.append((1, 6))    // gas limit
+        }
+    }
 
+    func setupTxStatus() {
         switch transaction.status {
         case .success:
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
             statusLabel.backgroundColor = UIColor(named: "secondary_color")?.withAlphaComponent(0.2)
             statusLabel.textColor = UIColor(named: "secondary_color")
-            hashLabel.text = transaction.hash
-            blockLabel.text = "\(transaction.blockNumber)"
         case .pending:
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationPending".localized() : "TransactionStatus.pending".localized()
             statusLabel.backgroundColor = UIColor(named: "warning_bg_color")
             statusLabel.textColor = UIColor(named: "warning_color")
-
-            hiddenItems.append((0, 3))    // block chain network
-            hiddenItems.append((1, 0))    // hash
-            hiddenItems.append((1, 2))    // block
         case .failure:
             statusLabel.text = transaction.isContractCreation ? "Transaction.Details.contractCreationFailure".localized() : "TransactionStatus.failure".localized()
             statusLabel.backgroundColor = UIColor(hex: "FF706B", alpha: 0.2)
             statusLabel.textColor = UIColor(hex: "FF706B")
-
-            hiddenItems.append((0, 3))    // block chain network
-            hiddenItems.append((1, 0))    // hash
-            hiddenItems.append((1, 2))    // block
         }
         statusWidthLayout.constant = statusLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 20), limitedToNumberOfLines: 1).size.width + 24
-        setupGasInfo()
     }
 
-    // TODO: Refeature setup function
-    func setupGasInfo() {
-        switch transaction.status {
-        case .success, .pending:
-            if let ethereum = transaction as? EthereumTransactionDetails {
-                gasFeeLabel.text = (ethereum.gasUsed * ethereum.gasPrice).toAmountText(transaction.token.decimals) + " ETH"
-                gasPriceLabel.text = "\(ethereum.gasPrice.toGweiText()) Gwei"
-            } else if let erc20 = transaction as? Erc20TransactionDetails {
-                gasFeeLabel.text = (erc20.gasUsed * erc20.gasPrice).toAmountText(transaction.token.decimals) + " ETH"
-                gasPriceLabel.text = "\(erc20.gasPrice.toGweiText()) Gwei"
-            } else if let appChain = transaction as? AppChainTransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: transaction.token.chainHosts)
-                gasPriceLabel.text = "\(quotaPrice.toAmountText(transaction.token.decimals)) NATT"
-                gasFeeLabel.text = (appChain.quotaUsed * quotaPrice).toAmountText(transaction.token.decimals) + " NATT"
-            } else if let appChainErc20 = transaction as? AppChainErc20TransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: transaction.token.chainHosts)
-                gasPriceLabel.text = "\(quotaPrice.toAmountText(transaction.token.decimals)) NATT"
-                gasFeeLabel.text = (appChainErc20.quotaUsed * quotaPrice).toAmountText(transaction.token.decimals) + " NATT"
-            }
-        case .failure:
-            hiddenItems.append((1, 3))    // gas fee
-            hiddenItems.append((1, 4))    // gas price
-            hiddenItems.append((1, 5))    // gas used
+    func setupTxFeeTitle() {
+        switch transaction.token.type {
+        case .ether, .erc20:
+            chainIconView.image = UIImage(named: "icon_tx_details_chain_eth")
+            gasUsedTitleLabel.text = "Gas Used:"
+            gasPriceTitleLabel.text = "Gas Price:"
+            gasLimitTitleLabel.text = "Gas Limit:"
+        case .appChain, .appChainErc20:
+            chainIconView.image = UIImage(named: "icon_tx_details_chain_cita")
+            gasUsedTitleLabel.text = "Quota Used:"
+            gasPriceTitleLabel.text = "Quota Price:"
+            gasLimitTitleLabel.text = "Quota Limit:"
         }
+    }
 
-        if transaction.status == .pending {
-            gasLimitLabel.text = "\(transaction.gasLimit)"
-        } else {
-            hiddenItems.append((1, 6))    // gas limit
-        }
-
-        if transaction.status == .success {
-            if let ethereum = transaction as? EthereumTransactionDetails {
-                gasUsedLabel.text = "\(ethereum.gasUsed)"
-            } else if let erc20 = transaction as? Erc20TransactionDetails {
-                gasUsedLabel.text = "\(erc20.gasUsed)"
-            } else if let appChain = transaction as? AppChainTransactionDetails {
-                gasUsedLabel.text = "\(appChain.quotaUsed)"
-            } else if let appChainErc20 = transaction as? AppChainErc20TransactionDetails {
-                gasUsedLabel.text = "\(appChainErc20.quotaUsed)"
-            }
-        } else {
-            hiddenItems.append((1, 5))    // gas used
-        }
+    @IBAction func share(_ sender: Any) {
+        let controller = UIActivityViewController(activityItems: [getTxDetailsURL()], applicationActivities: nil)
+        controller.excludedActivityTypes = [.markupAsPDF, .mail, .openInIBooks, .print, .addToReadingList, .assignToContact]
+        present(controller, animated: true, completion: nil)
     }
 }
 
@@ -190,16 +176,22 @@ extension TransactionDetailsViewController {
             UIPasteboard.general.string = transaction.to
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 3 {
-            let url: URL
-            if transaction.token.type == .erc20 || transaction.token.type == .ether {
-                url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
-            } else if transaction.token.chainId == "1" {
-                url = URL(string: "https://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
-            } else {
-                fatalError()
-            }
-            let safariController = SFSafariViewController(url: url)
+            let safariController = SFSafariViewController(url: getTxDetailsURL())
             self.present(safariController, animated: true, completion: nil)
         }
+    }
+}
+
+extension TransactionDetailsViewController {
+    fileprivate func getTxDetailsURL() -> URL {
+        let url: URL
+        if transaction.token.type == .erc20 || transaction.token.type == .ether {
+            url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
+        } else if transaction.token.chainId == "1" {
+            url = URL(string: "https://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
+        } else {
+            fatalError()
+        }
+        return url
     }
 }

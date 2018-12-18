@@ -8,6 +8,7 @@
 
 import UIKit
 import EFQRCode
+import Social
 
 class WalletQRCodeViewController: UIViewController {
     @IBOutlet private weak var iconView: UIImageView!
@@ -44,5 +45,12 @@ class WalletQRCodeViewController: UIViewController {
         title = "Wallet.receipt".localized()
         copyButton.setTitle("Wallet.QRCode.copy".localized(), for: .normal)
         walletQRCodeDescLabel.text = "Wallet.QRCode.desc".localized()
+    }
+
+    @IBAction func share(_ sender: Any) {
+        guard let image = qrCodeView.image else { return }
+        let controller = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+        controller.excludedActivityTypes = [.markupAsPDF, .mail, .openInIBooks, .print, .addToReadingList, .assignToContact]
+        present(controller, animated: true, completion: nil)
     }
 }
