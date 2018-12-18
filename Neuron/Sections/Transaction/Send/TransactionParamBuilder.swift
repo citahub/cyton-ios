@@ -46,6 +46,7 @@ class TransactionParamBuilder: NSObject {
 
     @objc dynamic
     private(set) var gasTokenPrice: Double = 0
+    private(set) var gasTokenDecimals = 18
 
     private(set) var currencySymbol = ""
 

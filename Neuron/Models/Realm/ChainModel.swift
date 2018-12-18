@@ -19,6 +19,10 @@ class ChainModel: Object {
     override class func primaryKey() -> String? {
         return "identifier"
     }
+
+    var nativeToken: TokenModel {
+        return (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)!
+    }
 }
 
 extension ChainModel {

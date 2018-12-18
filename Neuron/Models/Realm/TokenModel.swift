@@ -82,7 +82,7 @@ class TokenModel: Object, Decodable {
         case .ether, .erc20:
             return "ETH"
         case .appChain, .appChainErc20:
-            return self.symbol
+            return chain?.nativeToken.symbol ?? "NATT"
         }
     }
 
