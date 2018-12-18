@@ -284,6 +284,7 @@
 "Wallet.Details.ChangePassword.success" = "Password Changed";
 "Wallet.Details.ExportKeystore.copy" = "Copy";
 "Wallet.Details.ExportKeystore.copySuccess" = "Keystore is copied to clipbord";
+"Wallet.Details.WalletIconPicker.title" = "选择头像(en)";
 
 // No Screenshot
 // ---------------------------------------------------------

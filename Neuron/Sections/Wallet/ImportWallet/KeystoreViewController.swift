@@ -9,7 +9,6 @@
 import UIKit
 import RSKPlaceholderTextView
 import EthereumAddress
-import IGIdenticon
 import RealmSwift
 
 class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegate {
@@ -123,8 +122,6 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             return
         }
 
-        let iconImage = GitHubIdenticon().icon(from: walletModel.address.lowercased(), size: CGSize(width: 60, height: 60))
-        walletModel.iconData = iconImage!.pngData()!
         do {
             let realm = try! Realm()
             try realm.write {

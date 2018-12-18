@@ -38,7 +38,7 @@ class SettingsViewController: UITableViewController {
         if let walletModel = AppModel.current.currentWallet {
             nameLabel.text = walletModel.name
             addressLabel.text = walletModel.address
-            iconImageView.image = UIImage(data: walletModel.iconData)
+            iconImageView.image = walletModel.icon.image
             currencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
             ethereumNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
             authenticationSwitch.isOn = AuthenticationService.shared.isEnable

@@ -120,7 +120,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         let wallet = AppModel.current.currentWallet!
         title = String(format: "Transaction.Send.title".localized(), tokenModel.symbol)
 
-        walletIconView.image = UIImage(data: wallet.iconData)
+        walletIconView.image = wallet.icon.image
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
         tokenBalanceButton.setTitle("\(tokenModel.balance.toAmountText(tokenModel.decimals)) \(tokenModel.symbol)", for: .normal)

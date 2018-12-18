@@ -48,7 +48,7 @@ class SelectWalletController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchWalletCell") as! WalletTableViewCell
         let walletModel = appModel.wallets[indexPath.section]
-        cell.iconImageView.image = UIImage(data: walletModel.iconData)
+        cell.iconImageView.image = walletModel.icon.image
         cell.nameLabel.text = walletModel.name
         cell.addressLabel.text = walletModel.address
         if appModel.currentWallet?.address == walletModel.address {

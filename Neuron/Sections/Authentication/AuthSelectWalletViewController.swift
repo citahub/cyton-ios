@@ -35,7 +35,7 @@ class AuthSelectWalletViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: AuthSelectWalletTableViewCell.self)) as! AuthSelectWalletTableViewCell
         let wallet = wallets[indexPath.row]
-        cell.iconImageView.image = UIImage(data: wallet.iconData)
+        cell.iconImageView.image = wallet.icon.image
         cell.nameLabel.text = wallet.name
         cell.addressLabel.text = wallet.address
         return cell

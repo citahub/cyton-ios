@@ -27,6 +27,7 @@ class WalletDetailController: UITableViewController {
     private var deleteBulletinManager: BLTNItemManager?
     private var exportBulletinManager: BLTNItemManager?
     private var modifyWalletNameBulletinManager: BLTNItemManager?
+    private var walletObserve: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,7 @@ class WalletDetailController: UITableViewController {
         walletModel = appModel.currentWallet!
         walletAddressLabel.text = walletModel.address
         walletNameLabel.text = walletModel.name
-        walletIconImageView.image = UIImage(data: walletModel.iconData)
+        walletIconImageView.image = walletModel.icon.image
 
         iconTitleLabel.text = "Wallet.Details.icon".localized()
         nameTItleLabel.text = "Wallet.Details.name".localized()
@@ -43,6 +44,28 @@ class WalletDetailController: UITableViewController {
         changePwTitleLabel.text = "Wallet.Details.changePassword".localized()
         exprotKeystoreTItleLabel.text = "Wallet.Details.exportKeystore".localized()
         deleteWalletButton.setTitle("Wallet.Details.delete".localized(), for: .normal)
+
+        walletObserve = walletModel.observe { [weak self](change) in
+            switch change {
+            case .change(let propertyChanges):
+                if propertyChanges.contains(where: { $0.name == "iconName" }) {
+                    self?.walletIconImageView.image = self?.walletModel.icon.image
+                }
+            default:
+                break
+            }
+        }
+    }
+
+    deinit {
+        walletObserve?.invalidate()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == String(describing: WalletIconPickerViewController.self) {
+            let controller = segue.destination as! WalletIconPickerViewController
+            controller.wallet = walletModel
+        }
     }
 
     func createDeleteWalletPageItem() -> PasswordPageItem {

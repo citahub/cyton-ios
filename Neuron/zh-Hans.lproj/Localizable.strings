@@ -284,6 +284,7 @@
 "Wallet.Details.ChangePassword.success" = "密码修改成功，请牢记！";
 "Wallet.Details.ExportKeystore.copy" = "复制";
 "Wallet.Details.ExportKeystore.copySuccess" = "Keystore已经复制到粘贴板";
+"Wallet.Details.WalletIconPicker.title" = "选择头像";
 
 // No Screenshot
 // ---------------------------------------------------------

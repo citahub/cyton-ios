@@ -31,7 +31,7 @@ class ChangePasswordController: UITableViewController, UITextFieldDelegate {
 
         let walletModel = AppModel.current.currentWallet!
         walletNameLabel.text = walletModel.name
-        walletIconView.image = UIImage(data: walletModel.iconData)
+        walletIconView.image = walletModel.icon.image
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
