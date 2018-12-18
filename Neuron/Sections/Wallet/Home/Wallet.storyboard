@@ -836,7 +836,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oeL-3K-bag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="265"/>
+            <point key="canvasLocation" x="473" y="265"/>
         </scene>
         <!--收款-->
         <scene sceneID="SFn-o6-Kln">
