@@ -44,6 +44,8 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         tempArray.append(objectsIn: selectArray)
         try! realm.write {
             selectArray.removeAll()
+            tokenArray.removeAll()
+            tokenArray.append(objectsIn: tempTokenArray)
             tempTokenArray.forEach({ (model) in
                 if let token = tempArray.first(where: { $0 == model }) {
                     selectArray.append(token)
