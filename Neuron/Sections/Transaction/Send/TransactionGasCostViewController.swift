@@ -89,14 +89,12 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-        } else if paramBuilder.tokenType == .appChain {
+        } else if paramBuilder.tokenType == .appChain || paramBuilder.tokenType == .appChainErc20 {
             gasPriceTextField.isEnabled = false
             if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
                 Toast.showToast(text: "Transaction.Send.quotaLimitSettingIsTooLow".localized())
                 return
             }
-        } else if paramBuilder.tokenType == .appChainErc20 {
-            gasPriceTextField.isEnabled = false
         }
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
