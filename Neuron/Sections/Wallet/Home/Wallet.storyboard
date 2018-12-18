@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -960,7 +961,14 @@
                         <viewLayoutGuide key="safeArea" id="6AJ-1k-51B"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="faA-hN-qcP"/>
+                    <navigationItem key="navigationItem" id="faA-hN-qcP">
+                        <barButtonItem key="rightBarButtonItem" image="icon_share" id="dqv-TH-Jb5">
+                            <color key="tintColor" name="headline_color"/>
+                            <connections>
+                                <action selector="share:" destination="xNb-kk-FtN" id="Nya-Ig-hDW"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressLabel" destination="ist-sh-hoq" id="DHS-ij-Kyr"/>
                         <outlet property="copyButton" destination="hj4-9b-ulb" id="gkF-W2-dmc"/>
@@ -977,11 +985,15 @@
     </scenes>
     <resources>
         <image name="icon_refresh" width="36" height="32"/>
+        <image name="icon_share" width="27" height="28"/>
         <image name="icon_wallet_add" width="44" height="44"/>
         <image name="icon_wallet_qrcode" width="38" height="38"/>
         <image name="icon_wallet_switch" width="40" height="40"/>
         <image name="icon_wallet_trans" width="44" height="44"/>
         <image name="wallet_switch_arrow" width="7" height="12"/>
+        <namedColor name="headline_color">
+            <color red="0.18000000715255737" green="0.19200000166893005" blue="0.24300000071525574" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="XeA-2f-AYU"/>

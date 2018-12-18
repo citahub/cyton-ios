@@ -8,6 +8,7 @@
 
 import UIKit
 import SafariServices
+import Social
 
 class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var tokenIconView: UIImageView!
@@ -35,6 +36,7 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
     @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
+    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
     var transaction: TransactionDetails! {
         didSet {
             if oldValue != nil && transaction != nil {
@@ -115,6 +117,12 @@ class TransactionDetailsViewController: UITableViewController {
         }
         statusWidthLayout.constant = statusLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 200, height: 20), limitedToNumberOfLines: 1).size.width + 24
         setupGasInfo()
+
+        if hiddenItems.contains(where: { $0.0 == 0 && $0.1 == 3 }) {
+            self.navigationItem.rightBarButtonItem = nil
+        } else {
+            self.navigationItem.rightBarButtonItem = shareBarButtonItem
+        }
     }
 
     // TODO: Refeature setup function
@@ -162,6 +170,12 @@ class TransactionDetailsViewController: UITableViewController {
             hiddenItems.append((1, 5))    // gas used
         }
     }
+
+    @IBAction func share(_ sender: Any) {
+        let controller = UIActivityViewController(activityItems: [getTxDetailsURL()], applicationActivities: nil)
+        controller.excludedActivityTypes = [.markupAsPDF, .mail, .openInIBooks, .print, .addToReadingList, .assignToContact]
+        present(controller, animated: true, completion: nil)
+    }
 }
 
 extension TransactionDetailsViewController {
@@ -190,16 +204,22 @@ extension TransactionDetailsViewController {
             UIPasteboard.general.string = transaction.to
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 3 {
-            let url: URL
-            if transaction.token.type == .erc20 || transaction.token.type == .ether {
-                url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
-            } else if transaction.token.chainId == "1" {
-                url = URL(string: "https://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
-            } else {
-                fatalError()
-            }
-            let safariController = SFSafariViewController(url: url)
+            let safariController = SFSafariViewController(url: getTxDetailsURL())
             self.present(safariController, animated: true, completion: nil)
         }
+    }
+}
+
+extension TransactionDetailsViewController {
+    fileprivate func getTxDetailsURL() -> URL {
+        let url: URL
+        if transaction.token.type == .erc20 || transaction.token.type == .ether {
+            url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
+        } else if transaction.token.chainId == "1" {
+            url = URL(string: "https://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
+        } else {
+            fatalError()
+        }
+        return url
     }
 }
