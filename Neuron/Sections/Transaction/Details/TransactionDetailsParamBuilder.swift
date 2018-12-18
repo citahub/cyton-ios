@@ -10,7 +10,6 @@ import UIKit
 
 class TransactionDetailsParamBuilder {
     let tx: TransactionDetails
-
     var tokenIcon: String!
     var status: String!
     var amount: String!
@@ -18,7 +17,6 @@ class TransactionDetailsParamBuilder {
     var from: String!
     var to: String!
     var txDetailsUrl: URL!
-
     var hash: String!
     var network: String!
     var block: String!
