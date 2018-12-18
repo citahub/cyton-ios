@@ -42,4 +42,5 @@ struct LocalCurrency: Codable {
     var name: String
     var short: String
     var symbol: String
+    var identifier: String
 }

@@ -68,7 +68,7 @@ extension TokenModel {
                     let amountText = self.balance.toDecimalNumber(self.decimals).multiplying(by: NSDecimalNumber(value: price)).formatterToString(4)
                     profile.possess = LocalCurrencyService.shared.getLocalCurrencySelect().symbol + amountText
                     profile.price = price
-                    profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
+                    profile.priceText = NSDecimalNumber(value: price).currencyFormat()
                 }
                 complection(profile)
             }
@@ -106,7 +106,7 @@ extension TokenModel {
                 let amountText = self.balance.toDecimalNumber(self.decimals).multiplying(by: NSDecimalNumber(value: price)).formatterToString(4)
                 profile.possess = LocalCurrencyService.shared.getLocalCurrencySelect().symbol + amountText
                 profile.price = price
-                profile.priceText = String(format: "%@ %.4f", LocalCurrencyService.shared.getLocalCurrencySelect().symbol, price)
+                profile.priceText = NSDecimalNumber(value: price).currencyFormat()
                 complection(profile)
             } else {
                 complection(profile)

@@ -18,4 +18,13 @@ extension NSDecimalNumber {
         formatter.roundingMode = .floor
         return formatter.string(from: self) ?? "0"
     }
+
+    func currencyFormat() -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: LocalCurrencyService.shared.getLocalCurrencySelect().identifier)
+        print(formatter.locale)
+        let text = formatter.string(from: self) ?? "0"
+        return text.replacingOccurrences(of: formatter.locale.currencySymbol!, with: "\(formatter.locale.currencySymbol!) ")
+    }
 }
