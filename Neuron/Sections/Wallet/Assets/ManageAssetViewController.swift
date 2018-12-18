@@ -41,7 +41,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func sortSelectTokenArray() {
         let tempArray = List<TokenModel>()
-        tempArray.append(objectsIn: tempTokenArray)
+        tempArray.append(objectsIn: selectArray)
         try! realm.write {
             selectArray.removeAll()
             tempTokenArray.forEach({ (model) in
@@ -104,16 +104,20 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
 
     func assetTableViewCell(_ assetTableViewCell: UITableViewCell, isSelected: Bool) {
         let index = tableView.indexPath(for: assetTableViewCell)!
-        let tokenModel = tokenArray[index.row]
+        let tokenModel = tempTokenArray[index.row]
         try! realm.write {
             if isSelected {
-                if !selectArray.contains(where: { $0 == tokenModel }) {
-                    selectArray.append(tokenModel)
+                var insertIndex = 0
+                for token in tempTokenArray {
+                    if token == tokenModel {
+                        break
+                    } else if selectArray.contains(token) {
+                        insertIndex += 1
+                    }
                 }
+                selectArray.insert(tokenModel, at: insertIndex)
             } else {
-                if selectArray.contains(where: { $0 == tokenModel }) {
-                    selectArray.remove(at: selectArray.index(of: tokenModel)!)
-                }
+                selectArray.remove(at: selectArray.index(of: tokenModel)!)
             }
         }
     }
