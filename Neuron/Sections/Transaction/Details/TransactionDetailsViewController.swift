@@ -53,7 +53,7 @@ class TransactionDetailsViewController: UITableViewController {
         title = "Transaction.Details.title".localized()
         paymentAddressTitleLabel.text = "Transaction.Details.paymentAddress".localized() + ":"
         receiptAddressTitleLabel.text = "Transaction.Details.receiptAddress".localized() + ":"
-        blockchainBrowserLabel.text = "Transaction.Details.blockchainBrowserDesc".localized() + ":"
+        blockchainBrowserLabel.text = "Transaction.Details.blockchainBrowserDesc".localized()
         hashTitleLabel.text = "Transaction.Details.hash".localized() + ":"
         chainNetworkTitleLable.text = "Transaction.Details.chainNetwork".localized() + ":"
         blockTitleLabel.text = "Transaction.Details.block".localized() + ":"
@@ -83,6 +83,7 @@ class TransactionDetailsViewController: UITableViewController {
         } else {
             hiddenItems.append((1, 0))    // hash
         }
+        chainNetworkLabel.text = paramBuilder.network
         if let block = paramBuilder.block {
             blockLabel.text = block
         } else {

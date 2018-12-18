@@ -78,7 +78,7 @@ class TransactionDetailsParamBuilder {
                 txFee = (ethereum.gasUsed * ethereum.gasPrice).toAmountText(tx.token.decimals) + " ETH"
                 gasPrice = "\(ethereum.gasPrice.toGweiText()) Gwei"
             } else if let erc20 = tx as? Erc20TransactionDetails {
-                txFee = (erc20.gasUsed * erc20.gasPrice).toAmountText(tx.token.decimals) + " ETH"
+                txFee = (erc20.gasUsed * erc20.gasPrice).toAmountText() + " ETH"
                 gasPrice = "\(erc20.gasPrice.toGweiText()) Gwei"
             } else if let appChain = tx as? AppChainTransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHosts)
@@ -87,7 +87,7 @@ class TransactionDetailsParamBuilder {
             } else if let appChainErc20 = tx as? AppChainErc20TransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHosts)
                 gasPrice = "\(quotaPrice.toAmountText(tx.token.decimals)) NATT"
-                txFee = (appChainErc20.quotaUsed * quotaPrice).toAmountText(tx.token.decimals) + " NATT"
+                txFee = (appChainErc20.quotaUsed * quotaPrice).toAmountText() + " NATT"
             }
         }
         gasLimit = tx.status == .pending ? "\(tx.gasLimit)" : nil
