@@ -27,7 +27,7 @@ class TokenTableViewCell: UITableViewCell {
                     if let price = token.price {
                         let amountNumber = balance.toDecimalNumber(token.decimals).multiplying(by: NSDecimalNumber(value: price))
                         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-                        amountLabel.text = "≈\(currency.symbol)" + amountNumber.formatterToString(4)
+                        amountLabel.text = "≈\(currency.symbol)" + amountNumber.formatterToString(2)
                     }
                 }
             }

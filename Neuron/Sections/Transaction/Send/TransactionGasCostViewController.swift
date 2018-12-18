@@ -125,7 +125,7 @@ class TransactionGasCostViewController: UITableViewController {
         gasCostDescLabel.text = "≈\(gasLimitTitleLabel.text!)(\(gasLimitTextField.text!))*\(gasPriceTitleLabel.text!)(\(gasPriceTextField.text!) \(gasPriceSymbolLabel.text!))"
         if paramBuilder.gasTokenPrice > 0 {
             let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
-            gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(4)
+            gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(2)
         }
     }
 
