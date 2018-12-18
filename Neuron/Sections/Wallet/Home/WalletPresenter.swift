@@ -122,7 +122,9 @@ extension WalletPresenter {
             token.walletAddress = self.currentWallet!.address
             return token
         })
-        self.tokens += newTokens
+        for (idx, token) in newTokens.enumerated() {
+            self.tokens.insert(token, at: insertions[idx])
+        }
         self.refreshTokenListBalance(tokens: newTokens)
     }
 }

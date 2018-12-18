@@ -107,13 +107,17 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         let tokenModel = tokenArray[index.row]
         try! realm.write {
             if isSelected {
-                if !selectArray.contains(where: { $0 == tokenModel }) {
-                    selectArray.append(tokenModel)
+                var insertIndex = 0
+                for token in tokenArray {
+                    if token == tokenModel {
+                        break
+                    } else if selectArray.contains(token) {
+                        insertIndex += 1
+                    }
                 }
+                selectArray.insert(tokenModel, at: insertIndex)
             } else {
-                if selectArray.contains(where: { $0 == tokenModel }) {
-                    selectArray.remove(at: selectArray.index(of: tokenModel)!)
-                }
+                selectArray.remove(at: selectArray.index(of: tokenModel)!)
             }
         }
     }
