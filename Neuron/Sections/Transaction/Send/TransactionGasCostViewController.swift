@@ -80,19 +80,19 @@ class TransactionGasCostViewController: UITableViewController {
             if paramBuilder.data.count > 0 {
                 let estimateGasLimit = paramBuilder.estimateGasLimit()
                 if paramBuilder.gasLimit < UInt(estimateGasLimit) {
-                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(estimateGasLimit)"))
+                    Toast.showToast(text: "Transaction.Send.gasLimitSettingIsTooLow".localized())
                     return
                 }
             } else {
                 if paramBuilder.gasLimit < GasCalculator.defaultGasLimit {
-                    Toast.showToast(text: String(format: "Transaction.Send.gasLimitSettingIsTooLow".localized(), "\(GasCalculator.defaultGasLimit)"))
+                    Toast.showToast(text: "Transaction.Send.gasLimitSettingIsTooLow".localized())
                     return
                 }
             }
         } else if paramBuilder.tokenType == .appChain {
             gasPriceTextField.isEnabled = false
             if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
-                Toast.showToast(text: String(format: "Transaction.Send.quotaLimitSettingIsTooLow".localized(), "\(paramBuilder.estimateGasLimit())"))
+                Toast.showToast(text: "Transaction.Send.quotaLimitSettingIsTooLow".localized())
                 return
             }
         } else if paramBuilder.tokenType == .appChainErc20 {
