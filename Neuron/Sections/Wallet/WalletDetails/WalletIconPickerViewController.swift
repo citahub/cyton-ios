@@ -11,13 +11,13 @@ import RealmSwift
 
 class WalletIconPickerViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, WalletIconPickerFooterViewDelegate {
     var wallet: WalletModel!
-    private var walletIcons: [WalleIconType]!
-    private var currentIcon: WalleIconType!
+    private var walletIcons: [WalleIcon]!
+    private var currentIcon: WalleIcon!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Wallet.Details.WalletIconPicker.title".localized()
-        walletIcons = WalleIconType.allType
+        walletIcons = WalleIcon.allCases
         currentIcon = wallet.icon
     }
 

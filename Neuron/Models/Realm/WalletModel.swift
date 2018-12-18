@@ -9,29 +9,25 @@
 import UIKit
 import RealmSwift
 
-enum WalleIconType: String {
-    case dog = "icon_wallet_dog"
-    case fish = "icon_wallet_fish"
-    case owl = "icon_wallet_owl"
-    case parrot = "icon_wallet_parrot"
-    case rat = "icon_wallet_rat"
-    case squirrel = "icon_wallet_squirrel"
-    case fox = "icon_wallet_fox"
-    case tiger = "icon_wallet_tiger"
+enum WalleIcon: String, CaseIterable {
+    case dog
+    case fish
+    case owl
+    case parrot
+    case rat
+    case squirrel
+    case fox
+    case tiger
 
     var image: UIImage {
-        return UIImage(named: rawValue)!
-    }
-
-    static var allType: [WalleIconType] {
-        return [.dog, .fish, .owl, .parrot, .rat, .squirrel, .fox, .tiger]
+        return UIImage(named: "wallet_icon_\(rawValue)")!
     }
 }
 
 class WalletModel: Object {
     @objc dynamic var name = ""
     @objc dynamic var address = ""
-    @objc dynamic private var iconName: String!
+    @objc dynamic var iconName: String!
     var selectedTokenList = List<TokenModel>()
     var tokenModelList = List<TokenModel>()
     var chainModelList = List<ChainModel>()
@@ -44,37 +40,42 @@ class WalletModel: Object {
         return "address"
     }
 
-    var icon: WalleIconType {
+    var icon: WalleIcon {
         get {
             if let iconName = iconName {
-                return WalleIconType(rawValue: iconName)!
+                return WalleIcon(rawValue: iconName)!
             }
-            let iconList = WalleIconType.allType
-            var useCount = [Int].init(repeating: 0, count: WalleIconType.allType.count)
-            let realm = try! Realm()
-            realm.objects(WalletModel.self).forEach { (wallet) in
-                guard let idx = iconList.firstIndex(where: { $0.rawValue == wallet.iconName }) else { return }
-                useCount[idx] += 1
-            }
-            var minimumUsedCount = Int.max
-            var minimumUsedList = [WalleIconType]()
-            for (idx, count) in useCount.enumerated() {
-                if count < minimumUsedCount {
-                    minimumUsedCount = count
-                    minimumUsedList.removeAll()
-                }
-                if count == minimumUsedCount {
-                    minimumUsedList.append(iconList[idx])
-                }
-            }
-            let randomIdx = arc4random_uniform(UInt32(minimumUsedList.count))
-            try! (self.realm ?? realm).write {
-                self.icon = minimumUsedList[Int(randomIdx)]
+            try! (realm ?? Realm()).write {
+                self.icon = WalleIcon.randomIcon()
             }
             return self.icon
         }
         set {
             iconName = newValue.rawValue
         }
+    }
+}
+
+extension WalleIcon {
+    static func randomIcon() -> WalleIcon {
+        let iconList = WalleIcon.allCases
+        var useCount = [Int].init(repeating: 0, count: WalleIcon.allCases.count)
+        try! Realm().objects(WalletModel.self).forEach { (wallet) in
+            guard let idx = iconList.firstIndex(where: { $0.rawValue == wallet.iconName }) else { return }
+            useCount[idx] += 1
+        }
+        var minimumUsedCount = Int.max
+        var minimumUsedList = [WalleIcon]()
+        for (idx, count) in useCount.enumerated() {
+            if count < minimumUsedCount {
+                minimumUsedCount = count
+                minimumUsedList.removeAll()
+            }
+            if count == minimumUsedCount {
+                minimumUsedList.append(iconList[idx])
+            }
+        }
+        let randomIdx = Int.random(in: 0..<minimumUsedList.count)
+        return minimumUsedList[randomIdx]
     }
 }
