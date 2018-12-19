@@ -36,17 +36,10 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
     @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
-    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
-    var transaction: TransactionDetails! {
-        didSet {
-            if oldValue != nil && transaction != nil {
-                setupUI()
-            }
-        }
-    }
+    @IBOutlet private weak var shareBarButtonItem: UIBarButtonItem!
     private var paramBuilder: TransactionDetailsParamBuilder!
-
     private var hiddenItems = [(Int, Int)]()
+    var transaction: TransactionDetails!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,12 +52,19 @@ class TransactionDetailsViewController: UITableViewController {
         blockTitleLabel.text = "Transaction.Details.block".localized() + ":"
         gasFeeTitleLabel.text = "Transaction.Details.gasFee".localized() + ":"
 
-        setupUI()
         setupTxFeeTitle()
+        Toast.showHUD()
+        DispatchQueue.global().async {
+            self.paramBuilder = TransactionDetailsParamBuilder(tx: self.transaction)
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+                self.setupUI()
+                self.tableView.reloadData()
+            }
+        }
     }
 
     func setupUI() {
-        paramBuilder = TransactionDetailsParamBuilder(tx: transaction)
         setupTxStatus()
         tokenIconView.sd_setImage(with: URL(string: paramBuilder.tokenIcon), placeholderImage: UIImage(named: "eth_logo"))
         amountLabel.text = paramBuilder.amount
@@ -153,7 +153,7 @@ class TransactionDetailsViewController: UITableViewController {
 
 extension TransactionDetailsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
+        if paramBuilder == nil || hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
             return 0.0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -161,7 +161,7 @@ extension TransactionDetailsViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.isHidden = hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
+        cell.isHidden = cell.bounds.height == 0.0
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
