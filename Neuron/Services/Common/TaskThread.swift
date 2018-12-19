@@ -43,6 +43,7 @@ class TaskThread: NSObject {
     }
 
     @objc func stop() {
+        guard thread != nil else { return }
         thread = nil
         if let runloop = runLoop?.getCFRunLoop() {
             CFRunLoopStop(runloop)
