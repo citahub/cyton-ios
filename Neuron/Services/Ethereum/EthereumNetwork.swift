@@ -56,17 +56,17 @@ struct EthereumNetwork {
         case ropsten
         case kovan
 
-        static let allValues = allCases.map { $0.rawValue }
+//        static let allValues = allCases.map { $0.chainName }
         var chainName: String {
             switch self {
             case .mainnet:
-                return "Ethereum Mainnet"
+                return "Main Ethereum Network"
             case .rinkeby:
-                return "Ethereum Rinkeby"
+                return "Rinkeby Test Network"
             case .ropsten:
-                return "Ethereum Ropsten"
+                return "Ropsten Test Network "
             case .kovan:
-                return "Ethereum Kovan"
+                return "Kovan Test Network"
             }
         }
     }
@@ -78,9 +78,7 @@ struct EthereumNetwork {
         return EthereumNetworkType(rawValue: network) ?? .mainnet
     }
 
-    func switchNetwork(_ network: String) {
-        if let network = EthereumNetworkType(rawValue: network) {
-            UserDefaults.standard.set(network.rawValue, forKey: currentNetworkKey)
-        }
+    func switchNetwork(_ network: EthereumNetworkType) {
+        UserDefaults.standard.set(network.rawValue, forKey: currentNetworkKey)
     }
 }

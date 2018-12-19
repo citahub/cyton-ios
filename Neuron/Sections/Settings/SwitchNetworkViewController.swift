@@ -9,8 +9,6 @@
 import UIKit
 
 class SwitchNetworkViewController: UITableViewController {
-    var networks: [String] = []
-
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings.SwitchNetwork.Title".localized()
@@ -18,14 +16,14 @@ class SwitchNetworkViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return EthereumNetwork.EthereumNetworkType.allValues.count
+        return EthereumNetwork.EthereumNetworkType.allCases.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchNetwork") as! SwitchNetworkTableViewCell
-        let network = EthereumNetwork.EthereumNetworkType.allValues[indexPath.row]
-        cell.networkLabel.text = network.capitalized
-        if EthereumNetwork().currentNetwork.rawValue == network {
+        let network = EthereumNetwork.EthereumNetworkType.allCases[indexPath.row]
+        cell.networkLabel.text = network.chainName
+        if EthereumNetwork().currentNetwork == network {
             cell.selectImage.isHidden = false
         } else {
             cell.selectImage.isHidden = true
@@ -35,7 +33,7 @@ class SwitchNetworkViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        EthereumNetwork().switchNetwork(EthereumNetwork.EthereumNetworkType.allValues[indexPath.row])
+        EthereumNetwork().switchNetwork(EthereumNetwork.EthereumNetworkType.allCases[indexPath.row])
         NotificationCenter.default.post(name: .switchEthNetwork, object: nil)
         navigationController?.popViewController(animated: true)
     }
