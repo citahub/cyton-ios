@@ -100,6 +100,9 @@ class BigUIntExtensionTests: XCTestCase {
     func testAmountTextToBigUInt() {
         XCTAssertEqual(BigUInt.parseToBigUInt("1.23", 4), 12_300)
         XCTAssertEqual(BigUInt.parseToBigUInt("0.00045", 18), 450_000_000_000_000)
+        XCTAssertEqual(BigUInt.parseToBigUInt("1.23", 2), 123)
+        XCTAssertEqual(BigUInt.parseToBigUInt("1.2344", 2), 123)
+        XCTAssertEqual(BigUInt.parseToBigUInt("1.003", 2), 100)
     }
 
     func testBigUIntToAmountText() {
