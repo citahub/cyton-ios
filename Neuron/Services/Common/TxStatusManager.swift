@@ -102,10 +102,8 @@ class TxStatusManager: NSObject {
                 result = EthereumNetwork().getTransactionStatus(localTxDetail: localTxDetail)
             case .erc20:
                 result = EthereumNetwork().getTransactionStatus(localTxDetail: localTxDetail)
-            case .appChain:
+            case .appChain, .appChainErc20:
                 result = AppChainNetwork().getTransactionStatus(localTxDetail: localTxDetail)
-            default:
-                fatalError()
             }
             switch result {
             case .failure:

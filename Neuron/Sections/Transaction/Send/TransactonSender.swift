@@ -117,6 +117,19 @@ extension TransactonSender {
                 quota: paramBuilder.gasLimit,
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password)
+            TxStatusManager.manager.insertLocalTxDetail { () -> LocalTxDetailModel in
+                return LocalTxDetailModel(
+                    contractAddress: self.paramBuilder.contractAddress,
+                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+                    txHash: result.0,
+                    from: self.paramBuilder.from,
+                    to: self.paramBuilder.to,
+                    value: self.paramBuilder.value,
+                    gasPrice: self.paramBuilder.gasPrice,
+                    gasLimit: BigUInt(self.paramBuilder.gasLimit),
+                    blockNumber: result.1
+                )
+            }
             return result.0
         }
     }

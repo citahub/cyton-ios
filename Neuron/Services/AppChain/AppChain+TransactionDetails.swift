@@ -114,15 +114,10 @@ extension AppChainNetwork {
         }.wait()
     }
 
-    func getTransaction(txhash: String, account: String, from: String, to: String) throws -> AppChainTransactionDetails {
+    func getTransaction(txhash: String) throws -> AppChainTransactionDetails {
         let url = AppChainNetwork().host().appendingPathComponent("/api/transactions/\(txhash)")
-        let parameters: [String: Any] = [
-            "account": account,
-            "from": from,
-            "to": to
-        ]
         return try Promise<AppChainTransactionDetails>.init { (resolver) in
-            Alamofire.request(url, method: .get, parameters: parameters).responseData(completionHandler: { (response) in
+            Alamofire.request(url, method: .get, parameters: nil).responseData(completionHandler: { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
                     let response = try JSONDecoder().decode(AppChainTransactionResponse.self, from: responseData)

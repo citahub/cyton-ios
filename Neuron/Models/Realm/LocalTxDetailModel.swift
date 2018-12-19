@@ -72,7 +72,10 @@ class LocalTxDetailModel: Object {
         status = .pending
     }
 
-    // TODO: AppChainErc20
+    required convenience init(contractAddress: String, tokenIdentifier: String, txHash: TxHash, from: String, to: String, value: BigUInt, gasPrice: BigUInt, gasLimit: BigUInt, blockNumber: BigUInt) {
+        self.init(tokenIdentifier: tokenIdentifier, txHash: txHash, from: from, to: to, value: value, gasPrice: gasPrice, gasLimit: gasLimit, blockNumber: blockNumber)
+        self.contractAddress = contractAddress
+    }
 
     override var description: String {
         return """
@@ -103,7 +106,9 @@ class LocalTxDetailModel: Object {
             appChain.quotaUsed = BigUInt(gasLimit) ?? 0
             transaction = appChain
         } else {
-            fatalError()
+            let appChainErc20 = AppChainErc20TransactionDetails()
+            appChainErc20.quotaUsed = BigUInt(gasLimit) ?? 0
+            transaction = appChainErc20
         }
         transaction.token = Token(token)
         transaction.token.walletAddress = from
