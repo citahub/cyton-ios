@@ -98,7 +98,9 @@ class TransactionGasCostViewController: UITableViewController {
         }
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
-        param.data = inputDataTextView.text.data(using: .utf8) ?? Data()
+        if let dataText = inputDataTextView.text {
+            param.data = Data(hex: dataText)
+        }
         navigationController?.popViewController(animated: true)
     }
 
