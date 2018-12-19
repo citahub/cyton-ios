@@ -165,7 +165,7 @@ extension TransactionDetailsViewController {
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return [(0, 1), (0, 2), (0, 3)].contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
+        return [(0, 1), (0, 2), (0, 3), (1, 0)].contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -175,6 +175,9 @@ extension TransactionDetailsViewController {
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 2 {
             UIPasteboard.general.string = transaction.to
+            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            UIPasteboard.general.string = transaction.hash
             Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
         } else if indexPath.section == 0 && indexPath.row == 3 {
             let safariController = SFSafariViewController(url: getTxDetailsURL())
