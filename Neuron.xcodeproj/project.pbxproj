@@ -53,7 +53,7 @@
 		6E83CB8F216F573100029324 /* Guide.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB8A216F573100029324 /* Guide.storyboard */; };
 		6E83CB90216F573100029324 /* GuideCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */; };
 		6E83CB91216F573100029324 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB8C216F573100029324 /* GuideViewController.swift */; };
-		6E83CB93216F581800029324 /* ProductAgreement.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB92216F581800029324 /* ProductAgreement.txt */; };
+		6E83CB93216F581800029324 /* product_agreement_cn.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6E83CB92216F581800029324 /* product_agreement_cn.txt */; };
 		6E859CB82176DC3100637E1C /* Overlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6E859CB72176DC3100637E1C /* Overlay.storyboard */; };
 		6E85C12A21C7542900670F8B /* CreateWalletGuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E85C12921C7542900670F8B /* CreateWalletGuideViewController.swift */; };
 		6E867E03216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */; };
@@ -272,7 +272,7 @@
 		6E83CB8A216F573100029324 /* Guide.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Guide.storyboard; sourceTree = "<group>"; };
 		6E83CB8B216F573100029324 /* GuideCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E83CB8C216F573100029324 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
-		6E83CB92216F581800029324 /* ProductAgreement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ProductAgreement.txt; sourceTree = "<group>"; };
+		6E83CB92216F581800029324 /* product_agreement_cn.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = product_agreement_cn.txt; sourceTree = "<group>"; };
 		6E859CB72176DC3100637E1C /* Overlay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Overlay.storyboard; sourceTree = "<group>"; };
 		6E85C12921C7542900670F8B /* CreateWalletGuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateWalletGuideViewController.swift; sourceTree = "<group>"; };
 		6E867E02216C3EC800BD6FE5 /* AuthSelectWalletViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSelectWalletViewController.swift; sourceTree = "<group>"; };
@@ -823,7 +823,7 @@
 				8935BA5A216EFCF000C37263 /* init.js */,
 				896812CA20F726D000731C8C /* dappOpration.js */,
 				8978846221AD26690034AF4F /* neuron.js */,
-				6E83CB92216F581800029324 /* ProductAgreement.txt */,
+				6E83CB92216F581800029324 /* product_agreement_cn.txt */,
 				89C614562140D4C500DC3DF4 /* currency.plist */,
 			);
 			path = Resource;
@@ -1228,7 +1228,7 @@
 				6E8A838D21B8C49F0051B3EB /* TransactionDetails.storyboard in Resources */,
 				1A207DD32137B4B7008DC306 /* SwitchWallet.storyboard in Resources */,
 				6E8A838221B62E0A0051B3EB /* SendTransaction.storyboard in Resources */,
-				6E83CB93216F581800029324 /* ProductAgreement.txt in Resources */,
+				6E83CB93216F581800029324 /* product_agreement_cn.txt in Resources */,
 				89D84CE3214790B5006B0287 /* NFTDetail.storyboard in Resources */,
 				89F9E73F20DEBDE8009E68D4 /* ExportKeystoreController.xib in Resources */,
 				891B663D213EAA1900B0FCB0 /* WalletManagement.storyboard in Resources */,

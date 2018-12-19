@@ -36,31 +36,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="甄选全球最新DAPP" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vn5-Iu-eRh">
-                                                    <rect key="frame" x="19" y="68" width="334" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="一应俱全" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vzp-p4-zND">
-                                                    <rect key="frame" x="19" y="96" width="334" height="24"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guide_1" translatesAutoresizingMaskIntoConstraints="NO" id="DXc-c3-gew">
-                                                    <rect key="frame" x="-1" y="168" width="374" height="289"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="guide_1_cn" translatesAutoresizingMaskIntoConstraints="NO" id="DXc-c3-gew">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="558"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="imageView" destination="DXc-c3-gew" id="I9b-Sx-Dov"/>
-                                            <outlet property="subTitleLabel" destination="vzp-p4-zND" id="wsF-ax-fnj"/>
-                                            <outlet property="titleLabel" destination="vn5-Iu-eRh" id="FKq-wA-kGO"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -125,6 +109,8 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="1pw-Ug-Okf" id="QjW-NR-Ehf"/>
+                        <outlet property="createWalletButton" destination="rN5-2W-lBP" id="L93-CA-IMq"/>
+                        <outlet property="importWalletButton" destination="0se-6B-q7Z" id="suj-kV-D9C"/>
                         <outlet property="pageControl" destination="ncT-w6-Q3C" id="9RT-Eb-WdF"/>
                         <segue destination="3Kq-lC-yon" kind="presentation" identifier="displayAgreement" modalPresentationStyle="overCurrentContext" id="LHJ-Nj-MeX"/>
                     </connections>
@@ -150,8 +136,8 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAY-0L-22M">
-                                                <rect key="frame" x="15" y="523" width="200" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                <rect key="frame" x="15" y="523" width="277" height="18"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="我以仔细阅读并同意以上条款" image="icon_check_no">
@@ -232,6 +218,7 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
                         <outlet property="checkButton" destination="kAY-0L-22M" id="foI-Za-EZZ"/>
                         <outlet property="confirmButton" destination="hQz-WN-cpJ" id="R1z-Mb-j8b"/>
                         <outlet property="textView" destination="GwS-7Y-8AD" id="vRS-g2-1ac"/>
+                        <outlet property="titleLabel" destination="B6M-M5-jxX" id="80K-NA-HAb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fW2-Rx-CdO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -256,7 +243,7 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
         </scene>
     </scenes>
     <resources>
-        <image name="guide_1" width="750" height="590"/>
+        <image name="guide_1_cn" width="375" height="400"/>
         <image name="icon_check_no" width="14" height="14"/>
     </resources>
 </document>
