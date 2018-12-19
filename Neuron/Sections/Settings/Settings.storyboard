@@ -50,8 +50,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cq0-DK-vo4">
-                                                    <rect key="frame" x="75" y="45" width="186" height="15"/>
+                                                    <rect key="frame" x="75" y="45" width="150" height="15"/>
                                                     <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="LeU-Lk-qLn"/>
                                                         <constraint firstAttribute="height" constant="15" id="YEW-eh-hNR"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -61,7 +62,6 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Cq0-DK-vo4" firstAttribute="top" secondItem="4Rs-dx-HPF" secondAttribute="bottom" constant="3" id="CWS-rh-ex2"/>
-                                                <constraint firstAttribute="trailing" secondItem="Cq0-DK-vo4" secondAttribute="trailing" constant="80" id="GQN-c3-1xO"/>
                                                 <constraint firstItem="Cq0-DK-vo4" firstAttribute="leading" secondItem="vM3-Iz-eKV" secondAttribute="trailing" constant="10" id="Uyi-Ol-MyZ"/>
                                                 <constraint firstAttribute="trailing" secondItem="4Rs-dx-HPF" secondAttribute="trailing" constant="80" id="V3m-sw-KJ3"/>
                                                 <constraint firstItem="vM3-Iz-eKV" firstAttribute="top" secondItem="Tdv-7b-1U6" secondAttribute="top" constant="18" id="XX1-z1-WGW"/>
