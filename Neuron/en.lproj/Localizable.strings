@@ -216,14 +216,14 @@
 "Wallet.Create.passwordDesc" = "At least 8 characters three types of uppercase and lowercase alphabets, numbers, and special symbols！";
 "Wallet.Create.passwordInconsistent" = "Password don't match";
 
-"Wallet.Create.backupMnemonic" = "Your Mnemonic Phrase";
-"Wallet.Create.mnemonicWarnTitle" = "Mnemonic phrase will allow you to recover access to your wallet if your phone is lost or stolen.";
-"Wallet.Create.mnemonicWarn1" = "- Anyone who has the mnemonic phrase can transfer the corresponding digital assets";
+"Wallet.Create.backupMnemonic" = "Your Mnemonic";
+"Wallet.Create.mnemonicWarnTitle" = "Mnemonic will allow you to recover access to your wallet if your phone is lost or stolen.";
+"Wallet.Create.mnemonicWarn1" = "- Anyone who has the mnemonic can transfer the corresponding digital assets";
 "Wallet.Create.mnemonicWarn2" = "- Don't email them or screenshot them.";
 "Wallet.Create.mnemonicWarn3" = "- Carefully write down these 12 words or save them in your password manager.";
 "Wallet.Create.backCreateWalletAlert" = "The last step to start your blockchain account! Do you want to continue?";
 
-"Wallet.Create.confirmMnemonic" = "Verify Mnemonic Phrase";
+"Wallet.Create.confirmMnemonic" = "Verify Mnemonic";
 "Wallet.Create.confirmMnemonicDesc" = "Please click on the mnemonic in order to confirm that your backup mnemonic is correct.";
 "Wallet.Create.backupCompleted" = "Confirm";
 "Wallet.Create.walletCreation" = "Wallet creating...";
@@ -234,9 +234,9 @@
 // ---------------------------------------------------------
 "Wallet.Import.title" = "Import Wallet";
 "Wallet.Import.keystore" = "Keystore";
-"Wallet.Import.mnemonic" = "Mnemonic Phrase";
+"Wallet.Import.mnemonic" = "Mnemonic";
 "Wallet.Import.privatekey" = "Private Key";
-"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic Phrase，Private Key gives full and unlimited access to your wallet.";
+"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic，Private Key gives full and unlimited access to your wallet.";
 "Wallet.Import.inputWalletName" = "Wallet Name";
 "Wallet.Import.import" = "Import";
 "Wallet.Import.loading" = "Wallet Importing...";
@@ -252,8 +252,8 @@
 "Wallet.Import.inputWalletPassword" = "Password";
 "Wallet.Import.emptyKeystorePassword" = "Empty Password";
 
-"Wallet.Import.inputMnemonicWarning" = "请按顺序输入您的助记词，并选择助记词路径。（已无）";
-"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic Phrase with a space.";
+"Wallet.Import.inputMnemonicWarning" = "Please enter your mnemonics in order.";
+"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic with a space.";
 
 "Wallet.Import.inputPrivatekeyWarning" = "Please enter Private Key or scan it by QR code";
 "Wallet.Import.inputPrivatekey" = "Please enter Private Key.";
@@ -346,4 +346,4 @@
 "Assets.AssetSetting.Edit" = "Edit";
 
 // Switch Wallet
-"SwitchWallet.title" = "切换钱包(en)";
+"SwitchWallet.title" = "Switch Wallet";
