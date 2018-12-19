@@ -105,7 +105,7 @@ struct Chain {
 
     // first index chain default ethereum chain
     var defaultChain: Chain {
-        return Chain(chainId: SwitchChainViewController().ethereumChainId, chainName: EthereumNetwork().currentNetwork.chainName, httpProvider: EthereumNetwork().apiHost().absoluteString)
+        return Chain(chainId: SwitchChainViewController().ethereumChainId, chainName: EthereumNetwork().networkType.chainName, httpProvider: EthereumNetwork().apiHost().absoluteString)
     }
 
     init() {

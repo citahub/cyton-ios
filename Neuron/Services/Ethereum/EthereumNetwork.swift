@@ -9,9 +9,9 @@
 import Foundation
 import Web3swift
 
-struct EthereumNetwork {
+class EthereumNetwork {
     func getWeb3() -> web3 {
-        switch currentNetwork {
+        switch networkType {
         case .mainnet:
             return Web3.InfuraMainnetWeb3()
         case .rinkeby:
@@ -25,7 +25,7 @@ struct EthereumNetwork {
     }
 
     func apiHost() -> URL {
-        switch currentNetwork {
+        switch networkType {
         case .mainnet:
             return URL(string: "http://api.etherscan.io")!
         case .rinkeby:
@@ -38,7 +38,7 @@ struct EthereumNetwork {
     }
 
     func host() -> URL {
-        switch currentNetwork {
+        switch networkType {
         case .mainnet:
             return URL(string: "https://etherscan.io")!
         case .rinkeby:
@@ -56,7 +56,6 @@ struct EthereumNetwork {
         case ropsten
         case kovan
 
-//        static let allValues = allCases.map { $0.chainName }
         var chainName: String {
             switch self {
             case .mainnet:
@@ -71,14 +70,16 @@ struct EthereumNetwork {
         }
     }
 
-    private let currentNetworkKey = "selectedNetwork"
+    private let currentNetworkKey = "ethereumNetwork"
 
-    var currentNetwork: EthereumNetworkType {
-        let network = UserDefaults.standard.string(forKey: currentNetworkKey) ?? ""
-        return EthereumNetworkType(rawValue: network) ?? .mainnet
-    }
-
-    func switchNetwork(_ network: EthereumNetworkType) {
-        UserDefaults.standard.set(network.rawValue, forKey: currentNetworkKey)
+    var networkType: EthereumNetworkType {
+        get {
+            let network = UserDefaults.standard.string(forKey: currentNetworkKey) ?? ""
+            return EthereumNetworkType(rawValue: network) ?? .mainnet
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: currentNetworkKey)
+            NotificationCenter.default.post(name: .switchEthNetwork, object: nil)
+        }
     }
 }

@@ -74,7 +74,7 @@ class TransactionDetailsParamBuilder {
         }
         switch tx.token.type {
         case .ether, .erc20:
-            network = EthereumNetwork().currentNetwork.chainName
+            network = EthereumNetwork().networkType.chainName
         case .appChain, .appChainErc20:
             network = tx.token.chainName ?? "CITA"
         }

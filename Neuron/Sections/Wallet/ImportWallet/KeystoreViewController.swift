@@ -85,7 +85,7 @@ class KeystoreViewController: UITableViewController, QRCodeViewControllerDelegat
             Toast.showToast(text: reason)
             return
         }
-        
+
         if password.isEmpty {
             Toast.showToast(text: "Wallet.Import.emptyKeystorePassword".localized())
             return

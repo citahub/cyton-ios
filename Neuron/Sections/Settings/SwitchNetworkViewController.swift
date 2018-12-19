@@ -23,7 +23,7 @@ class SwitchNetworkViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "switchNetwork") as! SwitchNetworkTableViewCell
         let network = EthereumNetwork.EthereumNetworkType.allCases[indexPath.row]
         cell.networkLabel.text = network.chainName
-        if EthereumNetwork().currentNetwork == network {
+        if EthereumNetwork().networkType == network {
             cell.selectImage.isHidden = false
         } else {
             cell.selectImage.isHidden = true
@@ -33,8 +33,7 @@ class SwitchNetworkViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        EthereumNetwork().switchNetwork(EthereumNetwork.EthereumNetworkType.allCases[indexPath.row])
-        NotificationCenter.default.post(name: .switchEthNetwork, object: nil)
+        EthereumNetwork().networkType = EthereumNetwork.EthereumNetworkType.allCases[indexPath.row]
         navigationController?.popViewController(animated: true)
     }
 }
