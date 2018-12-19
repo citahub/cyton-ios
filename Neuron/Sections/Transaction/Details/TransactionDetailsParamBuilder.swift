@@ -49,6 +49,14 @@ class TransactionDetailsParamBuilder {
         case .failure:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationFailure".localized() : "TransactionStatus.failure".localized()
         }
+
+        if tx.from.lowercased() == tx.token.walletAddress.lowercased() ||
+            tx.from == tx.to {
+            amount = "-\(tx.value.toAmountText(tx.token.decimals)) \(tx.token.symbol)"
+        } else {
+            amount = "+\(tx.value.toAmountText(tx.token.decimals)) \(tx.token.symbol)"
+        }
+
         amount = tx.value.toAmountText(tx.token.decimals) + " " + tx.token.symbol
         date = {
             let dateformatter = DateFormatter()
