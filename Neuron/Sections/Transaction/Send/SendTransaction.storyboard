@@ -464,8 +464,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASjD8Ad980saM...8Ad9aFMSjD81e" textAlignment="natural" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7D-md-LKB">
-                                            <rect key="frame" x="70" y="40" width="215" height="20"/>
+                                            <rect key="frame" x="70" y="40" width="150" height="20"/>
                                             <constraints>
+                                                <constraint firstAttribute="width" constant="150" id="YWn-EP-Bsd"/>
                                                 <constraint firstAttribute="height" constant="20" id="yi5-6d-MsN"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -478,7 +479,6 @@
                                         <constraint firstItem="M6M-Zr-d47" firstAttribute="leading" secondItem="Kly-7H-z5H" secondAttribute="leading" constant="20" id="0Rl-qS-kb6"/>
                                         <constraint firstItem="O7D-md-LKB" firstAttribute="top" secondItem="09g-3m-5Hd" secondAttribute="bottom" id="4zl-pw-fsh"/>
                                         <constraint firstItem="09g-3m-5Hd" firstAttribute="leading" secondItem="M6M-Zr-d47" secondAttribute="trailing" constant="10" id="Ejo-xO-Hc2"/>
-                                        <constraint firstAttribute="trailing" secondItem="O7D-md-LKB" secondAttribute="trailing" constant="60" id="FQa-0q-qta"/>
                                         <constraint firstItem="09g-3m-5Hd" firstAttribute="top" secondItem="Kly-7H-z5H" secondAttribute="top" constant="20" id="MDK-hQ-fqY"/>
                                         <constraint firstItem="M6M-Zr-d47" firstAttribute="centerY" secondItem="Kly-7H-z5H" secondAttribute="centerY" id="QfA-px-Ent"/>
                                         <constraint firstItem="O7D-md-LKB" firstAttribute="leading" secondItem="M6M-Zr-d47" secondAttribute="trailing" constant="10" id="eyR-PF-FHE"/>
@@ -808,9 +808,8 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NATT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17V-i3-S87">
-                                                            <rect key="frame" x="15" y="14" width="150" height="22"/>
+                                                            <rect key="frame" x="15" y="14" width="294" height="22"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="150" id="X0j-8v-8q8"/>
                                                                 <constraint firstAttribute="height" constant="22" id="Yj3-Nq-dJQ"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -830,6 +829,7 @@
                                                         <constraint firstItem="Ef8-yw-kug" firstAttribute="centerY" secondItem="uBW-XN-hyP" secondAttribute="centerY" id="KZ6-a2-Nri"/>
                                                         <constraint firstAttribute="trailing" secondItem="Ef8-yw-kug" secondAttribute="trailing" constant="15" id="VlS-se-w7i"/>
                                                         <constraint firstItem="17V-i3-S87" firstAttribute="centerY" secondItem="uBW-XN-hyP" secondAttribute="centerY" id="n5E-uZ-GBc"/>
+                                                        <constraint firstItem="Ef8-yw-kug" firstAttribute="leading" secondItem="17V-i3-S87" secondAttribute="trailing" constant="30" id="tuN-hK-XC7"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
