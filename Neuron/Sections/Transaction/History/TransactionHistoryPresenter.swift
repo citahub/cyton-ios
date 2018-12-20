@@ -28,9 +28,7 @@ class TransactionHistoryPresenter: NSObject {
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
-        guard !loading else {
-            return
-        }
+        guard !loading else { return }
         page = 1
         hasMoreData = true
         loadMoreData(completion: completion)
@@ -38,9 +36,7 @@ class TransactionHistoryPresenter: NSObject {
 
     func loadMoreData(completion: CallbackBlock? = nil) {
         guard loading == false else { return }
-        guard hasMoreData else {
-           return
-        }
+        guard hasMoreData else { return }
         loading = true
         DispatchQueue.global().async {
             do {
@@ -55,9 +51,7 @@ class TransactionHistoryPresenter: NSObject {
 
                 // merge
                 list = self.mergeSentTransactions(from: list)
-                list.forEach({ (trans) in
-                    trans.token = self.token
-                })
+                list.forEach({$0.token = self.token})
 
                 var insertions = [Int]()
                 for idx in list.indices {

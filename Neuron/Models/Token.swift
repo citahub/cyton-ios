@@ -75,7 +75,6 @@ class Token {
             refreshBalanceSignal = nil
         }
 
-        self.balance = nil
         switch type {
         case .appChain :
             balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHosts)), address: walletAddress).getBalance()

@@ -38,9 +38,10 @@ class TokenPriceLoader {
 
     private static var tokens = [Token]()
 
-    func getPrice(symbol: String, currency: String) -> Double? {
+    func getPrice(symbol: String, currency: String? = nil) -> Double? {
         guard EthereumNetwork().networkType == .mainnet else { return nil }
         guard let tokenId = getTokenId(symbol: symbol) else { return nil }
+        let currency = currency ?? LocalCurrencyService.shared.getLocalCurrencySelect().short
         let url = URL(string: "https://api.coinmarketcap.com/v2/ticker/\(tokenId)/?convert=\(currency)")!
         return try? Promise<Double>.init { (resolver) in
             Alamofire.request(url).responseData { (response) in
