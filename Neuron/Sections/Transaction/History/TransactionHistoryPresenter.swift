@@ -120,7 +120,7 @@ class TransactionHistoryPresenter: NSObject {
     // MARK: - Load transactions
     private var loading = false
     private var page: UInt = 1
-    private var pageSize: UInt = 10
+    private var pageSize: UInt = 20
 
     private func loadData() throws -> [TransactionDetails] {
         switch token.type {
