@@ -203,6 +203,14 @@
 "Authentication.Error.biometryLockout" = "多次验证失败被锁定";
 "Authentication.Error.authFailed" = "验证失败，请重新验证";
 
+// Guide
+// ---------------------------------------------------------
+"Guide.createWallet" = "创建钱包";
+"Guide.existingWallet" = "已有钱包";
+"Guide.neuronServiceAgreement" = "Neuron服务协议";
+"Guide.agreementOfConsent" = "我以仔细阅读并同意以上条款";
+"Guide.continue" = "继续";
+
 // Create Wallet
 // ---------------------------------------------------------
 "Wallet.Create.warning" = "没有「找回密码」！";

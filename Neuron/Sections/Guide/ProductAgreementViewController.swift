@@ -13,6 +13,7 @@ class ProductAgreementViewController: UIViewController {
         case agreement = "ProductAgreementUserDefaultsKey"
     }
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var checkButton: UIButton!
@@ -39,10 +40,14 @@ class ProductAgreementViewController: UIViewController {
         super.viewDidLoad()
         setupTextView()
         isAgree = false
+
+        titleLabel.text = "Guide.neuronServiceAgreement".localized()
+        confirmButton.setTitle("Guide.continue".localized(), for: .normal)
+        checkButton.setTitle("Guide.agreementOfConsent".localized(), for: .normal)
     }
 
     func setupTextView() {
-        let text = try! String(contentsOfFile: Bundle.main.path(forResource: "ProductAgreement", ofType: "txt")!)
+        let text = try! String(contentsOfFile: Bundle.main.path(forResource: "product_agreement", ofType: "txt")!)
         textView.text = text
         let attributedText = NSMutableAttributedString(attributedString: textView.attributedText)
         var searchRange = Range(uncheckedBounds: (text.startIndex, text.endIndex))

@@ -203,6 +203,14 @@
 "Authentication.Error.biometryLockout" = "Multiple verification failures, Please try again later";
 "Authentication.Error.authFailed" = "Verification failed, please re-verify";
 
+// Guide
+// ---------------------------------------------------------
+"Guide.createWallet" = "Create Wallet";
+"Guide.existingWallet" = "Import Wallet";
+"Guide.neuronServiceAgreement" = "Neuron service agreement";
+"Guide.agreementOfConsent" = "我以仔细阅读并同意以上条款(en)";
+"Guide.continue" = "Continue";
+
 // Create Wallet
 // ---------------------------------------------------------
 "Wallet.Create.warning" = "Backup Password！";

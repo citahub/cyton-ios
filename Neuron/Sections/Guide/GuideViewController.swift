@@ -11,24 +11,18 @@ import UIKit
 private var GuideOnceTokenAssiciationKey = 0
 
 class GuideViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    struct GuideItem {
-        let title: String
-        let subTitle: String
-        let imageName: String
-    }
+    private let items = ["guide_page_1", "guide_page_2", "guide_page_3"]
 
-    private let items = [
-        GuideItem(title: "甄选全球最新DAPP", subTitle: "一应俱全", imageName: "guide_1"),
-        GuideItem(title: "多重安全算法保护", subTitle: "钱包秘钥惟您掌握", imageName: "guide_2"),
-        GuideItem(title: "开启区块链之旅", subTitle: "探索无限可能", imageName: "guide_3")
-    ]
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var pageControl: UIPageControl!
+    @IBOutlet private weak var createWalletButton: UIButton!
+    @IBOutlet private weak var importWalletButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        createWalletButton.setTitle("Guide.createWallet".localized(), for: .normal)
+        importWalletButton.setTitle("Guide.existingWallet".localized(), for: .normal)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.showProductAgreementView()
         }
@@ -53,10 +47,7 @@ class GuideViewController: UIViewController, UICollectionViewDataSource, UIColle
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: GuideCollectionViewCell.self), for: indexPath) as! GuideCollectionViewCell
-        cell.titleLabel.text = items[indexPath.row].title
-        cell.subTitleLabel.text = items[indexPath.row].subTitle
-        cell.imageView.image = UIImage(named: items[indexPath.row].imageName)
-        cell.backgroundColor = indexPath.row == 3 ? UIColor.clear : UIColor.white
+        cell.imageView.image = UIImage(named: items[indexPath.row])
         return cell
     }
 
