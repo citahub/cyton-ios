@@ -558,7 +558,6 @@
 				89FE21D920EDB10900A09302 /* CustomERC20TokenService.swift */,
 				1A19C2DD21B12DE800C289D0 /* EthereumMessageSigner.swift */,
 				89D84CE021475755006B0287 /* NFTService.swift */,
-				6E876840218022F30032EBCE /* TokenProfile.swift */,
 				6E3B2B6C219ED9230095257D /* Ethereum+TransactionDetails.swift */,
 				6E3B2B6E219ED9340095257D /* Ethereum+TransactionStatus.swift */,
 				6EEDEDA621CB4CF100FC3BCE /* EthereumTokenProfileLoader.swift */,
@@ -1866,7 +1865,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1899,7 +1898,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = PBL67DWM43;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Neuron/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
