@@ -24,23 +24,21 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
 
     var presenter: TransactionHistoryPresenter?
     var tokenProfile: TokenProfile?
-    var tokenType: TokenType = .erc20
     var token: Token!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = token.symbol
         walletQRCodeButton.setTitle("Wallet.receipt".localized(), for: .normal)
         transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
-        title = token.symbol
         testTokenWarnLabel.text = "Transaction.History.testTokenWarning".localized()
 
         tableView.delegate = self
         tableView.dataSource = self
-
         tableView.refreshControl = UIRefreshControl()
         tableView.refreshControl?.addTarget(self, action: #selector(loadData), for: .valueChanged)
 
-        setupTokenProfile(nil)
+        setupTokenProfile(tokenIcon: nil, overview: nil, price: nil)
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
         if token.symbol == "MBA" ||
             token.symbol == "NATT" {
@@ -54,9 +52,18 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         presenter = TransactionHistoryPresenter(token: token)
         presenter?.delegate = self
         Toast.showHUD()
-        token.tokenModel.getProfile { (tokenProfile) in
-            self.setupTokenProfile(tokenProfile)
-            self.presenter?.reloadData()
+        DispatchQueue.global().async {
+            switch self.token.type {
+            case .ether, .erc20:
+                let result = try? EthereumTokenProfileLoader().loadTokenProfile(address: self.token.address)
+                let price = TokenPriceLoader().getPrice(symbol: self.token.symbol)
+                DispatchQueue.main.async {
+                    self.setupTokenProfile(tokenIcon: result?.0, overview: result?.1, price: price)
+                }
+            default:
+                break
+            }
+            self.loadData()
         }
     }
 
@@ -71,13 +78,8 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         guard let url = tokenProfile?.detailUrl else { return }
         let controller: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
         controller.requestUrlStr = url.absoluteString
-        let js = "window.webkit.messageHandlers.getTokenPrice.postMessage({symbol: 'ETH', callback: 'handlePrice'})"
-        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false))
-        controller.webView.addMessageHandler(name: "getTokenPrice") { [weak self](message) in
-            guard message.name == "getTokenPrice" else { return }
-            let price = self?.tokenProfile?.priceText ?? ""
-            message.webView?.evaluateJavaScript("handlePrice('\(price)')", completionHandler: nil)
-        }
+        let price = tokenProfile?.priceText ?? ""
+        controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: "handlePrice('\(price)')", injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         navigationController?.pushViewController(controller, animated: true)
     }
 
@@ -95,44 +97,39 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         })
     }
 
-    private func setupTokenProfile(_ profile: TokenProfile?) {
-        tokenProfile = profile
-        guard var profile = profile else {
-            self.overlay.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.tableView.bounds.size.height)
-            self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 1)
-            self.tokenProfleView.isHidden = true
+    private func setupTokenProfile(tokenIcon: String?, overview: String?, price: Double?) {
+        guard var tokenIcon = tokenIcon, let overview = overview else {
+            overlay.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: tableView.bounds.size.height)
+            tokenProfleView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 1)
+            tokenProfleView.isHidden = true
             return
         }
-        self.overlay.frame = CGRect(x: 0, y: 125, width: self.view.bounds.size.width, height: self.tableView.bounds.size.height)
-        self.tokenProfleView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: 125)
-        self.tokenProfleView.isHidden = false
-        self.tokenNameLabel.text = profile.symbol
-
-        let textFont = self.tokenOverviewLabel.font!
-        var overview = profile.overview.zh
-        func overviewWidth() -> CGFloat {
-            let rect = CGSize(width: 1000, height: textFont.lineHeight)
-            return NSString(string: overview).boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [.font: textFont], context: nil).size.width
-        }
-        while overviewWidth() > self.tokenOverviewLabel.bounds.size.width * 1.7 {
-            let index = overview.index(overview.endIndex, offsetBy: -6)
-            overview = String(overview[...index])
-        }
-        if profile.overview.zh.count != overview.count {
-            overview += "..."
-        }
-        self.tokenOverviewLabel.text = overview
-
-        if let imageUrl = URL(string: profile.imageUrl ?? "") {
-            self.tokenIconView.sd_setImage(with: imageUrl) { (image, error, _, _) in
-                if image == nil {
-                    print(error!)
-                }
+        overlay.frame = CGRect(x: 0, y: 125, width: view.bounds.size.width, height: tableView.bounds.size.height)
+        tokenProfleView.frame = CGRect(x: 0, y: 0, width: view.bounds.size.width, height: 125)
+        tokenProfleView.isHidden = false
+        tokenNameLabel.text = token.symbol
+        tokenOverviewLabel.text = {
+            let textFont = tokenOverviewLabel.font!
+            var formatOverview = overview
+            func overviewWidth() -> CGFloat {
+                let rect = CGSize(width: 1000, height: textFont.lineHeight)
+                return NSString(string: formatOverview).boundingRect(with: rect, options: .usesLineFragmentOrigin, attributes: [.font: textFont], context: nil).size.width
             }
-        } else if let image = profile.image {
-            self.tokenIconView.image = image
+            while overviewWidth() > tokenOverviewLabel.bounds.size.width * 1.7 {
+                let index = formatOverview.index(formatOverview.endIndex, offsetBy: -6)
+                formatOverview = String(formatOverview[...index])
+            }
+            if overview.count != formatOverview.count {
+                formatOverview += "..."
+            }
+            return formatOverview
+        }()
+        tokenIconView.sd_setImage(with: URL(string: tokenIcon), placeholderImage: UIImage(named: "eth_logo"))
+        if let price = price {
+            tokenAmountLabel.text = NSDecimalNumber(value: price).currencyFormat()
+        } else {
+            tokenAmountLabel.text = ""
         }
-        self.tokenAmountLabel.text = profile.priceText
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -185,7 +182,6 @@ extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate 
             for index in insertions {
                 indexPaths.append(IndexPath(row: index, section: 0))
             }
-
             let contentOffset = self.tableView.contentOffset
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: indexPaths, with: .none)
