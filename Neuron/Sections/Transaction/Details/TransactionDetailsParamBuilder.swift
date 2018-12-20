@@ -57,7 +57,6 @@ class TransactionDetailsParamBuilder {
             amount = "+\(tx.value.toAmountText(tx.token.decimals)) \(tx.token.symbol)"
         }
 
-        amount = tx.value.toAmountText(tx.token.decimals) + " " + tx.token.symbol
         date = {
             let dateformatter = DateFormatter()
             dateformatter.dateFormat = "yyyy/MM/dd HH:mm:ss"

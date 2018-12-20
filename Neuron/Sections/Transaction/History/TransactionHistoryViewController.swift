@@ -135,18 +135,6 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         self.tokenAmountLabel.text = profile.priceText
     }
 
-    private func loadMoreData() {
-        presenter?.loadMoreData(completion: { [weak self](insertions, _) in
-            var indexPaths = [IndexPath]()
-            for index in insertions {
-                indexPaths.append(IndexPath(row: index, section: 0))
-            }
-            self?.tableView.beginUpdates()
-            self?.tableView.insertRows(at: indexPaths, with: .none)
-            self?.tableView.endUpdates()
-        })
-    }
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return presenter?.transactions.count ?? 0
     }
@@ -197,11 +185,13 @@ extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate 
             for index in insertions {
                 indexPaths.append(IndexPath(row: index, section: 0))
             }
+
+            let contentOffset = self.tableView.contentOffset
             self.tableView.beginUpdates()
             self.tableView.insertRows(at: indexPaths, with: .none)
             self.tableView.endUpdates()
+            self.tableView.setContentOffset(contentOffset, animated: true)
         }
-
         Toast.hideHUD()
     }
 }
