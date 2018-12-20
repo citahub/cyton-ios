@@ -29,7 +29,7 @@ class TransactionParamBuilder: NSObject {
         }
     }
 
-    var gasLimit: UInt64 = GasCalculator.defaultGasLimit {
+    var gasLimit: BigUInt = GasCalculator.defaultGasLimit {
         didSet {
             rebuildGasCalculator()
         }
@@ -87,8 +87,8 @@ class TransactionParamBuilder: NSObject {
         } else {
             fetchGasPrice()
         }
-        if let gasLimit = gasLimit?.words.first {
-            self.gasLimit = UInt64(gasLimit)
+        if let gasLimit = gasLimit {
+            self.gasLimit = gasLimit
         } else {
             fetchGasLimit()
         }
@@ -115,7 +115,7 @@ class TransactionParamBuilder: NSObject {
         rebuildGasCalculator()
     }
 
-    func estimateGasLimit() -> UInt64 {
+    func estimateGasLimit() -> BigUInt {
         switch tokenType {
         case .erc20, .ether:
             var options = TransactionOptions.defaultOptions
@@ -125,7 +125,7 @@ class TransactionParamBuilder: NSObject {
             let contract = EthereumNetwork().getWeb3().contract(Web3Utils.erc20ABI, at: EthereumAddress(from)!)
             let trans = contract!.method(transactionOptions: options)!
             let estimateGasLimit = (try? trans.estimateGas(transactionOptions: options)) ?? BigUInt(GasCalculator.defaultGasLimit)
-            return UInt64(estimateGasLimit)
+            return estimateGasLimit
         default:
             return GasCalculator.defaultGasLimit
         }

@@ -28,7 +28,7 @@ class AppChainTxSender {
     func send(
         to: String,
         value: BigUInt,
-        quota: UInt64 = GasCalculator.defaultGasLimit,
+        quota: BigUInt = GasCalculator.defaultGasLimit,
         data: Data,
         chainId: BigUInt,
         password: String
@@ -51,7 +51,7 @@ class AppChainTxSender {
         let transaction = Transaction(
             to: destinationEthAddress,
             nonce: UUID().uuidString,
-            quota: quota,
+            quota: UInt64(UInt(quota)),
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
             value: value,
@@ -66,7 +66,7 @@ class AppChainTxSender {
         to: String,
         contract: String,
         value: BigUInt,
-        quota: UInt64 = GasCalculator.defaultGasLimit,
+        quota: BigUInt = GasCalculator.defaultGasLimit,
         chainId: BigUInt,
         password: String
         ) throws -> (TxHash, BlockNumber) {
@@ -92,7 +92,7 @@ class AppChainTxSender {
         let transaction = Transaction(
             to: destinationEthAddress,
             nonce: UUID().uuidString,
-            quota: quota,
+            quota: UInt64(UInt(quota)),
             validUntilBlock: blockNumber + UInt64(88),
             data: data,
             value: BigUInt(0),

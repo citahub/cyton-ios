@@ -100,7 +100,7 @@ extension TransactonSender {
                     from: self.paramBuilder.from, to: self.paramBuilder.to,
                     value: self.paramBuilder.value,
                     gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: BigUInt(self.paramBuilder.gasLimit)
+                    gasLimit: self.paramBuilder.gasLimit
                 )
             case .erc20:
                 return LocalTxDetailModel(
@@ -110,7 +110,7 @@ extension TransactonSender {
                     from: self.paramBuilder.from, to: self.paramBuilder.to,
                     value: self.paramBuilder.value,
                     gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: BigUInt(self.paramBuilder.gasLimit)
+                    gasLimit: self.paramBuilder.gasLimit
                 )
             case .appChain:
                 return LocalTxDetailModel(
@@ -119,7 +119,7 @@ extension TransactonSender {
                     from: self.paramBuilder.from, to: self.paramBuilder.to,
                     value: self.paramBuilder.value,
                     gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: BigUInt(self.paramBuilder.gasLimit),
+                    gasLimit: self.paramBuilder.gasLimit,
                     blockNumber: blockNumber!
                 )
             case .appChainErc20:
@@ -130,7 +130,7 @@ extension TransactonSender {
                     from: self.paramBuilder.from, to: self.paramBuilder.to,
                     value: self.paramBuilder.value,
                     gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: BigUInt(self.paramBuilder.gasLimit),
+                    gasLimit: self.paramBuilder.gasLimit,
                     blockNumber: blockNumber!
                 )
             }
