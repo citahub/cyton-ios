@@ -22,8 +22,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet private weak var transactionButton: UIButton!
     @IBOutlet private weak var testTokenWarnLabel: UILabel!
 
-    var presenter: TransactionHistoryPresenter?
-    var tokenProfile: TokenProfile?
+    private var presenter: TransactionHistoryPresenter?
     var token: Token!
 
     override func viewDidLoad() {
@@ -75,10 +74,18 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     @objc func clickTokenProfile() {
-        guard let url = tokenProfile?.detailUrl else { return }
+        let urlString: String
+        switch token.type {
+        case .ether:
+            urlString = "https://ntp.staging.cryptape.com?coin=ethereum"
+        case .erc20:
+            urlString = "https://ntp.staging.cryptape.com?token=\(token.address)"
+        default:
+            return
+        }
         let controller: BrowserViewController = UIStoryboard(name: .dAppBrowser).instantiateViewController()
-        controller.requestUrlStr = url.absoluteString
-        let price = tokenProfile?.priceText ?? ""
+        controller.requestUrlStr = urlString
+        let price = tokenAmountLabel.text ?? ""
         controller.webView.configuration.userContentController.addUserScript(WKUserScript(source: "handlePrice('\(price)')", injectionTime: .atDocumentEnd, forMainFrameOnly: false))
         navigationController?.pushViewController(controller, animated: true)
     }
