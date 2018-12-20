@@ -40,7 +40,7 @@ class SettingsViewController: UITableViewController {
             addressLabel.text = walletModel.address
             iconImageView.image = walletModel.icon.image
             currencyLabel.text = LocalCurrencyService.shared.getLocalCurrencySelect().short
-            ethereumNetworkLabel.text = EthereumNetwork().currentNetwork.rawValue.capitalized
+            ethereumNetworkLabel.text = EthereumNetwork().networkType.chainName
             authenticationSwitch.isOn = AuthenticationService.shared.isEnable
         }
     }

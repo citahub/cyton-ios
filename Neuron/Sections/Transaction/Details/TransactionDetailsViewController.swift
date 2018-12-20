@@ -11,6 +11,11 @@ import SafariServices
 import Social
 
 class TransactionDetailsViewController: UITableViewController {
+    private struct ItemAction {
+        var indexPath: IndexPath
+        var action: () -> Void
+    }
+
     @IBOutlet private weak var tokenIconView: UIImageView!
     @IBOutlet private weak var statusLabel: UILabel!
     @IBOutlet private weak var amountLabel: UILabel!
@@ -36,17 +41,11 @@ class TransactionDetailsViewController: UITableViewController {
     @IBOutlet private weak var gasLimitTitleLabel: UILabel!
     @IBOutlet private weak var gasLimitLabel: UILabel!
     @IBOutlet private weak var statusWidthLayout: NSLayoutConstraint!
-    @IBOutlet weak var shareBarButtonItem: UIBarButtonItem!
-    var transaction: TransactionDetails! {
-        didSet {
-            if oldValue != nil && transaction != nil {
-                setupUI()
-            }
-        }
-    }
+    @IBOutlet private weak var shareBarButtonItem: UIBarButtonItem!
     private var paramBuilder: TransactionDetailsParamBuilder!
-
     private var hiddenItems = [(Int, Int)]()
+    private var itemActions = [ItemAction]()
+    var transaction: TransactionDetails!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,12 +58,36 @@ class TransactionDetailsViewController: UITableViewController {
         blockTitleLabel.text = "Transaction.Details.block".localized() + ":"
         gasFeeTitleLabel.text = "Transaction.Details.gasFee".localized() + ":"
 
-        setupUI()
         setupTxFeeTitle()
+        Toast.showHUD()
+        DispatchQueue.global().async {
+            self.paramBuilder = TransactionDetailsParamBuilder(tx: self.transaction)
+            DispatchQueue.main.async {
+                Toast.hideHUD()
+                self.setupUI()
+                self.tableView.reloadData()
+            }
+        }
+        // Item actions
+        itemActions.append(ItemAction(indexPath: IndexPath(row: 1, section: 0), action: { [weak self] in
+            UIPasteboard.general.string = self?.transaction.from
+            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
+        }))
+        itemActions.append(ItemAction(indexPath: IndexPath(row: 2, section: 0), action: { [weak self] in
+            UIPasteboard.general.string = self?.transaction.to
+            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
+        }))
+        itemActions.append(ItemAction(indexPath: IndexPath(row: 0, section: 1), action: { [weak self] in
+            UIPasteboard.general.string = self?.transaction.hash
+            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
+        }))
+        itemActions.append(ItemAction(indexPath: IndexPath(row: 3, section: 0), action: { [weak self] in
+            let safariController = SFSafariViewController(url: self!.paramBuilder.txDetailsUrl)
+            self!.present(safariController, animated: true, completion: nil)
+        }))
     }
 
     func setupUI() {
-        paramBuilder = TransactionDetailsParamBuilder(tx: transaction)
         setupTxStatus()
         tokenIconView.sd_setImage(with: URL(string: paramBuilder.tokenIcon), placeholderImage: UIImage(named: "eth_logo"))
         amountLabel.text = paramBuilder.amount
@@ -145,7 +168,7 @@ class TransactionDetailsViewController: UITableViewController {
     }
 
     @IBAction func share(_ sender: Any) {
-        let controller = UIActivityViewController(activityItems: [getTxDetailsURL()], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: [paramBuilder.txDetailsUrl], applicationActivities: nil)
         controller.excludedActivityTypes = [.markupAsPDF, .mail, .openInIBooks, .print, .addToReadingList, .assignToContact]
         present(controller, animated: true, completion: nil)
     }
@@ -153,7 +176,7 @@ class TransactionDetailsViewController: UITableViewController {
 
 extension TransactionDetailsViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
+        if paramBuilder == nil || hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row }) {
             return 0.0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
@@ -161,38 +184,16 @@ extension TransactionDetailsViewController {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.isHidden = hiddenItems.contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
+        cell.isHidden = cell.bounds.height == 0.0
     }
 
     override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return [(0, 1), (0, 2), (0, 3)].contains(where: { $0.0 == indexPath.section && $0.1 == indexPath.row })
+        return itemActions.contains(where: { $0.indexPath == indexPath })
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if indexPath.section == 0 && indexPath.row == 1 {
-            UIPasteboard.general.string = transaction.from
-            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
-        } else if indexPath.section == 0 && indexPath.row == 2 {
-            UIPasteboard.general.string = transaction.to
-            Toast.showToast(text: "Wallet.QRCode.copySuccess".localized())
-        } else if indexPath.section == 0 && indexPath.row == 3 {
-            let safariController = SFSafariViewController(url: getTxDetailsURL())
-            self.present(safariController, animated: true, completion: nil)
-        }
-    }
-}
-
-extension TransactionDetailsViewController {
-    fileprivate func getTxDetailsURL() -> URL {
-        let url: URL
-        if transaction.token.type == .erc20 || transaction.token.type == .ether {
-            url = EthereumNetwork().host().appendingPathComponent("/tx/\(transaction.hash)")
-        } else if transaction.token.chainId == "1" {
-            url = URL(string: "https://microscope.cryptape.com/#/transaction/\(transaction.hash)")!
-        } else {
-            fatalError()
-        }
-        return url
+        guard let itemAction = itemActions.first(where: { $0.indexPath == indexPath }) else { return }
+        itemAction.action()
     }
 }

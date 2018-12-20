@@ -27,7 +27,7 @@ class EthereumTxSender {
     func sendETH(
         to: String,
         value: BigUInt,
-        gasLimit: UInt64 = GasCalculator.defaultGasLimit,
+        gasLimit: BigUInt = GasCalculator.defaultGasLimit,
         gasPrice: BigUInt,
         data: Data,
         password: String
@@ -57,7 +57,7 @@ class EthereumTxSender {
     func sendToken(
         to: String,
         value: BigUInt,
-        gasLimit: UInt64 = GasCalculator.defaultGasLimit,
+        gasLimit: BigUInt = GasCalculator.defaultGasLimit,
         gasPrice: BigUInt,
         contractAddress: String,
         password: String

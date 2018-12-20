@@ -17,7 +17,7 @@ class AboutUsViewController: UITableViewController {
     @IBOutlet weak var openSeaDetailLabel: UILabel!
     @IBOutlet weak var peckShieldDetailLabel: UILabel!
     @IBOutlet weak var citaDetailLabel: UILabel!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Settings.About.AboutUs".localized()

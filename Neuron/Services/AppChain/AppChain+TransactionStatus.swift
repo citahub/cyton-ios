@@ -18,8 +18,10 @@ extension AppChainNetwork {
                     print(error)
                     return .failure
                 } else {
-                    if let transaction = try? AppChainNetwork().getTransaction(txhash: localTxDetail.txHash, account: localTxDetail.from, from: localTxDetail.from, to: localTxDetail.to) {
-                        return .success(transaction: transaction)
+                    if (try? AppChainNetwork().getTransaction(txhash: localTxDetail.txHash)) != nil {
+                        let details = localTxDetail.getTransactionDetails()
+                        details.status = .success
+                        return .success(transaction: details)
                     } else {
                         if localTxDetail.blockNumber < currentBlockNumber {
                             return .failure

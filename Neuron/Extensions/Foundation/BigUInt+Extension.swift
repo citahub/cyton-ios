@@ -92,6 +92,7 @@ extension BigUInt {
     }
 
     static func parseToBigUInt(_ amount: String, _ decimals: Int = 18) -> BigUInt {
-        return Web3Utils.parseToBigUInt(amount, decimals: decimals) ?? 0
+        let formatText = NSDecimalNumber(string: amount).formatterToString(decimals)
+        return Web3Utils.parseToBigUInt(formatText, decimals: decimals) ?? 0
     }
 }

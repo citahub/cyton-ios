@@ -69,7 +69,7 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     @IBAction func confirm() {
-        paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+        paramBuilder.gasLimit = BigUInt(string: gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
             paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
             let gasPrice = Double(gasPriceTextField.text!)!
@@ -98,7 +98,9 @@ class TransactionGasCostViewController: UITableViewController {
         }
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
-        param.data = inputDataTextView.text.data(using: .utf8) ?? Data()
+        if let dataText = inputDataTextView.text {
+            param.data = Data(hex: dataText)
+        }
         navigationController?.popViewController(animated: true)
     }
 
@@ -150,7 +152,7 @@ extension TransactionGasCostViewController: UITextFieldDelegate {
         if textField == gasPriceTextField {
             paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
         } else if textField == gasLimitTextField {
-            paramBuilder.gasLimit = UInt64(gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+            paramBuilder.gasLimit = BigUInt(string: gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
         }
     }
 }

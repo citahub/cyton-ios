@@ -39,7 +39,7 @@ class TokenPriceLoader {
     private static var tokens = [Token]()
 
     func getPrice(symbol: String, currency: String) -> Double? {
-        guard EthereumNetwork().currentNetwork == .mainnet else { return nil }
+        guard EthereumNetwork().networkType == .mainnet else { return nil }
         guard let tokenId = getTokenId(symbol: symbol) else { return nil }
         let url = URL(string: "https://api.coinmarketcap.com/v2/ticker/\(tokenId)/?convert=\(currency)")!
         return try? Promise<Double>.init { (resolver) in

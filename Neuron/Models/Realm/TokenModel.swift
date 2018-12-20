@@ -30,7 +30,7 @@ class TokenModel: Object, Decodable {
         case .ether, .erc20:
             let chainModel = ChainModel()
             chainModel.chainId = "-1"
-            chainModel.chainName = EthereumNetwork().currentNetwork.chainName
+            chainModel.chainName = EthereumNetwork().networkType.chainName
             chainModel.httpProvider = EthereumNetwork().apiHost().absoluteString
             return chainModel
         case .appChain, .appChainErc20:
