@@ -47,7 +47,7 @@ class ProductAgreementViewController: UIViewController {
     }
 
     func setupTextView() {
-        let text = try! String(contentsOfFile: Bundle.main.path(forResource: "Guide.neuronServiceAgreementFileName".localized(), ofType: "txt")!)
+        let text = try! String(contentsOfFile: Bundle.main.path(forResource: "product_agreement", ofType: "txt")!)
         textView.text = text
         let attributedText = NSMutableAttributedString(attributedString: textView.attributedText)
         var searchRange = Range(uncheckedBounds: (text.startIndex, text.endIndex))

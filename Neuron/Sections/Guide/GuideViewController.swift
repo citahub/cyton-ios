@@ -11,11 +11,7 @@ import UIKit
 private var GuideOnceTokenAssiciationKey = 0
 
 class GuideViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    private let items = [
-        "Guide.imageName.1".localized(),
-        "Guide.imageName.2".localized(),
-        "Guide.imageName.3".localized()
-    ]
+    private let items = ["guide_page_1", "guide_page_2", "guide_page_3"]
 
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var pageControl: UIPageControl!

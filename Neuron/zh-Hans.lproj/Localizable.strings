@@ -205,15 +205,11 @@
 
 // Guide
 // ---------------------------------------------------------
-"Guide.imageName.1" = "guide_1_cn";
-"Guide.imageName.2" = "guide_2_cn";
-"Guide.imageName.3" = "guide_3_cn";
 "Guide.createWallet" = "创建钱包";
 "Guide.existingWallet" = "已有钱包";
 "Guide.neuronServiceAgreement" = "Neuron服务协议";
 "Guide.agreementOfConsent" = "我以仔细阅读并同意以上条款";
 "Guide.continue" = "继续";
-"Guide.neuronServiceAgreementFileName" = "product_agreement_cn";
 
 // Create Wallet
 // ---------------------------------------------------------
