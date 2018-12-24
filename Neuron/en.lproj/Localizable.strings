@@ -8,15 +8,13 @@
 
 // Common
 // ---------------------------------------------------------
-"Common.Connection.ConnectionLost" = "The connection to the Internet is broken";
-"Common.Connection.FailToLoadPage" = "Failed to load the page";
-"Common.Connection.Cancel" = "Cancel";
-"Common.Connection.Confirm" = "Confirm";
 "Common.Connection.UserCancel" = "Canceled";
 "Common.Connection.ScanEmpty" = "QR Code failed";
 "Common.Connection.LoseConnect" = "The connection to the Internet is broken";
 "Common.Connection.LoadFaild" = "Failed to load the page";
 "Common.Connection.Refresh" = "Refresh";
+"Common.DataEmpty" = "Empty Data";
+"Common.NetworkError" = "Network error, please try again later";
 "Common.next" = "Continue";
 "Common.confirm" = "Confirm";
 "Common.cancel" = "Cancel";
@@ -40,10 +38,13 @@
 "DApp.Browser.SignFaild" = "Signature failed";
 "DApp.Browser.PayFaild" = "Payment failed";
 "DApp.Browser.confirmSign" = "Signature Request";
+"DApp.Browser.MonitorDirectionFailed" = "监听设备方向失败";
+"DApp.Browser.MonitorGyroFailed" = "监听陀螺仪数据失败";
 
 // DApp Contract
 // ---------------------------------------------------------
 "DApp.Contract.TransactionSend" = "Transaction sent";
+"DApp.Details.Title" = "Transaction Detail";
 
 // DApp Advanced
 // ---------------------------------------------------------

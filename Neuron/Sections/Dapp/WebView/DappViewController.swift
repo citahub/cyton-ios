@@ -110,9 +110,9 @@ extension DappViewController: WKNavigationDelegate {
         let error = error as NSError
         errorOverlaycontroller.style = .networkFail
         if error.code == -1009 {
-            errorOverlaycontroller.messageLabel.text = "Common.Connection.ConnectionLost".localized()
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
         } else {
-            errorOverlaycontroller.messageLabel.text = "Common.Connection.FailToLoadPage".localized()
+            errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
         }
         showOverlay()
     }

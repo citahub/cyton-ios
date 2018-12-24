@@ -14,7 +14,7 @@ class ShowTokenPageItem: BLTNPageItem {
     static func create() -> ShowTokenPageItem {
         let item = ShowTokenPageItem(title: "Assets.AddAssets.TokenMessage".localized())
         item.appearance = PageItemAppearance.default
-        item.actionButtonTitle = "Common.Connection.Confirm".localized()
+        item.actionButtonTitle = "Common.confirm".localized()
         return item
     }
 
