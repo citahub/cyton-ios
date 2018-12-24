@@ -14,17 +14,32 @@ protocol SelectWalletControllerDelegate: class {
 }
 
 class SelectWalletController: UITableViewController {
+    @IBOutlet private weak var addWalletButton: UIButton!
+
     var appModel = AppModel()
     weak var delegate: SelectWalletControllerDelegate?
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        title = "SwitchWallet.title".localized()
         didGetWalletData()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "SwitchWallet.title".localized()
+        addWalletButton.setTitle("  " + "Wallet.addWallet".localized(), for: .normal)
         didGetWalletData()
+
+        addWalletButton.layoutIfNeeded()
+        let border = CAShapeLayer()
+        border.strokeColor = UIColor(named: "weak_1_color")?.cgColor
+        border.fillColor = nil
+        border.path = UIBezierPath(roundedRect: addWalletButton.bounds, cornerRadius: 6).cgPath
+        border.frame = addWalletButton.bounds
+        border.lineWidth = 1.0
+        border.lineCap = .square
+        border.lineDashPattern = [4, 4]
+        addWalletButton.layer.addSublayer(border)
     }
 
     func didGetWalletData() {

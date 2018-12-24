@@ -535,7 +535,7 @@
                                     <constraint firstItem="6JH-TU-acd" firstAttribute="centerX" secondItem="r3k-sD-X0g" secondAttribute="centerX" id="q13-rH-3L3"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="iconView" destination="N6z-Lb-6l4" id="jFX-rE-p7f"/>
+                                    <outlet property="iconView" destination="N6z-Lb-6l4" id="2nB-R0-aMq"/>
                                     <outlet property="selectedView" destination="6JH-TU-acd" id="jQy-dZ-iVi"/>
                                 </connections>
                             </collectionViewCell>

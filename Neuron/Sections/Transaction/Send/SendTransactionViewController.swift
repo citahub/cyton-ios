@@ -106,11 +106,11 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         case .erc20:
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
-            if ether.balance < paramBuilder.txFee {
+            if ether.balance ?? 0 < paramBuilder.txFee {
                 Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), tokenModel.gasSymbol))
                 return
             }
-            amountTextField.text = tokenModel.balance.toDecimalNumber(tokenModel.decimals).formatterToString(8)
+            amountTextField.text = (tokenModel.balance ?? 0).toDecimalNumber(tokenModel.decimals).formatterToString(8)
         default:
             break
         }
@@ -123,7 +123,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         walletIconView.image = wallet.icon.image
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        tokenBalanceButton.setTitle("\(tokenModel.balance.toAmountText(tokenModel.decimals)) \(tokenModel.symbol)", for: .normal)
+        tokenBalanceButton.setTitle("\((tokenModel.balance ?? 0).toAmountText(tokenModel.decimals)) \(tokenModel.symbol)", for: .normal)
         addressTextField.text = paramBuilder.to
         tokenLabel.text = tokenModel.symbol
 
@@ -197,7 +197,7 @@ private extension SendTransactionViewController {
         if tokenModel.type == .erc20 {
             let realm = try! Realm()
             let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
-            if ether.balance < paramBuilder.txFee {
+            if ether.balance ?? 0 < paramBuilder.txFee {
                 Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), tokenModel.gasSymbol))
                 return false
             }

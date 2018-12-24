@@ -22,7 +22,7 @@ class TokenModel: Object, Decodable {
     @objc dynamic var isNativeToken = false
     @objc dynamic var chainIdentifier: String = ""
 
-    @objc dynamic private var balanceText = "0"
+    @objc dynamic private var balanceText = ""
     var currencyAmount = "0"
 
     var chain: ChainModel? {
@@ -39,12 +39,12 @@ class TokenModel: Object, Decodable {
         }
     }
 
-    var balance: BigUInt {
+    var balance: BigUInt? {
         get {
             return BigUInt.parseToBigUInt(balanceText, decimals)
         }
         set {
-            balanceText = newValue.toDecimalNumber(decimals).formatterToString(decimals)
+            balanceText = newValue?.toDecimalNumber(decimals).formatterToString(decimals) ?? ""
         }
     }
 

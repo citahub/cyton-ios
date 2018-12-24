@@ -78,7 +78,7 @@ class TransactionParamBuilder: NSObject {
         contractAddress = token.address
         symbol = token.symbol
         nativeCoinSymbol = token.gasSymbol
-        tokenBalance = token.balance
+        tokenBalance = token.balance ?? 0
 
         super.init()
 

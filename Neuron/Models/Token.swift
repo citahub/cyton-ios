@@ -57,6 +57,7 @@ class Token {
         type = token.type
         decimals = token.decimals
         identifier = token.identifier
+        balance = token.balance
     }
 
     // MARK: - balance

@@ -126,6 +126,7 @@
 "Wallet.receipt" = "Receive";
 "Wallet.totalAmount" = "Total Assets";
 "Wallet.noAmount" = "No Assets";
+"Wallet.addWallet" = "添加钱包(en)";
 
 // Wallet QRCode
 // ---------------------------------------------------------
