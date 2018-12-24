@@ -66,16 +66,16 @@ class WalletIconPickerViewController: UICollectionViewController, UICollectionVi
     }
 }
 
-private class WalletIconCollectionViewCell: UICollectionViewCell {
+class WalletIconCollectionViewCell: UICollectionViewCell {
     @IBOutlet var iconView: UIImageView!
     @IBOutlet var selectedView: UIView!
 }
 
-private protocol WalletIconPickerFooterViewDelegate: class {
+protocol WalletIconPickerFooterViewDelegate: class {
     func confirm()
 }
 
-private class WalletIconPickerFooterView: UICollectionReusableView {
+class WalletIconPickerFooterView: UICollectionReusableView {
     weak var delegate: WalletIconPickerFooterViewDelegate?
     @IBOutlet weak var confirmButton: UIButton!
 
