@@ -53,7 +53,7 @@ class DAppDeviceMotionMessageHandler: DAppNativeMessageHandler {
             }
             manager.startDeviceMotionUpdates(to: OperationQueue.main, withHandler: { [weak self](motion, error) in
                 guard let motion = motion else {
-                    self?.callback(result: .fail(-1, error?.localizedDescription ?? "监听设备方向失败"))
+                    self?.callback(result: .fail(-1, error?.localizedDescription ?? "DApp.Browser.MonitorDirectionFailed".localized()))
                     return
                 }
                 self?.motionDidUpdate(motion: motion)

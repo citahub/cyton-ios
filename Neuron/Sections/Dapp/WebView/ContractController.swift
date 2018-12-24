@@ -53,7 +53,7 @@ class ContractController: UITableViewController, TransactonSender {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "支付详情"
+        title = "DApp.Contract.Title".localized()
 
         let wallet = AppModel.current.currentWallet
         if dappCommonModel.chainType == "AppChain" {
