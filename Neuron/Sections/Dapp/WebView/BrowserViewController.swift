@@ -138,7 +138,7 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
         alert.addAction(UIAlertAction(title: "Common.Connection.Refresh".localized(), style: .default, handler: { (_) in
             self.webView.reload()
         }))
-        alert.addAction(UIAlertAction(title: "Common.Connection.Cancel".localized(), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Common.cancel".localized(), style: .cancel, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 
@@ -343,7 +343,7 @@ extension BrowserViewController: WKNavigationDelegate {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
                 let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoAliPay".localized(), preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
+                alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             decisionHandler(.cancel)
@@ -351,7 +351,7 @@ extension BrowserViewController: WKNavigationDelegate {
             UIApplication.shared.open(requestURL, options: [:]) { (result) in
                 guard !result else { return }
                 let alert = UIAlertController(title: "DApp.Browser.AlertTitle".localized(), message: "DApp.Browser.CheckNoWeChat".localized(), preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "Common.Connection.Confirm".localized(), style: .destructive, handler: nil))
+                alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .destructive, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             decisionHandler(.cancel)

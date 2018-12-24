@@ -54,11 +54,11 @@ class ErrorOverlayViewController: UIViewController {
             _ = view // load view
             if style == .networkFail {
                 imageView.image = UIImage(named: "fail_icon")
-                messageLabel.text = "网络错误，请稍后再试"
+                messageLabel.text = "Common.NetworkError".localized()
                 refreshButton.isHidden = false
             } else {
                 imageView.image = UIImage(named: "blank_icon")
-                messageLabel.text = "空空如也"
+                messageLabel.text = "Common.DataEmpty".localized()
                 refreshButton.isHidden = true
             }
         }

@@ -48,7 +48,7 @@ class DAppTakePhotoMessageHandler: DAppNativeMessageHandler, UIImagePickerContro
                     let url = URL(string: UIApplication.openSettingsURLString)!
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }))
-                alert.addAction(UIAlertAction(title: "Common.Connection.Cancel".localized(), style: .default, handler: { (_) in
+                alert.addAction(UIAlertAction(title: "Common.cancel".localized(), style: .default, handler: { (_) in
                     alert.dismiss(animated: true, completion: nil)
                     self.callback(result: .fail(-1, "DApp.DAppTakePhoto.NoAccess".localized()))
                 }))

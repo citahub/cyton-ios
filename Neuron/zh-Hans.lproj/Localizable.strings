@@ -8,15 +8,13 @@
 
 // Common
 // ---------------------------------------------------------
-"Common.Connection.ConnectionLost" = "似乎已断开与互联网的连接";
-"Common.Connection.FailToLoadPage" = "页面加载失败";
-"Common.Connection.Cancel" = "取消";
-"Common.Connection.Confirm" = "确定";
 "Common.Connection.UserCancel" = "用户取消";
 "Common.Connection.ScanEmpty" = "扫描结果为空";
 "Common.Connection.LoseConnect" = "似乎已断开与互联网的连接";
 "Common.Connection.LoadFaild" = "页面加载失败";
 "Common.Connection.Refresh" = "刷新";
+"Common.DataEmpty" = "空空如也";
+"Common.NetworkError" = "网络错误，请稍后再试";
 "Common.next" = "下一步";
 "Common.confirm" = "确定";
 "Common.cancel" = "取消";
@@ -40,10 +38,13 @@
 "DApp.Browser.SignFaild" = "签名失败";
 "DApp.Browser.PayFaild" = "支付失败";
 "DApp.Browser.confirmSign" = "DApp签名信息确认";
+"DApp.Browser.MonitorDirectionFailed" = "监听设备方向失败";
+"DApp.Browser.MonitorGyroFailed" = "监听陀螺仪数据失败";
 
 // DApp Contract
 // ---------------------------------------------------------
 "DApp.Contract.TransactionSend" = "交易已发送";
+"DApp.Details.Title" = "交易详情";
 
 // DApp Advanced
 // ---------------------------------------------------------
