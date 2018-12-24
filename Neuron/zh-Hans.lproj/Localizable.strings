@@ -44,7 +44,7 @@
 // DApp Contract
 // ---------------------------------------------------------
 "DApp.Contract.TransactionSend" = "交易已发送";
-"DApp.Details.Title" = "交易详情";
+"DApp.Contract.Title" = "交易详情";
 
 // DApp Advanced
 // ---------------------------------------------------------
