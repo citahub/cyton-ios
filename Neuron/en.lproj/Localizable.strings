@@ -38,8 +38,8 @@
 "DApp.Browser.SignFaild" = "Signature failed";
 "DApp.Browser.PayFaild" = "Payment failed";
 "DApp.Browser.confirmSign" = "Signature Request";
-"DApp.Browser.MonitorDirectionFailed" = "监听设备方向失败";
-"DApp.Browser.MonitorGyroFailed" = "监听陀螺仪数据失败";
+"DApp.Browser.MonitorDirectionFailed" = "Failed to monitor device direction";
+"DApp.Browser.MonitorGyroFailed" = "Failed to monitor gyroscope data";
 
 // DApp Contract
 // ---------------------------------------------------------
@@ -126,7 +126,7 @@
 "Wallet.receipt" = "Receive";
 "Wallet.totalAmount" = "Total Assets";
 "Wallet.noAmount" = "No Assets";
-"Wallet.addWallet" = "添加钱包(en)";
+"Wallet.addWallet" = "Import Wallet";
 
 // Wallet QRCode
 // ---------------------------------------------------------
@@ -158,7 +158,7 @@
 "Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
 "Transaction.Details.contractCreationPending" = "Contract Creating";
 "Transaction.Details.contractCreationSuccess" = "Contract Created";
-"Transaction.Details.contractCreationFailure" = "Conrtact Creation failed";
+"Transaction.Details.contractCreationFailure" = "Contract Creation failed";
 
 // Send Transaction
 // ---------------------------------------------------------
@@ -167,8 +167,8 @@
 "Transaction.Send.title" = "%@ Transfer";
 "Transaction.Send.transactionAvailableBalance" = "The amount you entered exceeds your account balance, are all transferred out?";
 "Transaction.Send.gasPriceSettingIsTooLow" = "Gas Price too low, Please set above the Recommend Gas Price";
-"Transaction.Send.gasLimitSettingIsTooLow" = "您输入的Gas Limit过低，请输入合理的数值(en)";
-"Transaction.Send.quotaLimitSettingIsTooLow" = "您输入的Quota Limit过低，请输入合理的数值(en)";
+"Transaction.Send.gasLimitSettingIsTooLow" = "The Gas Price you entered is too low, please enter a reasonable value.";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "The Gas Limit you entered is too low, please enter a reasonable value.";
 "Transaction.Send.gasCostSetting" = "Advanced";
 "Transaction.Send.gasCost" = "Gas Price";
 "Transaction.Send.extenData" = "Data";
@@ -210,7 +210,7 @@
 "Guide.createWallet" = "Create Wallet";
 "Guide.existingWallet" = "Import Wallet";
 "Guide.neuronServiceAgreement" = "Neuron service agreement";
-"Guide.agreementOfConsent" = "我以仔细阅读并同意以上条款(en)";
+"Guide.agreementOfConsent" = "I have carefully read and agree to the above terms and conditions.";
 "Guide.continue" = "Continue";
 
 // Create Wallet
@@ -294,7 +294,7 @@
 "Wallet.Details.ChangePassword.success" = "Password Changed";
 "Wallet.Details.ExportKeystore.copy" = "Copy";
 "Wallet.Details.ExportKeystore.copySuccess" = "Keystore is copied to clipbord";
-"Wallet.Details.WalletIconPicker.title" = "选择头像(en)";
+"Wallet.Details.WalletIconPicker.title" = "Wallet Photo";
 
 // No Screenshot
 // ---------------------------------------------------------
@@ -342,7 +342,7 @@
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "Blockchain";
 "Assets.AddAssets.AlreadyExist" = "You have the token in your list.";
 "Assets.AddAssets.StoreFailed" = "Failed to add token";
-"Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!(en)";
+"Assets.AddAssets.EmptySymbol" = "The token has no name and cannot be imported successfully!";
 "Assets.AddAssets.StoreSuccess" = "Token Added";
 "Assets.AddAssets.ListSettings" = "Setting";
 "Assets.AddAssets.TokenMessage" = "Token info";
