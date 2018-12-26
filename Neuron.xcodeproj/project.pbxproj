@@ -334,7 +334,6 @@
 		6EEDED9F21CB3DFB00FC3BCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/guide_page_3@2x.png"; sourceTree = "<group>"; };
 		6EEDEDA021CB3DFB00FC3BCE /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/guide_page_3@2x.png"; sourceTree = "<group>"; };
 		6EEDEDA321CB3F3500FC3BCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text; name = "zh-Hans"; path = "zh-Hans.lproj/product_agreement.txt"; sourceTree = "<group>"; };
-		6EEDEDA521CB3F3900FC3BCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = text; name = Base; path = Base.lproj/product_agreement.txt; sourceTree = "<group>"; };
 		6EEDEDA621CB4CF100FC3BCE /* EthereumTokenProfileLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EthereumTokenProfileLoader.swift; sourceTree = "<group>"; };
 		6EF8F40B2175CAD9004B7587 /* UIControl+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIControl+Extension.swift"; sourceTree = "<group>"; };
 		6EF8F40F2176029E004B7587 /* OpenAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAuthViewController.swift; sourceTree = "<group>"; };
@@ -364,6 +363,7 @@
 		89422FE521A7F92300DD8744 /* DAppModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAppModel.swift; sourceTree = "<group>"; };
 		89422FE721A7F97300DD8744 /* MyDAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyDAppViewController.swift; sourceTree = "<group>"; };
 		89422FEA21A7F9C900DD8744 /* CollectionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionTableViewCell.swift; sourceTree = "<group>"; };
+		89450B7721D37FD500CE1921 /* en */ = {isa = PBXFileReference; lastKnownFileType = text; name = en; path = en.lproj/product_agreement.txt; sourceTree = "<group>"; };
 		8951A84B2170A5CC00043228 /* DAppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppAction.swift; sourceTree = "<group>"; };
 		8955580420DCA7F700FC92D8 /* PasswordValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidator.swift; sourceTree = "<group>"; };
 		895F713321C630E800F41107 /* VerifyMnemonicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyMnemonicViewController.swift; sourceTree = "<group>"; };
@@ -1714,7 +1714,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				6EEDEDA321CB3F3500FC3BCE /* zh-Hans */,
-				6EEDEDA521CB3F3900FC3BCE /* Base */,
+				89450B7721D37FD500CE1921 /* en */,
 			);
 			name = product_agreement.txt;
 			sourceTree = "<group>";
