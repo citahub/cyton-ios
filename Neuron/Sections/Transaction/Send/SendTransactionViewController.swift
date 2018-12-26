@@ -128,9 +128,9 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
-            gasCostLabel.text! += "≈ \(paramBuilder.currencySymbol) " + amount.formatterToString(2)
         if paramBuilder.nativeTokenPrice > 0 {
             let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.nativeTokenPrice))
+            gasCostLabel.text! += " ≈ \(amount.currencyFormat())"
         }
     }
 
