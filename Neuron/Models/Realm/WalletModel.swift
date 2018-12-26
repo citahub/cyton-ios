@@ -16,13 +16,10 @@ class WalletModel: Object {
     var selectedTokenList = List<TokenModel>()
     var tokenModelList = List<TokenModel>()
     var chainModelList = List<ChainModel>()
+    var balanceList = List<TokenBalance>()
 
     var wallet: Wallet? {
         return WalletManager.default.wallet(for: address)
-    }
-
-    override static func primaryKey() -> String? {
-        return "address"
     }
 
     var icon: Icon {
@@ -39,6 +36,13 @@ class WalletModel: Object {
             iconName = newValue.rawValue
         }
     }
+
+    override static func primaryKey() -> String? { return "address" }
+}
+
+class TokenBalance: Object {
+    @objc dynamic var identifier: String! // token identifier
+    @objc dynamic var value: String!      // token balance
 }
 
 extension WalletModel {

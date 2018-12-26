@@ -1042,6 +1042,7 @@
 				8928C27820B2A61900C3103E /* WalletViewController.swift */,
 				6E9B947E21A4086400D67357 /* WalletPresenter.swift */,
 				6E8D77EF21A5264F00EA7674 /* WalletQRCodeViewController.swift */,
+				89D935242139363A002FAEEC /* TokenTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1083,7 +1084,6 @@
 			isa = PBXGroup;
 			children = (
 				89AB35C9213D113E00A2BF48 /* WalletTableViewCell.swift */,
-				89D935242139363A002FAEEC /* TokenTableViewCell.swift */,
 				89F7966C213A6B680064808A /* ERC721TableViewCell.swift */,
 				89D84CE62147C671006B0287 /* TraitsCollectionViewCell.swift */,
 				898A1A0520B5797700ECB465 /* AssetTableViewCell.swift */,

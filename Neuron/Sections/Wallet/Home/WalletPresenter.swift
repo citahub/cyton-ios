@@ -60,10 +60,7 @@ class WalletPresenter {
         currentWallet = wallet
 
         var tokens = [Token]()
-        tokens = wallet.selectedTokenList.map { Token($0) }
-        tokens.forEach { (token) in
-            token.walletAddress = self.currentWallet!.address
-        }
+        tokens = wallet.selectedTokenList.map { Token($0, currentWallet!.address) }
         self.tokens = tokens
         self.tokenListTimestamp = Date().timeIntervalSince1970
         refreshBalance()
@@ -117,11 +114,7 @@ extension WalletPresenter {
 
     private func insertTokens(tokenList: List<TokenModel>, insertions: [Int]) {
         guard insertions.count > 0 else { return }
-        let newTokens = insertions.map({ (idx) -> Token in
-            let token = Token(tokenList[idx])
-            token.walletAddress = self.currentWallet!.address
-            return token
-        })
+        let newTokens = insertions.map({ Token(tokenList[$0], self.currentWallet!.address) })
         for (idx, token) in newTokens.enumerated() {
             self.tokens.insert(token, at: insertions[idx])
         }

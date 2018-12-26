@@ -48,7 +48,7 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
-        observers.append(param.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
+        observers.append(param.observe(\.nativeTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         dataString != nil ? switchDataToHex() : nil
@@ -107,7 +107,7 @@ class TransactionGasCostViewController: UITableViewController {
     private func updateGasCost() {
         switch paramBuilder.tokenType {
         case .appChain, .appChainErc20:
-            gasPriceTextField.text = paramBuilder.gasPrice.toAmountText(paramBuilder.gasTokenDecimals)
+            gasPriceTextField.text = paramBuilder.gasPrice.toAmountText(paramBuilder.nativeTokenDecimals)
             gasPriceSymbolLabel.text = "NATT"
             gasPriceTextField.isEnabled = false
             gasPriceTitleLabel.text = "Quota Price"
@@ -125,9 +125,9 @@ class TransactionGasCostViewController: UITableViewController {
         gasLimitTextField.text = paramBuilder.gasLimit.description
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
         gasCostDescLabel.text = "≈\(gasLimitTitleLabel.text!)(\(gasLimitTextField.text!))*\(gasPriceTitleLabel.text!)(\(gasPriceTextField.text!) \(gasPriceSymbolLabel.text!))"
-        if paramBuilder.gasTokenPrice > 0 {
-            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
             gasCostLabel.text = gasCostLabel.text! + " ≈ \(paramBuilder.currencySymbol)" + amount.formatterToString(2)
+        if paramBuilder.nativeTokenPrice > 0 {
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.nativeTokenPrice))
         }
     }
 

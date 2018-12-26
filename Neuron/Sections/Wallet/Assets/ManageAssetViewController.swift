@@ -72,7 +72,7 @@ class ManageAssetViewController: UITableViewController, AssetTableViewCellDelega
         cell.iconUrlStr = tokenModel.iconUrl
         cell.symbolLabel.text = tokenModel.symbol
         cell.addressLabel.text = tokenModel.address
-        cell.nameLabel.text = tokenModel.chain?.chainName
+        cell.nameLabel.text = tokenModel.chain.chainName
         cell.selectionStyle = .none
         cell.isSelected = selectArray.contains(where: { $0 == tokenModel })
         return cell

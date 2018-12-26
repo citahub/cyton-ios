@@ -12,7 +12,7 @@ import AppChain
 import Web3swift
 
 protocol TransactonSender {
-    var tokenModel: TokenModel! { get set }
+    var token: Token! { get set }
     var paramBuilder: TransactionParamBuilder! { get set }
     func sendEthereumTransaction(password: String) throws -> TxHash
     func sendAppChainTransaction(password: String) throws -> TxHash

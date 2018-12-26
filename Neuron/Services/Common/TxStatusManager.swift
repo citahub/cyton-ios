@@ -74,10 +74,10 @@ class TxStatusManager: NSObject {
                     localTxDetail.token.name == token.name
             }
             return localTxDetail.from == token.walletAddress &&
-                localTxDetail.token.chain?.chainId == token.chainId &&
+                localTxDetail.token.chain.chainId == token.chainId &&
                 localTxDetail.token.symbol == token.symbol &&
                 localTxDetail.token.name == token.name &&
-                localTxDetail.token.chain?.httpProvider == token.chainHosts
+                localTxDetail.token.chain.httpProvider == token.chainHost
         }).map({ $0.getTransactionDetails() })
     }
 

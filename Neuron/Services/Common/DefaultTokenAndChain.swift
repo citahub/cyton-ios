@@ -63,7 +63,7 @@ class DefaultTokenAndChain {
             chainModel.chainId = metaData.chainId
             chainModel.chainName = metaData.chainName
             chainModel.httpProvider = chainHost
-            chainModel.tokenIdentifier = tokenModel.identifier
+            chainModel.nativeTokenIdentifier = tokenModel.identifier
             if let chainIdentifier = ChainModel.identifier(for: chainModel) {
                 chainModel.identifier = chainIdentifier
             }

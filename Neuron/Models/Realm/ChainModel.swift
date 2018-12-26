@@ -13,16 +13,12 @@ class ChainModel: Object {
     @objc dynamic var chainId = ""
     @objc dynamic var chainName = ""
     @objc dynamic var httpProvider = ""
-    @objc dynamic var tokenIdentifier = ""
+    @objc dynamic var nativeTokenIdentifier = ""
     @objc dynamic var identifier = UUID().uuidString
 
-    override class func primaryKey() -> String? {
-        return "identifier"
-    }
+    override class func primaryKey() -> String? { return "identifier" }
 
-    var nativeToken: TokenModel {
-        return (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: tokenIdentifier)!
-    }
+    var nativeToken: TokenModel { return (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: nativeTokenIdentifier)! }
 }
 
 extension ChainModel {

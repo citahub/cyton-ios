@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import BigInt
 
-class TokenModel: Object, Decodable {
+class TokenModel: Object {
     @objc dynamic var name = ""
     @objc dynamic var iconUrl: String? = ""
     @objc dynamic var address = ""
@@ -22,45 +22,21 @@ class TokenModel: Object, Decodable {
     @objc dynamic var isNativeToken = false
     @objc dynamic var chainIdentifier: String = ""
 
-    @objc dynamic private var balanceText = ""
-    var currencyAmount = "0"
-
-    var chain: ChainModel? {
+    var chain: ChainModel {
         switch type {
         case .ether, .erc20:
-            let chainModel = ChainModel()
-            chainModel.chainId = "-1"
-            chainModel.chainName = EthereumNetwork().networkType.chainName
-            chainModel.httpProvider = EthereumNetwork().apiHost().absoluteString
-            return chainModel
+            return EthereumNetwork().chain
         case .appChain, .appChainErc20:
-            let realm = try! Realm()
-            return realm.object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)
+            return (try! Realm()).object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)!
         }
     }
 
-    var balance: BigUInt? {
-        get {
-            return BigUInt.parseToBigUInt(balanceText, decimals)
-        }
-        set {
-            balanceText = newValue?.toDecimalNumber(decimals).formatterToString(decimals) ?? ""
-        }
-    }
+    override class func primaryKey() -> String? { return "identifier" }
 
-    override class func primaryKey() -> String? {
-        return "identifier"
-    }
+    override static func ignoredProperties() -> [String] { return ["currencyAmount"] }
+}
 
-    override static func ignoredProperties() -> [String] {
-        return ["currencyAmount"]
-    }
-
-    struct Logo: Decodable {
-        var src: String?
-    }
-    var logo: Logo?
-
+extension TokenModel {
     var type: TokenType {
         if isNativeToken {
             if chainIdentifier == "" && address == "" {
@@ -68,45 +44,21 @@ class TokenModel: Object, Decodable {
             } else {
                 return .appChain
             }
+        } else if chainIdentifier != "" && address != "" {
+            return .appChainErc20
         } else {
-            if chainIdentifier != "" && address != "" {
-                return .appChainErc20
-            } else {
-                return .erc20
-            }
-        }
-    }
-
-    var gasSymbol: String {
-        switch type {
-        case .ether, .erc20:
-            return "ETH"
-        case .appChain, .appChainErc20:
-            return chain?.nativeToken.symbol ?? "NATT"
+            return .erc20
         }
     }
 
     var isEthereum: Bool {
         return type == .ether || type == .erc20
     }
-
-    enum CodingKeys: String, CodingKey {
-        case name
-        case address
-        case decimals
-        case symbol
-        case logo
-    }
 }
 
 extension TokenModel {
     static func identifier(for tokenModel: TokenModel) -> String? {
-        let realm = try! Realm()
-        let tokenList = realm.objects(TokenModel.self)
-        if let model = tokenList.first(where: { $0 == tokenModel }) {
-            return model.identifier
-        }
-        return nil
+        return (try! Realm()).objects(TokenModel.self).first(where: { $0 == tokenModel })?.identifier
     }
 }
 
