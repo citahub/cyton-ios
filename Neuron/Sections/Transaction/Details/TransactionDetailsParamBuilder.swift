@@ -33,7 +33,7 @@ class TransactionDetailsParamBuilder {
     }
 
     func buildBaseInfo() {
-        tokenIcon = tx.token.iconUrl 
+        tokenIcon = tx.token.iconUrl
         switch tx.status {
         case .success:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()

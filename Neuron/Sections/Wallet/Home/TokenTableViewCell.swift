@@ -18,12 +18,11 @@ class TokenTableViewCell: UITableViewCell {
 
     var token: Token! {
         didSet {
-            iconView.sd_setImage(with: URL(string: token.iconUrl ?? ""), placeholderImage: UIImage(named: "eth_logo"))
+            iconView.sd_setImage(with: URL(string: token.iconUrl), placeholderImage: UIImage(named: "eth_logo"))
             symbolLabel.text = token.symbol
             symbolWidthConstraint.constant = symbolLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: 150, height: 20), limitedToNumberOfLines: 1).size.width
             if let balance = token.balance, let balanceLabel = balanceLabel {
                 balanceLabel.text = balance.toAmountText(token.decimals)
-                print("balance \(token.balance!)  \(token.symbol)")
                 if balance > 0 {
                     if let price = token.price {
                         let amountNumber = balance.toDecimalNumber(token.decimals).multiplying(by: NSDecimalNumber(value: price))
