@@ -8,6 +8,7 @@
 
 import Foundation
 import Web3swift
+import RealmSwift
 
 class EthereumNetwork {
     func getWeb3() -> web3 {
@@ -81,5 +82,14 @@ class EthereumNetwork {
             UserDefaults.standard.set(newValue.rawValue, forKey: currentNetworkKey)
             NotificationCenter.default.post(name: .switchEthNetwork, object: nil)
         }
+    }
+
+    var chain: ChainModel {
+        let chainModel = ChainModel()
+        chainModel.chainId = "-1"
+        chainModel.chainName = networkType.chainName
+        chainModel.httpProvider = apiHost().absoluteString
+        chainModel.nativeTokenIdentifier = (try! Realm()).objects(TokenModel.self).first(where: { $0.symbol == "ETH" })!.identifier
+        return chainModel
     }
 }

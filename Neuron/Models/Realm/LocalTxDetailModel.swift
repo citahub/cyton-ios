@@ -33,9 +33,7 @@ class LocalTxDetailModel: Object {
 
     @objc override class func primaryKey() -> String? { return "txHash" }
 
-    @objc override class func ignoredProperties() -> [String] {
-        return ["status"]
-    }
+    @objc override class func ignoredProperties() -> [String] { return ["status"] }
 
     // Ethereum
     required convenience init(tokenIdentifier: String, txHash: TxHash, from: String, to: String, value: BigUInt, gasPrice: BigUInt, gasLimit: BigUInt) {
@@ -110,8 +108,7 @@ class LocalTxDetailModel: Object {
             appChainErc20.quotaUsed = BigUInt(gasLimit) ?? 0
             transaction = appChainErc20
         }
-        transaction.token = Token(token)
-        transaction.token.walletAddress = from
+        transaction.token = Token(token, from)
         transaction.hash = txHash
         transaction.to = to
         transaction.from = from

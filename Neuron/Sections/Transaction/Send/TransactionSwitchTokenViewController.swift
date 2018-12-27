@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TransactionSwitchTokenViewControllerDelegate: NSObjectProtocol {
-    func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken token: TokenModel)
+    func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken tokenModel: TokenModel)
 }
 
 class TransactionSwitchTokenViewController: UIViewController {

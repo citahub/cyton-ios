@@ -33,7 +33,7 @@ class TransactionDetailsParamBuilder {
     }
 
     func buildBaseInfo() {
-        tokenIcon = tx.token.iconUrl ?? ""
+        tokenIcon = tx.token.iconUrl
         switch tx.status {
         case .success:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
@@ -75,7 +75,7 @@ class TransactionDetailsParamBuilder {
         case .ether, .erc20:
             network = EthereumNetwork().networkType.chainName
         case .appChain, .appChainErc20:
-            network = tx.token.chainName ?? "CITA"
+            network = tx.token.chainName
         }
     }
 
@@ -88,11 +88,11 @@ class TransactionDetailsParamBuilder {
                 txFee = (ethereum.gasUsed * ethereum.gasPrice).toAmountText(tx.token.decimals) + " ETH"
                 gasPrice = "\(ethereum.gasPrice.toGweiText()) Gwei"
             } else if let appChainErc20 = tx as? AppChainErc20TransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHosts)
+                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
                 gasPrice = "\(quotaPrice.toAmountText()) NATT"
                 txFee = (appChainErc20.quotaUsed * quotaPrice).toAmountText() + " NATT"
             } else if let appChain = tx as? AppChainTransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHosts)
+                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
                 gasPrice = "\(quotaPrice.toAmountText(tx.token.decimals)) NATT"
                 txFee = (appChain.quotaUsed * quotaPrice).toAmountText(tx.token.decimals) + " NATT"
             }

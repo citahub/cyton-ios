@@ -43,7 +43,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         return BLTNItemManager(rootItem: summaryPageItem)
     }()
 
-    var tokenModel: TokenModel!
+    var token: Token!
     var recipientAddress: String!
 
     override func viewDidLoad() {
@@ -56,8 +56,8 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
         gasCostTitleLabel.text = "Transaction.Send.gasFee".localized()
         nextButton.setTitle("Common.next".localized(), for: .normal)
 
-        if enableSwitchToken && tokenModel == nil {
-            tokenModel = AppModel.current.currentWallet?.selectedTokenList.first
+        if enableSwitchToken && token == nil {
+            token = AppModel.current.currentWallet!.selectedTokenList.first?.token
         }
 
         createParamBuilder()
@@ -66,7 +66,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "switchToken" {
             let controller = segue.destination as! TransactionSwitchTokenViewController
-            controller.currentToken = tokenModel
+            controller.currentToken = token.tokenModel
             controller.delegate = self
         } else if segue.identifier == String(describing: TransactionGasCostViewController.self) {
             let controller = segue.destination as! TransactionGasCostViewController
@@ -77,7 +77,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBAction func next(_ sender: Any) {
         view.endEditing(true)
 
-        paramBuilder.value = BigUInt.parseToBigUInt(amountTextField.text!, tokenModel.decimals)
+        paramBuilder.value = BigUInt.parseToBigUInt(amountTextField.text!, token.decimals)
         paramBuilder.to = addressTextField.text!
 
         if isEffectiveTransferInfo {
@@ -94,47 +94,43 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
     }
 
     @IBAction func transactionAvailableBalance() {
-        switch tokenModel.type {
+        switch token.type {
         case .ether, .appChain:
             if paramBuilder.txFee > paramBuilder.tokenBalance {
-                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), tokenModel.gasSymbol))
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.nativeTokenSymbol))
                 return
             }
             let amount = paramBuilder.tokenBalance - paramBuilder.txFee
-            let amountText = amount.toDecimalNumber(tokenModel.decimals).formatterToString(8)
+            let amountText = amount.toDecimalNumber(token.decimals).formatterToString(8)
             amountTextField.text = amountText
-        case .erc20:
-            let realm = try! Realm()
-            let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
-            if ether.balance ?? 0 < paramBuilder.txFee {
-                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), tokenModel.gasSymbol))
+        case .erc20, .appChainErc20:
+            if token.nativeToken.balance ?? 0 < paramBuilder.txFee {
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.nativeTokenSymbol))
                 return
             }
-            amountTextField.text = (tokenModel.balance ?? 0).toDecimalNumber(tokenModel.decimals).formatterToString(8)
-        default:
-            break
+            amountTextField.text = (token.balance ?? 0).toDecimalNumber(token.decimals).formatterToString(8)
         }
     }
 
     func setupUI() {
         let wallet = AppModel.current.currentWallet!
-        title = String(format: "Transaction.Send.title".localized(), tokenModel.symbol)
+        title = String(format: "Transaction.Send.title".localized(), token.symbol)
 
         walletIconView.image = wallet.icon.image
         walletNameLabel.text = wallet.name
         walletAddressLabel.text = wallet.address
-        tokenBalanceButton.setTitle("\((tokenModel.balance ?? 0).toAmountText(tokenModel.decimals)) \(tokenModel.symbol)", for: .normal)
+        tokenBalanceButton.setTitle("\((token.balance ?? 0).toAmountText(token.decimals)) \(token.symbol)", for: .normal)
         addressTextField.text = paramBuilder.to
-        tokenLabel.text = tokenModel.symbol
+        tokenLabel.text = token.symbol
 
         updateGasCost()
     }
 
     private func updateGasCost() {
         gasCostLabel.text = "\(paramBuilder.txFeeText) \(paramBuilder.nativeCoinSymbol)"
-        if paramBuilder.gasTokenPrice > 0 {
-            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.gasTokenPrice))
-            gasCostLabel.text! += "≈ \(paramBuilder.currencySymbol) " + amount.formatterToString(2)
+        if paramBuilder.nativeTokenPrice > 0 {
+            let amount = paramBuilder.txFee.toDecimalNumber().multiplying(by: NSDecimalNumber(value: paramBuilder.nativeTokenPrice))
+            gasCostLabel.text! += " ≈ \(amount.currencyFormat())"
         }
     }
 
@@ -194,11 +190,9 @@ private extension SendTransactionViewController {
             return false
         }
 
-        if tokenModel.type == .erc20 {
-            let realm = try! Realm()
-            let ether = realm.objects(TokenModel.self).first(where: { $0.type == .ether })!
-            if ether.balance ?? 0 < paramBuilder.txFee {
-                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), tokenModel.gasSymbol))
+        if token.type == .erc20 || token.type == .appChainErc20 {
+            if token.nativeToken.balance ?? 0 < paramBuilder.txFee {
+                Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), paramBuilder.nativeCoinSymbol))
                 return false
             }
         }
@@ -289,8 +283,8 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
         }
     }
 
-    func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken token: TokenModel) {
-        self.tokenModel = token
+    func switchToken(switchToken: TransactionSwitchTokenViewController, didSwitchToToken tokenModel: TokenModel) {
+        self.token = tokenModel.token
         tableView.reloadData()
 
         observers.forEach { (observe) in
@@ -302,11 +296,11 @@ extension SendTransactionViewController: TransactionSwitchTokenViewControllerDel
     }
 
     private func createParamBuilder() {
-        paramBuilder = TransactionParamBuilder(token: tokenModel)
+        paramBuilder = TransactionParamBuilder(token: token)
         observers.append(paramBuilder.observe(\.txFeeText, options: [.initial]) { (_, _) in
             self.updateGasCost()
         })
-        observers.append(paramBuilder.observe(\.gasTokenPrice, options: [.initial]) { [weak self](_, _) in
+        observers.append(paramBuilder.observe(\.nativeTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
         paramBuilder.from = AppModel.current.currentWallet!.address

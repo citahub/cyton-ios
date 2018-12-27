@@ -18,49 +18,63 @@ enum TokenType: String {
 }
 
 class Token {
-    var name: String
-    var iconUrl: String? = ""
-    var address: String
-    var symbol: String
-    var chainName: String? = ""
-    var chainId: String
-    var chainHosts: String
-    var isNativeToken: Bool
-    var walletAddress = ""
-    var type: TokenType
-    var decimals = 18
+    let name: String
+    let iconUrl: String
+    let address: String
+    let symbol: String
+    let chainName: String
+    let chainId: String
+    let chainHost: String
+    let isNativeToken: Bool
+    let type: TokenType
+    let decimals: Int
+
     let identifier: String
+    let walletAddress: String
 
-    var tokenModel: TokenModel {
-        let realm = try! Realm()
-        return realm.object(ofType: TokenModel.self, forPrimaryKey: identifier)!
-    }
-
-    private(set) var balance: BigUInt? {
-        didSet {
-            try? tokenModel.realm!.write {
-                tokenModel.balance = balance ?? 0
-            }
-        }
-    }
     var price: Double?
 
-    init(_ token: TokenModel) {
+    init(_ token: TokenModel, _ walletAddress: String? = nil) {
         name = token.name
-        iconUrl = token.iconUrl
+        iconUrl = token.iconUrl ?? ""
         address = token.address
         symbol = token.symbol
-        chainId = token.chain?.chainId ?? ""
-        chainName = token.chain?.chainName ?? ""
-        chainHosts = token.chain?.httpProvider ?? ""
+        chainId = token.chain.chainId
+        chainName = token.chain.chainName
+        chainHost = token.chain.httpProvider
         isNativeToken = token.isNativeToken
         type = token.type
         decimals = token.decimals
         identifier = token.identifier
-        balance = token.balance
+
+        self.walletAddress = walletAddress != nil ? walletAddress! : AppModel.current.currentWallet!.address
+        let balanceList = walletModel.balanceList
+        if let balanceText = balanceList.first(where: { $0.identifier == identifier })?.value {
+            balance = BigUInt(balanceText)
+        }
     }
 
     // MARK: - balance
+
+    var balance: BigUInt? {
+        didSet {
+            let balanceText = balance != nil ? String(balance!) : nil
+            let realm = try! Realm()
+            if let tokenBalance = walletModel.balanceList.first(where: { $0.identifier == identifier }) {
+                try? realm.write {
+                    tokenBalance.value = balanceText
+                }
+            } else {
+                let tokenBalance = TokenBalance()
+                tokenBalance.identifier = identifier
+                tokenBalance.value = balanceText
+                try? realm.write {
+                    walletModel.balanceList.append(tokenBalance)
+                }
+            }
+        }
+    }
+
     private var refreshBalanceSignal: DispatchGroup?
 
     @discardableResult func refreshBalance() throws -> BigUInt? {
@@ -70,7 +84,6 @@ class Token {
         }
         refreshBalanceSignal = DispatchGroup()
         refreshBalanceSignal?.enter()
-
         defer {
             refreshBalanceSignal?.leave()
             refreshBalanceSignal = nil
@@ -78,9 +91,9 @@ class Token {
 
         switch type {
         case .appChain :
-            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHosts)), address: walletAddress).getBalance()
+            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHost)), address: walletAddress).getBalance()
         case .appChainErc20 :
-            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHosts)), address: walletAddress).getERC20Balance(contractAddress: address)
+            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHost)), address: walletAddress).getERC20Balance(contractAddress: address)
         case .ether:
             balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getBalance()
         case .erc20:
@@ -92,6 +105,30 @@ class Token {
     }
 }
 
+extension Token {
+    var tokenModel: TokenModel {
+        let realm = try! Realm()
+        return realm.object(ofType: TokenModel.self, forPrimaryKey: identifier)!
+    }
+    var walletModel: WalletModel {
+        return (try! Realm()).object(ofType: WalletModel.self, forPrimaryKey: walletAddress)!
+    }
+}
+
+extension Token {
+    var nativeTokenSymbol: String {
+        switch type {
+        case .erc20, .appChainErc20:
+            return tokenModel.chain.nativeToken.symbol
+        case .ether, .appChain:
+            return symbol
+        }
+    }
+    var nativeToken: Token {
+        return tokenModel.chain.nativeToken.token
+    }
+}
+
 extension Token: Equatable {
     static func == (lhs: Token, rhs: Token) -> Bool {
         return
@@ -100,4 +137,8 @@ extension Token: Equatable {
             lhs.symbol == rhs.symbol &&
             lhs.walletAddress == rhs.walletAddress
     }
+}
+
+extension TokenModel {
+    var token: Token { return Token(self) }
 }

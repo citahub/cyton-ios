@@ -45,8 +45,8 @@ class TransactionParamBuilder: NSObject {
     var tokenBalance: BigUInt = 0
 
     @objc dynamic
-    private(set) var gasTokenPrice: Double = 0
-    private(set) var gasTokenDecimals = 18
+    private(set) var nativeTokenPrice: Double = 0
+    private(set) var nativeTokenDecimals = 18
 
     private(set) var currencySymbol = ""
 
@@ -69,15 +69,15 @@ class TransactionParamBuilder: NSObject {
 
     private var gasCalculator = GasCalculator()
 
-    init(token: TokenModel, gasPrice: BigUInt? = nil, gasLimit: BigUInt? = nil) {
+    init(token: Token, gasPrice: BigUInt? = nil, gasLimit: BigUInt? = nil) {
         tokenIdentifier = token.identifier
         tokenType = token.type
-        rpcNode = token.chain?.httpProvider ?? ""
+        rpcNode = token.chainHost
         decimals = token.decimals
-        chainId = token.chain?.chainId ?? ""
+        chainId = token.chainId
         contractAddress = token.address
         symbol = token.symbol
-        nativeCoinSymbol = token.gasSymbol
+        nativeCoinSymbol = token.nativeTokenSymbol
         tokenBalance = token.balance ?? 0
 
         super.init()
@@ -92,7 +92,7 @@ class TransactionParamBuilder: NSObject {
         } else {
             fetchGasLimit()
         }
-        fetchGasTokenPrice(token: token)
+        fetchNativeTokenPrice(token: token)
     }
 
     init(builder: TransactionParamBuilder) {
@@ -110,7 +110,7 @@ class TransactionParamBuilder: NSObject {
         gasLimit = builder.gasLimit
         from = builder.from
         to = builder.to
-        gasTokenPrice = builder.gasTokenPrice
+        nativeTokenPrice = builder.nativeTokenPrice
         currencySymbol = builder.currencySymbol
         rebuildGasCalculator()
     }
@@ -157,22 +157,14 @@ class TransactionParamBuilder: NSObject {
         }
     }
 
-    private func fetchGasTokenPrice(token: TokenModel) {
+    private func fetchNativeTokenPrice(token: Token) {
         let currency = LocalCurrencyService.shared.getLocalCurrencySelect()
-        let tokenSymbol: String
-        switch token.type {
-        case .ether, .appChain:
-            tokenSymbol = token.symbol
-        case .appChainErc20:
-            tokenSymbol = (try! Realm()).object(ofType: TokenModel.self, forPrimaryKey: token.chain!.tokenIdentifier)!.symbol
-        case .erc20:
-            tokenSymbol = (try! Realm()).objects(TokenModel.self).first(where: { $0.symbol == "ETH" && $0.name == "ethereum" })!.symbol
-        }
+        let tokenSymbol: String = token.nativeTokenSymbol
         currencySymbol = currency.symbol
         DispatchQueue.global().async {
             if let price = TokenPriceLoader().getPrice(symbol: tokenSymbol, currency: currency.short) {
                 DispatchQueue.main.async {
-                    self.gasTokenPrice = price
+                    self.nativeTokenPrice = price
                 }
             }
         }

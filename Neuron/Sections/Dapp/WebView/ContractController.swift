@@ -27,7 +27,7 @@ class ContractController: UITableViewController, TransactonSender {
     var dappName: String = ""
     var dappCommonModel: DAppCommonModel!
     var paramBuilder: TransactionParamBuilder!
-    var tokenModel: TokenModel!
+    var token: Token!
     weak var delegate: ContractControllerDelegate?
 
     @IBOutlet weak var valueLabel: UILabel!
@@ -57,17 +57,17 @@ class ContractController: UITableViewController, TransactonSender {
 
         let wallet = AppModel.current.currentWallet
         if dappCommonModel.chainType == "AppChain" {
-            self.tokenModel = wallet!.tokenModelList.first(where: { $0.type == .appChain && $0.chain!.chainId == "\(dappCommonModel.appChain!.chainId)" })
+            self.token = wallet!.tokenModelList.first(where: { $0.type == .appChain && $0.chain.chainId == "\(dappCommonModel.appChain!.chainId)" })?.token
             let gasLimit = dappCommonModel.appChain?.quota?.toBigUInt()
-            paramBuilder = TransactionParamBuilder(token: tokenModel, gasPrice: nil, gasLimit: gasLimit)
+            paramBuilder = TransactionParamBuilder(token: token, gasPrice: nil, gasLimit: gasLimit)
             paramBuilder.value = dappCommonModel.appChain?.value?.toBigUInt() ?? 0
             paramBuilder.to = dappCommonModel.appChain?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
         } else {
-            self.tokenModel = wallet!.tokenModelList.first(where: { $0.type == .ether })
+            self.token = wallet!.tokenModelList.first(where: { $0.type == .ether })?.token
             let gasPrcie = dappCommonModel.eth?.gasPrice?.toBigUInt()
             let gasLimit = dappCommonModel.eth?.gasLimit?.toBigUInt()
-            paramBuilder = TransactionParamBuilder(token: tokenModel, gasPrice: gasPrcie, gasLimit: gasLimit)
+            paramBuilder = TransactionParamBuilder(token: token, gasPrice: gasPrcie, gasLimit: gasLimit)
             paramBuilder.value = dappCommonModel.eth?.value?.toBigUInt() ?? 0
             paramBuilder.to = dappCommonModel.eth?.to ?? ""
             paramBuilder.data = Data(hex: dappCommonModel.eth?.data ?? "")
@@ -94,12 +94,12 @@ class ContractController: UITableViewController, TransactonSender {
         requestStringLabel.text = requestAddress
         dappNameLabel.text = dappName
         toLabel.text = paramBuilder.to
-        valueLabel.text = "\(paramBuilder.value.toAmountText(tokenModel.decimals)) \(tokenModel.symbol)"
+        valueLabel.text = "\(paramBuilder.value.toAmountText(token.decimals)) \(token.symbol)"
     }
 
     func updateGasCost() {
-        gasLabel.text =  "\(paramBuilder.txFeeText) \(tokenModel.symbol)"
-        totlePayLabel.text = "\((paramBuilder.txFee + paramBuilder.value).toAmountText(tokenModel.decimals)) \(tokenModel.symbol)"
+        gasLabel.text =  "\(paramBuilder.txFeeText) \(token.symbol)"
+        totlePayLabel.text = "\((paramBuilder.txFee + paramBuilder.value).toAmountText(token.decimals)) \(token.symbol)"
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -169,9 +169,9 @@ private extension ContractController {
 
     func track() {
         SensorsAnalytics.Track.transaction(
-            chainType: tokenModel.chain?.chainId ?? "",
-            currencyType: tokenModel.symbol,
-            currencyNumber: paramBuilder.value.toDouble(tokenModel.decimals),
+            chainType: token.chainId,
+            currencyType: token.symbol,
+            currencyNumber: paramBuilder.value.toDouble(token.decimals),
             receiveAddress: dappCommonModel.appChain?.to ?? "",
             outcomeAddress: AppModel.current.currentWallet!.address,
             transactionType: .normal
