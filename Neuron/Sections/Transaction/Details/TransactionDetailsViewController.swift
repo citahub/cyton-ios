@@ -58,6 +58,7 @@ class TransactionDetailsViewController: UITableViewController {
         blockTitleLabel.text = "Transaction.Details.block".localized() + ":"
         gasFeeTitleLabel.text = "Transaction.Details.gasFee".localized() + ":"
 
+        navigationItem.rightBarButtonItem = nil
         setupTxFeeTitle()
         Toast.showHUD()
         DispatchQueue.global().async {
