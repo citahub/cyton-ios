@@ -12,8 +12,9 @@ import AppChain
 extension AppChainNetwork {
     func getTransactionStatus(localTxDetail: LocalTxDetailModel) -> TransactionStateResult {
         do {
-            let currentBlockNumber = try AppChainNetwork.appChain().rpc.blockNumber()
-            if let receipt = try? AppChainNetwork.appChain().rpc.getTransactionReceipt(txhash: localTxDetail.txHash) {
+            let appChain = AppChainNetwork.appChain(url: URL(string: localTxDetail.token.chain.httpProvider)!)
+            let currentBlockNumber = try appChain.rpc.blockNumber()
+            if let receipt = try? appChain.rpc.getTransactionReceipt(txhash: localTxDetail.txHash) {
                 if let error = receipt.errorMessage {
                     print(error)
                     return .failure
