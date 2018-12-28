@@ -120,7 +120,6 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
                 DispatchQueue.main.async {
                     Toast.hideHUD()
                     self.walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
-                    SensorsAnalytics.Track.createWallet(address: self.walletModel.address)
                     self.saveWalletToRealm()
                 }
             } catch let error {
