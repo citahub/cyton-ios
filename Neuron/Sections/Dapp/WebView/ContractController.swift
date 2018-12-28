@@ -159,23 +159,11 @@ private extension ContractController {
     func transactionDidSend(txhash: TxHash?) {
         if let txhash = txhash {
             delegate?.callBackWebView(id: dappCommonModel.id, value: txhash.addHexPrefix(), error: nil)
-            track()
             bulletinManager.dismissBulletin()
             navigationController?.popViewController(animated: true)
         } else {
             delegate?.callBackWebView(id: dappCommonModel.id, value: "", error: DAppError.sendTransactionFailed)
         }
-    }
-
-    func track() {
-        SensorsAnalytics.Track.transaction(
-            chainType: token.chainId,
-            currencyType: token.symbol,
-            currencyNumber: paramBuilder.value.toDouble(token.decimals),
-            receiveAddress: dappCommonModel.appChain?.to ?? "",
-            outcomeAddress: AppModel.current.currentWallet!.address,
-            transactionType: .normal
-        )
     }
 
     private func createPasswordPageItem() -> PasswordPageItem {

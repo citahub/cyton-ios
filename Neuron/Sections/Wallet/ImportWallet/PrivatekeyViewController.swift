@@ -114,13 +114,11 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
                     Toast.hideHUD()
                     walletModel.address = EthereumAddress.toChecksumAddress(wallet.address)!
                     self.saveWalletToRealm(with: walletModel)
-                    SensorsAnalytics.Track.importWallet(type: .privateKey, address: walletModel.address)
                 }
             } catch let error {
                 DispatchQueue.main.async {
                     Toast.hideHUD()
                     Toast.showToast(text: error.localizedDescription)
-                    SensorsAnalytics.Track.importWallet(type: .privateKey, address: nil)
                 }
             }
         }
@@ -145,7 +143,6 @@ class PrivatekeyViewController: UITableViewController, QRCodeViewControllerDeleg
             }
             DefaultTokenAndChain().addDefaultTokenToWallet(wallet: walletModel)
             Toast.showToast(text: "Wallet.Import.success".localized())
-            SensorsAnalytics.Track.importWallet(type: .keystore, address: walletModel.address)
             navigationController?.popToRootViewController(animated: true)
         } catch {
             Toast.showToast(text: error.localizedDescription)

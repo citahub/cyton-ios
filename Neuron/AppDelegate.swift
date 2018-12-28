@@ -14,8 +14,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        hookSensorsDebugWarning()
-
         skipBackupFiles()
         RealmConfigurator.configure()
 
@@ -26,7 +24,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupKeyboard()
         GuideService.shared.register()
         AuthenticationService.shared.register()
-        SensorsAnalytics.configureSensors()
         TxStatusManager.manager.register()
         return true
     }
@@ -43,18 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).compactMap { URL(fileURLWithPath: $0) }
         paths.append(WalletManager.default.keystoreDir)
         SkipBackupFiles(paths: paths).skip()
-    }
-
-    private func hookSensorsDebugWarning() {
-        guard let cls = NSClassFromString("SensorsAnalyticsSDK") else { return }
-        let originalSelector = NSSelectorFromString("showDebugModeWarning:withNoMoreButton:")
-        let swizzledSelector = #selector(sensorsShowDebugModeWarning(message:showNoMore:))
-        guard let swizzledMethod = class_getInstanceMethod(self.classForCoder, swizzledSelector) else { return }
-        let swizzledMethodImp = method_getImplementation(swizzledMethod)
-        class_replaceMethod(cls, originalSelector, swizzledMethodImp, method_getTypeEncoding(swizzledMethod))
-    }
-
-    @objc func sensorsShowDebugModeWarning(message: String, showNoMore: Bool) {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -40,9 +40,6 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - secp256k1_swift (1.0.3)
-  - SensorsAnalyticsSDK (1.10.15):
-    - SensorsAnalyticsSDK/core (= 1.10.15)
-  - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.2.0)
   - SwiftRLP (1.2):
@@ -68,7 +65,6 @@ DEPENDENCIES:
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
   - SDWebImage
-  - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
   - web3swift (~> 2.0.1)
 
@@ -102,9 +98,6 @@ EXTERNAL SOURCES:
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
-  SensorsAnalyticsSDK:
-    :branch: v1.10.15
-    :git: https://github.com/sensorsdata/sa-sdk-ios
 
 CHECKOUT OPTIONS:
   AppChainSwift:
@@ -113,9 +106,6 @@ CHECKOUT OPTIONS:
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
-  SensorsAnalyticsSDK:
-    :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
-    :git: https://github.com/sensorsdata/sa-sdk-ios
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
@@ -135,13 +125,12 @@ SPEC CHECKSUMS:
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
-  SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
   SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: cbb58af54bb8975ca6c4d8ef6efd20b686b87a8f
+PODFILE CHECKSUM: e9873368f01cde7ebc847a764c0171b76e3ada09
 
 COCOAPODS: 1.5.3

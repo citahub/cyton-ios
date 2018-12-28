@@ -10,7 +10,6 @@ target 'Neuron' do
   pod 'RealmSwift'
 
   pod 'Alamofire'
-  pod 'SensorsAnalyticsSDK', git: "https://github.com/sensorsdata/sa-sdk-ios", branch: "v1.10.15"
   pod 'SDWebImage'
   pod 'IQKeyboardManagerSwift'
   pod 'EFQRCode'
