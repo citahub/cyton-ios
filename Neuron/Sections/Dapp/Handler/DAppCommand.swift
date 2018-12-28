@@ -71,12 +71,26 @@ struct AppChainObject: Decodable {
         to = try! values.decode(String.self, forKey: .to)
         version = try! values.decode(Int.self, forKey: .version)
         validUntilBlock = try! values.decode(UInt64.self, forKey: .validUntilBlock)
-        nonce = try? values.decode(String.self, forKey: .nonce)
+        if let nonce = try? values.decode(String.self, forKey: .nonce) {
+            self.nonce = nonce
+        } else if let nonce = try? values.decode(UInt64.self, forKey: .nonce) {
+            self.nonce = String(nonce)
+        } else {
+            self.nonce = nil
+        }
         if let quota = try? values.decode(String.self, forKey: .quota) {
             self.quota = quota
+        } else if let quota = try? values.decode(UInt64.self, forKey: .quota) {
+            self.quota = String(quota)
+        } else {
+            self.quota = nil
         }
         if let value = try? values.decode(String.self, forKey: .value) {
             self.value = value
+        } else if let value = try? values.decode(UInt64.self, forKey: .value) {
+            self.value = String(value)
+        } else {
+            self.value = nil
         }
     }
 
