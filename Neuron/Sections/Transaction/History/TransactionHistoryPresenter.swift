@@ -19,7 +19,7 @@ class TransactionHistoryPresenter: NSObject {
     typealias CallbackBlock = ([Int], Error?) -> Void
     weak var delegate: TransactionHistoryPresenterDelegate?
     private var hasMoreData = true
-    private var sentTransactions = [TransactionDetails]()
+    private var localTxs = [TransactionDetails]()
 
     init(token: Token) {
         self.token = token
@@ -45,12 +45,12 @@ class TransactionHistoryPresenter: NSObject {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.sentTransactions = TxStatusManager.manager.getTransactions(token: self.token)
+                    self.localTxs = TxStatusManager.manager.getTransactions(token: self.token)
                 }
                 self.page += 1
 
                 // merge
-                list = self.mergeSentTransactions(from: list)
+                list = self.mergeLocalTxs(from: list)
                 list.forEach({$0.token = self.token})
 
                 var insertions = [Int]()
@@ -73,7 +73,7 @@ class TransactionHistoryPresenter: NSObject {
     }
 
     // MARK: - Merge
-    private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
+    private func mergeLocalTxs(from list: [TransactionDetails]) -> [TransactionDetails] {
         var newList = [TransactionDetails]()
         list.forEach { (trans) in
             if !newList.contains(where: { $0.hash == trans.hash }) {
@@ -89,7 +89,7 @@ class TransactionHistoryPresenter: NSObject {
         } else {
             minDate = Date.distantPast
         }
-        let sentTransactions = self.sentTransactions
+        let sentTransactions = self.localTxs
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
             // merge status
             if sentTransaction.status == .pending {
@@ -97,12 +97,12 @@ class TransactionHistoryPresenter: NSObject {
                 return true
             }
             if let transaction = newList.first(where: { $0.hash == sentTransaction.hash }) {
-                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
+                self.localTxs.removeAll(where: { $0.hash == sentTransaction.hash })
                 transaction.status = sentTransaction.status
                 return false
             }
             if sentTransaction.date < maxDate && sentTransaction.date > minDate {
-                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
+                self.localTxs.removeAll(where: { $0.hash == sentTransaction.hash })
                 return true
             } else {
                 return false
