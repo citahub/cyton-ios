@@ -82,7 +82,9 @@ extension WalletPresenter {
             switch change {
             case .change(let propertys):
                 guard propertys.contains(where: { $0.name == "currentWallet" }) else { return }
-                self?.refresh()
+                DispatchQueue.main.async {
+                    self?.refresh()
+                }
             default:
                 break
             }
