@@ -11,7 +11,7 @@ import Web3swift
 import RealmSwift
 
 class EthereumNetwork {
-    func getWeb3() -> web3 {
+    func getWeb3(networkType: EthereumNetworkType = EthereumNetwork().networkType) -> web3 {
         switch networkType {
         case .mainnet:
             return Web3.InfuraMainnetWeb3()

@@ -25,6 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GuideService.shared.register()
         AuthenticationService.shared.register()
         TxStatusManager.manager.register()
+        EthereumLocalTxPool.pool.configure()
         return true
     }
 
