@@ -37,13 +37,6 @@ extension EthereumNetwork {
                     ethereumTransaction.gasPrice = transactionDetails.transaction.gasPrice
                     ethereumTransaction.gasUsed = receipt.gasUsed
                     ethereumTransaction.cumulativeGasUsed = receipt.cumulativeGasUsed
-                } else if let erc20Transaction = details as? Erc20TransactionDetails {
-                    erc20Transaction.nonce = transactionDetails.transaction.nonce
-                    erc20Transaction.blockHash = "0x" + String(BigUInt(receipt.blockHash), radix: 16)
-                    erc20Transaction.transactionIndex = receipt.transactionIndex
-                    erc20Transaction.gasPrice = transactionDetails.transaction.gasPrice
-                    erc20Transaction.gasUsed = receipt.gasUsed
-                    erc20Transaction.cumulativeGasUsed = receipt.cumulativeGasUsed
                 }
                 details.status = .success
                 return .success(transaction: details)

@@ -90,15 +90,11 @@ class LocalTxDetailModel: Object {
 
     func getTransactionDetails() -> TransactionDetails {
         let transaction: TransactionDetails
-        if token.type == .ether {
+        if token.type == .ether || token.type == .erc20 {
             let ethereum = EthereumTransactionDetails()
             ethereum.gasUsed = BigUInt(gasLimit) ?? 0
+            ethereum.contractAddress = contractAddress
             transaction = ethereum
-        } else if token.type == .erc20 {
-            let erc20 = Erc20TransactionDetails()
-            erc20.contractAddress = contractAddress
-            erc20.gasUsed = BigUInt(gasLimit) ?? 0
-            transaction = erc20
         } else if token.type == .appChain {
             let appChain = AppChainTransactionDetails()
             appChain.quotaUsed = BigUInt(gasLimit) ?? 0
