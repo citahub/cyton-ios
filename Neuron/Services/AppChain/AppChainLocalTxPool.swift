@@ -52,13 +52,13 @@ class AppChainLocalTx: Object {
     }
 }
 
-class AppChainLocalTxPool {
+class AppChainLocalTxPool: NSObject {
     static let didUpdateTxStatus = Notification.Name("AppChainLocalTxPool.didUpdateTxStatus")
     static let didAddLocalTx = Notification.Name("AppChainLocalTxPool.didAddLocalTx")
     static let txKey = "tx"
     static let pool = AppChainLocalTxPool()
 
-    func configure() {}
+    func register() {}
 
     func insertLocalTx(localTx: AppChainLocalTx) {
         do {
@@ -71,7 +71,7 @@ class AppChainLocalTxPool {
         }
     }
 
-    func getLocalTx(token: Token) -> [AppChainTransactionDetails] {
+    func getTransactions(token: Token) -> [AppChainTransactionDetails] {
         return (try! Realm()).objects(AppChainLocalTx.self).filter({
             $0.from == token.walletAddress &&
             $0.token.address == token.address
@@ -81,9 +81,10 @@ class AppChainLocalTxPool {
     // MARK: - Private
     private var observers = [NotificationToken]()
 
-    private init() {
+    private override init() {
+        super.init()
         DispatchQueue.global().async {
-            self.checkLocalTxStatus()
+            self.checkLocalTxList()
         }
         let realm = try! Realm()
         observers.append(realm.objects(AppChainLocalTx.self).observe { (change) in
@@ -91,7 +92,7 @@ class AppChainLocalTxPool {
             case .update(_, deletions: _, let insertions, modifications: _):
                 guard insertions.count > 0 else { return }
                 DispatchQueue.global().async {
-                    self.checkLocalTxStatus()
+                    self.checkLocalTxList()
                 }
             default:
                 break
@@ -100,8 +101,10 @@ class AppChainLocalTxPool {
     }
 
     private var checking = false
+    private let timeInterval: TimeInterval = 4.0
 
-    private func checkLocalTxStatus() {
+    @objc private func checkLocalTxList() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkLocalTxList), object: nil)
         guard checking == false else { return }
         let realm = try! Realm()
         let results = realm.objects(AppChainLocalTx.self).filter({ $0.status == .pending })
@@ -112,7 +115,8 @@ class AppChainLocalTxPool {
             self.checkLocalTxStatus(localTx: localTx)
         }
         checking = false
-        checkLocalTxStatus()
+        checkLocalTxList()
+        perform(#selector(checkLocalTxList), with: nil, afterDelay: timeInterval)
     }
 
     private func checkLocalTxStatus(localTx: AppChainLocalTx) {

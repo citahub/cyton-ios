@@ -52,13 +52,13 @@ class EthereumLocalTx: Object {
     }
 }
 
-class EthereumLocalTxPool {
+class EthereumLocalTxPool: NSObject {
     static let didUpdateTxStatus = Notification.Name("EthereumLocalTxPool.didUpdateTxStatus")
     static let didAddLocalTx = Notification.Name("EthereumLocalTxPool.didAddLocalTx")
     static let txKey = "tx"
     static let pool = EthereumLocalTxPool()
 
-    func configure() {}
+    func register() {}
 
     func insertLocalTx(localTx: EthereumLocalTx) {
         do {
@@ -74,7 +74,7 @@ class EthereumLocalTxPool {
         }
     }
 
-    func getLocalTx(token: Token) -> [EthereumTransactionDetails] {
+    func getTransactions(token: Token) -> [EthereumTransactionDetails] {
         let ethereumNetwork = EthereumNetwork().networkType
         return (try! Realm()).objects(EthereumLocalTx.self).filter({
             $0.from == token.walletAddress &&
@@ -86,9 +86,10 @@ class EthereumLocalTxPool {
     // MARK: - Private
     private var observers = [NotificationToken]()
 
-    private init() {
+    private override init() {
+        super.init()
         DispatchQueue.global().async {
-            self.checkLocalTxStatus()
+            self.checkLocalTxList()
         }
         let realm = try! Realm()
         observers.append(realm.objects(EthereumLocalTx.self).observe { (change) in
@@ -96,7 +97,7 @@ class EthereumLocalTxPool {
             case .update(_, deletions: _, let insertions, modifications: _):
                 guard insertions.count > 0 else { return }
                 DispatchQueue.global().async {
-                    self.checkLocalTxStatus()
+                    self.checkLocalTxList()
                 }
             default:
                 break
@@ -105,8 +106,10 @@ class EthereumLocalTxPool {
     }
 
     private var checking = false
+    private let timeInterval: TimeInterval = 4.0
 
-    private func checkLocalTxStatus() {
+    @objc private func checkLocalTxList() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkLocalTxList), object: nil)
         guard checking == false else { return }
         let realm = try! Realm()
         let results = realm.objects(EthereumLocalTx.self).filter({ $0.status == .pending })
@@ -117,7 +120,8 @@ class EthereumLocalTxPool {
             self.checkLocalTxStatus(localTx: localTx)
         }
         checking = false
-        checkLocalTxStatus()
+        checkLocalTxList()
+        perform(#selector(checkLocalTxList), with: nil, afterDelay: timeInterval)
     }
 
     private func checkLocalTxStatus(localTx: EthereumLocalTx) {
