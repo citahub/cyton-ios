@@ -297,6 +297,7 @@
                         <viewLayoutGuide key="safeArea" id="uM6-p6-idB"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="wl5-bw-4Bq" id="ARZ-ps-kdP"/>
                         <outlet property="confirmButton" destination="JbQ-9u-bch" id="jaT-wy-3pl"/>
                         <outlet property="iconView" destination="4hO-rb-Z1f" id="NbV-mf-DkE"/>
                         <outlet property="messageLabel" destination="BdS-6y-1c1" id="ddn-eC-tE1"/>

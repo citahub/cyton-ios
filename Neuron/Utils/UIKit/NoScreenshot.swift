@@ -17,7 +17,7 @@ extension NoScreenshot where Self: UIViewController {
         guard objc_getAssociatedObject(self, &NoScreenshotOnceTokenAssiciationKey) == nil else { return }
         objc_setAssociatedObject(self, &NoScreenshotOnceTokenAssiciationKey, 2233, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         let alert = UIAlertController(title: titile, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "确定", style: .destructive, handler: nil))
+        alert.addAction(UIAlertAction(title: "Common.confirm".localized(), style: .destructive, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 }

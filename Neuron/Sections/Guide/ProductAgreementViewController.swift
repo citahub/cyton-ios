@@ -40,7 +40,6 @@ class ProductAgreementViewController: UIViewController {
         super.viewDidLoad()
         setupTextView()
         isAgree = false
-
         titleLabel.text = "Guide.neuronServiceAgreement".localized()
         confirmButton.setTitle("Guide.continue".localized(), for: .normal)
         checkButton.setTitle("Guide.agreementOfConsent".localized(), for: .normal)

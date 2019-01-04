@@ -21,7 +21,7 @@ class CreateWalletController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Wallet.Create.walletName".localized()
+        title = "Wallet.Create.createWallet".localized()
         passwordWarningLabel.text = "Wallet.Create.passwordWarning".localized()
         nameTextField.placeholder = "Wallet.Create.walletName".localized()
         passwordTextField.placeholder = "Wallet.Create.setPassword".localized()

@@ -21,6 +21,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet private weak var walletQRCodeButton: UIButton!
     @IBOutlet private weak var transactionButton: UIButton!
     @IBOutlet private weak var testTokenWarnLabel: UILabel!
+    @IBOutlet private weak var detailsTitleLabel: UILabel!
 
     private var presenter: TransactionHistoryPresenter?
     var token: Token!
@@ -31,6 +32,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         walletQRCodeButton.setTitle("Wallet.receipt".localized(), for: .normal)
         transactionButton.setTitle("Wallet.transaction".localized(), for: .normal)
         testTokenWarnLabel.text = "Transaction.History.testTokenWarning".localized()
+        detailsTitleLabel.text = "Transaction.History.details".localized()
 
         tableView.delegate = self
         tableView.dataSource = self
