@@ -11,7 +11,7 @@ import Web3swift
 import RealmSwift
 
 class EthereumNetwork {
-    func getWeb3(networkType: EthereumNetworkType = EthereumNetwork().networkType) -> web3 {
+    func getWeb3(networkType: NetworkType = EthereumNetwork().networkType) -> web3 {
         switch networkType {
         case .mainnet:
             return Web3.InfuraMainnetWeb3()
@@ -51,7 +51,7 @@ class EthereumNetwork {
         }
     }
 
-    enum EthereumNetworkType: String, CaseIterable {
+    enum NetworkType: String, CaseIterable {
         case mainnet
         case rinkeby
         case ropsten
@@ -73,10 +73,10 @@ class EthereumNetwork {
 
     private let currentNetworkKey = "ethereumNetwork"
 
-    var networkType: EthereumNetworkType {
+    var networkType: NetworkType {
         get {
             let network = UserDefaults.standard.string(forKey: currentNetworkKey) ?? ""
-            return EthereumNetworkType(rawValue: network) ?? .mainnet
+            return NetworkType(rawValue: network) ?? .mainnet
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: currentNetworkKey)

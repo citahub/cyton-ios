@@ -23,8 +23,8 @@ class EthereumLocalTx: Object {
     @objc dynamic var date = Date()
     @objc dynamic private var statusValue: Int = TxStatus.pending.rawValue
     @objc dynamic private var ethereumNetworkValue: String = EthereumNetwork().networkType.rawValue
-    var ethereumNetwork: EthereumNetwork.EthereumNetworkType! {
-        get { return EthereumNetwork.EthereumNetworkType(rawValue: ethereumNetworkValue)! }
+    var ethereumNetwork: EthereumNetwork.NetworkType {
+        get { return EthereumNetwork.NetworkType(rawValue: ethereumNetworkValue)! }
         set { ethereumNetworkValue = newValue.rawValue }
     }
     var status: TxStatus {
