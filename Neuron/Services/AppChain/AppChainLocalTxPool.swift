@@ -66,7 +66,10 @@ class AppChainLocalTxPool: NSObject {
             try realm.write {
                 realm.add(localTx)
             }
-            NotificationCenter.default.post(name: AppChainLocalTxPool.didAddLocalTx, object: nil, userInfo: [AppChainLocalTxPool.txKey: localTx.getTx()])
+            let tx = localTx.getTx()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: AppChainLocalTxPool.didAddLocalTx, object: nil, userInfo: [AppChainLocalTxPool.txKey: tx])
+            }
         } catch {
         }
     }
