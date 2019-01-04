@@ -17,14 +17,18 @@ class EthereumTransactionDetails: TransactionDetails {
     var blockHash: String = ""
     var transactionIndex: BigUInt = 0
     var gas: BigUInt = 0
+    var gasUsed: BigUInt = 0
     var input: String = ""
     var contractAddress: String = ""
     var cumulativeGasUsed: BigUInt = 0
-    var gasUsed: BigUInt = 0
     var confirmations: UInt = 0
 
     var isError = false
     var txreceipt_status: Int = 0
+
+    var tokenName: String = ""
+    var tokenSymbol: String = ""
+    var tokenDecimal: String = ""
 
     enum EthereumCodingKeys: String, CodingKey {
         case timeStamp
@@ -41,6 +45,10 @@ class EthereumTransactionDetails: TransactionDetails {
 
         case isError
         case txreceipt_status
+
+        case tokenName
+        case tokenSymbol
+        case tokenDecimal
     }
 
     override init() {
@@ -84,83 +92,6 @@ class EthereumTransactionDetails: TransactionDetails {
         if let value = try? values.decode(String.self, forKey: .txreceipt_status) {
             txreceipt_status = Int(value) ?? 0
         }
-    }
-}
-
-private struct EthereumTransactionsResponse: Decodable {
-    let status: String
-    let message: String
-    let result: [EthereumTransactionDetails]
-}
-
-// MARK: - Erc20 transaction details
-class Erc20TransactionDetails: TransactionDetails {
-    var nonce: BigUInt = 0
-    var blockHash: String = ""
-    var contractAddress: String = ""
-    var tokenName: String = ""
-    var tokenSymbol: String = ""
-    var tokenDecimal: String = ""
-    var transactionIndex: BigUInt = 0
-    var gas: BigUInt = 0
-    var gasUsed: BigUInt = 0
-    var cumulativeGasUsed: BigUInt = 0
-    var input: String = ""
-    var confirmations: UInt = 0
-
-    enum Erc20CodingKeys: String, CodingKey {
-        case timeStamp
-        case nonce
-        case blockHash
-        case contractAddress
-        case transactionIndex
-        case gas
-        case gasPrice
-        case gasUsed
-        case cumulativeGasUsed
-        case input
-        case confirmations
-
-        case tokenName
-        case tokenSymbol
-        case tokenDecimal
-    }
-
-    override init() {
-        super.init()
-    }
-
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        let values = try decoder.container(keyedBy: Erc20CodingKeys.self)
-
-        if let value = try? values.decode(String.self, forKey: .timeStamp) {
-            date = Date(timeIntervalSince1970: TimeInterval(value) ?? 0.0)
-        }
-        if let value = try? values.decode(String.self, forKey: .nonce) {
-            nonce = BigUInt(string: value) ?? 0
-        }
-        blockHash = (try? values.decode(String.self, forKey: .blockHash)) ?? ""
-        contractAddress = (try? values.decode(String.self, forKey: .contractAddress)) ?? ""
-        if let value = try? values.decode(String.self, forKey: .transactionIndex) {
-            transactionIndex = BigUInt(string: value) ?? 0
-        }
-        if let value = try? values.decode(String.self, forKey: .gas) {
-            gas = BigUInt(string: value) ?? 0
-        }
-        if let value = try? values.decode(String.self, forKey: .gasPrice) {
-            gasPrice = BigUInt(string: value) ?? 0
-        }
-        if let value = try? values.decode(String.self, forKey: .gasUsed) {
-            gasUsed = BigUInt(string: value) ?? 0
-        }
-        if let value = try? values.decode(String.self, forKey: .cumulativeGasUsed) {
-            cumulativeGasUsed = BigUInt(string: value) ?? 0
-        }
-        input = (try? values.decode(String.self, forKey: .input)) ?? ""
-        if let value = try? values.decode(String.self, forKey: .confirmations) {
-            confirmations = UInt(value) ?? 0
-        }
 
         tokenName = (try? values.decode(String.self, forKey: .tokenName)) ?? ""
         tokenSymbol = (try? values.decode(String.self, forKey: .tokenSymbol)) ?? ""
@@ -168,10 +99,10 @@ class Erc20TransactionDetails: TransactionDetails {
     }
 }
 
-private struct Erc20TransactionsResponse: Decodable {
+private struct EthereumTransactionsResponse: Decodable {
     let status: String
     let message: String
-    let result: [Erc20TransactionDetails]
+    let result: [EthereumTransactionDetails]
 }
 
 // MARK: - Get transaction details
@@ -201,7 +132,7 @@ extension EthereumNetwork {
         }.wait()
     }
 
-    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [Erc20TransactionDetails] {
+    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [EthereumTransactionDetails] {
         let url = EthereumNetwork().apiHost().appendingPathComponent("/api")
         let parameters: [String: Any] = [
             "apikey": ServerApi.etherScanKey,
@@ -213,11 +144,11 @@ extension EthereumNetwork {
             "page": page,
             "offset": pageSize
         ]
-        return try Promise<[Erc20TransactionDetails]>.init { (resolver) in
+        return try Promise<[EthereumTransactionDetails]>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(Erc20TransactionsResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(EthereumTransactionsResponse.self, from: responseData)
                     let transactions = response.result
                     resolver.fulfill(transactions)
                 } catch {

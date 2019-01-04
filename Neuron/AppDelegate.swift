@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupKeyboard()
         GuideService.shared.register()
         AuthenticationService.shared.register()
-        TxStatusManager.manager.register()
+        EthereumLocalTxPool.pool.register()
+        AppChainLocalTxPool.pool.register()
         return true
     }
 

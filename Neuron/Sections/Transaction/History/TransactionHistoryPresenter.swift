@@ -19,12 +19,13 @@ class TransactionHistoryPresenter: NSObject {
     typealias CallbackBlock = ([Int], Error?) -> Void
     weak var delegate: TransactionHistoryPresenterDelegate?
     private var hasMoreData = true
-    private var sentTransactions = [TransactionDetails]()
+    private var localTxs = [TransactionDetails]()
 
     init(token: Token) {
         self.token = token
         super.init()
-        observeTxStatus()
+        observeEthereumTxStatus()
+        observeAppChainTxStatus()
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
@@ -45,12 +46,13 @@ class TransactionHistoryPresenter: NSObject {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.sentTransactions = TxStatusManager.manager.getTransactions(token: self.token)
+                    self.localTxs = AppChainLocalTxPool.pool.getTransactions(token: self.token)
+                    self.localTxs.append(contentsOf: EthereumLocalTxPool.pool.getTransactions(token: self.token))
                 }
                 self.page += 1
 
                 // merge
-                list = self.mergeSentTransactions(from: list)
+                list = self.mergeLocalTxs(from: list)
                 list.forEach({$0.token = self.token})
 
                 var insertions = [Int]()
@@ -73,7 +75,7 @@ class TransactionHistoryPresenter: NSObject {
     }
 
     // MARK: - Merge
-    private func mergeSentTransactions(from list: [TransactionDetails]) -> [TransactionDetails] {
+    private func mergeLocalTxs(from list: [TransactionDetails]) -> [TransactionDetails] {
         var newList = [TransactionDetails]()
         list.forEach { (trans) in
             if !newList.contains(where: { $0.hash == trans.hash }) {
@@ -89,7 +91,7 @@ class TransactionHistoryPresenter: NSObject {
         } else {
             minDate = Date.distantPast
         }
-        let sentTransactions = self.sentTransactions
+        let sentTransactions = self.localTxs
         let sentList = sentTransactions.filter({ (sentTransaction) -> Bool in
             // merge status
             if sentTransaction.status == .pending {
@@ -97,12 +99,12 @@ class TransactionHistoryPresenter: NSObject {
                 return true
             }
             if let transaction = newList.first(where: { $0.hash == sentTransaction.hash }) {
-                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
+                self.localTxs.removeAll(where: { $0.hash == sentTransaction.hash })
                 transaction.status = sentTransaction.status
                 return false
             }
             if sentTransaction.date < maxDate && sentTransaction.date > minDate {
-                self.sentTransactions.removeAll(where: { $0.hash == sentTransaction.hash })
+                self.localTxs.removeAll(where: { $0.hash == sentTransaction.hash })
                 return true
             } else {
                 return false
@@ -135,20 +137,43 @@ class TransactionHistoryPresenter: NSObject {
 }
 
 extension TransactionHistoryPresenter {
-    private func observeTxStatus() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didAddLocationTxDetails(notification:)), name: TxStatusManager.didAddLocationTxDetails, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateTxStatus(notification:)), name: TxStatusManager.didUpdateTxStatus, object: nil)
+    private func observeEthereumTxStatus() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateEthereumTxStatus(notification:)), name: EthereumLocalTxPool.didUpdateTxStatus, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didAddEthereumLocalTxAction(notification:)), name: EthereumLocalTxPool.didAddLocalTx, object: nil)
     }
 
-    @objc func didAddLocationTxDetails(notification: Notification) {
-        guard let transaction = notification.userInfo![TxStatusManager.transactionKey] as? TransactionDetails else { return }
+    @objc func didAddEthereumLocalTxAction(notification: Notification) {
+        guard let transaction = notification.userInfo![EthereumLocalTxPool.txKey] as? EthereumTransactionDetails else { return }
         guard transaction.token == token else { return }
         transactions.insert(transaction, at: 0)
         delegate?.didLoadTransactions(transaction: transactions, insertions: [0], error: nil)
     }
 
-    @objc func didUpdateTxStatus(notification: Notification) {
-        guard let transaction = notification.userInfo![TxStatusManager.transactionKey] as? TransactionDetails else { return }
+    @objc func didUpdateEthereumTxStatus(notification: Notification) {
+        guard let transaction = notification.userInfo![EthereumLocalTxPool.txKey] as? EthereumTransactionDetails else { return }
+        guard transaction.token == token else { return }
+        guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }
+        transactions.remove(at: idx)
+        transactions.insert(transaction, at: idx)
+        delegate?.updateTransactions(transaction: transactions, updates: [idx], error: nil)
+    }
+}
+
+extension TransactionHistoryPresenter {
+    private func observeAppChainTxStatus() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateAppChainTxStatus(notification:)), name: AppChainLocalTxPool.didUpdateTxStatus, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didAddAppChainLocalTxAction(notification:)), name: AppChainLocalTxPool.didAddLocalTx, object: nil)
+    }
+
+    @objc func didAddAppChainLocalTxAction(notification: Notification) {
+        guard let transaction = notification.userInfo![AppChainLocalTxPool.txKey] as? AppChainTransactionDetails else { return }
+        guard transaction.token == token else { return }
+        transactions.insert(transaction, at: 0)
+        delegate?.didLoadTransactions(transaction: transactions, insertions: [0], error: nil)
+    }
+
+    @objc func didUpdateAppChainTxStatus(notification: Notification) {
+        guard let transaction = notification.userInfo![AppChainLocalTxPool.txKey] as? AppChainTransactionDetails else { return }
         guard transaction.token == token else { return }
         guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }
         transactions.remove(at: idx)

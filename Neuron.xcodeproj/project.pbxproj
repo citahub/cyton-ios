@@ -41,12 +41,8 @@
 		1AEBF3E6219BA22600653FF5 /* BigUIntExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AEBF3E5219BA22600653FF5 /* BigUIntExtensionTests.swift */; };
 		1AEF127C21A677B600202373 /* AboutUs.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AEF127B21A677B600202373 /* AboutUs.storyboard */; };
 		3B9D2E9C9E858D6634948E6D /* Pods_Neuron.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CC6FD685582D038A3767657 /* Pods_Neuron.framework */; };
-		6E3B2B6B219D938F0095257D /* LocalTxDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B6A219D938F0095257D /* LocalTxDetailModel.swift */; };
 		6E3B2B6D219ED9240095257D /* Ethereum+TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B6C219ED9230095257D /* Ethereum+TransactionDetails.swift */; };
-		6E3B2B6F219ED9340095257D /* Ethereum+TransactionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B6E219ED9340095257D /* Ethereum+TransactionStatus.swift */; };
 		6E3B2B71219EDA230095257D /* AppChain+TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */; };
-		6E3B2B73219EDB870095257D /* AppChain+TransactionStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */; };
-		6E3B2B75219EDE200095257D /* TxStatusManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3B2B74219EDE200095257D /* TxStatusManager.swift */; };
 		6E7D3838219C173D0031177B /* TransactionDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7D3837219C173D0031177B /* TransactionDetails.swift */; };
 		6E83CB8D216F573100029324 /* ProductAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB88216F573100029324 /* ProductAgreementViewController.swift */; };
 		6E83CB8E216F573100029324 /* GuideService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E83CB89216F573100029324 /* GuideService.swift */; };
@@ -96,6 +92,8 @@
 		6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */; };
 		6EABFB122199520F00305ED5 /* DAppTakePhotoMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */; };
 		6EABFB1421995AB800305ED5 /* DAppGyroscopeMessageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */; };
+		6EB4E84121D62B3A00B93FAB /* EthereumLocalTxPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB4E84021D62B3900B93FAB /* EthereumLocalTxPool.swift */; };
+		6EDBE3A121DE02EA0087DA38 /* AppChainLocalTxPool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EDBE3A021DE02EA0087DA38 /* AppChainLocalTxPool.swift */; };
 		6EE37EA121C782FE00F62F2C /* WalletIconPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EE37EA021C782FE00F62F2C /* WalletIconPickerViewController.swift */; };
 		6EEDED6821CB3C8200FC3BCE /* guide_page_2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEDED6521CB3C8200FC3BCE /* guide_page_2@2x.png */; };
 		6EEDED7B21CB3D1700FC3BCE /* guide_page_2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EEDED7821CB3D1700FC3BCE /* guide_page_2@3x.png */; };
@@ -265,12 +263,8 @@
 		1D270F090888C6AD9CF6A055 /* Pods-Neuron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.release.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.release.xcconfig"; sourceTree = "<group>"; };
 		21C5F1D714208410CA8D77B9 /* Pods-Neuron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Neuron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Neuron/Pods-Neuron.debug.xcconfig"; sourceTree = "<group>"; };
 		3502E1744CFA926363F980D0 /* Pods_NeuronUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NeuronUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E3B2B6A219D938F0095257D /* LocalTxDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalTxDetailModel.swift; sourceTree = "<group>"; };
 		6E3B2B6C219ED9230095257D /* Ethereum+TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ethereum+TransactionDetails.swift"; sourceTree = "<group>"; };
-		6E3B2B6E219ED9340095257D /* Ethereum+TransactionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ethereum+TransactionStatus.swift"; sourceTree = "<group>"; };
 		6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppChain+TransactionDetails.swift"; sourceTree = "<group>"; };
-		6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppChain+TransactionStatus.swift"; sourceTree = "<group>"; };
-		6E3B2B74219EDE200095257D /* TxStatusManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TxStatusManager.swift; sourceTree = "<group>"; };
 		6E7D3837219C173D0031177B /* TransactionDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetails.swift; sourceTree = "<group>"; };
 		6E83CB88216F573100029324 /* ProductAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductAgreementViewController.swift; sourceTree = "<group>"; };
 		6E83CB89216F573100029324 /* GuideService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideService.swift; sourceTree = "<group>"; };
@@ -320,6 +314,8 @@
 		6EABFB0F219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppDeviceMotionMessageHandler.swift; sourceTree = "<group>"; };
 		6EABFB112199520F00305ED5 /* DAppTakePhotoMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppTakePhotoMessageHandler.swift; sourceTree = "<group>"; };
 		6EABFB1321995AB800305ED5 /* DAppGyroscopeMessageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DAppGyroscopeMessageHandler.swift; sourceTree = "<group>"; };
+		6EB4E84021D62B3900B93FAB /* EthereumLocalTxPool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthereumLocalTxPool.swift; sourceTree = "<group>"; };
+		6EDBE3A021DE02EA0087DA38 /* AppChainLocalTxPool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppChainLocalTxPool.swift; sourceTree = "<group>"; };
 		6EE37EA021C782FE00F62F2C /* WalletIconPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletIconPickerViewController.swift; sourceTree = "<group>"; };
 		6EEDED4F21CB3B3B00FC3BCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/guide_page_1@3x.png"; sourceTree = "<group>"; };
 		6EEDED5021CB3B3B00FC3BCE /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "zh-Hans"; path = "zh-Hans.lproj/guide_page_1@2x.png"; sourceTree = "<group>"; };
@@ -557,8 +553,8 @@
 				1A19C2DD21B12DE800C289D0 /* EthereumMessageSigner.swift */,
 				89D84CE021475755006B0287 /* NFTService.swift */,
 				6E3B2B6C219ED9230095257D /* Ethereum+TransactionDetails.swift */,
-				6E3B2B6E219ED9340095257D /* Ethereum+TransactionStatus.swift */,
 				6EEDEDA621CB4CF100FC3BCE /* EthereumTokenProfileLoader.swift */,
+				6EB4E84021D62B3900B93FAB /* EthereumLocalTxPool.swift */,
 			);
 			path = Ethereum;
 			sourceTree = "<group>";
@@ -570,9 +566,9 @@
 				1A69465D21916C3D000093A2 /* AppChainTxSender.swift */,
 				89880A2221C269F100A34A0B /* AppChainBalanceLoader.swift */,
 				6E3B2B70219EDA230095257D /* AppChain+TransactionDetails.swift */,
-				6E3B2B72219EDB870095257D /* AppChain+TransactionStatus.swift */,
 				892E5B1721B61F0000298845 /* AppChain+ERC20.swift */,
 				896B32BA21BF865900C4DA7F /* AppChain+AddToken.swift */,
+				6EDBE3A021DE02EA0087DA38 /* AppChainLocalTxPool.swift */,
 			);
 			path = AppChain;
 			sourceTree = "<group>";
@@ -628,7 +624,6 @@
 				8913437020C78F1000A17AEF /* WalletModel.swift */,
 				898CA98220EA0F210059ECA3 /* TokenModel.swift */,
 				89BD0EC921B77FA2002D10BD /* ChainModel.swift */,
-				6E3B2B6A219D938F0095257D /* LocalTxDetailModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -1105,7 +1100,6 @@
 			isa = PBXGroup;
 			children = (
 				89C6145D2141038300DC3DF4 /* LocalCurrencyService.swift */,
-				6E3B2B74219EDE200095257D /* TxStatusManager.swift */,
 				6E8BFC3621B00948004752CC /* TokenPriceLoader.swift */,
 				89FE21DD20EDB70000A09302 /* SendTransactionError.swift */,
 				896CEA9921B91E4500B1A7D4 /* DefaultTokenAndChain.swift */,
@@ -1473,13 +1467,13 @@
 				892E5B1821B61F0100298845 /* AppChain+ERC20.swift in Sources */,
 				6E9B947B21A4080300D67357 /* DesignableButton.swift in Sources */,
 				89A87C892173097000588674 /* WalletNameValidator.swift in Sources */,
-				6E3B2B6B219D938F0095257D /* LocalTxDetailModel.swift in Sources */,
 				1A5515E521898A1000D34791 /* WalletKeystoreManager.swift in Sources */,
 				6EABFB10219933EB00305ED5 /* DAppDeviceMotionMessageHandler.swift in Sources */,
 				6EF8F40C2175CAD9004B7587 /* UIControl+Extension.swift in Sources */,
 				898CA98320EA0F210059ECA3 /* TokenModel.swift in Sources */,
 				6E8D77F021A5264F00EA7674 /* WalletQRCodeViewController.swift in Sources */,
 				8989E2D32188440D008A1BDE /* SwitchNetworkTableViewCell.swift in Sources */,
+				6EDBE3A121DE02EA0087DA38 /* AppChainLocalTxPool.swift in Sources */,
 				898A1A1720B6BE6E00ECB465 /* ChangePasswordController.swift in Sources */,
 				6EEDEDA721CB4CF100FC3BCE /* EthereumTokenProfileLoader.swift in Sources */,
 				6EABFB0D21991CB300305ED5 /* DAppNativeMessageHandler.swift in Sources */,
@@ -1536,7 +1530,6 @@
 				6E8A838721B62E0A0051B3EB /* TransactonSender.swift in Sources */,
 				89D84CE92147D926006B0287 /* NFTDetailViewController.swift in Sources */,
 				898A1A0320B5717A00ECB465 /* ManageAssetViewController.swift in Sources */,
-				6E3B2B73219EDB870095257D /* AppChain+TransactionStatus.swift in Sources */,
 				1A60B6FC2186DB1C00FEFB3A /* Web3Utils.swift in Sources */,
 				6EF8F4102176029E004B7587 /* OpenAuthViewController.swift in Sources */,
 				6E9B948121A408B400D67357 /* Token.swift in Sources */,
@@ -1555,7 +1548,6 @@
 				898A1A0720B5797700ECB465 /* AssetTableViewCell.swift in Sources */,
 				89C25C6D20BD421E00007EC1 /* ContractController.swift in Sources */,
 				6E8A838B21B8C4780051B3EB /* TransactionDetailsViewController.swift in Sources */,
-				6E3B2B6F219ED9340095257D /* Ethereum+TransactionStatus.swift in Sources */,
 				8935BA5F216F631A00C37263 /* ScriptMessageProxy.swift in Sources */,
 				6E8BFC3721B00948004752CC /* TokenPriceLoader.swift in Sources */,
 				6E85C12A21C7542900670F8B /* CreateWalletGuideViewController.swift in Sources */,
@@ -1569,6 +1561,7 @@
 				89422FE621A7F92300DD8744 /* DAppModel.swift in Sources */,
 				8928C24920AE91E600C3103E /* DappViewController.swift in Sources */,
 				89FA2E2521BE39F3001EA590 /* ContractAddressTableViewCell.swift in Sources */,
+				6EB4E84121D62B3A00B93FAB /* EthereumLocalTxPool.swift in Sources */,
 				1A6007A021A29C2C00C7B712 /* SuccessPageItem.swift in Sources */,
 				6E867E09216C862900BD6FE5 /* NoScreenshot.swift in Sources */,
 				89C614592140FE6600DC3DF4 /* CurrencyTableViewCell.swift in Sources */,
@@ -1590,7 +1583,6 @@
 				89FE21DE20EDB70000A09302 /* SendTransactionError.swift in Sources */,
 				896B32BD21BFAD3B00C4DA7F /* ShowTokenPageItem.swift in Sources */,
 				891C2483211165AC007C639D /* TokenMacro.swift in Sources */,
-				6E3B2B75219EDE200095257D /* TxStatusManager.swift in Sources */,
 				6E9D7CBA216B04EF0044176D /* AuthenticationService.swift in Sources */,
 				6EABFB1421995AB800305ED5 /* DAppGyroscopeMessageHandler.swift in Sources */,
 				898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */,
