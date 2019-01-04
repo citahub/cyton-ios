@@ -34,7 +34,7 @@ extension TransactonSender {
                 data: paramBuilder.data,
                 password: password
             )
-            recordTxDetails(txhash: txhash)
+            recordEthereumTx(txhash: txhash)
             return txhash
         } else {
             let sender = try EthereumTxSender(web3: web3, from: paramBuilder.from)
@@ -46,7 +46,7 @@ extension TransactonSender {
                 contractAddress: paramBuilder.contractAddress,
                 password: password
             )
-            recordTxDetails(txhash: txhash)
+            recordEthereumTx(txhash: txhash)
             return txhash
         }
     }
@@ -75,7 +75,7 @@ extension TransactonSender {
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password
             )
-            recordTxDetails(txhash: result.0, blockNumber: result.1)
+            recordAppChainTx(txhash: result.0, blockNumber: result.1)
             return result.0
         } else {
             let result = try sender.sendERC20(
@@ -85,56 +85,72 @@ extension TransactonSender {
                 quota: paramBuilder.gasLimit,
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password)
-            recordTxDetails(txhash: result.0, blockNumber: result.1)
+            recordAppChainTx(txhash: result.0, blockNumber: result.1)
             return result.0
         }
     }
 
-    func recordTxDetails(txhash: String, blockNumber: BigUInt? = nil) {
-        let cetateModelBlock = { () -> LocalTxDetailModel in
-            switch self.paramBuilder.tokenType {
-            case .ether:
-                return LocalTxDetailModel(
-                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
-                    txHash: txhash,
-                    from: self.paramBuilder.from, to: self.paramBuilder.to,
-                    value: self.paramBuilder.value,
-                    gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: self.paramBuilder.gasLimit
-                )
-            case .erc20:
-                return LocalTxDetailModel(
-                    contractAddress: self.paramBuilder.contractAddress,
-                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
-                    txHash: txhash,
-                    from: self.paramBuilder.from, to: self.paramBuilder.to,
-                    value: self.paramBuilder.value,
-                    gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: self.paramBuilder.gasLimit
-                )
-            case .appChain:
-                return LocalTxDetailModel(
-                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
-                    txHash: txhash,
-                    from: self.paramBuilder.from, to: self.paramBuilder.to,
-                    value: self.paramBuilder.value,
-                    gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: self.paramBuilder.gasLimit,
-                    blockNumber: blockNumber!
-                )
-            case .appChainErc20:
-                return LocalTxDetailModel(
-                    contractAddress: self.paramBuilder.contractAddress,
-                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
-                    txHash: txhash,
-                    from: self.paramBuilder.from, to: self.paramBuilder.to,
-                    value: self.paramBuilder.value,
-                    gasPrice: self.paramBuilder.gasPrice,
-                    gasLimit: self.paramBuilder.gasLimit,
-                    blockNumber: blockNumber!
-                )
-            }
-        }
-        TxStatusManager.manager.insertLocalTxDetail(cetateModelBlock: cetateModelBlock)
+    func recordEthereumTx(txhash: String) {
+        EthereumLocalTxPool.pool.insertLocalTx(localTx: EthereumLocalTx(
+            token: token.tokenModel, txHash: txhash,
+            from: paramBuilder.from, to: paramBuilder.to, value: paramBuilder.value,
+            gasPrice: paramBuilder.gasPrice, gasLimit: paramBuilder.gasLimit
+        ))
     }
+
+    func recordAppChainTx(txhash: String, blockNumber: BigUInt) {
+        AppChainLocalTxPool.pool.insertLocalTx(localTx: AppChainLocalTx(
+            token: token.tokenModel, txHash: txhash, blockNumber: blockNumber,
+            from: paramBuilder.from, to: paramBuilder.to, value: paramBuilder.value,
+            quotaPrice: paramBuilder.gasPrice, quotaLimit: paramBuilder.gasLimit
+        ))
+    }
+
+//    func recordTxDetails(txhash: String, blockNumber: BigUInt? = nil) {
+//        let cetateModelBlock = { () -> LocalTxDetailModel in
+//            switch self.paramBuilder.tokenType {
+//            case .ether:
+//                return LocalTxDetailModel(
+//                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+//                    txHash: txhash,
+//                    from: self.paramBuilder.from, to: self.paramBuilder.to,
+//                    value: self.paramBuilder.value,
+//                    gasPrice: self.paramBuilder.gasPrice,
+//                    gasLimit: self.paramBuilder.gasLimit
+//                )
+//            case .erc20:
+//                return LocalTxDetailModel(
+//                    contractAddress: self.paramBuilder.contractAddress,
+//                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+//                    txHash: txhash,
+//                    from: self.paramBuilder.from, to: self.paramBuilder.to,
+//                    value: self.paramBuilder.value,
+//                    gasPrice: self.paramBuilder.gasPrice,
+//                    gasLimit: self.paramBuilder.gasLimit
+//                )
+//            case .appChain:
+//                return LocalTxDetailModel(
+//                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+//                    txHash: txhash,
+//                    from: self.paramBuilder.from, to: self.paramBuilder.to,
+//                    value: self.paramBuilder.value,
+//                    gasPrice: self.paramBuilder.gasPrice,
+//                    gasLimit: self.paramBuilder.gasLimit,
+//                    blockNumber: blockNumber!
+//                )
+//            case .appChainErc20:
+//                return LocalTxDetailModel(
+//                    contractAddress: self.paramBuilder.contractAddress,
+//                    tokenIdentifier: self.paramBuilder.tokenIdentifier,
+//                    txHash: txhash,
+//                    from: self.paramBuilder.from, to: self.paramBuilder.to,
+//                    value: self.paramBuilder.value,
+//                    gasPrice: self.paramBuilder.gasPrice,
+//                    gasLimit: self.paramBuilder.gasLimit,
+//                    blockNumber: blockNumber!
+//                )
+//            }
+//        }
+//        TxStatusManager.manager.insertLocalTxDetail(cetateModelBlock: cetateModelBlock)
+//    }
 }

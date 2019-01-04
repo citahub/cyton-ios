@@ -12,12 +12,6 @@ import Web3swift
 import struct Web3swift.TransactionDetails
 import BigInt
 
-enum TxStatus: Int {
-    case pending
-    case success
-    case failure
-}
-
 class EthereumLocalTx: Object {
     @objc dynamic var token: TokenModel!
     @objc dynamic var txHash = ""
@@ -33,7 +27,7 @@ class EthereumLocalTx: Object {
         get { return EthereumNetwork.EthereumNetworkType(rawValue: ethereumNetworkValue)! }
         set { ethereumNetworkValue = newValue.rawValue }
     }
-    var status: TxStatus! {
+    var status: TxStatus {
         get { return TxStatus(rawValue: statusValue)! }
         set { statusValue = newValue.rawValue }
     }
@@ -50,12 +44,18 @@ class EthereumLocalTx: Object {
     }
 
     @objc override class func primaryKey() -> String? { return "txHash" }
+
+    enum TxStatus: Int {
+        case pending
+        case success
+        case failure
+    }
 }
 
 class EthereumLocalTxPool {
-    static let didUpdateTxStatus = Notification.Name("didUpdateTxStatus")
-    static let didAddLocalTx = Notification.Name("didAddLocalTx")
-    static let localTxKey = "localTx"
+    static let didUpdateTxStatus = Notification.Name("EthereumLocalTxPool.didUpdateTxStatus")
+    static let didAddLocalTx = Notification.Name("EthereumLocalTxPool.didAddLocalTx")
+    static let txKey = "tx"
     static let pool = EthereumLocalTxPool()
 
     func configure() {}
@@ -66,18 +66,21 @@ class EthereumLocalTxPool {
             try realm.write {
                 realm.add(localTx)
             }
-            NotificationCenter.default.post(name: EthereumLocalTxPool.didAddLocalTx, object: nil, userInfo: [EthereumLocalTxPool.localTxKey: localTx])
+            let tx = localTx.getTx()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: EthereumLocalTxPool.didAddLocalTx, object: nil, userInfo: [EthereumLocalTxPool.txKey: tx])
+            }
         } catch {
         }
     }
 
-    func getLocalTx(with walletAddress: String, contractAddress: String = "") -> [EthereumLocalTx] {
+    func getLocalTx(token: Token) -> [EthereumTransactionDetails] {
         let ethereumNetwork = EthereumNetwork().networkType
         return (try! Realm()).objects(EthereumLocalTx.self).filter({
-            $0.from == walletAddress &&
-            $0.ethereumNetwork == ethereumNetwork &&
-            $0.token.address == contractAddress
-        })
+            $0.from == token.walletAddress &&
+            $0.token.address == token.address &&
+            $0.ethereumNetwork == ethereumNetwork
+        }).map({ $0.getTx() })
     }
 
     // MARK: - Private
@@ -109,7 +112,6 @@ class EthereumLocalTxPool {
         let results = realm.objects(EthereumLocalTx.self).filter({ $0.status == .pending })
         guard results.count > 0 else { return }
         checking = true
-        print("Txs 交易进行中 \(results.count)")
         results.forEach { (localTx) in
             guard localTx.status == .pending else { return }
             self.checkLocalTxStatus(localTx: localTx)
@@ -119,48 +121,28 @@ class EthereumLocalTxPool {
     }
 
     private func checkLocalTxStatus(localTx: EthereumLocalTx) {
-        print("Txs \(localTx.txHash) 开始检查交易状态")
-        defer {
-            print("Txs zzzzzzzzz")
-            if localTx.status == .pending {
-                if localTx.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
-                    localTx.status = .failure
-                    print("Txs \(localTx.txHash) 交易失败(超时)")
-                } else {
-                    print("Txs \(localTx.txHash) 交易进行中")
-                }
-            }
-        }
         guard let blockNumber = localTx.blockNumber else { return }
         guard let currentBlockNumber = try? localTx.web3.eth.getBlockNumber() else { return }
         let realm = try! Realm()
         try? realm.write {
-            let txHash = localTx.txHash
             if localTx.transactionReceipt?.status == .ok {
                 if currentBlockNumber - blockNumber < 12 {
-                    print("Txs \(localTx.txHash) 检查块高(\(currentBlockNumber - blockNumber))/12")
                     return
                 }
                 localTx.status = .success
-                print("Txs \(localTx.txHash) 交易成功")
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(
-                        name: EthereumLocalTxPool.didUpdateTxStatus, object: nil,
-                        userInfo: [EthereumLocalTxPool.localTxKey: realm.object(ofType: EthereumLocalTx.self, forPrimaryKey: txHash)!]
-                    )
-                }
             } else if localTx.transactionReceipt?.status == .failed {
                 localTx.status = .failure
-                print("Txs \(localTx.txHash) 交易失败")
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(
-                        name: EthereumLocalTxPool.didUpdateTxStatus, object: nil,
-                        userInfo: [EthereumLocalTxPool.localTxKey: realm.object(ofType: EthereumLocalTx.self, forPrimaryKey: txHash)!]
-                    )
-                }
-            } /*else if localTx.transactionReceipt?.status == .notYetProcessed {
-             localTx.status = .pending
-             }*/
+            }
+        }
+        if localTx.status == .pending && localTx.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
+            localTx.status = .failure
+        }
+
+        if localTx.status == .success || localTx.status == .failure {
+            let tx = localTx.getTx()
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: EthereumLocalTxPool.didUpdateTxStatus, object: nil, userInfo: [EthereumLocalTxPool.txKey: tx])
+            }
         }
     }
 }
@@ -205,6 +187,25 @@ extension EthereumLocalTx {
 extension EthereumLocalTx {
     func getTx() -> EthereumTransactionDetails {
         let tx = EthereumTransactionDetails()
+        tx.gasUsed = BigUInt(gasLimit) ?? 0
+        tx.contractAddress = token.address
+        tx.token = Token(token, from)
+        tx.hash = txHash
+        tx.from = from
+        tx.to = to
+        tx.value = BigUInt(value) ?? 0
+        tx.gasPrice = BigUInt(gasPrice) ?? 0
+        tx.gasLimit = BigUInt(gasLimit) ?? 0
+        tx.date = date
+        tx.blockNumber = blockNumber ?? 0
+        switch status {
+        case .pending:
+            tx.status = .pending
+        case .success:
+            tx.status = .success
+        case .failure:
+            tx.status = .failure
+        }
         return tx
     }
 }
