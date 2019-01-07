@@ -13,7 +13,7 @@ class CurrencyViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "默认货币单位"
+        title = "Settings.Currency.Title".localized()
         getCurrencyList()
     }
 

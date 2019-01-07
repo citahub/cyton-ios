@@ -44,4 +44,14 @@ class SendTransactionSummaryView: UIView, NibLoadable {
     @IBOutlet weak var fromLabel: UILabel!
     @IBOutlet weak var toLabel: UILabel!
     @IBOutlet weak var txFeeLabel: UILabel!
+    @IBOutlet private weak var fromAddressTitleLabel: UILabel!
+    @IBOutlet private weak var toAddressTitleLabel: UILabel!
+    @IBOutlet private weak var txFeeTitleLabel: UILabel!
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        fromAddressTitleLabel.text = "Transaction.Details.paymentAddress".localized()
+        toAddressTitleLabel.text = "Transaction.Details.receiptAddress".localized()
+        txFeeLabel.text = "Transaction.Details.gasFee".localized()
+    }
 }

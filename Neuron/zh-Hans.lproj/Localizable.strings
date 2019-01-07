@@ -139,6 +139,7 @@
 "Transaction.History.title" = "交易列表";
 "TokenProfile.Ether.overview" = "Ethereum是一个运行智能合约的去中心化平台，应用将完全按照程序运作，不存在任何欺诈，审查与第三方干预的可能。";
 "Transaction.History.testTokenWarning" = "该token无任何价值，仅做开发者测试使用";
+"Transaction.History.details" = "详情 >>";
 
 // Transaction Status
 // ---------------------------------------------------------
@@ -198,6 +199,7 @@
 "Authentication.openFaceIdAuth" = "开启刷脸验证";
 "Authentication.openTouchIdAuthDesc" = "请开启指纹验证，确保您的资产安全";
 "Authentication.openTouchIdAuth" = "开启指纹验证";
+"Authentication.notOpen" = "暂不开启";
 
 "Authentication.Error.touchIDNotEnrolled" = "未设置 Touch ID";
 "Authentication.Error.faceIDNotEnrolled" = "未设置 Face ID";
@@ -283,7 +285,6 @@
 "Wallet.Details.changePassword" = "修改密码";
 "Wallet.Details.exportKeystore" = "导出Keystore";
 "Wallet.Details.delete" = "删除当前钱包";
-"Wallet.Details.changePassword" = "修改密码";
 "Wallet.Details.ChangePassword.inputPassword" = "输入密码";
 "Wallet.Details.ChangePassword.inputNewPassword" = "输入新密码";
 "Wallet.Details.ChangePassword.repeatNewPassword" = "再次输入新密码";

@@ -13,6 +13,7 @@ class OpenAuthViewController: UIViewController {
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var confirmButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         if AuthenticationService.shared.biometryType == .faceID {
@@ -24,6 +25,7 @@ class OpenAuthViewController: UIViewController {
             messageLabel.text = "Authentication.openTouchIdAuthDesc".localized()
             confirmButton.setTitle("Authentication.openTouchIdAuth".localized(), for: .normal)
         }
+        cancelButton.setTitle("Authentication.notOpen".localized(), for: .normal)
     }
 
     @IBAction func confrim(_ sender: Any) {

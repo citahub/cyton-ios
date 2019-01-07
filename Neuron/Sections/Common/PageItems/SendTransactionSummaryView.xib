@@ -109,9 +109,12 @@
             <viewLayoutGuide key="safeArea" id="0bP-2V-AhC"/>
             <connections>
                 <outlet property="amountLabel" destination="aQX-op-eRe" id="Scz-gs-kkK"/>
+                <outlet property="fromAddressTitleLabel" destination="i7c-5C-7Pm" id="hUq-6E-IZs"/>
                 <outlet property="fromLabel" destination="mft-bY-j3G" id="QTa-7Y-kfy"/>
+                <outlet property="toAddressTitleLabel" destination="qg7-rC-rCl" id="D0A-2T-xSb"/>
                 <outlet property="toLabel" destination="Bdb-up-iGX" id="2VW-ME-UtW"/>
                 <outlet property="txFeeLabel" destination="CC7-VB-49R" id="tvZ-IC-eU3"/>
+                <outlet property="txFeeTitleLabel" destination="arP-Zm-SRn" id="hE6-sR-co0"/>
             </connections>
             <point key="canvasLocation" x="4" y="54"/>
         </view>

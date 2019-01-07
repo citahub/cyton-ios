@@ -252,6 +252,7 @@
                         <viewLayoutGuide key="safeArea" id="y2t-DP-6U9"/>
                     </view>
                     <connections>
+                        <outlet property="detailsTitleLabel" destination="xVD-6K-Qaw" id="dmK-zC-gdn"/>
                         <outlet property="tableView" destination="tKh-tV-Yeh" id="MDF-Qo-W6l"/>
                         <outlet property="testTokenWarnLabel" destination="lAL-oW-227" id="YZ6-Ic-fr3"/>
                         <outlet property="tokenAmountLabel" destination="TVz-WV-pzU" id="lZX-ma-PID"/>

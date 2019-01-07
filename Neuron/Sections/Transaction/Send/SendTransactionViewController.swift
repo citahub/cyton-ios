@@ -162,7 +162,7 @@ private extension SendTransactionViewController {
                 }
                 DispatchQueue.main.async {
                     // TODO: send back txHash?
-                    let successPageItem = SuccessPageItem.create(title: "交易已发送")
+                    let successPageItem = SuccessPageItem.create(title: "DApp.Contract.TransactionSend".localized())
                     successPageItem.actionHandler = { item in
                         item.manager?.dismissBulletin(animated: true)
                         self.navigationController?.popViewController(animated: true)
