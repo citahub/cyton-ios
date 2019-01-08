@@ -36,10 +36,10 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="矿工费用" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="arP-Zm-SRn">
-                    <rect key="frame" x="0.0" y="185" width="62" height="20"/>
+                    <rect key="frame" x="0.0" y="185" width="80" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="RLt-Fl-lrW"/>
-                        <constraint firstAttribute="width" constant="62" id="pSz-1J-3Nt"/>
+                        <constraint firstAttribute="width" constant="80" id="pSz-1J-3Nt"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" red="0.59607843140000005" green="0.61176470589999998" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -64,7 +64,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.213221 ETH" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CC7-VB-49R">
-                    <rect key="frame" x="92" y="185" width="283" height="20"/>
+                    <rect key="frame" x="110" y="185" width="265" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="eNt-UA-9wY"/>
                     </constraints>
