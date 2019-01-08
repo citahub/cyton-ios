@@ -356,7 +356,7 @@ extension BrowserViewController: WKNavigationDelegate {
             }
             decisionHandler(.cancel)
         } else {
-            if navigationAction.request.acceptLanguage == URLRequest.acceptLanguage {
+            if navigationAction.request.acceptLanguage == URLRequest.acceptLanguage || navigationAction.navigationType != .linkActivated {
                 decisionHandler(.allow)
             } else {
                 // Set Accept-Language for following requests
