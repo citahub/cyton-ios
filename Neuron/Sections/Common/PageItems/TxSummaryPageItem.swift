@@ -48,10 +48,10 @@ class SendTransactionSummaryView: UIView, NibLoadable {
     @IBOutlet private weak var toAddressTitleLabel: UILabel!
     @IBOutlet private weak var txFeeTitleLabel: UILabel!
 
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    override func didMoveToWindow() {
+        super.didMoveToWindow()
         fromAddressTitleLabel.text = "Transaction.Details.paymentAddress".localized()
         toAddressTitleLabel.text = "Transaction.Details.receiptAddress".localized()
-        txFeeLabel.text = "Transaction.Details.gasFee".localized()
+        txFeeTitleLabel.text = "Transaction.Details.gasFee".localized()
     }
 }
