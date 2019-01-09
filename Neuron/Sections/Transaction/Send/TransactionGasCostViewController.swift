@@ -69,9 +69,8 @@ class TransactionGasCostViewController: UITableViewController {
     }
 
     @IBAction func confirm() {
-        paramBuilder.gasLimit = BigUInt(string: gasLimitTextField.text!) ?? GasCalculator.defaultGasLimit
+        UIApplication.shared.keyWindow?.endEditing(true)
         if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
-            paramBuilder.gasPrice = BigUInt.parseToBigUInt(gasPriceTextField.text!, 9)
             let gasPrice = Double(gasPriceTextField.text!)!
             if gasPrice < minGasPrice {
                 Toast.showToast(text: "Transaction.Send.gasPriceSettingIsTooLow".localized())
