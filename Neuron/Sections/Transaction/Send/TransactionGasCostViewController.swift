@@ -51,6 +51,11 @@ class TransactionGasCostViewController: UITableViewController {
         observers.append(param.observe(\.nativeTokenPrice, options: [.initial]) { [weak self](_, _) in
             self?.updateGasCost()
         })
+        let hexText = paramBuilder.data.toHexString()
+        if hexText.lengthOfBytes(using: .utf8) > 0 {
+            inputDataTextView.text = hexText.addHexPrefix()
+            dataTextPlaceholderLabel.isHidden = inputDataTextView.text.lengthOfBytes(using: .utf8) > 0
+        }
         dataString != nil ? switchDataToHex() : nil
     }
 
@@ -97,7 +102,12 @@ class TransactionGasCostViewController: UITableViewController {
         }
         param.gasPrice = paramBuilder.gasPrice
         param.gasLimit = paramBuilder.gasLimit
-        if let dataText = inputDataTextView.text {
+        if var dataText = inputDataTextView.text {
+            dataText = dataText.removeHexPrefix()
+            if !CharacterSet(charactersIn: "0123456789ABCDEFabcdef").isSuperset(of: CharacterSet(charactersIn: dataText)) {
+                Toast.showToast(text: "Transaction.Send.inputHexData".localized())
+                return
+            }
             param.data = Data(hex: dataText)
         }
         navigationController?.popViewController(animated: true)
@@ -181,7 +191,7 @@ extension TransactionGasCostViewController {
 
 extension TransactionGasCostViewController: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let character = "0123456789abcdefABCDEF"
+        let character = "0123456789abcdefABCDEFxX"
         guard CharacterSet(charactersIn: character).isSuperset(of: CharacterSet(charactersIn: text)) else {
             return false
         }

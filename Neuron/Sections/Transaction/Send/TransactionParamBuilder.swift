@@ -110,6 +110,7 @@ class TransactionParamBuilder: NSObject {
         gasLimit = builder.gasLimit
         from = builder.from
         to = builder.to
+        data = builder.data
         nativeTokenPrice = builder.nativeTokenPrice
         currencySymbol = builder.currencySymbol
         rebuildGasCalculator()
