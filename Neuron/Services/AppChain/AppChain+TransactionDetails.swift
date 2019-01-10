@@ -17,6 +17,7 @@ class AppChainTransactionDetails: TransactionDetails {
     var quotaUsed: BigUInt = 0
     var chainId: Int = 0
     var chainName: String = ""
+    var errorMessage: String?
 
     enum AppChainCodingKeys: String, CodingKey {
         case content
@@ -24,6 +25,7 @@ class AppChainTransactionDetails: TransactionDetails {
         case quotaUsed
         case chainId
         case chainName
+        case errorMessage
     }
 
     override init() {
@@ -41,6 +43,10 @@ class AppChainTransactionDetails: TransactionDetails {
         }
         chainName = (try? values.decode(String.self, forKey: .chainName)) ?? ""
         chainId = (try? values.decode(Int.self, forKey: .chainId)) ?? 0
+        errorMessage = try? values.decode(String.self, forKey: .errorMessage)
+        if errorMessage != nil {
+            status = .failure
+        }
     }
 }
 
@@ -59,14 +65,10 @@ private struct AppChainTransactionResponse: Decodable {
     }
 }
 
-class AppChainErc20TransactionDetails: AppChainTransactionDetails {
-}
-
 private struct AppChainErc20TransactionsResponse: Decodable {
     let result: Result
     struct Result: Decodable {
-        let count: UInt
-        let transfers: [AppChainErc20TransactionDetails]
+        let transfers: [AppChainTransactionDetails]
     }
 }
 
@@ -92,7 +94,7 @@ extension AppChainNetwork {
         }.wait()
     }
 
-    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainErc20TransactionDetails] {
+    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainTransactionDetails] {
         let url = AppChainNetwork().host().appendingPathComponent("/api/erc20/transfers")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
@@ -100,7 +102,7 @@ extension AppChainNetwork {
             "page": page,
             "perPage": pageSize
         ]
-        return try Promise<[AppChainErc20TransactionDetails]>.init { (resolver) in
+        return try Promise<[AppChainTransactionDetails]>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }

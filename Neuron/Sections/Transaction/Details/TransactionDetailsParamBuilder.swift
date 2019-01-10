@@ -96,8 +96,6 @@ class TransactionDetailsParamBuilder {
                 gasUsed = "\(ethereum.gasUsed)"
             } else if let appChain = tx as? AppChainTransactionDetails {
                 gasUsed = "\(appChain.quotaUsed)"
-            } else if let appChainErc20 = tx as? AppChainErc20TransactionDetails {
-                gasUsed = "\(appChainErc20.quotaUsed)"
             }
         }
     }
