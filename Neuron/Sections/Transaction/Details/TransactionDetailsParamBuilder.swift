@@ -84,14 +84,10 @@ class TransactionDetailsParamBuilder {
             if let ethereum = tx as? EthereumTransactionDetails {
                 txFee = (ethereum.gasUsed * ethereum.gasPrice).toAmountText() + " ETH"
                 gasPrice = "\(ethereum.gasPrice.toGweiText()) Gwei"
-            } else if let appChainErc20 = tx as? AppChainErc20TransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
-                gasPrice = "\(quotaPrice.toAmountText()) NATT"
-                txFee = (appChainErc20.quotaUsed * quotaPrice).toAmountText() + " NATT"
             } else if let appChain = tx as? AppChainTransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
-                gasPrice = "\(quotaPrice.toAmountText(tx.token.decimals)) NATT"
-                txFee = (appChain.quotaUsed * quotaPrice).toAmountText(tx.token.decimals) + " NATT"
+                gasPrice = "\(quotaPrice.toAmountText()) NATT"
+                txFee = ((appChain.quotaUsed > 0 ? appChain.quotaUsed : appChain.gasLimit) * quotaPrice).toAmountText() + " NATT"
             }
         }
         gasLimit = tx.status == .pending ? "\(tx.gasLimit)" : nil

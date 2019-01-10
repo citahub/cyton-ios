@@ -75,7 +75,7 @@ extension TransactonSender {
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password
             )
-            recordAppChainTx(txhash: result.0, blockNumber: result.1)
+            recordAppChainTx(txhash: result.0, validUntilBlock: result.1)
             return result.0
         } else {
             let result = try sender.sendERC20(
@@ -85,7 +85,7 @@ extension TransactonSender {
                 quota: paramBuilder.gasLimit,
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password)
-            recordAppChainTx(txhash: result.0, blockNumber: result.1)
+            recordAppChainTx(txhash: result.0, validUntilBlock: result.1)
             return result.0
         }
     }
@@ -98,9 +98,9 @@ extension TransactonSender {
         ))
     }
 
-    func recordAppChainTx(txhash: String, blockNumber: BigUInt) {
+    func recordAppChainTx(txhash: String, validUntilBlock: BigUInt) {
         AppChainLocalTxPool.pool.insertLocalTx(localTx: AppChainLocalTx(
-            token: token.tokenModel, txHash: txhash, blockNumber: blockNumber,
+            token: token.tokenModel, txHash: txhash, validUntilBlock: validUntilBlock,
             from: paramBuilder.from, to: paramBuilder.to, value: paramBuilder.value,
             quotaPrice: paramBuilder.gasPrice, quotaLimit: paramBuilder.gasLimit
         ))

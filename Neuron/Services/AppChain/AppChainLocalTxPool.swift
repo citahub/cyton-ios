@@ -21,21 +21,21 @@ class AppChainLocalTx: Object {
     @objc dynamic var quotaLimit = ""
     @objc dynamic var date = Date()
     @objc dynamic private var statusValue: Int = TxStatus.pending.rawValue
-    @objc dynamic private var blockNumberText = ""
+    @objc dynamic private var validUntilBlockText = ""
     var status: TxStatus {
         get { return TxStatus(rawValue: statusValue)! }
         set { statusValue = newValue.rawValue }
     }
-    var blockNumber: BigUInt {
-        get { return BigUInt(blockNumberText)! }
-        set { blockNumberText = String(newValue) }
+    var validUntilBlock: BigUInt {
+        get { return BigUInt(validUntilBlockText)! }
+        set { validUntilBlockText = String(newValue) }
     }
 
-    required convenience init(token: TokenModel, txHash: String, blockNumber: BigUInt, from: String, to: String, value: BigUInt, quotaPrice: BigUInt, quotaLimit: BigUInt) {
+    required convenience init(token: TokenModel, txHash: String, validUntilBlock: BigUInt, from: String, to: String, value: BigUInt, quotaPrice: BigUInt, quotaLimit: BigUInt) {
         self.init()
         self.token = token
         self.txHash = txHash
-        self.blockNumber = blockNumber
+        self.validUntilBlock = validUntilBlock
         self.from = from
         self.to = to
         self.value = String(value)
@@ -124,10 +124,10 @@ class AppChainLocalTxPool: NSObject {
 
     private func checkLocalTxStatus(localTx: AppChainLocalTx) {
         let appChain = AppChain(provider: HTTPProvider(URL(string: localTx.token.chain.httpProvider)!)!)
+        let realm = try! Realm()
         do {
-            try (try Realm()).write {
-                let currentBlockNumber = try appChain.rpc.blockNumber()
-                if let receipt = try? appChain.rpc.getTransactionReceipt(txhash: localTx.txHash) {
+            try realm.write {
+                if let receipt = localTx.transactionReceipt {
                     if receipt.errorMessage != nil {
                         localTx.status = .failure
                     } else {
@@ -136,7 +136,8 @@ class AppChainLocalTxPool: NSObject {
                         }
                     }
                 }
-                if localTx.status == .pending && localTx.blockNumber < BigUInt(currentBlockNumber) {
+                let currentBlockNumber = try appChain.rpc.blockNumber()
+                if localTx.status == .pending && localTx.validUntilBlock < BigUInt(currentBlockNumber) {
                     localTx.status = .failure
                 }
             }
@@ -146,6 +147,11 @@ class AppChainLocalTxPool: NSObject {
             let tx = localTx.getTx()
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: AppChainLocalTxPool.didUpdateTxStatus, object: nil, userInfo: [AppChainLocalTxPool.txKey: tx])
+            }
+            if localTx.status == .success {
+                try? realm.write {
+                    realm.delete(localTx)
+                }
             }
         }
     }
@@ -159,9 +165,10 @@ extension AppChainLocalTx {
         tx.from = from
         tx.to = to
         tx.value = BigUInt(value) ?? 0
-        tx.quotaUsed = BigUInt(quotaLimit) ?? 0
+        tx.gasLimit = BigUInt(quotaLimit) ?? 0
         tx.date = date
-        tx.blockNumber = blockNumber
+        tx.blockNumber = transactionReceipt?.blockNumber ?? 0
+        tx.quotaUsed = transactionReceipt?.quotaUsed ?? 0
         switch status {
         case .pending:
             tx.status = .pending
@@ -175,7 +182,20 @@ extension AppChainLocalTx {
 }
 
 extension AppChainLocalTx {
+    private struct AssociatedKey {
+        static var transactionReceipt = 0
+    }
+
     private var appChain: AppChain {
         return AppChain(provider: HTTPProvider(URL(string: token.chain.httpProvider)!)!)
+    }
+
+    fileprivate var transactionReceipt: TransactionReceipt? {
+        if let transactionReceipt = objc_getAssociatedObject(self, &AssociatedKey.transactionReceipt) {
+            return transactionReceipt as? TransactionReceipt
+        }
+        let transactionReceipt = try? appChain.rpc.getTransactionReceipt(txhash: txHash)
+        objc_setAssociatedObject(self, &AssociatedKey.transactionReceipt, transactionReceipt, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        return transactionReceipt
     }
 }
