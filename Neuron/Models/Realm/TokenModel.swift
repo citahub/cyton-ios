@@ -26,7 +26,7 @@ class TokenModel: Object {
         switch type {
         case .ether, .erc20:
             return EthereumNetwork().chain
-        case .appChain, .appChainErc20:
+        case .cita, .citaErc20:
             return (try! Realm()).object(ofType: ChainModel.self, forPrimaryKey: chainIdentifier)!
         }
     }
@@ -42,10 +42,10 @@ extension TokenModel {
             if chainIdentifier == "" && address == "" {
                 return .ether
             } else {
-                return .appChain
+                return .cita
             }
         } else if chainIdentifier != "" && address != "" {
-            return .appChainErc20
+            return .citaErc20
         } else {
             return .erc20
         }

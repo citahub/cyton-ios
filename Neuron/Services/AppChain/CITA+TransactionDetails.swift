@@ -1,5 +1,5 @@
 //
-//  AppChain+TransactionDetails.swift
+//  CITA+TransactionDetails.swift
 //  Neuron
 //
 //  Created by 晨风 on 2018/11/16.
@@ -9,17 +9,17 @@
 import Foundation
 import BigInt
 import Alamofire
-import AppChain
+import CITA
 import PromiseKit
 
-class AppChainTransactionDetails: TransactionDetails {
+class CITATransactionDetails: TransactionDetails {
     var gasUsed: BigUInt = 0
     var quotaUsed: BigUInt = 0
     var chainId: Int = 0
     var chainName: String = ""
     var errorMessage: String?
 
-    enum AppChainCodingKeys: String, CodingKey {
+    enum CITACodingKeys: String, CodingKey {
         case content
         case gasUsed
         case quotaUsed
@@ -34,7 +34,7 @@ class AppChainTransactionDetails: TransactionDetails {
 
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
-        let values = try decoder.container(keyedBy: AppChainCodingKeys.self)
+        let values = try decoder.container(keyedBy: CITACodingKeys.self)
         if let value = try? values.decode(String.self, forKey: .gasUsed) {
             gasUsed = BigUInt(string: value) ?? 0
         }
@@ -50,41 +50,41 @@ class AppChainTransactionDetails: TransactionDetails {
     }
 }
 
-private struct AppChainTransactionsResponse: Decodable {
+private struct CITATransactionsResponse: Decodable {
     let result: Result
     struct Result: Decodable {
         let count: UInt
-        let transactions: [AppChainTransactionDetails]
+        let transactions: [CITATransactionDetails]
     }
 }
 
-private struct AppChainTransactionResponse: Decodable {
+private struct CITATransactionResponse: Decodable {
     let result: Result
     struct Result: Decodable {
-        let transaction: AppChainTransactionDetails?
+        let transaction: CITATransactionDetails?
     }
 }
 
-private struct AppChainErc20TransactionsResponse: Decodable {
+private struct CITAErc20TransactionsResponse: Decodable {
     let result: Result
     struct Result: Decodable {
-        let transfers: [AppChainTransactionDetails]
+        let transfers: [CITATransactionDetails]
     }
 }
 
-extension AppChainNetwork {
-    func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainTransactionDetails] {
-        let url = AppChainNetwork().host().appendingPathComponent("/api/transactions")
+extension CITANetwork {
+    func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [CITATransactionDetails] {
+        let url = host().appendingPathComponent("/api/transactions")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "page": page,
             "perPage": pageSize
         ]
-        return try Promise<[AppChainTransactionDetails]>.init { (resolver) in
+        return try Promise<[CITATransactionDetails]>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainTransactionsResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITATransactionsResponse.self, from: responseData)
                     let transactions = response.result.transactions
                     resolver.fulfill(transactions)
                 } catch {
@@ -94,19 +94,19 @@ extension AppChainNetwork {
         }.wait()
     }
 
-    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [AppChainTransactionDetails] {
-        let url = AppChainNetwork().host().appendingPathComponent("/api/erc20/transfers")
+    func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [CITATransactionDetails] {
+        let url = host().appendingPathComponent("/api/erc20/transfers")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "address": tokenAddress,
             "page": page,
             "perPage": pageSize
         ]
-        return try Promise<[AppChainTransactionDetails]>.init { (resolver) in
+        return try Promise<[CITATransactionDetails]>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainErc20TransactionsResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITAErc20TransactionsResponse.self, from: responseData)
                     let transactions = response.result.transfers
                     resolver.fulfill(transactions)
                 } catch {
@@ -116,13 +116,13 @@ extension AppChainNetwork {
         }.wait()
     }
 
-    func getTransaction(txhash: String) throws -> AppChainTransactionDetails {
-        let url = AppChainNetwork().host().appendingPathComponent("/api/transactions/\(txhash)")
-        return try Promise<AppChainTransactionDetails>.init { (resolver) in
+    func getTransaction(txhash: String) throws -> CITATransactionDetails {
+        let url = host().appendingPathComponent("/api/transactions/\(txhash)")
+        return try Promise<CITATransactionDetails>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: nil).responseData(completionHandler: { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainTransactionResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITATransactionResponse.self, from: responseData)
                     if let transaction = response.result.transaction {
                         resolver.fulfill(transaction)
                     } else {

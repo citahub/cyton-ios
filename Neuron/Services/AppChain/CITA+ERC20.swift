@@ -1,5 +1,5 @@
 //
-//  AppChain+ERC20.swift
+//  CITA+ERC20.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/12/3.
@@ -7,25 +7,25 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 import Web3swift
 import EthereumAddress
 import BigInt
 
-class AppChainERC20 {
-    private let appChain: AppChain
+class CITAERC20 {
+    private let cita: CITA
     private let contractAddress: String
     private let contract: EthereumContract
 
-    init(appChain: AppChain, contractAddress: String) {
-        self.appChain = appChain
+    init(cita: CITA, contractAddress: String) {
+        self.cita = cita
         self.contractAddress = contractAddress
         self.contract = EthereumContract(Web3Utils.erc20ABI)!
     }
 
     func name() throws -> String? {
         let callRequest = CallRequest(from: AppModel.current.currentWallet?.address, to: self.contractAddress, data: getContractString("name()"))
-        let nameHex = try appChain.rpc.call(request: callRequest)
+        let nameHex = try cita.rpc.call(request: callRequest)
         let data = Data(hex: nameHex)
         let result = contract.decodeReturnData("name", data: data)
         return result?.first?.value as? String
@@ -33,13 +33,13 @@ class AppChainERC20 {
 
     func decimals() throws -> BigUInt? {
         let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractString("decimals()"))
-        let decimalsHex = try appChain.rpc.call(request: callRequest)
+        let decimalsHex = try cita.rpc.call(request: callRequest)
         return decimalsHex.toBigUInt()
     }
 
     func symbol() throws -> String? {
         let callRequest = CallRequest(from: nil, to: self.contractAddress, data: getContractString("symbol()"))
-        let symbolHex = try appChain.rpc.call(request: callRequest)
+        let symbolHex = try cita.rpc.call(request: callRequest)
         let data = Data(hex: symbolHex)
         let result = contract.decodeReturnData("symbol", data: data)
         return result?.first?.value as? String
@@ -50,7 +50,7 @@ class AppChainERC20 {
         let data = encodeInputs(method: "balanceOf", parameters: [walletAddress as AnyObject])!
         let dataHex = data.toHexString().prefix(8)
         let callRequest = CallRequest(from: walletAddress, to: contractAddress, data: String(dataHex).addHexPrefix() + String(repeating: "0", count: 24) + walletAddress.removeHexPrefix())
-        let balanceHex = try appChain.rpc.call(request: callRequest)
+        let balanceHex = try cita.rpc.call(request: callRequest)
         return balanceHex.toBigUInt() ?? 0
     }
 

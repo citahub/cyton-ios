@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import AppChain
+import CITA
 import RealmSwift
 
 struct DAppAction {
@@ -81,10 +81,10 @@ struct DAppAction {
         guard let chainNode = manifest.chainSet?.values.first, let url = URL(string: chainNode) else {
             throw Error.emptyChainHosts
         }
-        let appChain = AppChainNetwork.appChain(url: url)
+        let cita = CITANetwork(url: url).cita
         DispatchQueue.global().async {
             do {
-                let metaData = try appChain.rpc.getMetaData()
+                let metaData = try cita.rpc.getMetaData()
                 DispatchQueue.main.async {
                     let chainModel = ChainModel()
                     chainModel.chainId = metaData.chainId

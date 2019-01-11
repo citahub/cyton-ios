@@ -8,15 +8,10 @@
 
 import UIKit
 import BLTNBoard
-import AppChain
+import CITA
 import BigInt
 import Web3swift
 import EthereumAddress
-
-enum ChainType {
-    case appChain
-    case eth
-}
 
 protocol ContractControllerDelegate: class {
     func callBackWebView(id: Int, value: String, error: DAppError?)
@@ -56,13 +51,13 @@ class ContractController: UITableViewController, TransactonSender {
         title = "DApp.Contract.Title".localized()
 
         let wallet = AppModel.current.currentWallet
-        if dappCommonModel.chainType == "AppChain" {
-            self.token = wallet!.tokenModelList.first(where: { $0.type == .appChain && $0.chain.chainId == "\(dappCommonModel.appChain!.chainId)" })?.token
-            let gasLimit = dappCommonModel.appChain?.quota?.toBigUInt()
+        if dappCommonModel.chainType == .cita {
+            self.token = wallet!.tokenModelList.first(where: { $0.type == .cita && $0.chain.chainId == "\(dappCommonModel.cita!.chainId)" })?.token
+            let gasLimit = dappCommonModel.cita?.quota?.toBigUInt()
             paramBuilder = TransactionParamBuilder(token: token, gasPrice: nil, gasLimit: gasLimit)
-            paramBuilder.value = dappCommonModel.appChain?.value?.toBigUInt() ?? 0
-            paramBuilder.to = dappCommonModel.appChain?.to ?? ""
-            paramBuilder.data = Data(hex: dappCommonModel.appChain?.data ?? "")
+            paramBuilder.value = dappCommonModel.cita?.value?.toBigUInt() ?? 0
+            paramBuilder.to = dappCommonModel.cita?.to ?? ""
+            paramBuilder.data = Data(hex: dappCommonModel.cita?.data ?? "")
         } else {
             self.token = wallet!.tokenModelList.first(where: { $0.type == .ether })?.token
             let gasPrcie = dappCommonModel.eth?.gasPrice?.toBigUInt()
@@ -103,7 +98,7 @@ class ContractController: UITableViewController, TransactonSender {
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 && indexPath.row == 0 && dappCommonModel.chainType == "ETH" {
+        if indexPath.section == 0 && indexPath.row == 0 && dappCommonModel.chainType == .eth {
             cell.accessoryType = .disclosureIndicator
         } else {
             cell.accessoryType = .none
@@ -135,7 +130,7 @@ private extension ContractController {
                 if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
                     txHash = try self.sendEthereumTransaction(password: password)
                 } else {
-                    txHash = try self.sendAppChainTransaction(password: password)
+                    txHash = try self.sendCITATransaction(password: password)
                 }
 
                 DispatchQueue.main.async {

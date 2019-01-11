@@ -31,11 +31,9 @@ class MainViewController: UITabBarController, UITabBarControllerDelegate {
 
     private func applyStyle() {
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor(named: "tint_color")!], for: .selected)
-
         let navigationBarBackImage = UIImage(named: "nav_darkback")!.withRenderingMode(.alwaysOriginal)
         UINavigationBar.appearance().backIndicatorImage = navigationBarBackImage
         UINavigationBar.appearance().backIndicatorTransitionMaskImage = navigationBarBackImage
-
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
         UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .highlighted)
     }

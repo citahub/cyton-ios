@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 import BigInt
 
 /// Get current gas price and estimated gas, calculate gas, etc.
@@ -64,13 +64,7 @@ struct GasPriceFetcher {
     /// Get current quota price (CITA quota)
     func quotaPrice(rpcNode: String? = nil) -> BigUInt {
         do {
-            let appChain: AppChain
-            if let rpcNode = rpcNode, let rpcURL = URL(string: rpcNode) {
-                appChain = AppChainNetwork.appChain(url: rpcURL)
-            } else {
-                appChain = AppChainNetwork.appChain()
-            }
-            return try Utils.getQuotaPrice(appChain: appChain)
+            return try Utils.getQuotaPrice(cita: CITANetwork(url: rpcNode).cita)
         } catch {
             return GasCalculator.defaultGasPrice
         }

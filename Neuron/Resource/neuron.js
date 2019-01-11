@@ -46323,7 +46323,7 @@ HookedWalletSubprovider.prototype.handleRequest = function(payload, next, end){
       return
 
 
-    // adpter to appchain
+    // adpter to CITA
     case 'accounts':
       // process normally
       self.getAccounts(function(err, accounts){
@@ -46335,7 +46335,7 @@ HookedWalletSubprovider.prototype.handleRequest = function(payload, next, end){
     case 'sendTransaction':
       console.log("sendTransaction")
       txParams = payload.params[0]
-      txParams.chainType = "AppChain"
+      txParams.chainType = "CITA"
       waterfall([
         // (cb) => self.validateTransaction(txParams, cb),
         (cb) => self.processTransaction(txParams, cb),
@@ -46344,7 +46344,7 @@ HookedWalletSubprovider.prototype.handleRequest = function(payload, next, end){
 
     case 'signTransaction':
       txParams = payload.params[0]
-      txParams.chainType = "AppChain"
+      txParams.chainType = "CITA"
       waterfall([
         // (cb) => self.validateTransaction(txParams, cb),
         (cb) => self.processSignTransaction(txParams, cb),
@@ -46362,7 +46362,7 @@ HookedWalletSubprovider.prototype.handleRequest = function(payload, next, end){
         from: address,
         data: message,
       })
-      msgParams.chainType = "AppChain"
+      msgParams.chainType = "CITA"
       waterfall([
         // (cb) => self.validateMessage(msgParams, cb),
         (cb) => self.processMessage(msgParams, cb),
@@ -46403,7 +46403,7 @@ HookedWalletSubprovider.prototype.handleRequest = function(payload, next, end){
         from: address,
         data: message,
       })
-      msgParams.chainType = "AppChain"
+      msgParams.chainType = "CITA"
       waterfall([
         // (cb) => self.validatePersonalMessage(msgParams, cb),
         (cb) => self.processPersonalMessage(msgParams, cb),

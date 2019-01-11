@@ -1,5 +1,5 @@
 //
-//  AppChainLocalTxPool.swift
+//  CitaLocalTxPool.swift
 //  Neuron
 //
 //  Created by 晨风 on 2019/1/3.
@@ -9,9 +9,9 @@
 import UIKit
 import RealmSwift
 import BigInt
-import AppChain
+import CITA
 
-class AppChainLocalTx: Object {
+class CITALocalTx: Object {
     @objc dynamic var token: TokenModel!
     @objc dynamic var txHash = ""
     @objc dynamic var from = ""
@@ -52,15 +52,15 @@ class AppChainLocalTx: Object {
     }
 }
 
-class AppChainLocalTxPool: NSObject {
-    static let didUpdateTxStatus = Notification.Name("AppChainLocalTxPool.didUpdateTxStatus")
-    static let didAddLocalTx = Notification.Name("AppChainLocalTxPool.didAddLocalTx")
+class CITALocalTxPool: NSObject {
+    static let didUpdateTxStatus = Notification.Name("CITALocalTxPool.didUpdateTxStatus")
+    static let didAddLocalTx = Notification.Name("CITALocalTxPool.didAddLocalTx")
     static let txKey = "tx"
-    static let pool = AppChainLocalTxPool()
+    static let pool = CITALocalTxPool()
 
     func register() {}
 
-    func insertLocalTx(localTx: AppChainLocalTx) {
+    func insertLocalTx(localTx: CITALocalTx) {
         do {
             let realm = try Realm()
             try realm.write {
@@ -68,14 +68,14 @@ class AppChainLocalTxPool: NSObject {
             }
             let tx = localTx.getTx()
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: AppChainLocalTxPool.didAddLocalTx, object: nil, userInfo: [AppChainLocalTxPool.txKey: tx])
+                NotificationCenter.default.post(name: CITALocalTxPool.didAddLocalTx, object: nil, userInfo: [CITALocalTxPool.txKey: tx])
             }
         } catch {
         }
     }
 
-    func getTransactions(token: Token) -> [AppChainTransactionDetails] {
-        return (try! Realm()).objects(AppChainLocalTx.self).filter({
+    func getTransactions(token: Token) -> [CITATransactionDetails] {
+        return (try! Realm()).objects(CITALocalTx.self).filter({
             $0.from == token.walletAddress &&
             $0.token.address == token.address
         }).map({ $0.getTx() })
@@ -90,7 +90,7 @@ class AppChainLocalTxPool: NSObject {
             self.checkLocalTxList()
         }
         let realm = try! Realm()
-        observers.append(realm.objects(AppChainLocalTx.self).observe { (change) in
+        observers.append(realm.objects(CITALocalTx.self).observe { (change) in
             switch change {
             case .update(_, deletions: _, let insertions, modifications: _):
                 guard insertions.count > 0 else { return }
@@ -110,7 +110,7 @@ class AppChainLocalTxPool: NSObject {
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkLocalTxList), object: nil)
         guard checking == false else { return }
         let realm = try! Realm()
-        let results = realm.objects(AppChainLocalTx.self).filter({ $0.status == .pending })
+        let results = realm.objects(CITALocalTx.self).filter({ $0.status == .pending })
         guard results.count > 0 else { return }
         checking = true
         results.forEach { (localTx) in
@@ -122,8 +122,8 @@ class AppChainLocalTxPool: NSObject {
         perform(#selector(checkLocalTxList), with: nil, afterDelay: timeInterval)
     }
 
-    private func checkLocalTxStatus(localTx: AppChainLocalTx) {
-        let appChain = AppChain(provider: HTTPProvider(URL(string: localTx.token.chain.httpProvider)!)!)
+    private func checkLocalTxStatus(localTx: CITALocalTx) {
+        let cita = CITA(provider: HTTPProvider(URL(string: localTx.token.chain.httpProvider)!)!)
         let realm = try! Realm()
         do {
             try realm.write {
@@ -131,12 +131,12 @@ class AppChainLocalTxPool: NSObject {
                     if receipt.errorMessage != nil {
                         localTx.status = .failure
                     } else {
-                        if (try? AppChainNetwork().getTransaction(txhash: localTx.txHash)) != nil {
+                        if (try? CITANetwork().getTransaction(txhash: localTx.txHash)) != nil {
                             localTx.status = .success
                         }
                     }
                 }
-                let currentBlockNumber = try appChain.rpc.blockNumber()
+                let currentBlockNumber = try cita.rpc.blockNumber()
                 if localTx.status == .pending && localTx.validUntilBlock < BigUInt(currentBlockNumber) {
                     localTx.status = .failure
                 }
@@ -146,7 +146,7 @@ class AppChainLocalTxPool: NSObject {
         if localTx.status == .success || localTx.status == .failure {
             let tx = localTx.getTx()
             DispatchQueue.main.async {
-                NotificationCenter.default.post(name: AppChainLocalTxPool.didUpdateTxStatus, object: nil, userInfo: [AppChainLocalTxPool.txKey: tx])
+                NotificationCenter.default.post(name: CITALocalTxPool.didUpdateTxStatus, object: nil, userInfo: [CITALocalTxPool.txKey: tx])
             }
             if localTx.status == .success {
                 try? realm.write {
@@ -157,9 +157,9 @@ class AppChainLocalTxPool: NSObject {
     }
 }
 
-extension AppChainLocalTx {
-    func getTx() -> AppChainTransactionDetails {
-        let tx = AppChainTransactionDetails()
+extension CITALocalTx {
+    func getTx() -> CITATransactionDetails {
+        let tx = CITATransactionDetails()
         tx.token = Token(token, from)
         tx.hash = txHash
         tx.from = from
@@ -181,20 +181,20 @@ extension AppChainLocalTx {
     }
 }
 
-extension AppChainLocalTx {
+extension CITALocalTx {
     private struct AssociatedKey {
         static var transactionReceipt = 0
     }
 
-    private var appChain: AppChain {
-        return AppChain(provider: HTTPProvider(URL(string: token.chain.httpProvider)!)!)
+    private var cita: CITA {
+        return CITA(provider: HTTPProvider(URL(string: token.chain.httpProvider)!)!)
     }
 
     fileprivate var transactionReceipt: TransactionReceipt? {
         if let transactionReceipt = objc_getAssociatedObject(self, &AssociatedKey.transactionReceipt) {
             return transactionReceipt as? TransactionReceipt
         }
-        let transactionReceipt = try? appChain.rpc.getTransactionReceipt(txhash: txHash)
+        let transactionReceipt = try? cita.rpc.getTransactionReceipt(txhash: txHash)
         objc_setAssociatedObject(self, &AssociatedKey.transactionReceipt, transactionReceipt, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         return transactionReceipt
     }

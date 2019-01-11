@@ -25,7 +25,7 @@ class TransactionHistoryPresenter: NSObject {
         self.token = token
         super.init()
         observeEthereumTxStatus()
-        observeAppChainTxStatus()
+        observeCITATxStatus()
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
@@ -46,7 +46,7 @@ class TransactionHistoryPresenter: NSObject {
                 self.loading = false
                 if self.page == 1 {
                     self.transactions = []
-                    self.localTxs = AppChainLocalTxPool.pool.getTransactions(token: self.token)
+                    self.localTxs = CITALocalTxPool.pool.getTransactions(token: self.token)
                     self.localTxs.append(contentsOf: EthereumLocalTxPool.pool.getTransactions(token: self.token))
                 }
                 self.page += 1
@@ -120,9 +120,9 @@ class TransactionHistoryPresenter: NSObject {
 
     private func loadData() throws -> [TransactionDetails] {
         switch token.type {
-        case .appChain:
+        case .cita:
             if token.symbol == "NATT" {
-                return try AppChainNetwork().getTransactionHistory(walletAddress: token.walletAddress, page: page, pageSize: pageSize)
+                return try CITANetwork().getTransactionHistory(walletAddress: token.walletAddress, page: page, pageSize: pageSize)
             } else {
                 return []
             }
@@ -130,8 +130,8 @@ class TransactionHistoryPresenter: NSObject {
             return try EthereumNetwork().getTransactionHistory(walletAddress: token.walletAddress, page: page, pageSize: pageSize)
         case .erc20:
             return try EthereumNetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
-        case .appChainErc20:
-            return try AppChainNetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
+        case .citaErc20:
+            return try CITANetwork().getErc20TransactionHistory(walletAddress: token.walletAddress, tokenAddress: token.address, page: page, pageSize: pageSize)
         }
     }
 }
@@ -160,20 +160,20 @@ extension TransactionHistoryPresenter {
 }
 
 extension TransactionHistoryPresenter {
-    private func observeAppChainTxStatus() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateAppChainTxStatus(notification:)), name: AppChainLocalTxPool.didUpdateTxStatus, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didAddAppChainLocalTxAction(notification:)), name: AppChainLocalTxPool.didAddLocalTx, object: nil)
+    private func observeCITATxStatus() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateCITATxStatus(notification:)), name: CITALocalTxPool.didUpdateTxStatus, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didAddCITALocalTxAction(notification:)), name: CITALocalTxPool.didAddLocalTx, object: nil)
     }
 
-    @objc func didAddAppChainLocalTxAction(notification: Notification) {
-        guard let transaction = notification.userInfo![AppChainLocalTxPool.txKey] as? AppChainTransactionDetails else { return }
+    @objc func didAddCITALocalTxAction(notification: Notification) {
+        guard let transaction = notification.userInfo![CITALocalTxPool.txKey] as? CITATransactionDetails else { return }
         guard transaction.token == token else { return }
         transactions.insert(transaction, at: 0)
         delegate?.didLoadTransactions(transaction: transactions, insertions: [0], error: nil)
     }
 
-    @objc func didUpdateAppChainTxStatus(notification: Notification) {
-        guard let transaction = notification.userInfo![AppChainLocalTxPool.txKey] as? AppChainTransactionDetails else { return }
+    @objc func didUpdateCITATxStatus(notification: Notification) {
+        guard let transaction = notification.userInfo![CITALocalTxPool.txKey] as? CITATransactionDetails else { return }
         guard transaction.token == token else { return }
         guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }
         transactions.remove(at: idx)

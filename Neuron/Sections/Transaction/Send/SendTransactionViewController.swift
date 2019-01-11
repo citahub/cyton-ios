@@ -9,7 +9,7 @@
 import UIKit
 import BLTNBoard
 import BigInt
-import AppChain
+import CITA
 import RealmSwift
 
 class SendTransactionViewController: UITableViewController, TransactonSender {
@@ -95,7 +95,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
 
     @IBAction func transactionAvailableBalance() {
         switch token.type {
-        case .ether, .appChain:
+        case .ether, .cita:
             if paramBuilder.txFee > paramBuilder.tokenBalance {
                 Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.nativeTokenSymbol))
                 return
@@ -103,7 +103,7 @@ class SendTransactionViewController: UITableViewController, TransactonSender {
             let amount = paramBuilder.tokenBalance - paramBuilder.txFee
             let amountText = amount.toDecimalNumber(token.decimals).formatterToString(8)
             amountTextField.text = amountText
-        case .erc20, .appChainErc20:
+        case .erc20, .citaErc20:
             if token.nativeToken.balance ?? 0 < paramBuilder.txFee {
                 Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), token.nativeTokenSymbol))
                 return
@@ -158,7 +158,7 @@ private extension SendTransactionViewController {
                 if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
                     _ = try self.sendEthereumTransaction(password: password)
                 } else {
-                    _ = try self.sendAppChainTransaction(password: password)
+                    _ = try self.sendCITATransaction(password: password)
                 }
                 DispatchQueue.main.async {
                     // TODO: send back txHash?
@@ -189,7 +189,7 @@ private extension SendTransactionViewController {
             return false
         }
 
-        if token.type == .erc20 || token.type == .appChainErc20 {
+        if token.type == .erc20 || token.type == .citaErc20 {
             if token.nativeToken.balance ?? 0 < paramBuilder.txFee {
                 Toast.showToast(text: String(format: "Transaction.Send.balanceNotSufficient".localized(), paramBuilder.nativeCoinSymbol))
                 return false

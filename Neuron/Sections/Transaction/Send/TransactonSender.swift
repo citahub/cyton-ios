@@ -8,14 +8,14 @@
 
 import UIKit
 import BigInt
-import AppChain
+import CITA
 import Web3swift
 
 protocol TransactonSender {
     var token: Token! { get set }
     var paramBuilder: TransactionParamBuilder! { get set }
     func sendEthereumTransaction(password: String) throws -> TxHash
-    func sendAppChainTransaction(password: String) throws -> TxHash
+    func sendCITATransaction(password: String) throws -> TxHash
 }
 
 extension TransactonSender {
@@ -51,22 +51,22 @@ extension TransactonSender {
         }
     }
 
-    func sendAppChainTransaction(password: String) throws -> TxHash {
-        let appChain: AppChain
+    func sendCITATransaction(password: String) throws -> TxHash {
+        let cita: CITA
         if paramBuilder.rpcNode.isEmpty {
-            appChain = AppChainNetwork.appChain()
+            cita = CITANetwork().cita
         } else {
-            guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
-                throw SendTransactionError.invalidAppChainNode
+            guard let citaUrl = URL(string: paramBuilder.rpcNode) else {
+                throw SendTransactionError.invalidCITANode
             }
-            appChain = AppChainNetwork.appChain(url: appChainUrl)
+            cita = CITANetwork(url: citaUrl).cita
         }
-        let sender = try AppChainTxSender(
-            appChain: appChain,
+        let sender = try CITATxSender(
+            cita: cita,
             walletManager: WalletManager.default,
             from: paramBuilder.from
         )
-        if paramBuilder.tokenType == .appChain {
+        if paramBuilder.tokenType == .cita {
             let result = try sender.send(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
@@ -75,7 +75,7 @@ extension TransactonSender {
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password
             )
-            recordAppChainTx(txhash: result.0, validUntilBlock: result.1)
+            recordCITATx(txhash: result.0, validUntilBlock: result.1)
             return result.0
         } else {
             let result = try sender.sendERC20(
@@ -85,7 +85,7 @@ extension TransactonSender {
                 quota: paramBuilder.gasLimit,
                 chainId: BigUInt(paramBuilder.chainId)!,
                 password: password)
-            recordAppChainTx(txhash: result.0, validUntilBlock: result.1)
+            recordCITATx(txhash: result.0, validUntilBlock: result.1)
             return result.0
         }
     }
@@ -98,8 +98,8 @@ extension TransactonSender {
         ))
     }
 
-    func recordAppChainTx(txhash: String, validUntilBlock: BigUInt) {
-        AppChainLocalTxPool.pool.insertLocalTx(localTx: AppChainLocalTx(
+    func recordCITATx(txhash: String, validUntilBlock: BigUInt) {
+        CITALocalTxPool.pool.insertLocalTx(localTx: CITALocalTx(
             token: token.tokenModel, txHash: txhash, validUntilBlock: validUntilBlock,
             from: paramBuilder.from, to: paramBuilder.to, value: paramBuilder.value,
             quotaPrice: paramBuilder.gasPrice, quotaLimit: paramBuilder.gasLimit

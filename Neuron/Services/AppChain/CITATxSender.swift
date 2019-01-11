@@ -1,5 +1,5 @@
 //
-//  AppChainTxSender.swift
+//  CITATxSender.swift
 //  Neuron
 //
 //  Created by James Chen on 2018/11/06.
@@ -7,17 +7,17 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 import EthereumAddress
 import BigInt
 
-class AppChainTxSender {
-    private let appChain: AppChain
+class CITATxSender {
+    private let cita: CITA
     private let walletManager: WalletManager
     private let from: Address
 
-    init(appChain: AppChain, walletManager: WalletManager, from: String) throws {
-        self.appChain = appChain
+    init(cita: CITA, walletManager: WalletManager, from: String) throws {
+        self.cita = cita
         self.walletManager = walletManager
         guard let fromAddress = Address(from) else {
             throw SendTransactionError.invalidSourceAddress
@@ -38,10 +38,10 @@ class AppChainTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard let meta = try? appChain.rpc.getMetaData() else {
+        guard let meta = try? cita.rpc.getMetaData() else {
             throw SendTransactionError.createTransactionIssue
         }
-        guard let blockNumber = try? appChain.rpc.blockNumber() else {
+        guard let blockNumber = try? cita.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
         if chainId.description != meta.chainId {
@@ -59,7 +59,7 @@ class AppChainTxSender {
             version: meta.version
         )
         let signed = try sign(transaction: transaction, password: password)
-        return (try appChain.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
+        return (try cita.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
     }
 
     func sendERC20(
@@ -75,13 +75,13 @@ class AppChainTxSender {
             throw SendTransactionError.invalidDestinationAddress
         }
 
-        guard let meta = try? appChain.rpc.getMetaData() else {
+        guard let meta = try? cita.rpc.getMetaData() else {
             throw SendTransactionError.createTransactionIssue
         }
-        guard let blockNumber = try? appChain.rpc.blockNumber() else {
+        guard let blockNumber = try? cita.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
-        guard let data = try AppChainERC20(appChain: appChain, contractAddress: contract).transferData(to: to, amount: value) else {
+        guard let data = try CITAERC20(cita: cita, contractAddress: contract).transferData(to: to, amount: value) else {
             throw SendTransactionError.createTransactionIssue
         }
 
@@ -100,12 +100,12 @@ class AppChainTxSender {
             version: meta.version
         )
         let signed = try sign(transaction: transaction, password: password)
-        return (try appChain.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
+        return (try cita.rpc.sendRawTransaction(signedTx: signed), BigUInt(transaction.validUntilBlock))
     }
 
     func sendToken(transaction: Transaction, password: String) throws -> TxHash {
         let signed = try sign(transaction: transaction, password: password)
-        return try appChain.rpc.sendRawTransaction(signedTx: signed)
+        return try cita.rpc.sendRawTransaction(signedTx: signed)
     }
 
     func sign(transaction: Transaction, password: String) throws -> String {
