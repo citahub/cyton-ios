@@ -1,5 +1,5 @@
 //
-//  AppChain+AddToken.swift
+//  CITA+AddToken.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/12/11.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class AddCITAToken {
-    static func appChainNativeToken(nodeAddress: String) -> (TokenModel?, ChainModel?) {
+    static func nativeToken(nodeAddress: String) -> (TokenModel?, ChainModel?) {
         if !nodeAddress.hasPrefix("http") {
             return (nil, nil)
         }
@@ -40,20 +40,20 @@ class AddCITAToken {
         return (tokenModel, chainModel)
     }
 
-    static func appChainERC20Token(chain: Chain, contractAddress: String) -> TokenModel? {
+    static func erc20Token(chain: Chain, contractAddress: String) -> TokenModel? {
         do {
             let cita = CITANetwork.cita(url: URL(string: chain.httpProvider))
-            let appchainErc20 = CITAERC20(appChain: cita, contractAddress: contractAddress)
+            let erc20 = CITAERC20(cita: cita, contractAddress: contractAddress)
 
-            guard let name = try appchainErc20.name() else {
+            guard let name = try erc20.name() else {
                 return nil
             }
 
-            guard let symbol = try appchainErc20.symbol() else {
+            guard let symbol = try erc20.symbol() else {
                 return TokenModel()
             }
 
-            guard let decimals = try appchainErc20.decimals() else {
+            guard let decimals = try erc20.decimals() else {
                 return nil
             }
 

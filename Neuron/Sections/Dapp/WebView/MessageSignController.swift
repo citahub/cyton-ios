@@ -8,7 +8,7 @@
 
 import UIKit
 import BLTNBoard
-import AppChain
+import CITA
 
 protocol MessageSignControllerDelegate: class {
     func messageSignCallBackWebView(id: Int, value: String, error: DAppError?)

@@ -8,7 +8,7 @@
 
 import Foundation
 import Alamofire
-import AppChain
+import CITA
 import RealmSwift
 
 struct DAppAction {

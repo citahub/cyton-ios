@@ -1,5 +1,5 @@
 //
-//  AppChain+TransactionDetails.swift
+//  CITA+TransactionDetails.swift
 //  Neuron
 //
 //  Created by 晨风 on 2018/11/16.
@@ -9,7 +9,7 @@
 import Foundation
 import BigInt
 import Alamofire
-import AppChain
+import CITA
 import PromiseKit
 
 class CITATransactionDetails: TransactionDetails {
@@ -50,7 +50,7 @@ class CITATransactionDetails: TransactionDetails {
     }
 }
 
-private struct AppChainTransactionsResponse: Decodable {
+private struct CITATransactionsResponse: Decodable {
     let result: Result
     struct Result: Decodable {
         let count: UInt
@@ -58,14 +58,14 @@ private struct AppChainTransactionsResponse: Decodable {
     }
 }
 
-private struct AppChainTransactionResponse: Decodable {
+private struct CITATransactionResponse: Decodable {
     let result: Result
     struct Result: Decodable {
         let transaction: CITATransactionDetails?
     }
 }
 
-private struct AppChainErc20TransactionsResponse: Decodable {
+private struct CITAErc20TransactionsResponse: Decodable {
     let result: Result
     struct Result: Decodable {
         let transfers: [CITATransactionDetails]
@@ -84,7 +84,7 @@ extension CITANetwork {
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainTransactionsResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITATransactionsResponse.self, from: responseData)
                     let transactions = response.result.transactions
                     resolver.fulfill(transactions)
                 } catch {
@@ -106,7 +106,7 @@ extension CITANetwork {
             Alamofire.request(url, method: .get, parameters: parameters).responseJSON { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainErc20TransactionsResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITAErc20TransactionsResponse.self, from: responseData)
                     let transactions = response.result.transfers
                     resolver.fulfill(transactions)
                 } catch {
@@ -122,7 +122,7 @@ extension CITANetwork {
             Alamofire.request(url, method: .get, parameters: nil).responseData(completionHandler: { (response) in
                 do {
                     guard let responseData = response.data else { throw TransactionHistoryError.networkFailure }
-                    let response = try JSONDecoder().decode(AppChainTransactionResponse.self, from: responseData)
+                    let response = try JSONDecoder().decode(CITATransactionResponse.self, from: responseData)
                     if let transaction = response.result.transaction {
                         resolver.fulfill(transaction)
                     } else {

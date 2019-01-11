@@ -49,9 +49,9 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         if chain.chainId == Chain().defaultChain.chainId {
             ethereumERC20Token(contractAddress: inputText)
         } else if chain.chainId == SwitchChainViewController().appChainId {
-            appchainNativeToken(nodeAddress: inputText)
+            citaNativeToken(nodeAddress: inputText)
         } else {
-            appchainERC20Token(chain: chain, contractAddress: inputText)
+            citaERC20Token(chain: chain, contractAddress: inputText)
         }
     }
 
@@ -162,11 +162,11 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func appchainNativeToken(nodeAddress: String) {
+    func citaNativeToken(nodeAddress: String) {
         Toast.showHUD()
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            let (tokenModel, chainModel) = AddCITAToken.appChainNativeToken(nodeAddress: nodeAddress)
+            let (tokenModel, chainModel) = AddCITAToken.nativeToken(nodeAddress: nodeAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if tokenModel != nil && chainModel != nil {
@@ -178,11 +178,11 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
 
-    func appchainERC20Token(chain: Chain, contractAddress: String) {
+    func citaERC20Token(chain: Chain, contractAddress: String) {
         Toast.showHUD()
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            let tokenModel = AddCITAToken.appChainERC20Token(chain: chain, contractAddress: contractAddress)
+            let tokenModel = AddCITAToken.erc20Token(chain: chain, contractAddress: contractAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if tokenModel != nil {

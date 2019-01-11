@@ -1,5 +1,5 @@
 //
-//  AppChainBalanceLoader.swift
+//  CITABalanceLoader.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/12/13.
@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 import BigInt
 
 class CITABalanceLoader {
-    private let cita: AppChain
+    private let cita: CITA
     private let walletAddress: String
 
-    init(cita: AppChain, address: String) {
+    init(cita: CITA, address: String) {
         self.cita = cita
         self.walletAddress = address
     }
@@ -24,6 +24,6 @@ class CITABalanceLoader {
     }
 
     func getERC20Balance(contractAddress: String) throws -> BigUInt {
-        return try CITAERC20(appChain: cita, contractAddress: contractAddress).balance() ?? 0
+        return try CITAERC20(cita: cita, contractAddress: contractAddress).balance() ?? 0
     }
 }

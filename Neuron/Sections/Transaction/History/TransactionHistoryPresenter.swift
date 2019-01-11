@@ -25,7 +25,7 @@ class TransactionHistoryPresenter: NSObject {
         self.token = token
         super.init()
         observeEthereumTxStatus()
-        observeAppChainTxStatus()
+        observeCITATxStatus()
     }
 
     func reloadData(completion: CallbackBlock? = nil) {
@@ -160,19 +160,19 @@ extension TransactionHistoryPresenter {
 }
 
 extension TransactionHistoryPresenter {
-    private func observeAppChainTxStatus() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateAppChainTxStatus(notification:)), name: CITALocalTxPool.didUpdateTxStatus, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(didAddAppChainLocalTxAction(notification:)), name: CITALocalTxPool.didAddLocalTx, object: nil)
+    private func observeCITATxStatus() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didUpdateCITATxStatus(notification:)), name: CITALocalTxPool.didUpdateTxStatus, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didAddCITALocalTxAction(notification:)), name: CITALocalTxPool.didAddLocalTx, object: nil)
     }
 
-    @objc func didAddAppChainLocalTxAction(notification: Notification) {
+    @objc func didAddCITALocalTxAction(notification: Notification) {
         guard let transaction = notification.userInfo![CITALocalTxPool.txKey] as? CITATransactionDetails else { return }
         guard transaction.token == token else { return }
         transactions.insert(transaction, at: 0)
         delegate?.didLoadTransactions(transaction: transactions, insertions: [0], error: nil)
     }
 
-    @objc func didUpdateAppChainTxStatus(notification: Notification) {
+    @objc func didUpdateCITATxStatus(notification: Notification) {
         guard let transaction = notification.userInfo![CITALocalTxPool.txKey] as? CITATransactionDetails else { return }
         guard transaction.token == token else { return }
         guard let idx = transactions.firstIndex(where: { $0.hash == transaction.hash }) else { return }

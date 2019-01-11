@@ -14,7 +14,7 @@ enum SendTransactionError: String, LocalizedError {
     case invalidContractAddress
     case noAvailableKeys
     case createTransactionIssue
-    case invalidAppChainNode
+    case invalidCITANode
     case invalidChainId
     case signTXFailed
 

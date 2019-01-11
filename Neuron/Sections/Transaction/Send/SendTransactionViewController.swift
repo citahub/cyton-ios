@@ -9,7 +9,7 @@
 import UIKit
 import BLTNBoard
 import BigInt
-import AppChain
+import CITA
 import RealmSwift
 
 class SendTransactionViewController: UITableViewController, TransactonSender {
@@ -158,7 +158,7 @@ private extension SendTransactionViewController {
                 if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
                     _ = try self.sendEthereumTransaction(password: password)
                 } else {
-                    _ = try self.sendAppChainTransaction(password: password)
+                    _ = try self.sendCITATransaction(password: password)
                 }
                 DispatchQueue.main.async {
                     // TODO: send back txHash?

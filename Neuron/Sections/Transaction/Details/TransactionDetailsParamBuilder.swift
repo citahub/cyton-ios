@@ -81,21 +81,21 @@ class TransactionDetailsParamBuilder {
 
     func buildTxFee() {
         if tx.status == .success || tx.status == .pending {
-            if let ethereum = tx as? EthereumTransactionDetails {
-                txFee = (ethereum.gasUsed * ethereum.gasPrice).toAmountText() + " ETH"
-                gasPrice = "\(ethereum.gasPrice.toGweiText()) Gwei"
-            } else if let appChain = tx as? CITATransactionDetails {
-                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
+            if let etherTx = tx as? EthereumTransactionDetails {
+                txFee = (etherTx.gasUsed * etherTx.gasPrice).toAmountText() + " ETH"
+                gasPrice = "\(etherTx.gasPrice.toGweiText()) Gwei"
+            } else if let citaTx = tx as? CITATransactionDetails {
+                let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: citaTx.token.chainHost)
                 gasPrice = "\(quotaPrice.toAmountText()) NATT"
-                txFee = ((appChain.quotaUsed > 0 ? appChain.quotaUsed : appChain.gasLimit) * quotaPrice).toAmountText() + " NATT"
+                txFee = ((citaTx.quotaUsed > 0 ? citaTx.quotaUsed : citaTx.gasLimit) * quotaPrice).toAmountText() + " NATT"
             }
         }
         gasLimit = tx.status == .pending ? "\(tx.gasLimit)" : nil
         if tx.status == .success {
-            if let ethereum = tx as? EthereumTransactionDetails {
-                gasUsed = "\(ethereum.gasUsed)"
-            } else if let appChain = tx as? CITATransactionDetails {
-                gasUsed = "\(appChain.quotaUsed)"
+            if let etherTx = tx as? EthereumTransactionDetails {
+                gasUsed = "\(etherTx.gasUsed)"
+            } else if let citaTx = tx as? CITATransactionDetails {
+                gasUsed = "\(citaTx.quotaUsed)"
             }
         }
     }

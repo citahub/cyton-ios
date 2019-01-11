@@ -8,7 +8,7 @@
 
 import UIKit
 import BLTNBoard
-import AppChain
+import CITA
 import BigInt
 import Web3swift
 import EthereumAddress
@@ -135,7 +135,7 @@ private extension ContractController {
                 if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
                     txHash = try self.sendEthereumTransaction(password: password)
                 } else {
-                    txHash = try self.sendAppChainTransaction(password: password)
+                    txHash = try self.sendCITATransaction(password: password)
                 }
 
                 DispatchQueue.main.async {

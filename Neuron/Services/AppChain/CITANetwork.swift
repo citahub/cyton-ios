@@ -1,5 +1,5 @@
 //
-//  AppChainNetwork.swift
+//  CITANetwork.swift
 //  Neuron
 //
 //  Created by XiaoLu on 2018/7/31.
@@ -7,14 +7,14 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 
 struct CITANetwork {
     static let defaultNode = "http://121.196.200.225:1337"
 
-    static func cita(url: URL? = URL(string: defaultNode)!) -> AppChain {
+    static func cita(url: URL? = URL(string: defaultNode)!) -> CITA {
         let url = url == nil ? URL(string: defaultNode)! : url!
-        return AppChain(provider: HTTPProvider(url)!)
+        return CITA(provider: HTTPProvider(url)!)
     }
 
     func host() -> URL {

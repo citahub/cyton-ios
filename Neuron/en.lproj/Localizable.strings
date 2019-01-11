@@ -130,7 +130,7 @@
 
 // Wallet QRCode
 // ---------------------------------------------------------
-"Wallet.QRCode.desc" = "Please do not deposit any digital assets other than ETH and AppChain to above address";
+"Wallet.QRCode.desc" = "Please do not deposit any digital assets other than ETH and CITA to above address";
 "Wallet.QRCode.copy" = "Copy";
 "Wallet.QRCode.copySuccess" = "Address is copied to clipboard";
 
@@ -339,7 +339,7 @@
 "Assets.AddAssets.NodeAddressPlaceHolder" = "Enter";
 "Assets.AddAssets.Search" = "Search";
 "Assets.AddAssets.EmptyResult" = "Incorrect contract address";
-"Assets.AddAssets.AppChainNativeCoin" = "AppChain Native Token";
+"Assets.AddAssets.CITANativeCoin" = "CITA Native Token";
 "Assets.AddAssets.SwitchChainNetWorkTitle" = "Blockchain";
 "Assets.AddAssets.AlreadyExist" = "You have the token in your list.";
 "Assets.AddAssets.StoreFailed" = "Failed to add token";

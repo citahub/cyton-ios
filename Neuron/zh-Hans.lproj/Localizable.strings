@@ -130,7 +130,7 @@
 
 // Wallet QRCode
 // ---------------------------------------------------------
-"Wallet.QRCode.desc" = "此地址只接收AppChain、以太坊Token，发送其他币种到此地址将不可找回";
+"Wallet.QRCode.desc" = "此地址只接收CITA、以太坊Token，发送其他币种到此地址将不可找回";
 "Wallet.QRCode.copy" = "复制";
 "Wallet.QRCode.copySuccess" = "地址已经复制到粘贴板";
 
@@ -339,7 +339,7 @@
 "Assets.AddAssets.NodeAddressPlaceHolder" = "请输入节点地址";
 "Assets.AddAssets.Search" = "查询";
 "Assets.AddAssets.TokenMessage" = "代币信息";
-"Assets.AddAssets.AppChainNativeCoin" = "AppChain 原生代币";
+"Assets.AddAssets.CITANativeCoin" = "CITA 原生代币";
 "Assets.AddAssets.EmptyResult" = "请输入正确的合约地址";
 "Assets.AddAssets.EmptySymbol" = "您的代币没有名称，无法成功导入!";
 "Assets.AddAssets.AlreadyExist" = "您的列表已有该代币";

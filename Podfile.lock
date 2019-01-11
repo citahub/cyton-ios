@@ -1,14 +1,14 @@
 PODS:
   - Alamofire (4.7.3)
-  - AppChainSwift (0.20.5):
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - BulletinBoard (3.0.0)
+  - CITA (0.20.5):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - PromiseKit (~> 6.5)
     - secp256k1_swift (~> 1.0.3)
     - SwiftProtobuf (~> 1.2.0)
-  - BigInt (3.1.0):
-    - SipHash (~> 1.2)
-  - BulletinBoard (3.0.0)
   - CryptoSwift (0.13.0)
   - EFQRCode (4.3.0)
   - EthereumABI (1.1.1):
@@ -57,8 +57,8 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.5`)
   - BulletinBoard (from `https://github.com/alexaubry/BulletinBoard`, commit `7086607d3476cea29cd77a65d13df5c8ed0da52e`)
+  - CITA (from `https://github.com/cryptape/appchain-swift`, commit `249369dec5185e68d274c926c5b68840d6a54b86`)
   - EFQRCode
   - IQKeyboardManagerSwift
   - QRCodeReader.swift
@@ -92,26 +92,26 @@ SPEC REPOS:
     - web3swift
 
 EXTERNAL SOURCES:
-  AppChainSwift:
-    :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
+  CITA:
+    :commit: 249369dec5185e68d274c926c5b68840d6a54b86
+    :git: https://github.com/cryptape/appchain-swift
 
 CHECKOUT OPTIONS:
-  AppChainSwift:
-    :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
+  CITA:
+    :commit: 249369dec5185e68d274c926c5b68840d6a54b86
+    :git: https://github.com/cryptape/appchain-swift
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppChainSwift: 0957a762aa81d31cee3276834096e0f6d4fca1fd
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BulletinBoard: 927f4f9fd22503ceecd71bfc830fd65d5996593a
+  CITA: 89f5b7325029d4eaa96656fce18649b1df42df5e
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
@@ -131,6 +131,6 @@ SPEC CHECKSUMS:
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: e9873368f01cde7ebc847a764c0171b76e3ada09
+PODFILE CHECKSUM: 8ecb7285c91b622942bf16841b1eb8a75f805332
 
 COCOAPODS: 1.5.3

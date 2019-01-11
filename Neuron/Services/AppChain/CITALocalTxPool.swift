@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 import BigInt
-import AppChain
+import CITA
 
 class CITALocalTx: Object {
     @objc dynamic var token: TokenModel!
@@ -53,8 +53,8 @@ class CITALocalTx: Object {
 }
 
 class CITALocalTxPool: NSObject {
-    static let didUpdateTxStatus = Notification.Name("AppChainLocalTxPool.didUpdateTxStatus")
-    static let didAddLocalTx = Notification.Name("AppChainLocalTxPool.didAddLocalTx")
+    static let didUpdateTxStatus = Notification.Name("CITALocalTxPool.didUpdateTxStatus")
+    static let didAddLocalTx = Notification.Name("CITALocalTxPool.didAddLocalTx")
     static let txKey = "tx"
     static let pool = CITALocalTxPool()
 
@@ -123,7 +123,7 @@ class CITALocalTxPool: NSObject {
     }
 
     private func checkLocalTxStatus(localTx: CITALocalTx) {
-        let appChain = AppChain(provider: HTTPProvider(URL(string: localTx.token.chain.httpProvider)!)!)
+        let cita = CITA(provider: HTTPProvider(URL(string: localTx.token.chain.httpProvider)!)!)
         let realm = try! Realm()
         do {
             try realm.write {
@@ -136,7 +136,7 @@ class CITALocalTxPool: NSObject {
                         }
                     }
                 }
-                let currentBlockNumber = try appChain.rpc.blockNumber()
+                let currentBlockNumber = try cita.rpc.blockNumber()
                 if localTx.status == .pending && localTx.validUntilBlock < BigUInt(currentBlockNumber) {
                     localTx.status = .failure
                 }
@@ -186,8 +186,8 @@ extension CITALocalTx {
         static var transactionReceipt = 0
     }
 
-    private var cita: AppChain {
-        return AppChain(provider: HTTPProvider(URL(string: token.chain.httpProvider)!)!)
+    private var cita: CITA {
+        return CITA(provider: HTTPProvider(URL(string: token.chain.httpProvider)!)!)
     }
 
     fileprivate var transactionReceipt: TransactionReceipt? {

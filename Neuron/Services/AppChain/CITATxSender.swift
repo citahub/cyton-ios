@@ -1,5 +1,5 @@
 //
-//  AppChainTxSender.swift
+//  CITATxSender.swift
 //  Neuron
 //
 //  Created by James Chen on 2018/11/06.
@@ -7,17 +7,17 @@
 //
 
 import Foundation
-import AppChain
+import CITA
 import EthereumAddress
 import BigInt
 
 class CITATxSender {
-    private let cita: AppChain
+    private let cita: CITA
     private let walletManager: WalletManager
     private let from: Address
 
-    init(appChain: AppChain, walletManager: WalletManager, from: String) throws {
-        self.cita = appChain
+    init(cita: CITA, walletManager: WalletManager, from: String) throws {
+        self.cita = cita
         self.walletManager = walletManager
         guard let fromAddress = Address(from) else {
             throw SendTransactionError.invalidSourceAddress
@@ -81,7 +81,7 @@ class CITATxSender {
         guard let blockNumber = try? cita.rpc.blockNumber() else {
             throw SendTransactionError.createTransactionIssue
         }
-        guard let data = try CITAERC20(appChain: cita, contractAddress: contract).transferData(to: to, amount: value) else {
+        guard let data = try CITAERC20(cita: cita, contractAddress: contract).transferData(to: to, amount: value) else {
             throw SendTransactionError.createTransactionIssue
         }
 
