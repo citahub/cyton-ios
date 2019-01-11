@@ -17,7 +17,6 @@ protocol MessageSignControllerDelegate: class {
 class MessageSignController: UIViewController {
     var dappCommonModel: DAppCommonModel!
     weak var delegate: MessageSignControllerDelegate?
-//    private var chainType: ChainType = .cita
 
     private lazy var messagePageItem: SignMessagePageItem = {
         return SignMessagePageItem.create()
