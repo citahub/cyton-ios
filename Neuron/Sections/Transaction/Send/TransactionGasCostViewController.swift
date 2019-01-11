@@ -93,7 +93,7 @@ class TransactionGasCostViewController: UITableViewController {
                     return
                 }
             }
-        } else if paramBuilder.tokenType == .appChain || paramBuilder.tokenType == .appChainErc20 {
+        } else if paramBuilder.tokenType == .cita || paramBuilder.tokenType == .citaErc20 {
             gasPriceTextField.isEnabled = false
             if paramBuilder.gasLimit < paramBuilder.estimateGasLimit() {
                 Toast.showToast(text: "Transaction.Send.quotaLimitSettingIsTooLow".localized())
@@ -115,7 +115,7 @@ class TransactionGasCostViewController: UITableViewController {
 
     private func updateGasCost() {
         switch paramBuilder.tokenType {
-        case .appChain, .appChainErc20:
+        case .cita, .citaErc20:
             gasPriceTextField.text = paramBuilder.gasPrice.toAmountText(paramBuilder.nativeTokenDecimals)
             gasPriceSymbolLabel.text = "NATT"
             gasPriceTextField.isEnabled = false
@@ -177,7 +177,7 @@ extension TransactionGasCostViewController {
             }
         }
         if indexPath.row == 3 {
-            if paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .appChainErc20 || dataString != nil {
+            if paramBuilder.tokenType == .erc20 || paramBuilder.tokenType == .citaErc20 || dataString != nil {
                 return 0.0
             }
         }

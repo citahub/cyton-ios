@@ -12,7 +12,7 @@ import Web3swift
 import EthereumAddress
 import BigInt
 
-class AppChainERC20 {
+class CITAERC20 {
     private let appChain: AppChain
     private let contractAddress: String
     private let contract: EthereumContract

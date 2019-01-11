@@ -166,7 +166,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         Toast.showHUD()
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            let (tokenModel, chainModel) = AddAppChainToken.appChainNativeToken(nodeAddress: nodeAddress)
+            let (tokenModel, chainModel) = AddCITAToken.appChainNativeToken(nodeAddress: nodeAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if tokenModel != nil && chainModel != nil {
@@ -182,7 +182,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         Toast.showHUD()
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
-            let tokenModel = AddAppChainToken.appChainERC20Token(chain: chain, contractAddress: contractAddress)
+            let tokenModel = AddCITAToken.appChainERC20Token(chain: chain, contractAddress: contractAddress)
             DispatchQueue.main.async {
                 Toast.hideHUD()
                 if tokenModel != nil {

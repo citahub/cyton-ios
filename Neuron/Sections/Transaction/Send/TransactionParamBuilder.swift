@@ -54,9 +54,9 @@ class TransactionParamBuilder: NSObject {
     ///   when sending ERC20. UI layer should check that.
     var hasSufficientBalance: Bool {
         switch tokenType {
-        case .ether, .appChain:
+        case .ether, .cita:
             return tokenBalance >= value + txFee
-        case .erc20, .appChainErc20:
+        case .erc20, .citaErc20:
             return tokenBalance >= value
         }
     }
@@ -141,7 +141,7 @@ class TransactionParamBuilder: NSObject {
         switch tokenType {
         case .ether, .erc20:
             GasPriceFetcher().fetchGasPrice(then: fetched)
-        case .appChain, .appChainErc20:
+        case .cita, .citaErc20:
             GasPriceFetcher().fetchQuotaPrice(rpcNode: rpcNode, then: fetched)
         }
     }
@@ -149,11 +149,11 @@ class TransactionParamBuilder: NSObject {
     // TODO: implement estimate gas
     private func fetchGasLimit() {
         switch tokenType {
-        case .ether, .appChain:
+        case .ether, .cita:
             gasLimit = GasCalculator.defaultGasLimit
         case .erc20:
             gasLimit = 100_000
-        case .appChainErc20:
+        case .citaErc20:
             gasLimit = 200_000
         }
     }

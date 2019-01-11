@@ -9,13 +9,13 @@
 import Foundation
 import RealmSwift
 
-class AddAppChainToken {
+class AddCITAToken {
     static func appChainNativeToken(nodeAddress: String) -> (TokenModel?, ChainModel?) {
         if !nodeAddress.hasPrefix("http") {
             return (nil, nil)
         }
-        let appChain = AppChainNetwork.appChain(url: URL(string: nodeAddress))
-        guard let metaData = try? appChain.rpc.getMetaData() else {
+        let cita = CITANetwork.cita(url: URL(string: nodeAddress))
+        guard let metaData = try? cita.rpc.getMetaData() else {
             return (nil, nil)
         }
         let chainModel = ChainModel()
@@ -42,8 +42,8 @@ class AddAppChainToken {
 
     static func appChainERC20Token(chain: Chain, contractAddress: String) -> TokenModel? {
         do {
-            let appChain = AppChainNetwork.appChain(url: URL(string: chain.httpProvider))
-            let appchainErc20 = AppChainERC20(appChain: appChain, contractAddress: contractAddress)
+            let cita = CITANetwork.cita(url: URL(string: chain.httpProvider))
+            let appchainErc20 = CITAERC20(appChain: cita, contractAddress: contractAddress)
 
             guard let name = try appchainErc20.name() else {
                 return nil

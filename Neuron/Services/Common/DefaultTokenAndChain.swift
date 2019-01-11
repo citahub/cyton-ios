@@ -18,7 +18,7 @@ class DefaultTokenAndChain {
                 return
             }
             self.ethereum(wallet: walletModel)
-            self.testChain(chainHost: AppChainNetwork.defaultNode, wallet: walletModel)
+            self.testChain(chainHost: CITANetwork.defaultNode, wallet: walletModel)
             self.testChain(chainHost: "http://testnet.mba.cmbchina.biz:1337", wallet: walletModel)
         }
     }
@@ -49,7 +49,7 @@ class DefaultTokenAndChain {
 
     func testChain(chainHost: String, wallet: WalletModel) {
         do {
-            let metaData = try AppChainNetwork.appChain(url: URL(string: chainHost)).rpc.getMetaData()
+            let metaData = try CITANetwork.cita(url: URL(string: chainHost)).rpc.getMetaData()
             let tokenModel = TokenModel()
             tokenModel.symbol = metaData.tokenSymbol
             tokenModel.iconUrl = metaData.tokenAvatar

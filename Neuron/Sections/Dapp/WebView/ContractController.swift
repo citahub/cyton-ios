@@ -57,7 +57,7 @@ class ContractController: UITableViewController, TransactonSender {
 
         let wallet = AppModel.current.currentWallet
         if dappCommonModel.chainType == "AppChain" {
-            self.token = wallet!.tokenModelList.first(where: { $0.type == .appChain && $0.chain.chainId == "\(dappCommonModel.appChain!.chainId)" })?.token
+            self.token = wallet!.tokenModelList.first(where: { $0.type == .cita && $0.chain.chainId == "\(dappCommonModel.appChain!.chainId)" })?.token
             let gasLimit = dappCommonModel.appChain?.quota?.toBigUInt()
             paramBuilder = TransactionParamBuilder(token: token, gasPrice: nil, gasLimit: gasLimit)
             paramBuilder.value = dappCommonModel.appChain?.value?.toBigUInt() ?? 0

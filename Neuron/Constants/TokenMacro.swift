@@ -9,6 +9,6 @@
 import Foundation
 
 struct NativeDecimals {
-    /// ETH and AppChain token decimals, default to 18
+    /// ETH and CITA token decimals, default to 18
     static let nativeTokenDecimals = 18
 }

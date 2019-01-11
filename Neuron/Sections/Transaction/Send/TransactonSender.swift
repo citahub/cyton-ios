@@ -54,19 +54,19 @@ extension TransactonSender {
     func sendAppChainTransaction(password: String) throws -> TxHash {
         let appChain: AppChain
         if paramBuilder.rpcNode.isEmpty {
-            appChain = AppChainNetwork.appChain()
+            appChain = CITANetwork.cita()
         } else {
             guard let appChainUrl = URL(string: paramBuilder.rpcNode) else {
                 throw SendTransactionError.invalidAppChainNode
             }
-            appChain = AppChainNetwork.appChain(url: appChainUrl)
+            appChain = CITANetwork.cita(url: appChainUrl)
         }
-        let sender = try AppChainTxSender(
+        let sender = try CITATxSender(
             appChain: appChain,
             walletManager: WalletManager.default,
             from: paramBuilder.from
         )
-        if paramBuilder.tokenType == .appChain {
+        if paramBuilder.tokenType == .cita {
             let result = try sender.send(
                 to: paramBuilder.to,
                 value: paramBuilder.value,
@@ -99,7 +99,7 @@ extension TransactonSender {
     }
 
     func recordAppChainTx(txhash: String, validUntilBlock: BigUInt) {
-        AppChainLocalTxPool.pool.insertLocalTx(localTx: AppChainLocalTx(
+        CITALocalTxPool.pool.insertLocalTx(localTx: CITALocalTx(
             token: token.tokenModel, txHash: txhash, validUntilBlock: validUntilBlock,
             from: paramBuilder.from, to: paramBuilder.to, value: paramBuilder.value,
             quotaPrice: paramBuilder.gasPrice, quotaLimit: paramBuilder.gasLimit

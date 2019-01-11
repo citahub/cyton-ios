@@ -160,7 +160,7 @@ class TransactionDetailsViewController: UITableViewController {
             gasUsedTitleLabel.text = "Gas Used:"
             gasPriceTitleLabel.text = "Gas Price:"
             gasLimitTitleLabel.text = "Gas Limit:"
-        case .appChain, .appChainErc20:
+        case .cita, .citaErc20:
             chainIconView.image = UIImage(named: "icon_tx_details_chain_cita")
             gasUsedTitleLabel.text = "Quota Used:"
             gasPriceTitleLabel.text = "Quota Price:"

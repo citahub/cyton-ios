@@ -13,8 +13,8 @@ import RealmSwift
 enum TokenType: String {
     case ether
     case erc20
-    case appChain
-    case appChainErc20
+    case cita
+    case citaErc20
 }
 
 class Token {
@@ -90,10 +90,10 @@ class Token {
         }
 
         switch type {
-        case .appChain :
-            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHost)), address: walletAddress).getBalance()
-        case .appChainErc20 :
-            balance = try AppChainBalanceLoader(appChain: AppChainNetwork.appChain(url: URL(string: chainHost)), address: walletAddress).getERC20Balance(contractAddress: address)
+        case .cita :
+            balance = try CITABalanceLoader(cita: CITANetwork.cita(url: URL(string: chainHost)), address: walletAddress).getBalance()
+        case .citaErc20 :
+            balance = try CITABalanceLoader(cita: CITANetwork.cita(url: URL(string: chainHost)), address: walletAddress).getERC20Balance(contractAddress: address)
         case .ether:
             balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getBalance()
         case .erc20:
@@ -118,9 +118,9 @@ extension Token {
 extension Token {
     var nativeTokenSymbol: String {
         switch type {
-        case .erc20, .appChainErc20:
+        case .erc20, .citaErc20:
             return tokenModel.chain.nativeToken.symbol
-        case .ether, .appChain:
+        case .ether, .cita:
             return symbol
         }
     }

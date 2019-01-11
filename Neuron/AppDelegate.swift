@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GuideService.shared.register()
         AuthenticationService.shared.register()
         EthereumLocalTxPool.pool.register()
-        AppChainLocalTxPool.pool.register()
+        CITALocalTxPool.pool.register()
         return true
     }
 

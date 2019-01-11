@@ -37,7 +37,7 @@ class TransactionDetailsParamBuilder {
         switch tx.status {
         case .success:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
-            if tx.token.type == .appChain || tx.token.type == .appChainErc20 {
+            if tx.token.type == .cita || tx.token.type == .citaErc20 {
                 if tx.token.chainId == "1" {
                     txDetailsUrl = URL(string: "https://microscope.cryptape.com/#/transaction/\(tx.hash)")!
                 }
@@ -74,7 +74,7 @@ class TransactionDetailsParamBuilder {
         switch tx.token.type {
         case .ether, .erc20:
             network = EthereumNetwork().networkType.chainName
-        case .appChain, .appChainErc20:
+        case .cita, .citaErc20:
             network = tx.token.chainName
         }
     }
@@ -84,7 +84,7 @@ class TransactionDetailsParamBuilder {
             if let ethereum = tx as? EthereumTransactionDetails {
                 txFee = (ethereum.gasUsed * ethereum.gasPrice).toAmountText() + " ETH"
                 gasPrice = "\(ethereum.gasPrice.toGweiText()) Gwei"
-            } else if let appChain = tx as? AppChainTransactionDetails {
+            } else if let appChain = tx as? CITATransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: tx.token.chainHost)
                 gasPrice = "\(quotaPrice.toAmountText()) NATT"
                 txFee = ((appChain.quotaUsed > 0 ? appChain.quotaUsed : appChain.gasLimit) * quotaPrice).toAmountText() + " NATT"
@@ -94,7 +94,7 @@ class TransactionDetailsParamBuilder {
         if tx.status == .success {
             if let ethereum = tx as? EthereumTransactionDetails {
                 gasUsed = "\(ethereum.gasUsed)"
-            } else if let appChain = tx as? AppChainTransactionDetails {
+            } else if let appChain = tx as? CITATransactionDetails {
                 gasUsed = "\(appChain.quotaUsed)"
             }
         }

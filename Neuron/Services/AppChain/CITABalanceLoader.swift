@@ -10,20 +10,20 @@ import Foundation
 import AppChain
 import BigInt
 
-class AppChainBalanceLoader {
-    private let appChain: AppChain
+class CITABalanceLoader {
+    private let cita: AppChain
     private let walletAddress: String
 
-    init(appChain: AppChain, address: String) {
-        self.appChain = appChain
+    init(cita: AppChain, address: String) {
+        self.cita = cita
         self.walletAddress = address
     }
 
     func getBalance() throws -> BigUInt {
-        return try appChain.rpc.getBalance(address: walletAddress)
+        return try cita.rpc.getBalance(address: walletAddress)
     }
 
     func getERC20Balance(contractAddress: String) throws -> BigUInt {
-        return try AppChainERC20(appChain: appChain, contractAddress: contractAddress).balance() ?? 0
+        return try CITAERC20(appChain: cita, contractAddress: contractAddress).balance() ?? 0
     }
 }
