@@ -281,12 +281,12 @@ extension BrowserViewController {
     }
 
     func identificateValueAndGas(dappModel: DAppCommonModel) -> Bool {
-        if dappModel.chainType == "AppChain" {
-            if dappModel.appChain?.value?.toBigUInt() == nil {
+        if dappModel.chainType == .cita {
+            if dappModel.cita?.value?.toBigUInt() == nil {
                 Toast.showToast(text: "DApp.SendTransactionError.emptyValue".localized())
                 return false
             }
-            if dappModel.appChain?.quota == nil || dappModel.appChain?.quota?.count == 0 {
+            if dappModel.cita?.quota == nil || dappModel.cita?.quota?.count == 0 {
                 Toast.showToast(text: "DApp.SendTransactionError.emptyQuota".localized())
                 return false
             }

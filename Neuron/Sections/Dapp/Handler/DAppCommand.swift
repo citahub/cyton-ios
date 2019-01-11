@@ -9,17 +9,22 @@
 import Foundation
 import BigInt
 
+enum ChainType {
+    case cita
+    case eth
+}
+
 struct DAppCommonModel: Decodable {
     let name: Method
     let id: Int
-    let chainType: String
+    let chainType: ChainType
     private let object: Any
 
     var eth: ETHObject? {
         return object as? ETHObject
     }
-    var appChain: AppChainObject? {
-        return object as? AppChainObject
+    var cita: CITAObject? {
+        return object as? CITAObject
     }
 
     enum CodingKeys: String, CodingKey {
@@ -33,17 +38,17 @@ struct DAppCommonModel: Decodable {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         name = try! values.decode(Method.self, forKey: .name)
         id = try! values.decode(Int.self, forKey: .id)
-        chainType = try! values.decode(String.self, forKey: .chainType)
-
-        if chainType == "AppChain" {
-            object = try! values.decode(AppChainObject.self, forKey: .object)
+        if try! values.decode(String.self, forKey: .chainType) == "CITA" {
+            chainType = .cita
+            object = try! values.decode(CITAObject.self, forKey: .object)
         } else {
+            chainType = .eth
             object = try! values.decode(ETHObject.self, forKey: .object)
         }
     }
 }
 
-struct AppChainObject: Decodable {
+struct CITAObject: Decodable {
     let chainId: Int
     let data: String?
     let nonce: String?

@@ -17,7 +17,7 @@ protocol MessageSignControllerDelegate: class {
 class MessageSignController: UIViewController {
     var dappCommonModel: DAppCommonModel!
     weak var delegate: MessageSignControllerDelegate?
-    private var chainType: ChainType = .appChain
+//    private var chainType: ChainType = .cita
 
     private lazy var messagePageItem: SignMessagePageItem = {
         return SignMessagePageItem.create()
@@ -39,11 +39,9 @@ class MessageSignController: UIViewController {
         super.viewDidLoad()
 
         let dataText: String
-        if dappCommonModel.chainType == "AppChain" {
-            chainType = .appChain
-            dataText = dappCommonModel.appChain?.data ?? ""
+        if dappCommonModel.chainType == .cita {
+            dataText = dappCommonModel.cita?.data ?? ""
         } else {
-            chainType = .eth
             dataText = dappCommonModel.eth?.data ?? ""
         }
         messagePageItem.descriptionText = String(decoding: Data.fromHex(dataText)!, as: UTF8.self)
@@ -96,9 +94,9 @@ class MessageSignController: UIViewController {
 
 private extension MessageSignController {
     func signMessage(password: String) {
-        switch chainType {
-        case .appChain:
-            appChainSign(password: password)
+        switch dappCommonModel.chainType {
+        case .cita:
+            citaSign(password: password)
         case .eth:
             ethSign(password: password)
         }
@@ -115,10 +113,10 @@ private extension MessageSignController {
         }
     }
 
-    func appChainSign(password: String) {
+    func citaSign(password: String) {
         switch dappCommonModel.name {
         case .signMessage:
-            appChainSignMessage(password: password)
+            citaSignMessage(password: password)
         default:
             break
         }
@@ -166,7 +164,7 @@ private extension MessageSignController {
         }
     }
 
-    func appChainSignMessage(password: String) {
+    func citaSignMessage(password: String) {
         DispatchQueue.global().async {
             do {
                 let messageData = Data.fromHex(self.dappCommonModel.eth?.data ?? "") ?? Data()
