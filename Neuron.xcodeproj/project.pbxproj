@@ -860,7 +860,7 @@
 			children = (
 				8928C22A20AE7CB500C3103E /* Common */,
 				6E83CB87216F573100029324 /* Guide */,
-				8928C22720AE7CB500C3103E /* Dapp */,
+				8928C22720AE7CB500C3103E /* DApp */,
 				8928C27320B29ABB00C3103E /* Wallet */,
 				8922685820DE4EA50021A85F /* Settings */,
 				898A1A1D20B7B4F300ECB465 /* Transaction */,
@@ -869,7 +869,7 @@
 			path = Sections;
 			sourceTree = "<group>";
 		};
-		8928C22720AE7CB500C3103E /* Dapp */ = {
+		8928C22720AE7CB500C3103E /* DApp */ = {
 			isa = PBXGroup;
 			children = (
 				890E3112219BC56A00561F3D /* WebView */,
@@ -877,7 +877,7 @@
 				6EABFB0921991AF900305ED5 /* Native */,
 				89422FE921A7F9C900DD8744 /* TableViewCell */,
 			);
-			path = Dapp;
+			path = DApp;
 			sourceTree = "<group>";
 		};
 		8928C22A20AE7CB500C3103E /* Common */ = {
