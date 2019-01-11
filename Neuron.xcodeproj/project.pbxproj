@@ -559,7 +559,7 @@
 			path = Ethereum;
 			sourceTree = "<group>";
 		};
-		1A69465621904551000093A2 /* AppChain */ = {
+		1A69465621904551000093A2 /* CITA */ = {
 			isa = PBXGroup;
 			children = (
 				899AD19A211011F300A8AC09 /* CITANetwork.swift */,
@@ -570,7 +570,7 @@
 				896B32BA21BF865900C4DA7F /* CITA+AddToken.swift */,
 				6EDBE3A021DE02EA0087DA38 /* CITALocalTxPool.swift */,
 			);
-			path = AppChain;
+			path = CITA;
 			sourceTree = "<group>";
 		};
 		1A694657219046DB000093A2 /* Foundation */ = {
@@ -797,7 +797,7 @@
 			isa = PBXGroup;
 			children = (
 				898CA98420EA21E90059ECA3 /* Common */,
-				1A69465621904551000093A2 /* AppChain */,
+				1A69465621904551000093A2 /* CITA */,
 				1A694655219044FE000093A2 /* Ethereum */,
 				89D4AC1F20D59F270097E02B /* WalletManager */,
 			);
