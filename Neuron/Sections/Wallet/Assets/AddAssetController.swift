@@ -48,7 +48,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
         }
         if chain.chainId == Chain().defaultChain.chainId {
             ethereumERC20Token(contractAddress: inputText)
-        } else if chain.chainId == SwitchChainViewController().appChainId {
+        } else if chain.chainId == SwitchChainViewController().citaChainId {
             citaNativeToken(nodeAddress: inputText)
         } else {
             citaERC20Token(chain: chain, contractAddress: inputText)
@@ -119,7 +119,7 @@ class AddAssetController: UIViewController, UITableViewDelegate, UITableViewData
             let cell = tableView.dequeueReusableCell(withIdentifier: "contractAddressTableViewCell") as! ContractAddressTableViewCell
             cell.delegate = self
             cell.contractAddressTextField.text = inputText
-            if chain.chainId == SwitchChainViewController().appChainId {
+            if chain.chainId == SwitchChainViewController().citaChainId {
                 cell.contractAddressTextField.placeholder = "Assets.AddAssets.NodeAddressPlaceHolder".localized()
                 cell.contractAddressLabel.text = "Assets.AddAssets.NodeAddress".localized()
             } else {

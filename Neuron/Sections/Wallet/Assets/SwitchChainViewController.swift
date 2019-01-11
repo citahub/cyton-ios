@@ -20,7 +20,7 @@ class SwitchChainViewController: UIViewController {
     @IBOutlet private weak var closeButton: UIButton!
     @IBOutlet private weak var tableView: UITableView!
     let ethereumChainId = "ethereumERC20"// switch chain work only
-    let appChainId = "appChainNative"
+    let citaChainId = "citaNative"
 
     var chains: [Chain] = []
     var currentChain: Chain!
@@ -57,7 +57,7 @@ class SwitchChainViewController: UIViewController {
 
     func getChainModelList() {
         let ethChain = Chain().defaultChain
-        let testChain = Chain(chainId: appChainId, chainName: "Assets.AddAssets.CITANativeCoin".localized(), httpProvider: "")
+        let testChain = Chain(chainId: citaChainId, chainName: "Assets.AddAssets.CITANativeCoin".localized(), httpProvider: "")
         chains += [ethChain, testChain]
         let realm = try! Realm()
         let chainResult = realm.objects(ChainModel.self)
