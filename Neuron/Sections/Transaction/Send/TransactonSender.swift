@@ -54,12 +54,12 @@ extension TransactonSender {
     func sendCITATransaction(password: String) throws -> TxHash {
         let cita: CITA
         if paramBuilder.rpcNode.isEmpty {
-            cita = CITANetwork.cita()
+            cita = CITANetwork().cita
         } else {
             guard let citaUrl = URL(string: paramBuilder.rpcNode) else {
                 throw SendTransactionError.invalidCITANode
             }
-            cita = CITANetwork.cita(url: citaUrl)
+            cita = CITANetwork(url: citaUrl).cita
         }
         let sender = try CITATxSender(
             cita: cita,

@@ -10,20 +10,12 @@ import Foundation
 import CITA
 import BigInt
 
-class CITABalanceLoader {
-    private let cita: CITA
-    private let walletAddress: String
-
-    init(cita: CITA, address: String) {
-        self.cita = cita
-        self.walletAddress = address
-    }
-
-    func getBalance() throws -> BigUInt {
+extension CITANetwork {
+    func getBalance(walletAddress: String) throws -> BigUInt {
         return try cita.rpc.getBalance(address: walletAddress)
     }
 
-    func getERC20Balance(contractAddress: String) throws -> BigUInt {
+    func getErc20Balance(walletAddress: String, contractAddress: String) throws -> BigUInt {
         return try CITAERC20(cita: cita, contractAddress: contractAddress).balance() ?? 0
     }
 }

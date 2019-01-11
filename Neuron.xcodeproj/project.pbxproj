@@ -150,7 +150,7 @@
 		8978846321AD26690034AF4F /* neuron.js in Resources */ = {isa = PBXBuildFile; fileRef = 8978846221AD26690034AF4F /* neuron.js */; };
 		897AFC5B2130129500383A12 /* CurrencyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897AFC592130129500383A12 /* CurrencyViewController.swift */; };
 		8981212A218D3161000813C8 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89812129218D3161000813C8 /* QRCodeViewController.swift */; };
-		89880A2321C269F100A34A0B /* CITABalanceLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89880A2221C269F100A34A0B /* CITABalanceLoader.swift */; };
+		89880A2321C269F100A34A0B /* CITA+Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89880A2221C269F100A34A0B /* CITA+Balance.swift */; };
 		898889C62136521100D04AA8 /* KeystoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C52136521100D04AA8 /* KeystoreViewController.swift */; };
 		898889C82136526800D04AA8 /* MnemonicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C72136526800D04AA8 /* MnemonicViewController.swift */; };
 		898889CA2136528B00D04AA8 /* PrivatekeyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */; };
@@ -387,7 +387,7 @@
 		8978846221AD26690034AF4F /* neuron.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = neuron.js; sourceTree = "<group>"; };
 		897AFC592130129500383A12 /* CurrencyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyViewController.swift; sourceTree = "<group>"; };
 		89812129218D3161000813C8 /* QRCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
-		89880A2221C269F100A34A0B /* CITABalanceLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CITABalanceLoader.swift; sourceTree = "<group>"; };
+		89880A2221C269F100A34A0B /* CITA+Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CITA+Balance.swift"; sourceTree = "<group>"; };
 		898889C52136521100D04AA8 /* KeystoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreViewController.swift; sourceTree = "<group>"; };
 		898889C72136526800D04AA8 /* MnemonicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MnemonicViewController.swift; sourceTree = "<group>"; };
 		898889C92136528B00D04AA8 /* PrivatekeyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatekeyViewController.swift; sourceTree = "<group>"; };
@@ -564,7 +564,7 @@
 			children = (
 				899AD19A211011F300A8AC09 /* CITANetwork.swift */,
 				1A69465D21916C3D000093A2 /* CITATxSender.swift */,
-				89880A2221C269F100A34A0B /* CITABalanceLoader.swift */,
+				89880A2221C269F100A34A0B /* CITA+Balance.swift */,
 				6E3B2B70219EDA230095257D /* CITA+TransactionDetails.swift */,
 				892E5B1721B61F0000298845 /* CITA+ERC20.swift */,
 				896B32BA21BF865900C4DA7F /* CITA+AddToken.swift */,
@@ -1498,7 +1498,7 @@
 				8964A17D20BE7F750086848F /* MessageSignController.swift in Sources */,
 				6E867E11216CA51600BD6FE5 /* SettingCurrencyTableViewCell.swift in Sources */,
 				8928C2A320B41BCA00C3103E /* SelectWalletController.swift in Sources */,
-				89880A2321C269F100A34A0B /* CITABalanceLoader.swift in Sources */,
+				89880A2321C269F100A34A0B /* CITA+Balance.swift in Sources */,
 				89D4AC2E20D59F270097E02B /* WalletManager.swift in Sources */,
 				89FE21DA20EDB10900A09302 /* CustomERC20TokenService.swift in Sources */,
 				896B32BB21BF865900C4DA7F /* CITA+AddToken.swift in Sources */,

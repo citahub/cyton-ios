@@ -91,9 +91,9 @@ class Token {
 
         switch type {
         case .cita :
-            balance = try CITABalanceLoader(cita: CITANetwork.cita(url: URL(string: chainHost)), address: walletAddress).getBalance()
+            balance = try CITANetwork(url: chainHost).getBalance(walletAddress: walletAddress)
         case .citaErc20 :
-            balance = try CITABalanceLoader(cita: CITANetwork.cita(url: URL(string: chainHost)), address: walletAddress).getERC20Balance(contractAddress: address)
+            balance = try CITANetwork(url: chainHost).getErc20Balance(walletAddress: walletAddress, contractAddress: address)
         case .ether:
             balance = try EthereumBalanceLoader(web3: EthereumNetwork().getWeb3(), address: walletAddress).getBalance()
         case .erc20:

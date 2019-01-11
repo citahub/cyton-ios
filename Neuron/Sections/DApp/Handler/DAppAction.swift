@@ -81,7 +81,7 @@ struct DAppAction {
         guard let chainNode = manifest.chainSet?.values.first, let url = URL(string: chainNode) else {
             throw Error.emptyChainHosts
         }
-        let cita = CITANetwork.cita(url: url)
+        let cita = CITANetwork(url: url).cita
         DispatchQueue.global().async {
             do {
                 let metaData = try cita.rpc.getMetaData()

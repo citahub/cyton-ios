@@ -14,7 +14,7 @@ class AddCITAToken {
         if !nodeAddress.hasPrefix("http") {
             return (nil, nil)
         }
-        let cita = CITANetwork.cita(url: URL(string: nodeAddress))
+        let cita = CITANetwork(url: URL(string: nodeAddress)).cita
         guard let metaData = try? cita.rpc.getMetaData() else {
             return (nil, nil)
         }
@@ -42,7 +42,7 @@ class AddCITAToken {
 
     static func erc20Token(chain: Chain, contractAddress: String) -> TokenModel? {
         do {
-            let cita = CITANetwork.cita(url: URL(string: chain.httpProvider))
+            let cita = CITANetwork(url: URL(string: chain.httpProvider)).cita
             let erc20 = CITAERC20(cita: cita, contractAddress: contractAddress)
 
             guard let name = try erc20.name() else {

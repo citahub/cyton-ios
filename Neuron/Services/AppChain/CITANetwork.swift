@@ -8,16 +8,24 @@
 
 import Foundation
 import CITA
+import Alamofire
 
 struct CITANetwork {
     static let defaultNode = "http://121.196.200.225:1337"
 
-    static func cita(url: URL? = URL(string: defaultNode)!) -> CITA {
-        let url = url == nil ? URL(string: defaultNode)! : url!
-        return CITA(provider: HTTPProvider(url)!)
-    }
-
     func host() -> URL {
         return URL(string: "https://microscope.cryptape.com:8888")!
+    }
+
+    let cita: CITA
+
+    init(url: URLConvertible? = defaultNode) {
+        let provider: HTTPProvider
+        if let urlstring = url, let url = try? urlstring.asURL() {
+            provider = HTTPProvider(url)!
+        } else {
+            provider = HTTPProvider(try! CITANetwork.defaultNode.asURL())!
+        }
+        cita = CITA(provider: provider)
     }
 }

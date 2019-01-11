@@ -49,7 +49,7 @@ class DefaultTokenAndChain {
 
     func testChain(chainHost: String, wallet: WalletModel) {
         do {
-            let metaData = try CITANetwork.cita(url: URL(string: chainHost)).rpc.getMetaData()
+            let metaData = try CITANetwork(url: URL(string: chainHost)).cita.rpc.getMetaData()
             let tokenModel = TokenModel()
             tokenModel.symbol = metaData.tokenSymbol
             tokenModel.iconUrl = metaData.tokenAvatar

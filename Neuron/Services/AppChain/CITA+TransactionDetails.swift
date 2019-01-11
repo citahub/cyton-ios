@@ -74,7 +74,7 @@ private struct CITAErc20TransactionsResponse: Decodable {
 
 extension CITANetwork {
     func getTransactionHistory(walletAddress: String, page: UInt, pageSize: UInt) throws -> [CITATransactionDetails] {
-        let url = CITANetwork().host().appendingPathComponent("/api/transactions")
+        let url = host().appendingPathComponent("/api/transactions")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "page": page,
@@ -95,7 +95,7 @@ extension CITANetwork {
     }
 
     func getErc20TransactionHistory(walletAddress: String, tokenAddress: String, page: UInt, pageSize: UInt) throws -> [CITATransactionDetails] {
-        let url = CITANetwork().host().appendingPathComponent("/api/erc20/transfers")
+        let url = host().appendingPathComponent("/api/erc20/transfers")
         let parameters: [String: Any] = [
             "account": walletAddress.lowercased(),
             "address": tokenAddress,
@@ -117,7 +117,7 @@ extension CITANetwork {
     }
 
     func getTransaction(txhash: String) throws -> CITATransactionDetails {
-        let url = CITANetwork().host().appendingPathComponent("/api/transactions/\(txhash)")
+        let url = host().appendingPathComponent("/api/transactions/\(txhash)")
         return try Promise<CITATransactionDetails>.init { (resolver) in
             Alamofire.request(url, method: .get, parameters: nil).responseData(completionHandler: { (response) in
                 do {
