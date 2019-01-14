@@ -1,0 +1,75 @@
+Last updated on: June 29, 2018
+Dear users:
+The Nervos foundation (hereinafter referred to as "foundation" or "we") respects and protects the privacy of users (hereinafter referred to as "you" or "user"). When you use Cyton, the foundation will collect and use your personal information in accordance with this privacy policy (hereinafter referred to as "the policy").
+The foundation recommends that you read and understand the entire policy before using the product (hereafter referred to as "Cyton"), and that important information, including disclaimers, be bolded. The definition of key words in this policy is consistent with the foundation's Cyton service terms.
+This policy can be updated online by the foundation at any time. Once the updated policy is published, it replaces the original policy. If you do not accept the modified clause, please immediately stop using Cyton. Once the revised policy is published in Cyton, it takes effect automatically.
+You are aware that this policy and other relevant regulations apply to Cyton. Privacy policy of the other DApp developed by Foundation that Cyton links will be separately provided to you by the other DApp.
+
+I.What information do we collect from you
+Please be aware that we collect the following information for your needs in the Cyton service and we take your privacy seriously. When we collect your information, we will strictly abide by the principle of "lawful, just and necessary". And you know that if you do not provide the relevant information needed for our services, your service experience in Cyton may be affected as a result.
+1. For the purpose of Cyton service only, we will not collect your mobile device information, operation record, transaction record, wallet address, your name, bank card number, mobile phone number, email address and other personal information; The code used by Cyton will be open-sourced on Github.com to verify the above commitment.
+2. For the purpose of optimizing application experience, collect anonymous access statistics, but they do not belong to your personal information.
+3. What you know: your wallet password, private key, mnemonic word, and Keystore on the Cyton do not store or synchronize to the foundation server. The foundation does not provide a service for retrieving your wallet password, private key, mnemonic word, and Keystore.
+4. In addition to the above content, when you use the Cyton specific function, you will be prompted for more personal information before collecting it. If you choose not to agree, you are deemed to have given up using the particular function of Cyton.
+5. When you jump to another DApp developed by the Foundation or a DApp developed by a third party, the other or third party DApp will collect personal information from you with its own special terms and privacy scheme, and you need to make an independent judgment on whether to sign up to use the DApp. Cyton does not collect, retain, and use the personal information that the DApp collects from you.
+6. To the extent permitted by laws and regulations, the foundation may collect and use your personal information without your authorization and consent:
+(1) those related to national security and national defense security;
+(2) relating to public safety, public health and major public interests;
+(3) relating to criminal investigation, prosecution, trial and execution of judgment;
+(4) the personal information collected is open to the public by yourself;
+(5) collect your personal information from legally disclosed information, such as legitimate news reports, government information disclosure and other channels;
+(6) necessary to maintain the security and compliance of the service, such as finding and handling failures of products and services;
+(7) other circumstances stipulated by laws and regulations.
+
+II.How do we use your information
+1. We will send you important notice in time, such as software update, service agreement and change of this policy.
+2. We will provide you with the "fingerprint login" option in the Cyton's "system Settings" to allow you to easily and securely manage your crypto- tokens. Fingerprint information will remain local and Cyton will not collect and retain your fingerprint information.
+3. Provisions of laws and regulations and requirements for cooperation with regulatory authorities.
+
+III.How do you control your information
+You have the following independent control of your personal information in Cyton:
+1. You can import your other wallets into Cyton by synchronizing your wallet, or import your wallet in Cyton into other crypto- token management wallets. Cyton will show you the information to import the wallet.
+2. You are aware that you can modify your crypto-token type, transfer and collection activities through the "assets" section.
+3. You know that when we collect information from you for a specific purpose, we will inform you in advance and you have the right to refuse. But at the same time, you know that when you choose to refuse to provide information about the service, you forgo using the relevant service at Cyton.
+4. You know that you and we have no control over whether your transaction records are public or not, because based on the open source property of the blockchain transaction system, your transaction records are open and transparent in the whole blockchain system.
+5. You know when you use the function of the Cyton to jump to the development of Foundation’s other DApp or third-party DApp, our "Cyton service agreement", and the Cyton privacy policy will no longer applicable, for your personal information about you on the DApp control problem, we recommend that you read before using the DApp and to understand its privacy rules and the user service agreement, etc.
+6.You have the right to ask us to update, change, and delete your information collected by Cyton.
+7. You are aware that we may collect your information in accordance with the requirements of article 1, section 6 of this policy without obtaining your prior authorization consent.
+
+IV.We may share or transmit your information
+1. User personal information collected and generated by the foundation within the territory of the People's Republic of China will be stored on servers within the territory of the People's Republic of China. If the foundation really needs to transmit your personal information to overseas, it will obtain your authorization in advance, carry out cross-border data transmission in accordance with the requirements of relevant laws, regulations and policies, and perform the confidentiality obligation on your personal information.
+2. The foundation will not share or transfer your personal information to any third party without your prior consent, unless:
+(1) obtain your express consent or authorization in advance;
+(2) the personal information collected is open to the public by yourself;
+(3) the personal information collected is collected from the information disclosed legally, such as legal news reports, government information disclosure and other channels;
+(4) sharing with the foundation's affiliates, we will only share the necessary user information and will be bound by the stated purpose in this privacy clause;
+(5) to be provided in accordance with applicable laws and regulations, requirements of legal procedures, and requirements of administrative or judicial authorities;
+(6) when merger or acquisition is involved, if personal information transfer is involved, the foundation will require the recipient of personal information to continue to be bound by this policy.
+
+V. How do we protect your information
+1. If the Foundation ceases operation, the Foundation will stop the activity of collecting your personal information in time, put the notification of the cessation on the Cyton, and delete or anonymize your personal information held for a reasonable period of time.
+2. In order to protect your personal information, the Foundation will adopt data security technical measures, improve internal compliance level, increase internal employee information security training, and set up security access rights for relevant data to protect your privacy information.
+3. We will send you information about information security in the Cyton "message center" and periodically update your wallet usage and information protection information on the Cyton "help center" section for your reference.
+
+VI. The protection of minors
+We have the following special agreements on the protection of minors under the age of 18:
+1. Minors shall use Foundation services under the guidance of their parents or legal guardians.
+2. Parents and legal guardians of minors shall instruct minors in the use of Cyton on the premise of reading the policy, the Cyton service terms and our other relevant rules.
+3. The privacy and security of minors' personal information will be protected in accordance with national laws and regulations.
+
+VII. Disclaimer
+1. Please note that when you access the third-party DApp via Cyton links, the privacy policy issued by the third-party DApp will apply. The third-party DApp's collection and use of your personal information is not controlled by the Foundation and is not subject to this policy. The Foundation cannot guarantee that the third-party DApp will take personal information protection measures as required by the Foundation.
+2. You should carefully select and use third-party DApp and properly protect your personal information. The Foundation shall not be responsible for the privacy protection of other third-party DApp.
+3. Please note that when you use the Cyton access Foundation's other DApp, the privacy policy issued by that other DApp will apply. The DApp's collection and use of your personal information is not subject to this policy.
+4. The foundation shall, as far as possible, take reasonable security measures to protect your personal information at the current technical level to avoid information leakage, tampering or damage. The Foundation uses wireless to transmit data, so it cannot guarantee the privacy and security of transmitting data over the wireless network.
+
+VIII. Miscellaneous
+1. You need to fully understand and comply with all relevant laws, regulations and rules regarding your jurisdiction and use of foundation services.
+2. During the use of the foundation services, if you encounter any problems with the use of personal information, you can contact us by submitting feedback in Cyton.
+3. You can view this policy and the foundation's other service rules in Cyton. We encourage you to check the foundation's service protocol and privacy policy every time you visit Cyton.
+4. Any translated version of this policy is provided for the convenience of users only, and there is no intention to modify the terms of this policy. If there is a conflict between the Chinese version and the non-chinese version of this policy, the Chinese version shall prevail.
+5. This policy shall apply from June 29, 2018.
+
+For matters not covered by this policy, you shall comply with the announcement and relevant rules updated by the foundation from time to time.
+
+Nervos foundation
