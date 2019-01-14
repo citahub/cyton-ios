@@ -13,7 +13,7 @@
         <!--Settings View Controller-->
         <scene sceneID="K5j-4r-QvA">
             <objects>
-                <tableViewController id="cE0-S4-LPn" customClass="SettingsViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="cE0-S4-LPn" customClass="SettingsViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" sectionFooterHeight="-1" id="WaL-jo-VnF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -273,7 +273,7 @@
         <!--Common Web View Controller-->
         <scene sceneID="lzt-Hn-ubW">
             <objects>
-                <viewController storyboardIdentifier="CommonWebViewController" id="IoZ-7J-fyU" customClass="CommonWebViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommonWebViewController" id="IoZ-7J-fyU" customClass="CommonWebViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RlJ-JP-lwL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -298,7 +298,7 @@
         <!--Currency View Controller-->
         <scene sceneID="bJ8-uh-m9J">
             <objects>
-                <tableViewController storyboardIdentifier="CurrencyViewController" id="gAJ-Ph-Khh" customClass="CurrencyViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CurrencyViewController" id="gAJ-Ph-Khh" customClass="CurrencyViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="40" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="2fA-Yk-0tb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,7 +309,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="currencyCell" rowHeight="40" id="thF-qm-ugJ" customClass="CurrencyTableViewCell" customModule="Neuron" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="currencyCell" rowHeight="40" id="thF-qm-ugJ" customClass="CurrencyTableViewCell" customModule="Cyton" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="thF-qm-ugJ" id="ZtZ-mi-ytW">
@@ -359,7 +359,7 @@
         <!--Switch Network View Controller-->
         <scene sceneID="XG9-Ro-Kqm">
             <objects>
-                <tableViewController storyboardIdentifier="switchNetworkViewController" id="8sp-Gz-rtW" customClass="SwitchNetworkViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="switchNetworkViewController" id="8sp-Gz-rtW" customClass="SwitchNetworkViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Q94-Os-svw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -370,7 +370,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchNetwork" id="KgP-ce-xfm" customClass="SwitchNetworkTableViewCell" customModule="Neuron" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="switchNetwork" id="KgP-ce-xfm" customClass="SwitchNetworkTableViewCell" customModule="Cyton" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KgP-ce-xfm" id="4ez-ir-SIb">
@@ -423,7 +423,7 @@
         <!--我-->
         <scene sceneID="IY9-Hf-DOL">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cnK-C0-SxL" customClass="BaseNavigationController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cnK-C0-SxL" customClass="BaseNavigationController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="我" image="Main_off" selectedImage="Main_on" id="Agk-fQ-F3d"/>
                     <toolbarItems/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
