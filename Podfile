@@ -1,7 +1,7 @@
 source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 
-target 'Neuron' do
+target 'Cyton' do
   use_frameworks!
   inhibit_all_warnings!
 
@@ -18,12 +18,12 @@ target 'Neuron' do
   pod 'Toast-Swift', "~> 4.0.0"
   pod 'QRCodeReader.swift'
 
-  target 'NeuronTests' do
+  target 'CytonTests' do
     inherit! :search_paths
     # Pods for testing
   end
 
-  target 'NeuronUITests' do
+  target 'CytonUITests' do
     inherit! :search_paths
     # Pods for testing
   end
