@@ -1,44 +1,44 @@
-# Neuron Wallet (iOS)
+# Cyton Wallet (iOS)
 
-[![Travis](https://travis-ci.com/cryptape/neuron-ios.svg?branch=develop)](https://travis-ci.com/cryptape/neuron-ios)
+[![Travis](https://travis-ci.com/cryptape/Cyton-ios.svg?branch=develop)](https://travis-ci.com/cryptape/Cyton-ios)
 [![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
-[![AppChain](https://img.shields.io/badge/made%20for-Nervos%20AppChain-blue.svg)](https://appchain.nervos.org)
+[![CITA](https://img.shields.io/badge/made%20for-CITA-blue.svg)](https://www.citahub.com)
 
 # Overview
 
-Neuron is an open source blockchain wallet which supports Ethereum and [AppChain](https://docs.nervos.org/#/). It supports most tokens of Ethereum and [AppChain](https://docs.nervos.org/#/), such as ETH, ERC20, ERC721, and also supports most kinds of DApps of Ethereum and [AppChain](https://docs.nervos.org/#/) , such as cryptokitties, Fomo3D, 0xproject...
+Cyton is an open source blockchain wallet which supports Ethereum and [CITA](https://www.citahub.com). It supports most tokens of Ethereum and [CITA](https://www.citahub.com), such as ETH, ERC20, ERC721, and also supports most kinds of DApps of Ethereum and [CITA](https://www.citahub.com), such as cryptokitties, Fomo3D, 0xproject...
 
 # Usage
 
 ## Private key and address
 
-Neuron is a blockchain wallet that supports both Ethereum and Nervos [AppChain](https://docs.nervos.org/#/), you can use a single private key and address to access your Ethereum and AppChain account. **Neuron never saves your private key directly, you need to input password to sign every transaction. If you forget your private key, Neuron can not find and recover it, so you should save private key (keystore and mnemonic) carefully.**
+Cyton is a blockchain wallet that supports both Ethereum and [CITA](https://www.citahub.com), you can use a single private key and address to access your Ethereum and CITA account. **Cyton never saves your private key directly, you need to input password to sign every transaction. If you forget your private key, Cyton can not find and recover it, so you should save private key (keystore and mnemonic) carefully.**
 
-Neuron supports importing wallet through private key, keystore and mnemonic, and supports exporting keystore.
+Cyton supports importing wallet through private key, keystore and mnemonic, and supports exporting keystore.
 
 ## Token
 
-Neuron is a blockchain wallet which supports Ethereum, so you can view your ERC20 token balances and tranfer tokens to other accounts. If you can not find certain ERC20 token, you can input contract address to load token information and add to your token list.
+Cyton is a blockchain wallet which supports Ethereum, so you can view your ERC20 token balances and tranfer tokens to other accounts. If you can not find certain ERC20 token, you can input contract address to load token information and add to your token list.
 
-Nervos [AppChain](https://docs.nervos.org/#/) is a blockchain solution which includes blockchain kernel CITA, Neuron wallet, blockchain browser [Microscope](https://github.com/cryptape/microscope), cache server [ReBirth](https://github.com/cryptape/re-birth) and SDKs of different programming languages. [AppChain](https://docs.nervos.org/#/) supports Ethereum solidity contract, so all ERC contracts can deploy to AppChain directly.
+[CITA](https://www.citahub.com) is a blockchain solution which includes blockchain kernel CITA, Cyton wallet, blockchain browser [Microscope](https://github.com/cryptape/microscope), cache server [ReBirth](https://github.com/cryptape/re-birth) and SDKs of different programming languages. [CITA](https://www.citahub.com) supports Ethereum solidity contract, so all ERC contracts can deploy to CITA directly.
 
-AppChain is an open source blockchain solution, you can create your blockchain token by yourself and set any name(symbol) you like. All tokens on AppChain can display in Neuron wallet.
+CITA is an open source blockchain solution, you can create your blockchain token by yourself and set any name(symbol) you like. All tokens on CITA can display in Cyton wallet.
 
 ## DApp
 
-Neuron is also a DApp browser, which supprts Ethereum and [AppChain](https://docs.nervos.org/#/) DApps. Most popular Ethereum DApps, such as cryptokitties, Fomo3D and 0xproject, can run in Neuron directly. Neuron also supports AppChain DApps, which can be easily migrated from Ethereum. You can get more information about [how to develop an AppChain DApp](https://docs.nervos.org/nervos-appchain-docs/#/quick-start/build-dapp).
+Cyton is also a DApp browser, which supprts Ethereum and [CITA](https://www.citahub.com) DApps. Most popular Ethereum DApps, such as cryptokitties, Fomo3D and 0xproject, can run in Cyton directly. Cyton also supports CITA DApps, which can be easily migrated from Ethereum. 
 
 ## Get Started
 
 * From the project folder, run `pod install`.
-* Open `Neuron.xcworkspace` with Xcode.
-* Build and run the `Neuron` target.
+* Open `Cyton.xcworkspace` with Xcode.
+* Build and run the `Cyton` target.
 
-Neuron supports iOS 10 and newer versions.
+Cyton supports iOS 10 and newer versions.
 
 ## System Requirements
 
-To build Neuron, you'll need:
+To build Cyton, you'll need:
 
 * Swift 4.2 and later
 * Xcode 10 and later
@@ -58,4 +58,4 @@ expected to follow our code of conduct.
 
 # MIT License
 
-Neuron is open sourced under MIT License.
+Cyton is open sourced under MIT License.
