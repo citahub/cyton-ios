@@ -1,6 +1,6 @@
 # Cyton Wallet (iOS)
 
-[![Travis](https://travis-ci.com/cryptape/Cyton-ios.svg?branch=develop)](https://travis-ci.com/cryptape/Cyton-ios)
+[![Travis](https://travis-ci.com/cryptape/Cyton-ios.svg?branch=develop)](https://github.com/cryptape/cyton-ios)
 [![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![CITA](https://img.shields.io/badge/made%20for-CITA-blue.svg)](https://www.citahub.com)
 
