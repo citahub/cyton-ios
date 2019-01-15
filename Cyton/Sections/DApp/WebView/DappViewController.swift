@@ -9,11 +9,13 @@
 import UIKit
 import WebKit
 import JavaScriptCore
+import Alamofire
 
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
     private var mainUrl = URL(string: "https://dapp.cryptape.com")!
+    let netState = NetworkReachabilityManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,7 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         }
 
         loadRequest()
+        monitorNetwork()
     }
 
     private func addWebView() {
@@ -64,6 +67,19 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         var request = URLRequest(url: mainUrl)
         request.setAcceptLanguage()
         webView.load(request)
+    }
+
+    func monitorNetwork() {
+        netState?.listener = { state in
+            switch state {
+            case .unknown, .notReachable:
+                break
+            case .reachable:
+                self.removeOverlay()
+                self.loadRequest()
+                self.netState?.stopListening()
+            }
+        }
     }
 }
 
@@ -110,6 +126,7 @@ extension DappViewController: WKNavigationDelegate {
         let error = error as NSError
         errorOverlaycontroller.style = .networkFail
         if error.code == -1009 {
+            netState?.startListening()
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
         } else {
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
