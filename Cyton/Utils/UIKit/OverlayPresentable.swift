@@ -52,6 +52,7 @@ class ErrorOverlayViewController: UIViewController {
     var style: Style = .networkFail {
         didSet {
             _ = view // load view
+            refreshButton.setTitle("Common.Connection.Refresh".localized(), for: .normal)
             if style == .networkFail {
                 imageView.image = UIImage(named: "fail_icon")
                 messageLabel.text = "Common.NetworkError".localized()

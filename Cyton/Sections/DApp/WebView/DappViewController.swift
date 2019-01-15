@@ -9,6 +9,7 @@
 import UIKit
 import WebKit
 import JavaScriptCore
+import CoreTelephony
 
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
@@ -65,6 +66,20 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         request.setAcceptLanguage()
         webView.load(request)
     }
+
+    func monitorNetwork() {
+        let cellularData = CTCellularData()
+        cellularData.cellularDataRestrictionDidUpdateNotifier = { state in
+            DispatchQueue.main.async {
+                switch state {
+                case .notRestricted:
+                    self.removeOverlay()
+                    self.loadRequest()
+                default: break
+                }
+            }
+        }
+    }
 }
 
 // MARK: - User agent, JS, CSS style, etc.
@@ -107,11 +122,14 @@ extension DappViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        let error = error as NSError
         errorOverlaycontroller.style = .networkFail
-        if error.code == -1009 {
+        let cellularData = CTCellularData()
+        let state = cellularData.restrictedState
+        switch state {
+        case .restrictedStateUnknown, .restricted:
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
-        } else {
+            monitorNetwork()
+        case .notRestricted:
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
         }
         showOverlay()
