@@ -77,6 +77,7 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
             case .reachable:
                 self.removeOverlay()
                 self.loadRequest()
+                self.netState?.stopListening()
             }
         }
     }
