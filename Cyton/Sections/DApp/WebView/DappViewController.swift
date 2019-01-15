@@ -9,12 +9,13 @@
 import UIKit
 import WebKit
 import JavaScriptCore
-import CoreTelephony
+import Alamofire
 
 /// DApp Home
 class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentable {
     private let webView = WKWebView(frame: .zero)
     private var mainUrl = URL(string: "https://dapp.cryptape.com")!
+    let netState = NetworkReachabilityManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,7 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
         }
 
         loadRequest()
+        monitorNetwork()
     }
 
     private func addWebView() {
@@ -68,15 +70,13 @@ class DappViewController: UIViewController, WKUIDelegate, ErrorOverlayPresentabl
     }
 
     func monitorNetwork() {
-        let cellularData = CTCellularData()
-        cellularData.cellularDataRestrictionDidUpdateNotifier = { state in
-            DispatchQueue.main.async {
-                switch state {
-                case .notRestricted:
-                    self.removeOverlay()
-                    self.loadRequest()
-                default: break
-                }
+        netState?.listener = { state in
+            switch state {
+            case .unknown, .notReachable:
+                break
+            case .reachable:
+                self.removeOverlay()
+                self.loadRequest()
             }
         }
     }
@@ -122,14 +122,12 @@ extension DappViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        let error = error as NSError
         errorOverlaycontroller.style = .networkFail
-        let cellularData = CTCellularData()
-        let state = cellularData.restrictedState
-        switch state {
-        case .restrictedStateUnknown, .restricted:
+        if error.code == -1009 {
+            netState?.startListening()
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoseConnect".localized()
-            monitorNetwork()
-        case .notRestricted:
+        } else {
             errorOverlaycontroller.messageLabel.text = "Common.Connection.LoadFaild".localized()
         }
         showOverlay()
