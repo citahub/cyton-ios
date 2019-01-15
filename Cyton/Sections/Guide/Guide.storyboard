@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,13 +14,13 @@
         <!--Guide View Controller-->
         <scene sceneID="xbg-mg-C4i">
             <objects>
-                <viewController storyboardIdentifier="GuideViewController" id="O3T-88-B97" customClass="GuideViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GuideViewController" id="O3T-88-B97" customClass="GuideViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qgz-do-VwJ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1pw-Ug-Okf">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="qYv-5n-A9y">
@@ -25,8 +30,8 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="GuideCollectionViewCell" reuseIdentifier="GuideCollectionViewCell" id="Wq9-JJ-CWj" customClass="GuideCollectionViewCell" customModule="Neuron" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-33.5" width="375" height="667"/>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="GuideCollectionViewCell" reuseIdentifier="GuideCollectionViewCell" id="Wq9-JJ-CWj" customClass="GuideCollectionViewCell" customModule="Cyton" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -50,7 +55,7 @@
                                 </connections>
                             </collectionView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ncT-w6-Q3C">
-                                <rect key="frame" x="20" y="465" width="560" height="10"/>
+                                <rect key="frame" x="20" y="532" width="335" height="10"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="5hr-vH-ShC"/>
                                 </constraints>
@@ -58,7 +63,7 @@
                                 <color key="currentPageIndicatorTintColor" red="0.28235294119999998" green="0.42745098040000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rN5-2W-lBP">
-                                <rect key="frame" x="16" y="490" width="568" height="44"/>
+                                <rect key="frame" x="16" y="557" width="343" height="44"/>
                                 <color key="backgroundColor" red="0.27058823529999998" green="0.42352941179999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="5zE-3k-gVK"/>
@@ -76,7 +81,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0se-6B-q7Z">
-                                <rect key="frame" x="16" y="536" width="568" height="44"/>
+                                <rect key="frame" x="16" y="603" width="343" height="44"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="cee-cq-EtR"/>
@@ -118,32 +123,16 @@
         <!--Product Agreement View Controller-->
         <scene sceneID="sJW-Gw-4Km">
             <objects>
-                <viewController storyboardIdentifier="ProductAgreementViewController" id="3Kq-lC-yon" customClass="ProductAgreementViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProductAgreementViewController" id="3Kq-lC-yon" customClass="ProductAgreementViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dec-Lc-RM3">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QxX-vu-CJ7">
-                                <rect key="frame" x="52" y="119" width="495" height="333"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QxX-vu-CJ7">
+                                <rect key="frame" x="52" y="120" width="271" height="407"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MDE-DH-Lxm">
-                                        <rect key="frame" x="0.0" y="0.0" width="495" height="333"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAY-0L-22M">
-                                                <rect key="frame" x="15" y="269" width="472" height="18"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <inset key="titleEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="我以仔细阅读并同意以上条款" image="icon_check_no">
-                                                    <color key="titleColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="agreement:" destination="3Kq-lC-yon" eventType="touchUpInside" id="yWp-rp-gV8"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MDE-DH-Lxm">
+                                        <rect key="frame" x="0.0" y="0.0" width="271" height="407"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -151,9 +140,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GwS-7Y-8AD">
-                                        <rect key="frame" x="8" y="70" width="479" height="190"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="GwS-7Y-8AD">
+                                        <rect key="frame" x="8" y="70" width="255" height="264"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">最近更新于：2018年6月29日
 尊敬的用户：
@@ -164,21 +152,36 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cyton服务协议" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6M-M5-jxX">
-                                        <rect key="frame" x="8" y="20" width="472" height="42"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cyton服务协议" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B6M-M5-jxX">
+                                        <rect key="frame" x="12" y="20" width="247" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="EIA-49-77j"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K3H-pw-vFK">
-                                        <rect key="frame" x="15" y="292" width="465" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我以仔细阅读并同意以上条款" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LU1-mt-BhB">
+                                        <rect key="frame" x="12" y="344" width="247" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="enh-UG-hLq"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <color key="textColor" name="subhead_color"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K3H-pw-vFK">
+                                        <rect key="frame" x="15" y="366" width="241" height="1"/>
                                         <color key="backgroundColor" red="0.9137254901960784" green="0.92156862745098034" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="Ecr-Ro-M7Y"/>
+                                        </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-WN-cpJ">
-                                        <rect key="frame" x="0.0" y="293" width="495" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hQz-WN-cpJ">
+                                        <rect key="frame" x="0.0" y="367" width="271" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8ke-3z-Wwu"/>
+                                        </constraints>
                                         <state key="normal" title="继续">
                                             <color key="titleColor" red="0.27058823529411763" green="0.42352941176470588" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -188,6 +191,28 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="MDE-DH-Lxm" secondAttribute="bottom" id="6iM-VS-gPM"/>
+                                    <constraint firstAttribute="trailing" secondItem="MDE-DH-Lxm" secondAttribute="trailing" id="8sM-RW-pzB"/>
+                                    <constraint firstItem="B6M-M5-jxX" firstAttribute="top" secondItem="QxX-vu-CJ7" secondAttribute="top" constant="20" id="Bk1-eV-9I2"/>
+                                    <constraint firstItem="hQz-WN-cpJ" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" id="Bzv-6d-jd5"/>
+                                    <constraint firstItem="LU1-mt-BhB" firstAttribute="top" secondItem="GwS-7Y-8AD" secondAttribute="bottom" constant="10" id="Cb5-pz-44b"/>
+                                    <constraint firstItem="GwS-7Y-8AD" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" constant="8" id="DfX-N7-JNA"/>
+                                    <constraint firstAttribute="trailing" secondItem="LU1-mt-BhB" secondAttribute="trailing" constant="12" id="Ik7-50-azM"/>
+                                    <constraint firstItem="B6M-M5-jxX" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" constant="12" id="LHG-s1-Scq"/>
+                                    <constraint firstItem="MDE-DH-Lxm" firstAttribute="top" secondItem="QxX-vu-CJ7" secondAttribute="top" id="Nnr-Fr-EJj"/>
+                                    <constraint firstAttribute="trailing" secondItem="B6M-M5-jxX" secondAttribute="trailing" constant="12" id="PI4-Nw-zSH"/>
+                                    <constraint firstItem="K3H-pw-vFK" firstAttribute="top" secondItem="LU1-mt-BhB" secondAttribute="bottom" constant="4" id="dnf-6i-gDm"/>
+                                    <constraint firstAttribute="bottom" secondItem="hQz-WN-cpJ" secondAttribute="bottom" id="gkf-Fd-Pkf"/>
+                                    <constraint firstAttribute="trailing" secondItem="GwS-7Y-8AD" secondAttribute="trailing" constant="8" id="hE3-7I-O2m"/>
+                                    <constraint firstItem="hQz-WN-cpJ" firstAttribute="top" secondItem="K3H-pw-vFK" secondAttribute="bottom" id="iBe-GS-fFu"/>
+                                    <constraint firstAttribute="trailing" secondItem="hQz-WN-cpJ" secondAttribute="trailing" id="nEL-Ks-r1k"/>
+                                    <constraint firstItem="K3H-pw-vFK" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" constant="15" id="pIQ-Uw-hod"/>
+                                    <constraint firstItem="MDE-DH-Lxm" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" id="pVO-cH-JPb"/>
+                                    <constraint firstItem="GwS-7Y-8AD" firstAttribute="top" secondItem="B6M-M5-jxX" secondAttribute="bottom" constant="10" id="u9t-vg-R8d"/>
+                                    <constraint firstItem="LU1-mt-BhB" firstAttribute="leading" secondItem="QxX-vu-CJ7" secondAttribute="leading" constant="12" id="uWC-Qi-9IN"/>
+                                    <constraint firstAttribute="trailing" secondItem="K3H-pw-vFK" secondAttribute="trailing" constant="15" id="w2B-qg-B9f"/>
+                                </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="0.0"/>
@@ -208,10 +233,17 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bYd-Xa-K7S" firstAttribute="bottom" secondItem="QxX-vu-CJ7" secondAttribute="bottom" constant="140" id="A74-xZ-oSg"/>
+                            <constraint firstItem="QxX-vu-CJ7" firstAttribute="top" secondItem="bYd-Xa-K7S" secondAttribute="top" constant="100" id="DBr-w1-X9o"/>
+                            <constraint firstItem="bYd-Xa-K7S" firstAttribute="trailing" secondItem="QxX-vu-CJ7" secondAttribute="trailing" constant="52" id="hSN-2K-Zdp"/>
+                            <constraint firstItem="QxX-vu-CJ7" firstAttribute="leading" secondItem="bYd-Xa-K7S" secondAttribute="leading" constant="52" id="nnX-nv-DxO"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bYd-Xa-K7S"/>
                     </view>
                     <connections>
-                        <outlet property="checkButton" destination="kAY-0L-22M" id="foI-Za-EZZ"/>
+                        <outlet property="checkLabel" destination="LU1-mt-BhB" id="ZAW-VD-IDs"/>
+                        <outlet property="checkLabelHeight" destination="enh-UG-hLq" id="NYy-ET-25O"/>
                         <outlet property="confirmButton" destination="hQz-WN-cpJ" id="R1z-Mb-j8b"/>
                         <outlet property="textView" destination="GwS-7Y-8AD" id="vRS-g2-1ac"/>
                         <outlet property="titleLabel" destination="B6M-M5-jxX" id="80K-NA-HAb"/>
@@ -240,6 +272,8 @@ Nervos基金会（以下简称“基金会”或“我们”）尊重并保护�
     </scenes>
     <resources>
         <image name="guide_1_cn" width="375" height="400"/>
-        <image name="icon_check_no" width="14" height="14"/>
+        <namedColor name="subhead_color">
+            <color red="0.42399999499320984" green="0.44299998879432678" blue="0.51800000667572021" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
