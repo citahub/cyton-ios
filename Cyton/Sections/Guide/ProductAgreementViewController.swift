@@ -13,22 +13,28 @@ class ProductAgreementViewController: UIViewController {
         case agreement = "ProductAgreementUserDefaultsKey"
     }
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var confirmButton: UIButton!
-    @IBOutlet weak var textView: UITextView!
-    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var confirmButton: UIButton!
+    @IBOutlet private weak var textView: UITextView!
+    @IBOutlet private weak var checkLabel: UILabel!
+    @IBOutlet private weak var checkLabelHeight: NSLayoutConstraint!
 
     var isAgree: Bool = false {
         didSet {
+            let attach = NSTextAttachment()
             if isAgree {
                 confirmButton.isEnabled = true
                 confirmButton.setTitleColor(UIColor(red: 54/255.0, green: 59/255.0, blue: 255/255.0, alpha: 1.0), for: .normal)
-                checkButton.setImage(UIImage(named: "icon_check_yes"), for: .normal)
+                attach.image = UIImage(named: "icon_check_yes")
             } else {
                 confirmButton.isEnabled = false
                 confirmButton.setTitleColor(UIColor(red: 233/255.0, green: 235/255.0, blue: 240/255.0, alpha: 1.0), for: .normal)
-                checkButton.setImage(UIImage(named: "icon_check_no"), for: .normal)
+                attach.image = UIImage(named: "icon_check_no")
             }
+            attach.bounds = CGRect(x: 0, y: 0, width: 14, height: 14)
+            let attributedText = NSMutableAttributedString(attributedString: checkLabel.attributedText!)
+            attributedText.replaceCharacters(in: NSRange(location: 0, length: 1), with: NSAttributedString(attachment: attach))
+            checkLabel.attributedText = attributedText
         }
     }
 
@@ -42,7 +48,24 @@ class ProductAgreementViewController: UIViewController {
         isAgree = false
         titleLabel.text = "Guide.cytonServiceAgreement".localized()
         confirmButton.setTitle("Guide.continue".localized(), for: .normal)
-        checkButton.setTitle("Guide.agreementOfConsent".localized(), for: .normal)
+
+        let attach = NSTextAttachment()
+        attach.image = UIImage(named: "icon_check_no")
+        attach.bounds = CGRect(x: 0, y: 0, width: 14, height: 14)
+
+        let attributedText = NSMutableAttributedString(string: "   " + "Guide.agreementOfConsent".localized())
+        attributedText.addAttribute(NSAttributedString.Key.baselineOffset, value: 3, range: NSRange(location: 0, length: attributedText.string.count))
+        attributedText.insert(NSAttributedString(attachment: attach), at: 0)
+        checkLabel.attributedText = attributedText
+        checkLabelHeight.constant = checkLabel.textRect(forBounds: CGRect(x: 0, y: 0, width: checkLabel.bounds.size.width, height: 60), limitedToNumberOfLines: 0).size.height + 12
+
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductAgreementViewController.agreement(_:)))
+        checkLabel.addGestureRecognizer(tapGestureRecognizer)
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        textView.contentOffset = CGPoint.zero
     }
 
     func setupTextView() {
