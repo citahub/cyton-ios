@@ -126,6 +126,11 @@ private extension ContractController {
         }
         DispatchQueue.global().async {
             do {
+                guard let wallet = AppModel.current.currentWallet?.wallet else { return }
+                guard WalletManager.default.verifyPassword(wallet: wallet, password: password) else {
+                    throw "WalletManager.Error.invalidPassword".localized()
+                }
+                
                 let txHash: TxHash
                 if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
                     txHash = try self.sendEthereumTransaction(password: password)
@@ -145,7 +150,11 @@ private extension ContractController {
                     self.bulletinManager.hideActivityIndicator()
                     let passwordPageItem = self.createPasswordPageItem()
                     self.bulletinManager.push(item: passwordPageItem)
-                    passwordPageItem.errorMessage = error.localizedDescription
+                    if let error: Web3Error = error as? Web3Error {
+                        passwordPageItem.errorMessage = error.description
+                    } else {
+                        passwordPageItem.errorMessage = error.localizedDescription
+                    }
                 }
             }
         }

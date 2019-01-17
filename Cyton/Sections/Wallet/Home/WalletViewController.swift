@@ -100,7 +100,11 @@ extension WalletViewController: WalletPresenterDelegate {
     }
 
     func walletPresenter(presenter: WalletPresenter, didRefreshCurrency currency: LocalCurrency) {
-        currencyLabel.text = "Wallet.totalAmount".localized() + "(\(currency.name))"
+        if Locale.current.languageCode?.contains("zh") ?? false {
+            currencyLabel.text = "Wallet.totalAmount".localized() + "(\(currency.name))"
+        } else {
+            currencyLabel.text = "Wallet.totalAmount".localized() + "(\(currency.short))"
+        }
     }
 
     func walletPresenter(presenter: WalletPresenter, didSwitchWallet wallet: WalletModel) {

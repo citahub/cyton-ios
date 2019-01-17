@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="FK5-Ys-aof">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="se2-Kc-J4x">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,7 +14,7 @@
         <!--View Controller-->
         <scene sceneID="mdT-Z0-ZGe">
             <objects>
-                <tableViewController storyboardIdentifier="nftViewController" id="ZqU-lY-lyh" customClass="NFTViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="nftViewController" id="ZqU-lY-lyh" customClass="NFTViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="nuZ-t1-lVB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -25,7 +25,7 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ERC721TableviewCell" rowHeight="70" id="vsx-BU-L6h" customClass="ERC721TableViewCell" customModule="Neuron" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ERC721TableviewCell" rowHeight="70" id="vsx-BU-L6h" customClass="ERC721TableViewCell" customModule="Cyton" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vsx-BU-L6h" id="ZeO-8a-PAt">
@@ -100,7 +100,7 @@
         <!--钱包-->
         <scene sceneID="IKI-Uq-7Sc">
             <objects>
-                <viewController restorationIdentifier="WalletViewController" storyboardIdentifier="WalletViewController" title="钱包" id="FK5-Ys-aof" customClass="WalletViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="WalletViewController" storyboardIdentifier="WalletViewController" title="钱包" id="FK5-Ys-aof" customClass="WalletViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="tVO-je-58w">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -133,10 +133,10 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFT-j7-CsS" customClass="DesignableGradientView" customModule="Neuron" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFT-j7-CsS" customClass="DesignableGradientView" customModule="Cyton" customModuleProvider="target">
                                                     <rect key="frame" x="55" y="98" width="120" height="40"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-9I-06f" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QU2-9I-06f" customClass="DesignableButton" customModule="Cyton" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="4F5-d1-Lsi"/>
@@ -189,10 +189,10 @@
                                                         <constraint firstAttribute="width" constant="5" id="cHz-vd-Jar"/>
                                                     </constraints>
                                                 </view>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omU-t3-B9C" customClass="DesignableGradientView" customModule="Neuron" customModuleProvider="target">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="omU-t3-B9C" customClass="DesignableGradientView" customModule="Cyton" customModuleProvider="target">
                                                     <rect key="frame" x="200" y="98" width="120" height="40"/>
                                                     <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-vX-xxw" customClass="DesignableButton" customModule="Neuron" customModuleProvider="target">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Xn-vX-xxw" customClass="DesignableButton" customModule="Cyton" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="0.0" width="120" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="120" id="aMt-BK-sBl"/>
@@ -275,7 +275,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell" rowHeight="95" id="La6-Pb-PVp" customClass="TokenTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell" rowHeight="95" id="La6-Pb-PVp" customClass="TokenTableViewCell" customModule="Cyton" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="231.5" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="La6-Pb-PVp" id="pte-jl-kt4">
@@ -386,7 +386,7 @@
                                             <outlet property="symbolWidthConstraint" destination="PZl-mr-0RU" id="yXa-Uf-tkT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_NoPrice" rowHeight="95" id="Jhw-ME-q0h" customClass="TokenTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_NoPrice" rowHeight="95" id="Jhw-ME-q0h" customClass="TokenTableViewCell" customModule="Cyton" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="326.5" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jhw-ME-q0h" id="z7A-Mu-kyE">
@@ -484,7 +484,7 @@
                                             <outlet property="symbolWidthConstraint" destination="Q4O-Ok-cCv" id="Sl3-6H-LaH"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_Loading" rowHeight="95" id="cwD-M0-dIp" customClass="TokenTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_Loading" rowHeight="95" id="cwD-M0-dIp" customClass="TokenTableViewCell" customModule="Cyton" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="421.5" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cwD-M0-dIp" id="btj-Ns-mrJ">
@@ -580,7 +580,7 @@
                                             <outlet property="symbolWidthConstraint" destination="qrP-5P-yM0" id="hjN-zq-tmc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_LoadFail" rowHeight="95" id="vfN-Ym-fCJ" customClass="TokenTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TokenTableViewCell_LoadFail" rowHeight="95" id="vfN-Ym-fCJ" customClass="TokenTableViewCell" customModule="Cyton" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="516.5" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vfN-Ym-fCJ" id="esB-fe-U6U">
@@ -841,13 +841,13 @@
         <!--收款-->
         <scene sceneID="SFn-o6-Kln">
             <objects>
-                <viewController storyboardIdentifier="WalletQRCodeViewController" title="收款" id="xNb-kk-FtN" customClass="WalletQRCodeViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WalletQRCodeViewController" title="收款" id="xNb-kk-FtN" customClass="WalletQRCodeViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3Ox-Cr-A8g">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkq-1Q-CnU">
-                                <rect key="frame" x="15" y="84" width="345" height="480"/>
+                                <rect key="frame" x="15" y="40" width="345" height="480"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zDQ-Iw-I8R">
                                         <rect key="frame" x="147.5" y="30" width="50" height="50"/>
@@ -996,6 +996,6 @@
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="XeA-2f-AYU"/>
+        <segue reference="A0N-Ka-jF1"/>
     </inferredMetricsTieBreakers>
 </document>
