@@ -139,7 +139,7 @@
 "Transaction.History.title" = "Transaction List";
 "TokenProfile.Ether.overview" = "Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.";
 "Transaction.History.testTokenWarning" = "The token has no value and is only used for developer testing.";
-"Transaction.History.details" = "详情 >>(en)";
+"Transaction.History.details" = "Details >>";
 
 // Transaction Status
 // ---------------------------------------------------------
@@ -199,7 +199,7 @@
 "Authentication.openFaceIdAuth" = "Turn on Face ID";
 "Authentication.openTouchIdAuthDesc" = "Please turn on Touch ID to keep your assets safe";
 "Authentication.openTouchIdAuth" = "Turn on Touch ID";
-"Authentication.notOpen" = "暂不开启(en)";
+"Authentication.notOpen" = "Not open yet";
 
 "Authentication.Error.touchIDNotEnrolled" = "Touch ID is not set";
 "Authentication.Error.faceIDNotEnrolled" = "Face ID is not set";

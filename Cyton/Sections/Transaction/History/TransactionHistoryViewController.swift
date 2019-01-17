@@ -24,6 +24,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet private weak var detailsTitleLabel: UILabel!
 
     private var presenter: TransactionHistoryPresenter?
+    private var transactions = [TransactionDetails]()
     var token: Token!
 
     override func viewDidLoad() {
@@ -142,17 +143,17 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.transactions.count ?? 0
+        return transactions.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TransactionHistoryTableViewCell") as! TransactionHistoryTableViewCell
-        cell.transaction = presenter!.transactions[indexPath.row]
+        cell.transaction = transactions[indexPath.row]
         return cell
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row > presenter!.transactions.count - 2 {
+        if indexPath.row > transactions.count - 2 {
             presenter?.loadMoreData()
         }
     }
@@ -160,7 +161,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let controller: TransactionDetailsViewController = UIStoryboard(name: .transactionDetails).instantiateViewController()
-        controller.transaction = presenter?.transactions[indexPath.row]
+        controller.transaction = transactions[indexPath.row]
         navigationController?.pushViewController(controller, animated: true)
     }
 }
@@ -171,13 +172,15 @@ extension TransactionHistoryViewController: TransactionHistoryPresenterDelegate 
         for index in updates {
             indexPaths.append(IndexPath(row: index, section: 0))
         }
+        self.transactions = transaction
         self.tableView.reloadRows(at: indexPaths, with: .none)
     }
 
     func didLoadTransactions(transaction: [TransactionDetails], insertions: [Int], error: Error?) {
         self.tableView.refreshControl?.endRefreshing()
+        self.transactions = transaction
 
-        if self.presenter?.transactions.count == 0 {
+        if transactions.count == 0 {
             self.errorOverlaycontroller.style = .blank
             self.tableView.addSubview(self.overlay)
         } else {
