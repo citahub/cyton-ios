@@ -109,8 +109,8 @@ class EthereumLocalTxPool: NSObject {
     private let timeInterval: TimeInterval = 4.0
 
     @objc private func checkLocalTxList() {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkLocalTxList), object: nil)
         guard checking == false else { return }
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(checkLocalTxList), object: nil)
         let realm = try! Realm()
         let results = realm.objects(EthereumLocalTx.self).filter({ $0.status == .pending })
         guard results.count > 0 else { return }
@@ -128,18 +128,21 @@ class EthereumLocalTxPool: NSObject {
         guard let blockNumber = localTx.blockNumber else { return }
         guard let currentBlockNumber = try? localTx.web3.eth.getBlockNumber() else { return }
         let realm = try! Realm()
-        try? realm.write {
-            if localTx.transactionReceipt?.status == .ok {
-                if currentBlockNumber - blockNumber < 12 {
-                    return
-                }
-                localTx.status = .success
-            } else if localTx.transactionReceipt?.status == .failed {
-                localTx.status = .failure
+        var status: EthereumLocalTx.TxStatus = .success
+        if localTx.transactionReceipt?.status == .ok {
+            if Int(currentBlockNumber) - Int(blockNumber) < 12 {
+                return
             }
+            status = .success
+        } else if localTx.transactionReceipt?.status == .failed {
+            status = .failure
         }
         if localTx.status == .pending && localTx.date.timeIntervalSince1970 + 60*60*48 < Date().timeIntervalSince1970 {
-            localTx.status = .failure
+            status = .failure
+        }
+
+        try? realm.write {
+            localTx.status = status
         }
 
         if localTx.status == .success || localTx.status == .failure {

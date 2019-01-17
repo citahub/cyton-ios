@@ -145,7 +145,11 @@ private extension ContractController {
                     self.bulletinManager.hideActivityIndicator()
                     let passwordPageItem = self.createPasswordPageItem()
                     self.bulletinManager.push(item: passwordPageItem)
-                    passwordPageItem.errorMessage = error.localizedDescription
+                    if let error: Web3Error = error as? Web3Error {
+                        passwordPageItem.errorMessage = error.description
+                    } else {
+                        passwordPageItem.errorMessage = error.localizedDescription
+                    }
                 }
             }
         }

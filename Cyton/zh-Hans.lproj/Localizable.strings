@@ -313,7 +313,7 @@
 
 // Settings: About U
 // ---------------------------------------------------------
-"Settings.About.AboutUs" = "About us";
+"Settings.About.AboutUs" = "About Us";
 "Settings.About.SourceCode" = "源码";
 "Settings.About.ServicePrivacy" = "服务隐私";
 "Settings.About.InfuaDetail" = "提供以太坊访问服务";

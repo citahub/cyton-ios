@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="ACh-dl-MiB">
             <objects>
-                <tabBarController id="dQ0-5m-U0C" customClass="MainViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="dQ0-5m-U0C" customClass="MainViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="RWM-Fq-3aU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -29,10 +29,10 @@
             </objects>
             <point key="canvasLocation" x="82" y="-1135"/>
         </scene>
-        <!--Wallet-->
+        <!--WalletViewController-->
         <scene sceneID="Z8o-Y3-ZbA">
             <objects>
-                <viewControllerPlaceholder storyboardName="Wallet" id="t9r-OI-ov4" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardIdentifier="WalletViewController" storyboardName="Wallet" referencedIdentifier="WalletViewController" id="t9r-OI-ov4" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="KIa-St-Wro"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="loa-Wp-6gH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -52,7 +52,7 @@
         <!--钱包-->
         <scene sceneID="G00-Tb-dXa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hM1-o9-xvf" customClass="BaseNavigationController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hM1-o9-xvf" customClass="BaseNavigationController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="钱包" image="wallet_off" selectedImage="wallet_on" id="7Nq-Hx-Y4Z"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pe2-LD-ePg">
@@ -71,7 +71,7 @@
         <!--应用-->
         <scene sceneID="YEu-uN-pfd">
             <objects>
-                <viewController id="p8c-h3-jt8" customClass="DappViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="p8c-h3-jt8" customClass="DappViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LVm-H3-4FI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -105,7 +105,7 @@
         <!--应用-->
         <scene sceneID="Xcy-xf-LxQ">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hlq-GV-TAq" customClass="BaseNavigationController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hlq-GV-TAq" customClass="BaseNavigationController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="应用" image="dapp_off" selectedImage="dapp_on" id="cjZ-KD-Gcm"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Uw2-ti-l79">
