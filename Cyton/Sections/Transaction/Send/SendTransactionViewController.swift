@@ -11,6 +11,7 @@ import BLTNBoard
 import BigInt
 import CITA
 import RealmSwift
+import Web3swift
 
 class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBOutlet private weak var walletIconView: UIImageView!
@@ -155,6 +156,11 @@ private extension SendTransactionViewController {
     func sendTransaction(password: String) {
         DispatchQueue.global().async {
             do {
+                guard let wallet = AppModel.current.currentWallet?.wallet else { return }
+                guard WalletManager.default.verifyPassword(wallet: wallet, password: password) else {
+                    throw "WalletManager.Error.invalidPassword".localized()
+                }
+
                 if self.paramBuilder.tokenType == .ether || self.paramBuilder.tokenType == .erc20 {
                     _ = try self.sendEthereumTransaction(password: password)
                 } else {
@@ -177,7 +183,11 @@ private extension SendTransactionViewController {
                     /// create a new item. Note this would leave more than one password item in the stack.
                     let passwordPageItem = self.createPasswordPageItem()
                     self.bulletinManager.push(item: passwordPageItem)
-                    passwordPageItem.errorMessage = error.localizedDescription
+                    if let error = error as? Web3Error {
+                        passwordPageItem.errorMessage = error.description.localized()
+                    } else {
+                        passwordPageItem.errorMessage = error.localizedDescription
+                    }
                 }
             }
         }
