@@ -14,7 +14,7 @@
         <!--高级设置-->
         <scene sceneID="NAt-zZ-lq0">
             <objects>
-                <tableViewController storyboardIdentifier="TransactionGasCostViewController" title="高级设置" id="nhM-23-DIY" customClass="TransactionGasCostViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="TransactionGasCostViewController" title="高级设置" id="nhM-23-DIY" customClass="TransactionGasCostViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="8SA-u6-xiL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -435,7 +435,7 @@
         <!--Send Transaction View Controller-->
         <scene sceneID="fTm-pa-XUQ">
             <objects>
-                <tableViewController storyboardIdentifier="SendTransactionViewController" id="KXN-bo-zdG" customClass="SendTransactionViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="SendTransactionViewController" id="KXN-bo-zdG" customClass="SendTransactionViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="cde-J0-lmo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -754,7 +754,7 @@
         <!--Transaction Switch Token View Controller-->
         <scene sceneID="PM9-G1-jhO">
             <objects>
-                <viewController storyboardIdentifier="TransactionSwitchTokenViewController" id="Xde-fs-u5a" customClass="TransactionSwitchTokenViewController" customModule="Neuron" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionSwitchTokenViewController" id="Xde-fs-u5a" customClass="TransactionSwitchTokenViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3nI-mk-hA8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -800,7 +800,7 @@
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </view>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransactionSwitchTokenTableViewCell" rowHeight="50" id="BMd-u9-JTH" customClass="TransactionSwitchTokenTableViewCell" customModule="Neuron" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TransactionSwitchTokenTableViewCell" rowHeight="50" id="BMd-u9-JTH" customClass="TransactionSwitchTokenTableViewCell" customModule="Cyton" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BMd-u9-JTH" id="uBW-XN-hyP">
@@ -887,6 +887,7 @@
                         <outlet property="backgroundView" destination="cYt-Ct-AiK" id="Wzf-dR-kgm"/>
                         <outlet property="contentView" destination="kdc-L9-JJe" id="1un-HH-Ybm"/>
                         <outlet property="tableView" destination="QYg-72-MbY" id="euY-07-RyP"/>
+                        <outlet property="titleLabel" destination="Ops-KP-EE1" id="Grn-CR-W89"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d3F-y3-928" userLabel="First Responder" sceneMemberID="firstResponder"/>

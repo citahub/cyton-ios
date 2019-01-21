@@ -172,6 +172,7 @@
 "Transaction.Send.quotaLimitSettingIsTooLow" = "The Gas Limit you entered is too low, please enter a reasonable value.";
 "Transaction.Send.gasCostSetting" = "Advanced";
 "Transaction.Send.gasCost" = "Gas Price";
+"Transaction.Send.quotaCost" = "Quota Price";
 "Transaction.Send.extenData" = "Data";
 "Transaction.Send.gasCostSettingDesc" = "The data will be uploaded to the blockchain and your data security will be guaranteed";
 "Transaction.Send.input" = "Please Enter";
@@ -183,6 +184,7 @@
 "Transaction.Send.gasFee" = "Miner Fee";
 "Transaction.Send.txInfo" = "Payment Details";
 "Transaction.Send.confirmSendTx" = "Confirm";
+"Transaction.Send.txTokens" = "Tokens";
 
 // Authentication
 // ---------------------------------------------------------

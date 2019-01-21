@@ -185,8 +185,10 @@ private extension SendTransactionViewController {
                     self.bulletinManager.push(item: passwordPageItem)
                     if let error = error as? Web3Error {
                         passwordPageItem.errorMessage = error.description.localized()
+                    } else if let error = error as? String {
+                        passwordPageItem.errorMessage = error
                     } else {
-                        passwordPageItem.errorMessage = error.localizedDescription
+                        passwordPageItem.errorMessage = "交易失败"
                     }
                 }
             }
