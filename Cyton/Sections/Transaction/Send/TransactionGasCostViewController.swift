@@ -121,7 +121,7 @@ class TransactionGasCostViewController: UITableViewController {
             gasPriceTextField.isEnabled = false
             gasPriceTitleLabel.text = "Quota Price"
             gasLimitTitleLabel.text = "Quota Limit"
-            gasCostTitleLabel.text = "Quota 费用"
+            gasCostTitleLabel.text = "Transaction.Send.quotaCost".localized()
         case .ether, .erc20:
             gasPriceTextField.text = paramBuilder.gasPrice.toGweiText()
             gasPriceSymbolLabel.text = "Gwei"

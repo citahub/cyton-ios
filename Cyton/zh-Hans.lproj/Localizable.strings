@@ -172,6 +172,7 @@
 "Transaction.Send.quotaLimitSettingIsTooLow" = "您输入的Quota Limit过低，请输入合理的数值";
 "Transaction.Send.gasCostSetting" = "高级设置";
 "Transaction.Send.gasCost" = "Gas 费用";
+"Transaction.Send.quotaCost" = "Quota 费用";
 "Transaction.Send.extenData" = "包含数据";
 "Transaction.Send.gasCostSettingDesc" = "数据将上传至区块链，您的数据安全将得到一百分保障！";
 "Transaction.Send.input" = "请输入";
@@ -183,6 +184,7 @@
 "Transaction.Send.gasFee" = "矿工费用";
 "Transaction.Send.txInfo" = "转账信息";
 "Transaction.Send.confirmSendTx" = "确认转账";
+"Transaction.Send.txTokens" = "转账币种"
 
 // Authentication
 // ---------------------------------------------------------
