@@ -61,6 +61,9 @@ class ProductAgreementViewController: UIViewController {
 
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ProductAgreementViewController.agreement(_:)))
         checkLabel.addGestureRecognizer(tapGestureRecognizer)
+        checkLabel.accessibilityValue = "ckeckLabel"
+        checkLabel.accessibilityLabel = "ckeckLabel"
+        checkLabel.accessibilityIdentifier = "ckeckLabel"
     }
 
     override func viewDidLayoutSubviews() {
