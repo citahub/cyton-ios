@@ -13,9 +13,10 @@ protocol TransactionSwitchTokenViewControllerDelegate: NSObjectProtocol {
 }
 
 class TransactionSwitchTokenViewController: UIViewController {
-    @IBOutlet weak var backgroundView: UIView!
-    @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet private weak var backgroundView: UIView!
+    @IBOutlet private weak var contentView: UIView!
+    @IBOutlet private weak var tableView: UITableView!
+    @IBOutlet private weak var titleLabel: UILabel!
     private var tokens = [TokenModel]()
     var currentToken: TokenModel!
     weak var delegate: TransactionSwitchTokenViewControllerDelegate?
@@ -23,6 +24,7 @@ class TransactionSwitchTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tokens = AppModel.current.currentWallet!.selectedTokenList.map({ $0 })
+        titleLabel.text = "转账币种"
     }
 
     override func viewWillAppear(_ animated: Bool) {
