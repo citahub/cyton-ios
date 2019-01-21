@@ -184,7 +184,7 @@
 "Transaction.Send.gasFee" = "Miner Fee";
 "Transaction.Send.txInfo" = "Payment Details";
 "Transaction.Send.confirmSendTx" = "Confirm";
-"Transaction.Send.txTokens" = "Tokens"
+"Transaction.Send.txTokens" = "Tokens";
 
 // Authentication
 // ---------------------------------------------------------

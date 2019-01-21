@@ -184,7 +184,7 @@
 "Transaction.Send.gasFee" = "矿工费用";
 "Transaction.Send.txInfo" = "转账信息";
 "Transaction.Send.confirmSendTx" = "确认转账";
-"Transaction.Send.txTokens" = "转账币种"
+"Transaction.Send.txTokens" = "转账币种";
 
 // Authentication
 // ---------------------------------------------------------
