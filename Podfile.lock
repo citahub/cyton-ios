@@ -1,14 +1,14 @@
 PODS:
   - Alamofire (4.7.3)
-  - AppChainSwift (0.20.5):
+  - BigInt (3.1.0):
+    - SipHash (~> 1.2)
+  - BulletinBoard (3.0.0)
+  - CITA (0.20.5):
     - BigInt (~> 3.1)
     - CryptoSwift (~> 0.13)
     - PromiseKit (~> 6.5)
     - secp256k1_swift (~> 1.0.3)
     - SwiftProtobuf (~> 1.2.0)
-  - BigInt (3.1.0):
-    - SipHash (~> 1.2)
-  - BulletinBoard (3.0.0)
   - CryptoSwift (0.13.0)
   - EFQRCode (4.3.0)
   - EthereumABI (1.1.1):
@@ -17,7 +17,6 @@ PODS:
     - EthereumAddress (~> 1.0.0)
   - EthereumAddress (1.0.0):
     - CryptoSwift (~> 0.13)
-  - IGIdenticon (0.6)
   - IQKeyboardManagerSwift (6.2.0)
   - PromiseKit (6.5.2):
     - PromiseKit/CorePromise (= 6.5.2)
@@ -41,9 +40,6 @@ PODS:
     - SDWebImage/Core (= 4.4.2)
   - SDWebImage/Core (4.4.2)
   - secp256k1_swift (1.0.3)
-  - SensorsAnalyticsSDK (1.10.15):
-    - SensorsAnalyticsSDK/core (= 1.10.15)
-  - SensorsAnalyticsSDK/core (1.10.15)
   - SipHash (1.2.2)
   - SwiftProtobuf (1.2.0)
   - SwiftRLP (1.2):
@@ -61,16 +57,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - AppChainSwift (from `https://github.com/cryptape/appchain-swift`, tag `v0.20.5`)
   - BulletinBoard (from `https://github.com/alexaubry/BulletinBoard`, commit `7086607d3476cea29cd77a65d13df5c8ed0da52e`)
+  - CITA (from `https://github.com/cryptape/cita-sdk-swift`, commit `df1342916ca3a7621c6f68353f94094a36faeb4b`)
   - EFQRCode
-  - IGIdenticon (~> 0.6)
   - IQKeyboardManagerSwift
   - QRCodeReader.swift
   - RealmSwift
   - RSKPlaceholderTextView (~> 4.0.0)
   - SDWebImage
-  - SensorsAnalyticsSDK (from `https://github.com/sensorsdata/sa-sdk-ios`, branch `v1.10.15`)
   - Toast-Swift (~> 4.0.0)
   - web3swift (~> 2.0.1)
 
@@ -82,7 +76,6 @@ SPEC REPOS:
     - EFQRCode
     - EthereumABI
     - EthereumAddress
-    - IGIdenticon
     - IQKeyboardManagerSwift
     - PromiseKit
     - QRCodeReader.swift
@@ -99,37 +92,30 @@ SPEC REPOS:
     - web3swift
 
 EXTERNAL SOURCES:
-  AppChainSwift:
-    :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
-  SensorsAnalyticsSDK:
-    :branch: v1.10.15
-    :git: https://github.com/sensorsdata/sa-sdk-ios
+  CITA:
+    :commit: df1342916ca3a7621c6f68353f94094a36faeb4b
+    :git: https://github.com/cryptape/cita-sdk-swift
 
 CHECKOUT OPTIONS:
-  AppChainSwift:
-    :git: https://github.com/cryptape/appchain-swift
-    :tag: v0.20.5
   BulletinBoard:
     :commit: 7086607d3476cea29cd77a65d13df5c8ed0da52e
     :git: https://github.com/alexaubry/BulletinBoard
-  SensorsAnalyticsSDK:
-    :commit: f61088a6cdc661a6e5a3e9f361d624c48b50af01
-    :git: https://github.com/sensorsdata/sa-sdk-ios
+  CITA:
+    :commit: df1342916ca3a7621c6f68353f94094a36faeb4b
+    :git: https://github.com/cryptape/cita-sdk-swift
 
 SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
-  AppChainSwift: 0957a762aa81d31cee3276834096e0f6d4fca1fd
   BigInt: 76b5dfdfa3e2e478d4ffdf161aeede5502e2742f
   BulletinBoard: 927f4f9fd22503ceecd71bfc830fd65d5996593a
+  CITA: ea81e8443a879ca429fbd6c5ee7756525fd44fa1
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
   EFQRCode: 51b67bd10952da9ef619ae0a396abb746b94263f
   EthereumABI: f040f5429e5a4366d028c88b88d9441e137593af
   EthereumAddress: f476e1320dca3a0024431e713ede7a09c7eb7796
-  IGIdenticon: 5790befde4fe56296927c72c0efed3d07b21de8e
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
   PromiseKit: 27c1601bfb73405871b805bcb8cf7e55c4dad3db
   QRCodeReader.swift: 96292a5612fbc2fd9a0b26f93fa5164c8d02f59d
@@ -139,13 +125,12 @@ SPEC CHECKSUMS:
   scrypt: 3fe5b1a3b0976f97cd87488673a8f7c65708cc84
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
   secp256k1_swift: 4fc5c4b2d2c6d21ee8ccb868cdc92da12f38bed9
-  SensorsAnalyticsSDK: 206079ab1b4ecc451e12bc90c315a56c035b2a53
   SipHash: fad90a4683e420c52ef28063063dbbce248ea6d4
   SwiftProtobuf: 91a9856079044ef4ec762b2344c763cd9e5a73c1
   SwiftRLP: 98a02b2210128353ca02e4c2f4d83e2a9796db4f
   Toast-Swift: 594b5c5e5129f15438e410207e43287f027b3c00
   web3swift: 33f30ca0e061e0f89117dfb46f5ee9f626eff6d6
 
-PODFILE CHECKSUM: beb75d52d4fb090be32eb898fb3ca2ea9a3e4566
+PODFILE CHECKSUM: e6d95e03f992e05fdb2ddc4c592ff6fb063e1218
 
 COCOAPODS: 1.5.3

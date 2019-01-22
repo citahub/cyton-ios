@@ -1,0 +1,363 @@
+/* 
+  Localizable.strings
+  Cyton
+
+  Created by James Chen on 2018/11/03.
+  Copyright © 2018 Cryptape. All rights reserved.
+*/
+
+// Common
+// ---------------------------------------------------------
+"Common.Connection.UserCancel" = "Canceled";
+"Common.Connection.ScanEmpty" = "QR Code failed";
+"Common.Connection.LoseConnect" = "The connection to the Internet is broken";
+"Common.Connection.LoadFaild" = "Failed to load the page";
+"Common.Connection.Refresh" = "Refresh";
+"Common.DataEmpty" = "Empty Data";
+"Common.NetworkError" = "Network error, please try again later";
+"Common.next" = "Continue";
+"Common.confirm" = "Confirm";
+"Common.cancel" = "Cancel";
+"Common.reject" = "Reject";
+
+// DApp
+// ---------------------------------------------------------
+"DApp.Home" = "ÐApp";
+"DApp.Search.TextFieldPlaceholder" = "Explore the decentralized web";
+"DApp.Search.DeleteHistory" = "Delete";
+
+// DApp Browser
+// ---------------------------------------------------------
+"DApp.Browser.InvalidLink" = "Invalid Address";
+"DApp.Browser.Collection" = "Add to Bookmark";
+"DApp.Browser.CollectSuccess" = "Added to Bookmark";
+"DApp.Browser.CollectFaild" = "Failed to add bookmark";
+"DApp.Browser.AlertTitle" = "Tips";
+"DApp.Browser.CheckNoAliPay" = "The Alipay client is not detected. Please try again after installation.";
+"DApp.Browser.CheckNoWeChat" = "WeChat client is not detected, please try again after installation.";
+"DApp.Browser.SignFaild" = "Signature failed";
+"DApp.Browser.PayFaild" = "Payment failed";
+"DApp.Browser.confirmSign" = "Signature Request";
+"DApp.Browser.MonitorDirectionFailed" = "Failed to monitor device direction";
+"DApp.Browser.MonitorGyroFailed" = "Failed to monitor gyroscope data";
+
+// DApp Contract
+// ---------------------------------------------------------
+"DApp.Contract.TransactionSend" = "Transaction sent";
+"DApp.Details.Title" = "Transaction Detail";
+
+// DApp Advanced
+// ---------------------------------------------------------
+"DApp.Advanced.ETHRecommend" = "Ethereum recommended";
+"DApp.Advanced.Gas" = "Gas Price";
+"DApp.Advanced.EmptyGasPrice" = "Please enter Gas Price";
+"DApp.Advanced.MinGasPrice" = "Gas Price too low, Please set above %@ GWei";
+
+// DApp DAppTakePhoto
+// ---------------------------------------------------------
+"DApp.DAppTakePhoto.CameraPermissions" = "Please authorize camera access";
+"DApp.DAppTakePhoto.Open" = "Authorize";
+"DApp.DAppTakePhoto.NoAccess" = "No camera access，Please go to System Settings > Cyton > Camera，and authorize camera access";
+
+// DApp MyDApp
+// ---------------------------------------------------------
+"DApp.MyDApp.Title" = "My ÐApp";
+
+// DApp NFT
+// ---------------------------------------------------------
+"DApp.NFT.EmptyData" = "No Collectives Found";
+"DApp.NFT.Title" = "My Collectives";
+"DApp.NFT.DetailTitle" = "Collectibles Detail";
+
+// DApp Transaction
+// ---------------------------------------------------------
+"DApp.SendTransactionError.emptyValue" = "Empty transfer amount";
+"DApp.SendTransactionError.emptyQuota" = "Empty transfer Quota";
+"DApp.SendTransactionError.emptyGasLimit" = "Empty Gas Limit";
+"DApp.SendTransactionError.emptyGasPrice" = "Empty Gas Price";
+
+// Mnemonic Validator
+// ---------------------------------------------------------
+"MnemonicValidator.emptyMnemonic" = "Empty Mnemonic";
+"MnemonicValidator.invalidMnemonic" = "Invalid Mnemonic";
+
+// Wallet Manager Errors
+// ---------------------------------------------------------
+"WalletManager.Error.invalidPassword" = "Invalid password";
+"WalletManager.Error.invalidPrivateKey" = "Invalid Private Key";
+"WalletManager.Error.invalidKeystore" = "Invalid Keystore";
+"WalletManager.Error.invalidMnemonic" = "Invalid Mnemonic";
+"WalletManager.Error.emptyMnemonic" = "Empty Mnemonic";
+"WalletManager.Error.accountAlreadyExists" = "You already have this wallet";
+"WalletManager.Error.accountNotFound" = "Wallet not found";
+"WalletManager.Error.failedToDeleteAccount" = "Failed to delete wallet";
+"WalletManager.Error.failedToUpdatePassword" = "Failed to update wallet password";
+"WalletManager.Error.failedToSaveKeystore" = "Failed to save the Keystore";
+"WalletManager.Error.unknown" = "Unknown error";
+
+// Send Transactoin Error
+// ---------------------------------------------------------
+"SendTransactionError.invalidSourceAddress" = "Invalid source address";
+"SendTransactionError.invalidDestinationAddress" = "Invalid destination address";
+"SendTransactionError.invalidContractAddress" = "Invalid contract Address";
+"SendTransactionError.noAvailableKeys" = "Wallet not found";
+"SendTransactionError.createTransactionIssue" = "Failed to create transaction";
+"SendTransactionError.invalidChainId" = "Invalid chain ID";
+"SendTransactionError.signTXFailed" = "Failed to sign the transaction";
+
+// Custom Token Error
+// ---------------------------------------------------------
+"CustomTokenError.wrongBalanceError" = "Wrong balance";
+"CustomTokenError.badNameError" = "Bad token name";
+"CustomTokenError.badSymbolError" = "Bad token symbol";
+"CustomTokenError.undefinedError" = "Undefined error";
+
+// Sign Message Error
+// ---------------------------------------------------------
+"MessageSign.Error.walletNotFound" = "Wallet not found";
+"MessageSign.Error.signMessageFailed" = "Failed to sign the message";
+
+// Wallet
+// ---------------------------------------------------------
+"Wallet" = "Wallet";
+"Wallet.token" = "Token";
+"Wallet.addToken" = "Add";
+"Wallet.transaction" = "Send";
+"Wallet.receipt" = "Receive";
+"Wallet.totalAmount" = "Total Assets";
+"Wallet.noAmount" = "No Assets";
+"Wallet.addWallet" = "Import Wallet";
+
+// Wallet QRCode
+// ---------------------------------------------------------
+"Wallet.QRCode.desc" = "Please do not deposit any digital assets other than ETH and CITA to above address";
+"Wallet.QRCode.copy" = "Copy";
+"Wallet.QRCode.copySuccess" = "Address is copied to clipboard";
+
+// Transaction History
+// ---------------------------------------------------------
+"Transaction.History.title" = "Transaction List";
+"TokenProfile.Ether.overview" = "Ethereum is a decentralized platform that runs smart contracts: applications that run exactly as programmed without any possibility of downtime, censorship, fraud or third-party interference.";
+"Transaction.History.testTokenWarning" = "The token has no value and is only used for developer testing.";
+"Transaction.History.details" = "Details >>";
+
+// Transaction Status
+// ---------------------------------------------------------
+"TransactionStatus.success" = "Confirmed Transaction";
+"TransactionStatus.pending" = "Pending Transaction";
+"TransactionStatus.failure" = "Failed Transaction";
+
+// Transaction Details
+// ---------------------------------------------------------
+"Transaction.Details.title" = "Transaction Details";
+"Transaction.Details.paymentAddress" = "From";
+"Transaction.Details.receiptAddress" = "To";
+"Transaction.Details.hash" = "TxID";
+"Transaction.Details.chainNetwork" = "Network";
+"Transaction.Details.block" = "Block";
+"Transaction.Details.gasFee" = "Miner Fee";
+"Transaction.Details.blockchainBrowserDesc" = "Go to the Blockchain Explore for more details";
+"Transaction.Details.contractCreationPending" = "Contract Creating";
+"Transaction.Details.contractCreationSuccess" = "Contract Created";
+"Transaction.Details.contractCreationFailure" = "Contract Creation failed";
+
+// Send Transaction
+// ---------------------------------------------------------
+"Transaction.Send.balanceNotSufficient" = "Insufficient %@ Balance for miner fee";
+"Transaction.Send.addressError" = "Incorrect address：The address is usually a 42-bit character starting with 0x";
+"Transaction.Send.title" = "%@ Transfer";
+"Transaction.Send.transactionAvailableBalance" = "The amount you entered exceeds your account balance, are all transferred out?";
+"Transaction.Send.gasPriceSettingIsTooLow" = "Gas Price too low, Please set above the Recommend Gas Price";
+"Transaction.Send.gasLimitSettingIsTooLow" = "The Gas Price you entered is too low, please enter a reasonable value.";
+"Transaction.Send.quotaLimitSettingIsTooLow" = "The Gas Limit you entered is too low, please enter a reasonable value.";
+"Transaction.Send.gasCostSetting" = "Advanced";
+"Transaction.Send.gasCost" = "Gas Price";
+"Transaction.Send.quotaCost" = "Quota Price";
+"Transaction.Send.extenData" = "Data";
+"Transaction.Send.gasCostSettingDesc" = "The data will be uploaded to the blockchain and your data security will be guaranteed";
+"Transaction.Send.input" = "Please Enter";
+"Transaction.Send.inputHexData" = "Hexadecimal Data";
+"Transaction.Send.txToken" = "Transfer Token";
+"Transaction.Send.txAmount" = "Amount To Send";
+"Transaction.Send.inputAmount" = "Input Amount";
+"Transaction.Send.receiptAddress" = "To";
+"Transaction.Send.gasFee" = "Miner Fee";
+"Transaction.Send.txInfo" = "Payment Details";
+"Transaction.Send.confirmSendTx" = "Confirm";
+"Transaction.Send.txTokens" = "Tokens";
+
+// Authentication
+// ---------------------------------------------------------
+"Authentication.clickFaceIdAuth" = "Click to verify Face ID";
+"Authentication.clickTouchIdAuth" = "Click to verify Touch ID";
+"Authentication.authFaceIdTitle" = "Please authenticate Face ID";
+"Authentication.authTouchIdTitle" = "Please authenticate Touch ID";
+"Authentication.otherMode" = "Other";
+
+"Authentication.selectWallet" = "Select Wallet";
+"Authentication.walletPassword" = "Wallet Password";
+"Authentication.walletPasswordError" = "Incorrect Password";
+
+"Authentication.openFaceIdAuthDesc" = "Please turn on Face ID to keep your assets safe";
+"Authentication.openFaceIdAuth" = "Turn on Face ID";
+"Authentication.openTouchIdAuthDesc" = "Please turn on Touch ID to keep your assets safe";
+"Authentication.openTouchIdAuth" = "Turn on Touch ID";
+"Authentication.notOpen" = "Not open yet";
+
+"Authentication.Error.touchIDNotEnrolled" = "Touch ID is not set";
+"Authentication.Error.faceIDNotEnrolled" = "Face ID is not set";
+"Authentication.Error.faceIDNotAvailable" = "You have not set up your Touch ID. Please input password.";
+"Authentication.Error.biometryLockout" = "Multiple verification failures, Please try again later";
+"Authentication.Error.authFailed" = "Verification failed, please re-verify";
+
+// Guide
+// ---------------------------------------------------------
+"Guide.createWallet" = "Create Wallet";
+"Guide.existingWallet" = "Import Wallet";
+"Guide.cytonServiceAgreement" = "Cyton service agreement";
+"Guide.agreementOfConsent" = "I have carefully read and agree to the above terms and conditions.";
+"Guide.continue" = "Continue";
+
+// Create Wallet
+// ---------------------------------------------------------
+"Wallet.Create.warning" = "Backup Password！";
+"Wallet.Create.desc" = "Cyton will not store your password, please backup diligently.";
+
+"Wallet.Create.createWallet" = "Create Wallet";
+"Wallet.Create.passwordWarning" = "Your password will be required when sending digital assets or accessing confidential information.";
+"Wallet.Create.walletName" = "Wallet Name";
+"Wallet.Create.setPassword" = "Password";
+"Wallet.Create.rePassword" = "Repeat Password";
+"Wallet.Create.passwordDesc" = "At least 8 characters three types of uppercase and lowercase alphabets, numbers, and special symbols！";
+"Wallet.Create.passwordInconsistent" = "Password don't match";
+
+"Wallet.Create.backupMnemonic" = "Your Mnemonic";
+"Wallet.Create.mnemonicWarnTitle" = "Mnemonic will allow you to recover access to your wallet if your phone is lost or stolen.";
+"Wallet.Create.mnemonicWarn1" = "- Anyone who has the mnemonic can transfer the corresponding digital assets";
+"Wallet.Create.mnemonicWarn2" = "- Don't email them or screenshot them.";
+"Wallet.Create.mnemonicWarn3" = "- Carefully write down these 12 words or save them in your password manager.";
+"Wallet.Create.backCreateWalletAlert" = "The last step to start your blockchain account! Do you want to continue?";
+
+"Wallet.Create.confirmMnemonic" = "Verify Mnemonic";
+"Wallet.Create.confirmMnemonicDesc" = "Please click on the mnemonic in order to confirm that your backup mnemonic is correct.";
+"Wallet.Create.backupCompleted" = "Confirm";
+"Wallet.Create.walletCreation" = "Wallet creating...";
+"Wallet.Create.mnemonicValidationFailed" = "Import Failed";
+"Wallet.Create.createSuccess" = "Wallet Created";
+
+// Import Wallet
+// ---------------------------------------------------------
+"Wallet.Import.title" = "Import Wallet";
+"Wallet.Import.keystore" = "Keystore";
+"Wallet.Import.mnemonic" = "Mnemonic";
+"Wallet.Import.privatekey" = "Private Key";
+"NoScreenshot.importWalletMessage" = "Keystore，Mnemonic，Private Key gives full and unlimited access to your wallet.";
+"Wallet.Import.inputWalletName" = "Wallet Name";
+"Wallet.Import.import" = "Import";
+"Wallet.Import.loading" = "Wallet Importing...";
+"Wallet.Import.walletAlreadyExists" = "Wallet Address is existed";
+"Wallet.Import.success" = "Wallet Imported";
+"Wallet.Import.setPassword" = "Set Password";
+"Wallet.Import.repeatPassword" = "Repeat Password";
+"Wallet.Import.setPasswordDesc" = "At least 8 characters, three types of uppercase and lowercase alphabets, numbers, and special symbols！";
+"Wallet.Import.inconsistentPasswords" = "Password don't match";
+
+"Wallet.Import.inputKeystoreWarning" = "Please enter Keystore";
+"Wallet.Import.inputKeystore" = "Please enter Keystore";
+"Wallet.Import.inputWalletPassword" = "Password";
+"Wallet.Import.emptyKeystorePassword" = "Empty Password";
+
+"Wallet.Import.inputMnemonicWarning" = "Please enter your mnemonics in order.";
+"Wallet.Import.inputMnemonic" = "Please separate each Mnemonic with a space.";
+
+"Wallet.Import.inputPrivatekeyWarning" = "Please enter Private Key or scan it by QR code";
+"Wallet.Import.inputPrivatekey" = "Please enter Private Key.";
+
+// Wallet Details
+// ---------------------------------------------------------
+"Wallet.Details.ChangePassword.inputPassword" = "Password";
+"Wallet.Details.ChangeName.inputName" = "Wallet Name";
+"Wallet.Details.title" = "Manager";
+"Wallet.Details.deleteWallet" = "Delete Wallet";
+"Wallet.Details.confirmDeleteWallet" = "Confirm";
+"Wallet.Details.importKeystore" = "Export keystore";
+"Wallet.Details.deleteWalletSuccess" = "Wallet Deleted";
+"Wallet.Details.icon" = "Wallet Photo";
+"Wallet.Details.name" = "Wallet Name";
+"Wallet.Details.address" = "Wallet Address";
+"Wallet.Details.changePassword" = "Change Password";
+"Wallet.Details.exportKeystore" = "Export keystore";
+"Wallet.Details.delete" = "Delete Wallet";
+"Wallet.Details.ChangePassword.inputPassword" = "Password";
+"Wallet.Details.ChangePassword.inputNewPassword" = "New Password";
+"Wallet.Details.ChangePassword.repeatNewPassword" = "Repeat New Password";
+"Wallet.Details.ChangePassword.warning" = "Cyton will not store your password, please backup diligently.";
+"Wallet.Details.ChangePassword.newPasswordIsSameAsOld" = "The password you entered is the same as the current password. Please re-enter";
+"Wallet.Details.ChangePassword.inconsistentPasswords" = "Password don't match";
+"Wallet.Details.ChangePassword.loading" = "Changing Password";
+"Wallet.Details.ChangePassword.success" = "Password Changed";
+"Wallet.Details.ExportKeystore.copy" = "Copy";
+"Wallet.Details.ExportKeystore.copySuccess" = "Keystore is copied to clipbord";
+"Wallet.Details.WalletIconPicker.title" = "Wallet Photo";
+
+// No Screenshot
+// ---------------------------------------------------------
+"NoScreenshot.title" = "No screenshot!";
+"NoScreenshot.mnemonicMessage" = "Keep your 12-word Mnemonic Phrase safe. Anyone who has it can transfer the corresponding digital assets.";
+
+// Settings
+// ---------------------------------------------------------
+"Settings.Title" = "Me";
+"Settings.CurrencyTitle" = "Local Currency";
+"Settings.TouchIdTitle" = "Touch ID";
+"Settings.ConnectUs" = "Contact";
+"Settings.Forum" = "Forum";
+"Settings.ConnectUs.CopyWechat" = "WeChat is copied to clipbord";
+
+// Settings: About U
+// ---------------------------------------------------------
+"Settings.About.AboutUs" = "About us";
+"Settings.About.SourceCode" = "Source Code";
+"Settings.About.ServicePrivacy" = "Terms of Use";
+"Settings.About.InfuaDetail" = "Provide access to Ethereum APIs";
+"Settings.About.OpenSea" = "Provide access to ERC721 assets APIs";
+"Settings.About.PeckShield" = "Provide security audits";
+"Settings.About.Cita" = "Blockchain Core";
+
+// Settings: Currency
+// ---------------------------------------------------------
+"Settings.Currency.Title" = "Local Currency";
+
+// Settings: Switch ETH Network
+// ---------------------------------------------------------
+"Settings.SwitchNetwork.Title" = "Network";
+
+// Assets
+// ---------------------------------------------------------
+"Assets.AddAssets.Title" = "Add";
+"Assets.AddAssets.BlockChainNetwork" = "Blockchain";
+"Assets.AddAssets.ContractAddress" = "Contract Address";
+"Assets.AddAssets.NodeAddress" = "Node Address";
+"Assets.AddAssets.ContractAddressPlaceHolder" = "Enter";
+"Assets.AddAssets.NodeAddressPlaceHolder" = "Enter";
+"Assets.AddAssets.Search" = "Search";
+"Assets.AddAssets.EmptyResult" = "Incorrect contract address";
+"Assets.AddAssets.CITANativeCoin" = "CITA Native Token";
+"Assets.AddAssets.SwitchChainNetWorkTitle" = "Blockchain";
+"Assets.AddAssets.AlreadyExist" = "You have the token in your list.";
+"Assets.AddAssets.StoreFailed" = "Failed to add token";
+"Assets.AddAssets.EmptySymbol" = "The token has no name and cannot be imported successfully!";
+"Assets.AddAssets.StoreSuccess" = "Token Added";
+"Assets.AddAssets.ListSettings" = "Setting";
+"Assets.AddAssets.TokenMessage" = "Token info";
+"Assets.AddAssets.TokenName" = "Token Name";
+"Assets.AddAssets.TokenSymbol" = "Token Symbol";
+"Assets.AddAssets.TokenDecimals" = "Decimal";
+
+// Assets List Setting
+"Assets.AssetSetting.Title" = "Setting";
+"Assets.AssetSetting.Complete" = "Done";
+"Assets.AssetSetting.Edit" = "Edit";
+
+// Switch Wallet
+"SwitchWallet.title" = "Switch Wallet";

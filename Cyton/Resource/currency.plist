@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>元</string>
+		<key>short</key>
+		<string>CNY</string>
+		<key>symbol</key>
+		<string>¥</string>
+		<key>identifier</key>
+		<string>zh_CN</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>美元</string>
+		<key>short</key>
+		<string>USD</string>
+		<key>symbol</key>
+		<string>$</string>
+		<key>identifier</key>
+		<string>zh-Hans_US</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>新台币</string>
+		<key>short</key>
+		<string>TWD</string>
+		<key>symbol</key>
+		<string>NT$</string>
+		<key>identifier</key>
+		<string>zh-Hans_TW</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>港元</string>
+		<key>short</key>
+		<string>HKD</string>
+		<key>symbol</key>
+		<string>HK$</string>
+		<key>identifier</key>
+		<string>zh-Hans_HK</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>欧元</string>
+		<key>short</key>
+		<string>EUR</string>
+		<key>symbol</key>
+		<string>€</string>
+		<key>identifier</key>
+		<string>zh-Hans_FR</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>俄罗斯卢布</string>
+		<key>short</key>
+		<string>RUB</string>
+		<key>symbol</key>
+		<string>₽</string>
+		<key>identifier</key>
+		<string>zh-Hans_RU</string>
+	</dict>
+</array>
+</plist>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dQ0-5m-U0C">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main View Controller-->
+        <scene sceneID="ACh-dl-MiB">
+            <objects>
+                <tabBarController id="dQ0-5m-U0C" customClass="MainViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="RWM-Fq-3aU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="Hlq-GV-TAq" kind="relationship" relationship="viewControllers" id="JKO-nV-u01"/>
+                        <segue destination="hM1-o9-xvf" kind="relationship" relationship="viewControllers" id="gvu-Jh-ACh"/>
+                        <segue destination="Ycr-tU-11D" kind="relationship" relationship="viewControllers" id="j0L-Lt-TPi"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gEz-oK-Whq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="82" y="-1135"/>
+        </scene>
+        <!--WalletViewController-->
+        <scene sceneID="Z8o-Y3-ZbA">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="WalletViewController" storyboardName="Wallet" referencedIdentifier="WalletViewController" id="t9r-OI-ov4" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="KIa-St-Wro"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="loa-Wp-6gH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="80" y="473"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="LwR-br-IZa">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="Ycr-tU-11D" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="我" image="Main_off" selectedImage="Main_on" id="Cn2-zO-P7f"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xGO-bN-eUe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="734" y="-402"/>
+        </scene>
+        <!--钱包-->
+        <scene sceneID="G00-Tb-dXa">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hM1-o9-xvf" customClass="BaseNavigationController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="钱包" image="wallet_off" selectedImage="wallet_on" id="7Nq-Hx-Y4Z"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Pe2-LD-ePg">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="t9r-OI-ov4" kind="relationship" relationship="rootViewController" id="3f2-l2-iCy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wuo-3j-svN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="81" y="-76"/>
+        </scene>
+        <!--应用-->
+        <scene sceneID="YEu-uN-pfd">
+            <objects>
+                <viewController id="p8c-h3-jt8" customClass="DappViewController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LVm-H3-4FI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <bool key="isElement" value="YES"/>
+                        </accessibility>
+                        <viewLayoutGuide key="safeArea" id="lbZ-aR-khA"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="应用" id="VbH-aR-7SH">
+                        <barButtonItem key="rightBarButtonItem" image="search_dapp" id="DVd-sy-6YQ">
+                            <color key="tintColor" red="0.40784313729999999" green="0.42352941179999998" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="vLC-ng-WwE" kind="show" id="CZq-Pf-J99"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wlo-Mf-ySy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-698" y="761"/>
+        </scene>
+        <!--DAppBrowser-->
+        <scene sceneID="EDo-Tz-nHO">
+            <objects>
+                <viewControllerPlaceholder storyboardName="DAppBrowser" id="vLC-ng-WwE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w1j-Op-kot" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-698" y="1205"/>
+        </scene>
+        <!--应用-->
+        <scene sceneID="Xcy-xf-LxQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Hlq-GV-TAq" customClass="BaseNavigationController" customModule="Cyton" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="应用" image="dapp_off" selectedImage="dapp_on" id="cjZ-KD-Gcm"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="Uw2-ti-l79">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="p8c-h3-jt8" kind="relationship" relationship="rootViewController" id="dWr-QK-qbA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GfH-9j-mpE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-698" y="-76"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Main_off" width="21" height="21"/>
+        <image name="Main_on" width="20" height="19"/>
+        <image name="dapp_off" width="22" height="23"/>
+        <image name="dapp_on" width="20" height="23"/>
+        <image name="search_dapp" width="20" height="20"/>
+        <image name="wallet_off" width="22" height="24"/>
+        <image name="wallet_on" width="20" height="22"/>
+    </resources>
+</document>

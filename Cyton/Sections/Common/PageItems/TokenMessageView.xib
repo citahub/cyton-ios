@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ShowTokenMessageView" customModule="Neuron" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代币名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPg-2s-JJx">
+                    <rect key="frame" x="0.0" y="0.0" width="150" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="Zhw-dG-KLT"/>
+                        <constraint firstAttribute="height" constant="25" id="jhD-aR-FgU"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.59607843137254901" green="0.61176470588235299" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="代币缩写" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAc-Dk-gLq">
+                    <rect key="frame" x="0.0" y="50" width="150" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="6WP-gf-Tlh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.59607843140000005" green="0.61176470589999998" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="小数位数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EAx-r2-Zg9">
+                    <rect key="frame" x="0.0" y="93" width="150" height="57"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="8up-0v-JOl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.59607843140000005" green="0.61176470589999998" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ethereum mainnet" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L6l-R5-JR9">
+                    <rect key="frame" x="225" y="0.0" width="150" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="BAp-tX-Pg5"/>
+                        <constraint firstAttribute="height" constant="25" id="uDm-MI-76D"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.1803921568627451" green="0.19215686274509802" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qyb-9B-vnh">
+                    <rect key="frame" x="225" y="112.5" width="150" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="150" id="nm1-3j-mkm"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETH" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUU-83-vbH">
+                    <rect key="frame" x="225" y="50" width="150" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="KTW-WF-qj9"/>
+                        <constraint firstAttribute="width" constant="150" id="sEk-wa-tGT"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="tPg-2s-JJx" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="13r-S6-EO5"/>
+                <constraint firstItem="ZAc-Dk-gLq" firstAttribute="top" secondItem="tPg-2s-JJx" secondAttribute="bottom" constant="25" id="E4h-O4-OrL"/>
+                <constraint firstItem="qyb-9B-vnh" firstAttribute="centerY" secondItem="EAx-r2-Zg9" secondAttribute="centerY" id="Hgv-9A-XFz"/>
+                <constraint firstItem="L6l-R5-JR9" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="JR6-I2-Eeq"/>
+                <constraint firstItem="nUU-83-vbH" firstAttribute="centerY" secondItem="ZAc-Dk-gLq" secondAttribute="centerY" id="NV4-jO-4M9"/>
+                <constraint firstItem="EAx-r2-Zg9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="OPU-OL-vUE"/>
+                <constraint firstItem="nUU-83-vbH" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="RjY-8l-HKv"/>
+                <constraint firstItem="ZAc-Dk-gLq" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="bQ9-sX-PRM"/>
+                <constraint firstItem="EAx-r2-Zg9" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="e3A-q8-3gm"/>
+                <constraint firstItem="EAx-r2-Zg9" firstAttribute="top" secondItem="ZAc-Dk-gLq" secondAttribute="bottom" constant="25" id="mkM-gU-Xn9"/>
+                <constraint firstItem="L6l-R5-JR9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="oGF-m0-seY"/>
+                <constraint firstItem="tPg-2s-JJx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="xJU-rl-2fb"/>
+                <constraint firstItem="qyb-9B-vnh" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="xSt-cn-y7f"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="decimalsLabel" destination="qyb-9B-vnh" id="E7p-kW-t7U"/>
+                <outlet property="decimalsTitleLabel" destination="EAx-r2-Zg9" id="5eY-Eg-QEV"/>
+                <outlet property="nameLabel" destination="L6l-R5-JR9" id="szc-Jt-jab"/>
+                <outlet property="nameTitleLabel" destination="tPg-2s-JJx" id="20U-Zy-J8e"/>
+                <outlet property="symbolLabel" destination="nUU-83-vbH" id="B70-Sq-EcA"/>
+                <outlet property="symbolTitleLabel" destination="ZAc-Dk-gLq" id="8M0-vi-NrN"/>
+            </connections>
+            <point key="canvasLocation" x="138.40000000000001" y="376.91154422788611"/>
+        </view>
+    </objects>
+</document>
