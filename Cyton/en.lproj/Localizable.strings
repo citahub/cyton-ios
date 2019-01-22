@@ -192,6 +192,7 @@
 "Authentication.clickTouchIdAuth" = "Click to verify Touch ID";
 "Authentication.authFaceIdTitle" = "Please authenticate Face ID";
 "Authentication.authTouchIdTitle" = "Please authenticate Touch ID";
+"Authentication.otherMode" = "Other";
 
 "Authentication.selectWallet" = "Select Wallet";
 "Authentication.walletPassword" = "Wallet Password";

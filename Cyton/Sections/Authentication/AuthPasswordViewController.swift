@@ -27,6 +27,7 @@ class AuthPasswordViewController: UIViewController, AuthenticationMode, UITextFi
         currentWallet = AppModel.current.currentWallet
         passwordTextField.placeholder = "Authentication.walletPassword".localized()
         confirmButton.setTitle("Common.confirm".localized(), for: .normal)
+        selectWalletButton.setTitle("SwitchWallet.title".localized(), for: .normal)
     }
 
     @IBAction func selectWallet(_ sender: Any) {
