@@ -24,7 +24,7 @@ class TransactionSwitchTokenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tokens = AppModel.current.currentWallet!.selectedTokenList.map({ $0 })
-        titleLabel.text = "转账币种"
+        titleLabel.text = "Transaction.Send.txTokens".localized()
     }
 
     override func viewWillAppear(_ animated: Bool) {
