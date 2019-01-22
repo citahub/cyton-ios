@@ -192,6 +192,7 @@
 "Authentication.clickTouchIdAuth" = "点击进行验证 Touch ID";
 "Authentication.authFaceIdTitle" = "请验证 Face ID";
 "Authentication.authTouchIdTitle" = "请验证 Touch ID";
+"Authentication.otherMode" = "其它验证方式";
 
 "Authentication.selectWallet" = "选择钱包";
 "Authentication.walletPassword" = "钱包密码";
