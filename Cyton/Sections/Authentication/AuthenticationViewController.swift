@@ -32,6 +32,7 @@ class AuthenticationViewController: UIViewController, AuthenticationDelegate {
             otherTitleLabel.isHidden = true
             switchImageView.isHidden = true
         }
+        otherTitleLabel.text = "Authentication.otherMode".localized()
     }
 
     override func viewWillAppear(_ animated: Bool) {

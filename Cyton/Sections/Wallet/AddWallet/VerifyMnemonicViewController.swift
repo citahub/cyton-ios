@@ -59,6 +59,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         sureButton.setTitle("Wallet.Create.backupCompleted".localized(), for: .normal)
         sureButton.addTarget(self, action: #selector(didCompletBackupMnemonic), for: .touchUpInside)
         sureButton.layer.cornerRadius = 5
+        sureButton.accessibilityValue = "confirmButton"
         view.addSubview(sureButton)
     }
 
