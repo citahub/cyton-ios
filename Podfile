@@ -5,7 +5,7 @@ target 'Cyton' do
   use_frameworks!
   inhibit_all_warnings!
 
-  pod 'CITA', git: "https://github.com/cryptape/cita-sdk-swift", commit: "df1342916ca3a7621c6f68353f94094a36faeb4b"
+  pod 'CITA', git: "https://github.com/cryptape/cita-sdk-swift", tag: "v0.20.6"
   pod 'web3swift', "~> 2.0.1"
   pod 'RealmSwift'
 
