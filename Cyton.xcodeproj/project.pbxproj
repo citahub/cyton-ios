@@ -1330,7 +1330,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Cyton/Pods-Cyton-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Cyton/Pods-Cyton-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/BigInt/BigInt.framework",
 				"${BUILT_PRODUCTS_DIR}/BulletinBoard/BLTNBoard.framework",
@@ -1383,7 +1383,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Cyton/Pods-Cyton-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Cyton/Pods-Cyton-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6ED304CBD81C419EE9F1043A /* [CP] Check Pods Manifest.lock */ = {
