@@ -130,7 +130,7 @@ private extension ContractController {
                 guard WalletManager.default.verifyPassword(wallet: wallet, password: password) else {
                     throw "WalletManager.Error.invalidPassword".localized()
                 }
-                
+
                 let txHash: TxHash
                 if paramBuilder.tokenType == .ether || paramBuilder.tokenType == .erc20 {
                     txHash = try self.sendEthereumTransaction(password: password)

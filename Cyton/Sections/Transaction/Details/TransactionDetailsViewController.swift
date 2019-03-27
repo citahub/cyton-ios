@@ -169,7 +169,7 @@ class TransactionDetailsViewController: UITableViewController {
     }
 
     @IBAction func share(_ sender: Any) {
-        let controller = UIActivityViewController(activityItems: [paramBuilder.txDetailsUrl], applicationActivities: nil)
+        let controller = UIActivityViewController(activityItems: [paramBuilder.txDetailsUrl as Any], applicationActivities: nil)
         controller.excludedActivityTypes = [.markupAsPDF, .mail, .openInIBooks, .print, .addToReadingList, .assignToContact]
         present(controller, animated: true, completion: nil)
     }
