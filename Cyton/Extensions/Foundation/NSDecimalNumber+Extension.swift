@@ -23,7 +23,6 @@ extension NSDecimalNumber {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: LocalCurrencyService.shared.getLocalCurrencySelect().identifier)
-        print(formatter.locale)
         let text = formatter.string(from: self) ?? "0"
         return text.replacingOccurrences(of: formatter.locale.currencySymbol!, with: "\(formatter.locale.currencySymbol!) ")
     }

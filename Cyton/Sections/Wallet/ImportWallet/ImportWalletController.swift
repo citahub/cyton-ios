@@ -65,7 +65,7 @@ class ImportWalletController: UIViewController, NoScreenshot, EnterBackOverlayPr
 
 extension ImportWalletController: TabbedButtonsViewDelegate, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        currentIndex = pageViewControllers.index(of: viewController)!
+        currentIndex = pageViewControllers.firstIndex(of: viewController)!
         let previousIndex = abs((currentIndex - 1) % pageViewControllers.count)
         if currentIndex == 0 {
             return nil
@@ -75,7 +75,7 @@ extension ImportWalletController: TabbedButtonsViewDelegate, UIPageViewControlle
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        currentIndex = pageViewControllers.index(of: viewController)!
+        currentIndex = pageViewControllers.firstIndex(of: viewController)!
         let nextIndex = abs((currentIndex + 1) % pageViewControllers.count)
         if currentIndex == pageViewControllers.count - 1 {
             return nil

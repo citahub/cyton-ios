@@ -1,7 +1,7 @@
 language: objective-c
-osx_image: xcode10.1
+osx_image: xcode10.2
 xcode_workspace: Cyton.xcworkspace
 xcode_scheme: Cyton
-xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
+xcode_destination: platform=iOS Simulator,OS=12.2,name=iPhone X
 before_install:
   - travis_wait pod repo update --silent

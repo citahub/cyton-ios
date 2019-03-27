@@ -24,7 +24,7 @@ System Requirements
 
 To build Cyton, you'll need:
 
-* Swift 4.2 and later
+* Swift 5 and later
 * Xcode 10 and later
 * [CocoaPods](https://cocoapods.org)
 
