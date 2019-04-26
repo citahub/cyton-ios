@@ -144,8 +144,9 @@ class BrowserViewController: UIViewController, ErrorOverlayPresentable {
 
     func evaluateJavaScryptWebView(id: Int, value: String, error: DAppError?) {
         let script: String
+        let valueJson = "{\"status\":\"OK\",\"hash\":\"\(value)\"}"
         if error == nil {
-            script = "onSignSuccessful(\(id), \"\(value)\")"
+            script = "onSignSuccessful(\(id), \(valueJson))"
         } else {
             script = "onSignError(\(id), \"\(error!)\")"
         }
