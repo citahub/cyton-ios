@@ -97,7 +97,7 @@ private extension DappViewController {
     var customUserAgent: String {
         let infoDictionary = Bundle.main.infoDictionary!
         let majorVersion = infoDictionary["CFBundleShortVersionString"]!
-        return "Neuron(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
+        return "Cyton(Platform=iOS&AppVersion=\(String(describing: majorVersion))"
     }
 
     var customStyle: String {
