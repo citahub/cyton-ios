@@ -30,7 +30,7 @@ class CITATxSender {
         value: BigUInt,
         quota: BigUInt = GasCalculator.defaultGasLimit,
         data: Data,
-        chainId: BigUInt,
+        chainId: String,
         password: String
     ) throws -> (TxHash, BlockNumber) {
         let destinationEthAddress = Address(to.addHexPrefix())

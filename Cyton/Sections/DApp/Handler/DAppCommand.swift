@@ -49,7 +49,7 @@ struct DAppCommonModel: Decodable {
 }
 
 struct CITAObject: Decodable {
-    let chainId: Int
+    let chainId: String
     let data: String?
     let nonce: String?
     var quota: String?
@@ -71,7 +71,7 @@ struct CITAObject: Decodable {
 
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
-        chainId = try! values.decode(Int.self, forKey: .chainId)
+        chainId = try! values.decode(String.self, forKey: .chainId)
         data = try? values.decode(String.self, forKey: .data)
         to = try! values.decode(String.self, forKey: .to)
         version = try! values.decode(Int.self, forKey: .version)
