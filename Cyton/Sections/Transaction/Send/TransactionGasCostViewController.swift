@@ -8,7 +8,7 @@
 
 import UIKit
 import BigInt
-import Web3swift
+import web3swift
 
 class TransactionGasCostViewController: UITableViewController {
     @IBOutlet private weak var gasPriceTitleLabel: UILabel!

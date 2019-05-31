@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Web3swift
+import web3swift
 import RealmSwift
 
 class EthereumNetwork {

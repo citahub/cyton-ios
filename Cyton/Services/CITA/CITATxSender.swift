@@ -8,7 +8,7 @@
 
 import Foundation
 import CITA
-import EthereumAddress
+import web3swift
 import BigInt
 
 class CITATxSender {

@@ -9,8 +9,7 @@
 import UIKit
 import RealmSwift
 import BigInt
-import Web3swift
-import EthereumAddress
+import web3swift
 
 protocol WalletPresenterDelegate: NSObjectProtocol {
     func walletPresenterBeganRefresh(presenter: WalletPresenter)

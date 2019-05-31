@@ -8,8 +8,7 @@
 
 import Foundation
 import CITA
-import Web3swift
-import EthereumAddress
+import web3swift
 import BigInt
 
 class CITAERC20 {

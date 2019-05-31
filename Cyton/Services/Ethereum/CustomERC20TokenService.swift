@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Web3swift
-import EthereumAddress
+import web3swift
 import BigInt
 
 enum CustomTokenError: String, LocalizedError {
@@ -74,8 +73,8 @@ struct CustomERC20TokenService {
         return web3.contract(Web3.Utils.erc20ABI, at: contractETHAddress, abiVersion: 2)
     }
 
-    private static func defaultOptions(wAddress: String) -> Web3Options {
-        var options = Web3Options.defaultOptions()
+    private static func defaultOptions(wAddress: String) -> TransactionOptions {
+        var options = TransactionOptions.defaultOptions
         options.from = EthereumAddress(wAddress)
         return options
     }

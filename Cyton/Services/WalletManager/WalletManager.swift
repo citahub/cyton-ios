@@ -5,8 +5,7 @@
 //
 
 import Foundation
-import Web3swift
-import EthereumAddress
+import web3swift
 
 // Plain object for passing around
 struct Wallet {

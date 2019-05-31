@@ -8,8 +8,7 @@
 
 import UIKit
 import BigInt
-import Web3swift
-import EthereumAddress
+import web3swift
 
 class EthereumBalanceLoader {
     private let web3: web3

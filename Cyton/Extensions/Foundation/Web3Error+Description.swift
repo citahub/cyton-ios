@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Web3swift
+import web3swift
 
 extension Web3Error: CustomStringConvertible {
     public var description: String {

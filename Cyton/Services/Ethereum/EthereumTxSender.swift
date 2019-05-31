@@ -8,8 +8,7 @@
 
 import Foundation
 import BigInt
-import EthereumAddress
-import Web3swift
+import web3swift
 
 class EthereumTxSender {
     private let web3: web3
