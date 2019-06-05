@@ -117,7 +117,7 @@ class TransactionGasCostViewController: UITableViewController {
         switch paramBuilder.tokenType {
         case .cita, .citaErc20:
             gasPriceTextField.text = paramBuilder.gasPrice.toAmountText(paramBuilder.nativeTokenDecimals)
-            gasPriceSymbolLabel.text = "NATT"
+            gasPriceSymbolLabel.text = "CTT"
             gasPriceTextField.isEnabled = false
             gasPriceTitleLabel.text = "Quota Price"
             gasLimitTitleLabel.text = "Quota Limit"

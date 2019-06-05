@@ -86,8 +86,8 @@ class TransactionDetailsParamBuilder {
                 gasPrice = "\(etherTx.gasPrice.toGweiText()) Gwei"
             } else if let citaTx = tx as? CITATransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: citaTx.token.chainHost)
-                gasPrice = "\(quotaPrice.toAmountText()) NATT"
-                txFee = ((citaTx.quotaUsed > 0 ? citaTx.quotaUsed : citaTx.gasLimit) * quotaPrice).toAmountText() + " NATT"
+                gasPrice = "\(quotaPrice.toAmountText()) CTT"
+                txFee = ((citaTx.quotaUsed > 0 ? citaTx.quotaUsed : citaTx.gasLimit) * quotaPrice).toAmountText() + " CTT"
             }
         }
         gasLimit = tx.status == .pending ? "\(tx.gasLimit)" : nil

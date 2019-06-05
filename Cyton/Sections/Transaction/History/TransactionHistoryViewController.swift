@@ -43,7 +43,7 @@ class TransactionHistoryViewController: UIViewController, UITableViewDelegate, U
         setupTokenProfile(tokenIcon: nil, overview: nil, price: nil)
         tokenProfleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(clickTokenProfile)))
         if token.symbol == "MBA" ||
-            token.symbol == "NATT" {
+            token.symbol == "CTT" {
             warningView.isHidden = false
             warningHeight.constant = 30.0
         } else {
