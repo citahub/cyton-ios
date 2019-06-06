@@ -38,7 +38,7 @@ class TransactionDetailsParamBuilder {
         case .success:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
             if tx.token.type == .cita || tx.token.type == .citaErc20 {
-                if tx.token.chainId == "1" {
+                if tx.token.chainId == "1" || tx.token.chainId == "0x1" {
                     txDetailsUrl = URL(string: "https://microscope.cryptape.com/#/transaction/\(tx.hash)")!
                 }
             } else {
