@@ -190,6 +190,11 @@ extension WalletPresenter {
 // MARK: - Utils
 extension WalletPresenter {
     private func getTokenPrice(token: Token) -> Double? {
-        return TokenPriceLoader().getPrice(symbol: token.symbol, currency: currency.short)
+        switch token.type {
+        case .cita, .citaErc20:
+            return nil
+        case .erc20, .ether:
+            return TokenPriceLoader().getPrice(symbol: token.symbol, currency: currency.short)
+        }
     }
 }
