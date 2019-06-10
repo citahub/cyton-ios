@@ -318,7 +318,6 @@
 // ---------------------------------------------------------
 "Settings.About.AboutUs" = "About Us";
 "Settings.About.SourceCode" = "源代码";
-"Settings.About.ServicePrivacy" = "服务及隐私条款";
 "Settings.About.InfuaDetail" = "提供以太坊访问服务";
 "Settings.About.OpenSea" = "提供721数据服务";
 "Settings.About.PeckShield" = "提供代码安全审计服务";

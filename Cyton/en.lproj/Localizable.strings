@@ -318,7 +318,6 @@
 // ---------------------------------------------------------
 "Settings.About.AboutUs" = "About us";
 "Settings.About.SourceCode" = "Source Code";
-"Settings.About.ServicePrivacy" = "Terms of Use";
 "Settings.About.InfuaDetail" = "Provide access to Ethereum APIs";
 "Settings.About.OpenSea" = "Provide access to ERC721 assets APIs";
 "Settings.About.PeckShield" = "Provide security audits";
