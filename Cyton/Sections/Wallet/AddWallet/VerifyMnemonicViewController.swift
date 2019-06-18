@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Web3swift
-import EthereumAddress
+import web3swift
 import RealmSwift
 
 class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, NoScreenshot, EnterBackOverlayPresentable {

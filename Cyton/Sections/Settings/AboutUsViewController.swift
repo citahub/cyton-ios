@@ -12,7 +12,6 @@ import SafariServices
 class AboutUsViewController: UITableViewController {
     @IBOutlet private weak var versionLabel: UILabel!
     @IBOutlet weak var sourceCodeLabel: UILabel!
-    @IBOutlet weak var servicePrivacyLabel: UILabel!
     @IBOutlet weak var infuaDetailLabel: UILabel!
     @IBOutlet weak var openSeaDetailLabel: UILabel!
     @IBOutlet weak var peckShieldDetailLabel: UILabel!
@@ -22,7 +21,6 @@ class AboutUsViewController: UITableViewController {
         super.viewDidLoad()
         title = "Settings.About.AboutUs".localized()
         sourceCodeLabel.text = "Settings.About.SourceCode".localized()
-        servicePrivacyLabel.text = "Settings.About.ServicePrivacy".localized()
         infuaDetailLabel.text = "Settings.About.InfuaDetail".localized()
         openSeaDetailLabel.text = "Settings.About.OpenSea".localized()
         peckShieldDetailLabel.text = "Settings.About.PeckShield".localized()

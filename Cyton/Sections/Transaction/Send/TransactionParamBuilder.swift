@@ -8,8 +8,7 @@
 
 import Foundation
 import BigInt
-import Web3swift
-import EthereumAddress
+import web3swift
 import RealmSwift
 
 /// Prepare tx params.

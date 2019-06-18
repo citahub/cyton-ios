@@ -310,15 +310,12 @@
 "Settings.Title" = "我";
 "Settings.CurrencyTitle" = "本地货币";
 "Settings.TouchIdTitle" = "指纹设置";
-"Settings.ConnectUs" = "联系我们";
 "Settings.Forum" = "论坛";
-"Settings.ConnectUs.CopyWechat" = "客服微信已复制";
 
 // Settings: About U
 // ---------------------------------------------------------
-"Settings.About.AboutUs" = "About Us";
+"Settings.About.AboutUs" = "关于我们";
 "Settings.About.SourceCode" = "源代码";
-"Settings.About.ServicePrivacy" = "服务及隐私条款";
 "Settings.About.InfuaDetail" = "提供以太坊访问服务";
 "Settings.About.OpenSea" = "提供721数据服务";
 "Settings.About.PeckShield" = "提供代码安全审计服务";

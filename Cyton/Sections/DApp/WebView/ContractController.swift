@@ -10,8 +10,7 @@ import UIKit
 import BLTNBoard
 import CITA
 import BigInt
-import Web3swift
-import EthereumAddress
+import web3swift
 
 protocol ContractControllerDelegate: class {
     func callBackWebView(id: Int, value: String, error: DAppError?)

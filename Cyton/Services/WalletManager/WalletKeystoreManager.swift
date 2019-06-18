@@ -7,8 +7,7 @@
 //
 
 import Foundation
-import Web3swift
-import EthereumAddress
+import web3swift
 
 /// Keystore storage management
 /// All keystores are stored as V3 keystore despite its original type (plain private key, mnemonic (HD) or keystore).

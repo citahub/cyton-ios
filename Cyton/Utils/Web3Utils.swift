@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import Web3swift
+import web3swift
 import BigInt
 
-typealias Web3Utils = Web3swift.Web3Utils
+typealias Web3Utils = web3swift.Web3Utils
 
 typealias TxHash = String
 typealias BlockNumber = BigUInt

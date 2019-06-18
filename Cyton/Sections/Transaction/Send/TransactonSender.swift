@@ -9,7 +9,7 @@
 import UIKit
 import BigInt
 import CITA
-import Web3swift
+import web3swift
 
 protocol TransactonSender {
     var token: Token! { get set }

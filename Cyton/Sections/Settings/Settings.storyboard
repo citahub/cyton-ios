@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cnK-C0-SxL">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -192,29 +192,8 @@
                                             <segue destination="LbK-Da-t3x" kind="show" id="AP5-vk-SuP"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="OLa-8a-SKK" imageView="e6c-0E-4x7" rowHeight="50" style="IBUITableViewCellStyleDefault" id="L2w-WQ-hNO">
-                                        <rect key="frame" x="0.0" y="389" width="375" height="50"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L2w-WQ-hNO" id="eQw-gB-1sv">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="联系我们" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OLa-8a-SKK">
-                                                    <rect key="frame" x="51" y="0.0" width="289" height="49.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.18039215689999999" green="0.19215686269999999" blue="0.24313725489999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" image="contactus" id="e6c-0E-4x7">
-                                                    <rect key="frame" x="16" y="14" width="20" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </imageView>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="IGz-fk-1Cf" imageView="dm8-VT-lb6" rowHeight="50" style="IBUITableViewCellStyleDefault" id="wBU-bb-dai">
-                                        <rect key="frame" x="0.0" y="439" width="375" height="50"/>
+                                        <rect key="frame" x="0.0" y="389" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wBU-bb-dai" id="hOb-U6-blZ">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="49.5"/>
@@ -247,7 +226,6 @@
                         <outlet property="aboutUsLabel" destination="bvK-ic-X0Z" id="BoD-PW-all"/>
                         <outlet property="addressLabel" destination="Cq0-DK-vo4" id="RNI-YH-BmS"/>
                         <outlet property="authenticationSwitch" destination="f5t-fC-gCl" id="NTC-2X-idW"/>
-                        <outlet property="connectUsLabel" destination="OLa-8a-SKK" id="3bW-V4-6D9"/>
                         <outlet property="currencyLabel" destination="bhI-du-BpJ" id="4wc-eV-Gwm"/>
                         <outlet property="currencyTitleLabel" destination="eNW-sx-gy6" id="rmM-6o-fQc"/>
                         <outlet property="ethereumNetworkLabel" destination="M0v-A8-YM0" id="dwW-kW-hrx"/>
@@ -454,7 +432,6 @@
         <image name="Main_off" width="21" height="21"/>
         <image name="Main_on" width="20" height="19"/>
         <image name="aboutus" width="20" height="20"/>
-        <image name="contactus" width="20" height="20"/>
         <image name="currency" width="20" height="20"/>
         <image name="currency_selected" width="21" height="15"/>
         <image name="ethereum_network" width="20" height="20"/>
