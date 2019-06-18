@@ -7,8 +7,7 @@
 //
 
 import UIKit
-import Web3swift
-import EthereumAddress
+import web3swift
 import RealmSwift
 
 class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, ButtonTagUpViewDelegate, NoScreenshot, EnterBackOverlayPresentable {
@@ -59,7 +58,7 @@ class VerifyMnemonicViewController: UIViewController, ButtonTagViewDelegate, But
         sureButton.setTitle("Wallet.Create.backupCompleted".localized(), for: .normal)
         sureButton.addTarget(self, action: #selector(didCompletBackupMnemonic), for: .touchUpInside)
         sureButton.layer.cornerRadius = 5
-        sureButton.accessibilityValue = "confirmButton"
+        sureButton.accessibilityIdentifier = "confirmButton"
         view.addSubview(sureButton)
     }
 

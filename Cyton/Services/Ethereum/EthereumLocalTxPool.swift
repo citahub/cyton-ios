@@ -8,8 +8,8 @@
 
 import Foundation
 import RealmSwift
-import Web3swift
-import struct Web3swift.TransactionDetails
+import web3swift
+import struct web3swift.TransactionDetails
 import BigInt
 
 class EthereumLocalTx: Object {
@@ -160,9 +160,9 @@ extension EthereumLocalTx {
         static var transactionReceipt: Int = 0
     }
 
-    fileprivate var transactionDetails: Web3swift.TransactionDetails? {
+    fileprivate var transactionDetails: web3swift.TransactionDetails? {
         if let transactionDetails = objc_getAssociatedObject(self, &AssociatedKey.transactionDetails) {
-            return transactionDetails as? Web3swift.TransactionDetails
+            return transactionDetails as? web3swift.TransactionDetails
         }
         let transactionDetails = try? web3.eth.getTransactionDetails(txHash)
         if transactionDetails?.blockNumber != nil {
@@ -171,9 +171,9 @@ extension EthereumLocalTx {
         return transactionDetails
     }
 
-    fileprivate var transactionReceipt: Web3swift.TransactionReceipt? {
+    fileprivate var transactionReceipt: web3swift.TransactionReceipt? {
         if let transactionReceipt = objc_getAssociatedObject(self, &AssociatedKey.transactionReceipt) {
-            return transactionReceipt as? Web3swift.TransactionReceipt
+            return transactionReceipt as? web3swift.TransactionReceipt
         }
         let transactionReceipt = try? web3.eth.getTransactionReceipt(txHash)
         if transactionReceipt?.status == .ok || transactionReceipt?.status == .failed {

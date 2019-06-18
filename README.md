@@ -1,7 +1,7 @@
 # Cyton Wallet (iOS)
 
 [![Travis](https://travis-ci.com/cryptape/cyton-ios.svg?branch=develop)](https://travis-ci.com/cryptape/cyton-ios)
-[![Swift](https://img.shields.io/badge/Swift-4.2-orange.svg?style=flat)](https://developer.apple.com/swift/)
+[![Swift](https://img.shields.io/badge/Swift-5.0-orange.svg?style=flat)](https://developer.apple.com/swift/)
 [![CITA](https://img.shields.io/badge/made%20for-CITA-blue.svg)](https://www.citahub.com)
 
 Overview
@@ -24,7 +24,7 @@ System Requirements
 
 To build Cyton, you'll need:
 
-* Swift 4.2 and later
+* Swift 5 and later
 * Xcode 10 and later
 * [CocoaPods](https://cocoapods.org)
 

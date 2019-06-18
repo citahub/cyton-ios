@@ -31,11 +31,11 @@ class BigUIntExtensionTests: XCTestCase {
     func testToGwei() {
         XCTAssertEqual(
             BigUInt(1),
-            BigUInt("1000000000")!.toGwei(from: .wei)
+            BigUInt("1000000000").toGwei(from: .wei)
         )
         XCTAssertEqual(
             BigUInt(0),
-            BigUInt("10000")!.toGwei(from: .wei)
+            BigUInt("10000").toGwei(from: .wei)
         )
 
         XCTAssertEqual(
@@ -52,20 +52,20 @@ class BigUIntExtensionTests: XCTestCase {
     func testToEther() {
         XCTAssertEqual(
             BigUInt(1),
-            BigUInt("1000000000000000000")!.toEther(from: .wei)
+            BigUInt("1000000000000000000").toEther(from: .wei)
         )
         XCTAssertEqual(
             BigUInt(0),
-            BigUInt("10000")!.toEther(from: .wei)
+            BigUInt("10000").toEther(from: .wei)
         )
 
         XCTAssertEqual(
             BigUInt(1),
-            BigUInt("1000000000")!.toEther(from: .gwei)
+            BigUInt("1000000000").toEther(from: .gwei)
         )
         XCTAssertEqual(
             BigUInt(0),
-            BigUInt("10000")!.toEther(from: .gwei)
+            BigUInt("10000").toEther(from: .gwei)
         )
 
         XCTAssertEqual(
@@ -84,11 +84,11 @@ class BigUIntExtensionTests: XCTestCase {
     func testFromQuota() {
         XCTAssertEqual(
             BigUInt(1),
-            BigUInt("1000000000000000000")!.fromQuota()
+            BigUInt("1000000000000000000").fromQuota()
         )
         XCTAssertEqual(
             BigUInt(0),
-            BigUInt("1000000000")!.fromQuota()
+            BigUInt("1000000000").fromQuota()
         )
     }
 

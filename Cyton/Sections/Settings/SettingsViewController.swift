@@ -21,7 +21,6 @@ class SettingsViewController: UITableViewController {
     @IBOutlet weak var touchIdLabel: UILabel!
     @IBOutlet weak var switchEthLabel: UILabel!
     @IBOutlet weak var aboutUsLabel: UILabel!
-    @IBOutlet weak var connectUsLabel: UILabel!
     @IBOutlet weak var forumLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +29,6 @@ class SettingsViewController: UITableViewController {
         touchIdLabel.text = "Settings.TouchIdTitle".localized()
         switchEthLabel.text = "Settings.SwitchNetwork.Title".localized()
         aboutUsLabel.text = "Settings.About.AboutUs".localized()
-        connectUsLabel.text = "Settings.ConnectUs".localized()
         forumLabel.text = "Settings.Forum".localized()
     }
 
@@ -75,10 +73,7 @@ class SettingsViewController: UITableViewController {
         if indexPath.section == 2 {
             switch indexPath.row {
             case 1:
-                UIPasteboard.general.string = "Nervos-Neuron"
-                Toast.showToast(text: "Settings.ConnectUs.CopyWechat".localized())
-            case 2:
-                let safariController = SFSafariViewController(url: URL(string: "https://forums.nervos.org/")!)
+                let safariController = SFSafariViewController(url: URL(string: "https://talk.citahub.com/")!)
                 self.present(safariController, animated: true, completion: nil)
             default:
                 break

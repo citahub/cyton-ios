@@ -8,7 +8,7 @@
 
 import UIKit
 import RSKPlaceholderTextView
-import EthereumAddress
+import web3swift
 import RealmSwift
 
 class MnemonicViewController: UITableViewController, QRCodeViewControllerDelegate {

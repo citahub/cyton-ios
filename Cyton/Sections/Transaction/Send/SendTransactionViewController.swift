@@ -11,7 +11,7 @@ import BLTNBoard
 import BigInt
 import CITA
 import RealmSwift
-import Web3swift
+import web3swift
 
 class SendTransactionViewController: UITableViewController, TransactonSender {
     @IBOutlet private weak var walletIconView: UIImageView!

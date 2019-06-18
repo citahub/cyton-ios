@@ -7,7 +7,8 @@
 //
 
 import Foundation
-import secp256k1_swift
+import web3swift
+import secp256k1
 
 /// Ethereum Message Signer
 /// TODO: Web3swift should've already provided these.

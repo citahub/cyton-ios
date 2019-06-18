@@ -8,7 +8,7 @@
 
 import UIKit
 import PromiseKit
-import EthereumAddress
+import web3swift
 import Alamofire
 
 typealias TokenOverview = String

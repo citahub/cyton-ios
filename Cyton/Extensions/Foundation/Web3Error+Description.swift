@@ -7,10 +7,10 @@
 //
 
 import UIKit
-import Web3swift
+import web3swift
 
-extension Web3Error : CustomStringConvertible {
-    public var description : String {
+extension Web3Error: CustomStringConvertible {
+    public var description: String {
         switch self {
         case .transactionSerializationError:
             return "Transaction Serialization Error"

@@ -38,7 +38,7 @@ class TransactionDetailsParamBuilder {
         case .success:
             status = tx.isContractCreation ? "Transaction.Details.contractCreationSuccess".localized() : "TransactionStatus.success".localized()
             if tx.token.type == .cita || tx.token.type == .citaErc20 {
-                if tx.token.chainId == "1" {
+                if tx.token.chainId == "1" || tx.token.chainId == "0x1" {
                     txDetailsUrl = URL(string: "https://microscope.cryptape.com/#/transaction/\(tx.hash)")!
                 }
             } else {
@@ -86,8 +86,8 @@ class TransactionDetailsParamBuilder {
                 gasPrice = "\(etherTx.gasPrice.toGweiText()) Gwei"
             } else if let citaTx = tx as? CITATransactionDetails {
                 let quotaPrice = GasPriceFetcher().quotaPrice(rpcNode: citaTx.token.chainHost)
-                gasPrice = "\(quotaPrice.toAmountText()) NATT"
-                txFee = ((citaTx.quotaUsed > 0 ? citaTx.quotaUsed : citaTx.gasLimit) * quotaPrice).toAmountText() + " NATT"
+                gasPrice = "\(quotaPrice.toAmountText()) CTT"
+                txFee = ((citaTx.quotaUsed > 0 ? citaTx.quotaUsed : citaTx.gasLimit) * quotaPrice).toAmountText() + " CTT"
             }
         }
         gasLimit = tx.status == .pending ? "\(tx.gasLimit)" : nil

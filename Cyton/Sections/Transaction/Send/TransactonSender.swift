@@ -9,7 +9,7 @@
 import UIKit
 import BigInt
 import CITA
-import Web3swift
+import web3swift
 
 protocol TransactonSender {
     var token: Token! { get set }
@@ -72,7 +72,7 @@ extension TransactonSender {
                 value: paramBuilder.value,
                 quota: paramBuilder.gasLimit,
                 data: paramBuilder.data,
-                chainId: BigUInt(paramBuilder.chainId)!,
+                chainId: paramBuilder.chainId,
                 password: password
             )
             recordCITATx(txhash: result.0, validUntilBlock: result.1)

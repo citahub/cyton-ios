@@ -310,15 +310,12 @@
 "Settings.Title" = "Me";
 "Settings.CurrencyTitle" = "Local Currency";
 "Settings.TouchIdTitle" = "Touch ID";
-"Settings.ConnectUs" = "Contact";
 "Settings.Forum" = "Forum";
-"Settings.ConnectUs.CopyWechat" = "WeChat is copied to clipbord";
 
 // Settings: About U
 // ---------------------------------------------------------
 "Settings.About.AboutUs" = "About us";
 "Settings.About.SourceCode" = "Source Code";
-"Settings.About.ServicePrivacy" = "Terms of Use";
 "Settings.About.InfuaDetail" = "Provide access to Ethereum APIs";
 "Settings.About.OpenSea" = "Provide access to ERC721 assets APIs";
 "Settings.About.PeckShield" = "Provide security audits";
